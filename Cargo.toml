@@ -1,0 +1,14 @@
+[package]
+edition = "2021"
+name = "twinswcro"
+version = "0.1.0"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+serde = "1"
+swc_core = {version = "0.7.*", features = ["plugin_transform"]}
+
+[dev-dependencies]
+swc_ecma_parser = {version = "0.117.6", features = ["typescript"]}

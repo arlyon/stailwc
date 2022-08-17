@@ -1,0 +1,15 @@
+{
+  "name": "twinswcro",
+  "version": "0.1.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [
+    "swc-plugin"
+  ],
+  "main": "target/wasm32-wasi/release/twinswcro.wasm",
+  "scripts": {
+    "prepublishOnly": "cargo build-wasi --release"
+  },
+  "files": []
+}
