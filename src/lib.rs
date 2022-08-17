@@ -1,5 +1,8 @@
 #![feature(box_patterns)]
 
+#[cfg(test)]
+mod test;
+
 use swc_core::{
     ast::{
         Expr, Ident, JSXAttr, JSXAttrName, JSXAttrValue, JSXExpr, JSXExprContainer, Lit, Program,
@@ -7,7 +10,6 @@ use swc_core::{
     },
     common::{errors::HANDLER, MultiSpan},
     plugin::{plugin_transform, proxies::TransformPluginProgramMetadata},
-    testing_transform::test,
     visit::{as_folder, FoldWith, VisitMut},
 };
 
@@ -51,42 +53,3 @@ impl VisitMut for TransformVisitor {
 pub fn process_transform(program: Program, _metadata: TransformPluginProgramMetadata) -> Program {
     program.fold_with(&mut as_folder(TransformVisitor))
 }
-
-test!(
-    swc_ecma_parser::Syntax::Typescript(swc_ecma_parser::TsConfig {
-        tsx: true,
-        ..Default::default()
-    }),
-    |_| as_folder(TransformVisitor),
-    basic,
-    // Input codes
-    r#"<Test tw="h-4" />"#,
-    // Output codes after transformed with plugin
-    r#"console.log("transform");"#
-);
-
-test!(
-    swc_ecma_parser::Syntax::Typescript(swc_ecma_parser::TsConfig {
-        tsx: true,
-        ..Default::default()
-    }),
-    |_| as_folder(TransformVisitor),
-    string,
-    // Input codes
-    r#"<Test tw={"h-4"} />"#,
-    // Output codes after transformed with plugin
-    r#"console.log("transform");"#
-);
-
-test!(
-    swc_ecma_parser::Syntax::Typescript(swc_ecma_parser::TsConfig {
-        tsx: true,
-        ..Default::default()
-    }),
-    |_| as_folder(TransformVisitor),
-    variable,
-    // Input codes
-    r#"<Test tw={variable} />"#,
-    // Output codes after transformed with plugin
-    r#"console.log("transform");"#
-);

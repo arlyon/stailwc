@@ -1722,6 +1722,7 @@ dependencies = [
  "serde",
  "swc_core",
  "swc_ecma_parser",
+ "swc_ecma_transforms_testing",
 ]
 
 [[package]]

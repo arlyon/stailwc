@@ -12,3 +12,4 @@ swc_core = {version = "0.7.*", features = ["plugin_transform"]}
 
 [dev-dependencies]
 swc_ecma_parser = {version = "0.117.6", features = ["typescript"]}
+swc_ecma_transforms_testing = "0.105.5"
