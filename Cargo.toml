@@ -7,9 +7,16 @@ version = "0.1.0"
 crate-type = ["cdylib"]
 
 [dependencies]
+itertools = "0.10.3"
 serde = "1"
-swc_core = {version = "0.7.*", features = ["plugin_transform"]}
+swc_atoms = "0.3.1"
+swc_common = "0.26.0"
+swc_ecma_visit = "0.75.0"
+swc_ecmascript = "0.186.0"
+swc_plugin = "0.88.2"
+swc_plugin_macro = "0.8.1"
+tracing = "0.1.36"
 
 [dev-dependencies]
-swc_ecma_parser = {version = "0.117.6", features = ["typescript"]}
-swc_ecma_transforms_testing = "0.105.5"
+swc_ecma_parser = {version = "0.116.0", features = ["typescript"]}
+swc_ecma_transforms_testing = "0.104.0"
