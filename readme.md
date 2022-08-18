@@ -33,15 +33,14 @@ module.exports = nextConfig;
 
 Optionally, you can also include the tailwind normalizer.
 
-`_app.tsx`
+`_document.tsx`
 
 ```tsx
-import type { AppProps } from "next/app";
-import Head from "next/head";
+import { Html, Head, Main, NextScript } from "next/document";
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function Document() {
   return (
-    <>
+    <Html>
       <Head>
         <link
           rel="stylesheet"
@@ -49,12 +48,13 @@ function MyApp({ Component, pageProps }: AppProps) {
           href="https://unpkg.com/tailwindcss@3.1.8/src/css/preflight.css"
         />
       </Head>
-      <Component {...pageProps} />
-    </>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
   );
 }
-
-export default MyApp;
 ```
 
 Now get hacking!
