@@ -1,22 +1,19 @@
+use crate::config::TailwindTheme;
+
 pub enum Type<'a> {
-    Size(&'a str),
+    Screen(&'a str),
     Scalar(u32),
     Color(&'a str),
 }
 
-pub static SIZES: [&str; 8] = ["xs", "s", "m", "lg", "xl", "2xl", "3xl", "4xl"];
-static COLORS: [&str; 4] = ["red", "green", "blue", "yellow"];
-
-pub fn infer_type(s: &str) -> Result<Type, &str> {
-    match s {
-        x if SIZES.contains(&x) => Ok(Type::Size(x)),
-        x if COLORS.contains(&x) => Ok(Type::Color(x)),
-        x => {
-            if let Ok(x) = x.parse() {
-                Ok(Type::Scalar(x))
-            } else {
-                Err(s)
-            }
-        }
+pub fn infer_type<'a>(theme: &'a TailwindTheme, s: &'a str) -> Result<Type<'a>, &'a str> {
+    if let Some(x) = theme.screens.get(s) {
+        Ok(Type::Screen(x))
+    } else if let Some(x) = theme.colors.get(s) {
+        Ok(Type::Color(x))
+    } else if let Ok(x) = s.parse::<u32>() {
+        Ok(Type::Scalar(x))
+    } else {
+        Err(s)
     }
 }

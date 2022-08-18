@@ -3,20 +3,20 @@ use swc_ecma_visit::swc_ecma_ast::{
     Expr, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str,
 };
 
-use crate::infer::{infer_type, Type, SIZES};
+use crate::{
+    config::TailwindTheme,
+    infer::{infer_type, Type},
+};
 
-pub fn parse_literal(s: &str) -> Result<ObjectLit, &str> {
+pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit, &'a str> {
     if let Some(pair) = s.split_once('-') {
         match pair {
-            ("text", rest) => match infer_type(rest) {
-                Ok(Type::Size(x)) => Ok(create_literal(
-                    "fontSize",
-                    &format!("{}em", SIZES.iter().position(|s| x.eq(*s)).unwrap()),
-                )),
+            ("text", rest) => match infer_type(theme, rest) {
+                Ok(Type::Screen(x)) => Ok(create_literal("fontSize", &format!("{}em", x))),
                 Ok(Type::Color(x)) => Ok(create_literal("color", x)),
                 _ => Err(s),
             },
-            ("border", rest) => match infer_type(rest) {
+            ("border", rest) => match infer_type(theme, rest) {
                 Ok(Type::Scalar(x)) => Ok(create_literal("borderWidth", &format!("{}px", x))),
                 Ok(Type::Color(x)) => Ok(create_literal("borderColor", x)),
                 _ => Err(s),
