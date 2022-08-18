@@ -21,7 +21,7 @@ use tailwind_parse::Directive;
 
 #[derive(Default)]
 pub struct TransformVisitor {
-    css_attr: Option<ObjectLit>,
+    tw_attr: Option<ObjectLit>,
     tw_tpl: Option<ObjectLit>,
 }
 
@@ -52,7 +52,7 @@ impl VisitMut for TransformVisitor {
                 ..
             })) => {
                 let d = Directive::from(&*string.value);
-                if self.css_attr.replace(d.parse()).is_some() {
+                if self.tw_attr.replace(d.parse()).is_some() {
                     println!("warn : encountered multiple tw attributes");
                 }
             }
@@ -79,7 +79,7 @@ impl VisitMut for TransformVisitor {
     fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
         n.attrs.visit_mut_children_with(self);
 
-        let lit = match self.css_attr.take() {
+        let lit = match self.tw_attr.take() {
             Some(v) => v,
             _ => return,
         };
