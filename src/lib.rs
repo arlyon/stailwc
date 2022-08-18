@@ -1,24 +1,24 @@
 #![feature(box_patterns)]
 
+mod infer;
+mod tailwind_parse;
 #[cfg(test)]
 mod test;
 
-use itertools::{Either, Itertools};
+use itertools::Itertools;
 use swc_ecmascript::ast::{
     Expr, Ident, JSXAttr, JSXAttrName, JSXAttrValue, JSXExpr, JSXExprContainer, Lit, Program, Str,
 };
 
-use swc_common::{errors::HANDLER, MultiSpan, Span, DUMMY_SP};
+use swc_common::DUMMY_SP;
 use swc_ecma_visit::{
     as_folder,
-    swc_ecma_ast::{
-        JSXAttrOrSpread, JSXOpeningElement, KeyValueProp, ObjectLit, Prop, PropName, PropOrSpread,
-    },
+    swc_ecma_ast::{JSXAttrOrSpread, JSXOpeningElement, ObjectLit},
     FoldWith, VisitMut, VisitMutWith,
 };
 use swc_plugin::metadata::TransformPluginProgramMetadata;
 use swc_plugin_macro::plugin_transform;
-use tracing::error;
+use tailwind_parse::Directive;
 
 #[derive(Default)]
 pub struct TransformVisitor {
@@ -48,7 +48,8 @@ impl VisitMut for TransformVisitor {
                 expr: JSXExpr::Expr(box Expr::Lit(Lit::Str(string))),
                 ..
             })) => {
-                if let Some(x) = self.css_attr.replace(generate_css_prop(&string.value)) {
+                let d = Directive::from(&*string.value);
+                if let Some(x) = self.css_attr.replace(d.parse()) {
                     println!("warn : encountered multiple tw attributes");
                 }
             }
@@ -81,8 +82,6 @@ impl VisitMut for TransformVisitor {
             _ => return,
         };
 
-        println!("parsed: {:?}", lit);
-
         n.attrs.retain(|attr| match &attr {
             swc_ecma_visit::swc_ecma_ast::JSXAttrOrSpread::JSXAttr(JSXAttr {
                 name: JSXAttrName::Ident(Ident { sym, .. }),
@@ -90,6 +89,8 @@ impl VisitMut for TransformVisitor {
             }) if sym == "tw" => false,
             _ => true,
         });
+
+        // todo(arlyon): handle array, function, object merge
 
         n.attrs.push(JSXAttrOrSpread::JSXAttr(JSXAttr {
             name: JSXAttrName::Ident(Ident {
@@ -103,35 +104,6 @@ impl VisitMut for TransformVisitor {
                 span: DUMMY_SP,
             })),
         }));
-    }
-}
-
-fn generate_css_prop(tw: &str) -> ObjectLit {
-    let props = tw.split(' ').filter_map(|s| {
-        let (k, v) = match s {
-            "h-4" => Some(("height", "4em")),
-            "text-red" => Some(("color", "red")),
-            "bg-red" => Some(("background-color", "red")),
-            x => None,
-        }?;
-
-        Some(PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-            key: PropName::Str(Str {
-                span: DUMMY_SP,
-                raw: None,
-                value: k.into(),
-            }),
-            value: Box::new(Expr::Lit(Lit::Str(Str {
-                span: DUMMY_SP,
-                raw: None,
-                value: v.into(),
-            }))),
-        }))))
-    });
-
-    ObjectLit {
-        span: DUMMY_SP,
-        props: props.collect(),
     }
 }
 
