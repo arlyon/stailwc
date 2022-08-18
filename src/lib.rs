@@ -1,7 +1,7 @@
 #![feature(box_patterns)]
 
 mod infer;
-mod tailwind_parse;
+mod parse;
 #[cfg(test)]
 mod test;
 
@@ -9,6 +9,7 @@ use swc_ecmascript::ast::{
     Expr, Ident, JSXAttr, JSXAttrName, JSXAttrValue, JSXExpr, JSXExprContainer, Lit, Program,
 };
 
+use parse::nom::Directive;
 use swc_common::{util::take::Take, DUMMY_SP};
 use swc_ecma_visit::{
     as_folder,
@@ -20,7 +21,6 @@ use swc_ecma_visit::{
 };
 use swc_plugin::metadata::TransformPluginProgramMetadata;
 use swc_plugin_macro::plugin_transform;
-use tailwind_parse::Directive;
 
 #[derive(Default)]
 pub struct TransformVisitor {
@@ -54,8 +54,8 @@ impl VisitMut for TransformVisitor {
                 expr: JSXExpr::Expr(box Expr::Lit(Lit::Str(string))),
                 ..
             })) => {
-                let d = Directive::from(&*string.value);
-                if self.tw_attr.replace(d.parse()).is_some() {
+                let (_, d) = Directive::parse(&*string.value).unwrap();
+                if self.tw_attr.replace(d.into()).is_some() {
                     println!("warn : encountered multiple tw attributes");
                 }
             }
@@ -171,8 +171,8 @@ impl VisitMut for TransformVisitor {
             }
         };
 
-        let d = Directive::from(text.as_ref());
-        if self.tw_tpl.replace(d.parse()).is_some() {
+        let (_, d) = Directive::parse(text.as_ref()).unwrap();
+        if self.tw_tpl.replace(d.into()).is_some() {
             println!("warn : encountered bad state in template tag");
         }
     }
