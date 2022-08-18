@@ -26,6 +26,8 @@ pub struct TailwindTheme<'a> {
     pub font_size: HashMap<&'a str, (&'a str, LineHeight<'a>)>,
     #[serde(borrow, rename = "fontWeight")]
     pub font_weight: HashMap<&'a str, &'a str>,
+    #[serde(borrow, rename = "borderRadius")]
+    pub border_radius: HashMap<&'a str, &'a str>,
 }
 
 #[derive(Deserialize, Debug)]
