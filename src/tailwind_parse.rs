@@ -129,8 +129,6 @@ impl<'a> Expression<'a> {
             };
         };
 
-        println!("{:#?}", prop);
-
         ObjectLit {
             span: DUMMY_SP,
             props: vec![prop],
