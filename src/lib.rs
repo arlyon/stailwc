@@ -12,7 +12,7 @@ use swc_ecmascript::ast::{
 use swc_common::DUMMY_SP;
 use swc_ecma_visit::{
     as_folder,
-    swc_ecma_ast::{JSXAttrOrSpread, JSXOpeningElement, ObjectLit},
+    swc_ecma_ast::{JSXAttrOrSpread, JSXOpeningElement, ObjectLit, TaggedTpl, TplElement},
     FoldWith, VisitMut, VisitMutWith,
 };
 use swc_plugin::metadata::TransformPluginProgramMetadata;
@@ -22,6 +22,7 @@ use tailwind_parse::Directive;
 #[derive(Default)]
 pub struct TransformVisitor {
     css_attr: Option<ObjectLit>,
+    tw_tpl: Option<ObjectLit>,
 }
 
 /**
@@ -104,6 +105,44 @@ impl VisitMut for TransformVisitor {
                 span: DUMMY_SP,
             })),
         }));
+    }
+
+    /**
+     * On discovery of a template tag, if it is a tailwind template tag,
+     * convert it to an emotion object.
+     */
+    fn visit_mut_tagged_tpl(&mut self, n: &mut TaggedTpl) {
+        let _sym = match &n.tag {
+            box Expr::Ident(Ident { sym, .. }) if sym == "tw" => "tw",
+            _ => {
+                n.visit_mut_children_with(self);
+                return;
+            }
+        };
+
+        let text = match n.tpl.quasis.as_slice() {
+            [TplElement { raw, .. }] => raw,
+            _ => {
+                println!("fail : did not expect multiple quasis. please file an issue");
+                return;
+            }
+        };
+
+        let d = Directive::from(text.as_ref());
+        if self.tw_tpl.replace(d.parse()).is_some() {
+            println!("warn : encountered bad state in template tag");
+        }
+    }
+
+    /**
+     * Visit an expression, optionally substituting the template tag with the
+     * generated emotion object.
+     */
+    fn visit_mut_expr(&mut self, n: &mut Expr) {
+        n.visit_mut_children_with(self);
+        if let Some(objlit) = self.tw_tpl.take() {
+            *n = Expr::Object(objlit);
+        }
     }
 }
 
