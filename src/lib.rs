@@ -9,10 +9,13 @@ use swc_ecmascript::ast::{
     Expr, Ident, JSXAttr, JSXAttrName, JSXAttrValue, JSXExpr, JSXExprContainer, Lit, Program,
 };
 
-use swc_common::DUMMY_SP;
+use swc_common::{util::take::Take, DUMMY_SP};
 use swc_ecma_visit::{
     as_folder,
-    swc_ecma_ast::{JSXAttrOrSpread, JSXOpeningElement, ObjectLit, TaggedTpl, TplElement},
+    swc_ecma_ast::{
+        ArrayLit, ExprOrSpread, JSXAttrOrSpread, JSXOpeningElement, ObjectLit, TaggedTpl,
+        TplElement,
+    },
     FoldWith, VisitMut, VisitMutWith,
 };
 use swc_plugin::metadata::TransformPluginProgramMetadata;
@@ -91,20 +94,60 @@ impl VisitMut for TransformVisitor {
                        }) if sym == "tw")
         });
 
-        // todo(arlyon): handle array, function, object merge
+        let css_attr = n.attrs.iter_mut().find_map(|attr| match attr {
+            swc_ecma_visit::swc_ecma_ast::JSXAttrOrSpread::JSXAttr(JSXAttr {
+                name: JSXAttrName::Ident(Ident { sym, .. }),
+                value,
+                ..
+            }) if sym == "css" => value.as_mut(),
+            _ => None,
+        });
 
-        n.attrs.push(JSXAttrOrSpread::JSXAttr(JSXAttr {
-            name: JSXAttrName::Ident(Ident {
-                sym: "css".into(),
+        // todo(arlyon): handle function
+
+        if let Some(JSXAttrValue::JSXExprContainer(JSXExprContainer {
+            expr: JSXExpr::Expr(box e),
+            ..
+        })) = css_attr
+        {
+            match e {
+                // if the expr is an array, push our tailwind styles to the end
+                Expr::Array(a) => a.elems.push(Some(ExprOrSpread {
+                    expr: Box::new(Expr::Object(lit)),
+                    spread: None,
+                })),
+                // for anything else, convert it to an array and push our tailwind styles to the end
+                _ => {
+                    *e = Expr::Array(ArrayLit {
+                        span: DUMMY_SP,
+                        elems: vec![
+                            Some(ExprOrSpread {
+                                expr: Box::new(e.take()),
+                                spread: None,
+                            }),
+                            Some(ExprOrSpread {
+                                expr: Box::new(Expr::Object(lit)),
+                                spread: None,
+                            }),
+                        ],
+                    });
+                }
+            }
+        } else {
+            // if the attr doesn't exist, push one
+            n.attrs.push(JSXAttrOrSpread::JSXAttr(JSXAttr {
+                name: JSXAttrName::Ident(Ident {
+                    sym: "css".into(),
+                    span: DUMMY_SP,
+                    optional: false,
+                }),
                 span: DUMMY_SP,
-                optional: false,
-            }),
-            span: DUMMY_SP,
-            value: Some(JSXAttrValue::JSXExprContainer(JSXExprContainer {
-                expr: JSXExpr::Expr(Box::new(Expr::Object(lit))),
-                span: DUMMY_SP,
-            })),
-        }));
+                value: Some(JSXAttrValue::JSXExprContainer(JSXExprContainer {
+                    expr: JSXExpr::Expr(Box::new(Expr::Object(lit))),
+                    span: DUMMY_SP,
+                })),
+            }));
+        };
     }
 
     /**

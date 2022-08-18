@@ -57,9 +57,22 @@ test!(
         ..Default::default()
     }),
     |_| as_folder(TransformVisitor::default()),
-    variable,
+    existing_css_object,
     // Input codes
-    r#"<Test tw={variable} />"#,
+    r#"<Test tw="h-4" css={{width: "4em"}} />"#,
     // Output codes after transformed with plugin
-    r#"console.log("transform");"#
+    r#"<Test css={[{width: "4em"}, {"height": "4em"}]} />"#
+);
+
+test!(
+    swc_ecma_parser::Syntax::Typescript(swc_ecma_parser::TsConfig {
+        tsx: true,
+        ..Default::default()
+    }),
+    |_| as_folder(TransformVisitor::default()),
+    existing_css_array,
+    // Input codes
+    r#"<Test tw="h-4" css={[]} />"#,
+    // Output codes after transformed with plugin
+    r#"<Test css={[{"height": "4em"}]} />"#
 );
