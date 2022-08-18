@@ -1,3 +1,4 @@
+use itertools::Itertools;
 use swc_common::DUMMY_SP;
 use swc_ecma_visit::swc_ecma_ast::{
     Expr, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str,
@@ -15,6 +16,10 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit,
                 Ok(Type::Screen(x)) => Ok(create_literal("fontSize", &format!("{}em", x))),
                 Ok(Type::Color(x)) => Ok(create_literal("color", x)),
                 _ => Err(s),
+            },
+            ("font", rest) => match theme.font_family.get(rest) {
+                Some(val) => Ok(create_literal("fontFamily", &val.iter().join(", "))),
+                None => Err(s),
             },
             ("border", rest) => match infer_type(theme, rest) {
                 Ok(Type::Scalar(x)) => Ok(create_literal("borderWidth", &format!("{}px", x))),
