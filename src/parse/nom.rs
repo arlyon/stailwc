@@ -1,11 +1,8 @@
-use std::str::FromStr;
-
 use nom::branch::alt;
-use nom::bytes::complete::{tag, take_while};
+use nom::bytes::complete::take_while;
 use nom::character::complete::char;
 use nom::character::{is_alphabetic, is_alphanumeric};
 use nom::combinator::{eof, opt, verify};
-use nom::error::ParseError;
 use nom::multi::{many0, separated_list0, separated_list1};
 use nom::sequence::{delimited, terminated};
 use nom::{IResult, Parser};
@@ -76,10 +73,10 @@ impl<'a> Subject<'a> {
     pub fn parse(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
         let literal = verify(
             take_while(|c| is_alphanumeric(c as u8) || c == '-'),
-            |c: &str| c.len() > 0 && is_alphabetic(c.chars().next().unwrap() as u8),
+            |c: &str| !c.is_empty() && is_alphabetic(c.chars().next().unwrap() as u8),
         )
-        .map(|u| Subject::Literal(u));
-        let group = delimited(char('('), Directive::parse, char(')')).map(|u| Subject::Group(u));
+        .map(Subject::Literal);
+        let group = delimited(char('('), Directive::parse, char(')')).map(Subject::Group);
         alt((literal, group))(s)
     }
 }

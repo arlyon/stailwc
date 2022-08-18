@@ -8,10 +8,7 @@ use swc_ecma_visit::swc_ecma_ast::PropName;
 use swc_ecma_visit::swc_ecma_ast::PropOrSpread;
 use swc_ecma_visit::swc_ecma_ast::Str;
 
-use crate::infer::infer_type;
-use crate::infer::Type;
-use crate::infer::SIZES;
-
+use super::literal::parse_literal;
 use super::nom::Directive;
 use super::nom::Expression;
 use super::nom::Subject;
@@ -95,54 +92,8 @@ impl<'a> TryFrom<Subject<'a>> for ObjectLit {
 
     fn try_from(value: Subject<'a>) -> Result<Self, Self::Error> {
         match value {
-            Subject::Literal(s) => {
-                if let Some(pair) = s.split_once('-') {
-                    match pair {
-                        ("text", rest) => match infer_type(rest) {
-                            Ok(Type::Size(x)) => Ok(create_lit(
-                                "fontSize",
-                                &format!("{}em", SIZES.iter().position(|s| x.eq(*s)).unwrap()),
-                            )),
-                            Ok(Type::Color(x)) => Ok(create_lit("color", x)),
-                            _ => Err(s),
-                        },
-                        ("border", rest) => match infer_type(rest) {
-                            Ok(Type::Scalar(x)) => {
-                                Ok(create_lit("borderWidth", &format!("{}px", x)))
-                            }
-                            Ok(Type::Color(x)) => Ok(create_lit("borderColor", x)),
-                            _ => Err(s),
-                        },
-                        ("bg", rest) => Ok(create_lit("backgroundColor", rest)),
-                        ("h", rest) => Ok(create_lit("height", &format!("{}em", rest,))),
-                        ("w", rest) => Ok(create_lit("width", &format!("{}em", rest,))),
-                        ("p", rest) => Ok(create_lit("padding", &format!("{}em", rest,))),
-                        ("m", rest) => Ok(create_lit("margin", &format!("{}em", rest,))),
-                        _ => Err(s),
-                    }
-                } else {
-                    Err(s)
-                }
-            }
+            Subject::Literal(s) => parse_literal(s),
             Subject::Group(dir) => Ok(dir.into()),
         }
-    }
-}
-
-fn create_lit(key: &str, value: &str) -> ObjectLit {
-    ObjectLit {
-        span: DUMMY_SP,
-        props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-            key: PropName::Str(Str {
-                span: DUMMY_SP,
-                raw: None,
-                value: key.into(),
-            }),
-            value: Box::new(Expr::Lit(Lit::Str(Str {
-                span: DUMMY_SP,
-                raw: None,
-                value: value.into(),
-            }))),
-        })))],
     }
 }
