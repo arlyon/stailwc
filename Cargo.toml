@@ -6,6 +6,15 @@ version = "0.1.0"
 [lib]
 crate-type = ["cdylib"]
 
+[profile.release]
+# This removes more dead code
+codegen-units = 1
+lto = true
+# Optimize for size
+opt-level = "s"
+# Optimize for performance, this is default so you don't need to specify it
+# opt-level = "z"
+
 [dependencies]
 chumsky = "0.8.0"
 itertools = "0.10.3"

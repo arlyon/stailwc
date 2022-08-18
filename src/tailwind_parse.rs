@@ -1,5 +1,3 @@
-use std::str::FromStr;
-
 use swc_common::DUMMY_SP;
 use swc_ecma_visit::swc_ecma_ast::{
     Expr, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str,
@@ -42,22 +40,22 @@ struct Expression<'a> {
 
 impl<'a> From<&'a str> for Expression<'a> {
     fn from(s: &'a str) -> Self {
-        let (negative, s) = if s.starts_with('-') {
-            (true, &s[1..])
+        let (negative, s) = if let Some(stripped) = s.strip_prefix('-') {
+            (true, stripped)
         } else {
             (false, s)
         };
 
-        let mut modifiers: Vec<_> = s.split(":").collect();
+        let mut modifiers: Vec<_> = s.split(':').collect();
         let s = modifiers.pop().unwrap();
 
-        let (important, s) = if s.ends_with("!") {
-            (true, &s[..s.len() - 1])
+        let (important, s) = if let Some(stripped) = s.strip_suffix('!') {
+            (true, stripped)
         } else {
             (false, s)
         };
 
-        let (s, alpha) = match s.split_once("/") {
+        let (s, alpha) = match s.split_once('/') {
             Some((a, b)) => (a, Some(b)),
             None => (s, None),
         };

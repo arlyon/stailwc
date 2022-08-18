@@ -5,9 +5,8 @@ mod tailwind_parse;
 #[cfg(test)]
 mod test;
 
-use itertools::Itertools;
 use swc_ecmascript::ast::{
-    Expr, Ident, JSXAttr, JSXAttrName, JSXAttrValue, JSXExpr, JSXExprContainer, Lit, Program, Str,
+    Expr, Ident, JSXAttr, JSXAttrName, JSXAttrValue, JSXExpr, JSXExprContainer, Lit, Program,
 };
 
 use swc_common::DUMMY_SP;
@@ -35,7 +34,7 @@ impl VisitMut for TransformVisitor {
      * Handle jsx attributes and convert them into emotion.
      */
     fn visit_mut_jsx_attr(&mut self, n: &mut JSXAttr) {
-        let sym = match &n.name {
+        let _sym = match &n.name {
             JSXAttrName::Ident(Ident { sym, .. }) if sym == "tw" => "tw",
             _ => return,
         };
@@ -49,13 +48,12 @@ impl VisitMut for TransformVisitor {
                 ..
             })) => {
                 let d = Directive::from(&*string.value);
-                if let Some(x) = self.css_attr.replace(d.parse()) {
+                if self.css_attr.replace(d.parse()).is_some() {
                     println!("warn : encountered multiple tw attributes");
                 }
             }
             Some(JSXAttrValue::JSXExprContainer(JSXExprContainer {
                 expr: JSXExpr::Expr(box Expr::Ident(Ident { sym, .. })),
-                span,
                 ..
             })) => {
                 // todo(arlyon): enable error reporting
@@ -82,12 +80,11 @@ impl VisitMut for TransformVisitor {
             _ => return,
         };
 
-        n.attrs.retain(|attr| match &attr {
-            swc_ecma_visit::swc_ecma_ast::JSXAttrOrSpread::JSXAttr(JSXAttr {
-                name: JSXAttrName::Ident(Ident { sym, .. }),
-                ..
-            }) if sym == "tw" => false,
-            _ => true,
+        n.attrs.retain(|attr| {
+            !matches!(attr, swc_ecma_visit::swc_ecma_ast::JSXAttrOrSpread::JSXAttr(JSXAttr {
+                            name: JSXAttrName::Ident(Ident { sym, .. }),
+                           ..
+                       }) if sym == "tw")
         });
 
         // todo(arlyon): handle array, function, object merge
