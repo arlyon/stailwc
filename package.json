@@ -1,5 +1,5 @@
 {
-  "name": "twinswcro",
+  "name": "stailwc",
   "version": "0.1.0",
   "description": "",
   "author": "",
@@ -7,7 +7,7 @@
   "keywords": [
     "swc-plugin"
   ],
-  "main": "target/wasm32-wasi/release/twinswcro.wasm",
+  "main": "target/wasm32-wasi/release/stailwc.wasm",
   "scripts": {
     "prepublishOnly": "cargo build-wasi --release"
   },

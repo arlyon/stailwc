@@ -1,6 +1,6 @@
 [package]
 edition = "2021"
-name = "twinswcro"
+name = "stailwc"
 version = "0.1.0"
 
 [lib]

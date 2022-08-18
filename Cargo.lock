@@ -1160,6 +1160,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "stailwc"
+version = "0.1.0"
+dependencies = [
+ "chumsky",
+ "itertools",
+ "serde",
+ "swc_atoms",
+ "swc_common",
+ "swc_ecma_parser",
+ "swc_ecma_transforms_testing",
+ "swc_ecma_visit",
+ "swc_ecmascript",
+ "swc_plugin",
+ "swc_plugin_macro",
+ "tracing",
+]
+
+[[package]]
 name = "static_assertions"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1763,24 +1781,6 @@ dependencies = [
  "tracing",
  "tracing-core",
  "tracing-log",
-]
-
-[[package]]
-name = "twinswcro"
-version = "0.1.0"
-dependencies = [
- "chumsky",
- "itertools",
- "serde",
- "swc_atoms",
- "swc_common",
- "swc_ecma_parser",
- "swc_ecma_transforms_testing",
- "swc_ecma_visit",
- "swc_ecmascript",
- "swc_plugin",
- "swc_plugin_macro",
- "tracing",
 ]
 
 [[package]]
