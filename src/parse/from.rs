@@ -34,10 +34,8 @@ impl<'a> From<Directive<'a>> for ObjectLit {
 
 impl<'a> From<Expression<'a>> for ObjectLit {
     fn from(val: Expression<'a>) -> Self {
-        // generate item
-
-        let (k, v) = match val.subject.try_into() {
-            Ok((k, v)) => (k, v),
+        let mut object: ObjectLit = match val.subject.try_into() {
+            Ok(object) => object,
             Err(text) => {
                 println!("fail : unknown subject `{}`", text);
                 return ObjectLit {
@@ -47,25 +45,21 @@ impl<'a> From<Expression<'a>> for ObjectLit {
             }
         };
 
-        let v = format!(
-            "{}{}{}",
-            if val.negative { "-" } else { "" },
-            v,
-            if val.important { " !important" } else { "" }
-        );
-
-        let mut prop = PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-            key: PropName::Str(Str {
-                span: DUMMY_SP,
-                raw: None,
-                value: k.into(),
-            }),
-            value: Box::new(Expr::Lit(Lit::Str(Str {
-                span: DUMMY_SP,
-                raw: None,
-                value: v.into(),
-            }))),
-        })));
+        for prop in &mut object.props {
+            if let PropOrSpread::Prop(box Prop::KeyValue(KeyValueProp {
+                value: box Expr::Lit(Lit::Str(Str { value, .. })),
+                ..
+            })) = prop
+            {
+                *value = format!(
+                    "{}{}{}",
+                    if val.negative { "-" } else { "" },
+                    value,
+                    if val.important { " !important" } else { "" }
+                )
+                .into();
+            }
+        }
 
         for modifier in &val.modifiers {
             let value = match *modifier {
@@ -79,27 +73,24 @@ impl<'a> From<Expression<'a>> for ObjectLit {
                 _ => continue,
             };
 
-            prop = PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-                key: PropName::Str(Str {
-                    span: DUMMY_SP,
-                    raw: None,
-                    value: value.into(),
-                }),
-                value: Box::new(Expr::Object(ObjectLit {
-                    span: DUMMY_SP,
-                    props: vec![prop],
-                })),
-            })))
+            object = ObjectLit {
+                span: DUMMY_SP,
+                props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+                    key: PropName::Str(Str {
+                        span: DUMMY_SP,
+                        raw: None,
+                        value: value.into(),
+                    }),
+                    value: Box::new(Expr::Object(object)),
+                })))],
+            }
         }
 
-        ObjectLit {
-            span: DUMMY_SP,
-            props: vec![prop],
-        }
+        object
     }
 }
 
-impl<'a> TryFrom<Subject<'a>> for (&'a str, String) {
+impl<'a> TryFrom<Subject<'a>> for ObjectLit {
     type Error = &'a str;
 
     fn try_from(value: Subject<'a>) -> Result<Self, Self::Error> {
@@ -108,30 +99,50 @@ impl<'a> TryFrom<Subject<'a>> for (&'a str, String) {
                 if let Some(pair) = s.split_once('-') {
                     match pair {
                         ("text", rest) => match infer_type(rest) {
-                            Ok(Type::Size(x)) => Ok((
+                            Ok(Type::Size(x)) => Ok(create_lit(
                                 "fontSize",
-                                format!("{}em", SIZES.iter().position(|s| x.eq(*s)).unwrap()),
+                                &format!("{}em", SIZES.iter().position(|s| x.eq(*s)).unwrap()),
                             )),
-                            Ok(Type::Color(x)) => Ok(("color", x.to_string())),
+                            Ok(Type::Color(x)) => Ok(create_lit("color", x)),
                             _ => Err(s),
                         },
                         ("border", rest) => match infer_type(rest) {
-                            Ok(Type::Scalar(x)) => Ok(("borderWidth", format!("{}px", x))),
-                            Ok(Type::Color(x)) => Ok(("borderColor", x.to_string())),
+                            Ok(Type::Scalar(x)) => {
+                                Ok(create_lit("borderWidth", &format!("{}px", x)))
+                            }
+                            Ok(Type::Color(x)) => Ok(create_lit("borderColor", x)),
                             _ => Err(s),
                         },
-                        ("bg", rest) => Ok(("backgroundColor", rest.to_string())),
-                        ("h", rest) => Ok(("height", format!("{}em", rest,))),
-                        ("w", rest) => Ok(("width", format!("{}em", rest,))),
-                        ("p", rest) => Ok(("padding", format!("{}em", rest,))),
-                        ("m", rest) => Ok(("margin", format!("{}em", rest,))),
+                        ("bg", rest) => Ok(create_lit("backgroundColor", rest)),
+                        ("h", rest) => Ok(create_lit("height", &format!("{}em", rest,))),
+                        ("w", rest) => Ok(create_lit("width", &format!("{}em", rest,))),
+                        ("p", rest) => Ok(create_lit("padding", &format!("{}em", rest,))),
+                        ("m", rest) => Ok(create_lit("margin", &format!("{}em", rest,))),
                         _ => Err(s),
                     }
                 } else {
                     Err(s)
                 }
             }
-            Subject::Group(_) => Err("not supported"),
+            Subject::Group(dir) => Ok(dir.into()),
         }
+    }
+}
+
+fn create_lit(key: &str, value: &str) -> ObjectLit {
+    ObjectLit {
+        span: DUMMY_SP,
+        props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+            key: PropName::Str(Str {
+                span: DUMMY_SP,
+                raw: None,
+                value: key.into(),
+            }),
+            value: Box::new(Expr::Lit(Lit::Str(Str {
+                span: DUMMY_SP,
+                raw: None,
+                value: value.into(),
+            }))),
+        })))],
     }
 }
