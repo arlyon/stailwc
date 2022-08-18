@@ -68,18 +68,16 @@ tag.
 ```tsx
 import { useState } from "react";
 
-const MyComponent = () => {
+export const ColorButton = () => {
   const [clicked, setClicked] = useState(0);
   return (
-    <div tw="bg-white border-2 border-orange m-2">
-      <button
-        tw="p-1"
-        css={clicked % 2 == 0 ? tw`text-green` : tw`text-blue`}
-        onClick={() => setClicked(clicked + 1)}
-      >
-        Clicked {clicked} times
-      </button>
-    </div>
+    <button
+      tw="p-1 m-4 text-green bg-white hover:(bg-gray text-yellow md:text-red) border-3"
+      css={clicked % 2 == 0 ? tw`border-green` : tw`border-blue`}
+      onClick={() => setClicked(clicked + 1)}
+    >
+      Clicked {clicked} times
+    </button>
   );
 };
 ```
