@@ -21,7 +21,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    swcPlugins: [["stailwc, {}]],
+    swcPlugins: [["stailwc", {}]],
   },
   compiler: {
     emotion: true,
@@ -58,6 +58,31 @@ export default function Document() {
 ```
 
 Now get hacking!
+
+## Usage
+
+You can interact with stailwc in two ways. The first is through
+the `tw` JSW attribute, and the second is via the `tw` template
+tag.
+
+```tsx
+import { useState } from "react";
+
+const MyComponent = () => {
+  const [clicked, setClicked] = useState(0);
+  return (
+    <div tw="bg-white border-2 border-orange m-2">
+      <button
+        tw="p-1"
+        css={clicked % 2 == 0 ? tw`text-green` : tw`text-blue`}
+        onClick={() => setClicked(clicked + 1)}
+      >
+        Clicked {clicked} times
+      </button>
+    </div>
+  );
+};
+```
 
 ## Caveats
 
