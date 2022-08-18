@@ -36,7 +36,10 @@ impl VisitMut for TransformVisitor {
     fn visit_mut_jsx_attr(&mut self, n: &mut JSXAttr) {
         let _sym = match &n.name {
             JSXAttrName::Ident(Ident { sym, .. }) if sym == "tw" => "tw",
-            _ => return,
+            _ => {
+                n.visit_mut_children_with(self);
+                return;
+            }
         };
 
         match &n.value {
