@@ -21,6 +21,10 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit,
                 Some(val) => Ok(create_literal("fontFamily", &val.iter().join(", "))),
                 None => Err(s),
             },
+            ("shadow", rest) => match theme.box_shadow.get(rest) {
+                Some(val) => Ok(create_literal("boxShadow", val)),
+                None => Err(s),
+            },
             ("border", rest) => match infer_type(theme, rest) {
                 Ok(Type::Scalar(x)) => Ok(create_literal("borderWidth", &format!("{}px", x))),
                 Ok(Type::Color(x)) => Ok(create_literal("borderColor", x)),
