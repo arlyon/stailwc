@@ -1,11 +1,16 @@
 {
   "name": "stailwc",
-  "version": "0.1.0",
-  "description": "",
-  "author": "",
+  "version": "0.1.1",
+  "description": "An experimental transpiler to bring tailwind macros to SWC rocket",
+  "author": "arlyon@me.com",
   "license": "ISC",
   "keywords": [
-    "swc-plugin"
+    "swc-plugin",
+    "swc",
+    "tailwind",
+    "tailwindcss",
+    "next",
+    "nextjs"
   ],
   "main": "target/wasm32-wasi/release/stailwc.wasm",
   "scripts": {
