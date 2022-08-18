@@ -16,13 +16,13 @@ impl<'a> Directive<'a> {
     /**
      * Same as parse, but with an added check for an EOF.
      */
-    pub fn parse_root(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
+    pub fn parse(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
         terminated(separated_list0(char(' '), Expression::parse), eof)
             .map(|exps| Directive { exps })
             .parse(s)
     }
 
-    pub fn parse(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
+    fn parse_inner(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
         separated_list1(char(' '), Expression::parse)
             .map(|exps| Directive { exps })
             .parse(s)
@@ -76,7 +76,7 @@ impl<'a> Subject<'a> {
             |c: &str| !c.is_empty() && is_alphabetic(c.chars().next().unwrap() as u8),
         )
         .map(Subject::Literal);
-        let group = delimited(char('('), Directive::parse, char(')')).map(Subject::Group);
+        let group = delimited(char('('), Directive::parse_inner, char(')')).map(Subject::Group);
         alt((literal, group))(s)
     }
 }
@@ -90,7 +90,7 @@ mod test {
 
     #[test]
     fn directive() -> anyhow::Result<()> {
-        let (rest, d) = Directive::parse_root(
+        let (rest, d) = Directive::parse(
             "-h-4 md:bg-blue text-white! hover:(text-blue bg-white lg:text-black!)",
         )?;
 
@@ -106,6 +106,6 @@ mod test {
     #[test_case("m0d:sub" ; "when modifier has a number")]
     #[test_case("()" ; "rejects empty group")]
     fn parse_failure_tests(s: &str) {
-        Directive::parse_root(s).unwrap();
+        Directive::parse(s).unwrap();
     }
 }
