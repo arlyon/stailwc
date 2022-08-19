@@ -46,7 +46,9 @@ impl<'a> Expression<'a> {
         let mods = many0(terminated(
             verify(
                 take_while(|c| is_alphabetic(c as u8) || c == '-'),
-                |s: &str| s.len() > 0 && is_alphabetic(s.chars().next().unwrap() as u8),
+                |s: &str| {
+                    !s.is_empty() && is_alphabetic(s.chars().next().expect("not empty") as u8)
+                },
             ),
             char(':'),
         ));
@@ -80,7 +82,7 @@ impl<'a> Subject<'a> {
     pub fn parse(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
         let literal = verify(
             take_while(|c| is_alphanumeric(c as u8) || ['-', '[', ']'].contains(&c)),
-            |c: &str| !c.is_empty() && is_alphabetic(c.chars().next().unwrap() as u8),
+            |c: &str| !c.is_empty() && is_alphabetic(c.chars().next().expect("not empty") as u8),
         )
         .map(Subject::Literal);
         let group = delimited(char('('), Directive::parse_inner, char(')')).map(Subject::Group);

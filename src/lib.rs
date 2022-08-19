@@ -1,4 +1,5 @@
 #![feature(box_patterns)]
+#![deny(clippy::unwrap_used)]
 
 mod config;
 mod infer;
@@ -72,7 +73,13 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 expr: JSXExpr::Expr(box Expr::Lit(Lit::Str(string))),
                 ..
             })) => {
-                let (_, d) = Directive::parse(&*string.value).unwrap();
+                let d = match Directive::parse(&*string.value) {
+                    Ok((_, d)) => d,
+                    Err(e) => {
+                        println!("fail : could not parse `{}`  {}", string.value, e);
+                        return;
+                    },
+                };
                 if self.tw_attr.replace(literal_from_directive(d, &self.config.theme)).is_some() {
                     println!("warn : encountered multiple tw attributes");
                 }
@@ -189,7 +196,13 @@ impl<'a> VisitMut for TransformVisitor<'a> {
             }
         };
 
-        let (_, d) = Directive::parse(text.as_ref()).unwrap();
+        let d = match Directive::parse(text) {
+            Ok((_, d)) => d,
+            Err(e) => {
+                println!("fail : could not parse `{}` - {}", text, e);
+                return;
+            }
+        };
         if self
             .tw_tpl
             .replace(literal_from_directive(d, &self.config.theme))
