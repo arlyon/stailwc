@@ -255,6 +255,20 @@ pub fn right(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.spacing, rest, "right")
 }
 
+pub fn translate(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    println!("processing translate {}", rest);
+    let (cmd, rest) = rest.split_once("-")?;
+    match cmd {
+        "x" => simple_lookup_map(&theme.translate, rest, "transform", |s| {
+            format!("translateX({})", s)
+        }),
+        "y" => simple_lookup_map(&theme.translate, rest, "transform", |s| {
+            format!("translateY({})", s)
+        }),
+        _ => None,
+    }
+}
+
 pub fn bg(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.colors, rest, "backgroundColor")
 }
