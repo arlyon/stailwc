@@ -7,7 +7,6 @@ mod parse;
 mod test;
 
 use config::TailwindConfig;
-use serde_path_to_error::Error;
 use swc_ecmascript::ast::{
     Expr, Ident, JSXAttr, JSXAttrName, JSXAttrValue, JSXExpr, JSXExprContainer, Lit, Program,
 };

@@ -1,6 +1,6 @@
 use std::{borrow::Cow, collections::HashMap};
 
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct AppConfig<'a> {
