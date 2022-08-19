@@ -13,15 +13,46 @@ performing considerably better than babel-based alternatives.
 > yarn add stailwc
 ```
 
+Currently the setup process is a little bit convoluted, but it
+will be cleaned up in the future, once we determine the best
+way to package this. Place the following in your next.config.js:
+
 `next.config.js`
 
 ```js
+const initStailwc = () => {
+  const resolveConfig = require("tailwindcss/resolveConfig");
+  const defaultConfig = require("tailwindcss/defaultConfig");
+  const override = require("./tailwind.config");
+
+  const config = resolveConfig(override, defaultConfig);
+
+  config.theme.colors = Object.entries(config.theme.colors)
+    .flatMap(([k, v]) => {
+      if (typeof v === "object") {
+        const items = Object.entries(v).map(([k2, v2]) => [k + "-" + k2, v2]);
+        return items;
+      } else {
+        return [[k, v]];
+      }
+    })
+    .reduce(
+      (acc, [k, v]) => ({
+        ...acc,
+        [k]: v,
+      }),
+      {}
+    );
+
+  return ["stailwc", { config }];
+};
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    swcPlugins: [["stailwc", {}]],
+    swcPlugins: [initStailwc()],
   },
   compiler: {
     emotion: true,
