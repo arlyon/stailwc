@@ -46,7 +46,7 @@ impl<'a> Expression<'a> {
         let mods = many0(terminated(
             verify(
                 take_while(|c| is_alphabetic(c as u8) || c == '-'),
-                |s: &str| s.len() > 0,
+                |s: &str| s.len() > 0 && is_alphabetic(s.chars().next().unwrap() as u8),
             ),
             char(':'),
         ));
@@ -109,6 +109,7 @@ mod test {
     }
 
     #[test_case(" should handle  spacing " ; "when a statement has irregular gaps")]
+    #[test_case("dash-modifier:call" ; "when a modifier has a dash in it")]
     fn parse_tests(s: &str) {
         Directive::parse(s).unwrap();
     }
