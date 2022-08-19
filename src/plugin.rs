@@ -23,11 +23,13 @@ fn simple_lookup_map<V>(
 }
 
 pub fn text(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    match infer_type(theme, rest) {
-        Ok(Type::Screen(x)) => Some(to_lit(&[("fontSize", &format!("{}em", x))])),
-        Ok(Type::Color(x)) => Some(to_lit(&[("color", x)])),
-        _ => None,
-    }
+    simple_lookup_map(&theme.font_size, rest, "fontSize", |(a, _)| a.to_string())
+        .or_else(|| simple_lookup(&theme.colors, rest, "color"))
+        .or_else(|| {
+            ["left", "center", "right", "justify", "start", "end"]
+                .contains(&rest)
+                .then_some(to_lit(&[("textAlign", rest)]))
+        })
 }
 
 pub fn font(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
