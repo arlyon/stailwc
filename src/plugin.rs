@@ -36,6 +36,7 @@ pub fn font(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup_map(&theme.font_family, rest, "fontFamily", |s| {
         s.iter().join(", ")
     })
+    .or_else(|| simple_lookup(&theme.font_weight, rest, "fontWeight"))
 }
 
 pub fn shadow(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
