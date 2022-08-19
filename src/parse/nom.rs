@@ -48,11 +48,10 @@ impl<'a> Expression<'a> {
         ));
         let subject = Subject::parse;
 
-        negative
-            .and(mods)
+        mods.and(negative)
             .and(subject)
             .and(important)
-            .map(|(((negative, modifiers), subject), important)| Expression {
+            .map(|(((modifiers, negative), subject), important)| Expression {
                 alpha: None,
                 important,
                 modifiers,
@@ -103,6 +102,7 @@ mod test {
 
     #[should_panic]
     #[test_case("-5" ; "when subject does not start with a letter")]
+    #[test_case("-mod:sub" ; "when the minus is in the wrong place")]
     #[test_case("m0d:sub" ; "when modifier has a number")]
     #[test_case("()" ; "rejects empty group")]
     fn parse_failure_tests(s: &str) {
