@@ -1,9 +1,9 @@
 use nom::branch::alt;
 use nom::bytes::complete::take_while;
-use nom::character::complete::char;
+use nom::character::complete::{char, space0};
 use nom::character::{is_alphabetic, is_alphanumeric};
 use nom::combinator::{eof, opt, verify};
-use nom::multi::{many0, separated_list0, separated_list1};
+use nom::multi::{many0, many1};
 use nom::sequence::{delimited, terminated};
 use nom::{IResult, Parser};
 
@@ -17,14 +17,15 @@ impl<'a> Directive<'a> {
      * Same as parse, but with an added check for an EOF.
      */
     pub fn parse(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
-        terminated(separated_list0(char(' '), Expression::parse), eof)
-            .map(|exps| Directive { exps })
+        terminated(many0(Expression::parse).and(space0), eof)
+            .map(|(exps, _)| Directive { exps })
             .parse(s)
     }
 
     fn parse_inner(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
-        separated_list1(char(' '), Expression::parse)
-            .map(|exps| Directive { exps })
+        many1(Expression::parse)
+            .and(space0)
+            .map(|(exps, _)| Directive { exps })
             .parse(s)
     }
 }
@@ -43,21 +44,28 @@ impl<'a> Expression<'a> {
         let negative = opt(char('-')).map(|o| o.is_some());
         let important = opt(char('!')).map(|o| o.is_some());
         let mods = many0(terminated(
-            take_while(|c| is_alphabetic(c as u8)),
+            verify(
+                take_while(|c| is_alphabetic(c as u8) || c == '-'),
+                |s: &str| s.len() > 0,
+            ),
             char(':'),
         ));
         let subject = Subject::parse;
 
-        mods.and(negative)
+        space0
+            .and(mods)
+            .and(negative)
             .and(subject)
             .and(important)
-            .map(|(((modifiers, negative), subject), important)| Expression {
-                alpha: None,
-                important,
-                modifiers,
-                negative,
-                subject,
-            })
+            .map(
+                |((((_, modifiers), negative), subject), important)| Expression {
+                    alpha: None,
+                    important,
+                    modifiers,
+                    negative,
+                    subject,
+                },
+            )
             .parse(s)
     }
 }
@@ -100,12 +108,18 @@ mod test {
         Ok(())
     }
 
+    #[test_case(" should handle  spacing " ; "when a statement has irregular gaps")]
+    fn parse_tests(s: &str) {
+        Directive::parse(s).unwrap();
+    }
+
     #[should_panic]
     #[test_case("-5" ; "when subject does not start with a letter")]
     #[test_case("-mod:sub" ; "when the minus is in the wrong place")]
     #[test_case("m0d:sub" ; "when modifier has a number")]
     #[test_case("()" ; "rejects empty group")]
     fn parse_failure_tests(s: &str) {
-        Directive::parse(s).unwrap();
+        let (rest, d) = Directive::parse(s).unwrap();
+        println!("rest: {}, d: {:?}", rest, d);
     }
 }
