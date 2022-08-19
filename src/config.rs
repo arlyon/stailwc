@@ -36,6 +36,8 @@ pub struct TailwindTheme<'a> {
     pub border_radius: HashMap<&'a str, &'a str>,
     #[serde(borrow, rename = "boxShadow")]
     pub box_shadow: HashMap<&'a str, &'a str>,
+    #[serde(borrow, rename = "zIndex")]
+    pub z_index: HashMap<&'a str, &'a str>,
 
     #[serde(borrow, rename = "transitionDelay")]
     pub transition_delay: HashMap<&'a str, &'a str>,

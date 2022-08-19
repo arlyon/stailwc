@@ -193,6 +193,10 @@ pub fn m(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.spacing, rest, "margin")
 }
 
+pub fn z(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.z_index, rest, "z-index")
+}
+
 fn to_lit(items: &[(&str, &str)]) -> ObjectLit {
     ObjectLit {
         span: DUMMY_SP,

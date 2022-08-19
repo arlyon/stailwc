@@ -35,6 +35,7 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit,
         "w" => plugin::w,
         "p" => plugin::p,
         "m" => plugin::m,
+        "z" => plugin::z,
         _ => return Err(s),
     };
 
