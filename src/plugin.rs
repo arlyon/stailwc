@@ -281,8 +281,68 @@ pub fn p(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.spacing, rest, "padding")
 }
 
+pub fn px(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    theme
+        .spacing
+        .get(rest)
+        .map(|s| to_lit(&[("paddingLeft", s), ("paddingRight", s)]))
+}
+
+pub fn pl(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.spacing, rest, "paddingLeft")
+}
+
+pub fn pr(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.spacing, rest, "paddingRight")
+}
+
+pub fn py(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    theme
+        .spacing
+        .get(rest)
+        .map(|s| to_lit(&[("paddingTop", s), ("paddingBottom", s)]))
+}
+
+pub fn pt(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.spacing, rest, "paddingTop")
+}
+
+pub fn pb(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.spacing, rest, "paddingBottom")
+}
+
 pub fn m(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.spacing, rest, "margin")
+}
+
+pub fn mx(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    theme
+        .spacing
+        .get(rest)
+        .map(|s| to_lit(&[("marginLeft", s), ("marginRight", s)]))
+}
+
+pub fn ml(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.spacing, rest, "marginLeft")
+}
+
+pub fn mr(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.spacing, rest, "marginRight")
+}
+
+pub fn my(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    theme
+        .spacing
+        .get(rest)
+        .map(|s| to_lit(&[("marginTop", s), ("marginBottom", s)]))
+}
+
+pub fn mt(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.spacing, rest, "marginTop")
+}
+
+pub fn mb(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.spacing, rest, "marginBottom")
 }
 
 pub fn z(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
