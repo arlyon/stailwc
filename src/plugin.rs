@@ -3,11 +3,7 @@ use std::collections::HashMap;
 use itertools::Itertools;
 use swc_ecma_visit::swc_ecma_ast::ObjectLit;
 
-use crate::{
-    config::TailwindTheme,
-    infer::{infer_type, Type},
-    util::to_lit,
-};
+use crate::{config::TailwindTheme, util::to_lit};
 
 fn simple_lookup(hashmap: &HashMap<&str, &str>, search: &str, output: &str) -> Option<ObjectLit> {
     hashmap.get(search).map(|val| to_lit(&[(output, val)]))
@@ -84,11 +80,8 @@ pub fn ease(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
 }
 
 pub fn border(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    match infer_type(theme, rest) {
-        Ok(Type::Scalar(x)) => Some(to_lit(&[("borderWidth", &format!("{}px", x))])),
-        Ok(Type::Color(x)) => Some(to_lit(&[("borderColor", x)])),
-        _ => None,
-    }
+    simple_lookup(&theme.colors, rest, "borderColor")
+        .or_else(|| simple_lookup(&theme.border_width, rest, "borderWidth"))
 }
 
 pub fn flex(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {

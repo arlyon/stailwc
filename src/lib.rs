@@ -2,7 +2,6 @@
 #![deny(clippy::unwrap_used)]
 
 mod config;
-mod infer;
 mod parse;
 mod plugin;
 #[cfg(test)]
