@@ -81,7 +81,7 @@ pub enum Subject<'a> {
 impl<'a> Subject<'a> {
     pub fn parse(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
         let literal = verify(
-            take_while(|c| is_alphanumeric(c as u8) || ['-', '[', ']'].contains(&c)),
+            take_while(|c| is_alphanumeric(c as u8) || ['-', '[', ']', '.'].contains(&c)),
             |c: &str| !c.is_empty() && is_alphabetic(c.chars().next().expect("not empty") as u8),
         )
         .map(Subject::Literal);
@@ -112,6 +112,7 @@ mod test {
 
     #[test_case(" should handle  spacing " ; "when a statement has irregular gaps")]
     #[test_case("dash-modifier:call" ; "when a modifier has a dash in it")]
+    #[test_case("pl-3.5" ; "when a subject has a . in it")]
     fn parse_tests(s: &str) {
         Directive::parse(s).unwrap();
     }
