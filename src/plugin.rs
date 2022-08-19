@@ -218,6 +218,12 @@ pub fn select(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
         .then_some(to_lit(&[("userSelect", rest)]))
 }
 
+pub fn overflow(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    ["auto", "hidden", "clip", "visible", "scroll"]
+        .contains(&rest)
+        .then_some(to_lit(&[("overflow", rest)]))
+}
+
 pub fn position(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     ["static", "fixed", "absolute", "relative", "sticky"]
         .contains(&rest)
