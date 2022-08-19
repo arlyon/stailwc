@@ -75,16 +75,25 @@ impl<'a> Expression<'a> {
 #[derive(Debug, PartialEq)]
 pub enum Subject<'a> {
     Literal(&'a str),
+    Css(&'a str, &'a str),
     Group(Directive<'a>),
 }
 
 impl<'a> Subject<'a> {
     pub fn parse(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
         let literal = verify(
-            take_while(|c| is_alphanumeric(c as u8) || ['-', '[', ']', '.'].contains(&c)),
+            take_while(|c| is_alphanumeric(c as u8) || ['-', '.', '/'].contains(&c)),
             |c: &str| !c.is_empty() && is_alphabetic(c.chars().next().expect("not empty") as u8),
         )
-        .map(Subject::Literal);
+        .and(opt(delimited(
+            char('['),
+            take_while(|c| c != ']'),
+            char(']'),
+        )))
+        .map(|(lit, css)| {
+            css.map(|s| Subject::Css(lit, s))
+                .unwrap_or(Subject::Literal(lit))
+        });
         let group = delimited(char('('), Directive::parse_inner, char(')')).map(Subject::Group);
         alt((literal, group))(s)
     }
@@ -113,6 +122,9 @@ mod test {
     #[test_case(" should handle  spacing " ; "when a statement has irregular gaps")]
     #[test_case("dash-modifier:call" ; "when a modifier has a dash in it")]
     #[test_case("pl-3.5" ; "when a subject has a . in it")]
+    #[test_case("grid-cols-[repeat(6,1fr)]" ; "when braces are in arbitrary css")]
+    #[test_case("grid-cols-[min-content min-content]" ; "when spaces are in arbitrary css")]
+    #[test_case("relative z-10 m-auto w-3/4" ; "when a statement as /")]
     fn parse_tests(s: &str) {
         Directive::parse(s).unwrap();
     }

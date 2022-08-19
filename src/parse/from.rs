@@ -90,6 +90,7 @@ pub fn literal_from_subject<'a>(
 ) -> Result<ObjectLit, &'a str> {
     match value {
         Subject::Literal(s) => parse_literal(theme, s),
+        Subject::Css(_, _) => Err("arbitrary css not supported"),
         Subject::Group(dir) => Ok(literal_from_directive(dir, theme)),
     }
 }
