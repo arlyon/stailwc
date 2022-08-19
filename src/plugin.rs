@@ -136,6 +136,12 @@ pub fn box_(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
         .then_some(to_lit(&[("boxSizing", rest)]))
 }
 
+pub fn select(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    ["none", "text", "all", "auto"]
+        .contains(&rest)
+        .then_some(to_lit(&[("userSelect", rest)]))
+}
+
 pub fn bg(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.colors, rest, "backgroundColor")
 }
