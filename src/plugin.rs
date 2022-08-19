@@ -102,6 +102,33 @@ pub fn scale(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup_map(&theme.scale, rest, "transform", |v| format!("scale({})", v))
 }
 
+pub fn display(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    [
+        "block",
+        "inline-block",
+        "inline",
+        "flex",
+        "inline-flex",
+        "table",
+        "inline-table",
+        "table-caption",
+        "table-cell",
+        "table-column",
+        "table-column-group",
+        "table-footer-group",
+        "table-header-group",
+        "table-row-group",
+        "table-row",
+        "flow-root",
+        "grid",
+        "inline-grid",
+        "contents",
+        "list-item",
+        "hidden",
+    ]
+    .contains(&rest)
+    .then_some(to_lit(&[("display", rest)]))
+}
 pub fn bg(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.colors, rest, "backgroundColor")
 }
