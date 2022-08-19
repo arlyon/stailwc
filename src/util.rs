@@ -61,7 +61,7 @@ pub fn merge_literals(mut a: ObjectLit, b: ObjectLit) -> ObjectLit {
                     ) = (a.props.get_mut(*idx), prop)
                     {
                         let temp = std::mem::replace(lit1, to_lit(&[]));
-                        std::mem::replace(lit1, merge_literals(temp, lit2));
+                        *lit1 = merge_literals(temp, lit2);
                     }
                 }
                 Some((idx, KeyStrategy::Override)) => a.props.insert(*idx, prop),
