@@ -142,6 +142,28 @@ pub fn select(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
         .then_some(to_lit(&[("userSelect", rest)]))
 }
 
+pub fn position(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    ["static", "fixed", "absolute", "relative", "sticky"]
+        .contains(&rest)
+        .then_some(to_lit(&[("position", rest)]))
+}
+
+pub fn top(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.spacing, rest, "top")
+}
+
+pub fn bottom(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.spacing, rest, "bottom")
+}
+
+pub fn left(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.spacing, rest, "left")
+}
+
+pub fn right(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.spacing, rest, "right")
+}
+
 pub fn bg(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.colors, rest, "backgroundColor")
 }
