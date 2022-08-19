@@ -117,6 +117,19 @@ pub fn shrink(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.flex_shrink, rest, "flexShrink")
 }
 
+pub fn justify(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest {
+        "start" => Some("flex-start"),
+        "end" => Some("flex-end"),
+        "center" => Some("center"),
+        "between" => Some("between"),
+        "around" => Some("around"),
+        "evenly" => Some("evenly"),
+        _ => None,
+    }
+    .map(|v| to_lit(&[("justifyContent", v)]))
+}
+
 pub fn gap(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.gap, rest, "gap")
 }
