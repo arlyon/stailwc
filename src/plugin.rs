@@ -101,6 +101,27 @@ pub fn flex(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     .or_else(|| simple_lookup(&theme.flex, rest, "flex"))
 }
 
+pub fn grid(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    let (cmd, rest) = rest.split_once('-')?;
+    match cmd {
+        "cols" => simple_lookup(&theme.grid_template_columns, rest, "gridTemplateColumns"),
+        "rows" => simple_lookup(&theme.grid_template_rows, rest, "gridTemplateRows"),
+        "flow" => {
+            let x = match rest {
+                "row" => "row",
+                "col" => "column",
+                "dense" => "dense",
+                "row-dense" => "row dense",
+                "col-dense" => "column dense",
+                _ => return None,
+            };
+
+            Some(to_lit(&[("gridAutoFlow", x)]))
+        }
+        _ => None,
+    }
+}
+
 pub fn basis(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.flex_basis, rest, "flexBasis")
 }

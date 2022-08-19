@@ -51,6 +51,11 @@ pub struct TailwindTheme<'a> {
     #[serde(borrow, rename = "zIndex")]
     pub z_index: HashMap<&'a str, &'a str>,
 
+    #[serde(borrow, rename = "gridTemplateRows")]
+    pub grid_template_rows: HashMap<&'a str, &'a str>,
+    #[serde(borrow, rename = "gridTemplateColumns")]
+    pub grid_template_columns: HashMap<&'a str, &'a str>,
+
     #[serde(borrow, rename = "transitionDelay")]
     pub transition_delay: HashMap<&'a str, &'a str>,
     #[serde(borrow, rename = "transitionDuration")]
