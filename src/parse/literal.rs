@@ -22,8 +22,14 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit,
                 None => return Err(s),
             },
             ("shadow", rest) => match theme.box_shadow.get(rest) {
-                Some(val) => to_lit(&[("boxShadow", val)]),
-                None => return Err(s),
+                Some(val) => to_lit(&[("boxShadow", "var(--tw-shadow)"), ("--tw-shadow", &val), ("--tw-shadow-colored", "0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color)")]),
+                None => match theme.colors.get(rest) {
+                    Some(val) => to_lit(&[
+                        ("--tw-shadow-color", val),
+                        ("--tw-shadow", "var(--tw-shadow-colored)"),
+                    ]),
+                    None => return Err(s),
+                },
             },
             ("border", rest) => match infer_type(theme, rest) {
                 Ok(Type::Scalar(x)) => to_lit(&[("borderWidth", &format!("{}px", x))]),
