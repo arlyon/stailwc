@@ -6,7 +6,8 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit,
     let (command, rest) = match s.split_once("-") {
         Some(s) => s,
         None => {
-            return plugin::position(s, theme).ok_or(s);
+            let root_plugins = [plugin::position, plugin::visibility];
+            return root_plugins.iter().find_map(|p| p(s, theme)).ok_or(s);
         }
     };
 

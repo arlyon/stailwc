@@ -148,6 +148,15 @@ pub fn position(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
         .then_some(to_lit(&[("position", rest)]))
 }
 
+pub fn visibility(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest {
+        "visible" => Some("visible"),
+        "invisible" => Some("hidden"),
+        _ => None,
+    }
+    .map(|v| to_lit(&[("visibility", v)]))
+}
+
 pub fn top(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.spacing, rest, "top")
 }
