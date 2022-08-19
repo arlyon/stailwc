@@ -64,6 +64,7 @@ pub fn literal_from_exp<'a>(val: Expression<'a>, theme: &TailwindTheme) -> Objec
             "2xl" => "@media(min-width: 1536x)",
             "hover" => "&:hover",
             "focus" => "&:focus",
+            "focus-within" => "&:focus-within",
             _ => continue,
         };
 
