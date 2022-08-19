@@ -158,7 +158,10 @@ pub fn display(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
         "hidden",
     ]
     .contains(&rest)
-    .then_some(to_lit(&[("display", rest)]))
+    .then_some(to_lit(&[(
+        "display",
+        if rest == "hidden" { "none" } else { rest },
+    )]))
 }
 
 pub fn box_(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
