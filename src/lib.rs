@@ -3,6 +3,7 @@
 mod config;
 mod infer;
 mod parse;
+mod plugin;
 #[cfg(test)]
 mod test;
 
