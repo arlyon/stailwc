@@ -6,6 +6,7 @@ mod parse;
 mod plugin;
 #[cfg(test)]
 mod test;
+mod util;
 
 use config::TailwindConfig;
 use swc_ecmascript::ast::{

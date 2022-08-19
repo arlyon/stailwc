@@ -9,6 +9,7 @@ use swc_ecma_visit::swc_ecma_ast::PropOrSpread;
 use swc_ecma_visit::swc_ecma_ast::Str;
 
 use crate::config::TailwindTheme;
+use crate::util::merge_literals;
 
 use super::literal::parse_literal;
 use super::nom::Directive;
@@ -19,10 +20,7 @@ pub fn literal_from_directive<'a>(val: Directive<'a>, theme: &TailwindTheme) -> 
     val.exps
         .into_iter()
         .map(|e| literal_from_exp(e, theme))
-        .reduce(|mut acc, mut curr| {
-            acc.props.append(&mut curr.props);
-            acc
-        })
+        .reduce(merge_literals)
         .unwrap_or_else(|| ObjectLit {
             span: DUMMY_SP,
             props: vec![],

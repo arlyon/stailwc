@@ -1,14 +1,12 @@
 use std::collections::HashMap;
 
 use itertools::Itertools;
-use swc_common::DUMMY_SP;
-use swc_ecma_visit::swc_ecma_ast::{
-    Expr, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str,
-};
+use swc_ecma_visit::swc_ecma_ast::ObjectLit;
 
 use crate::{
     config::TailwindTheme,
     infer::{infer_type, Type},
+    util::to_lit,
 };
 
 fn simple_lookup(hashmap: &HashMap<&str, &str>, search: &str, output: &str) -> Option<ObjectLit> {
@@ -195,27 +193,4 @@ pub fn m(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
 
 pub fn z(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.z_index, rest, "z-index")
-}
-
-fn to_lit(items: &[(&str, &str)]) -> ObjectLit {
-    ObjectLit {
-        span: DUMMY_SP,
-        props: items
-            .iter()
-            .map(|(key, value)| {
-                PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-                    key: PropName::Str(Str {
-                        span: DUMMY_SP,
-                        raw: None,
-                        value: (*key).into(),
-                    }),
-                    value: Box::new(Expr::Lit(Lit::Str(Str {
-                        span: DUMMY_SP,
-                        raw: None,
-                        value: (*value).into(),
-                    }))),
-                })))
-            })
-            .collect(),
-    }
 }

@@ -7,6 +7,7 @@ fn test_visitor() -> TransformVisitor<'static> {
     let mut t = TransformVisitor::default();
 
     t.config.theme.spacing.insert("4", "1rem");
+    t.config.theme.colors.insert("black", "black");
 
     t
 }
@@ -83,4 +84,17 @@ test!(
     r#"<Test tw="h-4" css={[]} />"#,
     // Output codes after transformed with plugin
     r#"<Test css={[{"height": "1rem"}]} />"#
+);
+
+test!(
+    swc_ecma_parser::Syntax::Typescript(swc_ecma_parser::TsConfig {
+        tsx: true,
+        ..Default::default()
+    }),
+    |_| as_folder(test_visitor()),
+    multiple_mod,
+    // Input codes
+    r#"<Test tw="hover:h-4 hover:text-black" />"#,
+    // Output codes after transformed with plugin
+    r#"<Test css={{"&:hover": {"height": "1rem", "color": "black"}}} />"#
 );
