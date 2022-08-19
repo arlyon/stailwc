@@ -253,6 +253,22 @@ pub fn bg(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.colors, rest, "backgroundColor")
 }
 
+pub fn sr(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    (rest == "only").then(|| {
+        to_lit(&[
+            ("position", "absolute"),
+            ("width", "1px"),
+            ("height", "1px"),
+            ("padding", "0"),
+            ("margin", "-1px"),
+            ("overflow", "hidden"),
+            ("clip", "rect(0,0,0,0)"),
+            ("whiteSpace", "no-wrap"),
+            ("borderWidth", "0"),
+        ])
+    })
+}
+
 pub fn h(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.spacing, rest, "height")
 }
