@@ -45,7 +45,7 @@ pub fn shadow(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
         .map(|val| {
             to_lit(&[
         ("boxShadow", "var(--tw-shadow)"),
-        ("--tw-shadow", &val),
+        ("--tw-shadow", val),
         (
             "--tw-shadow-colored",
             "0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color)",
@@ -83,7 +83,7 @@ pub fn ease(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
 }
 
 pub fn border(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    match infer_type(&theme, rest) {
+    match infer_type(theme, rest) {
         Ok(Type::Scalar(x)) => Some(to_lit(&[("borderWidth", &format!("{}px", x))])),
         Ok(Type::Color(x)) => Some(to_lit(&[("borderColor", x)])),
         _ => None,

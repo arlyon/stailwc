@@ -3,7 +3,7 @@ use swc_ecma_visit::swc_ecma_ast::ObjectLit;
 use crate::{config::TailwindTheme, plugin};
 
 pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit, &'a str> {
-    let (command, rest) = match s.split_once("-") {
+    let (command, rest) = match s.split_once('-') {
         Some(s) => s,
         None => {
             let root_plugins = [plugin::position, plugin::visibility];
