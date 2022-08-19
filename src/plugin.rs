@@ -269,6 +269,10 @@ pub fn translate(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     }
 }
 
+pub fn tracking(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.letter_spacing, rest, "letterSpacing")
+}
+
 pub fn bg(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.colors, rest, "backgroundColor")
 }
