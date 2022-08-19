@@ -290,11 +290,11 @@ pub fn sr(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
 }
 
 pub fn h(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "height")
+    simple_lookup(&theme.height, rest, "height")
 }
 
 pub fn w(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "width")
+    simple_lookup(&theme.width, rest, "width")
 }
 
 pub fn p(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {

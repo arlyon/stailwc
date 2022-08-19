@@ -50,6 +50,12 @@ pub struct TailwindTheme<'a> {
     pub box_shadow: HashMap<&'a str, &'a str>,
     #[serde(borrow, rename = "zIndex")]
     pub z_index: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
+    pub translate: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
+    pub width: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
+    pub height: HashMap<&'a str, &'a str>,
 
     #[serde(borrow, rename = "gridTemplateRows")]
     pub grid_template_rows: HashMap<&'a str, &'a str>,

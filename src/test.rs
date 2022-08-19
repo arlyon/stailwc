@@ -6,6 +6,7 @@ use crate::TransformVisitor;
 fn test_visitor() -> TransformVisitor<'static> {
     let mut t = TransformVisitor::default();
 
+    t.config.theme.height.insert("4", "1rem");
     t.config.theme.spacing.insert("4", "1rem");
     t.config.theme.colors.insert("black", "black");
 
