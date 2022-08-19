@@ -105,6 +105,10 @@ pub fn flex(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     .or_else(|| simple_lookup(&theme.flex, rest, "flex"))
 }
 
+pub fn basis(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.flex_basis, rest, "flexBasis")
+}
+
 pub fn grow(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.flex_grow, rest, "flexGrow")
 }

@@ -24,6 +24,8 @@ pub struct TailwindTheme<'a> {
     pub cursor: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
     pub flex: HashMap<&'a str, &'a str>,
+    #[serde(borrow, alias = "flexBasis")]
+    pub flex_basis: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "flexGrow")]
     pub flex_grow: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "flexShrink")]
