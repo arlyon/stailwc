@@ -6,7 +6,7 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit,
     let (command, rest) = match s.split_once('-') {
         Some(s) => s,
         None => {
-            let root_plugins = [plugin::position, plugin::visibility];
+            let root_plugins = [plugin::position, plugin::visibility, plugin::display];
             return root_plugins.iter().find_map(|p| p(s, theme)).ok_or(s);
         }
     };
@@ -23,7 +23,6 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit,
         "rounded" => plugin::rounded,
         "cursor" => plugin::cursor,
         "scale" => plugin::scale,
-        "display" => plugin::display,
         "box" => plugin::box_,
         "select" => plugin::select,
         "top" => plugin::top,
