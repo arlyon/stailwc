@@ -130,6 +130,18 @@ pub fn justify(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     .map(|v| to_lit(&[("justifyContent", v)]))
 }
 
+pub fn items(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest {
+        "start" => Some("flex-start"),
+        "end" => Some("flex-end"),
+        "center" => Some("center"),
+        "baseline" => Some("baseline"),
+        "stretch" => Some("stretch"),
+        _ => None,
+    }
+    .map(|v| to_lit(&[("visibility", v)]))
+}
+
 pub fn gap(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.gap, rest, "gap")
 }
