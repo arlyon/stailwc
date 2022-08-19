@@ -23,6 +23,8 @@ pub struct TailwindTheme<'a> {
     #[serde(borrow)]
     pub cursor: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
+    pub flex: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
     pub scale: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
     pub colors: HashMap<&'a str, &'a str>,

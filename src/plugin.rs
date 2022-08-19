@@ -88,6 +88,23 @@ pub fn border(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     }
 }
 
+pub fn flex(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest {
+        "row" => Some("row"),
+        "row-reverse" => Some("row-reverse"),
+        "col" => Some("column"),
+        "col-reverse" => Some("column-reverse"),
+        _ => None,
+    }
+    .map(|v| to_lit(&[("flexDirection", v)]))
+    .or_else(|| {
+        ["wrap", "wrap-reverse", "nowrap"]
+            .contains(&rest)
+            .then_some(to_lit(&[("flexWrap", rest)]))
+    })
+    .or_else(|| simple_lookup(&theme.flex, rest, "flex"))
+}
+
 pub fn rounded(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.border_radius, rest, "borderRadius")
 }
