@@ -105,6 +105,10 @@ pub fn flex(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     .or_else(|| simple_lookup(&theme.flex, rest, "flex"))
 }
 
+pub fn shrink(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.flex_shrink, rest, "flexShrink")
+}
+
 pub fn gap(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.gap, rest, "gap")
 }
