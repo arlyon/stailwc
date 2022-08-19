@@ -21,6 +21,8 @@ pub struct TailwindTheme<'a> {
     #[serde(borrow)]
     pub spacing: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
+    pub cursor: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
     pub colors: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "fontFamily")]
     pub font_family: HashMap<&'a str, Vec<Cow<'a, str>>>,

@@ -94,6 +94,10 @@ pub fn rounded(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.border_radius, rest, "borderRadius")
 }
 
+pub fn cursor(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.cursor, rest, "cursor")
+}
+
 pub fn bg(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.colors, rest, "backgroundColor")
 }
