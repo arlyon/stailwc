@@ -99,3 +99,16 @@ test!(
     // Output codes after transformed with plugin
     r#"<Test css={{"&:hover": {"height": "1rem", "color": "black"}}} />"#
 );
+
+test!(
+    swc_ecma_parser::Syntax::Typescript(swc_ecma_parser::TsConfig {
+        tsx: true,
+        ..Default::default()
+    }),
+    |_| as_folder(test_visitor()),
+    minus_values,
+    // Input codes
+    r#"<Test tw="-m-4" />"#,
+    // Output codes after transformed with plugin
+    r#"<Test css={{"margin": "-1rem"}} />"#
+);
