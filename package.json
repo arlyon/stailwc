@@ -16,5 +16,8 @@
   "scripts": {
     "prepublishOnly": "cargo build-wasi --release"
   },
-  "files": []
+  "files": [],
+  "dependencies": {
+    "app-root-path": "^3.1.0"
+  }
 }

@@ -20,39 +20,14 @@ way to package this. Place the following in your next.config.js:
 `next.config.js`
 
 ```js
-const initStailwc = () => {
-  const resolveConfig = require("tailwindcss/resolveConfig");
-  const defaultConfig = require("tailwindcss/defaultConfig");
-  const override = require("./tailwind.config");
-
-  const config = resolveConfig(override, defaultConfig);
-
-  config.theme.colors = Object.entries(config.theme.colors)
-    .flatMap(([k, v]) => {
-      if (typeof v === "object") {
-        const items = Object.entries(v).map(([k2, v2]) => [k + "-" + k2, v2]);
-        return items;
-      } else {
-        return [[k, v]];
-      }
-    })
-    .reduce(
-      (acc, [k, v]) => ({
-        ...acc,
-        [k]: v,
-      }),
-      {}
-    );
-
-  return ["stailwc", { config }];
-};
+const stailwc = require("stailwc/install");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    swcPlugins: [initStailwc()],
+    swcPlugins: [stailwc()],
   },
   compiler: {
     emotion: true,
