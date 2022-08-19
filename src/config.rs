@@ -30,6 +30,15 @@ pub struct TailwindTheme<'a> {
     pub border_radius: HashMap<&'a str, &'a str>,
     #[serde(borrow, rename = "boxShadow")]
     pub box_shadow: HashMap<&'a str, &'a str>,
+
+    #[serde(borrow, rename = "transitionDelay")]
+    pub transition_delay: HashMap<&'a str, &'a str>,
+    #[serde(borrow, rename = "transitionDuration")]
+    pub transition_duration: HashMap<&'a str, &'a str>,
+    #[serde(borrow, rename = "transitionProperty")]
+    pub transition_property: HashMap<&'a str, &'a str>,
+    #[serde(borrow, rename = "transitionTimingFunction")]
+    pub transition_timing_function: HashMap<&'a str, &'a str>,
 }
 
 #[derive(Deserialize, Debug)]

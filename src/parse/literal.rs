@@ -31,6 +31,22 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit,
                     None => return Err(s),
                 },
             },
+            ("transition", rest) => match theme.transition_property.get(rest)  {
+                Some(val) => to_lit(&[("transition-property", val)]),
+                None => return Err(s),
+            },
+            ("delay", rest) => match theme.transition_delay.get(rest)  {
+                Some(val) => to_lit(&[("transition-delay", val)]),
+                None => return Err(s),
+            },
+            ("duration", rest) => match theme.transition_duration.get(rest)  {
+                Some(val) => to_lit(&[("transition-duration", val)]),
+                None => return Err(s),
+            },
+            ("ease", rest) => match theme.transition_timing_function.get(rest)  {
+                Some(val) => to_lit(&[("transition-timing-function", val)]),
+                None => return Err(s),
+            },
             ("border", rest) => match infer_type(theme, rest) {
                 Ok(Type::Scalar(x)) => to_lit(&[("borderWidth", &format!("{}px", x))]),
                 Ok(Type::Color(x)) => to_lit(&[("borderColor", x)]),
