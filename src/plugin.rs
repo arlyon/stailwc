@@ -129,6 +129,13 @@ pub fn display(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     .contains(&rest)
     .then_some(to_lit(&[("display", rest)]))
 }
+
+pub fn box_(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    ["border-box", "content-box"]
+        .contains(&rest)
+        .then_some(to_lit(&[("boxSizing", rest)]))
+}
+
 pub fn bg(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.colors, rest, "backgroundColor")
 }
