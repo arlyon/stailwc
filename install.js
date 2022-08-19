@@ -44,5 +44,5 @@ module.exports = (options = {}) => {
       {}
     );
 
-  return [options?.wasm ?? "wasm", { config }];
+  return [options?.wasm ?? "stailwc", { config }];
 };
