@@ -98,6 +98,10 @@ pub fn cursor(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.cursor, rest, "cursor")
 }
 
+pub fn scale(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup_map(&theme.scale, rest, "transform", |v| format!("scale({})", v))
+}
+
 pub fn bg(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.colors, rest, "backgroundColor")
 }
