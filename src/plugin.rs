@@ -63,16 +63,16 @@ lookup_plugin!(tracking, letter_spacing, "letterSpacing");
 lookup_plugin!(h, height, "height");
 lookup_plugin!(to, colors, "--tw-gradient-to");
 lookup_plugin!(w, width, "width");
-lookup_plugin!(p, spacing, "padding");
-lookup_plugin!(pl, spacing, "paddingLeft");
-lookup_plugin!(pr, spacing, "paddingRight");
-lookup_plugin!(pt, spacing, "paddingTop");
-lookup_plugin!(pb, spacing, "paddingBottom");
-lookup_plugin!(m, spacing, "margin");
-lookup_plugin!(ml, spacing, "marginLeft");
-lookup_plugin!(mr, spacing, "marginRight");
-lookup_plugin!(mt, spacing, "marginTop");
-lookup_plugin!(mb, spacing, "marginBottom");
+lookup_plugin!(p, padding, "padding");
+lookup_plugin!(pl, padding, "paddingLeft");
+lookup_plugin!(pr, padding, "paddingRight");
+lookup_plugin!(pt, padding, "paddingTop");
+lookup_plugin!(pb, padding, "paddingBottom");
+lookup_plugin!(m, margin, "margin");
+lookup_plugin!(ml, margin, "marginLeft");
+lookup_plugin!(mr, margin, "marginRight");
+lookup_plugin!(mt, margin, "marginTop");
+lookup_plugin!(mb, margin, "marginBottom");
 lookup_plugin!(z, z_index, "z-index");
 lookup_plugin!(gap, gap, "gap");
 lookup_plugin_opt!(rounded, border_radius, "borderRadius");
@@ -384,28 +384,28 @@ pub fn sr(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
 
 pub fn px(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme
-        .spacing
+        .padding
         .get(rest)
         .map(|s| to_lit(&[("paddingLeft", s), ("paddingRight", s)]))
 }
 
 pub fn py(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme
-        .spacing
+        .padding
         .get(rest)
         .map(|s| to_lit(&[("paddingTop", s), ("paddingBottom", s)]))
 }
 
 pub fn mx(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme
-        .spacing
+        .margin
         .get(rest)
         .map(|s| to_lit(&[("marginLeft", s), ("marginRight", s)]))
 }
 
 pub fn my(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme
-        .spacing
+        .margin
         .get(rest)
         .map(|s| to_lit(&[("marginTop", s), ("marginBottom", s)]))
 }

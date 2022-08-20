@@ -70,6 +70,10 @@ pub struct TailwindTheme<'a> {
     pub opacity: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
     pub order: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
+    pub margin: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
+    pub padding: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "outlineOffset")]
     pub outline_offset: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "outlineWidth")]
