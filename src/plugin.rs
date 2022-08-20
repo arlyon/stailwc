@@ -119,9 +119,15 @@ pub fn shadow(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
         })
 }
 
-pub fn border(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.colors, rest, "borderColor")
-        .or_else(|| simple_lookup(&theme.border_width, rest, "borderWidth"))
+pub fn border(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
+    rest.and_then(|rest| simple_lookup(&theme.colors, rest, "borderColor"))
+        .or_else(|| {
+            simple_lookup(
+                &theme.border_width,
+                rest.unwrap_or("DEFAULT"),
+                "borderWidth",
+            )
+        })
 }
 
 pub fn flex(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
