@@ -62,6 +62,8 @@ pub struct TailwindTheme<'a> {
     pub blur: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
     pub invert: HashMap<&'a str, &'a str>,
+    #[serde(borrow, alias = "ringWidth")]
+    pub ring_width: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
     pub opacity: HashMap<&'a str, &'a str>,
 

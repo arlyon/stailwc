@@ -130,6 +130,11 @@ pub fn border(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
         })
 }
 
+pub fn ring(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
+    rest.and_then(|rest| simple_lookup(&theme.colors, rest, "--tw-ring-color"))
+        .or_else(|| simple_lookup(&theme.ring_width, rest.unwrap_or("DEFAULT"), "borderWidth"))
+}
+
 pub fn flex(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     match rest {
         "row" => Some("row"),
