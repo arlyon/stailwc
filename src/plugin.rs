@@ -61,6 +61,7 @@ lookup_plugin!(left, spacing, "left");
 lookup_plugin!(right, spacing, "right");
 lookup_plugin!(tracking, letter_spacing, "letterSpacing");
 lookup_plugin!(h, height, "height");
+lookup_plugin!(to, colors, "--tw-gradient-to");
 lookup_plugin!(w, width, "width");
 lookup_plugin!(p, spacing, "padding");
 lookup_plugin!(pl, spacing, "paddingLeft");
@@ -154,6 +155,19 @@ pub fn border(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
                 "borderWidth",
             )
         })
+}
+
+pub fn from(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    theme.colors.get(rest).map(|c| {
+        to_lit(&[
+            ("--tw-gradient-from", c),
+            ("--tw-gradient-to", c),
+            (
+                "--tw-gradient-stops",
+                "var(--tw-gradient-from), var(--tw-gradient-to)",
+            ),
+        ])
+    })
 }
 
 pub fn ring(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
