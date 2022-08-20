@@ -5,6 +5,32 @@ use swc_ecma_visit::swc_ecma_ast::ObjectLit;
 
 use crate::{config::TailwindTheme, util::to_lit};
 
+macro_rules! lookup_plugin {
+    ($def:ident, $map:tt, $target:expr) => {
+        pub fn $def(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+            simple_lookup(&theme.$map, rest, $target)
+        }
+    };
+    ($def:ident, $map:tt, $target:expr, $closure:expr) => {
+        pub fn $def(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+            simple_lookup_map(&theme.$map, rest, $target, $closure)
+        }
+    };
+}
+
+macro_rules! lookup_plugin_opt {
+    ($def:ident, $map:tt, $target:expr) => {
+        pub fn $def(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
+            simple_lookup(&theme.$map, rest.unwrap_or("DEFAULT"), $target)
+        }
+    };
+    ($def:ident, $map:tt, $target:expr, $closure:expr) => {
+        pub fn $def(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
+            simple_lookup_map(&theme.$map, rest.unwrap_or("DEFAULT"), $target, $closure)
+        }
+    };
+}
+
 fn simple_lookup(hashmap: &HashMap<&str, &str>, search: &str, output: &str) -> Option<ObjectLit> {
     hashmap.get(search).map(|val| to_lit(&[(output, val)]))
 }
@@ -17,6 +43,37 @@ fn simple_lookup_map<V>(
 ) -> Option<ObjectLit> {
     hashmap.get(search).map(|val| to_lit(&[(output, &f(val))]))
 }
+
+lookup_plugin_opt!(transition, transition_property, "transitionProperty");
+lookup_plugin!(delay, transition_delay, "transitionDelay");
+lookup_plugin_opt!(duration, transition_duration, "transitionDuration");
+lookup_plugin_opt!(ease, transition_timing_function, "transitionTimingFunction");
+lookup_plugin!(basis, flex_basis, "flexBasis");
+lookup_plugin_opt!(grow, flex_grow, "flexGrow");
+lookup_plugin_opt!(shrink, flex_shrink, "flexShrink");
+lookup_plugin!(top, spacing, "top");
+lookup_plugin!(bottom, spacing, "bottom");
+lookup_plugin!(left, spacing, "left");
+lookup_plugin!(right, spacing, "right");
+lookup_plugin!(tracking, letter_spacing, "letterSpacing");
+lookup_plugin!(bg, colors, "backgroundColor");
+lookup_plugin!(h, height, "height");
+lookup_plugin!(w, width, "width");
+lookup_plugin!(p, spacing, "padding");
+lookup_plugin!(pl, spacing, "paddingLeft");
+lookup_plugin!(pr, spacing, "paddingRight");
+lookup_plugin!(pt, spacing, "paddingTop");
+lookup_plugin!(pb, spacing, "paddingBottom");
+lookup_plugin!(m, spacing, "margin");
+lookup_plugin!(ml, spacing, "marginLeft");
+lookup_plugin!(mr, spacing, "marginRight");
+lookup_plugin!(mt, spacing, "marginTop");
+lookup_plugin!(mb, spacing, "marginBottom");
+lookup_plugin!(z, z_index, "z-index");
+lookup_plugin!(gap, gap, "gap");
+lookup_plugin_opt!(rounded, border_radius, "borderRadius");
+lookup_plugin!(cursor, cursor, "cursor");
+lookup_plugin!(scale, scale, "transform", |v| format!("scale({})", v));
 
 pub fn text(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup_map(&theme.font_size, rest, "fontSize", |(a, _)| a.to_string())
@@ -57,26 +114,6 @@ pub fn shadow(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
                 ])
             })
         })
-}
-
-pub fn transition(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.transition_property, rest, "transitionProperty")
-}
-
-pub fn delay(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.transition_delay, rest, "transitionDelay")
-}
-
-pub fn duration(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.transition_duration, rest, "transitionDuration")
-}
-
-pub fn ease(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(
-        &theme.transition_timing_function,
-        rest,
-        "transitionTimingFunction",
-    )
 }
 
 pub fn border(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
@@ -122,18 +159,6 @@ pub fn grid(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     }
 }
 
-pub fn basis(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.flex_basis, rest, "flexBasis")
-}
-
-pub fn grow(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.flex_grow, rest, "flexGrow")
-}
-
-pub fn shrink(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.flex_shrink, rest, "flexShrink")
-}
-
 pub fn justify(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     match rest {
         "start" => Some("flex-start"),
@@ -157,22 +182,6 @@ pub fn items(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
         _ => None,
     }
     .map(|v| to_lit(&[("visibility", v)]))
-}
-
-pub fn gap(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.gap, rest, "gap")
-}
-
-pub fn rounded(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.border_radius, rest, "borderRadius")
-}
-
-pub fn cursor(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.cursor, rest, "cursor")
-}
-
-pub fn scale(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup_map(&theme.scale, rest, "transform", |v| format!("scale({})", v))
 }
 
 pub fn display(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
@@ -218,7 +227,7 @@ pub fn select(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
         .then_some(to_lit(&[("userSelect", rest)]))
 }
 
-pub fn overflow(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn overflow(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     ["auto", "hidden", "clip", "visible", "scroll"]
         .contains(&rest)
         .then_some(to_lit(&[("overflow", rest)]))
@@ -239,24 +248,7 @@ pub fn visibility(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     .map(|v| to_lit(&[("visibility", v)]))
 }
 
-pub fn top(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "top")
-}
-
-pub fn bottom(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "bottom")
-}
-
-pub fn left(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "left")
-}
-
-pub fn right(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "right")
-}
-
 pub fn translate(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    println!("processing translate {}", rest);
     let (cmd, rest) = rest.split_once("-")?;
     match cmd {
         "x" => simple_lookup_map(&theme.translate, rest, "transform", |s| {
@@ -268,15 +260,6 @@ pub fn translate(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
         _ => None,
     }
 }
-
-pub fn tracking(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.letter_spacing, rest, "letterSpacing")
-}
-
-pub fn bg(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.colors, rest, "backgroundColor")
-}
-
 pub fn sr(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     (rest == "only").then(|| {
         to_lit(&[
@@ -293,31 +276,11 @@ pub fn sr(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     })
 }
 
-pub fn h(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.height, rest, "height")
-}
-
-pub fn w(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.width, rest, "width")
-}
-
-pub fn p(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "padding")
-}
-
 pub fn px(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme
         .spacing
         .get(rest)
         .map(|s| to_lit(&[("paddingLeft", s), ("paddingRight", s)]))
-}
-
-pub fn pl(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "paddingLeft")
-}
-
-pub fn pr(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "paddingRight")
 }
 
 pub fn py(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
@@ -327,18 +290,6 @@ pub fn py(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
         .map(|s| to_lit(&[("paddingTop", s), ("paddingBottom", s)]))
 }
 
-pub fn pt(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "paddingTop")
-}
-
-pub fn pb(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "paddingBottom")
-}
-
-pub fn m(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "margin")
-}
-
 pub fn mx(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme
         .spacing
@@ -346,29 +297,9 @@ pub fn mx(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
         .map(|s| to_lit(&[("marginLeft", s), ("marginRight", s)]))
 }
 
-pub fn ml(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "marginLeft")
-}
-
-pub fn mr(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "marginRight")
-}
-
 pub fn my(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme
         .spacing
         .get(rest)
         .map(|s| to_lit(&[("marginTop", s), ("marginBottom", s)]))
-}
-
-pub fn mt(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "marginTop")
-}
-
-pub fn mb(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.spacing, rest, "marginBottom")
-}
-
-pub fn z(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.z_index, rest, "z-index")
 }

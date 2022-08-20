@@ -2,65 +2,78 @@ use swc_ecma_visit::swc_ecma_ast::ObjectLit;
 
 use crate::{config::TailwindTheme, plugin};
 
+enum PluginType {
+    Required(fn(&str, &TailwindTheme) -> Option<ObjectLit>),
+    Optional(fn(Option<&str>, &TailwindTheme) -> Option<ObjectLit>),
+}
+
 pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit, &'a str> {
-    let (command, rest) = match s.split_once('-') {
-        Some(s) => s,
+    let (cmd, rest) = match s.split_once('-') {
+        Some((cmd, rest)) => (cmd, Some(rest)),
         None => {
             let root_plugins = [plugin::position, plugin::visibility, plugin::display];
-            return root_plugins.iter().find_map(|p| p(s, theme)).ok_or(s);
+            match root_plugins.iter().find_map(|p| p(s, theme)) {
+                Some(r) => return Ok(r),
+                None => (s, None),
+            }
         }
     };
 
-    let plugin = match command {
-        "text" => plugin::text,
-        "font" => plugin::font,
-        "shadow" => plugin::shadow,
-        "transition" => plugin::transition,
-        "delay" => plugin::delay,
-        "duration" => plugin::duration,
-        "ease" => plugin::ease,
-        "border" => plugin::border,
-        "rounded" => plugin::rounded,
-        "flex" => plugin::flex,
-        "grid" => plugin::grid,
-        "grow" => plugin::grow,
-        "shrink" => plugin::shrink,
-        "basis" => plugin::basis,
-        "justify" => plugin::justify,
-        "items" => plugin::items,
-        "gap" => plugin::gap,
-        "cursor" => plugin::cursor,
-        "scale" => plugin::scale,
-        "box" => plugin::box_,
-        "select" => plugin::select,
-        "overflow" => plugin::overflow,
-        "top" => plugin::top,
-        "bottom" => plugin::bottom,
-        "left" => plugin::left,
-        "right" => plugin::right,
-        "translate" => plugin::translate,
-        "tracking" => plugin::tracking,
-        "sr" => plugin::sr,
-        "bg" => plugin::bg,
-        "h" => plugin::h,
-        "w" => plugin::w,
-        "p" => plugin::p,
-        "px" => plugin::px,
-        "pl" => plugin::pl,
-        "pr" => plugin::pr,
-        "py" => plugin::py,
-        "pt" => plugin::pt,
-        "pb" => plugin::pb,
-        "m" => plugin::m,
-        "mx" => plugin::mx,
-        "ml" => plugin::ml,
-        "mr" => plugin::mr,
-        "my" => plugin::my,
-        "mt" => plugin::mt,
-        "mb" => plugin::mb,
-        "z" => plugin::z,
+    use PluginType::*;
+    let plugin = match cmd {
+        "text" => Required(plugin::text),
+        "font" => Required(plugin::font),
+        "shadow" => Required(plugin::shadow),
+        "transition" => Optional(plugin::transition),
+        "delay" => Required(plugin::delay),
+        "duration" => Optional(plugin::duration),
+        "ease" => Optional(plugin::ease),
+        "rounded" => Optional(plugin::rounded),
+        "flex" => Required(plugin::flex),
+        "grid" => Required(plugin::grid),
+        "grow" => Optional(plugin::grow),
+        "shrink" => Optional(plugin::shrink),
+        "basis" => Required(plugin::basis),
+        "justify" => Required(plugin::justify),
+        "items" => Required(plugin::items),
+        "gap" => Required(plugin::gap),
+        "cursor" => Required(plugin::cursor),
+        "scale" => Required(plugin::scale),
+        "box" => Required(plugin::box_),
+        "select" => Required(plugin::select),
+        "overflow" => Required(plugin::overflow),
+        "top" => Required(plugin::top),
+        "bottom" => Required(plugin::bottom),
+        "left" => Required(plugin::left),
+        "right" => Required(plugin::right),
+        "translate" => Required(plugin::translate),
+        "tracking" => Required(plugin::tracking),
+        "sr" => Required(plugin::sr),
+        "bg" => Required(plugin::bg),
+        "h" => Required(plugin::h),
+        "w" => Required(plugin::w),
+        "p" => Required(plugin::p),
+        "px" => Required(plugin::px),
+        "pl" => Required(plugin::pl),
+        "pr" => Required(plugin::pr),
+        "py" => Required(plugin::py),
+        "pt" => Required(plugin::pt),
+        "pb" => Required(plugin::pb),
+        "m" => Required(plugin::m),
+        "mx" => Required(plugin::mx),
+        "ml" => Required(plugin::ml),
+        "mr" => Required(plugin::mr),
+        "my" => Required(plugin::my),
+        "mt" => Required(plugin::mt),
+        "mb" => Required(plugin::mb),
+        "z" => Required(plugin::z),
         _ => return Err(s),
     };
 
-    plugin(rest, theme).ok_or(s)
+    match (plugin, rest) {
+        (Required(p), Some(s)) => p(s, theme),
+        (Optional(p), s) => p(s, theme),
+        _ => None,
+    }
+    .ok_or(s)
 }
