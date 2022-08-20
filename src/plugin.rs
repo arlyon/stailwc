@@ -122,6 +122,13 @@ pub fn text(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
         })
 }
 
+pub fn min(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest.split_once('-') {
+        Some(("h", rest)) => simple_lookup(&theme.min_height, rest, "minHeight"),
+        _ => None,
+    }
+}
+
 pub fn appearance(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     (rest == "none").then_some(to_lit(&[("appearance", "none")]))
 }

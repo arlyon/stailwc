@@ -94,6 +94,9 @@ pub struct TailwindTheme<'a> {
     pub transition_property: HashMap<&'a str, &'a str>,
     #[serde(borrow, rename = "transitionTimingFunction")]
     pub transition_timing_function: HashMap<&'a str, &'a str>,
+
+    #[serde(borrow, alias = "minHeight")]
+    pub min_height: HashMap<&'a str, &'a str>,
 }
 
 #[derive(Deserialize, Debug)]
