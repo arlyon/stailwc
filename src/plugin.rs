@@ -55,6 +55,7 @@ lookup_plugin_opt!(grow, flex_grow, "flexGrow");
 lookup_plugin_opt!(shrink, flex_shrink, "flexShrink");
 lookup_plugin!(top, spacing, "top");
 lookup_plugin!(opacity, opacity, "opacity");
+lookup_plugin!(order, order, "order");
 lookup_plugin!(bottom, spacing, "bottom");
 lookup_plugin!(left, spacing, "left");
 lookup_plugin!(right, spacing, "right");

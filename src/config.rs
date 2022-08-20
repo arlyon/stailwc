@@ -66,6 +66,8 @@ pub struct TailwindTheme<'a> {
     pub ring_width: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
     pub opacity: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
+    pub order: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "outlineOffset")]
     pub outline_offset: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "outlineWidth")]
