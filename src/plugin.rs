@@ -157,8 +157,18 @@ pub fn border(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
 }
 
 pub fn ring(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
-    rest.and_then(|rest| simple_lookup(&theme.colors, rest, "--tw-ring-color"))
-        .or_else(|| simple_lookup(&theme.ring_width, rest.unwrap_or("DEFAULT"), "borderWidth"))
+    let rest = rest.unwrap_or("DEFAULT");
+    match rest.split_once("-") {
+        Some(("offset", rest)) => {
+            theme.ring_offset_width.get(rest)
+                .map(|&s| ("--tw-ring-offset-width", s))
+                .or_else(|| theme.colors.get(rest).map(|&s| ("--tw-ring-offset-color", s)))
+                .map(|p| to_lit(&[p, ("boxShadow", "0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color), var(--tw-ring-shadow)")]))
+        }
+        None => (rest == "inset").then(|| to_lit(&[("--tw-ring-inset", "inset")])).or_else(||simple_lookup(&theme.ring_width, rest, "borderWidth")
+            .or_else(|| simple_lookup(&theme.colors, rest, "--tw-ring-color"))),
+        _ => None,
+    }
 }
 
 pub fn flex(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
