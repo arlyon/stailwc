@@ -193,6 +193,15 @@ pub fn items(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     .map(|v| to_lit(&[("visibility", v)]))
 }
 
+pub fn transform(rest: Option<&str>, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    Some(to_lit(&[("transform", match rest {
+            Some("cpu") | None => "translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))",
+            Some("gpu") => "translate3d(var(--tw-translate-x), var(--tw-translate-y), 0) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))",
+            Some("none") => "none",
+            _ => return None,
+    })]))
+}
+
 pub fn display(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     [
         "block",
