@@ -60,7 +60,6 @@ lookup_plugin!(bottom, spacing, "bottom");
 lookup_plugin!(left, spacing, "left");
 lookup_plugin!(right, spacing, "right");
 lookup_plugin!(tracking, letter_spacing, "letterSpacing");
-lookup_plugin!(bg, colors, "backgroundColor");
 lookup_plugin!(h, height, "height");
 lookup_plugin!(w, width, "width");
 lookup_plugin!(p, spacing, "padding");
@@ -115,6 +114,11 @@ pub fn outline(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
             .or_else(|| simple_lookup(&theme.outline_offset, rest, "outlineOffset"))
             .or_else(|| simple_lookup(&theme.outline_width, rest, "outlineWidth")),
     }
+}
+
+pub fn bg(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.colors, rest, "backgroundColor")
+        .or_else(|| simple_lookup(&theme.background_image, rest, "backgroundImage"))
 }
 
 pub fn shadow(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
