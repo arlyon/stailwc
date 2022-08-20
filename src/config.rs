@@ -60,6 +60,8 @@ pub struct TailwindTheme<'a> {
     pub letter_spacing: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
     pub invert: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
+    pub opacity: HashMap<&'a str, &'a str>,
 
     #[serde(borrow, rename = "gridTemplateRows")]
     pub grid_template_rows: HashMap<&'a str, &'a str>,
