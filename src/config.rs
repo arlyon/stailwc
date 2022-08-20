@@ -97,6 +97,8 @@ pub struct TailwindTheme<'a> {
 
     #[serde(borrow, alias = "minHeight")]
     pub min_height: HashMap<&'a str, &'a str>,
+    #[serde(borrow, alias = "minWidth")]
+    pub min_width: HashMap<&'a str, &'a str>,
 }
 
 #[derive(Deserialize, Debug)]

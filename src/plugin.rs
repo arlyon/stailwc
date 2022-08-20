@@ -125,6 +125,7 @@ pub fn text(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
 pub fn min(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     match rest.split_once('-') {
         Some(("h", rest)) => simple_lookup(&theme.min_height, rest, "minHeight"),
+        Some(("w", rest)) => simple_lookup(&theme.min_width, rest, "minWidth"),
         _ => None,
     }
 }
