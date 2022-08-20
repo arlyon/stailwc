@@ -95,6 +95,23 @@ pub fn font(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     .or_else(|| simple_lookup(&theme.font_weight, rest, "fontWeight"))
 }
 
+pub fn outline(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest {
+        None => Some(to_lit(&[("outlineStyle", "solid")])),
+        Some("none") => Some(to_lit(&[
+            ("outline", "2px solid transparent"),
+            ("outlineOffset", "2px"),
+        ])),
+        Some("dashed") => Some(to_lit(&[("outlineStyle", "dashed")])),
+        Some("dotted") => Some(to_lit(&[("outlineStyle", "dotted")])),
+        Some("double") => Some(to_lit(&[("outlineStyle", "double")])),
+        Some("hidden") => Some(to_lit(&[("outlineStyle", "hidden")])),
+        Some(rest) => simple_lookup(&theme.colors, rest, "outlineColor")
+            .or_else(|| simple_lookup(&theme.outline_offset, rest, "outlineOffset"))
+            .or_else(|| simple_lookup(&theme.outline_width, rest, "outlineWidth")),
+    }
+}
+
 pub fn shadow(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme
         .box_shadow
