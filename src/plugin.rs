@@ -130,6 +130,13 @@ pub fn min(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     }
 }
 
+pub fn max(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest.split_once('-') {
+        Some(("h", rest)) => simple_lookup(&theme.max_height, rest, "maxHeight"),
+        _ => None,
+    }
+}
+
 pub fn appearance(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     (rest == "none").then_some(to_lit(&[("appearance", "none")]))
 }
