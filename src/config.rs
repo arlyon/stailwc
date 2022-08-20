@@ -59,6 +59,8 @@ pub struct TailwindTheme<'a> {
     #[serde(borrow, alias = "letterSpacing")]
     pub letter_spacing: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
+    pub blur: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
     pub invert: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
     pub opacity: HashMap<&'a str, &'a str>,
