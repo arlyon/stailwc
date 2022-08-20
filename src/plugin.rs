@@ -79,6 +79,39 @@ lookup_plugin_opt!(rounded, border_radius, "borderRadius");
 lookup_plugin!(cursor, cursor, "cursor");
 lookup_plugin!(scale, scale, "transform", |v| format!("scale({})", v));
 
+pub fn mix(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest.split_once('-') {
+        Some(("blend", rest)) => blend(rest, theme),
+        _ => None,
+    }
+}
+
+fn blend(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    let modes = [
+        "normal",
+        "multiply",
+        "screen",
+        "overlay",
+        "darken",
+        "lighten",
+        "color-dodge",
+        "color-burn",
+        "hard-light",
+        "soft-light",
+        "difference",
+        "exclusion",
+        "hue",
+        "saturation",
+        "color",
+        "luminosity",
+        "plus-lighter",
+    ];
+
+    modes
+        .contains(&rest)
+        .then(|| to_lit(&[("mixBlendMode", rest)]))
+}
+
 pub fn text(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup_map(&theme.font_size, rest, "fontSize", |(a, _)| a.to_string())
         .or_else(|| simple_lookup(&theme.colors, rest, "color"))
