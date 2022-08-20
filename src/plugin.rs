@@ -89,6 +89,10 @@ pub fn text(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
         })
 }
 
+pub fn appearance(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    (rest == "none").then_some(to_lit(&[("appearance", "none")]))
+}
+
 pub fn font(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup_map(&theme.font_family, rest, "fontFamily", |s| {
         s.iter().join(", ")
