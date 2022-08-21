@@ -138,6 +138,19 @@ pub fn max(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     }
 }
 
+pub fn text_transform(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    Some(to_lit(&[(
+        "textTransform",
+        match rest {
+            "uppercase" => "uppercase",
+            "lowercase" => "lowercase",
+            "captialize" => "capitalize",
+            "normal-case" => "none",
+            _ => return None,
+        },
+    )]))
+}
+
 pub fn appearance(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     (rest == "none").then_some(to_lit(&[("appearance", "none")]))
 }
