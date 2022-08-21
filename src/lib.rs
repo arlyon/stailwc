@@ -73,7 +73,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 expr: JSXExpr::Expr(box Expr::Lit(Lit::Str(string))),
                 ..
             })) => {
-                let d = match Directive::parse(&*string.value) {
+                let d = match Directive::parse(&string.value) {
                     Ok((_, d)) => d,
                     Err(e) => {
                         println!("fail : could not parse `{}`  {}", string.value, e);
