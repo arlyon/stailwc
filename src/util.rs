@@ -3,9 +3,10 @@ use std::collections::HashMap;
 use swc_atoms::JsWord;
 use swc_common::DUMMY_SP;
 use swc_ecma_visit::swc_ecma_ast::{
-    Expr, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str,
+    Expr, Ident, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str,
 };
 
+#[derive(Debug)]
 enum KeyStrategy {
     Merge,
     Override,
@@ -23,27 +24,30 @@ pub fn merge_literals(mut a: ObjectLit, b: ObjectLit) -> ObjectLit {
     let mut strategies: HashMap<JsWord, (usize, KeyStrategy)> = Default::default();
 
     for (idx, prop) in a.props.iter().enumerate() {
-        if let PropOrSpread::Prop(box Prop::KeyValue(KeyValueProp {
-            key: PropName::Str(Str { value: name, .. }),
-            value: box value,
-        })) = prop
-        {
-            strategies.insert(
-                name.to_owned(),
-                (
-                    idx,
-                    match value {
-                        Expr::Object(_) => KeyStrategy::Merge,
-                        _ => KeyStrategy::Override,
-                    },
-                ),
-            );
-        }
+        let (name, value) = match prop {
+            PropOrSpread::Prop(box Prop::KeyValue(KeyValueProp {
+                key:
+                    PropName::Ident(Ident { sym: name, .. }) | PropName::Str(Str { value: name, .. }),
+                value: box value,
+            })) => (name, value),
+            _ => continue,
+        };
+
+        strategies.insert(
+            name.to_owned(),
+            (
+                idx,
+                match value {
+                    Expr::Object(_) => KeyStrategy::Merge,
+                    _ => KeyStrategy::Override,
+                },
+            ),
+        );
     }
 
     for prop in b.props {
         if let PropOrSpread::Prop(box Prop::KeyValue(KeyValueProp {
-            key: PropName::Str(Str { value: name, .. }),
+            key: PropName::Str(Str { value: name, .. }) | PropName::Ident(Ident { sym: name, .. }),
             ..
         })) = &prop
         {
@@ -80,10 +84,10 @@ pub fn to_lit(items: &[(&str, &str)]) -> ObjectLit {
             .iter()
             .map(|(key, value)| {
                 PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-                    key: PropName::Str(Str {
+                    key: PropName::Ident(Ident {
                         span: DUMMY_SP,
-                        raw: None,
-                        value: (*key).into(),
+                        optional: false,
+                        sym: (*key).into(),
                     }),
                     value: Box::new(Expr::Lit(Lit::Str(Str {
                         span: DUMMY_SP,
@@ -110,7 +114,7 @@ mod test {
         let a = to_lit(&[("a", "value")]);
         let b = to_lit(&[("b", "value")]);
         let c = merge_literals(a, b);
-        assert!(c.props.len() == 2);
+        assert_eq!(c.props.len(), 2);
     }
 
     #[test]
@@ -127,7 +131,7 @@ mod test {
 
         let c = merge_literals(a.clone(), b);
 
-        assert!(a.eq(&c));
+        assert_eq!(a, c);
     }
 
     #[test]
@@ -142,7 +146,7 @@ mod test {
             ..
         })) = &c.props[0]
         {
-            assert!("b".eq(&*value))
+            assert_eq!("b", value.to_string())
         } else {
             panic!("fail")
         }
@@ -180,7 +184,7 @@ mod test {
             ..
         })) = &c.props[0]
         {
-            assert!(props.len() == 2)
+            assert_eq!(props.len(), 2)
         } else {
             panic!("fail")
         }

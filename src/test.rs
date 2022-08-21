@@ -15,6 +15,7 @@ fn test_visitor() -> TransformVisitor<'static> {
     t.config.theme.height.insert("4", "1rem");
     t.config.theme.spacing.insert("4", "1rem");
     t.config.theme.colors.insert("black", "black");
+    t.config.theme.margin.insert("4", "1rem");
 
     t
 }
@@ -29,7 +30,7 @@ test!(
     // Input codes
     r#"<Test tw="h-4" />"#,
     // Output codes after transformed with plugin
-    r#"<Test css={{"height": "1rem"}} />"#
+    r#"<Test css={{height: "1rem"}} />"#
 );
 
 test!(
@@ -42,7 +43,7 @@ test!(
     // Input codes
     r#"<Test tw={"h-4"} />"#,
     // Output codes after transformed with plugin
-    r#"<Test css={{"height": "1rem"}} />"#
+    r#"<Test css={{height: "1rem"}} />"#
 );
 
 test!(
@@ -53,7 +54,7 @@ test!(
     |_| as_folder(test_visitor()),
     template,
     r#"const x = tw`h-4`"#,
-    r#"const x = {"height": "1rem"}"#
+    r#"const x = {height: "1rem"}"#
 );
 
 test!(
@@ -64,7 +65,7 @@ test!(
     |_| as_folder(test_visitor()),
     template_jsx,
     r#"<Test css={tw`h-4`} />"#,
-    r#"<Test css={{"height": "1rem"}} />"#
+    r#"<Test css={{height: "1rem"}} />"#
 );
 
 test!(
@@ -77,7 +78,7 @@ test!(
     // Input codes
     r#"<Test tw="h-4" css={{width: "1rem"}} />"#,
     // Output codes after transformed with plugin
-    r#"<Test css={[{width: "1rem"}, {"height": "1rem"}]} />"#
+    r#"<Test css={[{width: "1rem"}, {height: "1rem"}]} />"#
 );
 
 test!(
@@ -90,7 +91,7 @@ test!(
     // Input codes
     r#"<Test tw="h-4" css={[]} />"#,
     // Output codes after transformed with plugin
-    r#"<Test css={[{"height": "1rem"}]} />"#
+    r#"<Test css={[{height: "1rem"}]} />"#
 );
 
 test!(
@@ -103,7 +104,7 @@ test!(
     // Input codes
     r#"<Test tw="hover:h-4 hover:text-black" />"#,
     // Output codes after transformed with plugin
-    r#"<Test css={{"&:hover": {"height": "1rem", "color": "black"}}} />"#
+    r#"<Test css={{"&:hover": {height: "1rem", color: "black"}}} />"#
 );
 
 test!(
@@ -116,7 +117,7 @@ test!(
     // Input codes
     r#"<Test tw="-m-4" />"#,
     // Output codes after transformed with plugin
-    r#"<Test css={{"margin": "-1rem"}} />"#
+    r#"<Test css={{margin: "-1rem"}} />"#
 );
 
 include!(concat!(env!("OUT_DIR"), "/test_cases.rs"));
