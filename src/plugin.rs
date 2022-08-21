@@ -351,9 +351,14 @@ pub fn display(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
 }
 
 pub fn box_(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
-    ["border-box", "content-box"]
-        .contains(&rest)
-        .then_some(to_lit(&[("boxSizing", rest)]))
+    Some(to_lit(&[(
+        "boxSizing",
+        match rest {
+            "border" => "border-box",
+            "content" => "content-box",
+            _ => return None,
+        },
+    )]))
 }
 
 pub fn select(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
