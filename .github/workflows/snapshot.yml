@@ -13,4 +13,5 @@ jobs:
           profile: minimal
           toolchain: nightly
           override: true
+      - uses: Swatinem/rust-cache@v2
       - run: cargo test -- --ignored || true
