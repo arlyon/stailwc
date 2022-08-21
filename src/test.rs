@@ -1,7 +1,13 @@
-use swc_ecma_transforms_testing::test;
+use std::{fs::read_to_string, path::Path};
+
+use cmd_lib::{run_cmd, run_fun};
+use swc_ecma_transforms_testing::{test, test_transform};
 use swc_ecma_visit::as_folder;
 
-use crate::TransformVisitor;
+use crate::{
+    config::{AppConfig, TailwindConfig, TailwindTheme},
+    TransformVisitor,
+};
 
 fn test_visitor() -> TransformVisitor<'static> {
     let mut t = TransformVisitor::default();
@@ -112,3 +118,44 @@ test!(
     // Output codes after transformed with plugin
     r#"<Test css={{"margin": "-1rem"}} />"#
 );
+
+include!(concat!(env!("OUT_DIR"), "/test_cases.rs"));
+
+fn snapshots_inner(path: &str) {
+    let input_path = Path::new(path);
+    let snapshot_path = Path::new("snapshots").join(input_path.file_name().unwrap());
+    let snapshot = read_to_string(snapshot_path).unwrap();
+
+    let tailwind_path = input_path.with_file_name("tailwind.config.js");
+    let tailwind_path = if tailwind_path.exists() {
+        format!("'./{}'", tailwind_path.to_str().unwrap())
+    } else {
+        "undefined".to_string()
+    };
+
+    let (input, expected) = snapshot.split_once("\n      ↓ ↓ ↓ ↓ ↓ ↓\n").unwrap();
+
+    let app_config =
+        run_fun!(node -e "console.log(JSON.stringify(require('./install.js')({silent: true, tailwindPath: ${tailwind_path}})[1]))")
+            .unwrap();
+
+    let deser = &mut serde_json::Deserializer::from_str(&app_config);
+    let app_config: Result<AppConfig, _> = serde_path_to_error::deserialize(deser);
+
+    test_transform(
+        swc_ecma_parser::Syntax::Typescript(swc_ecma_parser::TsConfig {
+            tsx: true,
+            ..Default::default()
+        }),
+        |_| {
+            as_folder(TransformVisitor {
+                config: app_config.unwrap().config,
+                tw_attr: None,
+                tw_tpl: None,
+            })
+        },
+        input,
+        expected,
+        false,
+    )
+}
