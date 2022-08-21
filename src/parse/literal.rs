@@ -11,7 +11,12 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit,
     let (cmd, rest) = match s.split_once('-') {
         Some((cmd, rest)) => (cmd, Some(rest)),
         None => {
-            let root_plugins = [plugin::position, plugin::visibility, plugin::display];
+            let root_plugins = [
+                plugin::position,
+                plugin::visibility,
+                plugin::display,
+                plugin::text_transform,
+            ];
             match root_plugins.iter().find_map(|p| p(s, theme)) {
                 Some(r) => return Ok(r),
                 None => (s, None),

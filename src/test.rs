@@ -1,7 +1,13 @@
-use swc_ecma_transforms_testing::test;
+use std::{fs::read_to_string, path::Path};
+
+use cmd_lib::{run_cmd, run_fun};
+use swc_ecma_transforms_testing::{test, test_transform};
 use swc_ecma_visit::as_folder;
 
-use crate::TransformVisitor;
+use crate::{
+    config::{AppConfig, TailwindConfig, TailwindTheme},
+    TransformVisitor,
+};
 
 fn test_visitor() -> TransformVisitor<'static> {
     let mut t = TransformVisitor::default();
@@ -9,6 +15,7 @@ fn test_visitor() -> TransformVisitor<'static> {
     t.config.theme.height.insert("4", "1rem");
     t.config.theme.spacing.insert("4", "1rem");
     t.config.theme.colors.insert("black", "black");
+    t.config.theme.margin.insert("4", "1rem");
 
     t
 }
@@ -23,7 +30,7 @@ test!(
     // Input codes
     r#"<Test tw="h-4" />"#,
     // Output codes after transformed with plugin
-    r#"<Test css={{"height": "1rem"}} />"#
+    r#"<Test css={{height: "1rem"}} />"#
 );
 
 test!(
@@ -36,7 +43,7 @@ test!(
     // Input codes
     r#"<Test tw={"h-4"} />"#,
     // Output codes after transformed with plugin
-    r#"<Test css={{"height": "1rem"}} />"#
+    r#"<Test css={{height: "1rem"}} />"#
 );
 
 test!(
@@ -47,7 +54,7 @@ test!(
     |_| as_folder(test_visitor()),
     template,
     r#"const x = tw`h-4`"#,
-    r#"const x = {"height": "1rem"}"#
+    r#"const x = {height: "1rem"}"#
 );
 
 test!(
@@ -58,7 +65,7 @@ test!(
     |_| as_folder(test_visitor()),
     template_jsx,
     r#"<Test css={tw`h-4`} />"#,
-    r#"<Test css={{"height": "1rem"}} />"#
+    r#"<Test css={{height: "1rem"}} />"#
 );
 
 test!(
@@ -71,7 +78,7 @@ test!(
     // Input codes
     r#"<Test tw="h-4" css={{width: "1rem"}} />"#,
     // Output codes after transformed with plugin
-    r#"<Test css={[{width: "1rem"}, {"height": "1rem"}]} />"#
+    r#"<Test css={[{width: "1rem"}, {height: "1rem"}]} />"#
 );
 
 test!(
@@ -84,7 +91,7 @@ test!(
     // Input codes
     r#"<Test tw="h-4" css={[]} />"#,
     // Output codes after transformed with plugin
-    r#"<Test css={[{"height": "1rem"}]} />"#
+    r#"<Test css={[{height: "1rem"}]} />"#
 );
 
 test!(
@@ -97,7 +104,7 @@ test!(
     // Input codes
     r#"<Test tw="hover:h-4 hover:text-black" />"#,
     // Output codes after transformed with plugin
-    r#"<Test css={{"&:hover": {"height": "1rem", "color": "black"}}} />"#
+    r#"<Test css={{"&:hover": {height: "1rem", color: "black"}}} />"#
 );
 
 test!(
@@ -110,5 +117,46 @@ test!(
     // Input codes
     r#"<Test tw="-m-4" />"#,
     // Output codes after transformed with plugin
-    r#"<Test css={{"margin": "-1rem"}} />"#
+    r#"<Test css={{margin: "-1rem"}} />"#
 );
+
+include!(concat!(env!("OUT_DIR"), "/test_cases.rs"));
+
+fn snapshots_inner(path: &str) {
+    let input_path = Path::new(path);
+    let snapshot_path = Path::new("snapshots").join(input_path.file_name().unwrap());
+    let snapshot = read_to_string(snapshot_path).unwrap();
+
+    let tailwind_path = input_path.with_file_name("tailwind.config.js");
+    let tailwind_path = if tailwind_path.exists() {
+        format!("'./{}'", tailwind_path.to_str().unwrap())
+    } else {
+        "undefined".to_string()
+    };
+
+    let (input, expected) = snapshot.split_once("\n      ↓ ↓ ↓ ↓ ↓ ↓\n").unwrap();
+
+    let app_config =
+        run_fun!(node -e "console.log(JSON.stringify(require('./install.js')({silent: true, tailwindPath: ${tailwind_path}})[1]))")
+            .unwrap();
+
+    let deser = &mut serde_json::Deserializer::from_str(&app_config);
+    let app_config: Result<AppConfig, _> = serde_path_to_error::deserialize(deser);
+
+    test_transform(
+        swc_ecma_parser::Syntax::Typescript(swc_ecma_parser::TsConfig {
+            tsx: true,
+            ..Default::default()
+        }),
+        |_| {
+            as_folder(TransformVisitor {
+                config: app_config.unwrap().config,
+                tw_attr: None,
+                tw_tpl: None,
+            })
+        },
+        input,
+        expected,
+        false,
+    )
+}

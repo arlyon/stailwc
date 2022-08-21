@@ -73,7 +73,7 @@ lookup_plugin!(ml, margin, "marginLeft");
 lookup_plugin!(mr, margin, "marginRight");
 lookup_plugin!(mt, margin, "marginTop");
 lookup_plugin!(mb, margin, "marginBottom");
-lookup_plugin!(z, z_index, "z-index");
+lookup_plugin!(z, z_index, "zIndex");
 lookup_plugin!(gap, gap, "gap");
 lookup_plugin_opt!(rounded, border_radius, "borderRadius");
 lookup_plugin!(cursor, cursor, "cursor");
@@ -136,6 +136,19 @@ pub fn max(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
         Some(("w", rest)) => simple_lookup(&theme.max_width, rest, "maxWidth"),
         _ => None,
     }
+}
+
+pub fn text_transform(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    Some(to_lit(&[(
+        "textTransform",
+        match rest {
+            "uppercase" => "uppercase",
+            "lowercase" => "lowercase",
+            "captialize" => "capitalize",
+            "normal-case" => "none",
+            _ => return None,
+        },
+    )]))
 }
 
 pub fn appearance(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
@@ -221,7 +234,7 @@ pub fn from(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
 
 pub fn ring(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
     let rest = rest.unwrap_or("DEFAULT");
-    match rest.split_once("-") {
+    match rest.split_once('-') {
         Some(("offset", rest)) => {
             theme.ring_offset_width.get(rest)
                 .map(|&s| ("--tw-ring-offset-width", s))
@@ -338,9 +351,14 @@ pub fn display(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
 }
 
 pub fn box_(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
-    ["border-box", "content-box"]
-        .contains(&rest)
-        .then_some(to_lit(&[("boxSizing", rest)]))
+    Some(to_lit(&[(
+        "boxSizing",
+        match rest {
+            "border" => "border-box",
+            "content" => "content-box",
+            _ => return None,
+        },
+    )]))
 }
 
 pub fn select(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
@@ -371,7 +389,7 @@ pub fn visibility(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
 }
 
 pub fn translate(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    let (cmd, rest) = rest.split_once("-")?;
+    let (cmd, rest) = rest.split_once('-')?;
     match cmd {
         "x" => simple_lookup_map(&theme.translate, rest, "transform", |s| {
             format!("translateX({})", s)

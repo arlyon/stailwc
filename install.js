@@ -1,7 +1,7 @@
 /**
  * Install stailwc
  *
- * @param {{wasm?: string, tailwindPath?: string}} options
+ * @param {{wasm?: string, tailwindPath?: string, silent?: boolean}} options
  * @returns A nextjs plugin configuration
  */
 module.exports = (options = {}) => {
@@ -15,14 +15,16 @@ module.exports = (options = {}) => {
 
   let override = {};
   try {
-    console.log(
-      `\u001b[36minfo\u001b[0m  - attempting to load tailwind config at ${options.tailwindPath}`
-    );
+    !options?.silent &&
+      console.log(
+        `\u001b[36minfo\u001b[0m  - attempting to load tailwind config at ${options.tailwindPath}`
+      );
     override = require(options.tailwindPath);
   } catch (e) {
-    console.warn(
-      `\u001b[33mwarn\u001b[0m  - could not load tailwind config at ${options.tailwindPath}`
-    );
+    !options?.silent &&
+      console.warn(
+        `\u001b[33mwarn\u001b[0m  - could not load tailwind config at ${options.tailwindPath}: ${e}`
+      );
   }
 
   const config = resolveConfig(override, defaultConfig);

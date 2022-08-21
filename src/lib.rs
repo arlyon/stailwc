@@ -1,6 +1,7 @@
 #![feature(box_patterns)]
 #![deny(clippy::unwrap_used)]
-
+// bug in swc
+#![allow(clippy::not_unsafe_ptr_arg_deref)]
 mod config;
 mod parse;
 mod plugin;
@@ -72,7 +73,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 expr: JSXExpr::Expr(box Expr::Lit(Lit::Str(string))),
                 ..
             })) => {
-                let d = match Directive::parse(&*string.value) {
+                let d = match Directive::parse(&string.value) {
                     Ok((_, d)) => d,
                     Err(e) => {
                         println!("fail : could not parse `{}`  {}", string.value, e);
