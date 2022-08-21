@@ -1,6 +1,7 @@
 #![feature(box_patterns)]
 #![deny(clippy::unwrap_used)]
-
+// bug in swc
+#![allow(clippy::not_unsafe_ptr_arg_deref)]
 mod config;
 mod parse;
 mod plugin;

@@ -138,7 +138,7 @@ pub fn max(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     }
 }
 
-pub fn text_transform(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn text_transform(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     Some(to_lit(&[(
         "textTransform",
         match rest {
@@ -234,7 +234,7 @@ pub fn from(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
 
 pub fn ring(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
     let rest = rest.unwrap_or("DEFAULT");
-    match rest.split_once("-") {
+    match rest.split_once('-') {
         Some(("offset", rest)) => {
             theme.ring_offset_width.get(rest)
                 .map(|&s| ("--tw-ring-offset-width", s))
@@ -389,7 +389,7 @@ pub fn visibility(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
 }
 
 pub fn translate(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    let (cmd, rest) = rest.split_once("-")?;
+    let (cmd, rest) = rest.split_once('-')?;
     match cmd {
         "x" => simple_lookup_map(&theme.translate, rest, "transform", |s| {
             format!("translateX({})", s)
