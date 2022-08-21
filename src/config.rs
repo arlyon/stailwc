@@ -17,7 +17,7 @@ pub struct TailwindConfig<'a> {
 #[derive(Deserialize, Debug, Default)]
 pub struct TailwindTheme<'a> {
     #[serde(borrow)]
-    pub screens: HashMap<&'a str, &'a str>,
+    pub screens: HashMap<&'a str, Screens<'a>>,
     #[serde(borrow)]
     pub spacing: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
@@ -103,6 +103,16 @@ pub struct TailwindTheme<'a> {
     pub max_height: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "maxWidth")]
     pub max_width: HashMap<&'a str, &'a str>,
+}
+
+#[derive(Deserialize, Debug)]
+#[serde(untagged)]
+pub enum Screens<'a> {
+    Min(&'a str),
+    Custom {
+        min: Option<&'a str>,
+        max: Option<&'a str>,
+    },
 }
 
 #[derive(Deserialize, Debug)]
