@@ -3,7 +3,8 @@
 This is an experimental SWC transpiler to bring compile time
 tailwind macros to SWC (and nextjs) a-la twin macro. The goal
 is to give the same great performance and flexibility while
-performing considerably better than babel-based alternatives.
+performing considerably better than babel-based alternatives
+(about 11x faster in my experience, proper benchmarks coming soon!)
 
 > 🚨 We currently only support NextJS 12.2.5
 
