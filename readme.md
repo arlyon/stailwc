@@ -93,4 +93,5 @@ export const ColorButton = () => {
 
 Next currently doesn't support the SWC error handler meaning
 that errors are logged only to the command line, and not shown
-visually on the screen. This will be supported down the line.
+visually on the screen. This will be supported down the line
+(see here: https://github.com/vercel/next.js/discussions/39779).
