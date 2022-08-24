@@ -263,6 +263,20 @@ pub fn flex(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     .or_else(|| simple_lookup(&theme.flex, rest, "flex"))
 }
 
+pub fn placeholder(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.colors, rest, "color").map(|lit| ObjectLit {
+        span: DUMMY_SP,
+        props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+            key: PropName::Str(Str {
+                span: DUMMY_SP,
+                raw: None,
+                value: "::placeholder".into(),
+            }),
+            value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(lit)),
+        })))],
+    })
+}
+
 pub fn grid(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     let (cmd, rest) = rest.split_once('-')?;
     match cmd {
