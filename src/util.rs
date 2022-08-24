@@ -84,11 +84,19 @@ pub fn to_lit(items: &[(&str, &str)]) -> ObjectLit {
             .iter()
             .map(|(key, value)| {
                 PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-                    key: PropName::Ident(Ident {
-                        span: DUMMY_SP,
-                        optional: false,
-                        sym: (*key).into(),
-                    }),
+                    key: if is_ident(key) {
+                        PropName::Ident(Ident {
+                            span: DUMMY_SP,
+                            optional: false,
+                            sym: (*key).into(),
+                        })
+                    } else {
+                        PropName::Str(Str {
+                            span: DUMMY_SP,
+                            raw: None,
+                            value: (*key).into(),
+                        })
+                    },
                     value: Box::new(Expr::Lit(Lit::Str(Str {
                         span: DUMMY_SP,
                         raw: None,
@@ -98,6 +106,12 @@ pub fn to_lit(items: &[(&str, &str)]) -> ObjectLit {
             })
             .collect(),
     }
+}
+
+/// Simple heuristic to determine ident vs string key name
+fn is_ident(s: &str) -> bool {
+    s.chars()
+        .all(|c| c.is_alphanumeric() || c.eq(&'$') || c.eq(&'_'))
 }
 
 #[cfg(test)]
