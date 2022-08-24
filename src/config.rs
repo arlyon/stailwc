@@ -95,6 +95,9 @@ pub struct TailwindTheme<'a> {
     #[serde(borrow, rename = "transitionTimingFunction")]
     pub transition_timing_function: HashMap<&'a str, &'a str>,
 
+    #[serde(borrow, alias = "divideWidth")]
+    pub divide_width: HashMap<&'a str, &'a str>,
+
     #[serde(borrow, alias = "minHeight")]
     pub min_height: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "minWidth")]

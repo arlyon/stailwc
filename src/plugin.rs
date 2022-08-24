@@ -1,7 +1,8 @@
 use std::collections::HashMap;
 
 use itertools::Itertools;
-use swc_ecma_visit::swc_ecma_ast::ObjectLit;
+use swc_common::DUMMY_SP;
+use swc_ecma_visit::swc_ecma_ast::{KeyValueProp, ObjectLit, Prop, PropName, PropOrSpread, Str};
 
 use crate::{config::TailwindTheme, util::to_lit};
 
@@ -261,6 +262,82 @@ pub fn flex(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
             .then_some(to_lit(&[("flexWrap", rest)]))
     })
     .or_else(|| simple_lookup(&theme.flex, rest, "flex"))
+}
+
+pub fn divide(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest.split_once('-').unwrap_or((rest, "DEFAULT")) {
+        ("x", "reverse") => Some(ObjectLit {
+            span: DUMMY_SP,
+            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+                key: PropName::Str(Str {
+                    span: DUMMY_SP,
+                    raw: None,
+                    value: "> :not([hidden]) ~ :not([hidden])".into(),
+                }),
+                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[(
+                    "--tw-divide-x-reverse",
+                    "1",
+                )]))),
+            })))],
+        }),
+        ("y", "reverse") => Some(ObjectLit {
+            span: DUMMY_SP,
+            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+                key: PropName::Str(Str {
+                    span: DUMMY_SP,
+                    raw: None,
+                    value: "> :not([hidden]) ~ :not([hidden])".into(),
+                }),
+                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[(
+                    "--tw-divide-y-reverse",
+                    "1",
+                )]))),
+            })))],
+        }),
+        ("x", rest) => theme.divide_width.get(rest).map(|v| ObjectLit {
+            span: DUMMY_SP,
+            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+                key: PropName::Str(Str {
+                    span: DUMMY_SP,
+                    raw: None,
+                    value: "> :not([hidden]) ~ :not([hidden])".into(),
+                }),
+                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[
+                    ("--tw-divide-x-reverse", "0"),
+                    (
+                        "borderRightWidth",
+                        &format!("calc({} * var(--tw-divide-x-reverse))", v),
+                    ),
+                    (
+                        "borderLeftWidth",
+                        &format!("calc({} * calc(1 - var(--tw-divide-x-reverse)))", v),
+                    ),
+                ]))),
+            })))],
+        }),
+        ("y", rest) => theme.divide_width.get(rest).map(|v| ObjectLit {
+            span: DUMMY_SP,
+            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+                key: PropName::Str(Str {
+                    span: DUMMY_SP,
+                    raw: None,
+                    value: "> :not([hidden]) ~ :not([hidden])".into(),
+                }),
+                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[
+                    ("--tw-divide-y-reverse", "0"),
+                    (
+                        "borderTopWidth",
+                        &format!("calc({} * calc(1 - var(--tw-divide-y-reverse)))", v),
+                    ),
+                    (
+                        "borderBottomWidth",
+                        &format!("calc({} * var(--tw-divide-y-reverse))", v),
+                    ),
+                ]))),
+            })))],
+        }),
+        _ => None,
+    }
 }
 
 pub fn placeholder(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
