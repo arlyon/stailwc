@@ -21,6 +21,8 @@ pub struct TailwindTheme<'a> {
     #[serde(borrow)]
     pub spacing: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
+    pub space: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
     pub cursor: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
     pub flex: HashMap<&'a str, &'a str>,

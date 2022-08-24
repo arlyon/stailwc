@@ -123,6 +123,72 @@ pub fn text(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
         })
 }
 
+pub fn space(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest.split_once('-') {
+        Some((xy, "reverse")) => Some(ObjectLit {
+            span: DUMMY_SP,
+            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+                key: PropName::Str(Str {
+                    span: DUMMY_SP,
+                    raw: None,
+                    value: "> :not([hidden]) ~ :not([hidden])".into(),
+                }),
+                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[(
+                    match xy {
+                        "x" => "--tw-space-x-reverse",
+                        "y" => "--tw-space-y-reverse",
+                        _ => return None,
+                    },
+                    "1",
+                )]))),
+            })))],
+        }),
+        Some(("x", rest)) => theme.space.get(rest).map(|v| ObjectLit {
+            span: DUMMY_SP,
+            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+                key: PropName::Str(Str {
+                    span: DUMMY_SP,
+                    raw: None,
+                    value: "> :not([hidden]) ~ :not([hidden])".into(),
+                }),
+                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[
+                    ("--tw-space-x-reverse", "0"),
+                    (
+                        "marginRight",
+                        &format!("calc({} * var(--tw-space-x-reverse))", v),
+                    ),
+                    (
+                        "marginLeft",
+                        &format!("calc({} * calc(1 - var(--tw-space-x-reverse)))", v),
+                    ),
+                ]))),
+            })))],
+        }),
+        Some(("y", rest)) => theme.space.get(rest).map(|v| ObjectLit {
+            span: DUMMY_SP,
+            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+                key: PropName::Str(Str {
+                    span: DUMMY_SP,
+                    raw: None,
+                    value: "> :not([hidden]) ~ :not([hidden])".into(),
+                }),
+                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[
+                    ("--tw-space-y-reverse", "0"),
+                    (
+                        "marginTop",
+                        &format!("calc({} * calc(1 - var(--tw-space-y-reverse)))", v),
+                    ),
+                    (
+                        "marginBottom",
+                        &format!("calc({} * var(--tw-space-y-reverse))", v),
+                    ),
+                ]))),
+            })))],
+        }),
+        _ => None,
+    }
+}
+
 pub fn min(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     match rest.split_once('-') {
         Some(("h", rest)) => simple_lookup(&theme.min_height, rest, "minHeight"),
