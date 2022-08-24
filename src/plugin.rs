@@ -241,9 +241,8 @@ pub fn ring(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
                 .or_else(|| theme.colors.get(rest).map(|&s| ("--tw-ring-offset-color", s)))
                 .map(|p| to_lit(&[p, ("boxShadow", "0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color), var(--tw-ring-shadow)")]))
         }
-        None => (rest == "inset").then(|| to_lit(&[("--tw-ring-inset", "inset")])).or_else(||simple_lookup(&theme.ring_width, rest, "borderWidth")
-            .or_else(|| simple_lookup(&theme.colors, rest, "--tw-ring-color"))),
-        _ => None,
+        Some((_, _)) => simple_lookup(&theme.colors, rest, "--tw-ring-color"),
+        None => (rest == "inset").then(|| to_lit(&[("--tw-ring-inset", "inset")])).or_else(||simple_lookup(&theme.ring_width, rest, "borderWidth")),
     }
 }
 
