@@ -446,9 +446,9 @@ pub fn justify(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
         "start" => Some("flex-start"),
         "end" => Some("flex-end"),
         "center" => Some("center"),
-        "between" => Some("between"),
-        "around" => Some("around"),
-        "evenly" => Some("evenly"),
+        "between" => Some("space-between"),
+        "around" => Some("space-around"),
+        "evenly" => Some("space-evenly"),
         _ => None,
     }
     .map(|v| to_lit(&[("justifyContent", v)]))
