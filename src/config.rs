@@ -8,6 +8,13 @@ pub struct AppConfig<'a> {
     pub config: TailwindConfig<'a>,
 }
 
+#[derive(Deserialize, Debug)]
+#[serde(untagged)]
+pub enum LineHeightOpt<'a> {
+    LineHeight(LineHeight<'a>),
+    Str(&'a str),
+}
+
 #[derive(Deserialize, Debug, Default)]
 pub struct TailwindConfig<'a> {
     #[serde(borrow)]
@@ -41,7 +48,7 @@ pub struct TailwindTheme<'a> {
     #[serde(borrow, alias = "fontFamily")]
     pub font_family: HashMap<&'a str, Vec<Cow<'a, str>>>,
     #[serde(borrow, rename = "fontSize")]
-    pub font_size: HashMap<&'a str, (&'a str, LineHeight<'a>)>,
+    pub font_size: HashMap<&'a str, (&'a str, LineHeightOpt<'a>)>,
     #[serde(borrow, rename = "fontWeight")]
     pub font_weight: HashMap<&'a str, &'a str>,
     #[serde(borrow, rename = "borderRadius")]
