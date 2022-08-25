@@ -1,3 +1,11 @@
+## [0.5.2](https://github.com/arlyon/stailwc/compare/0.5.1...0.5.2) (2022-08-25)
+
+
+### Bug Fixes
+
+* add wasm32-wasi to toolchain ([c5739e5](https://github.com/arlyon/stailwc/commit/c5739e5bb6f754cfafaab2cd286ade7740f17c3a))
+* ignore Cargo.lock file ([dd928b1](https://github.com/arlyon/stailwc/commit/dd928b1f81b519644dc9e7654abe325073b8ff64))
+
 ## [0.5.1](https://github.com/arlyon/stailwc/compare/0.5.0...0.5.1) (2022-08-25)
 
 
