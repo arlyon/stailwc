@@ -125,68 +125,53 @@ pub fn text(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
 
 pub fn space(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     match rest.split_once('-') {
-        Some((xy, "reverse")) => Some(ObjectLit {
-            span: DUMMY_SP,
-            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-                key: PropName::Str(Str {
-                    span: DUMMY_SP,
-                    raw: None,
-                    value: "> :not([hidden]) ~ :not([hidden])".into(),
-                }),
-                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[(
-                    match xy {
-                        "x" => "--tw-space-x-reverse",
-                        "y" => "--tw-space-y-reverse",
-                        _ => return None,
-                    },
-                    "1",
-                )]))),
-            })))],
+        Some((xy, "reverse")) => Some(to_lit(&[(
+            match xy {
+                "x" => "--tw-space-x-reverse",
+                "y" => "--tw-space-y-reverse",
+                _ => return None,
+            },
+            "1",
+        )])),
+        Some(("x", rest)) => theme.space.get(rest).map(|v| {
+            to_lit(&[
+                ("--tw-space-x-reverse", "0"),
+                (
+                    "marginRight",
+                    &format!("calc({} * var(--tw-space-x-reverse))", v),
+                ),
+                (
+                    "marginLeft",
+                    &format!("calc({} * calc(1 - var(--tw-space-x-reverse)))", v),
+                ),
+            ])
         }),
-        Some(("x", rest)) => theme.space.get(rest).map(|v| ObjectLit {
-            span: DUMMY_SP,
-            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-                key: PropName::Str(Str {
-                    span: DUMMY_SP,
-                    raw: None,
-                    value: "> :not([hidden]) ~ :not([hidden])".into(),
-                }),
-                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[
-                    ("--tw-space-x-reverse", "0"),
-                    (
-                        "marginRight",
-                        &format!("calc({} * var(--tw-space-x-reverse))", v),
-                    ),
-                    (
-                        "marginLeft",
-                        &format!("calc({} * calc(1 - var(--tw-space-x-reverse)))", v),
-                    ),
-                ]))),
-            })))],
-        }),
-        Some(("y", rest)) => theme.space.get(rest).map(|v| ObjectLit {
-            span: DUMMY_SP,
-            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-                key: PropName::Str(Str {
-                    span: DUMMY_SP,
-                    raw: None,
-                    value: "> :not([hidden]) ~ :not([hidden])".into(),
-                }),
-                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[
-                    ("--tw-space-y-reverse", "0"),
-                    (
-                        "marginTop",
-                        &format!("calc({} * calc(1 - var(--tw-space-y-reverse)))", v),
-                    ),
-                    (
-                        "marginBottom",
-                        &format!("calc({} * var(--tw-space-y-reverse))", v),
-                    ),
-                ]))),
-            })))],
+        Some(("y", rest)) => theme.space.get(rest).map(|v| {
+            to_lit(&[
+                ("--tw-space-y-reverse", "0"),
+                (
+                    "marginTop",
+                    &format!("calc({} * calc(1 - var(--tw-space-y-reverse)))", v),
+                ),
+                (
+                    "marginBottom",
+                    &format!("calc({} * var(--tw-space-y-reverse))", v),
+                ),
+            ])
         }),
         _ => None,
     }
+    .map(|lit| ObjectLit {
+        span: DUMMY_SP,
+        props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+            key: PropName::Str(Str {
+                span: DUMMY_SP,
+                raw: None,
+                value: "> :not([hidden]) ~ :not([hidden])".into(),
+            }),
+            value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(lit)),
+        })))],
+    })
 }
 
 pub fn min(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
@@ -332,78 +317,48 @@ pub fn flex(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
 
 pub fn divide(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     match rest.split_once('-').unwrap_or((rest, "DEFAULT")) {
-        ("x", "reverse") => Some(ObjectLit {
-            span: DUMMY_SP,
-            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-                key: PropName::Str(Str {
-                    span: DUMMY_SP,
-                    raw: None,
-                    value: "> :not([hidden]) ~ :not([hidden])".into(),
-                }),
-                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[(
-                    "--tw-divide-x-reverse",
-                    "1",
-                )]))),
-            })))],
+        ("x", "reverse") => Some(to_lit(&[("--tw-divide-x-reverse", "1")])),
+        ("y", "reverse") => Some(to_lit(&[("--tw-divide-y-reverse", "1")])),
+        ("x", rest) => theme.divide_width.get(rest).map(|v| {
+            to_lit(&[
+                ("--tw-divide-x-reverse", "0"),
+                (
+                    "borderRightWidth",
+                    &format!("calc({} * var(--tw-divide-x-reverse))", v),
+                ),
+                (
+                    "borderLeftWidth",
+                    &format!("calc({} * calc(1 - var(--tw-divide-x-reverse)))", v),
+                ),
+            ])
         }),
-        ("y", "reverse") => Some(ObjectLit {
-            span: DUMMY_SP,
-            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-                key: PropName::Str(Str {
-                    span: DUMMY_SP,
-                    raw: None,
-                    value: "> :not([hidden]) ~ :not([hidden])".into(),
-                }),
-                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[(
-                    "--tw-divide-y-reverse",
-                    "1",
-                )]))),
-            })))],
-        }),
-        ("x", rest) => theme.divide_width.get(rest).map(|v| ObjectLit {
-            span: DUMMY_SP,
-            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-                key: PropName::Str(Str {
-                    span: DUMMY_SP,
-                    raw: None,
-                    value: "> :not([hidden]) ~ :not([hidden])".into(),
-                }),
-                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[
-                    ("--tw-divide-x-reverse", "0"),
-                    (
-                        "borderRightWidth",
-                        &format!("calc({} * var(--tw-divide-x-reverse))", v),
-                    ),
-                    (
-                        "borderLeftWidth",
-                        &format!("calc({} * calc(1 - var(--tw-divide-x-reverse)))", v),
-                    ),
-                ]))),
-            })))],
-        }),
-        ("y", rest) => theme.divide_width.get(rest).map(|v| ObjectLit {
-            span: DUMMY_SP,
-            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
-                key: PropName::Str(Str {
-                    span: DUMMY_SP,
-                    raw: None,
-                    value: "> :not([hidden]) ~ :not([hidden])".into(),
-                }),
-                value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(to_lit(&[
-                    ("--tw-divide-y-reverse", "0"),
-                    (
-                        "borderTopWidth",
-                        &format!("calc({} * calc(1 - var(--tw-divide-y-reverse)))", v),
-                    ),
-                    (
-                        "borderBottomWidth",
-                        &format!("calc({} * var(--tw-divide-y-reverse))", v),
-                    ),
-                ]))),
-            })))],
+
+        ("y", rest) => theme.divide_width.get(rest).map(|v| {
+            to_lit(&[
+                ("--tw-divide-y-reverse", "0"),
+                (
+                    "borderTopWidth",
+                    &format!("calc({} * calc(1 - var(--tw-divide-y-reverse)))", v),
+                ),
+                (
+                    "borderBottomWidth",
+                    &format!("calc({} * var(--tw-divide-y-reverse))", v),
+                ),
+            ])
         }),
         _ => None,
     }
+    .map(|lit| ObjectLit {
+        span: DUMMY_SP,
+        props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+            key: PropName::Str(Str {
+                span: DUMMY_SP,
+                raw: None,
+                value: "> :not([hidden]) ~ :not([hidden])".into(),
+            }),
+            value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(lit)),
+        })))],
+    })
 }
 
 pub fn placeholder(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
@@ -463,7 +418,7 @@ pub fn items(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
         "stretch" => Some("stretch"),
         _ => None,
     }
-    .map(|v| to_lit(&[("visibility", v)]))
+    .map(|v| to_lit(&[("alignItems", v)]))
 }
 
 pub fn transform(rest: Option<&str>, _theme: &TailwindTheme) -> Option<ObjectLit> {
