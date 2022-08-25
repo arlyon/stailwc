@@ -1,8 +1,12 @@
 [package]
 build = "build.rs"
+description = "An experimental transpiler to bring tailwind macros to SWC rocket"
 edition = "2021"
+license = "MIT OR Apache-2.0"
 name = "stailwc"
-version ="0.5.0"
+readme = "readme.md"
+repository = "https://github.com/arlyon/stailwc"
+version = "0.5.0"
 
 [lib]
 crate-type = ["cdylib"]
