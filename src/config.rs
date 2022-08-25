@@ -67,6 +67,8 @@ pub struct TailwindTheme<'a> {
     pub width: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
     pub height: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
+    pub rotate: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "letterSpacing")]
     pub letter_spacing: HashMap<&'a str, &'a str>,
     #[serde(borrow)]

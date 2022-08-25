@@ -64,6 +64,7 @@ lookup_plugin!(tracking, letter_spacing, "letterSpacing");
 lookup_plugin!(h, height, "height");
 lookup_plugin!(to, colors, "--tw-gradient-to");
 lookup_plugin!(w, width, "width");
+lookup_plugin!(rotate, rotate, "--tw-rotate");
 lookup_plugin!(p, padding, "padding");
 lookup_plugin!(pl, padding, "paddingLeft");
 lookup_plugin!(pr, padding, "paddingRight");
