@@ -1,0 +1,31 @@
+{
+  "branches": ["master"],
+  "tagFormat": "${version}",
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/exec",
+      {
+        "verifyConditionsCmd": "semantic-release-rust verify-conditions",
+        "prepareCmd": "semantic-release-rust prepare ${nextRelease.version}",
+        "publishCmd": "semantic-release-rust publish"
+      }
+    ],
+    "@semantic-release/npm",
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["CHANGELOG.md", "package.json", "Cargo.toml"],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "release": true
+      }
+    ]
+  ]
+}
