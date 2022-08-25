@@ -8,7 +8,7 @@ use swc_ecma_visit::swc_ecma_ast::PropName;
 use swc_ecma_visit::swc_ecma_ast::PropOrSpread;
 use swc_ecma_visit::swc_ecma_ast::Str;
 
-use crate::config::TailwindTheme;
+use crate::config::TailwindConfig;
 use crate::util::merge_literals;
 
 use super::literal::parse_literal;
@@ -16,10 +16,10 @@ use super::nom::Directive;
 use super::nom::Expression;
 use super::nom::Subject;
 
-pub fn literal_from_directive<'a>(val: Directive<'a>, theme: &TailwindTheme) -> ObjectLit {
+pub fn literal_from_directive<'a>(val: Directive<'a>, config: &TailwindConfig) -> ObjectLit {
     val.exps
         .into_iter()
-        .map(|e| literal_from_exp(e, theme))
+        .map(|e| literal_from_exp(e, config))
         .reduce(merge_literals)
         .unwrap_or_else(|| ObjectLit {
             span: DUMMY_SP,
@@ -27,8 +27,8 @@ pub fn literal_from_directive<'a>(val: Directive<'a>, theme: &TailwindTheme) -> 
         })
 }
 
-pub fn literal_from_exp<'a>(val: Expression<'a>, theme: &TailwindTheme) -> ObjectLit {
-    let mut object: ObjectLit = match literal_from_subject(val.subject, theme) {
+pub fn literal_from_exp<'a>(val: Expression<'a>, config: &TailwindConfig) -> ObjectLit {
+    let mut object: ObjectLit = match literal_from_subject(val.subject, config) {
         Ok(object) => object,
         Err(text) => {
             println!("fail : unknown subject `{}`", text);
@@ -72,6 +72,11 @@ pub fn literal_from_exp<'a>(val: Expression<'a>, theme: &TailwindTheme) -> Objec
             "first-line" => "::first-line",
             "placeholder" => "::placeholder",
             "backdrop" => "::backdrop",
+            "dark" => match config.dark_mode {
+                "media" => "@media (prefers-color-scheme: dark)",
+                "class" => ".dark",
+                _ => continue,
+            },
             "focus" => "&:focus",
             "focus-within" => "&:focus-within",
             "first" => ":first-child",
@@ -110,11 +115,11 @@ pub fn literal_from_exp<'a>(val: Expression<'a>, theme: &TailwindTheme) -> Objec
 
 pub fn literal_from_subject<'a>(
     value: Subject<'a>,
-    theme: &TailwindTheme,
+    config: &TailwindConfig,
 ) -> Result<ObjectLit, &'a str> {
     match value {
-        Subject::Literal(s) => parse_literal(theme, s),
+        Subject::Literal(s) => parse_literal(&config.theme, s),
         Subject::Css(_, _) => Err("arbitrary css not supported"),
-        Subject::Group(dir) => Ok(literal_from_directive(dir, theme)),
+        Subject::Group(dir) => Ok(literal_from_directive(dir, config)),
     }
 }

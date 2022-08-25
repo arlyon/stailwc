@@ -80,7 +80,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                         return;
                     },
                 };
-                if self.tw_attr.replace(literal_from_directive(d, &self.config.theme)).is_some() {
+                if self.tw_attr.replace(literal_from_directive(d, &self.config)).is_some() {
                     println!("warn : encountered multiple tw attributes");
                 }
             }
@@ -205,7 +205,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         };
         if self
             .tw_tpl
-            .replace(literal_from_directive(d, &self.config.theme))
+            .replace(literal_from_directive(d, &self.config))
             .is_some()
         {
             println!("warn : encountered bad state in template tag");

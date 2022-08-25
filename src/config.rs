@@ -19,6 +19,8 @@ pub enum LineHeightOpt<'a> {
 pub struct TailwindConfig<'a> {
     #[serde(borrow)]
     pub theme: TailwindTheme<'a>,
+    #[serde(alias = "darkMode")]
+    pub dark_mode: &'a str,
 }
 
 #[derive(Deserialize, Debug, Default)]
