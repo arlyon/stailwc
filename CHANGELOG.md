@@ -1,3 +1,10 @@
+## [0.5.1](https://github.com/arlyon/stailwc/compare/0.5.0...0.5.1) (2022-08-25)
+
+
+### Bug Fixes
+
+* release metadata ([8dd82cb](https://github.com/arlyon/stailwc/commit/8dd82cbdf5d90cb3c0e276719f3019025b6b3b75))
+
 # [0.5.0](https://github.com/arlyon/stailwc/compare/0.4.0...0.5.0) (2022-08-25)
 
 
