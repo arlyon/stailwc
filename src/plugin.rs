@@ -480,9 +480,19 @@ pub fn select(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
 }
 
 pub fn overflow(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
-    ["auto", "hidden", "clip", "visible", "scroll"]
+    let values = ["auto", "hidden", "clip", "visible", "scroll"];
+    values
         .contains(&rest)
         .then_some(to_lit(&[("overflow", rest)]))
+        .or_else(|| match rest.split_once('-') {
+            Some(("x", rest)) => values
+                .contains(&rest)
+                .then_some(to_lit(&[("overflowX", rest)])),
+            Some(("y", rest)) => values
+                .contains(&rest)
+                .then_some(to_lit(&[("overflowY", rest)])),
+            _ => None,
+        })
 }
 
 pub fn position(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
