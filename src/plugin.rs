@@ -270,7 +270,26 @@ pub fn border(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
                 "borderWidth",
             )
         })
+        .or_else(|| {
+            rest.map(|r| match r.split_once('-') {
+                Some((a, b)) => (a, Some(b)),
+                _ => (r, None),
+            })
+            .and_then(|(def, rest)| match def {
+                "t" => Some((border_t as fn(_, _) -> _, rest)),
+                "b" => Some((border_b as fn(_, _) -> _, rest)),
+                "l" => Some((border_l as fn(_, _) -> _, rest)),
+                "r" => Some((border_r as fn(_, _) -> _, rest)),
+                _ => None,
+            })
+            .and_then(|(fun, rest)| fun(rest, theme))
+        })
 }
+
+lookup_plugin_opt!(border_t, border_width, "borderTopWidth");
+lookup_plugin_opt!(border_l, border_width, "borderLeftWidth");
+lookup_plugin_opt!(border_r, border_width, "borderRightWidth");
+lookup_plugin_opt!(border_b, border_width, "borderBottomWidth");
 
 pub fn from(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme.colors.get(rest).map(|c| {
