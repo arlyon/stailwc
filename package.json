@@ -1,6 +1,6 @@
 {
   "name": "stailwc",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "An experimental transpiler to bring tailwind macros to SWC rocket",
   "author": "arlyon@me.com",
   "license": "MIT",

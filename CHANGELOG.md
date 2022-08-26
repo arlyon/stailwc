@@ -1,3 +1,14 @@
+# [0.6.0](https://github.com/arlyon/stailwc/compare/0.5.2...0.6.0) (2022-08-26)
+
+
+### Features
+
+* add border-btlr ([7627f60](https://github.com/arlyon/stailwc/commit/7627f6096e0a8b9b6170f3b097f1891f538c29bf))
+* add overflow-x and overflow-y ([52640b5](https://github.com/arlyon/stailwc/commit/52640b518276e9c5432df0ae162975f25297cc51))
+* add rotate plugin ([938c4ed](https://github.com/arlyon/stailwc/commit/938c4ed848a019a0e5c6a676ce785024c157b24c))
+* add rounded t, b, l, r, tl, tr, bl, br ([3ec0789](https://github.com/arlyon/stailwc/commit/3ec07896267b7695092f3c296c241066956bf141))
+* add text decoration ([d4990ed](https://github.com/arlyon/stailwc/commit/d4990edae087d495a8d3d3279924e0fb669b54c0))
+
 ## [0.5.2](https://github.com/arlyon/stailwc/compare/0.5.1...0.5.2) (2022-08-25)
 
 
