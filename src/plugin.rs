@@ -77,9 +77,40 @@ lookup_plugin!(mt, margin, "marginTop");
 lookup_plugin!(mb, margin, "marginBottom");
 lookup_plugin!(z, z_index, "zIndex");
 lookup_plugin!(gap, gap, "gap");
-lookup_plugin_opt!(rounded, border_radius, "borderRadius");
 lookup_plugin!(cursor, cursor, "cursor");
 lookup_plugin!(scale, scale, "transform", |v| format!("scale({})", v));
+
+pub fn rounded(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest.map(|r| {
+        r.split_once('-')
+            .map(|(a, b)| (a, Some(b)))
+            .unwrap_or((r, None))
+    }) {
+        Some((cmd, rest)) => {
+            let cmds = match cmd {
+                "t" => ("borderTopLeftRadius", Some("borderTopRightRadius")),
+                "b" => ("borderBottomLeftRadius", Some("borderBottomRightRadius")),
+                "l" => ("borderTopLeftRadius", Some("borderBottomLeftRadius")),
+                "r" => ("borderTopRightRadius", Some("borderBottomRightRadius")),
+                "tr" => ("borderTopRightRadius", None),
+                "tl" => ("borderTopLeftRadius", None),
+                "br" => ("borderBottomRightRadius", None),
+                "bl" => ("borderBottomLeftRadius", None),
+                x => return simple_lookup(&theme.border_radius, x, "borderRadius"),
+            };
+
+            theme
+                .border_radius
+                .get(rest.unwrap_or("DEFAULT"))
+                .map(|lookup| match cmds {
+                    (a, Some(b)) => to_lit(&[(a, lookup), (b, lookup)]),
+                    (a, None) => to_lit(&[(a, lookup)]),
+                })
+        }
+        // rounded
+        None => simple_lookup(&theme.border_radius, "DEFAULT", "borderRadius"),
+    }
+}
 
 pub fn mix(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     match rest.split_once('-') {
