@@ -235,6 +235,19 @@ pub fn text_transform(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     )]))
 }
 
+pub fn text_decoration(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    Some(to_lit(&[(
+        "textDecorationLine",
+        match rest {
+            "underline" => "underline",
+            "overline" => "overline",
+            "line-through" => "line-through",
+            "no-underline" => "none",
+            _ => return None,
+        },
+    )]))
+}
+
 pub fn appearance(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     (rest == "none").then_some(to_lit(&[("appearance", "none")]))
 }

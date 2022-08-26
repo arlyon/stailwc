@@ -16,6 +16,7 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit,
                 plugin::visibility,
                 plugin::display,
                 plugin::text_transform,
+                plugin::text_decoration,
             ];
             match root_plugins.iter().find_map(|p| p(s, theme)) {
                 Some(r) => return Ok(r),
