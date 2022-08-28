@@ -1,3 +1,10 @@
+# [0.7.0](https://github.com/arlyon/stailwc/compare/0.6.0...0.7.0) (2022-08-28)
+
+
+### Features
+
+* add col plugin ([5f77625](https://github.com/arlyon/stailwc/commit/5f77625343378354bd45e1cf966fcc4b35a866c2))
+
 # [0.6.0](https://github.com/arlyon/stailwc/compare/0.5.2...0.6.0) (2022-08-26)
 
 
