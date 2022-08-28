@@ -460,6 +460,13 @@ pub fn grid(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     }
 }
 
+pub fn col(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+    simple_lookup(&theme.grid_column, rest, "gridColumn").or_else(|| match rest.split_once("-") {
+        Some(("start", rest)) => simple_lookup(&theme.grid_column_start, rest, "gridColumnStart"),
+        _ => None,
+    })
+}
+
 pub fn justify(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     match rest {
         "start" => Some("flex-start"),

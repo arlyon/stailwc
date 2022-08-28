@@ -98,6 +98,10 @@ pub struct TailwindTheme<'a> {
     pub grid_template_rows: HashMap<&'a str, &'a str>,
     #[serde(borrow, rename = "gridTemplateColumns")]
     pub grid_template_columns: HashMap<&'a str, &'a str>,
+    #[serde(borrow, rename = "gridColumn")]
+    pub grid_column: HashMap<&'a str, &'a str>,
+    #[serde(borrow, rename = "gridColumnStart")]
+    pub grid_column_start: HashMap<&'a str, &'a str>,
 
     #[serde(borrow, rename = "transitionDelay")]
     pub transition_delay: HashMap<&'a str, &'a str>,
