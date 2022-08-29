@@ -34,6 +34,8 @@ swc_plugin = "0.88.2"
 swc_plugin_macro = "0.8.1"
 tracing = "0.1.36"
 
+ast_node = {version = "=0.8.2", optional = true}
+
 [dev-dependencies]
 anyhow = "1.0.62"
 cmd_lib = "1.3.0"
