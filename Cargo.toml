@@ -6,7 +6,7 @@ license = "MIT OR Apache-2.0"
 name = "stailwc"
 readme = "readme.md"
 repository = "https://github.com/arlyon/stailwc"
-version ="0.7.0"
+version ="0.7.1"
 
 [lib]
 crate-type = ["cdylib"]

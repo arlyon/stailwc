@@ -1,3 +1,10 @@
+## [0.7.1](https://github.com/arlyon/stailwc/compare/0.7.0...0.7.1) (2022-08-29)
+
+
+### Bug Fixes
+
+* pin ast_node version to prevent panics ([ebb4fb3](https://github.com/arlyon/stailwc/commit/ebb4fb3004bc3ba999b9da7c88e7af81293e157f))
+
 # [0.7.0](https://github.com/arlyon/stailwc/compare/0.6.0...0.7.0) (2022-08-28)
 
 
