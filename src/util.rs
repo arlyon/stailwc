@@ -68,7 +68,9 @@ pub fn merge_literals(mut a: ObjectLit, b: ObjectLit) -> ObjectLit {
                         *lit1 = merge_literals(temp, lit2);
                     }
                 }
-                Some((idx, KeyStrategy::Override)) => a.props.insert(*idx, prop),
+                Some((idx, KeyStrategy::Override)) => {
+                    std::mem::replace(&mut a.props[*idx], prop);
+                }
                 _ => a.props.push(prop),
             }
         }
@@ -199,6 +201,51 @@ mod test {
         })) = &c.props[0]
         {
             assert_eq!(props.len(), 2)
+        } else {
+            panic!("fail")
+        }
+    }
+
+    #[test]
+    fn mergeable_b_conflicting_key() {
+        let a = ObjectLit {
+            span: DUMMY_SP,
+            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+                value: Box::new(Expr::Object(to_lit(&[("conflict", "a")]))),
+                key: PropName::Str(Str {
+                    raw: None,
+                    span: DUMMY_SP,
+                    value: "merge".into(),
+                }),
+            })))],
+        };
+        let b = ObjectLit {
+            span: DUMMY_SP,
+            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+                value: Box::new(Expr::Object(to_lit(&[("conflict", "b")]))),
+                key: PropName::Str(Str {
+                    raw: None,
+                    span: DUMMY_SP,
+                    value: "merge".into(),
+                }),
+            })))],
+        };
+
+        let c = merge_literals(a.clone(), b);
+
+        if let PropOrSpread::Prop(box Prop::KeyValue(KeyValueProp {
+            value: box Expr::Object(ObjectLit { props, .. }),
+            ..
+        })) = &c.props[0]
+        {
+            assert_eq!(props.len(), 1);
+            assert_eq!(
+                ObjectLit {
+                    props: props.to_owned(),
+                    span: DUMMY_SP
+                },
+                to_lit(&[("conflict", "b")])
+            );
         } else {
             panic!("fail")
         }
