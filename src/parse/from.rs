@@ -57,11 +57,11 @@ pub fn literal_from_exp<'a>(val: Expression<'a>, config: &TailwindConfig) -> Obj
 
     for modifier in &val.modifiers {
         let value = match *modifier {
-            "sm" => "@media(min-width: 640px)",
-            "md" => "@media(min-width: 768px)",
-            "lg" => "@media(min-width: 1024px)",
-            "xl" => "@media(min-width: 1280x)",
-            "2xl" => "@media(min-width: 1536x)",
+            "sm" => "@media (min-width: 640px)",
+            "md" => "@media (min-width: 768px)",
+            "lg" => "@media (min-width: 1024px)",
+            "xl" => "@media (min-width: 1280x)",
+            "2xl" => "@media (min-width: 1536x)",
             "before" => "::before",
             "after" => "::after",
             "hover" => "&:hover",
