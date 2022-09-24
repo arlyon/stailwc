@@ -1,3 +1,11 @@
+## [0.7.2](https://github.com/arlyon/stailwc/compare/0.7.1...0.7.2) (2022-09-24)
+
+
+### Bug Fixes
+
+* add tailwind as a peer dependency ([e6c3647](https://github.com/arlyon/stailwc/commit/e6c3647667094d5854f4ceae03402fc6624ba5df))
+* handle nested merging correctly ([4b100aa](https://github.com/arlyon/stailwc/commit/4b100aa3cfc40741ab0a4959d68b4bc5116356e4))
+
 ## [0.7.1](https://github.com/arlyon/stailwc/compare/0.7.0...0.7.1) (2022-08-29)
 
 
