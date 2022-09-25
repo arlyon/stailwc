@@ -6,7 +6,7 @@ use std::path::Path;
 use glob::glob;
 
 fn main() {
-    let test_files = glob("tests/**/*.js")
+    let test_files = glob("snapshots/tests/**/*.js")
         .expect("Failed to read glob pattern")
         .into_iter()
         .filter_map(Result::ok)

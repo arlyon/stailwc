@@ -118,8 +118,10 @@ fn is_ident(s: &str) -> bool {
 
 #[cfg(test)]
 mod test {
-    use swc_common::DUMMY_SP;
-    use {Expr, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str};
+    use swc_core::common::DUMMY_SP;
+    use swc_core::ecma::ast::{
+        Expr, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str,
+    };
 
     use crate::util::{merge_literals, to_lit};
 

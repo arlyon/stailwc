@@ -1,5 +1,0 @@
-{
-  "preset": "stitches",
-  "config": "__fixtures__/stitches/tailwind.config.js",
-  "stitchesConfig": "__fixtures__/stitches/stitches.config.js"
-}
