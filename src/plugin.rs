@@ -4,7 +4,7 @@ use crate::{config::TailwindTheme, util::to_lit};
 use itertools::Itertools;
 use swc_core::{
     common::DUMMY_SP,
-    ecma::ast::{Expr, KeyValueProp, ObjectLit, Prop, PropName, PropOrSpread, Str},
+    ecma::ast::{Expr, Ident, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str},
 };
 
 macro_rules! lookup_plugin {
@@ -585,14 +585,24 @@ pub fn visibility(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
 pub fn translate(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     let (cmd, rest) = rest.split_once('-')?;
     match cmd {
-        "x" => simple_lookup_map(&theme.translate, rest, "transform", |s| {
-            format!("translateX({})", s)
-        }),
-        "y" => simple_lookup_map(&theme.translate, rest, "transform", |s| {
-            format!("translateY({})", s)
-        }),
+        "x" => simple_lookup(&theme.translate, rest, "--tw-translate-x"),
+        "y" => simple_lookup(&theme.translate, rest, "--tw-translate-y"),
         _ => None,
     }
+    .map(|mut l| {
+        l.props.push(
+            Prop::KeyValue(KeyValueProp {
+                key: PropName::Ident(Ident {
+                    sym: "transform".into(),
+                    span: DUMMY_SP,
+                    optional: false,
+                }),
+                value: Box::new(Expr::Lit(Lit::Str(Str { span: DUMMY_SP, value: "translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))".into(), raw: None }))),
+            })
+            .into(),
+        );
+        l
+    })
 }
 pub fn sr(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     (rest == "only").then(|| {
