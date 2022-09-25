@@ -23,15 +23,18 @@ fn test_visitor() -> TransformVisitor<'static> {
     t
 }
 
-// test!(
-//     swc_core::ecma::,
-//     |_| as_folder(test_visitor()),
-//     basic,
-//     // Input codes
-//     r#"<Test tw="h-4" />"#,
-//     // Output codes after transformed with plugin
-//     r#"<Test css={{height: "1rem"}} />"#
-// );
+test!(
+    Syntax::Typescript(TsConfig {
+        tsx: true,
+        ..Default::default()
+    }),
+    |_| as_folder(test_visitor()),
+    basic,
+    // Input codes
+    r#"<Test tw="h-4" />"#,
+    // Output codes after transformed with plugin
+    r#"<Test css={{height: "1rem"}} />"#
+);
 
 test!(
     Syntax::Typescript(TsConfig {
