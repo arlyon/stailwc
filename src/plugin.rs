@@ -129,6 +129,14 @@ pub fn rounded(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
     }
 }
 
+pub fn pointer_events(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest {
+        "events-none" => Some(to_lit(&[("pointerEvents", "none")])),
+        "events-auto" => Some(to_lit(&[("pointerEvents", "auto")])),
+        _ => None,
+    }
+}
+
 pub fn mix(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     match rest.split_once('-') {
         Some(("blend", rest)) => blend(rest, theme),
