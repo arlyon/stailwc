@@ -1,0 +1,3 @@
+[submodule "snapshots"]
+	path = snapshots
+	url = https://github.com/arlyon/stailwc-snapshots.git
