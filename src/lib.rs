@@ -10,24 +10,21 @@ mod test;
 mod util;
 
 use config::TailwindConfig;
-use swc_ecmascript::ast::{
-    Expr, Ident, JSXAttr, JSXAttrName, JSXAttrValue, JSXExpr, JSXExprContainer, Lit, Program,
-};
-
-use parse::{from::literal_from_directive, nom::Directive};
-use swc_common::{util::take::Take, DUMMY_SP};
-use swc_ecma_visit::{
-    as_folder,
-    swc_ecma_ast::{
-        ArrayLit, ExprOrSpread, JSXAttrOrSpread, JSXOpeningElement, ObjectLit, TaggedTpl,
-        TplElement,
+use swc_core::{
+    common::{util::take::Take, DUMMY_SP},
+    ecma::{
+        ast::{
+            ArrayLit, Expr, ExprOrSpread, Ident, JSXAttr, JSXAttrName, JSXAttrOrSpread,
+            JSXAttrValue, JSXExpr, JSXExprContainer, JSXOpeningElement, Lit, ObjectLit, Program,
+            TaggedTpl, TplElement,
+        },
+        visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
     },
-    FoldWith, VisitMut, VisitMutWith,
+    plugin::{plugin_transform, proxies::TransformPluginProgramMetadata},
 };
-use swc_plugin::metadata::TransformPluginProgramMetadata;
-use swc_plugin_macro::plugin_transform;
 
 use crate::config::AppConfig;
+use parse::{from::literal_from_directive, nom::Directive};
 
 #[derive(Default)]
 pub struct TransformVisitor<'a> {
@@ -113,14 +110,14 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         };
 
         n.attrs.retain(|attr| {
-            !matches!(attr, swc_ecma_visit::swc_ecma_ast::JSXAttrOrSpread::JSXAttr(JSXAttr {
+            !matches!(attr, JSXAttrOrSpread::JSXAttr(JSXAttr {
                             name: JSXAttrName::Ident(Ident { sym, .. }),
                            ..
                        }) if sym == "tw")
         });
 
         let css_attr = n.attrs.iter_mut().find_map(|attr| match attr {
-            swc_ecma_visit::swc_ecma_ast::JSXAttrOrSpread::JSXAttr(JSXAttr {
+            JSXAttrOrSpread::JSXAttr(JSXAttr {
                 name: JSXAttrName::Ident(Ident { sym, .. }),
                 value,
                 ..

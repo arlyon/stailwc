@@ -1,10 +1,11 @@
 use std::collections::HashMap;
 
-use itertools::Itertools;
-use swc_common::DUMMY_SP;
-use swc_ecma_visit::swc_ecma_ast::{KeyValueProp, ObjectLit, Prop, PropName, PropOrSpread, Str};
-
 use crate::{config::TailwindTheme, util::to_lit};
+use itertools::Itertools;
+use swc_core::{
+    common::DUMMY_SP,
+    ecma::ast::{Expr, KeyValueProp, ObjectLit, Prop, PropName, PropOrSpread, Str},
+};
 
 macro_rules! lookup_plugin {
     ($def:ident, $map:tt, $target:expr) => {
@@ -201,7 +202,7 @@ pub fn space(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
                 raw: None,
                 value: "> :not([hidden]) ~ :not([hidden])".into(),
             }),
-            value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(lit)),
+            value: Box::new(Expr::Object(lit)),
         })))],
     })
 }
@@ -420,7 +421,7 @@ pub fn divide(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
                 raw: None,
                 value: "> :not([hidden]) ~ :not([hidden])".into(),
             }),
-            value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(lit)),
+            value: Box::new(Expr::Object(lit)),
         })))],
     })
 }
@@ -428,14 +429,15 @@ pub fn divide(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
 pub fn placeholder(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.colors, rest, "color").map(|lit| ObjectLit {
         span: DUMMY_SP,
-        props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+        props: vec![Prop::KeyValue(KeyValueProp {
             key: PropName::Str(Str {
                 span: DUMMY_SP,
                 raw: None,
                 value: "::placeholder".into(),
             }),
-            value: Box::new(swc_ecma_visit::swc_ecma_ast::Expr::Object(lit)),
-        })))],
+            value: Box::new(Expr::Object(lit)),
+        })
+        .into()],
     })
 }
 

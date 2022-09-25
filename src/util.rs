@@ -1,9 +1,11 @@
 use std::collections::HashMap;
 
-use swc_atoms::JsWord;
-use swc_common::DUMMY_SP;
-use swc_ecma_visit::swc_ecma_ast::{
-    Expr, Ident, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str,
+use swc_core::{
+    common::DUMMY_SP,
+    ecma::{
+        ast::{Expr, Ident, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str},
+        atoms::JsWord,
+    },
 };
 
 #[derive(Debug)]
@@ -117,9 +119,7 @@ fn is_ident(s: &str) -> bool {
 #[cfg(test)]
 mod test {
     use swc_common::DUMMY_SP;
-    use swc_ecma_visit::swc_ecma_ast::{
-        Expr, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str,
-    };
+    use {Expr, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str};
 
     use crate::util::{merge_literals, to_lit};
 

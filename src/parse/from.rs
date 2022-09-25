@@ -1,12 +1,12 @@
-use swc_common::DUMMY_SP;
-use swc_ecma_visit::swc_ecma_ast::Expr;
-use swc_ecma_visit::swc_ecma_ast::KeyValueProp;
-use swc_ecma_visit::swc_ecma_ast::Lit;
-use swc_ecma_visit::swc_ecma_ast::ObjectLit;
-use swc_ecma_visit::swc_ecma_ast::Prop;
-use swc_ecma_visit::swc_ecma_ast::PropName;
-use swc_ecma_visit::swc_ecma_ast::PropOrSpread;
-use swc_ecma_visit::swc_ecma_ast::Str;
+use swc_core::common::DUMMY_SP;
+use swc_core::ecma::ast::Expr;
+use swc_core::ecma::ast::KeyValueProp;
+use swc_core::ecma::ast::Lit;
+use swc_core::ecma::ast::ObjectLit;
+use swc_core::ecma::ast::Prop;
+use swc_core::ecma::ast::PropName;
+use swc_core::ecma::ast::PropOrSpread;
+use swc_core::ecma::ast::Str;
 
 use crate::config::TailwindConfig;
 use crate::util::merge_literals;
@@ -99,14 +99,15 @@ pub fn literal_from_exp<'a>(val: Expression<'a>, config: &TailwindConfig) -> Obj
 
         object = ObjectLit {
             span: DUMMY_SP,
-            props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+            props: vec![Prop::KeyValue(KeyValueProp {
                 key: PropName::Str(Str {
                     span: DUMMY_SP,
                     raw: None,
                     value: value.into(),
                 }),
                 value: Box::new(Expr::Object(object)),
-            })))],
+            })
+            .into()],
         }
     }
 

@@ -1,4 +1,4 @@
-use swc_ecma_visit::swc_ecma_ast::ObjectLit;
+use swc_core::ecma::ast::ObjectLit;
 
 use crate::{config::TailwindTheme, plugin};
 
