@@ -2,12 +2,18 @@ use swc_core::ecma::ast::ObjectLit;
 
 use crate::{config::TailwindTheme, plugin};
 
+use super::nom::SubjectValue;
+
 enum PluginType {
     Required(fn(&str, &TailwindTheme) -> Option<ObjectLit>),
     Optional(fn(Option<&str>, &TailwindTheme) -> Option<ObjectLit>),
 }
 
-pub fn parse_literal<'a>(theme: &TailwindTheme, s: &'a str) -> Result<ObjectLit, &'a str> {
+pub fn parse_literal<'a>(
+    theme: &TailwindTheme,
+    s: &'a str,
+    v: Option<SubjectValue<'a>>,
+) -> Result<ObjectLit, &'a str> {
     let (cmd, rest) = match s.split_once('-') {
         Some((cmd, rest)) => (cmd, Some(rest)),
         None => {

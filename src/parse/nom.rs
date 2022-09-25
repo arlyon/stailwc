@@ -74,9 +74,14 @@ impl<'a> Expression<'a> {
 
 #[derive(Debug, PartialEq)]
 pub enum Subject<'a> {
-    Literal(&'a str),
-    Css(&'a str, &'a str),
+    Literal(&'a str, Option<SubjectValue<'a>>),
     Group(Directive<'a>),
+}
+
+#[derive(Debug, PartialEq)]
+pub enum SubjectValue<'a> {
+    Value(&'a str),
+    Css(&'a str),
 }
 
 impl<'a> Subject<'a> {
@@ -90,9 +95,16 @@ impl<'a> Subject<'a> {
             take_while(|c| c != ']'),
             char(']'),
         )))
-        .map(|(lit, css)| {
-            css.map(|s| Subject::Css(lit, s))
-                .unwrap_or(Subject::Literal(lit))
+        .map(|(lit, css)| match css {
+            Some(css) => Subject::Literal(lit, Some(SubjectValue::Css(css))),
+            None => {
+                let (a, b) = lit
+                    .rfind('-')
+                    .map(|idx| lit.split_at(idx))
+                    .map(|(a, b)| (a, Some(b)))
+                    .unwrap_or((lit, None));
+                Subject::Literal(a, b.map(|b| SubjectValue::Value(b)))
+            }
         });
         let group = delimited(char('('), Directive::parse_inner, char(')')).map(Subject::Group);
         alt((literal, group))(s)

@@ -162,8 +162,7 @@ pub fn literal_from_subject<'a>(
     config: &TailwindConfig,
 ) -> Result<ObjectLit, &'a str> {
     match value {
-        Subject::Literal(s) => parse_literal(&config.theme, s),
-        Subject::Css(_, _) => Err("arbitrary css not supported"),
+        Subject::Literal(s, value) => parse_literal(&config.theme, s, value),
         Subject::Group(dir) => Ok(literal_from_directive(dir, config)),
     }
 }
