@@ -45,9 +45,9 @@ impl<'a> Expression<'a> {
         let important = opt(char('!')).map(|o| o.is_some());
         let mods = many0(terminated(
             verify(
-                take_while(|c| is_alphabetic(c as u8) || c == '-'),
+                take_while(|c| is_alphanumeric(c as u8) || c == '-'),
                 |s: &str| {
-                    !s.is_empty() && is_alphabetic(s.chars().next().expect("not empty") as u8)
+                    !s.is_empty() && is_alphanumeric(s.chars().next().expect("not empty") as u8)
                 },
             ),
             char(':'),
