@@ -6,6 +6,7 @@ use nom::combinator::{eof, opt, verify};
 use nom::multi::{many0, many1};
 use nom::sequence::{delimited, terminated};
 use nom::{IResult, Parser};
+use swc_core::common::Span;
 
 #[derive(Debug, PartialEq)]
 pub struct Directive<'a> {
@@ -74,8 +75,16 @@ impl<'a> Expression<'a> {
 
 #[derive(Debug, PartialEq)]
 pub enum Subject<'a> {
-    Literal(&'a str, Option<SubjectValue<'a>>),
+    Literal(Literal<'a>),
     Group(Directive<'a>),
+}
+
+#[derive(Debug, PartialEq)]
+pub struct Literal<'a> {
+    pub cmd: &'a str,
+    pub value: Option<SubjectValue<'a>>,
+    pub span: Option<Span>,
+    pub full: &'a str,
 }
 
 #[derive(Debug, PartialEq)]
@@ -96,14 +105,24 @@ impl<'a> Subject<'a> {
             char(']'),
         )))
         .map(|(lit, css)| match css {
-            Some(css) => Subject::Literal(lit, Some(SubjectValue::Css(css))),
+            Some(css) => Subject::Literal(Literal {
+                cmd: lit,
+                value: Some(SubjectValue::Css(css)),
+                span: None,
+                full: s,
+            }),
             None => {
                 let (a, b) = lit
                     .rfind('-')
-                    .map(|idx| lit.split_at(idx))
+                    .map(|idx| (&lit[0..idx], &lit[idx + 1..lit.len()]))
                     .map(|(a, b)| (a, Some(b)))
                     .unwrap_or((lit, None));
-                Subject::Literal(a, b.map(|b| SubjectValue::Value(b)))
+                Subject::Literal(Literal {
+                    cmd: a,
+                    value: b.map(|b| SubjectValue::Value(b)),
+                    span: None,
+                    full: s,
+                })
             }
         });
         let group = delimited(char('('), Directive::parse_inner, char(')')).map(Subject::Group);

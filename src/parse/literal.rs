@@ -2,37 +2,30 @@ use swc_core::ecma::ast::ObjectLit;
 
 use crate::{config::TailwindTheme, plugin};
 
-use super::nom::SubjectValue;
+use super::nom::{Literal, SubjectValue};
 
 enum PluginType {
     Required(fn(&str, &TailwindTheme) -> Option<ObjectLit>),
     Optional(fn(Option<&str>, &TailwindTheme) -> Option<ObjectLit>),
 }
 
-pub fn parse_literal<'a>(
-    theme: &TailwindTheme,
-    s: &'a str,
-    v: Option<SubjectValue<'a>>,
-) -> Result<ObjectLit, &'a str> {
-    let (cmd, rest) = match s.split_once('-') {
-        Some((cmd, rest)) => (cmd, Some(rest)),
-        None => {
-            let root_plugins = [
-                plugin::position,
-                plugin::visibility,
-                plugin::display,
-                plugin::text_transform,
-                plugin::text_decoration,
-            ];
-            match root_plugins.iter().find_map(|p| p(s, theme)) {
-                Some(r) => return Ok(r),
-                None => (s, None),
-            }
+pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<ObjectLit, &'a str> {
+    let root_plugins = [
+        plugin::position,
+        plugin::visibility,
+        plugin::display,
+        plugin::text_transform,
+        plugin::text_decoration,
+    ];
+
+    if let None = lit.value {
+        if let Some(r) = root_plugins.iter().find_map(|p| p(lit.cmd, theme)) {
+            return Ok(r);
         }
-    };
+    }
 
     use PluginType::*;
-    let plugin = match cmd {
+    let plugin = match lit.cmd {
         "text" => Required(plugin::text),
         "font" => Required(plugin::font),
         "shadow" => Required(plugin::shadow),
@@ -99,13 +92,16 @@ pub fn parse_literal<'a>(
         "mt" => Required(plugin::mt),
         "mb" => Required(plugin::mb),
         "z" => Required(plugin::z),
-        _ => return Err(s),
+        _ => return Err(lit.full),
     };
 
-    match (plugin, rest) {
-        (Required(p), Some(s)) => p(s, theme),
-        (Optional(p), s) => p(s, theme),
+    println!("{:?}", lit);
+
+    match (plugin, lit.value) {
+        (Required(p), Some(SubjectValue::Value(s))) => p(s, theme),
+        (Optional(p), Some(SubjectValue::Value(s))) => p(Some(s), theme),
+        (Optional(p), None) => p(None, theme),
         _ => None,
     }
-    .ok_or(s)
+    .ok_or(lit.full)
 }

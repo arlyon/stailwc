@@ -162,7 +162,7 @@ pub fn literal_from_subject<'a>(
     config: &TailwindConfig,
 ) -> Result<ObjectLit, &'a str> {
     match value {
-        Subject::Literal(s, value) => parse_literal(&config.theme, s, value),
+        Subject::Literal(lit) => parse_literal(&config.theme, lit),
         Subject::Group(dir) => Ok(literal_from_directive(dir, config)),
     }
 }
