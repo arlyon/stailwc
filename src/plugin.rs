@@ -1,6 +1,9 @@
 use std::collections::HashMap;
 
-use crate::{config::TailwindTheme, util::to_lit};
+use crate::{
+    config::TailwindTheme,
+    util::{merge_literals, to_lit},
+};
 use itertools::Itertools;
 use swc_core::{
     common::DUMMY_SP,
@@ -29,6 +32,19 @@ macro_rules! lookup_plugin_opt {
     ($def:ident, $map:tt, $target:expr, $closure:expr) => {
         pub fn $def(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
             simple_lookup_map(&theme.$map, rest.unwrap_or("DEFAULT"), $target, $closure)
+        }
+    };
+}
+
+macro_rules! merge_plugins {
+    ($def:ident, $closure_a:expr, $closure_b:expr) => {
+        pub fn $def(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
+            match ($closure_a(rest, theme), $closure_b(rest, theme)) {
+                (None, None) => None,
+                (None, Some(a)) => Some(a),
+                (Some(b), None) => Some(b),
+                (Some(a), Some(b)) => Some(merge_literals(a, b)),
+            }
         }
     };
 }
@@ -320,12 +336,19 @@ pub fn border(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
                 Some((a, b)) => (a, Some(b)),
                 _ => (r, None),
             })
-            .and_then(|(def, rest)| match def {
-                "t" => Some((border_t as fn(_, _) -> _, rest)),
-                "b" => Some((border_b as fn(_, _) -> _, rest)),
-                "l" => Some((border_l as fn(_, _) -> _, rest)),
-                "r" => Some((border_r as fn(_, _) -> _, rest)),
-                _ => None,
+            .and_then(|(def, rest)| {
+                Some((
+                    match def {
+                        "x" => border_x as fn(_, _) -> _,
+                        "y" => border_y as fn(_, _) -> _,
+                        "t" => border_t as fn(_, _) -> _,
+                        "b" => border_b as fn(_, _) -> _,
+                        "l" => border_l as fn(_, _) -> _,
+                        "r" => border_r as fn(_, _) -> _,
+                        _ => return None,
+                    },
+                    rest,
+                ))
             })
             .and_then(|(fun, rest)| fun(rest, theme))
         })
@@ -335,6 +358,8 @@ lookup_plugin_opt!(border_t, border_width, "borderTopWidth");
 lookup_plugin_opt!(border_l, border_width, "borderLeftWidth");
 lookup_plugin_opt!(border_r, border_width, "borderRightWidth");
 lookup_plugin_opt!(border_b, border_width, "borderBottomWidth");
+merge_plugins!(border_x, border_l, border_r);
+merge_plugins!(border_y, border_t, border_b);
 
 pub fn from(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme.colors.get(rest).map(|c| {
