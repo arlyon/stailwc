@@ -11,7 +11,7 @@ mod util;
 
 use config::TailwindConfig;
 use swc_core::{
-    common::{util::take::Take, DUMMY_SP},
+    common::{util::take::Take, Span, DUMMY_SP},
     ecma::{
         ast::{
             ArrayLit, Expr, ExprOrSpread, Ident, JSXAttr, JSXAttrName, JSXAttrOrSpread,
@@ -20,7 +20,7 @@ use swc_core::{
         },
         visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
     },
-    plugin::{plugin_transform, proxies::TransformPluginProgramMetadata},
+    plugin::{errors::HANDLER, plugin_transform, proxies::TransformPluginProgramMetadata},
 };
 
 use crate::config::AppConfig;
@@ -30,7 +30,7 @@ use parse::{from::literal_from_directive, nom::Directive};
 pub struct TransformVisitor<'a> {
     config: TailwindConfig<'a>,
 
-    tw_attr: Option<ObjectLit>,
+    tw_attr: Option<(Span, ObjectLit)>,
     tw_tpl: Option<ObjectLit>,
 }
 
@@ -73,26 +73,40 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 let d = match Directive::parse(&string.value) {
                     Ok((_, d)) => d,
                     Err(e) => {
-                        println!("fail : could not parse `{}`  {}", string.value, e);
+                        HANDLER.with(|h| {
+                            h.struct_span_err(
+                                string.span,
+                                    "invalid syntax",
+                            ).note(&e.to_string())
+                            .emit()
+                        });
                         return;
                     },
                 };
-                if self.tw_attr.replace(literal_from_directive(d, &self.config)).is_some() {
-                    println!("warn : encountered multiple tw attributes");
+                if let Some((span, _val)) = self.tw_attr.replace((n.span, literal_from_directive(n.span, d, &self.config))) {
+                    HANDLER.with(|h| {
+                        h.struct_span_warn(n.span, "tw attribute already exists, ignoring")
+                            .span_note(
+                                span,
+                                "previous encountered here",
+                            )
+                            .emit()
+                    });
                 }
             }
             Some(JSXAttrValue::JSXExprContainer(JSXExprContainer {
-                expr: JSXExpr::Expr(box Expr::Ident(Ident { sym, .. })),
+                expr: JSXExpr::Expr(box Expr::Ident(Ident { .. })),
+                span,
                 ..
             })) => {
-                // todo(arlyon): enable error reporting
-                // HANDLER.with(|h| {
-                //         h.struct_span_warn(MultiSpan::from_span(*span), "variables are not supported")
-                //             .emit()
-                // });
-                println!("fail : variables are not supported `{}`", sym);
+                HANDLER.with(|h| {
+                        h.struct_span_warn(*span, "variables are not supported")
+                            .emit()
+                });
             }
-            _ => println!("fail : unknown pattern {:#?}", n),
+            _ => HANDLER.with(|h| {
+                h.span_bug_no_panic(n.span, "unknown tw attribute, please file an issue")
+            }),
         }
     }
 
@@ -105,7 +119,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         n.attrs.visit_mut_children_with(self);
 
         let lit = match self.tw_attr.take() {
-            Some(v) => v,
+            Some((_, v)) => v,
             _ => return,
         };
 
@@ -188,7 +202,9 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         let text = match n.tpl.quasis.as_slice() {
             [TplElement { raw, .. }] => raw,
             _ => {
-                println!("fail : did not expect multiple quasis. please file an issue");
+                HANDLER.with(|h| {
+                    h.span_bug_no_panic(n.span, "unknown tw template, please file an issue")
+                });
                 return;
             }
         };
@@ -196,16 +212,25 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         let d = match Directive::parse(text) {
             Ok((_, d)) => d,
             Err(e) => {
-                println!("fail : could not parse `{}` - {}", text, e);
+                HANDLER.with(|h| {
+                    h.struct_span_err(n.span, "invalid syntax")
+                        .note(&e.to_string())
+                        .emit()
+                });
                 return;
             }
         };
         if self
             .tw_tpl
-            .replace(literal_from_directive(d, &self.config))
+            .replace(literal_from_directive(n.span, d, &self.config))
             .is_some()
         {
-            println!("warn : encountered bad state in template tag");
+            HANDLER.with(|h| {
+                h.span_bug_no_panic(
+                    n.span,
+                    "encountered bad state in parsing, please file an issue",
+                )
+            });
         }
     }
 
@@ -233,11 +258,11 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
     match config {
         Ok(config) => program.fold_with(&mut as_folder(TransformVisitor::new(config.config))),
         Err(error) => {
-            println!(
-                "fail : could not read tailwind config at {}: {}",
-                error.path(),
-                error.inner()
-            );
+            HANDLER.with(|h| {
+                h.struct_fatal("unable to parse tailwind config, aborting")
+                    .note(&error.to_string())
+                    .emit()
+            });
             program
         }
     }

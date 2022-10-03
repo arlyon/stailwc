@@ -95,8 +95,6 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         _ => return Err(lit.full),
     };
 
-    println!("{:?}", lit);
-
     match (plugin, lit.value) {
         (Required(p), Some(SubjectValue::Value(s))) => p(s, theme),
         (Optional(p), Some(SubjectValue::Value(s))) => p(Some(s), theme),

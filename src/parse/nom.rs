@@ -38,6 +38,7 @@ pub struct Expression<'a> {
     pub subject: Subject<'a>,
     pub alpha: Option<&'a str>,
     pub important: bool,
+    pub span: Option<Span>,
 }
 
 impl<'a> Expression<'a> {
@@ -67,6 +68,7 @@ impl<'a> Expression<'a> {
                     modifiers,
                     negative,
                     subject,
+                    span: None,
                 },
             )
             .parse(s)
@@ -156,6 +158,7 @@ mod test {
     #[test_case("grid-cols-[repeat(6,1fr)]" ; "when braces are in arbitrary css")]
     #[test_case("grid-cols-[min-content min-content]" ; "when spaces are in arbitrary css")]
     #[test_case("relative z-10 m-auto w-3/4" ; "when a statement as /")]
+    #[test_case("mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8" ; "random prefixes")]
     fn parse_tests(s: &str) {
         Directive::parse(s).unwrap();
     }

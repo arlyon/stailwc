@@ -1,3 +1,4 @@
+use swc_core::common::Span;
 use swc_core::common::DUMMY_SP;
 use swc_core::ecma::ast::Expr;
 use swc_core::ecma::ast::KeyValueProp;
@@ -7,6 +8,7 @@ use swc_core::ecma::ast::Prop;
 use swc_core::ecma::ast::PropName;
 use swc_core::ecma::ast::PropOrSpread;
 use swc_core::ecma::ast::Str;
+use swc_core::plugin::errors::HANDLER;
 
 use crate::config::Screens;
 use crate::config::TailwindConfig;
@@ -17,10 +19,14 @@ use super::nom::Directive;
 use super::nom::Expression;
 use super::nom::Subject;
 
-pub fn literal_from_directive<'a>(val: Directive<'a>, config: &TailwindConfig) -> ObjectLit {
+pub fn literal_from_directive<'a>(
+    span: Span,
+    val: Directive<'a>,
+    config: &TailwindConfig,
+) -> ObjectLit {
     val.exps
         .into_iter()
-        .map(|e| literal_from_exp(e, config))
+        .map(|e| literal_from_exp(span, e, config))
         .reduce(merge_literals)
         .unwrap_or_else(|| ObjectLit {
             span: DUMMY_SP,
@@ -28,11 +34,15 @@ pub fn literal_from_directive<'a>(val: Directive<'a>, config: &TailwindConfig) -
         })
 }
 
-pub fn literal_from_exp<'a>(val: Expression<'a>, config: &TailwindConfig) -> ObjectLit {
-    let mut object: ObjectLit = match literal_from_subject(val.subject, config) {
+pub fn literal_from_exp<'a>(span: Span, val: Expression<'a>, config: &TailwindConfig) -> ObjectLit {
+    let mut object: ObjectLit = match literal_from_subject(span, val.subject, config) {
         Ok(object) => object,
         Err(text) => {
-            println!("fail : unknown subject `{}`", text);
+            HANDLER.with(|handler| {
+                handler
+                    .struct_span_err(val.span.unwrap_or(span), "unknown subject")
+                    .emit()
+            });
             return ObjectLit {
                 span: DUMMY_SP,
                 props: vec![],
@@ -133,7 +143,10 @@ pub fn literal_from_exp<'a>(val: Expression<'a>, config: &TailwindConfig) -> Obj
                 "landscape" => "@media landscape",
                 "group-hover" => ".group:hover &",
                 x => {
-                    println!("warn: unrecognised modifier {}", x);
+                    HANDLER.with(|h| {
+                        h.struct_span_err(span, &format!("unknown modifier `{}`", x))
+                            .emit()
+                    });
                     continue;
                 }
             }
@@ -158,11 +171,12 @@ pub fn literal_from_exp<'a>(val: Expression<'a>, config: &TailwindConfig) -> Obj
 }
 
 pub fn literal_from_subject<'a>(
+    span: Span,
     value: Subject<'a>,
     config: &TailwindConfig,
 ) -> Result<ObjectLit, &'a str> {
     match value {
         Subject::Literal(lit) => parse_literal(&config.theme, lit),
-        Subject::Group(dir) => Ok(literal_from_directive(dir, config)),
+        Subject::Group(dir) => Ok(literal_from_directive(span, dir, config)),
     }
 }

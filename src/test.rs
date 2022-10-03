@@ -8,7 +8,7 @@ use swc_core::ecma::{
 };
 
 use crate::{
-    config::{AppConfig, TailwindConfig, TailwindTheme},
+    config::{AppConfig, Screens, TailwindConfig, TailwindTheme},
     TransformVisitor,
 };
 
@@ -19,6 +19,7 @@ fn test_visitor() -> TransformVisitor<'static> {
     t.config.theme.spacing.insert("4", "1rem");
     t.config.theme.colors.insert("black", "black");
     t.config.theme.margin.insert("4", "1rem");
+    t.config.theme.screens.insert("lg", Screens::Min("1024px"));
 
     t
 }
@@ -107,7 +108,7 @@ test!(
     // Input codes
     r#"<Test tw="hover:h-4 hover:text-black" />"#,
     // Output codes after transformed with plugin
-    r#"<Test css={{"&:hover": {height: "1rem", color: "black"}}} />"#
+    r#"<Test css={{":hover": {height: "1rem", color: "black"}}} />"#
 );
 
 test!(
