@@ -40,7 +40,10 @@ pub fn literal_from_exp<'a>(span: Span, val: Expression<'a>, config: &TailwindCo
         Err(text) => {
             HANDLER.with(|handler| {
                 handler
-                    .struct_span_err(val.span.unwrap_or(span), "unknown subject")
+                    .struct_span_err(
+                        val.span.unwrap_or(span),
+                        &format!("unknown subject `{}`", text),
+                    )
                     .emit()
             });
             return ObjectLit {

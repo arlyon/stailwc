@@ -10,13 +10,14 @@ mod test;
 mod util;
 
 use config::TailwindConfig;
+use nom_locate::LocatedSpan;
 use swc_core::{
     common::{util::take::Take, Span, DUMMY_SP},
     ecma::{
         ast::{
             ArrayLit, Expr, ExprOrSpread, Ident, JSXAttr, JSXAttrName, JSXAttrOrSpread,
             JSXAttrValue, JSXExpr, JSXExprContainer, JSXOpeningElement, Lit, ObjectLit, Program,
-            TaggedTpl, TplElement,
+            Str, TaggedTpl, TplElement,
         },
         visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
     },
@@ -64,18 +65,18 @@ impl<'a> VisitMut for TransformVisitor<'a> {
 
         match &n.value {
             // tw="h-4"
-            Some(JSXAttrValue::Lit(Lit::Str(string)))
+            Some(JSXAttrValue::Lit(Lit::Str(Str{span, value, ..})))
             // tw={"h-4"}
             | Some(JSXAttrValue::JSXExprContainer(JSXExprContainer {
-                expr: JSXExpr::Expr(box Expr::Lit(Lit::Str(string))),
+                expr: JSXExpr::Expr(box Expr::Lit(Lit::Str(Str{span, value, ..}))),
                 ..
             })) => {
-                let d = match Directive::parse(&string.value) {
+                let d = match Directive::parse(LocatedSpan::new_extra(&*value, *span)) {
                     Ok((_, d)) => d,
                     Err(e) => {
                         HANDLER.with(|h| {
                             h.struct_span_err(
-                                string.span,
+                                *span,
                                     "invalid syntax",
                             ).note(&e.to_string())
                             .emit()
@@ -83,7 +84,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                         return;
                     },
                 };
-                if let Some((span, _val)) = self.tw_attr.replace((n.span, literal_from_directive(n.span, d, &self.config))) {
+                if let Some((span, _val)) = self.tw_attr.replace((*span, literal_from_directive(*span, d, &self.config))) {
                     HANDLER.with(|h| {
                         h.struct_span_warn(n.span, "tw attribute already exists, ignoring")
                             .span_note(
@@ -199,8 +200,8 @@ impl<'a> VisitMut for TransformVisitor<'a> {
             }
         };
 
-        let text = match n.tpl.quasis.as_slice() {
-            [TplElement { raw, .. }] => raw,
+        let (text, span) = match n.tpl.quasis.as_slice() {
+            [TplElement { raw, span, .. }] => (raw, span),
             _ => {
                 HANDLER.with(|h| {
                     h.span_bug_no_panic(n.span, "unknown tw template, please file an issue")
@@ -209,11 +210,11 @@ impl<'a> VisitMut for TransformVisitor<'a> {
             }
         };
 
-        let d = match Directive::parse(text) {
+        let d = match Directive::parse(LocatedSpan::new_extra(&*text, *span)) {
             Ok((_, d)) => d,
             Err(e) => {
                 HANDLER.with(|h| {
-                    h.struct_span_err(n.span, "invalid syntax")
+                    h.struct_span_err(*span, "invalid syntax")
                         .note(&e.to_string())
                         .emit()
                 });
@@ -222,7 +223,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         };
         if self
             .tw_tpl
-            .replace(literal_from_directive(n.span, d, &self.config))
+            .replace(literal_from_directive(*span, d, &self.config))
             .is_some()
         {
             HANDLER.with(|h| {

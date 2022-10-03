@@ -6,7 +6,10 @@ use nom::combinator::{eof, opt, verify};
 use nom::multi::{many0, many1};
 use nom::sequence::{delimited, terminated};
 use nom::{IResult, Parser};
-use swc_core::common::Span;
+use nom_locate::LocatedSpan;
+use swc_core::common::{BytePos, Span};
+
+type NomSpan<'a> = LocatedSpan<&'a str, Span>;
 
 #[derive(Debug, PartialEq)]
 pub struct Directive<'a> {
@@ -17,13 +20,13 @@ impl<'a> Directive<'a> {
     /**
      * Same as parse, but with an added check for an EOF.
      */
-    pub fn parse(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
+    pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
         terminated(many0(Expression::parse).and(space0), eof)
             .map(|(exps, _)| Directive { exps })
             .parse(s)
     }
 
-    fn parse_inner(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
+    fn parse_inner(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
         many1(Expression::parse)
             .and(space0)
             .map(|(exps, _)| Directive { exps })
@@ -42,36 +45,40 @@ pub struct Expression<'a> {
 }
 
 impl<'a> Expression<'a> {
-    pub fn parse(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
-        let negative = opt(char('-')).map(|o| o.is_some());
-        let important = opt(char('!')).map(|o| o.is_some());
-        let mods = many0(terminated(
-            verify(
-                take_while(|c| is_alphabetic(c as u8) || c == '-'),
-                |s: &str| {
-                    !s.is_empty() && is_alphabetic(s.chars().next().expect("not empty") as u8)
-                },
-            ),
-            char(':'),
-        ));
-        let subject = Subject::parse;
+    pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
+        let mut negative = opt(char('-')).map(|o| o.is_some());
+        let mut important = opt(char('!')).map(|o| o.is_some());
 
-        space0
-            .and(mods)
-            .and(negative)
-            .and(subject)
-            .and(important)
-            .map(
-                |((((_, modifiers), negative), subject), important)| Expression {
-                    alpha: None,
-                    important,
-                    modifiers,
-                    negative,
-                    subject,
-                    span: None,
-                },
-            )
-            .parse(s)
+        let fst = take_while(|c| is_alphabetic(c as u8) || c == '-');
+        let snd = |s: &NomSpan<'a>| {
+            !s.is_empty() && is_alphabetic(s.chars().next().expect("not empty") as u8)
+        };
+
+        let verify = verify(fst, snd);
+
+        let mut mods = many0(terminated(verify, char(':')));
+        let mut subject = Subject::parse;
+
+        let (s_next, _) = space0(s)?;
+        let (s_next, mods) = mods.parse(s_next)?;
+        let (s_next, negative) = negative.parse(s_next)?;
+        let (s_next, subject) = subject.parse(s_next)?;
+        let (s_next, important) = important.parse(s_next)?;
+
+        let lo = s.extra.lo() + BytePos(s.location_offset() as u32 + 2);
+        let hi = s_next.extra.lo() + BytePos(s_next.location_offset() as u32 + 1);
+
+        Ok((
+            s_next,
+            Expression {
+                alpha: None,
+                important,
+                modifiers: mods.iter().map(|&s| *s).collect(),
+                negative,
+                subject,
+                span: Some(s.extra.with_lo(lo).with_hi(hi)),
+            },
+        ))
     }
 }
 
@@ -81,12 +88,12 @@ pub enum Subject<'a> {
     Group(Directive<'a>),
 }
 
+/// The core 'rule' of a tailwind directive.
 #[derive(Debug, PartialEq)]
 pub struct Literal<'a> {
     pub cmd: &'a str,
     pub value: Option<SubjectValue<'a>>,
     pub span: Option<Span>,
-    pub full: &'a str,
 }
 
 #[derive(Debug, PartialEq)]
@@ -96,37 +103,46 @@ pub enum SubjectValue<'a> {
 }
 
 impl<'a> Subject<'a> {
-    pub fn parse(s: &'a str) -> IResult<&'a str, Self, nom::error::Error<&'a str>> {
-        let literal = verify(
-            take_while(|c| is_alphanumeric(c as u8) || ['-', '.', '/'].contains(&c)),
-            |c: &str| !c.is_empty() && is_alphabetic(c.chars().next().expect("not empty") as u8),
-        )
-        .and(opt(delimited(
-            char('['),
-            take_while(|c| c != ']'),
-            char(']'),
-        )))
-        .map(|(lit, css)| match css {
-            Some(css) => Subject::Literal(Literal {
-                cmd: lit,
-                value: Some(SubjectValue::Css(css)),
-                span: None,
-                full: s,
-            }),
-            None => {
-                let (a, b) = lit
-                    .rfind('-')
-                    .map(|idx| (&lit[0..idx], &lit[idx + 1..lit.len()]))
-                    .map(|(a, b)| (a, Some(b)))
-                    .unwrap_or((lit, None));
-                Subject::Literal(Literal {
-                    cmd: a,
-                    value: b.map(|b| SubjectValue::Value(b)),
-                    span: None,
-                    full: s,
-                })
-            }
-        });
+    pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
+        let x = take_while(|c| is_alphanumeric(c as u8) || ['-', '.', '/'].contains(&c));
+        let y = |c: &NomSpan<'a>| {
+            !c.is_empty() && is_alphabetic(c.chars().next().expect("not empty") as u8)
+        };
+        let literal = verify(x, y);
+
+        let literal = literal
+            .and(opt(delimited(
+                char('['),
+                take_while(|c| c != ']'),
+                char(']'),
+            )))
+            .map(|(span, span2_opt): (NomSpan, _)| match span2_opt {
+                Some(span2) => Subject::Literal(Literal {
+                    cmd: &s[..span2.len()],
+                    value: Some(SubjectValue::Css(*span2)),
+                    span: Some(
+                        s.extra
+                            .with_lo(s.extra.lo() + BytePos(s.location_offset() as u32 + 2))
+                            .with_hi(s.extra.lo() + BytePos(span2.location_offset() as u32 + 1)),
+                    ),
+                }),
+                None => {
+                    let (a, b) = span
+                        .rfind('-')
+                        .map(|idx| (&span[0..idx], &span[idx + 1..span.len()]))
+                        .map(|(a, b)| (a, Some(b)))
+                        .unwrap_or((*span, None));
+                    Subject::Literal(Literal {
+                        cmd: &s[..span.len()],
+                        value: b.map(|b| SubjectValue::Value(b)),
+                        span: Some(
+                            s.extra
+                                .with_lo(s.extra.lo() + BytePos(s.location_offset() as u32 + 2))
+                                .with_hi(s.extra.lo() + BytePos(span.location_offset() as u32 + 1)),
+                        ),
+                    })
+                }
+            });
         let group = delimited(char('('), Directive::parse_inner, char(')')).map(Subject::Group);
         alt((literal, group))(s)
     }
@@ -137,13 +153,16 @@ mod test {
 
     use super::Directive;
 
+    use nom_locate::LocatedSpan;
+    use swc_core::common::DUMMY_SP;
     use test_case::test_case;
 
     #[test]
     fn directive() -> anyhow::Result<()> {
-        let (rest, d) = Directive::parse(
+        let (rest, d) = Directive::parse(LocatedSpan::new_extra(
             "-h-4 md:bg-blue text-white! hover:(text-blue bg-white lg:text-black!)",
-        )?;
+            DUMMY_SP,
+        ))?;
 
         println!("{:#?}", d);
 
@@ -160,7 +179,7 @@ mod test {
     #[test_case("relative z-10 m-auto w-3/4" ; "when a statement as /")]
     #[test_case("mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8" ; "random prefixes")]
     fn parse_tests(s: &str) {
-        Directive::parse(s).unwrap();
+        Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
     }
 
     #[should_panic]
@@ -169,7 +188,7 @@ mod test {
     #[test_case("m0d:sub" ; "when modifier has a number")]
     #[test_case("()" ; "rejects empty group")]
     fn parse_failure_tests(s: &str) {
-        let (rest, d) = Directive::parse(s).unwrap();
+        let (rest, d) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
         println!("rest: {}, d: {:?}", rest, d);
     }
 }
