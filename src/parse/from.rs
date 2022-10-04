@@ -13,6 +13,7 @@ use swc_core::plugin::errors::HANDLER;
 use crate::config::Screens;
 use crate::config::TailwindConfig;
 use crate::util::merge_literals;
+use crate::STRICT;
 
 use super::literal::parse_literal;
 use super::nom::Directive;
@@ -38,13 +39,20 @@ pub fn literal_from_exp<'a>(span: Span, val: Expression<'a>, config: &TailwindCo
     let mut object: ObjectLit = match literal_from_subject(span, val.subject, config) {
         Ok(object) => object,
         Err(text) => {
-            HANDLER.with(|handler| {
-                handler
-                    .struct_span_err(
+            HANDLER.with(|h| {
+                if STRICT.get().copied().unwrap_or_default() {
+                    h.struct_span_err(
                         val.span.unwrap_or(span),
                         &format!("unknown subject `{}`", text),
                     )
                     .emit()
+                } else {
+                    h.struct_span_warn(
+                        val.span.unwrap_or(span),
+                        &format!("unknown subject `{}`", text),
+                    )
+                    .emit()
+                }
             });
             return ObjectLit {
                 span: DUMMY_SP,
@@ -147,8 +155,13 @@ pub fn literal_from_exp<'a>(span: Span, val: Expression<'a>, config: &TailwindCo
                 "group-hover" => ".group:hover &",
                 x => {
                     HANDLER.with(|h| {
-                        h.struct_span_err(span, &format!("unknown modifier `{}`", x))
-                            .emit()
+                        if STRICT.get().copied().unwrap_or_default() {
+                            h.struct_span_err(span, &format!("unknown modifier `{}`", x))
+                                .emit()
+                        } else {
+                            h.struct_span_warn(span, &format!("unknown modifier `{}`", x))
+                                .emit()
+                        }
                     });
                     continue;
                 }

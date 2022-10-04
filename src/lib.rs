@@ -11,6 +11,7 @@ mod util;
 
 use config::TailwindConfig;
 use nom_locate::LocatedSpan;
+use once_cell::sync::OnceCell;
 use swc_core::{
     common::{util::take::Take, Span, DUMMY_SP},
     ecma::{
@@ -44,6 +45,8 @@ impl<'a> TransformVisitor<'a> {
         }
     }
 }
+
+static STRICT: OnceCell<bool> = OnceCell::new();
 
 /**
  * Implement necessary visit_mut_* methods for actual custom transform.
@@ -255,6 +258,10 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
 
     let deser = &mut serde_json::Deserializer::from_str(&config);
     let config: Result<AppConfig, _> = serde_path_to_error::deserialize(deser);
+
+    if let Ok(c) = &config {
+        STRICT.set(c.strict).expect("failed to set strict mode");
+    }
 
     match config {
         Ok(config) => program.fold_with(&mut as_folder(TransformVisitor::new(config.config))),

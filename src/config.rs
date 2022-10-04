@@ -6,6 +6,10 @@ use serde::Deserialize;
 pub struct AppConfig<'a> {
     #[serde(borrow)]
     pub config: TailwindConfig<'a>,
+
+    /// Strict mode throws an error when an unknown class is used.
+    #[serde(default)]
+    pub strict: bool,
 }
 
 #[derive(Deserialize, Debug)]
