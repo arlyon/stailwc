@@ -71,7 +71,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 expr: JSXExpr::Expr(box Expr::Lit(Lit::Str(Str{span, value, ..}))),
                 ..
             })) => {
-                let d = match Directive::parse(LocatedSpan::new_extra(&*value, *span)) {
+                let d = match Directive::parse(LocatedSpan::new_extra(value, *span)) {
                     Ok((_, d)) => d,
                     Err(e) => {
                         HANDLER.with(|h| {
@@ -210,7 +210,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
             }
         };
 
-        let d = match Directive::parse(LocatedSpan::new_extra(&*text, *span)) {
+        let d = match Directive::parse(LocatedSpan::new_extra(text, *span)) {
             Ok((_, d)) => d,
             Err(e) => {
                 HANDLER.with(|h| {

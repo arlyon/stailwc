@@ -18,7 +18,7 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         plugin::text_decoration,
     ];
 
-    if let None = lit.value {
+    if lit.value.is_none() {
         if let Some(r) = root_plugins.iter().find_map(|p| p(lit.cmd, theme)) {
             return Ok(r);
         }

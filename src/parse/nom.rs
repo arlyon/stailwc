@@ -89,14 +89,15 @@ pub enum Subject<'a> {
 }
 
 /// The core 'rule' of a tailwind directive.
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct Literal<'a> {
     pub cmd: &'a str,
     pub value: Option<SubjectValue<'a>>,
     pub span: Option<Span>,
+    pub full: &'a str,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum SubjectValue<'a> {
     Value(&'a str),
     Css(&'a str),
@@ -118,28 +119,30 @@ impl<'a> Subject<'a> {
             )))
             .map(|(span, span2_opt): (NomSpan, _)| match span2_opt {
                 Some(span2) => Subject::Literal(Literal {
-                    cmd: &s[..span2.len()],
-                    value: Some(SubjectValue::Css(*span2)),
+                    cmd: &span,
+                    value: Some(SubjectValue::Css(&span2)),
                     span: Some(
                         s.extra
                             .with_lo(s.extra.lo() + BytePos(s.location_offset() as u32 + 2))
                             .with_hi(s.extra.lo() + BytePos(span2.location_offset() as u32 + 1)),
                     ),
+                    full: &s[..span2.len()],
                 }),
                 None => {
-                    let (a, b) = span
+                    let (cmd, b) = span
                         .rfind('-')
                         .map(|idx| (&span[0..idx], &span[idx + 1..span.len()]))
                         .map(|(a, b)| (a, Some(b)))
                         .unwrap_or((*span, None));
                     Subject::Literal(Literal {
-                        cmd: &s[..span.len()],
-                        value: b.map(|b| SubjectValue::Value(b)),
+                        cmd,
+                        value: b.map(SubjectValue::Value),
                         span: Some(
                             s.extra
                                 .with_lo(s.extra.lo() + BytePos(s.location_offset() as u32 + 2))
                                 .with_hi(s.extra.lo() + BytePos(span.location_offset() as u32 + 1)),
                         ),
+                        full: &s[..span.len()],
                     })
                 }
             });
