@@ -92,7 +92,7 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         "mt" => Required(plugin::mt),
         "mb" => Required(plugin::mb),
         "z" => Required(plugin::z),
-        _ => return Err(lit.cmd),
+        _ => return Err(lit.full),
     };
 
     match (plugin, lit.value) {
@@ -101,5 +101,5 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         (Optional(p), None) => p(None, theme),
         _ => None,
     }
-    .ok_or(lit.cmd)
+    .ok_or(lit.full)
 }
