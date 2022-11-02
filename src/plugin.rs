@@ -97,6 +97,11 @@ lookup_plugin!(gap, gap, "gap");
 lookup_plugin!(cursor, cursor, "cursor");
 lookup_plugin!(scale, scale, "transform", |v| format!("scale({})", v));
 
+lookup_plugin!(min_w, min_width, "minWidth");
+lookup_plugin!(max_w, max_width, "maxWidth");
+lookup_plugin!(min_h, min_height, "minHeight");
+lookup_plugin!(max_h, max_height, "maxHeight");
+
 pub fn rounded(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
     match rest.map(|r| {
         r.split_once('-')
@@ -229,22 +234,6 @@ pub fn space(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
             value: Box::new(Expr::Object(lit)),
         })))],
     })
-}
-
-pub fn min(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    match rest.split_once('-') {
-        Some(("h", rest)) => simple_lookup(&theme.min_height, rest, "minHeight"),
-        Some(("w", rest)) => simple_lookup(&theme.min_width, rest, "minWidth"),
-        _ => None,
-    }
-}
-
-pub fn max(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    match rest.split_once('-') {
-        Some(("h", rest)) => simple_lookup(&theme.max_height, rest, "maxHeight"),
-        Some(("w", rest)) => simple_lookup(&theme.max_width, rest, "maxWidth"),
-        _ => None,
-    }
 }
 
 pub fn text_transform(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {

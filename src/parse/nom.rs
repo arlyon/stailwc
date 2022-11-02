@@ -1,5 +1,5 @@
 use nom::branch::alt;
-use nom::bytes::complete::take_while;
+use nom::bytes::complete::{tag, take_while};
 use nom::character::complete::{char, space0};
 use nom::character::{is_alphabetic, is_alphanumeric};
 use nom::combinator::{eof, opt, verify};
@@ -8,6 +8,7 @@ use nom::sequence::{delimited, terminated};
 use nom::{IResult, Parser};
 use nom_locate::LocatedSpan;
 use swc_core::common::{BytePos, Span};
+use tailwind_parse::Plugin;
 
 type NomSpan<'a> = LocatedSpan<&'a str, Span>;
 
@@ -91,7 +92,7 @@ pub enum Subject<'a> {
 /// The core 'rule' of a tailwind directive.
 #[derive(Debug, PartialEq, Eq)]
 pub struct Literal<'a> {
-    pub cmd: &'a str,
+    pub cmd: Plugin,
     pub value: Option<SubjectValue<'a>>,
     pub span: Option<Span>,
     pub full: &'a str,
@@ -105,48 +106,38 @@ pub enum SubjectValue<'a> {
 
 impl<'a> Subject<'a> {
     pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
-        let x = take_while(|c| is_alphanumeric(c as u8) || ['-', '.', '/'].contains(&c));
-        let y = |c: &NomSpan<'a>| {
-            !c.is_empty() && is_alphabetic(c.chars().next().expect("not empty") as u8)
-        };
-        let literal = verify(x, y);
+        let plugin = Plugin::parse;
+        let value = verify(
+            take_while(|c| is_alphanumeric(c as u8) || c == '-' || c == '.' || c == '/'),
+            |s: &NomSpan<'a>| (*s).len() > 0,
+        )
+        .map(|val: NomSpan<'a>| (val, SubjectValue::Value(*val)));
+        let css = delimited(char('['), take_while(|c| c != ']'), char(']'))
+            .map(|css: NomSpan<'a>| (css, SubjectValue::Css(*css)));
 
-        let literal = literal
-            .and(opt(delimited(
-                char('['),
-                take_while(|c| c != ']'),
-                char(']'),
-            )))
-            .map(|(span, span2_opt): (NomSpan, _)| match span2_opt {
-                Some(span2) => Subject::Literal(Literal {
-                    cmd: &span,
-                    value: Some(SubjectValue::Css(&span2)),
+        let subject_value = opt(alt((value, css)));
+
+        let group = delimited(char('('), Directive::parse_inner, char(')')).map(Subject::Group);
+        let literal = terminated(plugin, tag("-"))
+            .and(subject_value)
+            .map(|(cmd, value)| {
+                let (span, value) = value.unzip();
+                Subject::Literal(Literal {
+                    cmd,
+                    value,
                     span: Some(
                         s.extra
-                            .with_lo(s.extra.lo() + BytePos(s.location_offset() as u32 + 2))
-                            .with_hi(s.extra.lo() + BytePos(span2.location_offset() as u32 + 1)),
+                            .with_lo(s.extra.lo() + BytePos(s.location_offset() as u32))
+                            .with_hi(
+                                s.extra.lo()
+                                    + BytePos(
+                                        span.map(|s| s.location_offset() as u32).unwrap_or(0),
+                                    ),
+                            ),
                     ),
-                    full: &s[..span2.len()],
-                }),
-                None => {
-                    let (cmd, b) = span
-                        .rfind('-')
-                        .map(|idx| (&span[0..idx], &span[idx + 1..span.len()]))
-                        .map(|(a, b)| (a, Some(b)))
-                        .unwrap_or((*span, None));
-                    Subject::Literal(Literal {
-                        cmd,
-                        value: b.map(SubjectValue::Value),
-                        span: Some(
-                            s.extra
-                                .with_lo(s.extra.lo() + BytePos(s.location_offset() as u32 + 2))
-                                .with_hi(s.extra.lo() + BytePos(span.location_offset() as u32 + 1)),
-                        ),
-                        full: &s[..span.len()],
-                    })
-                }
+                    full: &s[..],
+                })
             });
-        let group = delimited(char('('), Directive::parse_inner, char(')')).map(Subject::Group);
         alt((literal, group))(s)
     }
 }
@@ -154,10 +145,11 @@ impl<'a> Subject<'a> {
 #[cfg(test)]
 mod test {
 
-    use super::Directive;
+    use super::{Directive, Subject, SubjectValue};
 
     use nom_locate::LocatedSpan;
     use swc_core::common::DUMMY_SP;
+    use tailwind_parse::{Border, Plugin, Position};
     use test_case::test_case;
 
     #[test]
@@ -174,21 +166,33 @@ mod test {
         Ok(())
     }
 
-    #[test_case(" should handle  spacing " ; "when a statement has irregular gaps")]
-    #[test_case("dash-modifier:call" ; "when a modifier has a dash in it")]
-    #[test_case("pl-3.5" ; "when a subject has a . in it")]
-    #[test_case("grid-cols-[repeat(6,1fr)]" ; "when braces are in arbitrary css")]
-    #[test_case("grid-cols-[min-content min-content]" ; "when spaces are in arbitrary css")]
-    #[test_case("relative z-10 m-auto w-3/4" ; "when a statement as /")]
+    #[test_case("relative", Plugin::Position(Position::Relative), None ; "when a subject has no value")]
+    #[test_case("pl-3.5", Plugin::Pl, Some(SubjectValue::Value("3.5")) ; "when a subject has a . in it")]
+    #[test_case("border-b-4", Plugin::Border(Some(Border::B)), Some(SubjectValue::Value("4")) ; "dash in plugin")]
+    #[test_case("w-3/4", Plugin::W, Some(SubjectValue::Value("3/4")) ; "when a statement has /")]
+    #[test_case("border-[10px]", Plugin::Border(None), Some(SubjectValue::Css("10px")) ; "arbitrary css")]
+    #[test_case("border-[repeat(6,1fr)]", Plugin::Border(None), Some(SubjectValue::Css("repeat(6,1fr)")) ; "when braces are in arbitrary css")]
+    #[test_case("border-[min-content min-content]", Plugin::Border(None), Some(SubjectValue::Css("min-content min-content")) ; "when spaces are in arbitrary css")]
+    fn plugin_tests(s: &str, p: Plugin, v: Option<SubjectValue>) {
+        let (_, s) = Subject::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
+        let lit = match s {
+            Subject::Literal(l) => l,
+            _ => panic!("should be a group"),
+        };
+        assert_eq!(lit.cmd, p, "correct plugin");
+        assert_eq!(lit.value, v, "correct value");
+    }
+
+    #[test_case(" text-lg b-4  p-4 " ; "when a statement has irregular gaps")]
+    #[test_case("dash-modifier:p-4" ; "when a modifier has a dash in it")]
     #[test_case("mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8" ; "random prefixes")]
     fn parse_tests(s: &str) {
         Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
     }
 
     #[should_panic]
-    #[test_case("-5" ; "when subject does not start with a letter")]
     #[test_case("-mod:sub" ; "when the minus is in the wrong place")]
-    #[test_case("m0d:sub" ; "when modifier has a number")]
+    #[test_case("m0d:p-4" ; "when modifier has a number")]
     #[test_case("()" ; "rejects empty group")]
     fn parse_failure_tests(s: &str) {
         let (rest, d) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();

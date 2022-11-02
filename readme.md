@@ -6,7 +6,7 @@ is to give the same great performance and flexibility while
 performing considerably better than babel-based alternatives
 (about 11x faster in my experience, proper benchmarks coming soon!)
 
-> 🚨 We currently only support NextJS 12.3.1
+> 🚨 We currently only support NextJS 13.0.1
 
 ## Getting started
 
