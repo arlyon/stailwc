@@ -120,6 +120,8 @@ lookup_plugin!(max_w, max_width, "maxWidth");
 lookup_plugin!(min_h, min_height, "minHeight");
 lookup_plugin!(max_h, max_height, "maxHeight");
 
+lookup_plugin!(leading, line_height, "lineHeight");
+
 pub fn rounded(
     subcommand: Option<Rounded>,
     rest: Option<SubjectValue>,

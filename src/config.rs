@@ -127,6 +127,8 @@ pub struct TailwindTheme<'a> {
     pub max_height: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "maxWidth")]
     pub max_width: HashMap<&'a str, &'a str>,
+    #[serde(borrow, alias = "lineHeight")]
+    pub line_height: HashMap<&'a str, &'a str>,
 }
 
 #[derive(Deserialize, Debug)]

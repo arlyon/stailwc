@@ -78,6 +78,7 @@ mod plugin {
         Basis,
         Justify,
         Items,
+        Leading,
         Gap,
         Cursor,
         Scale,

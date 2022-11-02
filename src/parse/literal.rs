@@ -97,6 +97,7 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         Inset(None) => Required(plugin::inset),
         Inset(Some(Inset::X)) => Required(plugin::inset_x),
         Inset(Some(Inset::Y)) => Required(plugin::inset_y),
+        Leading => Required(plugin::leading),
     };
 
     match (plugin, lit.value) {
