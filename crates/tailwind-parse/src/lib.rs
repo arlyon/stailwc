@@ -79,7 +79,7 @@ mod plugin {
         Justify,
         Items,
         Leading,
-        Gap,
+        Gap(Option<Gap>),
         Cursor,
         Scale,
         Box,
@@ -98,6 +98,12 @@ mod plugin {
         Blur,
         Ring,
         Sr,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Gap {
+        X,
+        Y,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

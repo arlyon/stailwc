@@ -10,6 +10,7 @@ enum PluginType {
 }
 
 pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<ObjectLit, &'a str> {
+    use tailwind_parse::Gap;
     use tailwind_parse::Inset;
     use tailwind_parse::Max;
     use tailwind_parse::Min;
@@ -52,7 +53,9 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         Basis => Required(plugin::basis),
         Justify => Required(plugin::justify),
         Items => Required(plugin::items),
-        Gap => Required(plugin::gap),
+        Gap(None) => Required(plugin::gap),
+        Gap(Some(Gap::X)) => Required(plugin::gap_x),
+        Gap(Some(Gap::Y)) => Required(plugin::gap_y),
         Cursor => Required(plugin::cursor),
         Scale => Required(plugin::scale),
         Box => Required(plugin::box_),
