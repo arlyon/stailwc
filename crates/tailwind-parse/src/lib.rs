@@ -1,8 +1,16 @@
+#![feature(let_chains)]
+
 pub use plugin::*;
 
 #[tailwind_parse_macro::parser]
 mod plugin {
-    use nom::{bytes::complete::take_while, combinator::map_res, IResult};
+    use nom::{
+        bytes::complete::{tag, take_while1},
+        combinator::map_res,
+        sequence::{terminated, preceded},
+        IResult,
+        Slice
+    };
     use nom_locate::LocatedSpan;
     use swc_core::common::Span;
 
@@ -23,10 +31,11 @@ mod plugin {
         TextDecoration(TextDecoration),
 
         Border(Option<Border>),
-        H,
-        W,
+        Rounded(Option<Rounded>),
         Min(Min),
         Max(Max),
+        H,
+        W,
         P,
         Px,
         Pl,
@@ -56,7 +65,6 @@ mod plugin {
         Pointer,
         Ease,
         Order,
-        Rounded(Option<Rounded>),
         From,
         To,
         Outline,
@@ -182,23 +190,28 @@ mod plugin {
         pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
             let _max = Plugin::max_dashes();
 
-            let cmd = map_res(take_while(|c| c != '-'), |s: NomSpan<'a>| {
+            let parse_cmd = || take_while1(|c| c != '-' && c != ' ' && c != '[');
+
+            let mut parse_plugin = map_res(parse_cmd(), |s: NomSpan<'a>| {
                 s.parse::<Plugin>()
-            })(s);
+            });
+            
+            let cmd = parse_plugin(s);
+            
+            if let Ok((rest, p)) = cmd && p.has_subcommand(){
+                let max = preceded(tag("-"), parse_cmd())(rest)
+                .map(|(rest, subcmd_span)|{
+                    println!("{:?}, {:?}", s, subcmd_span);
+                    (rest, s.slice(..subcmd_span.location_offset()+subcmd_span.len()-s.location_offset()))} );
+                
+                println!("{:?} SUBCOMMAND NOT SUPPORTED {:?}", p, max);
 
-            // if the command has sub-commands, attempt to parse
-            // if that fails, and the subcommand is optional, keep it,
-            // otherwise return an error
+                if let Ok((rest, Ok(plugin))) = max.map(|(rest, sub)|(rest, sub.parse::<Plugin>())) {
+                    return Ok((rest, plugin));
+                };
+            };
 
-            if cmd
-                .as_ref()
-                .map(|(_, c)| c.has_subcommand())
-                .unwrap_or(false)
-            {
-                println!("NOT SUPPORTED");
-            }
-
-            cmd
+            cmd.map(|(rest, p)| (rest, p))
         }
     }
 }

@@ -43,13 +43,13 @@ pub fn literal_from_exp<'a>(span: Span, val: Expression<'a>, config: &TailwindCo
                 if STRICT.get().copied().unwrap_or_default() {
                     h.struct_span_err(
                         val.span.unwrap_or(span),
-                        &format!("unknown subject `{}`", text),
+                        &format!("unknown subject `{text}`"),
                     )
                     .emit()
                 } else {
                     h.struct_span_warn(
                         val.span.unwrap_or(span),
-                        &format!("unknown subject `{}`", text),
+                        &format!("unknown subject `{text}`"),
                     )
                     .emit()
                 }
@@ -79,7 +79,7 @@ pub fn literal_from_exp<'a>(span: Span, val: Expression<'a>, config: &TailwindCo
 
     for modifier in &val.modifiers {
         let value = match config.theme.screens.get(modifier) {
-            Some(Screens::Min(v)) => format!("@media (min-width: {})", v).into(),
+            Some(Screens::Min(v)) => format!("@media (min-width: {v})").into(),
             _ => match *modifier {
                 "sm" => "@media (min-width: 640px)",
                 "md" => "@media (min-width: 768px)",
@@ -156,10 +156,10 @@ pub fn literal_from_exp<'a>(span: Span, val: Expression<'a>, config: &TailwindCo
                 x => {
                     HANDLER.with(|h| {
                         if STRICT.get().copied().unwrap_or_default() {
-                            h.struct_span_err(span, &format!("unknown modifier `{}`", x))
+                            h.struct_span_err(span, &format!("unknown modifier `{x}`"))
                                 .emit()
                         } else {
-                            h.struct_span_warn(span, &format!("unknown modifier `{}`", x))
+                            h.struct_span_warn(span, &format!("unknown modifier `{x}`"))
                                 .emit()
                         }
                     });

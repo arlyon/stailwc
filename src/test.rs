@@ -1,14 +1,18 @@
 use std::{fs::read_to_string, path::Path};
 
-use cmd_lib::{run_cmd, run_fun};
-use swc_core::ecma::{
-    parser::{Syntax, TsConfig},
-    transforms::testing::{test, test_transform},
-    visit::as_folder,
+use cmd_lib::run_fun;
+use swc_core::{
+    common::errors::{ColorConfig, Handler},
+    ecma::{
+        parser::{Syntax, TsConfig},
+        transforms::testing::{test, test_transform},
+        visit::as_folder,
+    },
+    plugin::errors::HANDLER,
 };
 
 use crate::{
-    config::{AppConfig, Screens, TailwindConfig, TailwindTheme},
+    config::{AppConfig, Screens},
     TransformVisitor,
 };
 
@@ -130,6 +134,15 @@ fn snapshots_inner(path: &str) {
     let input_path = Path::new(path);
     let snapshot_path = Path::new("snapshots/output").join(input_path.file_name().unwrap());
     let snapshot = read_to_string(snapshot_path).unwrap();
+
+    if let Err(e) = HANDLER.inner.set(Handler::with_tty_emitter(
+        ColorConfig::Auto,
+        true,
+        true,
+        None,
+    )) {
+        // set on a previous run
+    }
 
     let tailwind_path = input_path.with_file_name("tailwind.config.js");
     let tailwind_path = if tailwind_path.exists() {

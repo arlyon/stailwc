@@ -69,9 +69,9 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
                     .count()
                     > 0
                 {
-                    subcommands.push(ident.clone());
                     fmt_transparent
                 } else {
+                    subcommands.push(ident.clone());
                     fmt_regular
                 };
 

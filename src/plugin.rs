@@ -2,12 +2,16 @@ use std::collections::HashMap;
 
 use crate::{
     config::TailwindTheme,
+    parse::nom::SubjectValue,
     util::{merge_literals, to_lit},
 };
 use itertools::Itertools;
 use swc_core::{
     common::DUMMY_SP,
     ecma::ast::{Expr, Ident, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str},
+};
+use tailwind_parse::{
+    Border, Display, Position, Rounded, TextDecoration, TextTransform, Visibility,
 };
 
 macro_rules! lookup_plugin {
@@ -66,8 +70,8 @@ lookup_plugin_opt!(transition, transition_property, "transitionProperty");
 lookup_plugin!(delay, transition_delay, "transitionDelay");
 lookup_plugin_opt!(duration, transition_duration, "transitionDuration");
 lookup_plugin_opt!(ease, transition_timing_function, "transitionTimingFunction");
-lookup_plugin_opt!(blur, blur, "filter", |s| format!("blur({})", s));
-lookup_plugin_opt!(invert, invert, "filter", |s| format!("invert({})", s));
+lookup_plugin_opt!(blur, blur, "filter", |s| format!("blur({s})"));
+lookup_plugin_opt!(invert, invert, "filter", |s| format!("invert({s})"));
 lookup_plugin!(basis, flex_basis, "flexBasis");
 lookup_plugin_opt!(grow, flex_grow, "flexGrow");
 lookup_plugin_opt!(shrink, flex_shrink, "flexShrink");
@@ -95,43 +99,40 @@ lookup_plugin!(mb, margin, "marginBottom");
 lookup_plugin!(z, z_index, "zIndex");
 lookup_plugin!(gap, gap, "gap");
 lookup_plugin!(cursor, cursor, "cursor");
-lookup_plugin!(scale, scale, "transform", |v| format!("scale({})", v));
+lookup_plugin!(scale, scale, "transform", |v| format!("scale({v})"));
 
 lookup_plugin!(min_w, min_width, "minWidth");
 lookup_plugin!(max_w, max_width, "maxWidth");
 lookup_plugin!(min_h, min_height, "minHeight");
 lookup_plugin!(max_h, max_height, "maxHeight");
 
-pub fn rounded(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
-    match rest.map(|r| {
-        r.split_once('-')
-            .map(|(a, b)| (a, Some(b)))
-            .unwrap_or((r, None))
-    }) {
-        Some((cmd, rest)) => {
-            let cmds = match cmd {
-                "t" => ("borderTopLeftRadius", Some("borderTopRightRadius")),
-                "b" => ("borderBottomLeftRadius", Some("borderBottomRightRadius")),
-                "l" => ("borderTopLeftRadius", Some("borderBottomLeftRadius")),
-                "r" => ("borderTopRightRadius", Some("borderBottomRightRadius")),
-                "tr" => ("borderTopRightRadius", None),
-                "tl" => ("borderTopLeftRadius", None),
-                "br" => ("borderBottomRightRadius", None),
-                "bl" => ("borderBottomLeftRadius", None),
-                x => return simple_lookup(&theme.border_radius, x, "borderRadius"),
-            };
+pub fn rounded(
+    subcommand: Option<Rounded>,
+    rest: Option<SubjectValue>,
+    theme: &TailwindTheme,
+) -> Option<ObjectLit> {
+    let rest = match rest {
+        Some(SubjectValue::Value(rest)) => rest,
+        None => "DEFAULT",
+        _ => return None,
+    };
 
-            theme
-                .border_radius
-                .get(rest.unwrap_or("DEFAULT"))
-                .map(|lookup| match cmds {
-                    (a, Some(b)) => to_lit(&[(a, lookup), (b, lookup)]),
-                    (a, None) => to_lit(&[(a, lookup)]),
-                })
-        }
-        // rounded
-        None => simple_lookup(&theme.border_radius, "DEFAULT", "borderRadius"),
-    }
+    let cmds = match subcommand {
+        None => return simple_lookup(&theme.border_radius, rest, "borderRadius"),
+        Some(Rounded::T) => ("borderTopLeftRadius", Some("borderTopRightRadius")),
+        Some(Rounded::B) => ("borderBottomLeftRadius", Some("borderBottomRightRadius")),
+        Some(Rounded::L) => ("borderTopLeftRadius", Some("borderBottomLeftRadius")),
+        Some(Rounded::R) => ("borderTopRightRadius", Some("borderBottomRightRadius")),
+        Some(Rounded::Tr) => ("borderTopRightRadius", None),
+        Some(Rounded::Tl) => ("borderTopLeftRadius", None),
+        Some(Rounded::Br) => ("borderBottomRightRadius", None),
+        Some(Rounded::Bl) => ("borderBottomLeftRadius", None),
+    };
+
+    theme.border_radius.get(rest).map(|lookup| match cmds {
+        (a, Some(b)) => to_lit(&[(a, lookup), (b, lookup)]),
+        (a, None) => to_lit(&[(a, lookup)]),
+    })
 }
 
 pub fn pointer_events(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
@@ -200,11 +201,11 @@ pub fn space(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
                 ("--tw-space-x-reverse", "0"),
                 (
                     "marginRight",
-                    &format!("calc({} * var(--tw-space-x-reverse))", v),
+                    &format!("calc({v} * var(--tw-space-x-reverse))"),
                 ),
                 (
                     "marginLeft",
-                    &format!("calc({} * calc(1 - var(--tw-space-x-reverse)))", v),
+                    &format!("calc({v} * calc(1 - var(--tw-space-x-reverse)))"),
                 ),
             ])
         }),
@@ -213,11 +214,11 @@ pub fn space(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
                 ("--tw-space-y-reverse", "0"),
                 (
                     "marginTop",
-                    &format!("calc({} * calc(1 - var(--tw-space-y-reverse)))", v),
+                    &format!("calc({v} * calc(1 - var(--tw-space-y-reverse)))"),
                 ),
                 (
                     "marginBottom",
-                    &format!("calc({} * var(--tw-space-y-reverse))", v),
+                    &format!("calc({v} * var(--tw-space-y-reverse))"),
                 ),
             ])
         }),
@@ -236,28 +237,34 @@ pub fn space(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     })
 }
 
-pub fn text_transform(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn text_transform(
+    tt: TextTransform,
+    _rest: Option<SubjectValue>,
+    _theme: &TailwindTheme,
+) -> Option<ObjectLit> {
     Some(to_lit(&[(
         "textTransform",
-        match rest {
-            "uppercase" => "uppercase",
-            "lowercase" => "lowercase",
-            "captialize" => "capitalize",
-            "normal-case" => "none",
-            _ => return None,
+        match tt {
+            TextTransform::Uppercase => "uppercase",
+            TextTransform::Lowercase => "lowercase",
+            TextTransform::Capitalize => "capitalize",
+            TextTransform::NormalCase => "none",
         },
     )]))
 }
 
-pub fn text_decoration(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn text_decoration(
+    td: TextDecoration,
+    _rest: Option<SubjectValue>,
+    _theme: &TailwindTheme,
+) -> Option<ObjectLit> {
     Some(to_lit(&[(
         "textDecorationLine",
-        match rest {
-            "underline" => "underline",
-            "overline" => "overline",
-            "line-through" => "line-through",
-            "no-underline" => "none",
-            _ => return None,
+        match td {
+            TextDecoration::Underline => "underline",
+            TextDecoration::Overline => "overline",
+            TextDecoration::LineThrough => "line-through",
+            TextDecoration::NoUnderline => "none",
         },
     )]))
 }
@@ -319,36 +326,31 @@ pub fn shadow(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
         })
 }
 
-pub fn border(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
-    rest.and_then(|rest| simple_lookup(&theme.colors, rest, "borderColor"))
-        .or_else(|| {
-            simple_lookup(
-                &theme.border_width,
-                rest.unwrap_or("DEFAULT"),
-                "borderWidth",
-            )
-        })
-        .or_else(|| {
-            rest.map(|r| match r.split_once('-') {
-                Some((a, b)) => (a, Some(b)),
-                _ => (r, None),
-            })
-            .and_then(|(def, rest)| {
-                Some((
-                    match def {
-                        "x" => border_x as fn(_, _) -> _,
-                        "y" => border_y as fn(_, _) -> _,
-                        "t" => border_t as fn(_, _) -> _,
-                        "b" => border_b as fn(_, _) -> _,
-                        "l" => border_l as fn(_, _) -> _,
-                        "r" => border_r as fn(_, _) -> _,
-                        _ => return None,
-                    },
-                    rest,
-                ))
-            })
-            .and_then(|(fun, rest)| fun(rest, theme))
-        })
+pub fn border(
+    subcommand: Option<Border>,
+    rest: Option<SubjectValue>,
+    theme: &TailwindTheme,
+) -> Option<ObjectLit> {
+    let rest = match rest {
+        Some(SubjectValue::Value(rest)) => rest,
+        None => "DEFAULT",
+        _ => return None,
+    };
+
+    let func = match subcommand {
+        None => {
+            return simple_lookup(&theme.colors, rest, "borderColor")
+                .or_else(|| simple_lookup(&theme.border_width, rest, "borderWidth"))
+        }
+        Some(Border::X) => border_x,
+        Some(Border::Y) => border_y,
+        Some(Border::T) => border_t,
+        Some(Border::B) => border_b,
+        Some(Border::L) => border_l,
+        Some(Border::R) => border_r,
+    };
+
+    func(Some(rest), theme)
 }
 
 lookup_plugin_opt!(border_t, border_width, "borderTopWidth");
@@ -411,11 +413,11 @@ pub fn divide(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
                 ("--tw-divide-x-reverse", "0"),
                 (
                     "borderRightWidth",
-                    &format!("calc({} * var(--tw-divide-x-reverse))", v),
+                    &format!("calc({v} * var(--tw-divide-x-reverse))"),
                 ),
                 (
                     "borderLeftWidth",
-                    &format!("calc({} * calc(1 - var(--tw-divide-x-reverse)))", v),
+                    &format!("calc({v} * calc(1 - var(--tw-divide-x-reverse)))"),
                 ),
             ])
         }),
@@ -425,11 +427,11 @@ pub fn divide(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
                 ("--tw-divide-y-reverse", "0"),
                 (
                     "borderTopWidth",
-                    &format!("calc({} * calc(1 - var(--tw-divide-y-reverse)))", v),
+                    &format!("calc({v} * calc(1 - var(--tw-divide-y-reverse)))"),
                 ),
                 (
                     "borderBottomWidth",
-                    &format!("calc({} * var(--tw-divide-y-reverse))", v),
+                    &format!("calc({v} * var(--tw-divide-y-reverse))"),
                 ),
             ])
         }),
@@ -525,34 +527,34 @@ pub fn transform(rest: Option<&str>, _theme: &TailwindTheme) -> Option<ObjectLit
     })]))
 }
 
-pub fn display(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
-    [
-        "block",
-        "inline-block",
-        "inline",
-        "flex",
-        "inline-flex",
-        "table",
-        "inline-table",
-        "table-caption",
-        "table-cell",
-        "table-column",
-        "table-column-group",
-        "table-footer-group",
-        "table-header-group",
-        "table-row-group",
-        "table-row",
-        "flow-root",
-        "grid",
-        "inline-grid",
-        "contents",
-        "list-item",
-        "hidden",
-    ]
-    .contains(&rest)
-    .then_some(to_lit(&[(
+pub fn display(
+    d: Display,
+    _rest: Option<SubjectValue>,
+    _theme: &TailwindTheme,
+) -> Option<ObjectLit> {
+    Some(to_lit(&[(
         "display",
-        if rest == "hidden" { "none" } else { rest },
+        match d {
+            Display::Block => "block",
+            Display::InlineBlock => "inline-block",
+            Display::Inline => "inline",
+            Display::InlineFlex => "inline-fled",
+            Display::Table => "table",
+            Display::InlineTable => "inline-table",
+            Display::TableCaption => "table-caption",
+            Display::TableCell => "table-cell",
+            Display::TableColumn => "table-column",
+            Display::TableColumnGroup => "table-column-group",
+            Display::TableFooterGroup => "table-footer-group",
+            Display::TableHeaderGroup => "table-header-group",
+            Display::TableRowGroup => "table-row-group",
+            Display::TableRow => "table-row",
+            Display::FlowRoot => "flow-root",
+            Display::InlineGrid => "inline-grid",
+            Display::Contents => "contents",
+            Display::ListItem => "list-item",
+            Display::Hidden => "none",
+        },
     )]))
 }
 
@@ -589,19 +591,35 @@ pub fn overflow(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
         })
 }
 
-pub fn position(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
-    ["static", "fixed", "absolute", "relative", "sticky"]
-        .contains(&rest)
-        .then_some(to_lit(&[("position", rest)]))
+pub fn position(
+    p: Position,
+    _rest: Option<SubjectValue>,
+    _theme: &TailwindTheme,
+) -> Option<ObjectLit> {
+    Some(to_lit(&[(
+        "position",
+        match p {
+            Position::Static => "static",
+            Position::Fixed => "fixed",
+            Position::Absolute => "absolute",
+            Position::Relative => "relative",
+            Position::Sticky => "sticky",
+        },
+    )]))
 }
 
-pub fn visibility(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
-    match rest {
-        "visible" => Some("visible"),
-        "invisible" => Some("hidden"),
-        _ => None,
-    }
-    .map(|v| to_lit(&[("visibility", v)]))
+pub fn visibility(
+    v: Visibility,
+    _rest: Option<SubjectValue>,
+    _theme: &TailwindTheme,
+) -> Option<ObjectLit> {
+    Some(to_lit(&[(
+        "visibility",
+        match v {
+            Visibility::Visible => "visible",
+            Visibility::Invisible => "hidden",
+        },
+    )]))
 }
 
 pub fn translate(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {

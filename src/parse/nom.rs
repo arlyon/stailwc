@@ -4,7 +4,7 @@ use nom::character::complete::{char, space0};
 use nom::character::{is_alphabetic, is_alphanumeric};
 use nom::combinator::{eof, opt, verify};
 use nom::multi::{many0, many1};
-use nom::sequence::{delimited, terminated};
+use nom::sequence::{delimited, preceded, terminated};
 use nom::{IResult, Parser};
 use nom_locate::LocatedSpan;
 use swc_core::common::{BytePos, Span};
@@ -115,29 +115,25 @@ impl<'a> Subject<'a> {
         let css = delimited(char('['), take_while(|c| c != ']'), char(']'))
             .map(|css: NomSpan<'a>| (css, SubjectValue::Css(*css)));
 
-        let subject_value = opt(alt((value, css)));
+        let subject_value = opt(preceded(tag("-"), alt((value, css))));
 
         let group = delimited(char('('), Directive::parse_inner, char(')')).map(Subject::Group);
-        let literal = terminated(plugin, tag("-"))
-            .and(subject_value)
-            .map(|(cmd, value)| {
-                let (span, value) = value.unzip();
-                Subject::Literal(Literal {
-                    cmd,
-                    value,
-                    span: Some(
-                        s.extra
-                            .with_lo(s.extra.lo() + BytePos(s.location_offset() as u32))
-                            .with_hi(
-                                s.extra.lo()
-                                    + BytePos(
-                                        span.map(|s| s.location_offset() as u32).unwrap_or(0),
-                                    ),
-                            ),
-                    ),
-                    full: &s[..],
-                })
-            });
+        let literal = plugin.and(subject_value).map(|(cmd, value)| {
+            let (span, value) = value.unzip();
+            Subject::Literal(Literal {
+                cmd,
+                value,
+                span: Some(
+                    s.extra
+                        .with_lo(s.extra.lo() + BytePos(s.location_offset() as u32))
+                        .with_hi(
+                            s.extra.lo()
+                                + BytePos(span.map(|s| s.location_offset() as u32).unwrap_or(0)),
+                        ),
+                ),
+                full: &s[..],
+            })
+        });
         alt((literal, group))(s)
     }
 }
@@ -167,8 +163,10 @@ mod test {
     }
 
     #[test_case("relative", Plugin::Position(Position::Relative), None ; "when a subject has no value")]
-    #[test_case("pl-3.5", Plugin::Pl, Some(SubjectValue::Value("3.5")) ; "when a subject has a . in it")]
+    #[test_case("pl-3.5", Plugin::Pl, Some(SubjectValue::Value("3.5")) ; "when a subject has a dot in it")]
+    #[test_case("text-red-500", Plugin::Text, Some(SubjectValue::Value("red-500")) ; "when a subject has a dash in it")]
     #[test_case("border-b-4", Plugin::Border(Some(Border::B)), Some(SubjectValue::Value("4")) ; "dash in plugin")]
+    #[test_case("border-4", Plugin::Border(None), Some(SubjectValue::Value("4")) ; "empty plugin subcommand")]
     #[test_case("w-3/4", Plugin::W, Some(SubjectValue::Value("3/4")) ; "when a statement has /")]
     #[test_case("border-[10px]", Plugin::Border(None), Some(SubjectValue::Css("10px")) ; "arbitrary css")]
     #[test_case("border-[repeat(6,1fr)]", Plugin::Border(None), Some(SubjectValue::Css("repeat(6,1fr)")) ; "when braces are in arbitrary css")]
@@ -183,10 +181,12 @@ mod test {
         assert_eq!(lit.value, v, "correct value");
     }
 
-    #[test_case(" text-lg b-4  p-4 " ; "when a statement has irregular gaps")]
+    #[test_case("text-lg p-4" ; "basic")]
+    #[test_case("border-b-4 p-4" ; "with subcommand")]
+    #[test_case("   p-4    border-4" ; "when a statement has irregular gaps")]
     #[test_case("dash-modifier:p-4" ; "when a modifier has a dash in it")]
     #[test_case("mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8" ; "random prefixes")]
-    fn parse_tests(s: &str) {
+    fn directive_tests(s: &str) {
         Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
     }
 

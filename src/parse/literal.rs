@@ -14,7 +14,18 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
     use tailwind_parse::Min;
     use tailwind_parse::Plugin::*;
     use PluginType::*;
+
     let plugin = match lit.cmd {
+        // stateful plugins require some arg from their subject
+        Border(b) => return plugin::border(b, lit.value, theme).ok_or(lit.full),
+        Rounded(r) => return plugin::rounded(r, lit.value, theme).ok_or(lit.full),
+        Position(p) => return plugin::position(p, lit.value, theme).ok_or(lit.full),
+        Visibility(v) => return plugin::visibility(v, lit.value, theme).ok_or(lit.full),
+        Display(d) => return plugin::display(d, lit.value, theme).ok_or(lit.full),
+        TextTransform(tt) => return plugin::text_transform(tt, lit.value, theme).ok_or(lit.full),
+        TextDecoration(td) => return plugin::text_decoration(td, lit.value, theme).ok_or(lit.full),
+
+        // all other plugins
         Text => Required(plugin::text),
         Font => Required(plugin::font),
         Shadow => Required(plugin::shadow),
@@ -28,8 +39,6 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         Pointer => Required(plugin::pointer_events),
         Ease => Optional(plugin::ease),
         Order => Required(plugin::order),
-        Border(_) => Optional(plugin::border),
-        Rounded(_) => Optional(plugin::rounded),
         From => Required(plugin::from),
         To => Required(plugin::to),
         Outline => Optional(plugin::outline),
@@ -83,16 +92,11 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         Min(Min::W) => Required(plugin::min_w),
         Max(Max::H) => Required(plugin::max_h),
         Max(Max::W) => Required(plugin::max_w),
-        Position(_) => todo!(),
-        Visibility(_) => todo!(),
-        Display(_) => todo!(),
-        TextTransform(_) => todo!(),
-        TextDecoration(_) => todo!(),
     };
 
     match (plugin, lit.value) {
-        (Required(p), Some(SubjectValue::Value(s))) => p(s, theme),
-        (Optional(p), Some(SubjectValue::Value(s))) => p(Some(s), theme),
+        (Required(p), Some(SubjectValue::Value(s) | SubjectValue::Css(s))) => p(s, theme),
+        (Optional(p), Some(SubjectValue::Value(s) | SubjectValue::Css(s))) => p(Some(s), theme),
         (Optional(p), None) => p(None, theme),
         _ => None,
     }
