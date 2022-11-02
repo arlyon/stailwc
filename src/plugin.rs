@@ -79,6 +79,7 @@ lookup_plugin!(top, spacing, "top");
 lookup_plugin!(opacity, opacity, "opacity");
 lookup_plugin!(order, order, "order");
 lookup_plugin!(bottom, spacing, "bottom");
+lookup_plugin!(fill, colors, "fill");
 lookup_plugin!(left, spacing, "left");
 lookup_plugin!(right, spacing, "right");
 lookup_plugin!(tracking, letter_spacing, "letterSpacing");

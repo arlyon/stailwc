@@ -92,6 +92,7 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         Min(Min::W) => Required(plugin::min_w),
         Max(Max::H) => Required(plugin::max_h),
         Max(Max::W) => Required(plugin::max_w),
+        Fill => Required(plugin::fill),
     };
 
     match (plugin, lit.value) {
