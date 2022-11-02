@@ -145,7 +145,7 @@ mod test {
 
     use nom_locate::LocatedSpan;
     use swc_core::common::DUMMY_SP;
-    use tailwind_parse::{Border, Plugin, Position};
+    use tailwind_parse::{Border, Max, Plugin, Position};
     use test_case::test_case;
 
     #[test]
@@ -167,6 +167,7 @@ mod test {
     #[test_case("text-red-500", Plugin::Text, Some(SubjectValue::Value("red-500")) ; "when a subject has a dash in it")]
     #[test_case("border-b-4", Plugin::Border(Some(Border::B)), Some(SubjectValue::Value("4")) ; "dash in plugin")]
     #[test_case("border-4", Plugin::Border(None), Some(SubjectValue::Value("4")) ; "empty plugin subcommand")]
+    #[test_case("max-w-4", Plugin::Max(Max::W), Some(SubjectValue::Value("4")) ; "rootless subcommand")]
     #[test_case("w-3/4", Plugin::W, Some(SubjectValue::Value("3/4")) ; "when a statement has /")]
     #[test_case("border-[10px]", Plugin::Border(None), Some(SubjectValue::Css("10px")) ; "arbitrary css")]
     #[test_case("border-[repeat(6,1fr)]", Plugin::Border(None), Some(SubjectValue::Css("repeat(6,1fr)")) ; "when braces are in arbitrary css")]

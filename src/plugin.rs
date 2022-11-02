@@ -11,7 +11,7 @@ use swc_core::{
     ecma::ast::{Expr, Ident, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str},
 };
 use tailwind_parse::{
-    Border, Display, Position, Rounded, TextDecoration, TextTransform, Visibility,
+    Border, Display, Flex, Position, Rounded, TextDecoration, TextTransform, Visibility,
 };
 
 macro_rules! lookup_plugin {
@@ -387,21 +387,23 @@ pub fn ring(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
     }
 }
 
-pub fn flex(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    match rest {
-        "row" => Some("row"),
-        "row-reverse" => Some("row-reverse"),
-        "col" => Some("column"),
-        "col-reverse" => Some("column-reverse"),
-        _ => None,
-    }
-    .map(|v| to_lit(&[("flexDirection", v)]))
-    .or_else(|| {
-        ["wrap", "wrap-reverse", "nowrap"]
-            .contains(&rest)
-            .then_some(to_lit(&[("flexWrap", rest)]))
-    })
-    .or_else(|| simple_lookup(&theme.flex, rest, "flex"))
+pub fn flex(
+    f: Option<Flex>,
+    _rest: Option<SubjectValue>,
+    _theme: &TailwindTheme,
+) -> Option<ObjectLit> {
+    let rule = match f {
+        Some(Flex::Row) => [("flexDirection", "row")],
+        Some(Flex::RowReverse) => [("flexDirection", "row-reverse")],
+        Some(Flex::Col) => [("flexDirection", "column")],
+        Some(Flex::ColReverse) => [("flexDirection", "column-reverse")],
+        Some(Flex::Wrap) => [("flexWrap", "wrap")],
+        Some(Flex::WrapReverse) => [("flexWrap", "wrap-reverse")],
+        Some(Flex::NoWrap) => [("flexWrap", "nowrap")],
+        None => [("display", "flex")],
+    };
+
+    Some(to_lit(&rule))
 }
 
 pub fn divide(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {

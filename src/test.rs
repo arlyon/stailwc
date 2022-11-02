@@ -138,7 +138,7 @@ fn snapshots_inner(path: &str) {
     if let Err(e) = HANDLER.inner.set(Handler::with_tty_emitter(
         ColorConfig::Auto,
         true,
-        true,
+        false,
         None,
     )) {
         // set on a previous run

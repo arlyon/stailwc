@@ -31,6 +31,7 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
 
     let mut max_dashes = 0;
     let mut subcommands = vec![];
+    let mut subcommands_rootless = vec![];
 
     let x = root
         .variants
@@ -72,6 +73,9 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
                     fmt_transparent
                 } else {
                     subcommands.push(ident.clone());
+                    if optional.is_none() {
+                        subcommands_rootless.push(ident.to_string().to_case(Case::Kebab));
+                    }
                     fmt_regular
                 };
 
@@ -133,6 +137,10 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
                         #(#name::#subcommands(_))|* => true,
                         _ => false
                     }
+                }
+
+                pub fn is_rootless_subcommand(name: &str) -> bool {
+                    [#(#subcommands_rootless),*].contains(&name)
                 }
             }
 

@@ -7,9 +7,8 @@ mod plugin {
     use nom::{
         bytes::complete::{tag, take_while1},
         combinator::map_res,
-        sequence::{terminated, preceded},
-        IResult,
-        Slice
+        sequence::preceded,
+        IResult, Slice,
     };
     use nom_locate::LocatedSpan;
     use swc_core::common::Span;
@@ -54,6 +53,7 @@ mod plugin {
         Text,
         Bg,
         Font,
+        Fill,
         Shadow,
         Transition,
         Placeholder,
@@ -69,7 +69,7 @@ mod plugin {
         To,
         Outline,
         Mix,
-        Flex,
+        Flex(Option<Flex>),
         Grid,
         Col,
         Grow,
@@ -96,6 +96,17 @@ mod plugin {
         Blur,
         Ring,
         Sr,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Flex {
+        Row,
+        Col,
+        RowReverse,
+        ColReverse,
+        Wrap,
+        WrapReverse,
+        NoWrap,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
@@ -187,31 +198,45 @@ mod plugin {
     }
 
     impl<'a> Plugin {
+        /// At a hight level, this algorithm:
+        ///
+        /// 1. attempts to parse a valid plugin from the input
+        /// 2. if it fails, checks to see if the input is a 'rootless subcommand' (ie, one where the command on its own is not valid)
+        /// 3. if there is a subcommand, it attempts to parse the subcommand
+        /// 4. if the subcommand fails to parse, it falls back to the first discovered error
+        ///
         pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
-            let _max = Plugin::max_dashes();
-
             let parse_cmd = || take_while1(|c| c != '-' && c != ' ' && c != '[');
+            let mut parse_plugin = map_res(parse_cmd(), |s: NomSpan<'a>| s.parse::<Plugin>());
 
-            let mut parse_plugin = map_res(parse_cmd(), |s: NomSpan<'a>| {
-                s.parse::<Plugin>()
-            });
-            
+            // step 1
             let cmd = parse_plugin(s);
-            
-            if let Ok((rest, p)) = cmd && p.has_subcommand(){
-                let max = preceded(tag("-"), parse_cmd())(rest)
-                .map(|(rest, subcmd_span)|{
-                    println!("{:?}, {:?}", s, subcmd_span);
-                    (rest, s.slice(..subcmd_span.location_offset()+subcmd_span.len()-s.location_offset()))} );
-                
-                println!("{:?} SUBCOMMAND NOT SUPPORTED {:?}", p, max);
 
-                if let Ok((rest, Ok(plugin))) = max.map(|(rest, sub)|(rest, sub.parse::<Plugin>())) {
-                    return Ok((rest, plugin));
-                };
+            // step 2
+            let rest = if let Ok((rest, p)) = cmd && p.has_subcommand() {
+                rest
+            } else if cmd.is_err() && let Ok((rest, cmd)) = parse_cmd()(s) && Plugin::is_rootless_subcommand(*cmd) {
+                rest
+            } else  {
+                // this is not a subcommand, return early
+                return cmd;
             };
 
-            cmd.map(|(rest, p)| (rest, p))
+            // step 3
+            let max = preceded(tag("-"), parse_cmd())(rest).map(|(rest, subcmd_span)| {
+                (
+                    rest,
+                    s.slice(
+                        ..subcmd_span.location_offset() + subcmd_span.len() - s.location_offset(),
+                    ),
+                )
+            });
+
+            // step 4
+            match max.map(|(rest, sub)| (rest, sub.parse::<Plugin>())) {
+                Ok((rest, Ok(plugin))) => Ok((rest, plugin)),
+                _ => cmd,
+            }
         }
     }
 }
