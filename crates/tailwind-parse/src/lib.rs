@@ -57,6 +57,7 @@ mod plugin {
         Shadow,
         Transition,
         Placeholder,
+        Inset(Option<Inset>),
         Delay,
         Duration,
         Divide,
@@ -96,6 +97,12 @@ mod plugin {
         Blur,
         Ring,
         Sr,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Inset {
+        X,
+        Y,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

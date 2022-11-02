@@ -40,9 +40,22 @@ macro_rules! lookup_plugin_opt {
     };
 }
 
-macro_rules! merge_plugins {
+macro_rules! merge_plugins_opt {
     ($def:ident, $closure_a:expr, $closure_b:expr) => {
         pub fn $def(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
+            match ($closure_a(rest, theme), $closure_b(rest, theme)) {
+                (None, None) => None,
+                (None, Some(a)) => Some(a),
+                (Some(b), None) => Some(b),
+                (Some(a), Some(b)) => Some(merge_literals(a, b)),
+            }
+        }
+    };
+}
+
+macro_rules! merge_plugins {
+    ($def:ident, $closure_a:expr, $closure_b:expr) => {
+        pub fn $def(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
             match ($closure_a(rest, theme), $closure_b(rest, theme)) {
                 (None, None) => None,
                 (None, Some(a)) => Some(a),
@@ -358,8 +371,12 @@ lookup_plugin_opt!(border_t, border_width, "borderTopWidth");
 lookup_plugin_opt!(border_l, border_width, "borderLeftWidth");
 lookup_plugin_opt!(border_r, border_width, "borderRightWidth");
 lookup_plugin_opt!(border_b, border_width, "borderBottomWidth");
-merge_plugins!(border_x, border_l, border_r);
-merge_plugins!(border_y, border_t, border_b);
+merge_plugins_opt!(border_x, border_l, border_r);
+merge_plugins_opt!(border_y, border_t, border_b);
+
+merge_plugins!(inset_x, left, right);
+merge_plugins!(inset_y, top, bottom);
+merge_plugins!(inset, inset_x, inset_y);
 
 pub fn from(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme.colors.get(rest).map(|c| {

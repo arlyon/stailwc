@@ -10,6 +10,7 @@ enum PluginType {
 }
 
 pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<ObjectLit, &'a str> {
+    use tailwind_parse::Inset;
     use tailwind_parse::Max;
     use tailwind_parse::Min;
     use tailwind_parse::Plugin::*;
@@ -93,6 +94,9 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         Max(Max::H) => Required(plugin::max_h),
         Max(Max::W) => Required(plugin::max_w),
         Fill => Required(plugin::fill),
+        Inset(None) => Required(plugin::inset),
+        Inset(Some(Inset::X)) => Required(plugin::inset_x),
+        Inset(Some(Inset::Y)) => Required(plugin::inset_y),
     };
 
     match (plugin, lit.value) {
