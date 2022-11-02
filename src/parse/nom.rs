@@ -104,6 +104,15 @@ pub enum SubjectValue<'a> {
     Css(&'a str),
 }
 
+impl<'a> SubjectValue<'a> {
+    pub fn as_str(&self) -> &str {
+        match self {
+            SubjectValue::Value(s) => s,
+            SubjectValue::Css(s) => s,
+        }
+    }
+}
+
 impl<'a> Subject<'a> {
     pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
         let plugin = Plugin::parse;

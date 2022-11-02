@@ -11,7 +11,7 @@ use swc_core::{
     ecma::ast::{Expr, Ident, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str},
 };
 use tailwind_parse::{
-    Border, Display, Flex, Position, Rounded, TextDecoration, TextTransform, Visibility,
+    Border, Display, Flex, Grid, Position, Rounded, TextDecoration, TextTransform, Visibility,
 };
 
 macro_rules! lookup_plugin {
@@ -468,25 +468,28 @@ pub fn placeholder(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     })
 }
 
-pub fn grid(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    let (cmd, rest) = rest.split_once('-')?;
-    match cmd {
-        "cols" => simple_lookup(&theme.grid_template_columns, rest, "gridTemplateColumns"),
-        "rows" => simple_lookup(&theme.grid_template_rows, rest, "gridTemplateRows"),
-        "flow" => {
-            let x = match rest {
-                "row" => "row",
-                "col" => "column",
-                "dense" => "dense",
-                "row-dense" => "row dense",
-                "col-dense" => "column dense",
-                _ => return None,
-            };
-
-            Some(to_lit(&[("gridAutoFlow", x)]))
+pub fn grid(
+    g: Option<Grid>,
+    rest: Option<SubjectValue>,
+    theme: &TailwindTheme,
+) -> Option<ObjectLit> {
+    let rest = rest.as_ref().map(|s| s.as_str());
+    let pair = match (g, rest) {
+        (Some(Grid::Cols), Some(rest)) => {
+            return simple_lookup(&theme.grid_template_columns, rest, "gridTemplateColumns")
         }
-        _ => None,
-    }
+        (Some(Grid::Rows), Some(rest)) => {
+            return simple_lookup(&theme.grid_template_rows, rest, "gridTemplateRows")
+        }
+        (Some(Grid::FlowRow), None) => [("gridAutoFlow", "row")],
+        (Some(Grid::FlowRowDense), None) => [("gridAutoFlow", "row dense")],
+        (Some(Grid::FlowCol), None) => [("gridAutoFlow", "col")],
+        (Some(Grid::FlowColDense), None) => [("gridAutoFlow", "col dense")],
+        (Some(Grid::FlowDense), None) => [("gridAutoFlow", "dense")],
+        (None, None) => [("display", "grid")],
+        _ => return None,
+    };
+    Some(to_lit(&pair))
 }
 
 pub fn col(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {

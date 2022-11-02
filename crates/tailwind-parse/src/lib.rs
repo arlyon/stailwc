@@ -70,7 +70,7 @@ mod plugin {
         Outline,
         Mix,
         Flex(Option<Flex>),
-        Grid,
+        Grid(Option<Grid>),
         Col,
         Grow,
         Shrink,
@@ -96,6 +96,17 @@ mod plugin {
         Blur,
         Ring,
         Sr,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Grid {
+        Cols,
+        Rows,
+        FlowRow,
+        FlowCol,
+        FlowDense,
+        FlowRowDense,
+        FlowColDense,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

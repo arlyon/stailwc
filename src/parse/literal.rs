@@ -25,6 +25,7 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         TextTransform(tt) => return plugin::text_transform(tt, lit.value, theme).ok_or(lit.full),
         TextDecoration(td) => return plugin::text_decoration(td, lit.value, theme).ok_or(lit.full),
         Flex(f) => return plugin::flex(f, lit.value, theme).ok_or(lit.full),
+        Grid(g) => return plugin::grid(g, lit.value, theme).ok_or(lit.full),
 
         // all other plugins
         Text => Required(plugin::text),
@@ -44,7 +45,6 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         To => Required(plugin::to),
         Outline => Optional(plugin::outline),
         Mix => Required(plugin::mix),
-        Grid => Required(plugin::grid),
         Col => Required(plugin::col),
         Grow => Optional(plugin::grow),
         Shrink => Optional(plugin::shrink),
