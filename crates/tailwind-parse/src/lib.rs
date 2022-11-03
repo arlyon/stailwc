@@ -274,7 +274,7 @@ mod plugin {
         /// 4. if the subcommand fails to parse, it falls back to the first discovered error
         ///
         pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
-            let parse_cmd = || take_while1(|c| c != '-' && c != ' ' && c != '[');
+            let parse_cmd = || take_while1(|c| c != '-' && c != ' ' && c != '[' && c != '!');
             let mut parse_plugin = map_res(parse_cmd(), |s: NomSpan<'a>| s.parse::<Plugin>());
 
             // step 1

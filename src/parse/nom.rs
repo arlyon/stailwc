@@ -150,7 +150,7 @@ impl<'a> Subject<'a> {
 #[cfg(test)]
 mod test {
 
-    use super::{Directive, Subject, SubjectValue};
+    use super::{Directive, Expression, Subject, SubjectValue};
 
     use nom_locate::LocatedSpan;
     use swc_core::common::DUMMY_SP;
@@ -171,6 +171,14 @@ mod test {
         Ok(())
     }
 
+    #[test_case("mx-auto!", true ; "important")]
+    #[test_case("underline!", true ; "important with transparent command")]
+    #[test_case("min-w-4!", true ; "important with rootless command")]
+    fn expression(s: &str, important: bool) {
+        let (_, d) = Expression::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
+        assert_eq!(d.important, important)
+    }
+
     #[test_case("relative", Plugin::Position(Position::Relative), None ; "when a subject has no value")]
     #[test_case("pl-3.5", Plugin::Pl, Some(SubjectValue::Value("3.5")) ; "when a subject has a dot in it")]
     #[test_case("text-red-500", Plugin::Text, Some(SubjectValue::Value("red-500")) ; "when a subject has a dash in it")]
@@ -181,7 +189,7 @@ mod test {
     #[test_case("border-[10px]", Plugin::Border(None), Some(SubjectValue::Css("10px")) ; "arbitrary css")]
     #[test_case("border-[repeat(6,1fr)]", Plugin::Border(None), Some(SubjectValue::Css("repeat(6,1fr)")) ; "when braces are in arbitrary css")]
     #[test_case("border-[min-content min-content]", Plugin::Border(None), Some(SubjectValue::Css("min-content min-content")) ; "when spaces are in arbitrary css")]
-    fn plugin_tests(s: &str, p: Plugin, v: Option<SubjectValue>) {
+    fn plugin(s: &str, p: Plugin, v: Option<SubjectValue>) {
         let (_, s) = Subject::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
         let lit = match s {
             Subject::Literal(l) => l,
