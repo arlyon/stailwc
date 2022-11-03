@@ -120,9 +120,9 @@ impl<'a> Subject<'a> {
             take_while(|c| is_alphanumeric(c as u8) || c == '-' || c == '.' || c == '/'),
             |s: &NomSpan<'a>| (*s).len() > 0,
         )
-        .map(|val: NomSpan<'a>| (val, SubjectValue::Value(*val)));
+        .map(|val: NomSpan<'a>| (val, SubjectValue::Value(&val)));
         let css = delimited(char('['), take_while(|c| c != ']'), char(']'))
-            .map(|css: NomSpan<'a>| (css, SubjectValue::Css(*css)));
+            .map(|css: NomSpan<'a>| (css, SubjectValue::Css(&css)));
 
         let subject_value = opt(preceded(tag("-"), alt((value, css))));
 

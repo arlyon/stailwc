@@ -285,7 +285,7 @@ mod plugin {
             // step 2
             let rest = if let Ok((rest, p)) = cmd && p.has_subcommand() {
                 rest
-            } else if cmd.is_err() && let Ok((rest, cmd)) = parse_cmd()(s) && Plugin::is_rootless_subcommand(*cmd) {
+            } else if cmd.is_err() && let Ok((rest, cmd)) = parse_cmd()(s) && Plugin::is_rootless_subcommand(&cmd) {
                 rest
             } else  {
                 // this is not a subcommand, return early
