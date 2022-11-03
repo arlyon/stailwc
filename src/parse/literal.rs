@@ -36,7 +36,7 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         // all other plugins
         Text => Required(plugin::text),
         Font => Required(plugin::font),
-        Shadow => Required(plugin::shadow),
+        Shadow => Optional(plugin::shadow),
         Transition => Optional(plugin::transition),
         Placeholder => Required(plugin::placeholder),
         Delay => Required(plugin::delay),

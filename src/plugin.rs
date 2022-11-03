@@ -321,10 +321,10 @@ pub fn bg(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
         .or_else(|| simple_lookup(&theme.background_image, rest, "backgroundImage"))
 }
 
-pub fn shadow(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn shadow(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme
         .box_shadow
-        .get(rest)
+        .get(rest.unwrap_or("DEFAULT"))
         .map(|val| {
             to_lit(&[
         ("boxShadow", "var(--tw-shadow)"),
@@ -336,7 +336,7 @@ pub fn shadow(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     ])
         })
         .or_else(|| {
-            theme.colors.get(rest).map(|val| {
+            theme.colors.get(rest.unwrap_or("DEFAULT")).map(|val| {
                 to_lit(&[
                     ("--tw-shadow-color", val),
                     ("--tw-shadow", "var(--tw-shadow-colored)"),
