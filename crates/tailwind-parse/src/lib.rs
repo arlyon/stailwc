@@ -76,6 +76,7 @@ mod plugin {
         Grow,
         Shrink,
         Basis,
+        Object(Object),
         Justify,
         Items,
         Leading,
@@ -104,6 +105,15 @@ mod plugin {
     pub enum Gap {
         X,
         Y,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Object {
+        Contain,
+        Cover,
+        Fill,
+        None,
+        ScaleDown,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

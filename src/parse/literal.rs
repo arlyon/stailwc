@@ -28,6 +28,7 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         TextDecoration(td) => return plugin::text_decoration(td, lit.value, theme).ok_or(lit.full),
         Flex(f) => return plugin::flex(f, lit.value, theme).ok_or(lit.full),
         Grid(g) => return plugin::grid(g, lit.value, theme).ok_or(lit.full),
+        Object(o) => return plugin::object(o, lit.value, theme).ok_or(lit.full),
 
         // all other plugins
         Text => Required(plugin::text),

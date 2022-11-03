@@ -11,7 +11,8 @@ use swc_core::{
     ecma::ast::{Expr, Ident, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str},
 };
 use tailwind_parse::{
-    Border, Display, Flex, Grid, Position, Rounded, TextDecoration, TextTransform, Visibility,
+    Border, Display, Flex, Grid, Object, Position, Rounded, TextDecoration, TextTransform,
+    Visibility,
 };
 
 macro_rules! lookup_plugin {
@@ -511,6 +512,17 @@ pub fn grid(
         _ => return None,
     };
     Some(to_lit(&pair))
+}
+
+pub fn object(o: Object, _rest: Option<SubjectValue>, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    let rule = match o {
+        Object::Contain => [("objectFit", "contain")],
+        Object::Cover => [("objectFit", "cover")],
+        Object::Fill => [("objectFit", "fill")],
+        Object::None => [("objectFit", "none")],
+        Object::ScaleDown => [("objectFit", "scale-down")],
+    };
+    Some(to_lit(&rule))
 }
 
 pub fn col(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
