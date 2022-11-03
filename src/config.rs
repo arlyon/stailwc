@@ -129,6 +129,8 @@ pub struct TailwindTheme<'a> {
     pub max_width: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "lineHeight")]
     pub line_height: HashMap<&'a str, &'a str>,
+    #[serde(borrow, alias = "animation")]
+    pub animation: HashMap<&'a str, &'a str>,
 }
 
 #[derive(Deserialize, Debug)]

@@ -91,6 +91,7 @@ lookup_plugin_opt!(grow, flex_grow, "flexGrow");
 lookup_plugin_opt!(shrink, flex_shrink, "flexShrink");
 lookup_plugin!(top, height, "top");
 lookup_plugin!(opacity, opacity, "opacity");
+lookup_plugin!(animation, animation, "animation");
 lookup_plugin!(order, order, "order");
 lookup_plugin!(bottom, height, "bottom");
 lookup_plugin!(fill, colors, "fill");

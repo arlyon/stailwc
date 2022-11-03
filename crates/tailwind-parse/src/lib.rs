@@ -64,6 +64,7 @@ mod plugin {
         Rotate,
         Appearance,
         Truncate,
+        Animate,
         Pointer,
         Ease,
         Order,
