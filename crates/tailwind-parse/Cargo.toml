@@ -14,3 +14,7 @@ nom_locate = "4.0.0"
 phf = {version = "0.11.1", features = ["macros"]}
 swc_core = {version = "0.40.16", features = ["common"]}
 tailwind-parse-macro = {version = "0.8.0", path = "../tailwind-parse-macro"}
+
+[dev-dependencies]
+anyhow = "1.0.66"
+test-case = "2.2.2"

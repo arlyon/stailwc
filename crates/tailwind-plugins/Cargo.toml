@@ -1,8 +1,12 @@
 [package]
-name = "tailwind-plugins"
-version ="0.8.0"
+description = "Implementations of tailwind plugins for swc"
 edition = "2021"
+license = "MIT OR Apache-2.0"
+name = "tailwind-plugins"
+repository = "https://github.com/arlyon/stailwc"
+version = "0.8.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+tailwind-parse = {version = "0.8.0", path = "../tailwind-parse"}

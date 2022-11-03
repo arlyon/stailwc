@@ -24,9 +24,10 @@ use swc_core::{
     },
     plugin::{errors::HANDLER, plugin_transform, proxies::TransformPluginProgramMetadata},
 };
+use tailwind_parse::Directive;
 
 use crate::config::AppConfig;
-use parse::{from::literal_from_directive, nom::Directive};
+use parse::from::literal_from_directive;
 
 #[derive(Default)]
 pub struct TransformVisitor<'a> {

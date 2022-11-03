@@ -1,8 +1,8 @@
 use swc_core::ecma::ast::ObjectLit;
+use tailwind_parse::Literal;
+use tailwind_parse::SubjectValue;
 
 use crate::{config::TailwindTheme, plugin};
-
-use super::nom::{Literal, SubjectValue};
 
 enum PluginType {
     Required(fn(&str, &TailwindTheme) -> Option<ObjectLit>),

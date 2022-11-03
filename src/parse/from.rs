@@ -9,6 +9,9 @@ use swc_core::ecma::ast::PropName;
 use swc_core::ecma::ast::PropOrSpread;
 use swc_core::ecma::ast::Str;
 use swc_core::plugin::errors::HANDLER;
+use tailwind_parse::Directive;
+use tailwind_parse::Expression;
+use tailwind_parse::Subject;
 
 use crate::config::Screens;
 use crate::config::TailwindConfig;
@@ -16,9 +19,6 @@ use crate::util::merge_literals;
 use crate::STRICT;
 
 use super::literal::parse_literal;
-use super::nom::Directive;
-use super::nom::Expression;
-use super::nom::Subject;
 
 pub fn literal_from_directive<'a>(
     span: Span,
