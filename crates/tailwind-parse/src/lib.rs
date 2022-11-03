@@ -63,6 +63,7 @@ mod plugin {
         Divide(Option<Divide>),
         Rotate,
         Appearance,
+        Truncate,
         Pointer,
         Ease,
         Order,

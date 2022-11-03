@@ -288,6 +288,14 @@ pub fn text_decoration(
     )]))
 }
 
+pub fn truncate(_rest: Option<&str>, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    Some(to_lit(&[
+        ("overflow", "hidden"),
+        ("textOverflow", "ellipsis"),
+        ("whiteSpace", "nowrap"),
+    ]))
+}
+
 pub fn appearance(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     (rest == "none").then_some(to_lit(&[("appearance", "none")]))
 }
