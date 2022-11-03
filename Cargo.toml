@@ -6,7 +6,7 @@ license = "MIT OR Apache-2.0"
 name = "stailwc"
 readme = "readme.md"
 repository = "https://github.com/arlyon/stailwc"
-version = "0.7.2"
+version ="0.8.0"
 
 [lib]
 crate-type = ["cdylib"]
@@ -29,7 +29,7 @@ serde = "1"
 serde_json = "1.0.83"
 serde_path_to_error = "0.1.8"
 swc_core = {version = "=0.40.16", features = ["ecma_visit", "ecma_ast", "plugin_transform"]}
-tailwind-parse = {version = "0.1.0", path = "crates/tailwind-parse"}
+tailwind-parse = {version ="0.8.0", path = "crates/tailwind-parse"}
 tracing = "0.1.36"
 
 [dev-dependencies]

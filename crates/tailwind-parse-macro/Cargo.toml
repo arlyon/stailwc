@@ -1,7 +1,10 @@
 [package]
-name = "tailwind-parse-macro"
-version = "0.1.0"
+description = "Procedural macro for tailwind-parse"
 edition = "2021"
+license = "MIT OR Apache-2.0"
+name = "tailwind-parse-macro"
+repository = "https://github.com/arlyon/stailwc"
+version = "0.8.0"
 
 [lib]
 proc_macro = true
@@ -12,4 +15,4 @@ proc_macro = true
 convert_case = "0.6.0"
 proc-macro2 = "1.0.47"
 quote = "1.0.21"
-syn = { version = "1.0.103", features = ["full"] }
+syn = {version = "1.0.103", features = ["full"]}

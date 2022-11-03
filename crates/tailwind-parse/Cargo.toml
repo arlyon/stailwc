@@ -1,13 +1,16 @@
 [package]
-name = "tailwind-parse"
-version = "0.1.0"
+description = "Parses tailwind directives and yields user-friendly errors"
 edition = "2021"
+license = "MIT OR Apache-2.0"
+name = "tailwind-parse"
+repository = "https://github.com/arlyon/stailwc"
+version = "0.8.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 nom = "7.1.1"
 nom_locate = "4.0.0"
-phf = { version = "0.11.1", features = ["macros"] }
-swc_core = { version = "0.40.16", features = ["common"] }
-tailwind-parse-macro = { version = "0.1.0", path = "../tailwind-parse-macro" }
+phf = {version = "0.11.1", features = ["macros"]}
+swc_core = {version = "0.40.16", features = ["common"]}
+tailwind-parse-macro = {version = "0.8.0", path = "../tailwind-parse-macro"}
