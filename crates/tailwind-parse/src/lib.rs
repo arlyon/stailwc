@@ -66,6 +66,7 @@ mod plugin {
         Pointer,
         Ease,
         Order,
+        Whitespace(Whitespace),
         From,
         To,
         Outline,
@@ -99,6 +100,15 @@ mod plugin {
         Blur,
         Ring,
         Sr,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Whitespace {
+        Normal,
+        Nowrap,
+        Pre,
+        PreLine,
+        PreWrap,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

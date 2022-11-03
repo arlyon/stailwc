@@ -29,6 +29,7 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         Flex(f) => return plugin::flex(f, lit.value, theme).ok_or(lit.full),
         Grid(g) => return plugin::grid(g, lit.value, theme).ok_or(lit.full),
         Object(o) => return plugin::object(o, lit.value, theme).ok_or(lit.full),
+        Whitespace(ws) => return plugin::white_space(ws, lit.value, theme).ok_or(lit.full),
 
         // all other plugins
         Text => Required(plugin::text),

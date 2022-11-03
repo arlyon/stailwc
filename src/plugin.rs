@@ -12,7 +12,7 @@ use swc_core::{
 };
 use tailwind_parse::{
     Border, Display, Flex, Grid, Object, Position, Rounded, TextDecoration, TextTransform,
-    Visibility,
+    Visibility, Whitespace,
 };
 
 macro_rules! lookup_plugin {
@@ -521,6 +521,21 @@ pub fn object(o: Object, _rest: Option<SubjectValue>, _theme: &TailwindTheme) ->
         Object::Fill => [("objectFit", "fill")],
         Object::None => [("objectFit", "none")],
         Object::ScaleDown => [("objectFit", "scale-down")],
+    };
+    Some(to_lit(&rule))
+}
+
+pub fn white_space(
+    o: Whitespace,
+    _rest: Option<SubjectValue>,
+    _theme: &TailwindTheme,
+) -> Option<ObjectLit> {
+    let rule = match o {
+        Whitespace::Normal => [("whiteSpace", "normal")],
+        Whitespace::Nowrap => [("whiteSpace", "nowrap")],
+        Whitespace::Pre => [("whiteSpace", "pre")],
+        Whitespace::PreLine => [("whiteSpace", "pre-line")],
+        Whitespace::PreWrap => [("whiteSpace", "pre-wrap")],
     };
     Some(to_lit(&rule))
 }
