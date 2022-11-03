@@ -1,11 +1,12 @@
 #![feature(drain_filter)]
+#![feature(box_patterns)]
 
 use std::cmp::max;
 
 use convert_case::{Case, Casing};
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::{parse_macro_input, Ident, Item, ItemEnum, ItemMod, Variant};
+use syn::{parse_macro_input, Attribute, Ident, Item, ItemEnum, ItemMod, Variant};
 
 #[proc_macro_attribute]
 pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
@@ -38,7 +39,28 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
         .iter_mut()
         .map(|v| {
             let ident = v.ident.clone();
-            let kebab = v.ident.to_string().to_case(Case::Kebab);
+
+            let kebab = v
+                .attrs
+                .drain_filter(|v| v.path.get_ident().unwrap() == "rename")
+                .next()
+                .and_then(|Attribute { tokens, .. }| {
+                    let paren = syn::parse2::<syn::ExprParen>(tokens);
+                    if let Ok(syn::ExprParen {
+                        expr:
+                            box syn::Expr::Lit(syn::ExprLit {
+                                lit: syn::Lit::Str(lit),
+                                ..
+                            }),
+                        ..
+                    }) = paren
+                    {
+                        Some(lit.value())
+                    } else {
+                        None
+                    }
+                })
+                .unwrap_or_else(|| v.ident.to_string().to_case(Case::Kebab));
 
             if let Some(f) = v.fields.iter().next() {
                 let p = match &f.ty {
@@ -74,7 +96,7 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
                 } else {
                     subcommands.push(ident.clone());
                     if optional.is_none() {
-                        subcommands_rootless.push(ident.to_string().to_case(Case::Kebab));
+                        subcommands_rootless.push(kebab.clone());
                     }
                     fmt_regular
                 };
