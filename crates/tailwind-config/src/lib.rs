@@ -3,16 +3,6 @@ use std::{borrow::Cow, collections::HashMap};
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
-pub struct AppConfig<'a> {
-    #[serde(borrow)]
-    pub config: TailwindConfig<'a>,
-
-    /// Strict mode throws an error when an unknown class is used.
-    #[serde(default)]
-    pub strict: bool,
-}
-
-#[derive(Deserialize, Debug)]
 #[serde(untagged)]
 pub enum LineHeightOpt<'a> {
     LineHeight(LineHeight<'a>),

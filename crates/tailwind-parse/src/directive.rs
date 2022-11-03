@@ -5,8 +5,14 @@ use nom::{
     sequence::terminated,
     IResult, Parser,
 };
+use swc_core::{
+    common::{Span, DUMMY_SP},
+    ecma::ast::ObjectLit,
+};
+use swc_utils::merge_literals;
+use tailwind_config::TailwindConfig;
 
-use crate::{Expression, NomSpan};
+use crate::{Expression, ExpressionConversionError, NomSpan};
 
 #[derive(Debug, PartialEq)]
 pub struct Directive<'a> {
@@ -30,5 +36,22 @@ impl<'a> Directive<'a> {
             .and(space0)
             .map(|(exps, _)| Directive { exps })
             .parse(s)
+    }
+
+    pub fn to_literal(
+        self,
+        span: Span,
+        config: &TailwindConfig,
+    ) -> Result<ObjectLit, ExpressionConversionError<'a>> {
+        self.exps
+            .into_iter()
+            .map(|e| e.to_literal(span, config))
+            .try_fold(
+                ObjectLit {
+                    span: DUMMY_SP,
+                    props: vec![],
+                },
+                |curr, next| Ok(merge_literals(curr, next?)),
+            )
     }
 }

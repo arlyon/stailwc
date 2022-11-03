@@ -1,9 +1,12 @@
 #![feature(let_chains)]
+#![feature(box_patterns)]
+#![feature(iterator_try_reduce)]
 
 mod directive;
 mod expression;
 mod literal;
 mod plugin;
+mod plugin_impl;
 mod subject;
 
 pub type NomSpan<'a> = LocatedSpan<&'a str, Span>;
@@ -19,7 +22,7 @@ pub use subject::*;
 
 #[cfg(test)]
 mod test {
-    use crate::{Directive, Expression, Plugin, Subject, SubjectValue, Position, Border, Max};
+    use crate::{Border, Directive, Expression, Max, Plugin, Position, Subject, SubjectValue};
 
     use nom_locate::LocatedSpan;
     use swc_core::common::DUMMY_SP;

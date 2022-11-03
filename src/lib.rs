@@ -2,14 +2,10 @@
 #![deny(clippy::unwrap_used)]
 // bug in swc
 #![allow(clippy::not_unsafe_ptr_arg_deref)]
-mod config;
-mod parse;
-mod plugin;
+
 #[cfg(test)]
 mod test;
-mod util;
 
-use config::TailwindConfig;
 use nom_locate::LocatedSpan;
 use once_cell::sync::OnceCell;
 use swc_core::{
@@ -24,10 +20,20 @@ use swc_core::{
     },
     plugin::{errors::HANDLER, plugin_transform, proxies::TransformPluginProgramMetadata},
 };
+use tailwind_config::TailwindConfig;
 use tailwind_parse::Directive;
 
-use crate::config::AppConfig;
-use parse::from::literal_from_directive;
+static STRICT: OnceCell<bool> = OnceCell::new();
+
+#[derive(serde::Deserialize, Debug)]
+pub struct AppConfig<'a> {
+    #[serde(borrow)]
+    pub config: TailwindConfig<'a>,
+
+    /// Strict mode throws an error when an unknown class is used.
+    #[serde(default)]
+    pub strict: bool,
+}
 
 #[derive(Default)]
 pub struct TransformVisitor<'a> {
@@ -46,8 +52,6 @@ impl<'a> TransformVisitor<'a> {
         }
     }
 }
-
-static STRICT: OnceCell<bool> = OnceCell::new();
 
 /**
  * Implement necessary visit_mut_* methods for actual custom transform.
@@ -88,7 +92,22 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                         return;
                     },
                 };
-                if let Some((span, _val)) = self.tw_attr.replace((*span, literal_from_directive(*span, d, &self.config))) {
+
+                let x = match d.to_literal(*span, &self.config) {
+                    Ok(x) => x,
+                    Err(e) => {
+                        HANDLER.with(|h| {
+                            h.struct_span_err(
+                                *span,
+                                    "invalid syntax",
+                            ).note(&e.to_string())
+                            .emit()
+                        });
+                        return;
+                    },
+                };
+
+                if let Some((span, _val)) = self.tw_attr.replace((*span, x)) {
                     HANDLER.with(|h| {
                         h.struct_span_warn(n.span, "tw attribute already exists, ignoring")
                             .span_note(
@@ -225,11 +244,19 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 return;
             }
         };
-        if self
-            .tw_tpl
-            .replace(literal_from_directive(*span, d, &self.config))
-            .is_some()
-        {
+
+        let lit = match d.to_literal(*span, &self.config) {
+            Ok(lit) => lit,
+            Err(e) => {
+                println!("{:?}", e);
+                HANDLER.with(|h| {
+                    h.span_bug_no_panic(n.span, "unknown tw template, please file an issue")
+                });
+                return;
+            }
+        };
+
+        if self.tw_tpl.replace(lit).is_some() {
             HANDLER.with(|h| {
                 h.span_bug_no_panic(
                     n.span,

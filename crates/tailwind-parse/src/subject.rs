@@ -5,18 +5,29 @@ use nom::combinator::{opt, verify};
 use nom::sequence::preceded;
 use nom::IResult;
 use nom::{branch::alt, bytes::complete::take_while, sequence::delimited, Parser};
-use swc_core::common::BytePos;
+use swc_core::common::{BytePos, Span};
+use swc_core::ecma::ast::ObjectLit;
+use tailwind_config::TailwindConfig;
 
 use crate::{
     directive::Directive,
     literal::{Literal, SubjectValue},
 };
-use crate::{NomSpan, Plugin};
+use crate::{ExpressionConversionError, LiteralConversionError, NomSpan, Plugin};
 
 #[derive(Debug, PartialEq)]
 pub enum Subject<'a> {
     Literal(Literal<'a>),
     Group(Directive<'a>),
+}
+
+#[derive(thiserror::Error, Debug)]
+pub enum SubjectConversionError<'a> {
+    /// note: boxed because parsing a group can cause an expression to be parsed
+    #[error("failed to convert subject: {0}")]
+    InvalidExpression(Box<ExpressionConversionError<'a>>),
+    #[error("failed to convert literal: {0}")]
+    InvalidLiteral(LiteralConversionError<'a>),
 }
 
 impl<'a> Subject<'a> {
@@ -50,5 +61,20 @@ impl<'a> Subject<'a> {
             })
         });
         alt((literal, group))(s)
+    }
+
+    pub fn to_literal(
+        self,
+        span: Span,
+        config: &TailwindConfig,
+    ) -> Result<ObjectLit, SubjectConversionError<'a>> {
+        match self {
+            Subject::Literal(lit) => lit
+                .to_object_lit(span, &config.theme)
+                .map_err(|e| SubjectConversionError::InvalidLiteral(e)),
+            Subject::Group(dir) => dir
+                .to_literal(span, config)
+                .map_err(|e| SubjectConversionError::InvalidExpression(Box::new(e))),
+        }
     }
 }

@@ -1,18 +1,16 @@
 use std::collections::HashMap;
 
 use crate::{
-    config::TailwindTheme,
-    util::{merge_literals, to_lit},
+    AlignSelf, Border, Display, Divide, Flex, Grid, Object, Position, Rounded, SubjectValue,
+    TextDecoration, TextTransform, Visibility, Whitespace,
 };
 use itertools::Itertools;
 use swc_core::{
     common::DUMMY_SP,
     ecma::ast::{Expr, Ident, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str},
 };
-use tailwind_parse::{
-    AlignSelf, Border, Display, Divide, Flex, Grid, Object, Position, Rounded, SubjectValue,
-    TextDecoration, TextTransform, Visibility, Whitespace,
-};
+use swc_utils::{merge_literals, to_lit};
+use tailwind_config::TailwindTheme;
 
 macro_rules! lookup_plugin {
     ($def:ident, $map:tt, $target:expr) => {

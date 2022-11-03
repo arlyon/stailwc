@@ -1,3 +1,5 @@
+#![feature(box_patterns)]
+
 use std::collections::HashMap;
 
 use swc_core::{
@@ -123,7 +125,7 @@ mod test {
         Expr, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str,
     };
 
-    use crate::util::{merge_literals, to_lit};
+    use crate::{merge_literals, to_lit};
 
     #[test]
     fn a_and_b_merges() {

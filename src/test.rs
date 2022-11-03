@@ -10,11 +10,9 @@ use swc_core::{
     },
     plugin::errors::HANDLER,
 };
+use tailwind_config::Screens;
 
-use crate::{
-    config::{AppConfig, Screens},
-    TransformVisitor,
-};
+use crate::{AppConfig, TransformVisitor};
 
 fn test_visitor() -> TransformVisitor<'static> {
     let mut t = TransformVisitor::default();
