@@ -115,6 +115,11 @@ mod plugin {
     pub enum Divide {
         X,
         Y,
+        Solid,
+        Dashed,
+        Dotted,
+        Double,
+        None,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

@@ -437,7 +437,7 @@ pub fn divide(
     match (d, rest.as_ref().map(|r| r.as_str())) {
         (Some(Divide::X), Some("reverse")) => Some(to_lit(&[("--tw-divide-x-reverse", "1")])),
         (Some(Divide::Y), Some("reverse")) => Some(to_lit(&[("--tw-divide-y-reverse", "1")])),
-        (Some(Divide::X), Some(rest)) => theme.divide_width.get(rest).map(|v| {
+        (Some(Divide::X), rest) => theme.divide_width.get(rest.unwrap_or("DEFAULT")).map(|v| {
             to_lit(&[
                 ("--tw-divide-x-reverse", "0"),
                 (
@@ -450,7 +450,7 @@ pub fn divide(
                 ),
             ])
         }),
-        (Some(Divide::Y), Some(rest)) => theme.divide_width.get(rest).map(|v| {
+        (Some(Divide::Y), rest) => theme.divide_width.get(rest.unwrap_or("DEFAULT")).map(|v| {
             to_lit(&[
                 ("--tw-divide-y-reverse", "0"),
                 (
@@ -463,6 +463,15 @@ pub fn divide(
                 ),
             ])
         }),
+        (Some(Divide::None), None) => Some(to_lit(&[("borderStyle", "none")])),
+        (Some(Divide::Double), None) => Some(to_lit(&[("borderStyle", "double")])),
+        (Some(Divide::Dotted), None) => Some(to_lit(&[("borderStyle", "dotted")])),
+        (Some(Divide::Dashed), None) => Some(to_lit(&[("borderStyle", "dashed")])),
+        (Some(Divide::Solid), None) => Some(to_lit(&[("borderStyle", "solid")])),
+        (None, Some(rest)) => theme
+            .colors
+            .get(rest)
+            .map(|v| to_lit(&[("borderColor", v)])),
         _ => None,
     }
     .map(|lit| ObjectLit {
