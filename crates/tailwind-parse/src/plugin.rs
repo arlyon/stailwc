@@ -106,6 +106,19 @@ mod plugin {
         Blur,
         Ring,
         Sr,
+
+        Prose(Option<Prose>),
+        Not(Not),
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Prose {
+        Invert,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Not {
+        Prose,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

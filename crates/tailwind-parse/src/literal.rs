@@ -15,7 +15,7 @@ use nom::Slice;
 use swc_core::{common::Span, ecma::ast::ObjectLit};
 use tailwind_config::TailwindTheme;
 
-use crate::eval::plugin;
+use crate::eval::{plugin, prose};
 use crate::NomSpan;
 use crate::Plugin;
 
@@ -116,6 +116,14 @@ impl<'a> Literal<'a> {
             }
             AlignSelf(align) => {
                 return plugin::align_self(align, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+            }
+            Prose(p) => {
+                return prose::prose(p, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+            }
+            Not(n) => {
+                return prose::not(n, &self.value, theme)
                     .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
 
