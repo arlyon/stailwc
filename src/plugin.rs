@@ -11,7 +11,7 @@ use swc_core::{
     ecma::ast::{Expr, Ident, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str},
 };
 use tailwind_parse::{
-    Border, Display, Flex, Grid, Object, Position, Rounded, TextDecoration, TextTransform,
+    Border, Display, Divide, Flex, Grid, Object, Position, Rounded, TextDecoration, TextTransform,
     Visibility, Whitespace,
 };
 
@@ -429,11 +429,15 @@ pub fn flex(
     Some(to_lit(&rule))
 }
 
-pub fn divide(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    match rest.split_once('-').unwrap_or((rest, "DEFAULT")) {
-        ("x", "reverse") => Some(to_lit(&[("--tw-divide-x-reverse", "1")])),
-        ("y", "reverse") => Some(to_lit(&[("--tw-divide-y-reverse", "1")])),
-        ("x", rest) => theme.divide_width.get(rest).map(|v| {
+pub fn divide(
+    d: Option<Divide>,
+    rest: Option<SubjectValue>,
+    theme: &TailwindTheme,
+) -> Option<ObjectLit> {
+    match (d, rest.as_ref().map(|r| r.as_str())) {
+        (Some(Divide::X), Some("reverse")) => Some(to_lit(&[("--tw-divide-x-reverse", "1")])),
+        (Some(Divide::Y), Some("reverse")) => Some(to_lit(&[("--tw-divide-y-reverse", "1")])),
+        (Some(Divide::X), Some(rest)) => theme.divide_width.get(rest).map(|v| {
             to_lit(&[
                 ("--tw-divide-x-reverse", "0"),
                 (
@@ -446,8 +450,7 @@ pub fn divide(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
                 ),
             ])
         }),
-
-        ("y", rest) => theme.divide_width.get(rest).map(|v| {
+        (Some(Divide::Y), Some(rest)) => theme.divide_width.get(rest).map(|v| {
             to_lit(&[
                 ("--tw-divide-y-reverse", "0"),
                 (

@@ -30,6 +30,7 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         Grid(g) => return plugin::grid(g, lit.value, theme).ok_or(lit.full),
         Object(o) => return plugin::object(o, lit.value, theme).ok_or(lit.full),
         Whitespace(ws) => return plugin::white_space(ws, lit.value, theme).ok_or(lit.full),
+        Divide(d) => return plugin::divide(d, lit.value, theme).ok_or(lit.full),
 
         // all other plugins
         Text => Required(plugin::text),
@@ -39,7 +40,6 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         Placeholder => Required(plugin::placeholder),
         Delay => Required(plugin::delay),
         Duration => Optional(plugin::duration),
-        Divide => Required(plugin::divide),
         Rotate => Required(plugin::rotate),
         Appearance => Required(plugin::appearance),
         Pointer => Required(plugin::pointer_events),

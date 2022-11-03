@@ -60,7 +60,7 @@ mod plugin {
         Inset(Option<Inset>),
         Delay,
         Duration,
-        Divide,
+        Divide(Option<Divide>),
         Rotate,
         Appearance,
         Pointer,
@@ -109,6 +109,12 @@ mod plugin {
         Pre,
         PreLine,
         PreWrap,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Divide {
+        X,
+        Y,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
