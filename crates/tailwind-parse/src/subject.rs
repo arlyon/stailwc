@@ -24,9 +24,9 @@ pub enum Subject<'a> {
 #[derive(thiserror::Error, Debug)]
 pub enum SubjectConversionError<'a> {
     /// note: boxed because parsing a group can cause an expression to be parsed
-    #[error("failed to convert subject: {0}")]
+    #[error("{0}")]
     InvalidExpression(Box<ExpressionConversionError<'a>>),
-    #[error("failed to convert literal: {0}")]
+    #[error("{0}")]
     InvalidLiteral(LiteralConversionError<'a>),
 }
 

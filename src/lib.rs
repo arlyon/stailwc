@@ -85,8 +85,8 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                         HANDLER.with(|h| {
                             h.struct_span_err(
                                 *span,
-                                    "invalid syntax",
-                            ).note(&e.to_string())
+                                    &e.to_string(),
+                            )
                             .emit()
                         });
                         return;
@@ -99,8 +99,8 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                         HANDLER.with(|h| {
                             h.struct_span_err(
                                 *span,
-                                    "invalid syntax",
-                            ).note(&e.to_string())
+                                &e.to_string(),
+                            )
                             .emit()
                         });
                         return;

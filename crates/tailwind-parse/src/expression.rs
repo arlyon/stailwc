@@ -29,7 +29,7 @@ pub struct Expression<'a> {
 
 #[derive(thiserror::Error, Debug)]
 pub enum ExpressionConversionError<'a> {
-    #[error("unknown subject `{0}`")]
+    #[error("{0}")]
     UnknownSubject(SubjectConversionError<'a>),
     #[error("unknown modifier `{0}`")]
     UnknownModifier(&'a str),
