@@ -133,7 +133,7 @@ fn snapshots_inner(path: &str) {
     let snapshot_path = Path::new("snapshots/output").join(input_path.file_name().unwrap());
     let snapshot = read_to_string(snapshot_path).unwrap();
 
-    if let Err(e) = HANDLER.inner.set(Handler::with_tty_emitter(
+    if let Err(_) = HANDLER.inner.set(Handler::with_tty_emitter(
         ColorConfig::Auto,
         true,
         false,

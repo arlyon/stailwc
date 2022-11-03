@@ -1,10 +1,8 @@
-use nom::bytes::complete::tag;
 use nom::character::complete::char;
-use nom::character::is_alphanumeric;
-use nom::combinator::{opt, verify};
+use nom::combinator::opt;
 use nom::sequence::preceded;
 use nom::IResult;
-use nom::{branch::alt, bytes::complete::take_while, sequence::delimited, Parser};
+use nom::{sequence::delimited, Parser};
 use swc_core::common::{BytePos, Span};
 use swc_core::ecma::ast::ObjectLit;
 use tailwind_config::TailwindConfig;
@@ -33,15 +31,8 @@ pub enum SubjectConversionError<'a> {
 impl<'a> Subject<'a> {
     pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
         let plugin = Plugin::parse;
-        let value = verify(
-            take_while(|c| is_alphanumeric(c as u8) || c == '-' || c == '.' || c == '/'),
-            |s: &NomSpan<'a>| (*s).len() > 0,
-        )
-        .map(|val: NomSpan<'a>| (val, SubjectValue::Value(&val)));
-        let css = delimited(char('['), take_while(|c| c != ']'), char(']'))
-            .map(|css: NomSpan<'a>| (css, SubjectValue::Css(&css)));
 
-        let subject_value = opt(preceded(tag("-"), alt((value, css))));
+        let subject_value = opt(preceded(char('-'), SubjectValue::parse_with_span));
 
         let group = delimited(char('('), Directive::parse_inner, char(')')).map(Subject::Group);
         let literal = plugin.and(subject_value).map(|(cmd, value)| {
@@ -57,10 +48,10 @@ impl<'a> Subject<'a> {
                                 + BytePos(span.map(|s| s.location_offset() as u32).unwrap_or(0)),
                         ),
                 ),
-                full: &s[..],
             })
         });
-        alt((literal, group))(s)
+
+        literal.or(group).parse(s)
     }
 
     pub fn to_literal(
@@ -71,7 +62,7 @@ impl<'a> Subject<'a> {
         match self {
             Subject::Literal(lit) => lit
                 .to_object_lit(span, &config.theme)
-                .map_err(|e| SubjectConversionError::InvalidLiteral(e)),
+                .map_err(SubjectConversionError::InvalidLiteral),
             Subject::Group(dir) => dir
                 .to_literal(span, config)
                 .map_err(|e| SubjectConversionError::InvalidExpression(Box::new(e))),

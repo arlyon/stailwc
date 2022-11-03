@@ -125,7 +125,7 @@ lookup_plugin!(leading, line_height, "lineHeight");
 
 pub fn rounded(
     subcommand: Option<Rounded>,
-    rest: Option<SubjectValue>,
+    rest: &Option<SubjectValue>,
     theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
     let rest = match rest {
@@ -256,7 +256,7 @@ pub fn space(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
 
 pub fn text_transform(
     tt: TextTransform,
-    _rest: Option<SubjectValue>,
+    _rest: &Option<SubjectValue>,
     _theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
     Some(to_lit(&[(
@@ -272,7 +272,7 @@ pub fn text_transform(
 
 pub fn text_decoration(
     td: TextDecoration,
-    _rest: Option<SubjectValue>,
+    _rest: &Option<SubjectValue>,
     _theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
     Some(to_lit(&[(
@@ -353,7 +353,7 @@ pub fn shadow(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
 
 pub fn border(
     subcommand: Option<Border>,
-    rest: Option<SubjectValue>,
+    rest: &Option<SubjectValue>,
     theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
     let rest = match rest {
@@ -412,13 +412,13 @@ pub fn ring(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
                 .map(|p| to_lit(&[p, ("boxShadow", "0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color), var(--tw-ring-shadow)")]))
         }
         Some((_, _)) => simple_lookup(&theme.colors, rest, "--tw-ring-color"),
-        None => (rest == "inset").then(|| to_lit(&[("--tw-ring-inset", "inset")])).or_else(||simple_lookup(&theme.ring_width, rest, "borderWidth")),
+        None => (rest == "inset").then(|| to_lit(&[("--tw-ring-inset", "inset")])).or_else(||simple_lookup(&theme.ring_width, rest, "borderWidth")).or_else(|| simple_lookup(&theme.colors, rest, "--tw-ring-color")),
     }
 }
 
 pub fn flex(
     f: Option<Flex>,
-    _rest: Option<SubjectValue>,
+    _rest: &Option<SubjectValue>,
     _theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
     let rule = match f {
@@ -437,7 +437,7 @@ pub fn flex(
 
 pub fn divide(
     d: Option<Divide>,
-    rest: Option<SubjectValue>,
+    rest: &Option<SubjectValue>,
     theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
     match (d, rest.as_ref().map(|r| r.as_str())) {
@@ -495,7 +495,7 @@ pub fn divide(
 
 pub fn align_self(
     a: AlignSelf,
-    _rest: Option<SubjectValue>,
+    _rest: &Option<SubjectValue>,
     _theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
     let rule = match a {
@@ -527,7 +527,7 @@ pub fn placeholder(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
 
 pub fn grid(
     g: Option<Grid>,
-    rest: Option<SubjectValue>,
+    rest: &Option<SubjectValue>,
     theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
     let rest = rest.as_ref().map(|s| s.as_str());
@@ -549,7 +549,11 @@ pub fn grid(
     Some(to_lit(&pair))
 }
 
-pub fn object(o: Object, _rest: Option<SubjectValue>, _theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn object(
+    o: Object,
+    _rest: &Option<SubjectValue>,
+    _theme: &TailwindTheme,
+) -> Option<ObjectLit> {
     let rule = match o {
         Object::Contain => [("objectFit", "contain")],
         Object::Cover => [("objectFit", "cover")],
@@ -562,7 +566,7 @@ pub fn object(o: Object, _rest: Option<SubjectValue>, _theme: &TailwindTheme) ->
 
 pub fn white_space(
     o: Whitespace,
-    _rest: Option<SubjectValue>,
+    _rest: &Option<SubjectValue>,
     _theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
     let rule = match o {
@@ -618,7 +622,7 @@ pub fn transform(rest: Option<&str>, _theme: &TailwindTheme) -> Option<ObjectLit
 
 pub fn display(
     d: Display,
-    _rest: Option<SubjectValue>,
+    _rest: &Option<SubjectValue>,
     _theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
     Some(to_lit(&[(
@@ -682,7 +686,7 @@ pub fn overflow(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
 
 pub fn position(
     p: Position,
-    _rest: Option<SubjectValue>,
+    _rest: &Option<SubjectValue>,
     _theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
     Some(to_lit(&[(
@@ -699,7 +703,7 @@ pub fn position(
 
 pub fn visibility(
     v: Visibility,
-    _rest: Option<SubjectValue>,
+    _rest: &Option<SubjectValue>,
     _theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
     Some(to_lit(&[(

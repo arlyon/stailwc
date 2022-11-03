@@ -1,12 +1,12 @@
 use nom::{
-    bytes::complete::take_while,
+    bytes::complete::take_while1,
     character::{
         complete::{char, space0},
         is_alphabetic,
     },
     combinator::{opt, verify},
     multi::many0,
-    sequence::terminated,
+    sequence::{preceded, terminated},
     IResult, Parser,
 };
 use swc_core::{
@@ -15,14 +15,14 @@ use swc_core::{
 };
 use tailwind_config::{Screens, TailwindConfig};
 
-use crate::{subject::Subject, NomSpan, SubjectConversionError};
+use crate::{subject::Subject, NomSpan, SubjectConversionError, SubjectValue};
 
 #[derive(Debug, PartialEq)]
 pub struct Expression<'a> {
     pub negative: bool,
     pub modifiers: Vec<&'a str>,
     pub subject: Subject<'a>,
-    pub alpha: Option<&'a str>,
+    pub alpha: Option<SubjectValue<'a>>,
     pub important: bool,
     pub span: Option<Span>,
 }
@@ -37,24 +37,26 @@ pub enum ExpressionConversionError<'a> {
 
 impl<'a> Expression<'a> {
     pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
-        let mut negative = opt(char('-')).map(|o| o.is_some());
-        let mut important = opt(char('!')).map(|o| o.is_some());
-
-        let fst = take_while(|c| is_alphabetic(c as u8) || c == '-');
-        let snd = |s: &NomSpan<'a>| {
-            !s.is_empty() && is_alphabetic(s.chars().next().expect("not empty") as u8)
+        let single_mod = {
+            let single_mod = take_while1(|c| is_alphabetic(c as u8) || c == '-');
+            let start_letter =
+                |s: &NomSpan<'a>| is_alphabetic(s.chars().next().expect("not empty") as u8);
+            verify(single_mod, start_letter)
         };
 
-        let verify = verify(fst, snd);
+        let mods = many0(terminated(single_mod, char(':')));
+        let negative = opt(char('-')).map(|o| o.is_some());
+        let subject = Subject::parse;
+        let alpha = opt(preceded(char('/'), SubjectValue::parse));
+        let important = opt(char('!')).map(|o| o.is_some());
 
-        let mut mods = many0(terminated(verify, char(':')));
-        let mut subject = Subject::parse;
-
-        let (s_next, _) = space0(s)?;
-        let (s_next, mods) = mods.parse(s_next)?;
-        let (s_next, negative) = negative.parse(s_next)?;
-        let (s_next, subject) = subject.parse(s_next)?;
-        let (s_next, important) = important.parse(s_next)?;
+        let (s_next, (((((_, mods), negative), subject), alpha), important)) = space0
+            .and(mods)
+            .and(negative)
+            .and(subject)
+            .and(alpha)
+            .and(important)
+            .parse(s)?;
 
         let lo = s.extra.lo() + BytePos(s.location_offset() as u32 + 2);
         let hi = s_next.extra.lo() + BytePos(s_next.location_offset() as u32 + 1);
@@ -62,9 +64,9 @@ impl<'a> Expression<'a> {
         Ok((
             s_next,
             Expression {
-                alpha: None,
+                alpha,
                 important,
-                modifiers: mods.iter().map(|&s| *s).collect(),
+                modifiers: mods.into_iter().map(|s| *s).collect(),
                 negative,
                 subject,
                 span: Some(s.extra.with_lo(lo).with_hi(hi)),
@@ -80,7 +82,7 @@ impl<'a> Expression<'a> {
         let mut object: ObjectLit = self
             .subject
             .to_literal(span, config)
-            .map_err(|text| ExpressionConversionError::UnknownSubject(text))?;
+            .map_err(ExpressionConversionError::UnknownSubject)?;
 
         for prop in &mut object.props {
             if let PropOrSpread::Prop(box Prop::KeyValue(KeyValueProp {

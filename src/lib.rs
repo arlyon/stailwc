@@ -86,7 +86,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                             h.struct_span_err(
                                 *span,
                                     &e.to_string(),
-                            )
+                            ).note("unknown plugin")
                             .emit()
                         });
                         return;
@@ -100,7 +100,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                             h.struct_span_err(
                                 *span,
                                 &e.to_string(),
-                            )
+                            ).note("when evaluating plugin")
                             .emit()
                         });
                         return;
@@ -248,9 +248,10 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         let lit = match d.to_literal(*span, &self.config) {
             Ok(lit) => lit,
             Err(e) => {
-                println!("{:?}", e);
                 HANDLER.with(|h| {
-                    h.span_bug_no_panic(n.span, "unknown tw template, please file an issue")
+                    h.struct_span_fatal(*span, "unknown tw template, please file an issue")
+                        .note(&e.to_string())
+                        .emit();
                 });
                 return;
             }
@@ -258,10 +259,11 @@ impl<'a> VisitMut for TransformVisitor<'a> {
 
         if self.tw_tpl.replace(lit).is_some() {
             HANDLER.with(|h| {
-                h.span_bug_no_panic(
+                h.struct_span_fatal(
                     n.span,
                     "encountered bad state in parsing, please file an issue",
                 )
+                .emit()
             });
         }
     }

@@ -1,7 +1,22 @@
+use std::fmt::Display;
+
+use nom::bytes::complete::take_while;
+use nom::character::complete::char;
+use nom::character::is_alphabetic;
+use nom::character::is_digit;
+use nom::combinator::verify;
+use nom::error::Error;
+use nom::error::ErrorKind;
+use nom::sequence::delimited;
+use nom::Err;
+use nom::IResult;
+use nom::Parser;
+use nom::Slice;
 use swc_core::{common::Span, ecma::ast::ObjectLit};
 use tailwind_config::TailwindTheme;
 
 use crate::plugin_impl as plugin;
+use crate::NomSpan;
 use crate::Plugin;
 
 /// The core 'rule' of a tailwind directive.
@@ -12,15 +27,23 @@ pub struct Literal<'a> {
     pub cmd: Plugin,
     pub value: Option<SubjectValue<'a>>,
     pub span: Option<Span>,
-    pub full: &'a str,
 }
 
 #[derive(thiserror::Error, Debug)]
 pub enum LiteralConversionError<'a> {
-    #[error("invalid plugin `{0}`")]
-    InvalidPlugin(&'a str),
-    #[error("invalid value `{0}` for plugin `{1}`")]
-    InvalidValue(&'a str, &'a str),
+    #[error("missing argument for `{0:?}`")]
+    MissingArguments(Plugin),
+    #[error("invalid argument for `{0:?}` - `{1}`")]
+    InvalidArguments(Plugin, SubjectValue<'a>),
+}
+
+impl<'a> LiteralConversionError<'a> {
+    pub fn new<'b: 'a>(cmd: Plugin, value: Option<SubjectValue<'a>>) -> Self {
+        match value {
+            Some(value) => Self::InvalidArguments(cmd, value),
+            None => Self::MissingArguments(cmd),
+        }
+    }
 }
 
 enum PluginType {
@@ -39,47 +62,61 @@ impl<'a> Literal<'a> {
         use crate::Max;
         use crate::Min;
         use crate::Plugin::*;
-        use LiteralConversionError::InvalidPlugin;
         use PluginType::*;
 
         let plugin = match self.cmd {
             // stateful plugins require some arg from their subject
             Border(b) => {
-                return plugin::border(b, self.value, theme).ok_or(InvalidPlugin(self.full))
+                return plugin::border(b, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
             Rounded(r) => {
-                return plugin::rounded(r, self.value, theme).ok_or(InvalidPlugin(self.full))
+                return plugin::rounded(r, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
             Position(p) => {
-                return plugin::position(p, self.value, theme).ok_or(InvalidPlugin(self.full))
+                return plugin::position(p, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
             Visibility(v) => {
-                return plugin::visibility(v, self.value, theme).ok_or(InvalidPlugin(self.full))
+                return plugin::visibility(v, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
             Display(d) => {
-                return plugin::display(d, self.value, theme).ok_or(InvalidPlugin(self.full))
+                return plugin::display(d, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
             TextTransform(tt) => {
-                return plugin::text_transform(tt, self.value, theme)
-                    .ok_or(InvalidPlugin(self.full))
+                return plugin::text_transform(tt, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
             TextDecoration(td) => {
-                return plugin::text_decoration(td, self.value, theme)
-                    .ok_or(InvalidPlugin(self.full))
+                return plugin::text_decoration(td, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
-            Flex(f) => return plugin::flex(f, self.value, theme).ok_or(InvalidPlugin(self.full)),
-            Grid(g) => return plugin::grid(g, self.value, theme).ok_or(InvalidPlugin(self.full)),
+            Flex(f) => {
+                return plugin::flex(f, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+            }
+            Grid(g) => {
+                return plugin::grid(g, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+            }
             Object(o) => {
-                return plugin::object(o, self.value, theme).ok_or(InvalidPlugin(self.full))
+                return plugin::object(o, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
             Whitespace(ws) => {
-                return plugin::white_space(ws, self.value, theme).ok_or(InvalidPlugin(self.full))
+                return plugin::white_space(ws, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
             Divide(d) => {
-                return plugin::divide(d, self.value, theme).ok_or(InvalidPlugin(self.full))
+                return plugin::divide(d, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
             AlignSelf(align) => {
-                return plugin::align_self(align, self.value, theme).ok_or(InvalidPlugin(self.full))
+                return plugin::align_self(align, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
 
             // all other plugins
@@ -157,13 +194,13 @@ impl<'a> Literal<'a> {
             Animate => Required(plugin::animation),
         };
 
-        match (plugin, self.value) {
+        match (plugin, &self.value) {
             (Required(p), Some(SubjectValue::Value(s) | SubjectValue::Css(s))) => p(s, theme),
             (Optional(p), Some(SubjectValue::Value(s) | SubjectValue::Css(s))) => p(Some(s), theme),
             (Optional(p), None) => p(None, theme),
             _ => None,
         }
-        .ok_or(InvalidPlugin(self.full))
+        .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
     }
 }
 
@@ -173,11 +210,74 @@ pub enum SubjectValue<'a> {
     Css(&'a str),
 }
 
+impl Display for SubjectValue<'_> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            SubjectValue::Value(s) => write!(f, "{s}"),
+            SubjectValue::Css(s) => write!(f, "{s}"),
+        }
+    }
+}
+
 impl<'a> SubjectValue<'a> {
     pub fn as_str(&self) -> &str {
         match self {
             SubjectValue::Value(s) => s,
             SubjectValue::Css(s) => s,
         }
+    }
+
+    pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, Error<NomSpan<'a>>> {
+        match Self::parse_with_span(s) {
+            Ok((s, (_, v))) => Ok((s, v)),
+            Err(e) => Err(e),
+        }
+    }
+
+    pub fn parse_with_span(
+        s: NomSpan<'a>,
+    ) -> IResult<NomSpan<'a>, (NomSpan<'a>, Self), Error<NomSpan<'a>>> {
+        // a value is either numeric with dashes signifying fractions,
+        // or aplhanumeric with dashes
+        let value = verify(Self::parse_value, |s| s.len() > 0)
+            .map(|val: NomSpan<'a>| (val, SubjectValue::Value(&val)));
+        let css = delimited(char('['), take_while(|c| c != ']'), char(']'))
+            .map(|css: NomSpan<'a>| (css, SubjectValue::Css(&css)));
+
+        value.or(css).parse(s)
+    }
+
+    /// This algorithm is used to disambiguate between a number with a fraction
+    /// and a regular item with an opacity.
+    ///
+    /// The basic condition is that upon entry of the Number state from the
+    /// Neutral State, it is not permitted to leave it. The Number state is
+    /// triggered from the Neutral state upon encountering '/' or '.',
+    fn parse_value(s: NomSpan<'a>) -> IResult<NomSpan<'a>, NomSpan<'a>, Error<NomSpan<'a>>> {
+        #[derive(Debug, PartialEq, Eq)]
+        enum Mode {
+            /// The initial state, where we can encounter a numbers and dashes.
+            Neutral,
+            /// We have encountered '/' or '.' and are now expecting a fraction or decimal.
+            Number,
+            /// We are in 'text mode', and '/' and '.' are not permitted.
+            Text,
+        }
+
+        let mut state = Mode::Neutral;
+
+        for (i, x) in s.chars().enumerate() {
+            match (&state, x) {
+                (Mode::Neutral | Mode::Number, '/' | '.') => state = Mode::Number,
+                (Mode::Number, x) if is_alphabetic(x as u8) => {
+                    return Err(Err::Error(Error::new(s, ErrorKind::AlphaNumeric)))
+                }
+                (_, x) if is_alphabetic(x as u8) => state = Mode::Text,
+                (_, x) if is_digit(x as u8) || x == '-' => {}
+                _ => return Ok((s.slice(i..), s.slice(..i))),
+            }
+        }
+
+        Ok((s.slice(s.len()..), s))
     }
 }
