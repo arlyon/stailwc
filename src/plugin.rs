@@ -11,8 +11,8 @@ use swc_core::{
     ecma::ast::{Expr, Ident, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str},
 };
 use tailwind_parse::{
-    Border, Display, Divide, Flex, Grid, Object, Position, Rounded, TextDecoration, TextTransform,
-    Visibility, Whitespace,
+    AlignSelf, Border, Display, Divide, Flex, Grid, Object, Position, Rounded, TextDecoration,
+    TextTransform, Visibility, Whitespace,
 };
 
 macro_rules! lookup_plugin {
@@ -485,6 +485,23 @@ pub fn divide(
             value: Box::new(Expr::Object(lit)),
         })))],
     })
+}
+
+pub fn align_self(
+    a: AlignSelf,
+    _rest: Option<SubjectValue>,
+    _theme: &TailwindTheme,
+) -> Option<ObjectLit> {
+    let rule = match a {
+        AlignSelf::Auto => [("alignSelf", "auto")],
+        AlignSelf::Start => [("alignSelf", "flex-start")],
+        AlignSelf::End => [("alignSelf", "flex-end")],
+        AlignSelf::Center => [("alignSelf", "center")],
+        AlignSelf::Stretch => [("alignSelf", "stretch")],
+        AlignSelf::Baseline => [("alignSelf", "baseline")],
+    };
+
+    Some(to_lit(&rule))
 }
 
 pub fn placeholder(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {

@@ -31,6 +31,7 @@ pub fn parse_literal<'a>(theme: &TailwindTheme, lit: Literal<'a>) -> Result<Obje
         Object(o) => return plugin::object(o, lit.value, theme).ok_or(lit.full),
         Whitespace(ws) => return plugin::white_space(ws, lit.value, theme).ok_or(lit.full),
         Divide(d) => return plugin::divide(d, lit.value, theme).ok_or(lit.full),
+        AlignSelf(align) => return plugin::align_self(align, lit.value, theme).ok_or(lit.full),
 
         // all other plugins
         Text => Required(plugin::text),

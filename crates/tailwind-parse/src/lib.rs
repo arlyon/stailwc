@@ -91,6 +91,8 @@ mod plugin {
         Bottom,
         Left,
         Right,
+        #[rename("self")]
+        AlignSelf(AlignSelf),
         Translate,
         Tracking,
         Invert,
@@ -100,6 +102,16 @@ mod plugin {
         Blur,
         Ring,
         Sr,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum AlignSelf {
+        Auto,
+        Start,
+        End,
+        Center,
+        Stretch,
+        Baseline,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
