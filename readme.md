@@ -38,23 +38,26 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
-Optionally, you can also include the tailwind normalizer.
+Optionally, you can also include the tailwind normalizer + forms
+plugin by including the `<TailwindStyle />` component.
 
 `_document.tsx`
 
 ```tsx
 import { Html, Head, Main, NextScript } from "next/document";
+import { TailwindStyle } from "stailwc";
+
+// currently needed due to a swc bug
+// ===
+import { css, Global } from "@emotion/react";
+css;
+Global;
+// ===
 
 export default function Document() {
   return (
     <Html>
-      <Head>
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://unpkg.com/tailwindcss@3.1.8/src/css/preflight.css"
-        />
-      </Head>
+      <TailwindStyle />
       <body>
         <Main />
         <NextScript />
@@ -88,10 +91,3 @@ export const ColorButton = () => {
   );
 };
 ```
-
-## Caveats
-
-Next currently doesn't support the SWC error handler meaning
-that errors are logged only to the command line, and not shown
-visually on the screen. This will be supported down the line
-(see here: https://github.com/vercel/next.js/discussions/39779).

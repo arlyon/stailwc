@@ -1,4 +1,6 @@
 #![feature(box_patterns)]
+#![feature(let_chains)]
+#![feature(drain_filter)]
 #![deny(clippy::unwrap_used)]
 // bug in swc
 #![allow(clippy::not_unsafe_ptr_arg_deref)]
@@ -9,12 +11,13 @@ mod test;
 use nom_locate::LocatedSpan;
 use once_cell::sync::OnceCell;
 use swc_core::{
-    common::{util::take::Take, Span, DUMMY_SP},
+    common::{util::take::Take, Span, SyntaxContext, DUMMY_SP},
     ecma::{
         ast::{
-            ArrayLit, Expr, ExprOrSpread, Ident, JSXAttr, JSXAttrName, JSXAttrOrSpread,
-            JSXAttrValue, JSXExpr, JSXExprContainer, JSXOpeningElement, Lit, ObjectLit, Program,
-            Str, TaggedTpl, TplElement,
+            ArrayLit, Expr, ExprOrSpread, Ident, ImportDecl, ImportNamedSpecifier, ImportSpecifier,
+            JSXAttr, JSXAttrName, JSXAttrOrSpread, JSXAttrValue, JSXElementName, JSXExpr,
+            JSXExprContainer, JSXOpeningElement, Lit, Module, ModuleDecl, ModuleItem, ObjectLit,
+            Program, Str, TaggedTpl, Tpl, TplElement,
         },
         visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
     },
@@ -44,6 +47,7 @@ pub struct TransformVisitor<'a> {
 
     tw_attr: Option<(Span, ObjectLit)>,
     tw_tpl: Option<ObjectLit>,
+    tw_style_imported: bool,
 }
 
 impl<'a> TransformVisitor<'a> {
@@ -52,6 +56,7 @@ impl<'a> TransformVisitor<'a> {
             config,
             tw_attr: None,
             tw_tpl: None,
+            tw_style_imported: false,
         }
     }
 }
@@ -138,11 +143,45 @@ impl<'a> VisitMut for TransformVisitor<'a> {
     }
 
     /**
-     * Visit children to extract any tailwind attributes, then:
-     * - convert them into emotion
-     * - remove any tailwind attributes
+     * We want to visit all jsx elements to either:
+     * a) detect the TailwindStyle import and transform it into a css declaration
+     * b) extract any tw attributes and transform them into a css declarations
      */
     fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
+        if self.tw_style_imported && let JSXElementName::Ident(i) = &n.name && i.sym.eq("TailwindStyle") {
+            n.name = JSXElementName::Ident(Ident::new("Global".into(), i.span));
+            n.attrs.push(JSXAttrOrSpread::JSXAttr(
+                JSXAttr {
+                    span: n.span,
+                    name: JSXAttrName::Ident(Ident::new("styles".into(), n.span)),
+                    value: Some(JSXAttrValue::JSXExprContainer(JSXExprContainer {
+                        span: n.span,
+                        expr: JSXExpr::Expr(Box::new(Expr::TaggedTpl(
+                            TaggedTpl {
+                                span: n.span,
+                                tag: Box::new(Expr::Ident(Ident {
+                                    span: n.span,
+                                    sym: "css".into(), 
+                                    optional: false
+                                })),
+                                type_params: None, tpl: Tpl{
+                                    span: n.span,
+                                    exprs: vec![],
+                                    quasis: vec![TplElement{
+                                        cooked: None,
+                                        raw: format!("{}{}", RESET_CSS, FORM_CSS).into(),
+                                        span: n.span,
+                                        tail: true
+                                    }],
+                                }
+                            })
+
+                        ))
+                    })),
+                }
+            ));
+        }
+
         n.attrs.visit_mut_children_with(self);
 
         let lit = match self.tw_attr.take() {
@@ -280,6 +319,23 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         if let Some(objlit) = self.tw_tpl.take() {
             *n = Expr::Object(objlit);
         }
+    }
+
+    /**
+     * Visit the import declarations, and mark whether tw_style is imported.
+     */
+    fn visit_mut_module(&mut self, n: &mut Module) {
+        n.body.drain_filter(|stmt| {
+            if let ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl { src, .. })) = stmt {
+                if src.value.eq("stailwc") {
+                    self.tw_style_imported = true;
+                    return true;
+                }
+            }
+
+            false
+        });
+        n.visit_mut_children_with(self);
     }
 }
 
