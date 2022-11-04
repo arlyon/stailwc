@@ -5,11 +5,11 @@ use crate::{
     TextDecoration, TextTransform, Visibility, Whitespace,
 };
 use itertools::Itertools;
+use stailwc_swc_utils::{merge_literals, to_lit};
 use swc_core::{
     common::DUMMY_SP,
     ecma::ast::{Expr, Ident, KeyValueProp, Lit, ObjectLit, Prop, PropName, PropOrSpread, Str},
 };
-use swc_utils::{merge_literals, to_lit};
 use tailwind_config::TailwindTheme;
 
 macro_rules! lookup_plugin {

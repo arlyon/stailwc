@@ -5,11 +5,11 @@ use nom::{
     sequence::terminated,
     IResult, Parser,
 };
+use stailwc_swc_utils::merge_literals;
 use swc_core::{
     common::{Span, DUMMY_SP},
     ecma::ast::ObjectLit,
 };
-use swc_utils::merge_literals;
 use tailwind_config::TailwindConfig;
 
 use crate::{Expression, ExpressionConversionError, NomSpan};
