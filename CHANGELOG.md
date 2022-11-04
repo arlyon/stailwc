@@ -1,3 +1,36 @@
+# [0.8.0](https://github.com/arlyon/stailwc/compare/0.7.2...0.8.0) (2022-11-04)
+
+
+### Bug Fixes
+
+* clean up some more snapshots ([071d463](https://github.com/arlyon/stailwc/commit/071d4639d4b9e1a91e5d7b97c216372ed0122865))
+* correct lookup for top, bottom, left, and right plugins ([eec214c](https://github.com/arlyon/stailwc/commit/eec214c1a7ae9705a8af9fb8e8a3170327ae814f))
+* get screen dynamically form config ([f5c6f16](https://github.com/arlyon/stailwc/commit/f5c6f16f82f7f2feb455450e2abaf42c3c8dc928))
+* parse expressions marked as important with no value ([16c023f](https://github.com/arlyon/stailwc/commit/16c023f722be9b4b7308b1370a7d6859b7238857))
+* support standalone `shadow` plugin ([7ca223a](https://github.com/arlyon/stailwc/commit/7ca223a166176f6db7e14d489f4d050aac4f4000))
+* use parser for divide plugin and handle `divide` ([7e77e9f](https://github.com/arlyon/stailwc/commit/7e77e9fe09fa7a75bd504e581858110636f4f228))
+
+
+### Features
+
+* add `self` plugin ([cc93a27](https://github.com/arlyon/stailwc/commit/cc93a27c143d82d21c638c8576848c8a8486be21))
+* add additional functions to grid plugin ([b81146c](https://github.com/arlyon/stailwc/commit/b81146c813d4a222e460d1db879f785ecc4d06d2))
+* add animate plugin ([6f2eabe](https://github.com/arlyon/stailwc/commit/6f2eabe14ef9bdbf3fe7c956684e1699e96f303b))
+* add pointer events plugin ([38b9208](https://github.com/arlyon/stailwc/commit/38b92086dca46c90a136bf0284ff75d885542d33))
+* add strict mode ([e85d0d1](https://github.com/arlyon/stailwc/commit/e85d0d145cd4e90bb7b1152cd662e1c60ed122f5))
+* add support for tailwind css reset and forms ([82e3fbc](https://github.com/arlyon/stailwc/commit/82e3fbce1c1c7fab8f4d47abc2a9032d83ae8a2e))
+* add the fill plugin ([eaf3ef2](https://github.com/arlyon/stailwc/commit/eaf3ef2da560526153a016a2827d430c49f148de))
+* add the gap-x and gap-y plugins ([6ea516d](https://github.com/arlyon/stailwc/commit/6ea516d9b57da83c83ad29aa7a3a2843d87eeeb0))
+* add the inset plugin ([6d192b5](https://github.com/arlyon/stailwc/commit/6d192b55f8edf5ba7140f354247e459541c239e1))
+* add the leading plugin ([4d15fd6](https://github.com/arlyon/stailwc/commit/4d15fd6a1be68a2a02dd65ae84ea2c17c621d71a))
+* add the object plugin ([e420c5d](https://github.com/arlyon/stailwc/commit/e420c5d76f7e509f68a2394e0274a5ff56b1a053))
+* add the whitespace plugin ([5386680](https://github.com/arlyon/stailwc/commit/53866802ef7ee8cd97fd161a29d71c5a9c571c3f))
+* add truncate plugin ([eb143cf](https://github.com/arlyon/stailwc/commit/eb143cfbabc06f42dd5c749c65f99d4e5f82d45b))
+* add whole load of new modifiers ([f42e43d](https://github.com/arlyon/stailwc/commit/f42e43d24cd6ddfa2e96833058f5a91dc983d9a5))
+* improve spans for error handling ([b3a57cf](https://github.com/arlyon/stailwc/commit/b3a57cf2dad30a948ecf0c9e8a64108818c4f098))
+* support border-style in divide plugin ([9c15739](https://github.com/arlyon/stailwc/commit/9c15739426cc8a25532ecf94800b7ce9a6a169ba))
+* support transparency in the parser ([2ea75e7](https://github.com/arlyon/stailwc/commit/2ea75e7db07f648af5cad6dcd4c026784d876e62))
+
 ## [0.7.2](https://github.com/arlyon/stailwc/compare/0.7.1...0.7.2) (2022-09-24)
 
 
