@@ -25,6 +25,9 @@ use tailwind_parse::Directive;
 
 static STRICT: OnceCell<bool> = OnceCell::new();
 
+static RESET_CSS: &str = include_str!("../data/reset.css");
+static FORM_CSS: &str = include_str!("../data/form.css");
+
 #[derive(serde::Deserialize, Debug)]
 pub struct AppConfig<'a> {
     #[serde(borrow)]
