@@ -1,3 +1,10 @@
+## [0.8.1](https://github.com/arlyon/stailwc/compare/0.8.0...0.8.1) (2022-11-04)
+
+
+### Bug Fixes
+
+* release to target new crates ([6e289fc](https://github.com/arlyon/stailwc/commit/6e289fc1c99108b8392c512be3db3e7793156848))
+
 # [0.8.0](https://github.com/arlyon/stailwc/compare/0.7.2...0.8.0) (2022-11-04)
 
 
