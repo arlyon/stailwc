@@ -4,10 +4,10 @@
 #![feature(assert_matches)]
 
 mod directive;
+mod eval;
 mod expression;
 mod literal;
 mod plugin;
-mod plugin_impl;
 mod subject;
 
 pub type NomSpan<'a> = LocatedSpan<&'a str, Span>;

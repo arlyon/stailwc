@@ -15,7 +15,7 @@ use nom::Slice;
 use swc_core::{common::Span, ecma::ast::ObjectLit};
 use tailwind_config::TailwindTheme;
 
-use crate::plugin_impl as plugin;
+use crate::eval::plugin;
 use crate::NomSpan;
 use crate::Plugin;
 
