@@ -21,6 +21,7 @@ use swc_core::{
             JSXAttrValue, JSXElementName, JSXExpr, JSXExprContainer, JSXOpeningElement, Lit,
             Module, ModuleDecl, ModuleItem, ObjectLit, Program, Str, TaggedTpl, Tpl, TplElement,
         },
+        atoms::Atom,
         visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
     },
     plugin::{errors::HANDLER, plugin_transform, proxies::TransformPluginProgramMetadata},
@@ -154,6 +155,8 @@ impl<'a> VisitMut for TransformVisitor<'a> {
      */
     fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
         if self.tw_style_imported && let JSXElementName::Ident(i) = &n.name && i.sym.eq("TailwindStyle") {
+            let atom: Atom = format!("{}{}", RESET_CSS, FORM_CSS).into();
+
             n.name = JSXElementName::Ident(Ident::new("Global".into(), i.span));
             n.attrs.push(JSXAttrOrSpread::JSXAttr(
                 JSXAttr {
@@ -173,8 +176,8 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                                     span: n.span,
                                     exprs: vec![],
                                     quasis: vec![TplElement{
-                                        cooked: None,
-                                        raw: format!("{}{}", RESET_CSS, FORM_CSS).into(),
+                                        cooked: Some(atom.clone()),
+                                        raw: atom,
                                         span: n.span,
                                         tail: true
                                     }],
