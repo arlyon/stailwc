@@ -1,3 +1,19 @@
+# [0.9.0](https://github.com/arlyon/stailwc/compare/0.8.1...0.9.0) (2022-11-05)
+
+
+### Bug Fixes
+
+* port `flex-1` and friends to the new plugin structure ([92168da](https://github.com/arlyon/stailwc/commit/92168dace386dbff641cace6a15d9d89eb0fbf86))
+* port `flex-grow` to the new plugin structure ([8635bcc](https://github.com/arlyon/stailwc/commit/8635bccff4562d40630157e458c4b5c209576b79))
+* port `flex-shrink` to the new plugin structure ([6423247](https://github.com/arlyon/stailwc/commit/642324769d13c8a0af7816aa55f3b48ae2f5c15e))
+* prevent console log in development by including cooked css ([bb289ef](https://github.com/arlyon/stailwc/commit/bb289ef103fe989fc1682eff519971e9160c595a))
+
+
+### Features
+
+* add basic non-configurable prose plugin ([d88a744](https://github.com/arlyon/stailwc/commit/d88a744169919d3c32d14be00eebc821305bc5d3))
+* unify and expose the strict option ([3af6a0d](https://github.com/arlyon/stailwc/commit/3af6a0da906b4e3b6f4f7006cd3e8720ff19641d))
+
 ## [0.8.1](https://github.com/arlyon/stailwc/compare/0.8.0...0.8.1) (2022-11-04)
 
 
