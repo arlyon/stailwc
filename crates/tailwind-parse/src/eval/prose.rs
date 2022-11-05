@@ -2,7 +2,7 @@ use stailwc_swc_utils::{merge_literals, named_literal, to_lit};
 use swc_core::ecma::ast::ObjectLit;
 use tailwind_config::TailwindTheme;
 
-use crate::{Not, Prose, SubjectValue};
+use crate::{Prose, SubjectValue};
 
 pub fn prose(
     p: Option<Prose>,

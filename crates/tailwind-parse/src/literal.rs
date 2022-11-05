@@ -122,7 +122,7 @@ impl<'a> Literal<'a> {
                 return prose::prose(p, &self.value, theme)
                     .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
-            Not(n) => todo!(),
+            Not(_) => todo!(),
 
             // all other plugins
             Text => Required(plugin::text),
