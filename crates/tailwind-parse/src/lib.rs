@@ -29,9 +29,14 @@ mod test {
         Border, Directive, Expression, Literal, Max, Plugin, Position, Subject, SubjectValue,
     };
 
+    use itertools::Itertools;
     use nom_locate::LocatedSpan;
+    use stailwc_swc_utils::sort_recursive;
     use swc_core::common::DUMMY_SP;
+    use tailwind_config::{LineHeightOpt, TailwindConfig};
     use test_case::test_case;
+
+    use pretty_assertions::assert_eq;
 
     #[test]
     fn directive() -> anyhow::Result<()> {
@@ -97,6 +102,48 @@ mod test {
     #[test_case("text-white/40 bg-white/50" ; "chained transparency")]
     fn directive_tests(s: &str) {
         Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
+    }
+
+    #[test_case(&["bg-white", "text-black"] ; "basic case")]
+    #[test_case(&["prose", "w-full"] ; "prose")]
+    #[test_case(&["text-sm", "font-bold", "text-black", "p-4", "m-8"] ; "more complicated")]
+    fn directive_stable(s: &[&str]) {
+        let mut config = TailwindConfig::default();
+        config.theme.colors.insert("white", "#fff");
+        config.theme.colors.insert("black", "#000");
+        config.theme.width.insert("full", "100%");
+        config.theme.margin.insert("auto", "auto");
+        config.theme.font_weight.insert("bold", "bold");
+        config.theme.padding.insert("4", "1rem");
+        config.theme.margin.insert("8", "2rem");
+        config
+            .theme
+            .font_size
+            .insert("sm", ("1em", LineHeightOpt::Str("0.875rem")));
+
+        let inputs = s
+            .into_iter()
+            .permutations(s.len())
+            .map(|v| v.iter().map(|s| *s).join(" "))
+            .collect::<Vec<_>>();
+
+        println!("{:?}", inputs);
+
+        let lits = inputs
+            .iter()
+            .map(|s| {
+                let (_, d) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
+                let lit = d.to_literal(DUMMY_SP, &config).unwrap();
+                (s, sort_recursive(lit))
+            })
+            .collect::<Vec<_>>();
+
+        for items in lits.windows(2) {
+            let (s1, item1) = &items[0];
+            let (s2, item2) = &items[1];
+
+            assert_eq!(item1, item2, "\n\n`{}` != `{}`", s1, s2);
+        }
     }
 
     #[should_panic]

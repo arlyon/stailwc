@@ -81,6 +81,43 @@ pub fn merge_literals(mut a: ObjectLit, b: ObjectLit) -> ObjectLit {
     a
 }
 
+/// recursively sorts ObjectLits by key
+pub fn sort_recursive(mut lit: ObjectLit) -> ObjectLit {
+    for prop in &mut lit.props {
+        if let PropOrSpread::Prop(box Prop::KeyValue(KeyValueProp {
+            value: box Expr::Object(lit),
+            ..
+        })) = prop
+        {
+            *lit = sort_recursive(lit.to_owned());
+        }
+    }
+
+    lit.props.sort_by(|prop1, prop2| {
+        if let (
+            PropOrSpread::Prop(box Prop::KeyValue(KeyValueProp {
+                key:
+                    PropName::Ident(Ident { sym: name1, .. })
+                    | PropName::Str(Str { value: name1, .. }),
+                ..
+            })),
+            PropOrSpread::Prop(box Prop::KeyValue(KeyValueProp {
+                key:
+                    PropName::Ident(Ident { sym: name2, .. })
+                    | PropName::Str(Str { value: name2, .. }),
+                ..
+            })),
+        ) = (prop1, prop2)
+        {
+            name1.cmp(name2)
+        } else {
+            println!("{:?} {:?}", prop1, prop2);
+            std::cmp::Ordering::Equal
+        }
+    });
+    lit
+}
+
 pub fn to_lit(items: &[(&str, &str)]) -> ObjectLit {
     ObjectLit {
         span: DUMMY_SP,
