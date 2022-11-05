@@ -430,6 +430,13 @@ pub fn flex(
         (Some(Flex::WrapReverse), _) => [("flexWrap", "wrap-reverse")],
         (Some(Flex::NoWrap), _) => [("flexWrap", "nowrap")],
         (None, None) => [("display", "flex")],
+        (Some(Flex::Grow), val) => {
+            return simple_lookup(
+                &theme.flex_grow,
+                val.as_ref().map(|v| v.as_str()).unwrap_or("DEFAULT"),
+                "flexGrow",
+            )
+        }
         (None, Some(val)) => return simple_lookup(&theme.flex, val.as_str(), "flex"),
     };
 

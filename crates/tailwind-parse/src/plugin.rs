@@ -187,6 +187,7 @@ mod plugin {
     pub enum Flex {
         Row,
         Col,
+        Grow,
         RowReverse,
         ColReverse,
         Wrap,
