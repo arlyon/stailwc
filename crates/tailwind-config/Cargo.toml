@@ -4,9 +4,9 @@ edition = "2021"
 license = "MIT OR Apache-2.0"
 name = "tailwind-config"
 repository = "https://github.com/arlyon/stailwc"
-version = "0.8.1"
+version = "0.9.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-serde = { version = "1.0.147", features = ["derive"] }
+serde = {version = "1.0.147", features = ["derive"]}
