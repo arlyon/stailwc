@@ -9,15 +9,17 @@
 mod test;
 
 use nom_locate::LocatedSpan;
-use once_cell::sync::OnceCell;
 use swc_core::{
-    common::{util::take::Take, Span, SyntaxContext, DUMMY_SP},
+    common::{
+        errors::{DiagnosticBuilder, Handler},
+        util::take::Take,
+        Span, DUMMY_SP,
+    },
     ecma::{
         ast::{
-            ArrayLit, Expr, ExprOrSpread, Ident, ImportDecl, ImportNamedSpecifier, ImportSpecifier,
-            JSXAttr, JSXAttrName, JSXAttrOrSpread, JSXAttrValue, JSXElementName, JSXExpr,
-            JSXExprContainer, JSXOpeningElement, Lit, Module, ModuleDecl, ModuleItem, ObjectLit,
-            Program, Str, TaggedTpl, Tpl, TplElement,
+            ArrayLit, Expr, ExprOrSpread, Ident, ImportDecl, JSXAttr, JSXAttrName, JSXAttrOrSpread,
+            JSXAttrValue, JSXElementName, JSXExpr, JSXExprContainer, JSXOpeningElement, Lit,
+            Module, ModuleDecl, ModuleItem, ObjectLit, Program, Str, TaggedTpl, Tpl, TplElement,
         },
         visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
     },
@@ -25,8 +27,6 @@ use swc_core::{
 };
 use tailwind_config::TailwindConfig;
 use tailwind_parse::Directive;
-
-static STRICT: OnceCell<bool> = OnceCell::new();
 
 static RESET_CSS: &str = include_str!("../data/reset.css");
 static FORM_CSS: &str = include_str!("../data/form.css");
@@ -44,19 +44,28 @@ pub struct AppConfig<'a> {
 #[derive(Default)]
 pub struct TransformVisitor<'a> {
     config: TailwindConfig<'a>,
-
+    strict: bool,
     tw_attr: Option<(Span, ObjectLit)>,
     tw_tpl: Option<ObjectLit>,
     tw_style_imported: bool,
 }
 
 impl<'a> TransformVisitor<'a> {
-    pub fn new(config: TailwindConfig<'a>) -> Self {
+    pub fn new(config: AppConfig<'a>) -> Self {
         Self {
-            config,
+            config: config.config,
+            strict: config.strict,
             tw_attr: None,
             tw_tpl: None,
             tw_style_imported: false,
+        }
+    }
+
+    fn report<'s>(&self, h: &'s Handler, span: Span, msg: &'s str) -> DiagnosticBuilder<'s> {
+        if self.strict {
+            h.struct_span_err(span, msg)
+        } else {
+            h.struct_span_warn(span, msg)
         }
     }
 }
@@ -91,11 +100,9 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                     Ok((_, d)) => d,
                     Err(e) => {
                         HANDLER.with(|h| {
-                            h.struct_span_err(
-                                *span,
-                                    &e.to_string(),
-                            ).note("unknown plugin")
-                            .emit()
+                            self.report(h,  *span, &e.to_string())
+                                .note("unknown plugin")
+                                .emit()
                         });
                         return;
                     },
@@ -105,11 +112,9 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                     Ok(x) => x,
                     Err(e) => {
                         HANDLER.with(|h| {
-                            h.struct_span_err(
-                                *span,
-                                &e.to_string(),
-                            ).note("when evaluating plugin")
-                            .emit()
+                            self.report(h,  *span, &e.to_string())
+                                .note("when evaluating plugin")
+                                .emit()
                         });
                         return;
                     },
@@ -117,7 +122,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
 
                 if let Some((span, _val)) = self.tw_attr.replace((*span, x)) {
                     HANDLER.with(|h| {
-                        h.struct_span_warn(n.span, "tw attribute already exists, ignoring")
+                        self.report(h, n.span, "tw attribute already exists, ignoring")
                             .span_note(
                                 span,
                                 "previous encountered here",
@@ -132,7 +137,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 ..
             })) => {
                 HANDLER.with(|h| {
-                        h.struct_span_warn(*span, "variables are not supported")
+                    self.report(h, *span, "variables are not supported")
                             .emit()
                 });
             }
@@ -279,7 +284,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
             Ok((_, d)) => d,
             Err(e) => {
                 HANDLER.with(|h| {
-                    h.struct_span_err(*span, "invalid syntax")
+                    self.report(h, *span, "invalid syntax")
                         .note(&e.to_string())
                         .emit()
                 });
@@ -291,9 +296,9 @@ impl<'a> VisitMut for TransformVisitor<'a> {
             Ok(lit) => lit,
             Err(e) => {
                 HANDLER.with(|h| {
-                    h.struct_span_fatal(*span, "unknown tw template, please file an issue")
-                        .note(&e.to_string())
-                        .emit();
+                    self.report(h, *span, &e.to_string())
+                        .note("when evaluating plugin")
+                        .emit()
                 });
                 return;
             }
@@ -301,11 +306,10 @@ impl<'a> VisitMut for TransformVisitor<'a> {
 
         if self.tw_tpl.replace(lit).is_some() {
             HANDLER.with(|h| {
-                h.struct_span_fatal(
+                h.span_bug_no_panic(
                     n.span,
                     "encountered bad state in parsing, please file an issue",
                 )
-                .emit()
             });
         }
     }
@@ -348,12 +352,8 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
     let deser = &mut serde_json::Deserializer::from_str(&config);
     let config: Result<AppConfig, _> = serde_path_to_error::deserialize(deser);
 
-    if let Ok(c) = &config {
-        STRICT.set(c.strict).expect("failed to set strict mode");
-    }
-
     match config {
-        Ok(config) => program.fold_with(&mut as_folder(TransformVisitor::new(config.config))),
+        Ok(config) => program.fold_with(&mut as_folder(TransformVisitor::new(config))),
         Err(error) => {
             HANDLER.with(|h| {
                 h.struct_fatal("unable to parse tailwind config, aborting")
