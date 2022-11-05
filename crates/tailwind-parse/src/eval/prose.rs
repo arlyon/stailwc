@@ -460,6 +460,6 @@ pub fn prose(
             ),
         ]
         .into_iter()
-        .reduce(|a, b| merge_literals(a, b)),
+        .reduce(merge_literals),
     }
 }
