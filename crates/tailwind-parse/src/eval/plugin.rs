@@ -418,18 +418,19 @@ pub fn ring(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
 
 pub fn flex(
     f: Option<Flex>,
-    _rest: &Option<SubjectValue>,
-    _theme: &TailwindTheme,
+    rest: &Option<SubjectValue>,
+    theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
-    let rule = match f {
-        Some(Flex::Row) => [("flexDirection", "row")],
-        Some(Flex::RowReverse) => [("flexDirection", "row-reverse")],
-        Some(Flex::Col) => [("flexDirection", "column")],
-        Some(Flex::ColReverse) => [("flexDirection", "column-reverse")],
-        Some(Flex::Wrap) => [("flexWrap", "wrap")],
-        Some(Flex::WrapReverse) => [("flexWrap", "wrap-reverse")],
-        Some(Flex::NoWrap) => [("flexWrap", "nowrap")],
-        None => [("display", "flex")],
+    let rule = match (f, rest) {
+        (Some(Flex::Row), _) => [("flexDirection", "row")],
+        (Some(Flex::RowReverse), _) => [("flexDirection", "row-reverse")],
+        (Some(Flex::Col), _) => [("flexDirection", "column")],
+        (Some(Flex::ColReverse), _) => [("flexDirection", "column-reverse")],
+        (Some(Flex::Wrap), _) => [("flexWrap", "wrap")],
+        (Some(Flex::WrapReverse), _) => [("flexWrap", "wrap-reverse")],
+        (Some(Flex::NoWrap), _) => [("flexWrap", "nowrap")],
+        (None, None) => [("display", "flex")],
+        (None, Some(val)) => return simple_lookup(&theme.flex, val.as_str(), "flex"),
     };
 
     Some(to_lit(&rule))
