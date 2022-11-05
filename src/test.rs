@@ -168,6 +168,8 @@ fn snapshots_inner(path: &str) {
                 config: app_config.unwrap().config,
                 tw_attr: None,
                 tw_tpl: None,
+                tw_style_imported: false,
+                strict: true,
             })
         },
         input,
