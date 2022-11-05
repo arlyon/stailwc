@@ -188,6 +188,7 @@ mod plugin {
         Row,
         Col,
         Grow,
+        Shrink,
         RowReverse,
         ColReverse,
         Wrap,

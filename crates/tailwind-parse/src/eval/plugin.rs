@@ -437,6 +437,13 @@ pub fn flex(
                 "flexGrow",
             )
         }
+        (Some(Flex::Shrink), val) => {
+            return simple_lookup(
+                &theme.flex_grow,
+                val.as_ref().map(|v| v.as_str()).unwrap_or("DEFAULT"),
+                "flexShrink",
+            )
+        }
         (None, Some(val)) => return simple_lookup(&theme.flex, val.as_str(), "flex"),
     };
 
