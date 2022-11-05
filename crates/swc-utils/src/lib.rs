@@ -112,6 +112,28 @@ pub fn to_lit(items: &[(&str, &str)]) -> ObjectLit {
     }
 }
 
+pub fn named_literal(name: &str, items: &[(&str, &str)]) -> ObjectLit {
+    ObjectLit {
+        span: DUMMY_SP,
+        props: vec![PropOrSpread::Prop(Box::new(Prop::KeyValue(KeyValueProp {
+            key: if is_ident(name) {
+                PropName::Ident(Ident {
+                    span: DUMMY_SP,
+                    optional: false,
+                    sym: (*name).into(),
+                })
+            } else {
+                PropName::Str(Str {
+                    span: DUMMY_SP,
+                    raw: None,
+                    value: (*name).into(),
+                })
+            },
+            value: Box::new(Expr::Object(to_lit(items))),
+        })))],
+    }
+}
+
 /// Simple heuristic to determine ident vs string key name
 fn is_ident(s: &str) -> bool {
     s.chars()
