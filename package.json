@@ -31,7 +31,7 @@
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "semantic-release": "^19.0.5",
-    "tailwindcss": "^3.1.8"
+    "tailwindcss": "^3.2.2"
   },
   "peerDependencies": {
     "tailwindcss": "^3.1.8"

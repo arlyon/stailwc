@@ -13,10 +13,10 @@ itertools = "0.10.5"
 nom = "7.1.1"
 nom_locate = "4.0.0"
 phf = {version = "0.11.1", features = ["macros"]}
-stailwc-swc-utils = {version = "0.8.0", path = "../swc-utils"}
+stailwc-swc-utils = {version = "0.9.0", path = "../swc-utils"}
 swc_core = {version = "0.40.16", features = ["common"]}
-tailwind-config = {version = "0.8.0", path = "../tailwind-config"}
-tailwind-parse-macro = {version = "0.8.0", path = "../tailwind-parse-macro"}
+tailwind-config = {version = "0.9.0", path = "../tailwind-config"}
+tailwind-parse-macro = {version = "0.9.0", path = "../tailwind-parse-macro"}
 thiserror = "1.0.37"
 
 [dev-dependencies]
