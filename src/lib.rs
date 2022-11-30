@@ -5,6 +5,7 @@
 // bug in swc
 #![allow(clippy::not_unsafe_ptr_arg_deref)]
 
+mod css;
 #[cfg(test)]
 mod test;
 
@@ -28,9 +29,6 @@ use swc_core::{
 };
 use tailwind_config::TailwindConfig;
 use tailwind_parse::Directive;
-
-static RESET_CSS: &str = include_str!("../data/reset.css");
-static FORM_CSS: &str = include_str!("../data/form.css");
 
 #[derive(serde::Deserialize, Debug)]
 pub struct AppConfig<'a> {
@@ -155,7 +153,12 @@ impl<'a> VisitMut for TransformVisitor<'a> {
      */
     fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
         if self.tw_style_imported && let JSXElementName::Ident(i) = &n.name && i.sym.eq("TailwindStyle") {
-            let atom: Atom = format!("{}{}", RESET_CSS, FORM_CSS).into();
+
+            let atom: Atom = css::format_css(
+                true,
+                self.config.theme.font_family.get("sans").map(|v| v.as_slice()).unwrap_or(&[]),
+                self.config.theme.font_family.get("mono").map(|v| v.as_slice()).unwrap_or(&[])
+            ).into();
 
             n.name = JSXElementName::Ident(Ident::new("Global".into(), i.span));
             n.attrs.push(JSXAttrOrSpread::JSXAttr(
