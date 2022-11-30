@@ -173,6 +173,7 @@ impl<'a> Literal<'a> {
             Bg => Required(plugin::bg),
             H => RequiredArbitrary(plugin::h),
             W => RequiredArbitrary(plugin::w),
+            TransformOrigin => Required(plugin::transform_origin),
             P => Required(plugin::p),
             Px => Required(plugin::px),
             Pl => Required(plugin::pl),

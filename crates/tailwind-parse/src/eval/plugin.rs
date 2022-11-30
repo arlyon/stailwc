@@ -255,6 +255,21 @@ pub fn mix(rest: &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     }
 }
 
+pub fn transform_origin(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    match *rest {
+        "center" => Some(to_lit(&[("transformOrigin", "center")])),
+        "top" => Some(to_lit(&[("transformOrigin", "top")])),
+        "top-right" => Some(to_lit(&[("transformOrigin", "top right")])),
+        "right" => Some(to_lit(&[("transformOrigin", "right")])),
+        "bottom-right" => Some(to_lit(&[("transformOrigin", "bottom right")])),
+        "bottom" => Some(to_lit(&[("transformOrigin", "bottom")])),
+        "bottom-left" => Some(to_lit(&[("transformOrigin", "bottom left")])),
+        "left" => Some(to_lit(&[("transformOrigin", "left")])),
+        "top-left" => Some(to_lit(&[("transformOrigin", "top left")])),
+        _ => None,
+    }
+}
+
 fn blend(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     let modes = [
         "normal",

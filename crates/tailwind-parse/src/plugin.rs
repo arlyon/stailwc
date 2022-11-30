@@ -52,6 +52,8 @@ mod plugin {
         Ml,
         Mr,
         Mt,
+        #[rename("origin")]
+        TransformOrigin,
         Mb,
         Z,
         Text,
