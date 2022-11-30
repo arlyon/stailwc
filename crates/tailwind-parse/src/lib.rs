@@ -26,8 +26,8 @@ mod test {
     use std::assert_matches::assert_matches;
 
     use crate::{
-        Border, Css, Directive, Expression, Literal, Max, Plugin, Position, Subject, SubjectValue,
-        TextDecoration, Value,
+        Border, Css, Directive, Display, Expression, Literal, Max, Plugin, Position, Subject,
+        SubjectValue, TextDecoration, Value,
     };
 
     use itertools::Itertools;
@@ -84,6 +84,7 @@ mod test {
     #[test_case("border-[repeat(6,1fr)]", Plugin::Border(None), Some(SubjectValue::Css(Css("repeat(6,1fr)"))) ; "when braces are in arbitrary css")]
     #[test_case("border-[min-content min-content]", Plugin::Border(None), Some(SubjectValue::Css(Css("min-content min-content"))) ; "when spaces are in arbitrary css")]
     #[test_case("line-through", Plugin::TextDecoration(TextDecoration::LineThrough), None ; "when we have a transparent plugin")]
+    #[test_case("table-cell", Plugin::Display(Display::TableCell), None ; "do not eagerly parse")]
     fn plugin(s: &str, p: Plugin, v: Option<SubjectValue>) {
         let (rest, s) = Subject::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
         let lit = match s {

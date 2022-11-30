@@ -13,6 +13,7 @@ mod plugin {
     use nom::{
         bytes::complete::{tag, take_while1},
         combinator::map_res,
+        error::Error,
         sequence::preceded,
         IResult, Slice,
     };
@@ -293,42 +294,58 @@ mod plugin {
     impl<'a> Plugin {
         /// At a hight level, this algorithm:
         ///
-        /// 1. attempts to parse a plugin from the first segment in the text
-        /// 2. if it fails, it then checks the rootless map to determine whether it should keep searching
-        /// 3. if there is a subcommand, it attempts to parse the subcommand
-        /// 4. if the subcommand fails to parse, it falls back to the first discovered error
+        /// 1. take a segment of the input
+        /// 2. if it has a sub-segment, attempt to parse a plugin from the two
+        /// 3. if it doesn't have a sub-segment, attempt to parse a plugin from the segment
+        /// 4. if that plugin has subcommands, attempt to parse a subcommand from the sub-segment
         ///
+        /// this code is ugly
         pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
-            let parse_cmd = || take_while1(|c| c != '-' && c != ' ' && c != '[' && c != '!');
-            let mut parse_plugin = map_res(parse_cmd(), |s: NomSpan<'a>| s.parse::<Plugin>());
+            let parse_segment = || take_while1(|c| c != '-' && c != ' ' && c != '[' && c != '!');
 
-            // step 1
-            let cmd = parse_plugin(s);
+            let (rest, segment) = parse_segment()(s)?;
 
-            // step 2
-            let rest = if let Ok((rest, p)) = cmd && p.has_subcommand() {
-                rest
-            } else if cmd.is_err() && let Ok((rest, cmd)) = parse_cmd()(s) && Plugin::has_subsegments(&cmd) {
-                rest
-            } else  {
-                // this is not a subcommand, return early
-                return cmd;
-            };
+            // attempt to take the next one and parse
+            // this currently only goes one layer deep,
+            // but we may need to make this recursive
+            if Plugin::has_subsegments(&segment) && let Ok((rest, subsegment)) = preceded(tag("-"), parse_segment())(rest) {
+                let plugin_span = s
+                    .slice(..subsegment.location_offset() + subsegment.len() - s.location_offset());
+                if let Ok(p) = plugin_span.parse::<Plugin>() {
+                    return Ok((rest, p));
+                }
+            }
 
-            // step 3
-            let max = preceded(tag("-"), parse_cmd())(rest).map(|(rest, subcmd_span)| {
-                (
-                    rest,
-                    s.slice(
-                        ..subcmd_span.location_offset() + subcmd_span.len() - s.location_offset(),
-                    ),
-                )
-            });
+            // try and parse a plugin and if there is no subcommand, return it
+            let plugin_parse = segment
+                .parse::<Plugin>()
+                .map(|p| (rest, p))
+                .map_err(|_| nom::Err::Error(Error::new(segment, nom::error::ErrorKind::Tag)));
 
-            // step 4
-            match max.map(|(rest, sub)| (rest, sub.parse::<Plugin>())) {
+            if !plugin_parse
+                .as_ref()
+                .map(|(_, p)| p.has_subcommand())
+                .unwrap_or(false)
+            {
+                return plugin_parse;
+            }
+
+            // attempt to parse a subcommand
+            let subcommand =
+                preceded(tag("-"), parse_segment())(rest).map(|(rest, subcmd_span)| {
+                    (
+                        rest,
+                        s.slice(
+                            ..subcmd_span.location_offset() + subcmd_span.len()
+                                - s.location_offset(),
+                        ),
+                    )
+                });
+
+            // upon failing to parse, then return the first error
+            match subcommand.map(|(rest, sub)| (rest, sub.parse::<Plugin>())) {
                 Ok((rest, Ok(plugin))) => Ok((rest, plugin)),
-                _ => cmd,
+                _ => plugin_parse,
             }
         }
     }
