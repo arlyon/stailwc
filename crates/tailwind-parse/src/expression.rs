@@ -176,6 +176,7 @@ impl<'a> Expression<'a> {
                     "portrait" => "@media portrait",
                     "landscape" => "@media landscape",
                     "group-hover" => ".group:hover &",
+                    "group-focus" => ".group:focus &",
                     x => return Err(ExpressionConversionError::UnknownModifier(x)),
                 }
                 .into(),
