@@ -158,7 +158,7 @@ lookup_plugin!(bottom, height, "bottom");
 lookup_plugin!(fill, colors, "fill");
 lookup_plugin!(left, width, "left");
 lookup_plugin!(right, width, "right");
-lookup_plugin!(tracking, letter_spacing, "letterSpacing");
+lookup_plugin_arbitrary!(tracking, letter_spacing, "letterSpacing");
 lookup_plugin_arbitrary!(h, height, "height");
 lookup_plugin!(to, colors, "--tw-gradient-to");
 lookup_plugin_arbitrary!(w, width, "width");

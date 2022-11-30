@@ -162,7 +162,7 @@ impl<'a> Literal<'a> {
             Left => Required(plugin::left),
             Right => Required(plugin::right),
             Translate => Required(plugin::translate),
-            Tracking => Required(plugin::tracking),
+            Tracking => RequiredArbitrary(plugin::tracking),
             Invert => Optional(plugin::invert),
             Space => Required(plugin::space),
             Transform => Optional(plugin::transform),
