@@ -187,6 +187,20 @@ lookup_plugin_arbitrary!(max_h, max_height, "maxHeight");
 
 lookup_plugin!(leading, line_height, "lineHeight");
 
+pub fn align(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    match *rest {
+        "baseline" => Some(to_lit(&[("verticalAlign", "baseline")])),
+        "top" => Some(to_lit(&[("verticalAlign", "top")])),
+        "middle" => Some(to_lit(&[("verticalAlign", "middle")])),
+        "bottom" => Some(to_lit(&[("verticalAlign", "bottom")])),
+        "text-top" => Some(to_lit(&[("verticalAlign", "text-top")])),
+        "text-bottom" => Some(to_lit(&[("verticalAlign", "text-bottom")])),
+        "sub" => Some(to_lit(&[("verticalAlign", "sub")])),
+        "super" => Some(to_lit(&[("verticalAlign", "super")])),
+        _ => None,
+    }
+}
+
 pub fn rounded(
     subcommand: Option<Rounded>,
     rest: &Option<SubjectValue>,

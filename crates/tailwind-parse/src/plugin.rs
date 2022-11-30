@@ -43,6 +43,8 @@ mod plugin {
         Pr,
         Py,
         Pt,
+        #[rename("align")]
+        VerticalAlign,
         Pb,
         M,
         Mx,

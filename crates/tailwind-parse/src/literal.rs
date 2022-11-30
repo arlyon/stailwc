@@ -177,6 +177,7 @@ impl<'a> Literal<'a> {
             Px => Required(plugin::px),
             Pl => Required(plugin::pl),
             Pr => Required(plugin::pr),
+            VerticalAlign => Required(plugin::align),
             Py => Required(plugin::py),
             Pt => Required(plugin::pt),
             Pb => Required(plugin::pb),
