@@ -291,8 +291,8 @@ mod plugin {
     impl<'a> Plugin {
         /// At a hight level, this algorithm:
         ///
-        /// 1. attempts to parse a valid plugin from the input
-        /// 2. if it fails, checks to see if the input is a 'rootless subcommand' (ie, one where the command on its own is not valid)
+        /// 1. attempts to parse a plugin from the first segment in the text
+        /// 2. if it fails, it then checks the rootless map to determine whether it should keep searching
         /// 3. if there is a subcommand, it attempts to parse the subcommand
         /// 4. if the subcommand fails to parse, it falls back to the first discovered error
         ///
@@ -306,7 +306,7 @@ mod plugin {
             // step 2
             let rest = if let Ok((rest, p)) = cmd && p.has_subcommand() {
                 rest
-            } else if cmd.is_err() && let Ok((rest, cmd)) = parse_cmd()(s) && Plugin::is_rootless_subcommand(&cmd) {
+            } else if cmd.is_err() && let Ok((rest, cmd)) = parse_cmd()(s) && Plugin::has_subsegments(&cmd) {
                 rest
             } else  {
                 // this is not a subcommand, return early

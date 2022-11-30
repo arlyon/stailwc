@@ -1,7 +1,7 @@
 #![feature(drain_filter)]
 #![feature(box_patterns)]
 
-use std::cmp::max;
+use std::{cmp::max, collections::HashSet};
 
 use convert_case::{Case, Casing};
 use proc_macro::TokenStream;
@@ -32,7 +32,7 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
 
     let mut max_dashes = 0;
     let mut subcommands = vec![];
-    let mut subcommands_rootless = vec![];
+    let mut has_subsegments = HashSet::new();
 
     let x = root
         .variants
@@ -96,7 +96,7 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
                 } else {
                     subcommands.push(ident.clone());
                     if optional.is_none() {
-                        subcommands_rootless.push(kebab.clone());
+                        has_subsegments.insert(kebab.clone());
                     }
                     fmt_regular
                 };
@@ -104,6 +104,9 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
                 let subcommands = subcommand.variants.iter().map(|v| {
                     let kebab = format(v, &kebab);
                     let sub_name = subcommand.ident.clone();
+                    if let Some((l, _)) = kebab.split_once('-') {
+                        has_subsegments.insert(l.to_string());
+                    }
                     let sub_ident = v.ident.clone();
                     if optional.is_some() {
                         quote! {
@@ -135,6 +138,8 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
         })
         .collect::<Vec<_>>();
 
+    let has_subsegments = has_subsegments.iter();
+
     TokenStream::from(quote! {
         mod plugin {
             #root
@@ -161,8 +166,8 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
                     }
                 }
 
-                pub fn is_rootless_subcommand(name: &str) -> bool {
-                    [#(#subcommands_rootless),*].contains(&name)
+                pub fn has_subsegments(name: &str) -> bool {
+                    [#(#has_subsegments),*].contains(&name)
                 }
             }
 

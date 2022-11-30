@@ -83,6 +83,7 @@ mod test {
     #[test_case("border-[10px]", Plugin::Border(None), Some(SubjectValue::Css(Css("10px"))) ; "arbitrary css")]
     #[test_case("border-[repeat(6,1fr)]", Plugin::Border(None), Some(SubjectValue::Css(Css("repeat(6,1fr)"))) ; "when braces are in arbitrary css")]
     #[test_case("border-[min-content min-content]", Plugin::Border(None), Some(SubjectValue::Css(Css("min-content min-content"))) ; "when spaces are in arbitrary css")]
+    #[test_case("line-through", Plugin::TextDecoration(TextDecoration::LineThrough), None ; "when we have a transparent plugin")]
     fn plugin(s: &str, p: Plugin, v: Option<SubjectValue>) {
         let (rest, s) = Subject::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
         let lit = match s {
