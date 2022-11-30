@@ -206,14 +206,18 @@ pub fn rounded(
     rest: &Option<SubjectValue>,
     theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
-    let rest = match rest {
-        Some(SubjectValue::Value(Value(rest))) => rest,
-        None => "DEFAULT",
-        _ => return None,
-    };
-
     let cmds = match subcommand {
-        None => return simple_lookup(&theme.border_radius, rest, "borderRadius"),
+        None => {
+            return match rest {
+                Some(SubjectValue::Value(Value(v))) => {
+                    simple_lookup(&theme.border_radius, v, "borderRadius")
+                }
+                Some(SubjectValue::Css(Css(v))) => {
+                    Some(to_lit(&[("borderRadius", &v.to_string())]))
+                }
+                None => simple_lookup(&theme.border_radius, "DEFAULT", "borderRadius"),
+            }
+        }
         Some(Rounded::T) => ("borderTopLeftRadius", Some("borderTopRightRadius")),
         Some(Rounded::B) => ("borderBottomLeftRadius", Some("borderBottomRightRadius")),
         Some(Rounded::L) => ("borderTopLeftRadius", Some("borderBottomLeftRadius")),
@@ -224,7 +228,13 @@ pub fn rounded(
         Some(Rounded::Bl) => ("borderBottomLeftRadius", None),
     };
 
-    theme.border_radius.get(rest).map(|lookup| match cmds {
+    let radius = match rest {
+        Some(SubjectValue::Value(Value(v))) => theme.border_radius.get(v),
+        Some(SubjectValue::Css(Css(v))) => Some(v),
+        None => theme.border_radius.get("DEFAULT"),
+    };
+
+    radius.map(|lookup| match cmds {
         (a, Some(b)) => to_lit(&[(a, lookup), (b, lookup)]),
         (a, None) => to_lit(&[(a, lookup)]),
     })
