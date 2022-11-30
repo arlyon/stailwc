@@ -127,8 +127,6 @@ mod test {
             .map(|v| v.iter().map(|s| *s).join(" "))
             .collect::<Vec<_>>();
 
-        println!("{:?}", inputs);
-
         let lits = inputs
             .iter()
             .map(|s| {

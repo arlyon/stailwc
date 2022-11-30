@@ -111,7 +111,6 @@ pub fn sort_recursive(mut lit: ObjectLit) -> ObjectLit {
         {
             name1.cmp(name2)
         } else {
-            println!("{:?} {:?}", prop1, prop2);
             std::cmp::Ordering::Equal
         }
     });
