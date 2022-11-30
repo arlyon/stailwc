@@ -47,6 +47,7 @@ impl<'a> LiteralConversionError<'a> {
 }
 
 enum PluginType {
+    Singular(fn() -> Option<ObjectLit>),
     Required(fn(&Value, &TailwindTheme) -> Option<ObjectLit>),
     Optional(fn(Option<&Value>, &TailwindTheme) -> Option<ObjectLit>),
     RequiredArbitrary(fn(&SubjectValue, &TailwindTheme) -> Option<ObjectLit>),
@@ -147,6 +148,7 @@ impl<'a> Literal<'a> {
             Grow => Optional(plugin::grow),
             Shrink => Optional(plugin::shrink),
             Basis => Required(plugin::basis),
+            Italic => Singular(plugin::italic),
             Justify => Required(plugin::justify),
             Items => Required(plugin::items),
             Gap(None) => Required(plugin::gap),
@@ -209,6 +211,7 @@ impl<'a> Literal<'a> {
             (Optional(p), None) => p(None, theme),
             (RequiredArbitrary(p), Some(value)) => p(value, theme),
             (OptionalArbitrary(p), value) => p(value.as_ref(), theme),
+            (Singular(p), None) => p(),
             _ => None,
         }
         .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))

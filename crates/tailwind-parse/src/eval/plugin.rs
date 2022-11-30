@@ -714,6 +714,10 @@ pub fn justify(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit>
     .map(|v| to_lit(&[("justifyContent", v)]))
 }
 
+pub fn italic() -> Option<ObjectLit> {
+    Some(to_lit(&[("fontStyle", "italic")]))
+}
+
 pub fn items(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
     match *rest {
         "start" => Some("flex-start"),

@@ -107,6 +107,7 @@ mod plugin {
         Space,
         Transform,
         Opacity,
+        Italic,
         Blur,
         Ring,
         Sr,
@@ -123,6 +124,7 @@ mod plugin {
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
     pub enum Not {
         Prose,
+        Italic,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
