@@ -475,6 +475,18 @@ pub fn border(
     func(rest.as_ref(), theme)
 }
 
+fn border_style(rest: Option<&SubjectValue>, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest {
+        Some(SubjectValue::Value(Value("solid"))) => Some(to_lit(&[("borderStyle", "solid")])),
+        Some(SubjectValue::Value(Value("dashed"))) => Some(to_lit(&[("borderStyle", "dashed")])),
+        Some(SubjectValue::Value(Value("dotted"))) => Some(to_lit(&[("borderStyle", "dotted")])),
+        Some(SubjectValue::Value(Value("double"))) => Some(to_lit(&[("borderStyle", "double")])),
+        Some(SubjectValue::Value(Value("hidden"))) => Some(to_lit(&[("borderStyle", "hidden")])),
+        Some(SubjectValue::Value(Value("none"))) => Some(to_lit(&[("borderStyle", "none")])),
+        _ => None,
+    }
+}
+
 lookup_plugin_arbitrary_opt!(border_color, colors, "borderColor");
 lookup_plugin_arbitrary_opt!(border_width, border_width, "borderWidth");
 lookup_plugin_arbitrary_opt!(border_t, border_width, "borderTopWidth");
@@ -483,7 +495,8 @@ lookup_plugin_arbitrary_opt!(border_r, border_width, "borderRightWidth");
 lookup_plugin_arbitrary_opt!(border_b, border_width, "borderBottomWidth");
 merge_plugins_arbitrary_opt!(border_x, border_l, border_r);
 merge_plugins_arbitrary_opt!(border_y, border_t, border_b);
-merge_plugins_arbitrary_opt!(border_inner, border_color, border_width);
+merge_plugins_arbitrary_opt!(border_cw, border_color, border_width);
+merge_plugins_arbitrary_opt!(border_inner, border_cw, border_style);
 
 merge_plugins!(inset_x, left, right);
 merge_plugins!(inset_y, top, bottom);
