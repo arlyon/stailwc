@@ -47,8 +47,10 @@ impl<'a> LiteralConversionError<'a> {
 }
 
 enum PluginType {
-    Required(fn(&str, &TailwindTheme) -> Option<ObjectLit>),
-    Optional(fn(Option<&str>, &TailwindTheme) -> Option<ObjectLit>),
+    Required(fn(&Value, &TailwindTheme) -> Option<ObjectLit>),
+    Optional(fn(Option<&Value>, &TailwindTheme) -> Option<ObjectLit>),
+    RequiredArbitrary(fn(&SubjectValue, &TailwindTheme) -> Option<ObjectLit>),
+    OptionalArbitrary(fn(Option<&SubjectValue>, &TailwindTheme) -> Option<ObjectLit>),
 }
 
 impl<'a> Literal<'a> {
@@ -186,10 +188,10 @@ impl<'a> Literal<'a> {
             Mt => Required(plugin::mt),
             Mb => Required(plugin::mb),
             Z => Required(plugin::z),
-            Min(Min::H) => Required(plugin::min_h),
-            Min(Min::W) => Required(plugin::min_w),
-            Max(Max::H) => Required(plugin::max_h),
-            Max(Max::W) => Required(plugin::max_w),
+            Min(Min::H) => RequiredArbitrary(plugin::min_h),
+            Min(Min::W) => RequiredArbitrary(plugin::min_w),
+            Max(Max::H) => RequiredArbitrary(plugin::max_h),
+            Max(Max::W) => RequiredArbitrary(plugin::max_w),
             Fill => Required(plugin::fill),
             Inset(None) => Required(plugin::inset),
             Inset(Some(Inset::X)) => Required(plugin::inset_x),
@@ -200,9 +202,11 @@ impl<'a> Literal<'a> {
         };
 
         match (plugin, &self.value) {
-            (Required(p), Some(SubjectValue::Value(s) | SubjectValue::Css(s))) => p(s, theme),
-            (Optional(p), Some(SubjectValue::Value(s) | SubjectValue::Css(s))) => p(Some(s), theme),
+            (Required(p), Some(SubjectValue::Value(s))) => p(s, theme),
+            (Optional(p), Some(SubjectValue::Value(s))) => p(Some(s), theme),
             (Optional(p), None) => p(None, theme),
+            (RequiredArbitrary(p), Some(value)) => p(value, theme),
+            (OptionalArbitrary(p), value) => p(value.as_ref(), theme),
             _ => None,
         }
         .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
@@ -211,15 +215,20 @@ impl<'a> Literal<'a> {
 
 #[derive(Debug, PartialEq, Eq)]
 pub enum SubjectValue<'a> {
-    Value(&'a str),
-    Css(&'a str),
+    Value(Value<'a>),
+    Css(Css<'a>),
 }
+
+#[derive(Debug, PartialEq, Eq)]
+pub struct Value<'a>(pub &'a str);
+#[derive(Debug, PartialEq, Eq)]
+pub struct Css<'a>(pub &'a str);
 
 impl Display for SubjectValue<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            SubjectValue::Value(s) => write!(f, "{s}"),
-            SubjectValue::Css(s) => write!(f, "{s}"),
+            SubjectValue::Value(Value(s)) => write!(f, "{s}"),
+            SubjectValue::Css(Css(s)) => write!(f, "{s}"),
         }
     }
 }
@@ -227,8 +236,8 @@ impl Display for SubjectValue<'_> {
 impl<'a> SubjectValue<'a> {
     pub fn as_str(&self) -> &str {
         match self {
-            SubjectValue::Value(s) => s,
-            SubjectValue::Css(s) => s,
+            SubjectValue::Value(Value(s)) => s,
+            SubjectValue::Css(Css(s)) => s,
         }
     }
 
@@ -245,9 +254,9 @@ impl<'a> SubjectValue<'a> {
         // a value is either numeric with dashes signifying fractions,
         // or aplhanumeric with dashes
         let value = verify(Self::parse_value, |s| s.len() > 0)
-            .map(|val: NomSpan<'a>| (val, SubjectValue::Value(&val)));
+            .map(|val: NomSpan<'a>| (val, SubjectValue::Value(Value(&val))));
         let css = delimited(char('['), take_while(|c| c != ']'), char(']'))
-            .map(|css: NomSpan<'a>| (css, SubjectValue::Css(&css)));
+            .map(|css: NomSpan<'a>| (css, SubjectValue::Css(Css(&css))));
 
         value.or(css).parse(s)
     }

@@ -1,8 +1,8 @@
 use std::collections::HashMap;
 
 use crate::{
-    AlignSelf, Border, Display, Divide, Flex, Grid, Object, Position, Rounded, SubjectValue,
-    TextDecoration, TextTransform, Visibility, Whitespace,
+    AlignSelf, Border, Css, Display, Divide, Flex, Grid, Object, Position, Rounded, SubjectValue,
+    TextDecoration, TextTransform, Value, Visibility, Whitespace,
 };
 use itertools::Itertools;
 use stailwc_swc_utils::{merge_literals, to_lit};
@@ -14,33 +14,84 @@ use tailwind_config::TailwindTheme;
 
 macro_rules! lookup_plugin {
     ($def:ident, $map:tt, $target:expr) => {
-        pub fn $def(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+        pub fn $def(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
             simple_lookup(&theme.$map, rest, $target)
         }
     };
     ($def:ident, $map:tt, $target:expr, $closure:expr) => {
-        pub fn $def(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+        pub fn $def(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
             simple_lookup_map(&theme.$map, rest, $target, $closure)
+        }
+    };
+}
+
+macro_rules! lookup_plugin_arbitrary {
+    ($def:ident, $map:tt, $target:expr) => {
+        pub fn $def(value: &SubjectValue, theme: &TailwindTheme) -> Option<ObjectLit> {
+            match value {
+                SubjectValue::Value(Value(v)) => simple_lookup(&theme.$map, v, $target),
+                SubjectValue::Css(Css(v)) => Some(to_lit(&[($target, v)])),
+            }
+        }
+    };
+    ($def:ident, $map:tt, $target:expr, $closure:expr) => {
+        pub fn $def(value: &SubjectValue, theme: &TailwindTheme) -> Option<ObjectLit> {
+            match value {
+                SubjectValue::Value(Value(v)) => {
+                    simple_lookup_map(&theme.$map, v, $target, $closure)
+                }
+                SubjectValue::Css(Css(v)) => to_lit(&[($target, $closure(v))]),
+            }
         }
     };
 }
 
 macro_rules! lookup_plugin_opt {
     ($def:ident, $map:tt, $target:expr) => {
-        pub fn $def(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
-            simple_lookup(&theme.$map, rest.unwrap_or("DEFAULT"), $target)
+        pub fn $def(rest: Option<&Value>, theme: &TailwindTheme) -> Option<ObjectLit> {
+            simple_lookup(&theme.$map, rest.map(|v| v.0).unwrap_or("DEFAULT"), $target)
         }
     };
     ($def:ident, $map:tt, $target:expr, $closure:expr) => {
-        pub fn $def(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
-            simple_lookup_map(&theme.$map, rest.unwrap_or("DEFAULT"), $target, $closure)
+        pub fn $def(rest: Option<&Value>, theme: &TailwindTheme) -> Option<ObjectLit> {
+            simple_lookup_map(
+                &theme.$map,
+                rest.map(|v| v.0).unwrap_or("DEFAULT"),
+                $target,
+                $closure,
+            )
         }
     };
 }
 
-macro_rules! merge_plugins_opt {
+macro_rules! lookup_plugin_arbitrary_opt {
+    ($def:ident, $map:tt, $target:expr) => {
+        pub fn $def(value: Option<&SubjectValue>, theme: &TailwindTheme) -> Option<ObjectLit> {
+            match value {
+                Some(SubjectValue::Value(Value(v))) => simple_lookup(&theme.$map, v, $target),
+                Some(SubjectValue::Css(Css(v))) => Some(to_lit(&[($target, v)])),
+                // if there is no value, attempt to look up the default
+                None => simple_lookup(&theme.$map, "DEFAULT", $target),
+            }
+        }
+    };
+    ($def:ident, $map:tt, $target:expr, $closure:expr) => {
+        pub fn $def(value: Option<&SubjectValue>, theme: &TailwindTheme) -> Option<ObjectLit> {
+            match value {
+                Some(SubjectValue::Value(Value(v))) => {
+                    simple_lookup_map(&theme.$map, v, $target, $closure)
+                }
+                Some(SubjectValue::Css(Css(v))) => to_lit(&[($target, $closure(v))]),
+                // if there is no value, attempt to look up the default
+                None => simple_lookup_map(&theme.$map, "DEFAULT", $target, $closure),
+            }
+        }
+    };
+}
+
+macro_rules! merge_plugins {
     ($def:ident, $closure_a:expr, $closure_b:expr) => {
-        pub fn $def(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
+        pub fn $def(rest: &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
             match ($closure_a(rest, theme), $closure_b(rest, theme)) {
                 (None, None) => None,
                 (None, Some(a)) => Some(a),
@@ -51,9 +102,22 @@ macro_rules! merge_plugins_opt {
     };
 }
 
-macro_rules! merge_plugins {
+macro_rules! merge_plugins_opt {
     ($def:ident, $closure_a:expr, $closure_b:expr) => {
-        pub fn $def(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+        pub fn $def(rest: Option<&Value>, theme: &TailwindTheme) -> Option<ObjectLit> {
+            match ($closure_a(rest, theme), $closure_b(rest, theme)) {
+                (None, None) => None,
+                (None, Some(a)) => Some(a),
+                (Some(b), None) => Some(b),
+                (Some(a), Some(b)) => Some(merge_literals(a, b)),
+            }
+        }
+    };
+}
+
+macro_rules! merge_plugins_arbitrary_opt {
+    ($def:ident, $closure_a:expr, $closure_b:expr) => {
+        pub fn $def(rest: Option<&SubjectValue>, theme: &TailwindTheme) -> Option<ObjectLit> {
             match ($closure_a(rest, theme), $closure_b(rest, theme)) {
                 (None, None) => None,
                 (None, Some(a)) => Some(a),
@@ -116,10 +180,10 @@ lookup_plugin!(gap_y, gap, "rowGap");
 lookup_plugin!(cursor, cursor, "cursor");
 lookup_plugin!(scale, scale, "transform", |v| format!("scale({v})"));
 
-lookup_plugin!(min_w, min_width, "minWidth");
-lookup_plugin!(max_w, max_width, "maxWidth");
-lookup_plugin!(min_h, min_height, "minHeight");
-lookup_plugin!(max_h, max_height, "maxHeight");
+lookup_plugin_arbitrary!(min_w, min_width, "minWidth");
+lookup_plugin_arbitrary!(max_w, max_width, "maxWidth");
+lookup_plugin_arbitrary!(min_h, min_height, "minHeight");
+lookup_plugin_arbitrary!(max_h, max_height, "maxHeight");
 
 lookup_plugin!(leading, line_height, "lineHeight");
 
@@ -129,7 +193,7 @@ pub fn rounded(
     theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
     let rest = match rest {
-        Some(SubjectValue::Value(rest)) => rest,
+        Some(SubjectValue::Value(Value(rest))) => rest,
         None => "DEFAULT",
         _ => return None,
     };
@@ -152,16 +216,16 @@ pub fn rounded(
     })
 }
 
-pub fn pointer_events(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
-    match rest {
+pub fn pointer_events(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    match *rest {
         "events-none" => Some(to_lit(&[("pointerEvents", "none")])),
         "events-auto" => Some(to_lit(&[("pointerEvents", "auto")])),
         _ => None,
     }
 }
 
-pub fn mix(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
-    match rest.split_once('-') {
+pub fn mix(rest: &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
+    match rest.0.split_once('-') {
         Some(("blend", rest)) => blend(rest, theme),
         _ => None,
     }
@@ -193,7 +257,7 @@ fn blend(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
         .then(|| to_lit(&[("mixBlendMode", rest)]))
 }
 
-pub fn text(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn text(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup_map(&theme.font_size, rest, "fontSize", |(a, _)| a.to_string())
         .or_else(|| simple_lookup(&theme.colors, rest, "color"))
         .or_else(|| {
@@ -203,7 +267,7 @@ pub fn text(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
         })
 }
 
-pub fn space(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn space(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     match rest.split_once('-') {
         Some((xy, "reverse")) => Some(to_lit(&[(
             match xy {
@@ -286,7 +350,7 @@ pub fn text_decoration(
     )]))
 }
 
-pub fn truncate(_rest: Option<&str>, _theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn truncate(_rest: Option<&Value>, _theme: &TailwindTheme) -> Option<ObjectLit> {
     Some(to_lit(&[
         ("overflow", "hidden"),
         ("textOverflow", "ellipsis"),
@@ -294,43 +358,46 @@ pub fn truncate(_rest: Option<&str>, _theme: &TailwindTheme) -> Option<ObjectLit
     ]))
 }
 
-pub fn appearance(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
-    (rest == "none").then_some(to_lit(&[("appearance", "none")]))
+pub fn appearance(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    "none"
+        .eq(*rest)
+        .then_some(to_lit(&[("appearance", "none")]))
 }
 
-pub fn font(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn font(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup_map(&theme.font_family, rest, "fontFamily", |s| {
         s.iter().join(", ")
     })
     .or_else(|| simple_lookup(&theme.font_weight, rest, "fontWeight"))
 }
 
-pub fn outline(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn outline(rest: Option<&Value>, theme: &TailwindTheme) -> Option<ObjectLit> {
     match rest {
         None => Some(to_lit(&[("outlineStyle", "solid")])),
-        Some("none") => Some(to_lit(&[
+        Some(Value("none")) => Some(to_lit(&[
             ("outline", "2px solid transparent"),
             ("outlineOffset", "2px"),
         ])),
-        Some("dashed") => Some(to_lit(&[("outlineStyle", "dashed")])),
-        Some("dotted") => Some(to_lit(&[("outlineStyle", "dotted")])),
-        Some("double") => Some(to_lit(&[("outlineStyle", "double")])),
-        Some("hidden") => Some(to_lit(&[("outlineStyle", "hidden")])),
-        Some(rest) => simple_lookup(&theme.colors, rest, "outlineColor")
-            .or_else(|| simple_lookup(&theme.outline_offset, rest, "outlineOffset"))
-            .or_else(|| simple_lookup(&theme.outline_width, rest, "outlineWidth")),
+        Some(Value("dashed")) => Some(to_lit(&[("outlineStyle", "dashed")])),
+        Some(Value("dotted")) => Some(to_lit(&[("outlineStyle", "dotted")])),
+        Some(Value("double")) => Some(to_lit(&[("outlineStyle", "double")])),
+        Some(Value("hidden")) => Some(to_lit(&[("outlineStyle", "hidden")])),
+        Some(rest) => simple_lookup(&theme.colors, rest.0, "outlineColor")
+            .or_else(|| simple_lookup(&theme.outline_offset, rest.0, "outlineOffset"))
+            .or_else(|| simple_lookup(&theme.outline_width, rest.0, "outlineWidth")),
     }
 }
 
-pub fn bg(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn bg(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.colors, rest, "backgroundColor")
         .or_else(|| simple_lookup(&theme.background_image, rest, "backgroundImage"))
 }
 
-pub fn shadow(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn shadow(rest: Option<&Value>, theme: &TailwindTheme) -> Option<ObjectLit> {
+    let lookup = rest.map(|v| v.0).unwrap_or("DEFAULT");
     theme
         .box_shadow
-        .get(rest.unwrap_or("DEFAULT"))
+        .get(lookup)
         .map(|val| {
             to_lit(&[
         ("boxShadow", "var(--tw-shadow)"),
@@ -342,7 +409,7 @@ pub fn shadow(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
     ])
         })
         .or_else(|| {
-            theme.colors.get(rest.unwrap_or("DEFAULT")).map(|val| {
+            theme.colors.get(lookup).map(|val| {
                 to_lit(&[
                     ("--tw-shadow-color", val),
                     ("--tw-shadow", "var(--tw-shadow-colored)"),
@@ -356,40 +423,34 @@ pub fn border(
     rest: &Option<SubjectValue>,
     theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
-    let rest = match rest {
-        Some(SubjectValue::Value(rest)) => rest,
-        None => "DEFAULT",
-        _ => return None,
-    };
-
     let func = match subcommand {
-        None => {
-            return simple_lookup(&theme.colors, rest, "borderColor")
-                .or_else(|| simple_lookup(&theme.border_width, rest, "borderWidth"))
-        }
-        Some(Border::X) => border_x,
-        Some(Border::Y) => border_y,
+        None => border_inner,
         Some(Border::T) => border_t,
         Some(Border::B) => border_b,
         Some(Border::L) => border_l,
         Some(Border::R) => border_r,
+        Some(Border::X) => border_x,
+        Some(Border::Y) => border_y,
     };
 
-    func(Some(rest), theme)
+    func(rest.as_ref(), theme)
 }
 
-lookup_plugin_opt!(border_t, border_width, "borderTopWidth");
-lookup_plugin_opt!(border_l, border_width, "borderLeftWidth");
-lookup_plugin_opt!(border_r, border_width, "borderRightWidth");
-lookup_plugin_opt!(border_b, border_width, "borderBottomWidth");
-merge_plugins_opt!(border_x, border_l, border_r);
-merge_plugins_opt!(border_y, border_t, border_b);
+lookup_plugin_arbitrary_opt!(border_color, colors, "borderColor");
+lookup_plugin_arbitrary_opt!(border_width, border_width, "borderWidth");
+lookup_plugin_arbitrary_opt!(border_t, border_width, "borderTopWidth");
+lookup_plugin_arbitrary_opt!(border_l, border_width, "borderLeftWidth");
+lookup_plugin_arbitrary_opt!(border_r, border_width, "borderRightWidth");
+lookup_plugin_arbitrary_opt!(border_b, border_width, "borderBottomWidth");
+merge_plugins_arbitrary_opt!(border_x, border_l, border_r);
+merge_plugins_arbitrary_opt!(border_y, border_t, border_b);
+merge_plugins_arbitrary_opt!(border_inner, border_color, border_width);
 
 merge_plugins!(inset_x, left, right);
 merge_plugins!(inset_y, top, bottom);
 merge_plugins!(inset, inset_x, inset_y);
 
-pub fn from(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn from(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme.colors.get(rest).map(|c| {
         to_lit(&[
             ("--tw-gradient-from", c),
@@ -402,8 +463,8 @@ pub fn from(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
     })
 }
 
-pub fn ring(rest: Option<&str>, theme: &TailwindTheme) -> Option<ObjectLit> {
-    let rest = rest.unwrap_or("DEFAULT");
+pub fn ring(rest: Option<&Value>, theme: &TailwindTheme) -> Option<ObjectLit> {
+    let rest = rest.map(|v| v.0).unwrap_or("DEFAULT");
     match rest.split_once('-') {
         Some(("offset", rest)) => {
             theme.ring_offset_width.get(rest)
@@ -525,7 +586,7 @@ pub fn align_self(
     Some(to_lit(&rule))
 }
 
-pub fn placeholder(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn placeholder(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.colors, rest, "color").map(|lit| ObjectLit {
         span: DUMMY_SP,
         props: vec![Prop::KeyValue(KeyValueProp {
@@ -594,15 +655,15 @@ pub fn white_space(
     Some(to_lit(&rule))
 }
 
-pub fn col(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn col(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.grid_column, rest, "gridColumn").or_else(|| match rest.split_once('-') {
         Some(("start", rest)) => simple_lookup(&theme.grid_column_start, rest, "gridColumnStart"),
         _ => None,
     })
 }
 
-pub fn justify(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
-    match rest {
+pub fn justify(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    match *rest {
         "start" => Some("flex-start"),
         "end" => Some("flex-end"),
         "center" => Some("center"),
@@ -614,8 +675,8 @@ pub fn justify(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     .map(|v| to_lit(&[("justifyContent", v)]))
 }
 
-pub fn items(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
-    match rest {
+pub fn items(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    match *rest {
         "start" => Some("flex-start"),
         "end" => Some("flex-end"),
         "center" => Some("center"),
@@ -626,11 +687,11 @@ pub fn items(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     .map(|v| to_lit(&[("alignItems", v)]))
 }
 
-pub fn transform(rest: Option<&str>, _theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn transform(rest: Option<&Value>, _theme: &TailwindTheme) -> Option<ObjectLit> {
     Some(to_lit(&[("transform", match rest {
-            Some("cpu") | None => "translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))",
-            Some("gpu") => "translate3d(var(--tw-translate-x), var(--tw-translate-y), 0) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))",
-            Some("none") => "none",
+            Some(Value("cpu")) | None => "translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))",
+            Some(Value("gpu")) => "translate3d(var(--tw-translate-x), var(--tw-translate-y), 0) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))",
+            Some(Value("none")) => "none",
             _ => return None,
     })]))
 }
@@ -666,10 +727,10 @@ pub fn display(
     )]))
 }
 
-pub fn box_(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn box_(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
     Some(to_lit(&[(
         "boxSizing",
-        match rest {
+        match *rest {
             "border" => "border-box",
             "content" => "content-box",
             _ => return None,
@@ -677,13 +738,13 @@ pub fn box_(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     )]))
 }
 
-pub fn select(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn select(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
     ["none", "text", "all", "auto"]
         .contains(&rest)
         .then_some(to_lit(&[("userSelect", rest)]))
 }
 
-pub fn overflow(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn overflow(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
     let values = ["auto", "hidden", "clip", "visible", "scroll"];
     values
         .contains(&rest)
@@ -730,7 +791,7 @@ pub fn visibility(
     )]))
 }
 
-pub fn translate(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn translate(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     let (cmd, rest) = rest.split_once('-')?;
     match cmd {
         "x" => simple_lookup(&theme.translate, rest, "--tw-translate-x"),
@@ -752,8 +813,8 @@ pub fn translate(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
         l
     })
 }
-pub fn sr(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
-    (rest == "only").then(|| {
+pub fn sr(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    "only".eq(*rest).then(|| {
         to_lit(&[
             ("position", "absolute"),
             ("width", "1px"),
@@ -768,28 +829,28 @@ pub fn sr(rest: &str, _theme: &TailwindTheme) -> Option<ObjectLit> {
     })
 }
 
-pub fn px(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn px(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme
         .padding
         .get(rest)
         .map(|s| to_lit(&[("paddingLeft", s), ("paddingRight", s)]))
 }
 
-pub fn py(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn py(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme
         .padding
         .get(rest)
         .map(|s| to_lit(&[("paddingTop", s), ("paddingBottom", s)]))
 }
 
-pub fn mx(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn mx(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme
         .margin
         .get(rest)
         .map(|s| to_lit(&[("marginLeft", s), ("marginRight", s)]))
 }
 
-pub fn my(rest: &str, theme: &TailwindTheme) -> Option<ObjectLit> {
+pub fn my(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme
         .margin
         .get(rest)
