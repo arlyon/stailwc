@@ -102,6 +102,19 @@ macro_rules! merge_plugins {
     };
 }
 
+macro_rules! merge_plugins_arbitrary {
+    ($def:ident, $closure_a:expr, $closure_b:expr) => {
+        pub fn $def(rest: &SubjectValue, theme: &TailwindTheme) -> Option<ObjectLit> {
+            match ($closure_a(rest, theme), $closure_b(rest, theme)) {
+                (None, None) => None,
+                (None, Some(a)) => Some(a),
+                (Some(b), None) => Some(b),
+                (Some(a), Some(b)) => Some(merge_literals(a, b)),
+            }
+        }
+    };
+}
+
 macro_rules! merge_plugins_opt {
     ($def:ident, $closure_a:expr, $closure_b:expr) => {
         pub fn $def(rest: Option<&Value>, theme: &TailwindTheme) -> Option<ObjectLit> {
@@ -150,14 +163,14 @@ lookup_plugin_opt!(invert, invert, "filter", |s| format!("invert({s})"));
 lookup_plugin!(basis, flex_basis, "flexBasis");
 lookup_plugin_opt!(grow, flex_grow, "flexGrow");
 lookup_plugin_opt!(shrink, flex_shrink, "flexShrink");
-lookup_plugin!(top, height, "top");
+lookup_plugin_arbitrary!(top, height, "top");
 lookup_plugin!(opacity, opacity, "opacity");
 lookup_plugin!(animation, animation, "animation");
 lookup_plugin!(order, order, "order");
-lookup_plugin!(bottom, height, "bottom");
+lookup_plugin_arbitrary!(bottom, height, "bottom");
 lookup_plugin!(fill, colors, "fill");
-lookup_plugin!(left, width, "left");
-lookup_plugin!(right, width, "right");
+lookup_plugin_arbitrary!(left, width, "left");
+lookup_plugin_arbitrary!(right, width, "right");
 lookup_plugin_arbitrary!(tracking, letter_spacing, "letterSpacing");
 lookup_plugin_arbitrary!(h, height, "height");
 lookup_plugin!(to, colors, "--tw-gradient-to");
@@ -501,9 +514,9 @@ merge_plugins_arbitrary_opt!(border_y, border_t, border_b);
 merge_plugins_arbitrary_opt!(border_cw, border_color, border_width);
 merge_plugins_arbitrary_opt!(border_inner, border_cw, border_style);
 
-merge_plugins!(inset_x, left, right);
-merge_plugins!(inset_y, top, bottom);
-merge_plugins!(inset, inset_x, inset_y);
+merge_plugins_arbitrary!(inset_x, left, right);
+merge_plugins_arbitrary!(inset_y, top, bottom);
+merge_plugins_arbitrary!(inset, inset_x, inset_y);
 
 pub fn from(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     theme.colors.get(rest).map(|c| {
