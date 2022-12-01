@@ -427,9 +427,12 @@ pub fn outline(rest: Option<&Value>, theme: &TailwindTheme) -> Option<ObjectLit>
     }
 }
 
-pub fn bg(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
-    simple_lookup(&theme.colors, rest, "backgroundColor")
-        .or_else(|| simple_lookup(&theme.background_image, rest, "backgroundImage"))
+pub fn bg(val: &SubjectValue, theme: &TailwindTheme) -> Option<ObjectLit> {
+    match val {
+        SubjectValue::Value(Value(rest)) => simple_lookup(&theme.colors, rest, "backgroundColor")
+            .or_else(|| simple_lookup(&theme.background_image, rest, "backgroundImage")),
+        SubjectValue::Css(Css(css)) => Some(to_lit(&[("background", css)])),
+    }
 }
 
 pub fn shadow(rest: Option<&Value>, theme: &TailwindTheme) -> Option<ObjectLit> {

@@ -173,7 +173,7 @@ impl<'a> Literal<'a> {
             Blur => Optional(plugin::blur),
             Ring => Optional(plugin::ring),
             Sr => Required(plugin::sr),
-            Bg => Required(plugin::bg),
+            Bg => RequiredArbitrary(plugin::bg),
             H => RequiredArbitrary(plugin::h),
             W => RequiredArbitrary(plugin::w),
             TransformOrigin => Required(plugin::transform_origin),
