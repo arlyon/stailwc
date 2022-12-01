@@ -1,3 +1,30 @@
+# [0.10.0](https://github.com/arlyon/stailwc/compare/0.9.0...0.10.0) (2022-12-01)
+
+
+### Bug Fixes
+
+* adjust the parser to handle subcommands better ([217644d](https://github.com/arlyon/stailwc/commit/217644d6b17e981516b4f497bebf8ba4276bc3a2))
+
+
+### Features
+
+* add align plugin ([3f69b75](https://github.com/arlyon/stailwc/commit/3f69b751e4d1863cfe4d9121ec3b8c1541a2927f))
+* add arbitrary w and h ([92dcc97](https://github.com/arlyon/stailwc/commit/92dcc9748790388a8a726007efff27fd10e3fc2b))
+* add bg plugin arbitrary css support ([cd8f1a2](https://github.com/arlyon/stailwc/commit/cd8f1a2712a6b564465e84bbdf9870412816c262))
+* add border-style plugin ([05d6512](https://github.com/arlyon/stailwc/commit/05d65127d4914520695289c9d337a1c7dec16dc5))
+* add col-end plugin ([d874547](https://github.com/arlyon/stailwc/commit/d8745471ff4140ba8ce3238ef31ce7e4dd680c5b))
+* add group-focus modifier ([feebe07](https://github.com/arlyon/stailwc/commit/feebe070eb44736d7197b6308c05acfd3659548c))
+* add italic plugin ([7bb1acc](https://github.com/arlyon/stailwc/commit/7bb1acc5265409330f748181a552505cf2165083))
+* add line-through plugin by improving has_subsegments check ([0d92ef5](https://github.com/arlyon/stailwc/commit/0d92ef5dbd0877ea693c95f715b7769bdcea7e69))
+* add origin plugin ([c42759c](https://github.com/arlyon/stailwc/commit/c42759c5b1d5a4f10fad63ae43a47d55f7666b50))
+* add row plugin ([73291ca](https://github.com/arlyon/stailwc/commit/73291caffd7a9bef15db9d05c4d1543b50187c09))
+* add support for styled components ([744d420](https://github.com/arlyon/stailwc/commit/744d42057b1c813932985efb54f3228f5c0d1340))
+* add t, b, l, r, and inset arbitrary css support ([d1469d6](https://github.com/arlyon/stailwc/commit/d1469d628585f2112b8b2ea671778de84b058e46))
+* include custom fonts in the reset css ([9011241](https://github.com/arlyon/stailwc/commit/9011241573f63a6a174813c16bfa72c8d73fa8a4))
+* make border support arbitrary css ([aa48d03](https://github.com/arlyon/stailwc/commit/aa48d03d4bef0a35dbc21bbdede98676bcaa577c))
+* make tracking support arbitrary css ([7eaab04](https://github.com/arlyon/stailwc/commit/7eaab040617126c2521f3da07513826ebe860973))
+* support arbitrary CSS plugins ([d7c9331](https://github.com/arlyon/stailwc/commit/d7c933161759153e13e899941bfcfe5fa9b4c587))
+
 # [0.9.0](https://github.com/arlyon/stailwc/compare/0.8.1...0.9.0) (2022-11-05)
 
 
