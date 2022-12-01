@@ -83,6 +83,7 @@ mod plugin {
         Flex(Option<Flex>),
         Grid(Option<Grid>),
         Col,
+        Row,
         Grow,
         Shrink,
         Basis,
