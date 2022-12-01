@@ -18,9 +18,10 @@ use swc_core::{
     },
     ecma::{
         ast::{
-            ArrayLit, Expr, ExprOrSpread, Ident, ImportDecl, JSXAttr, JSXAttrName, JSXAttrOrSpread,
-            JSXAttrValue, JSXElementName, JSXExpr, JSXExprContainer, JSXOpeningElement, Lit,
-            Module, ModuleDecl, ModuleItem, ObjectLit, Program, Str, TaggedTpl, Tpl, TplElement,
+            ArrayLit, CallExpr, Callee, Expr, ExprOrSpread, Ident, ImportDecl, JSXAttr,
+            JSXAttrName, JSXAttrOrSpread, JSXAttrValue, JSXElementName, JSXExpr, JSXExprContainer,
+            JSXOpeningElement, Lit, MemberExpr, MemberProp, Module, ModuleDecl, ModuleItem,
+            ObjectLit, Program, Str, TaggedTpl, Tpl, TplElement,
         },
         atoms::Atom,
         visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
@@ -40,12 +41,21 @@ pub struct AppConfig<'a> {
     pub strict: bool,
 }
 
+enum TplTransform {
+    /// tw`...`
+    Style(ObjectLit),
+    /// tw.div`...`
+    Component(Ident, ObjectLit),
+    /// tw(Component)`...`
+    ComponentCustom(Vec<ExprOrSpread>, ObjectLit),
+}
+
 #[derive(Default)]
 pub struct TransformVisitor<'a> {
     config: TailwindConfig<'a>,
     strict: bool,
     tw_attr: Option<(Span, ObjectLit)>,
-    tw_tpl: Option<ObjectLit>,
+    tw_tpl: Option<TplTransform>,
     tw_style_imported: bool,
 }
 
@@ -268,49 +278,79 @@ impl<'a> VisitMut for TransformVisitor<'a> {
      * convert it to an emotion object.
      */
     fn visit_mut_tagged_tpl(&mut self, n: &mut TaggedTpl) {
-        let _sym = match &n.tag {
-            box Expr::Ident(Ident { sym, .. }) if sym == "tw" => "tw",
+        let extract_literal = || {
+            let (text, span) = match n.tpl.quasis.as_slice() {
+                [TplElement { raw, span, .. }] => (raw, span),
+                _ => {
+                    HANDLER.with(|h| {
+                        h.span_err(n.span, "variables inside template tags are not supported")
+                    });
+                    return None;
+                }
+            };
+
+            let d = match Directive::parse(LocatedSpan::new_extra(text, *span)) {
+                Ok((_, d)) => d,
+                Err(e) => {
+                    HANDLER.with(|h| {
+                        self.report(h, *span, "invalid syntax")
+                            .note(&e.to_string())
+                            .emit()
+                    });
+                    return None;
+                }
+            };
+
+            match d.to_literal(*span, &self.config) {
+                Ok(lit) => Some(lit),
+                Err(e) => {
+                    HANDLER.with(|h| {
+                        self.report(h, *span, &e.to_string())
+                            .note("when evaluating plugin")
+                            .emit()
+                    });
+                    return None;
+                }
+            }
+        };
+
+        let transform = match &n.tag {
+            box Expr::Ident(Ident { sym, .. }) if sym == "tw" => {
+                if let Some(lit) = extract_literal() {
+                    TplTransform::Style(lit)
+                } else {
+                    return;
+                }
+            }
+            box Expr::Member(MemberExpr {
+                obj: box Expr::Ident(Ident { sym, .. }),
+                prop: MemberProp::Ident(ident),
+                ..
+            }) if sym == "tw" => {
+                if let Some(lit) = extract_literal() {
+                    TplTransform::Component(ident.to_owned(), lit)
+                } else {
+                    return;
+                }
+            }
+            box Expr::Call(CallExpr {
+                callee: Callee::Expr(box Expr::Ident(Ident { sym, .. })),
+                args,
+                ..
+            }) if sym == "tw" => {
+                if let Some(lit) = extract_literal() {
+                    TplTransform::ComponentCustom(args.to_owned(), lit)
+                } else {
+                    return;
+                }
+            }
             _ => {
                 n.visit_mut_children_with(self);
                 return;
             }
         };
 
-        let (text, span) = match n.tpl.quasis.as_slice() {
-            [TplElement { raw, span, .. }] => (raw, span),
-            _ => {
-                HANDLER.with(|h| {
-                    h.span_bug_no_panic(n.span, "unknown tw template, please file an issue")
-                });
-                return;
-            }
-        };
-
-        let d = match Directive::parse(LocatedSpan::new_extra(text, *span)) {
-            Ok((_, d)) => d,
-            Err(e) => {
-                HANDLER.with(|h| {
-                    self.report(h, *span, "invalid syntax")
-                        .note(&e.to_string())
-                        .emit()
-                });
-                return;
-            }
-        };
-
-        let lit = match d.to_literal(*span, &self.config) {
-            Ok(lit) => lit,
-            Err(e) => {
-                HANDLER.with(|h| {
-                    self.report(h, *span, &e.to_string())
-                        .note("when evaluating plugin")
-                        .emit()
-                });
-                return;
-            }
-        };
-
-        if self.tw_tpl.replace(lit).is_some() {
+        if self.tw_tpl.replace(transform).is_some() {
             HANDLER.with(|h| {
                 h.span_bug_no_panic(
                     n.span,
@@ -326,8 +366,50 @@ impl<'a> VisitMut for TransformVisitor<'a> {
      */
     fn visit_mut_expr(&mut self, n: &mut Expr) {
         n.visit_mut_children_with(self);
-        if let Some(objlit) = self.tw_tpl.take() {
-            *n = Expr::Object(objlit);
+        match self.tw_tpl.take() {
+            Some(TplTransform::Style(lit)) => {
+                *n = Expr::Object(lit);
+            }
+            Some(TplTransform::Component(ident, lit)) => {
+                *n = Expr::Call(CallExpr {
+                    span: DUMMY_SP,
+                    callee: Callee::Expr(Box::new(Expr::Member(MemberExpr {
+                        span: DUMMY_SP,
+                        obj: Box::new(Expr::Ident(Ident {
+                            span: DUMMY_SP,
+                            sym: "_styled".into(),
+                            optional: false,
+                        })),
+                        prop: MemberProp::Ident(ident),
+                    }))),
+                    args: vec![ExprOrSpread {
+                        expr: Box::new(Expr::Object(lit)),
+                        spread: None,
+                    }],
+                    type_args: None,
+                });
+            }
+            Some(TplTransform::ComponentCustom(args, lit)) => {
+                *n = Expr::Call(CallExpr {
+                    span: DUMMY_SP,
+                    callee: Callee::Expr(Box::new(Expr::Call(CallExpr {
+                        args,
+                        callee: Callee::Expr(Box::new(Expr::Ident(Ident {
+                            span: DUMMY_SP,
+                            sym: "_styled".into(),
+                            optional: false,
+                        }))),
+                        span: DUMMY_SP,
+                        type_args: None,
+                    }))),
+                    type_args: None,
+                    args: vec![ExprOrSpread {
+                        expr: Box::new(Expr::Object(lit)),
+                        spread: None,
+                    }],
+                })
+            }
+            None => {}
         }
     }
 

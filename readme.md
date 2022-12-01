@@ -71,6 +71,8 @@ Now get hacking!
 
 ## Usage
 
+### The `tw` tag
+
 You can interact with stailwc in two ways. The first is through
 the `tw` JSW attribute, and the second is via the `tw` template
 tag.
@@ -90,4 +92,20 @@ export const ColorButton = () => {
     </button>
   );
 };
+```
+
+### Styled components
+
+You can also create styled components using the `tw` template tag.
+
+```tsx
+import _styled from "@emotion/styled";
+
+// currently needed due to a swc bug
+// ===
+_styled;
+// ===
+
+export const StyledButton = tw.button`p-1 m-4 text-green bg-white hover:(bg-gray text-yellow md:text-red) border-3`;
+export const ShadowButton = tw(StyledButton)`shadow-lg`;
 ```
