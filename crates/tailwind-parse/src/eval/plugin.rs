@@ -710,6 +710,7 @@ pub fn white_space(
 pub fn col(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     simple_lookup(&theme.grid_column, rest, "gridColumn").or_else(|| match rest.split_once('-') {
         Some(("start", rest)) => simple_lookup(&theme.grid_column_start, rest, "gridColumnStart"),
+        Some(("end", rest)) => simple_lookup(&theme.grid_column_end, rest, "gridColumnEnd"),
         _ => None,
     })
 }
