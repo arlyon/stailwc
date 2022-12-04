@@ -187,7 +187,7 @@ lookup_plugin!(mr, margin, "marginRight");
 lookup_plugin!(mt, margin, "marginTop");
 lookup_plugin!(mb, margin, "marginBottom");
 lookup_plugin!(z, z_index, "zIndex");
-lookup_plugin!(gap, gap, "gap");
+lookup_plugin_arbitrary!(gap, gap, "gap");
 lookup_plugin!(gap_x, gap, "columnGap");
 lookup_plugin!(gap_y, gap, "rowGap");
 lookup_plugin!(cursor, cursor, "cursor");

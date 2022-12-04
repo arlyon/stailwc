@@ -152,7 +152,7 @@ impl<'a> Literal<'a> {
             Italic => Singular(plugin::italic),
             Justify => Required(plugin::justify),
             Items => Required(plugin::items),
-            Gap(None) => Required(plugin::gap),
+            Gap(None) => RequiredArbitrary(plugin::gap),
             Gap(Some(Gap::X)) => Required(plugin::gap_x),
             Gap(Some(Gap::Y)) => Required(plugin::gap_y),
             Cursor => Required(plugin::cursor),
