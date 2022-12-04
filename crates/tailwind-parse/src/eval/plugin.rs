@@ -765,15 +765,24 @@ pub fn content(rest: &SubjectValue, _theme: &TailwindTheme) -> Option<ObjectLit>
 
 pub fn justify(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
     match *rest {
-        "start" => Some("flex-start"),
-        "end" => Some("flex-end"),
-        "center" => Some("center"),
-        "between" => Some("space-between"),
-        "around" => Some("space-around"),
-        "evenly" => Some("space-evenly"),
+        "start" => Some(("justifyContent", "flex-start")),
+        "end" => Some(("justifyContent", "flex-end")),
+        "center" => Some(("justifyContent", "center")),
+        "between" => Some(("justifyContent", "space-between")),
+        "around" => Some(("justifyContent", "space-around")),
+        "evenly" => Some(("justifyContent", "space-evenly")),
+        "items-start" => Some(("justifyItems", "start")),
+        "items-end" => Some(("justifyItems", "end")),
+        "items-center" => Some(("justifyItems", "center")),
+        "items-stretch" => Some(("justifyItems", "stretch")),
+        "self-auto" => Some(("justifySelf", "auto")),
+        "self-start" => Some(("justifySelf", "start")),
+        "self-end" => Some(("justifySelf", "end")),
+        "self-center" => Some(("justifySelf", "center")),
+        "self-stretch" => Some(("justifySelf", "stretch")),
         _ => None,
     }
-    .map(|v| to_lit(&[("justifyContent", v)]))
+    .map(|v| to_lit(&[v]))
 }
 
 pub fn italic() -> Option<ObjectLit> {
