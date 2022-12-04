@@ -446,6 +446,15 @@ pub fn bg(val: &SubjectValue, theme: &TailwindTheme) -> Option<ObjectLit> {
             .or_else(|| simple_lookup(&theme.background_image, rest, "backgroundImage"))
             .or_else(|| simple_lookup(&theme.background_size, rest, "backgroundSize"))
             .or_else(|| simple_lookup(&theme.background_position, rest, "backgroundPosition"))
+            .or_else(|| match *rest {
+                "repeat" => Some(to_lit(&[("backgroundRepeat", "repeat")])),
+                "repeat-x" => Some(to_lit(&[("backgroundRepeat", "repeat-x")])),
+                "repeat-y" => Some(to_lit(&[("backgroundRepeat", "repeat-y")])),
+                "no-repeat" => Some(to_lit(&[("backgroundRepeat", "no-repeat")])),
+                "repeat-round" => Some(to_lit(&[("backgroundRepeat", "round")])),
+                "repeat-space" => Some(to_lit(&[("backgroundRepeat", "space")])),
+                _ => None,
+            }),
         SubjectValue::Css(Css(css)) => Some(to_lit(&[("background", css)])),
     }
 }
