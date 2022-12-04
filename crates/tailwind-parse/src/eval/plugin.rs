@@ -214,6 +214,15 @@ pub fn align(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
     }
 }
 
+pub fn float(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    match *rest {
+        "left" => Some(to_lit(&[("float", "left")])),
+        "right" => Some(to_lit(&[("float", "right")])),
+        "none" => Some(to_lit(&[("float", "none")])),
+        _ => None,
+    }
+}
+
 pub fn rounded(
     subcommand: Option<Rounded>,
     rest: &Option<SubjectValue>,

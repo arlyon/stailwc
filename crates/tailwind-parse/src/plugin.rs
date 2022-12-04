@@ -84,6 +84,7 @@ mod plugin {
         Grid(Option<Grid>),
         Col,
         Row,
+        Float,
         Grow,
         Shrink,
         Basis,

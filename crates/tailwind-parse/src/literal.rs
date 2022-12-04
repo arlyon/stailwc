@@ -167,6 +167,7 @@ impl<'a> Literal<'a> {
             Translate => Required(plugin::translate),
             Tracking => RequiredArbitrary(plugin::tracking),
             Invert => Optional(plugin::invert),
+            Float => Required(plugin::float),
             Space => Required(plugin::space),
             Transform => Optional(plugin::transform),
             Opacity => Required(plugin::opacity),
