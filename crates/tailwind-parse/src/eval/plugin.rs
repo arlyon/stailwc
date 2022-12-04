@@ -445,6 +445,7 @@ pub fn bg(val: &SubjectValue, theme: &TailwindTheme) -> Option<ObjectLit> {
         SubjectValue::Value(Value(rest)) => simple_lookup(&theme.colors, rest, "backgroundColor")
             .or_else(|| simple_lookup(&theme.background_image, rest, "backgroundImage"))
             .or_else(|| simple_lookup(&theme.background_size, rest, "backgroundSize"))
+            .or_else(|| simple_lookup(&theme.background_position, rest, "backgroundPosition"))
         SubjectValue::Css(Css(css)) => Some(to_lit(&[("background", css)])),
     }
 }

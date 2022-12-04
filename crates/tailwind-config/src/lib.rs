@@ -89,6 +89,8 @@ pub struct TailwindTheme<'a> {
     pub background_image: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "backgroundSize")]
     pub background_size: HashMap<&'a str, &'a str>,
+    #[serde(borrow, alias = "backgroundPosition")]
+    pub background_position: HashMap<&'a str, &'a str>,
 
     #[serde(borrow, rename = "gridTemplateRows")]
     pub grid_template_rows: HashMap<&'a str, &'a str>,
