@@ -689,19 +689,19 @@ pub fn placeholder(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectL
     })
 }
 
+lookup_plugin_arbitrary!(grid_col, grid_template_columns, "gridTemplateColumns");
+lookup_plugin_arbitrary!(grid_row, grid_template_rows, "gridTemplateRows");
+
 pub fn grid(
     g: Option<Grid>,
     rest: &Option<SubjectValue>,
     theme: &TailwindTheme,
 ) -> Option<ObjectLit> {
-    let rest = rest.as_ref().map(|s| s.as_str());
     let pair = match (g, rest) {
         (Some(Grid::Cols), Some(rest)) => {
-            return simple_lookup(&theme.grid_template_columns, rest, "gridTemplateColumns")
+            return grid_col(rest, theme);
         }
-        (Some(Grid::Rows), Some(rest)) => {
-            return simple_lookup(&theme.grid_template_rows, rest, "gridTemplateRows")
-        }
+        (Some(Grid::Rows), Some(rest)) => return grid_row(rest, theme),
         (Some(Grid::FlowRow), None) => [("gridAutoFlow", "row")],
         (Some(Grid::FlowRowDense), None) => [("gridAutoFlow", "row dense")],
         (Some(Grid::FlowCol), None) => [("gridAutoFlow", "col")],
