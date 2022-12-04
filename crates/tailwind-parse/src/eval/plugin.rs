@@ -759,6 +759,10 @@ pub fn row(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
     })
 }
 
+pub fn content(rest: &SubjectValue, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    Some(to_lit(&[("content", rest.as_str())]))
+}
+
 pub fn justify(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
     match *rest {
         "start" => Some("flex-start"),

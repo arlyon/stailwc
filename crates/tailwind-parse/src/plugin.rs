@@ -47,6 +47,7 @@ mod plugin {
         #[rename("align")]
         VerticalAlign,
         Pb,
+        Content,
         M,
         Mx,
         My,

@@ -145,6 +145,7 @@ impl<'a> Literal<'a> {
             Outline => Optional(plugin::outline),
             Mix => Required(plugin::mix),
             Col => Required(plugin::col),
+            Content => RequiredArbitrary(plugin::content),
             Row => Required(plugin::row),
             Grow => Optional(plugin::grow),
             Shrink => Optional(plugin::shrink),
