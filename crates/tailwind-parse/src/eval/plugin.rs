@@ -443,7 +443,8 @@ pub fn outline(rest: Option<&Value>, theme: &TailwindTheme) -> Option<ObjectLit>
 pub fn bg(val: &SubjectValue, theme: &TailwindTheme) -> Option<ObjectLit> {
     match val {
         SubjectValue::Value(Value(rest)) => simple_lookup(&theme.colors, rest, "backgroundColor")
-            .or_else(|| simple_lookup(&theme.background_image, rest, "backgroundImage")),
+            .or_else(|| simple_lookup(&theme.background_image, rest, "backgroundImage"))
+            .or_else(|| simple_lookup(&theme.background_size, rest, "backgroundSize"))
         SubjectValue::Css(Css(css)) => Some(to_lit(&[("background", css)])),
     }
 }
