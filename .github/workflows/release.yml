@@ -17,7 +17,8 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: nightly
+          # regular nightly currently causes panics, so pin this
+          toolchain: nightly-2022-09-27-x86_64-unknown-linux-gnu
           target: wasm32-wasi
           override: true
       - name: Set up Node 14
