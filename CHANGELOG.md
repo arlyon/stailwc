@@ -1,3 +1,10 @@
+## [0.11.1](https://github.com/arlyon/stailwc/compare/0.11.0...0.11.1) (2022-12-05)
+
+
+### Bug Fixes
+
+* pin toolchain to avoid panics ([5e3ff5f](https://github.com/arlyon/stailwc/commit/5e3ff5f9100c6547b99b6000a6b006773aeaf2dd))
+
 # [0.11.0](https://github.com/arlyon/stailwc/compare/0.10.0...0.11.0) (2022-12-05)
 
 
