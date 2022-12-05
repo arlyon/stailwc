@@ -20,9 +20,7 @@ pub struct Directive<'a> {
 }
 
 impl<'a> Directive<'a> {
-    /**
-     * Same as parse, but with an added check for an EOF.
-     */
+    /// Same as parse, but with an added check for an EOF.     
     pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
         terminated(many0(Expression::parse).and(space0), eof)
             .map(|(exps, _)| Directive { exps })

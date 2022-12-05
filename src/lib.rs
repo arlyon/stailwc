@@ -79,15 +79,13 @@ impl<'a> TransformVisitor<'a> {
     }
 }
 
-/**
- * Implement necessary visit_mut_* methods for actual custom transform.
- * A comprehensive list of possible visitor methods can be found here:
- * https://rustdoc.swc.rs/swc_ecma_visit/trait.VisitMut.html
- */
+/// The transform visitor for stailwc.
+///
+/// This visitor is responsible for transforming the AST,
+/// discovering and parsing tailwind directives, and converting
+/// component declarations into equivalent styled components.
 impl<'a> VisitMut for TransformVisitor<'a> {
-    /**
-     * Handle jsx attributes and convert them into emotion.
-     */
+    /// Handle jsx attributes and convert them into emotion.
     fn visit_mut_jsx_attr(&mut self, n: &mut JSXAttr) {
         let _sym = match &n.name {
             JSXAttrName::Ident(Ident { sym, .. }) if sym == "tw" => "tw",
@@ -156,11 +154,10 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         }
     }
 
-    /**
-     * We want to visit all jsx elements to either:
-     * a) detect the TailwindStyle import and transform it into a css declaration
-     * b) extract any tw attributes and transform them into a css declarations
-     */
+    /// Visit all jsx elements to either:
+    ///
+    /// a) detect the TailwindStyle import and transform it into a css declaration
+    /// b) extract any tw attributes and transform them into a css declarations
     fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
         if self.tw_style_imported && let JSXElementName::Ident(i) = &n.name && i.sym.eq("TailwindStyle") {
 
@@ -273,10 +270,8 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         };
     }
 
-    /**
-     * On discovery of a template tag, if it is a tailwind template tag,
-     * convert it to an emotion object.
-     */
+    /// On discovery of a template tag, if it is a tailwind template tag,
+    /// convert it to an emotion object.
     fn visit_mut_tagged_tpl(&mut self, n: &mut TaggedTpl) {
         let extract_literal = || {
             let (text, span) = match n.tpl.quasis.as_slice() {
@@ -360,10 +355,8 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         }
     }
 
-    /**
-     * Visit an expression, optionally substituting the template tag with the
-     * generated emotion object.
-     */
+    /// Visit an expression, optionally substituting the template tag with the
+    /// generated emotion object.
     fn visit_mut_expr(&mut self, n: &mut Expr) {
         n.visit_mut_children_with(self);
         match self.tw_tpl.take() {
@@ -413,9 +406,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         }
     }
 
-    /**
-     * Visit the import declarations, and mark whether tw_style is imported.
-     */
+    /// Visit the import declarations, and mark whether tw_style is imported.
     fn visit_mut_module(&mut self, n: &mut Module) {
         n.body.drain_filter(|stmt| {
             if let ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl { src, .. })) = stmt {

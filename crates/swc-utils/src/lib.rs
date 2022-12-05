@@ -16,14 +16,12 @@ enum KeyStrategy {
     Override,
 }
 
-/**
- * Inserts all the keys / values from b into a.
- * On clash:
- * - if both values are objects, merge
- * - otherwise, overwrite with b
- *
- * todo(arlyon): this could be slow for many keys
- */
+/// Inserts all the keys / values from b into a.
+/// On clash:
+/// - if both values are objects, merge
+/// - otherwise, overwrite with b
+///
+/// todo(arlyon): this could be slow for many keys
 pub fn merge_literals(mut a: ObjectLit, b: ObjectLit) -> ObjectLit {
     let mut strategies: HashMap<JsWord, (usize, KeyStrategy)> = Default::default();
 
