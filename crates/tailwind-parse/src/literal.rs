@@ -125,6 +125,10 @@ impl<'a> Literal<'a> {
                 return prose::prose(p, &self.value, theme)
                     .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
             }
+            Translate(t) => {
+                return plugin::translate(t, &self.value, theme)
+                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+            }
             Not(_) => todo!(),
 
             // all other plugins
@@ -166,7 +170,6 @@ impl<'a> Literal<'a> {
             Bottom => RequiredArbitrary(plugin::bottom),
             Left => RequiredArbitrary(plugin::left),
             Right => RequiredArbitrary(plugin::right),
-            Translate => Required(plugin::translate),
             Tracking => RequiredArbitrary(plugin::tracking),
             Invert => Optional(plugin::invert),
             Float => Required(plugin::float),

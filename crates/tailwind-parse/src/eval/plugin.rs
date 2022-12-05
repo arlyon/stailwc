@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use crate::{
     AlignSelf, Border, Css, Display, Divide, Flex, Grid, Object, Position, Rounded, SubjectValue,
-    TextDecoration, TextTransform, Value, Visibility, Whitespace,
+    TextDecoration, TextTransform, Translate, Value, Visibility, Whitespace,
 };
 use itertools::Itertools;
 use stailwc_swc_utils::{merge_literals, to_lit};
@@ -914,12 +914,22 @@ pub fn visibility(
     )]))
 }
 
-pub fn translate(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
-    let (cmd, rest) = rest.split_once('-')?;
-    match cmd {
-        "x" => simple_lookup(&theme.translate, rest, "--tw-translate-x"),
-        "y" => simple_lookup(&theme.translate, rest, "--tw-translate-y"),
-        _ => None,
+lookup_plugin_arbitrary!(translate_x, translate, "--tw-translate-x");
+lookup_plugin_arbitrary!(translate_y, translate, "--tw-translate-y");
+
+pub fn translate(
+    t: Translate,
+    val: &Option<SubjectValue>,
+    theme: &TailwindTheme,
+) -> Option<ObjectLit> {
+    let val = match val {
+        Some(v) => v,
+        None => return None,
+    };
+
+    match t {
+        Translate::X => translate_x(val, theme),
+        Translate::Y => translate_y(val, theme),
     }
     .map(|mut l| {
         l.props.push(

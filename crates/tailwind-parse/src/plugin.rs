@@ -106,7 +106,7 @@ mod plugin {
         Right,
         #[rename("self")]
         AlignSelf(AlignSelf),
-        Translate,
+        Translate(Translate),
         Tracking,
         Invert,
         Space,
@@ -130,6 +130,12 @@ mod plugin {
     pub enum Not {
         Prose,
         Italic,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Translate {
+        X,
+        Y,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
