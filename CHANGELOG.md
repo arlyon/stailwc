@@ -1,3 +1,26 @@
+# [0.11.0](https://github.com/arlyon/stailwc/compare/0.10.0...0.11.0) (2022-12-05)
+
+
+### Bug Fixes
+
+* add unzip feature ([c266fb4](https://github.com/arlyon/stailwc/commit/c266fb437fe3d7cded91d3c7e56c922cb09bc293))
+* allow numbers in the modifiers ([8e20a03](https://github.com/arlyon/stailwc/commit/8e20a03a0b4d005cdcbc3ad0aac8d543f04c23fd))
+
+
+### Features
+
+* add arbitrary support for grid template row and col ([7e44200](https://github.com/arlyon/stailwc/commit/7e44200ff5cdb72eb7be9b2906b4bfda85202a54))
+* add arbitrary support to the gap plugin ([6347a8f](https://github.com/arlyon/stailwc/commit/6347a8f16b8ba260ec528917c5d7c984d4ebae73))
+* add background position plugin ([50cb275](https://github.com/arlyon/stailwc/commit/50cb275899dde062525bbdde21657aeba1bfce3d))
+* add background repeat plugin ([a295300](https://github.com/arlyon/stailwc/commit/a29530058f54879aee6a4602b04512de9b3e1a24))
+* add background size plugin ([d1b2300](https://github.com/arlyon/stailwc/commit/d1b230055dac95517884c1f588d1d337a4af0473))
+* add content plugin ([687f5a2](https://github.com/arlyon/stailwc/commit/687f5a285692d450b0dc8cbdaf4c8a4758fc6df8))
+* add float plugin ([d873b2f](https://github.com/arlyon/stailwc/commit/d873b2f549d3899fdafc4b94e29d98a80e1a69c4))
+* add justify items and self plugins ([ae0a938](https://github.com/arlyon/stailwc/commit/ae0a9387bf2e72371b70895633c93643ece11bbc))
+* add line clamp plugin ([0c2780f](https://github.com/arlyon/stailwc/commit/0c2780f57e16a24f1eee0f0f8ceb9f38bc8b4774))
+* improve parsing and allow arbitrary values for translate ([ae5fe6e](https://github.com/arlyon/stailwc/commit/ae5fe6ea1cff1c2c6dd2c8f61e43bc54e04eb76a))
+* support nested tw attrs by using an attribute stack instead ([1848eb3](https://github.com/arlyon/stailwc/commit/1848eb3cdb8e4a225b19dc13a60d230876824499)), closes [#16](https://github.com/arlyon/stailwc/issues/16)
+
 # [0.10.0](https://github.com/arlyon/stailwc/compare/0.9.0...0.10.0) (2022-12-01)
 
 
