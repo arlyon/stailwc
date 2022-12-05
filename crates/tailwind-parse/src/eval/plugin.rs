@@ -234,9 +234,7 @@ pub fn rounded(
                 Some(SubjectValue::Value(Value(v))) => {
                     simple_lookup(&theme.border_radius, v, "borderRadius")
                 }
-                Some(SubjectValue::Css(Css(v))) => {
-                    Some(to_lit(&[("borderRadius", &v.to_string())]))
-                }
+                Some(SubjectValue::Css(Css(v))) => Some(to_lit(&[("borderRadius", v)])),
                 None => simple_lookup(&theme.border_radius, "DEFAULT", "borderRadius"),
             }
         }
@@ -323,7 +321,7 @@ pub fn text(Value(rest): &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
         .or_else(|| simple_lookup(&theme.colors, rest, "color"))
         .or_else(|| {
             ["left", "center", "right", "justify", "start", "end"]
-                .contains(&rest)
+                .contains(rest)
                 .then_some(to_lit(&[("textAlign", rest)]))
         })
 }
@@ -863,14 +861,14 @@ pub fn box_(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
 
 pub fn select(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
     ["none", "text", "all", "auto"]
-        .contains(&rest)
+        .contains(rest)
         .then_some(to_lit(&[("userSelect", rest)]))
 }
 
 pub fn overflow(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
     let values = ["auto", "hidden", "clip", "visible", "scroll"];
     values
-        .contains(&rest)
+        .contains(rest)
         .then_some(to_lit(&[("overflow", rest)]))
         .or_else(|| match rest.split_once('-') {
             Some(("x", rest)) => values

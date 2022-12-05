@@ -12,7 +12,6 @@ mod plugin {
     use crate::NomSpan;
     use nom::{
         bytes::complete::{tag, take_while1},
-        combinator::map_res,
         error::Error,
         sequence::preceded,
         IResult, Slice,

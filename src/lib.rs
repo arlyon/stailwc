@@ -372,7 +372,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                             .note("when evaluating plugin")
                             .emit()
                     });
-                    return None;
+                    None
                 }
             }
         };

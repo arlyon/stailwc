@@ -2,9 +2,9 @@ use nom::{
     bytes::complete::take_while1,
     character::{
         complete::{char, space0},
-        is_alphabetic, is_alphanumeric,
+        is_alphanumeric,
     },
-    combinator::{opt, verify},
+    combinator::opt,
     multi::many0,
     sequence::{preceded, terminated},
     IResult, Parser,
