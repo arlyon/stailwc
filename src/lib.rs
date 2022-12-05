@@ -41,6 +41,7 @@ pub struct AppConfig<'a> {
     pub strict: bool,
 }
 
+#[derive(Debug)]
 enum TplTransform {
     /// tw`...`
     Style(ObjectLit),
@@ -50,13 +51,78 @@ enum TplTransform {
     ComponentCustom(Vec<ExprOrSpread>, ObjectLit),
 }
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct TransformVisitor<'a> {
     config: TailwindConfig<'a>,
     strict: bool,
-    tw_attr: Option<(Span, ObjectLit)>,
+    /// This is treated as a stack because tw attrs can be nested
+    tw_attr_stack: DepthStack<(Span, ObjectLit)>,
     tw_tpl: Option<TplTransform>,
     tw_style_imported: bool,
+}
+
+/// A stack that only allows a single item to be pushed at a given depth.
+#[derive(Debug)]
+struct DepthStack<T> {
+    stack: Vec<(usize, T)>,
+    depth: usize,
+}
+
+impl<T> DepthStack<T> {
+    fn new() -> Self {
+        Self {
+            stack: Vec::new(),
+            depth: 0,
+        }
+    }
+
+    fn push(&mut self, item: T) -> Option<T> {
+        if self
+            .stack
+            .last()
+            .filter(|(d, _)| *d == self.depth)
+            .is_some()
+        {
+            return self.stack.pop().map(|(_, v)| v);
+        }
+
+        self.stack.push((self.depth, item));
+        None
+    }
+
+    fn pop(&mut self) -> Option<T> {
+        self.stack.pop().map(|(_, item)| item)
+    }
+
+    fn peek(&self) -> Option<&T> {
+        self.stack
+            .last()
+            .filter(|(d, _)| *d == self.depth)
+            .map(|(_, item)| item)
+    }
+
+    fn depth(&self) -> usize {
+        self.depth
+    }
+
+    #[tracing::instrument(skip(self))]
+    fn inc_depth(&mut self) {
+        self.depth += 1;
+        tracing::trace!(depth = self.depth);
+    }
+
+    #[tracing::instrument(skip(self))]
+    fn dec_depth(&mut self) {
+        self.depth -= 1;
+        tracing::trace!(depth = self.depth);
+        self.stack.retain(|(d, _)| *d <= self.depth);
+    }
+}
+
+impl<T> Default for DepthStack<T> {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl<'a> TransformVisitor<'a> {
@@ -64,9 +130,7 @@ impl<'a> TransformVisitor<'a> {
         Self {
             config: config.config,
             strict: config.strict,
-            tw_attr: None,
-            tw_tpl: None,
-            tw_style_imported: false,
+            ..Default::default()
         }
     }
 
@@ -127,7 +191,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                     },
                 };
 
-                if let Some((span, _val)) = self.tw_attr.replace((*span, x)) {
+                if let Some((span, _val)) = self.tw_attr_stack.push((*span, x)) {
                     HANDLER.with(|h| {
                         self.report(h, n.span, "tw attribute already exists, ignoring")
                             .span_note(
@@ -200,9 +264,10 @@ impl<'a> VisitMut for TransformVisitor<'a> {
             ));
         }
 
+        self.tw_attr_stack.inc_depth();
         n.attrs.visit_mut_children_with(self);
 
-        let lit = match self.tw_attr.take() {
+        let lit = match self.tw_attr_stack.pop() {
             Some((_, v)) => v,
             _ => return,
         };
@@ -268,10 +333,13 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 })),
             }));
         };
+
+        self.tw_attr_stack.dec_depth();
     }
 
     /// On discovery of a template tag, if it is a tailwind template tag,
     /// convert it to an emotion object.
+    #[tracing::instrument]
     fn visit_mut_tagged_tpl(&mut self, n: &mut TaggedTpl) {
         let extract_literal = || {
             let (text, span) = match n.tpl.quasis.as_slice() {

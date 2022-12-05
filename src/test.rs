@@ -17,6 +17,15 @@ use crate::{AppConfig, TransformVisitor};
 fn test_visitor() -> TransformVisitor<'static> {
     let mut t = TransformVisitor::default();
 
+    if let Err(_) = HANDLER.inner.set(Handler::with_tty_emitter(
+        ColorConfig::Auto,
+        true,
+        false,
+        None,
+    )) {
+        // set on a previous run
+    };
+
     t.config.theme.height.insert("4", "1rem");
     t.config.theme.spacing.insert("4", "1rem");
     t.config.theme.colors.insert("black", "black");
@@ -126,6 +135,18 @@ test!(
     r#"<Test css={{margin: "-1rem"}} />"#
 );
 
+// this currently doesn't work if the tw attr is BEFORE the subcomponent
+test!(
+    Syntax::Typescript(TsConfig {
+        tsx: true,
+        ..Default::default()
+    }),
+    |_| as_folder(test_visitor()),
+    multiple_values,
+    r#"<Test tw="m-4" render={<button tw="m-4" />} />"#,
+    r#"<Test render={<button css={{margin: "1rem"}}/>} css={{margin: "1rem"}} />"#
+);
+
 include!(concat!(env!("OUT_DIR"), "/test_cases.rs"));
 
 fn snapshots_inner(path: &str) {
@@ -166,10 +187,8 @@ fn snapshots_inner(path: &str) {
         |_| {
             as_folder(TransformVisitor {
                 config: app_config.unwrap().config,
-                tw_attr: None,
-                tw_tpl: None,
-                tw_style_imported: false,
                 strict: true,
+                ..Default::default()
             })
         },
         input,
