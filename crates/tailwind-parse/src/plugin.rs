@@ -42,6 +42,7 @@ mod plugin {
         Px,
         Pl,
         Pr,
+        LineClamp,
         Py,
         Pt,
         #[rename("align")]

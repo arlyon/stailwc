@@ -139,6 +139,7 @@ impl<'a> Literal<'a> {
             Appearance => Required(plugin::appearance),
             Pointer => Required(plugin::pointer_events),
             Ease => Optional(plugin::ease),
+            LineClamp => RequiredArbitrary(plugin::line_clamp),
             Order => Required(plugin::order),
             From => Required(plugin::from),
             To => Required(plugin::to),

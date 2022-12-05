@@ -841,6 +841,15 @@ pub fn display(
     )]))
 }
 
+pub fn line_clamp(rest: &SubjectValue, _theme: &TailwindTheme) -> Option<ObjectLit> {
+    Some(to_lit(&[
+        ("overflow", "hidden"),
+        ("display", "-webkit-box"),
+        ("WebkitBoxOrient", "vertical"),
+        ("WebkitLineClamp", rest.as_str()),
+    ]))
+}
+
 pub fn box_(Value(rest): &Value, _theme: &TailwindTheme) -> Option<ObjectLit> {
     Some(to_lit(&[(
         "boxSizing",
