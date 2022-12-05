@@ -4,7 +4,7 @@ edition = "2021"
 license = "MIT OR Apache-2.0"
 name = "tailwind-parse"
 repository = "https://github.com/arlyon/stailwc"
-version = "0.10.0"
+version = "0.11.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -15,7 +15,7 @@ nom_locate = "4.0.0"
 phf = {version = "0.11.1", features = ["macros"]}
 stailwc-swc-utils = {version = "0.9.0", path = "../swc-utils"}
 swc_core = {version = "0.40.16", features = ["common"]}
-tailwind-config = {version = "0.10.0", path = "../tailwind-config"}
+tailwind-config = {version = "0.11.0", path = "../tailwind-config"}
 tailwind-parse-macro = {version = "0.9.0", path = "../tailwind-parse-macro"}
 thiserror = "1.0.37"
 
