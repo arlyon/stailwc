@@ -98,6 +98,7 @@ mod test {
     }
 
     #[test_case("text-lg p-4" ; "basic")]
+    #[test_case("2xl:text-right" ; "2xl modifier")]
     #[test_case("border-b-4 p-4" ; "with subcommand")]
     #[test_case("   p-4    border-4" ; "when a statement has irregular gaps")]
     #[test_case("dash-modifier:p-4" ; "when a modifier has a dash in it")]
@@ -150,7 +151,6 @@ mod test {
 
     #[should_panic]
     #[test_case("-mod:sub" ; "when the minus is in the wrong place")]
-    #[test_case("m0d:p-4" ; "when modifier has a number")]
     #[test_case("()" ; "rejects empty group")]
     fn parse_failure_tests(s: &str) {
         let (rest, d) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();

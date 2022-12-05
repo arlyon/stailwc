@@ -2,7 +2,7 @@ use nom::{
     bytes::complete::take_while1,
     character::{
         complete::{char, space0},
-        is_alphabetic,
+        is_alphabetic, is_alphanumeric,
     },
     combinator::{opt, verify},
     multi::many0,
@@ -37,12 +37,7 @@ pub enum ExpressionConversionError<'a> {
 
 impl<'a> Expression<'a> {
     pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
-        let single_mod = {
-            let single_mod = take_while1(|c| is_alphabetic(c as u8) || c == '-');
-            let start_letter =
-                |s: &NomSpan<'a>| is_alphabetic(s.chars().next().expect("not empty") as u8);
-            verify(single_mod, start_letter)
-        };
+        let single_mod = take_while1(|c| is_alphanumeric(c as u8) || c == '-');
 
         let mods = many0(terminated(single_mod, char(':')));
         let negative = opt(char('-')).map(|o| o.is_some());
