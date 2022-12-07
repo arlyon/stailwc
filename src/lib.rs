@@ -477,8 +477,19 @@ impl<'a> VisitMut for TransformVisitor<'a> {
     /// Visit the import declarations, and mark whether tw_style is imported.
     fn visit_mut_module(&mut self, n: &mut Module) {
         n.body.drain_filter(|stmt| {
-            if let ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl { src, .. })) = stmt {
-                if src.value.eq("stailwc") {
+            if let ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
+                src, specifiers, ..
+            })) = stmt
+            {
+                let has_style_import = specifiers.iter().any(|s| match s {
+                    ImportSpecifier::Named(ImportNamedSpecifier { local, .. }) => {
+                        println!("{:?}", local);
+                        local.sym.eq("TailwindStyle")
+                    }
+                    _ => false,
+                });
+
+                if src.value.eq("stailwc") && has_style_import {
                     self.tw_style_imported = true;
                     return true;
                 }
