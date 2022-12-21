@@ -6,10 +6,12 @@
 #![allow(clippy::not_unsafe_ptr_arg_deref)]
 
 mod css;
+mod engine;
 #[cfg(test)]
 mod test;
 
 use nom_locate::LocatedSpan;
+use serde::Deserialize;
 use swc_core::{
     common::{
         errors::{DiagnosticBuilder, Handler},
@@ -18,10 +20,11 @@ use swc_core::{
     },
     ecma::{
         ast::{
-            ArrayLit, CallExpr, Callee, Expr, ExprOrSpread, Ident, ImportDecl, JSXAttr,
-            JSXAttrName, JSXAttrOrSpread, JSXAttrValue, JSXElementName, JSXExpr, JSXExprContainer,
-            JSXOpeningElement, Lit, MemberExpr, MemberProp, Module, ModuleDecl, ModuleItem,
-            ObjectLit, Program, Str, TaggedTpl, Tpl, TplElement,
+            ArrayLit, CallExpr, Callee, Expr, ExprOrSpread, Ident, ImportDecl,
+            ImportNamedSpecifier, ImportSpecifier, JSXAttr, JSXAttrName, JSXAttrOrSpread,
+            JSXAttrValue, JSXElementName, JSXExpr, JSXExprContainer, JSXOpeningElement, Lit,
+            MemberExpr, MemberProp, Module, ModuleDecl, ModuleItem, ObjectLit, Program, Str,
+            TaggedTpl, Tpl, TplElement,
         },
         atoms::Atom,
         visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
@@ -39,6 +42,21 @@ pub struct AppConfig<'a> {
     /// Strict mode throws an error when an unknown class is used.
     #[serde(default)]
     pub strict: bool,
+
+    pub engine: Engine,
+}
+
+#[derive(Deserialize, Debug)]
+#[serde(rename_all = "kebab-case")]
+pub enum Engine {
+    Emotion,
+    StyledComponents,
+}
+
+impl Default for Engine {
+    fn default() -> Self {
+        Self::Emotion
+    }
 }
 
 #[derive(Debug)]
@@ -55,6 +73,7 @@ enum TplTransform {
 pub struct TransformVisitor<'a> {
     config: TailwindConfig<'a>,
     strict: bool,
+    engine: Engine,
     /// This is treated as a stack because tw attrs can be nested
     tw_attr_stack: DepthStack<(Span, ObjectLit)>,
     tw_tpl: Option<TplTransform>,
@@ -130,6 +149,7 @@ impl<'a> TransformVisitor<'a> {
         Self {
             config: config.config,
             strict: config.strict,
+            engine: config.engine,
             ..Default::default()
         }
     }
@@ -224,44 +244,16 @@ impl<'a> VisitMut for TransformVisitor<'a> {
     /// b) extract any tw attributes and transform them into a css declarations
     fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
         if self.tw_style_imported && let JSXElementName::Ident(i) = &n.name && i.sym.eq("TailwindStyle") {
-
             let atom: Atom = css::format_css(
                 true,
                 self.config.theme.font_family.get("sans").map(|v| v.as_slice()).unwrap_or(&[]),
                 self.config.theme.font_family.get("mono").map(|v| v.as_slice()).unwrap_or(&[])
             ).into();
 
-            n.name = JSXElementName::Ident(Ident::new("Global".into(), i.span));
-            n.attrs.push(JSXAttrOrSpread::JSXAttr(
-                JSXAttr {
-                    span: n.span,
-                    name: JSXAttrName::Ident(Ident::new("styles".into(), n.span)),
-                    value: Some(JSXAttrValue::JSXExprContainer(JSXExprContainer {
-                        span: n.span,
-                        expr: JSXExpr::Expr(Box::new(Expr::TaggedTpl(
-                            TaggedTpl {
-                                span: n.span,
-                                tag: Box::new(Expr::Ident(Ident {
-                                    span: n.span,
-                                    sym: "css".into(), 
-                                    optional: false
-                                })),
-                                type_params: None, tpl: Tpl{
-                                    span: n.span,
-                                    exprs: vec![],
-                                    quasis: vec![TplElement{
-                                        cooked: Some(atom.clone()),
-                                        raw: atom,
-                                        span: n.span,
-                                        tail: true
-                                    }],
-                                }
-                            })
-
-                        ))
-                    })),
-                }
-            ));
+            match self.engine {
+                Engine::Emotion => self.emotion_global(i.span, n, atom),
+                Engine::StyledComponents => self.styled_components_global(i.span, n, atom),
+            }
         }
 
         self.tw_attr_stack.inc_depth();
@@ -483,7 +475,6 @@ impl<'a> VisitMut for TransformVisitor<'a> {
             {
                 let has_style_import = specifiers.iter().any(|s| match s {
                     ImportSpecifier::Named(ImportNamedSpecifier { local, .. }) => {
-                        println!("{:?}", local);
                         local.sym.eq("TailwindStyle")
                     }
                     _ => false,
@@ -497,6 +488,35 @@ impl<'a> VisitMut for TransformVisitor<'a> {
 
             false
         });
+
+        if self.tw_style_imported {
+            match self.engine {
+                Engine::Emotion => {
+                    // no-op
+                }
+                Engine::StyledComponents => {
+                    // import createGlobalStyle and create the Global object
+                    n.body
+                        .push(ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
+                            src: Box::new(Str {
+                                raw: Some("styled-components".into()),
+                                value: "styled-components".into(),
+                                span: DUMMY_SP,
+                            }),
+                            span: DUMMY_SP,
+                            specifiers: vec![ImportSpecifier::Named(ImportNamedSpecifier {
+                                span: DUMMY_SP,
+                                local: Ident::new("createGlobalStyle".into(), DUMMY_SP),
+                                is_type_only: false,
+                                imported: None,
+                            })],
+                            asserts: None,
+                            type_only: false,
+                        })))
+                }
+            }
+        }
+
         n.visit_mut_children_with(self);
     }
 }
