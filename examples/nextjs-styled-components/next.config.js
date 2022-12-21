@@ -5,10 +5,15 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    swcPlugins: [stailwc()],
+    swcPlugins: [
+      stailwc({
+        engine: "styled-components",
+        wasm: "/home/arlyon/Programming/stailwc/target/wasm32-wasi/release/stailwc.wasm",
+      }),
+    ],
   },
   compiler: {
-    emotion: true,
+    styledComponents: true,
   },
 };
 
