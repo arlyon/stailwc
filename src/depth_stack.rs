@@ -31,6 +31,7 @@ impl<T> DepthStack<T> {
         self.stack.pop().map(|(_, item)| item)
     }
 
+    #[allow(dead_code)]
     pub fn peek(&self) -> Option<&T> {
         self.stack
             .last()
@@ -38,6 +39,7 @@ impl<T> DepthStack<T> {
             .map(|(_, item)| item)
     }
 
+    #[allow(dead_code)]
     pub fn depth(&self) -> usize {
         self.depth
     }

@@ -21,9 +21,8 @@ fn main() {
 
         write!(
             outfile,
-            r#"#[test_case::test_case("{}" ; "snapshot {}")]
+            r#"#[test_case::test_case("{path}" ; "snapshot {name}")]
             "#,
-            path, name
         )
         .unwrap();
     }

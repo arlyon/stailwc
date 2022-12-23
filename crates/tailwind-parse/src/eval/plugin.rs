@@ -89,6 +89,7 @@ macro_rules! lookup_plugin_arbitrary_opt {
     };
 }
 
+#[allow(unused_macros)]
 macro_rules! merge_plugins {
     ($def:ident, $closure_a:expr, $closure_b:expr) => {
         pub fn $def(rest: &Value, theme: &TailwindTheme) -> Option<ObjectLit> {
@@ -115,6 +116,7 @@ macro_rules! merge_plugins_arbitrary {
     };
 }
 
+#[allow(unused_macros)]
 macro_rules! merge_plugins_opt {
     ($def:ident, $closure_a:expr, $closure_b:expr) => {
         pub fn $def(rest: Option<&Value>, theme: &TailwindTheme) -> Option<ObjectLit> {
