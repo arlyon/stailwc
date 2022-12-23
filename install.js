@@ -1,7 +1,7 @@
 /**
  * Install stailwc
  *
- * @param {{wasm?: string, tailwindPath?: string, silent?: boolean, strict?: boolean}} options
+ * @param {{wasm?: string, tailwindPath?: string, silent?: boolean, strict?: boolean, engine: "emotion" | "styled-components"}} options
  * @returns A nextjs plugin configuration
  */
 module.exports = (options = {}) => {
@@ -46,5 +46,8 @@ module.exports = (options = {}) => {
       {}
     );
 
-  return [options?.wasm ?? "stailwc", { config, strict: options?.strict ?? false }];
+  return [
+    options?.wasm ?? "stailwc",
+    { config, strict: options?.strict ?? false, engine: options?.engine ?? "emotion" },
+  ];
 };

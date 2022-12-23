@@ -63,9 +63,17 @@ impl<'a> Subject<'a> {
             Subject::Literal(lit) => lit
                 .to_object_lit(span, &config.theme)
                 .map_err(SubjectConversionError::InvalidLiteral),
-            Subject::Group(dir) => dir
-                .to_literal(span, config)
-                .map_err(|e| SubjectConversionError::InvalidExpression(Box::new(e))),
+            Subject::Group(dir) => {
+                let (obj, mut errs) = dir.to_literal(config);
+
+                if errs.is_empty() {
+                    Ok(obj)
+                } else {
+                    Err(SubjectConversionError::InvalidExpression(Box::new(
+                        errs.pop().unwrap(),
+                    )))
+                }
+            }
         }
     }
 }

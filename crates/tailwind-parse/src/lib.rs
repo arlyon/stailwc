@@ -2,7 +2,6 @@
 #![feature(box_patterns)]
 #![feature(iterator_try_reduce)]
 #![feature(assert_matches)]
-#![feature(unzip_option)]
 
 mod directive;
 mod eval;
@@ -42,7 +41,7 @@ mod test {
 
     #[test]
     fn directive() -> anyhow::Result<()> {
-        let (rest, d) = Directive::parse(LocatedSpan::new_extra(
+        let (rest, _d) = Directive::parse(LocatedSpan::new_extra(
             "-h-4 md:bg-blue text-white! hover:(text-blue bg-white lg:text-black!)",
             DUMMY_SP,
         ))?;
@@ -136,7 +135,7 @@ mod test {
             .iter()
             .map(|s| {
                 let (_, d) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
-                let lit = d.to_literal(DUMMY_SP, &config).unwrap();
+                let (lit, _) = d.to_literal(&config);
                 (s, sort_recursive(lit))
             })
             .collect::<Vec<_>>();
@@ -153,7 +152,7 @@ mod test {
     #[test_case("-mod:sub" ; "when the minus is in the wrong place")]
     #[test_case("()" ; "rejects empty group")]
     fn parse_failure_tests(s: &str) {
-        let (rest, d) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
+        let (rest, _d) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
         assert_matches!(*rest, "");
     }
 
@@ -161,7 +160,7 @@ mod test {
     #[test_case("blue-500" ; "a color")]
     #[test_case("[10px]" ; "csss")]
     fn subject_value(s: &str) {
-        let (rest, s) = SubjectValue::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
+        let (rest, _s) = SubjectValue::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
         assert_matches!(*rest, "");
     }
 }

@@ -6,10 +6,14 @@
 #![allow(clippy::not_unsafe_ptr_arg_deref)]
 
 mod css;
+mod depth_stack;
+mod engine;
 #[cfg(test)]
 mod test;
 
+use depth_stack::DepthStack;
 use nom_locate::LocatedSpan;
+use serde::Deserialize;
 use swc_core::{
     common::{
         errors::{DiagnosticBuilder, Handler},
@@ -18,10 +22,11 @@ use swc_core::{
     },
     ecma::{
         ast::{
-            ArrayLit, CallExpr, Callee, Expr, ExprOrSpread, Ident, ImportDecl, JSXAttr,
-            JSXAttrName, JSXAttrOrSpread, JSXAttrValue, JSXElementName, JSXExpr, JSXExprContainer,
-            JSXOpeningElement, Lit, MemberExpr, MemberProp, Module, ModuleDecl, ModuleItem,
-            ObjectLit, Program, Str, TaggedTpl, Tpl, TplElement,
+            ArrayLit, BindingIdent, CallExpr, Callee, Decl, Expr, ExprOrSpread, Ident, ImportDecl,
+            ImportNamedSpecifier, ImportSpecifier, JSXAttr, JSXAttrName, JSXAttrOrSpread,
+            JSXAttrValue, JSXElementName, JSXExpr, JSXExprContainer, JSXOpeningElement, Lit,
+            MemberExpr, MemberProp, Module, ModuleDecl, ModuleItem, ObjectLit, Pat, Program, Stmt,
+            Str, TaggedTpl, Tpl, TplElement, VarDecl, VarDeclKind, VarDeclarator,
         },
         atoms::Atom,
         visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
@@ -39,6 +44,21 @@ pub struct AppConfig<'a> {
     /// Strict mode throws an error when an unknown class is used.
     #[serde(default)]
     pub strict: bool,
+
+    pub engine: Engine,
+}
+
+#[derive(Deserialize, Debug, Eq, PartialEq, Clone, Copy)]
+#[serde(rename_all = "kebab-case")]
+pub enum Engine {
+    Emotion,
+    StyledComponents,
+}
+
+impl Default for Engine {
+    fn default() -> Self {
+        Self::Emotion
+    }
 }
 
 #[derive(Debug)]
@@ -55,74 +75,11 @@ enum TplTransform {
 pub struct TransformVisitor<'a> {
     config: TailwindConfig<'a>,
     strict: bool,
+    engine: Engine,
     /// This is treated as a stack because tw attrs can be nested
     tw_attr_stack: DepthStack<(Span, ObjectLit)>,
     tw_tpl: Option<TplTransform>,
     tw_style_imported: bool,
-}
-
-/// A stack that only allows a single item to be pushed at a given depth.
-#[derive(Debug)]
-struct DepthStack<T> {
-    stack: Vec<(usize, T)>,
-    depth: usize,
-}
-
-impl<T> DepthStack<T> {
-    fn new() -> Self {
-        Self {
-            stack: Vec::new(),
-            depth: 0,
-        }
-    }
-
-    fn push(&mut self, item: T) -> Option<T> {
-        if self
-            .stack
-            .last()
-            .filter(|(d, _)| *d == self.depth)
-            .is_some()
-        {
-            return self.stack.pop().map(|(_, v)| v);
-        }
-
-        self.stack.push((self.depth, item));
-        None
-    }
-
-    fn pop(&mut self) -> Option<T> {
-        self.stack.pop().map(|(_, item)| item)
-    }
-
-    fn peek(&self) -> Option<&T> {
-        self.stack
-            .last()
-            .filter(|(d, _)| *d == self.depth)
-            .map(|(_, item)| item)
-    }
-
-    fn depth(&self) -> usize {
-        self.depth
-    }
-
-    #[tracing::instrument(skip(self))]
-    fn inc_depth(&mut self) {
-        self.depth += 1;
-        tracing::trace!(depth = self.depth);
-    }
-
-    #[tracing::instrument(skip(self))]
-    fn dec_depth(&mut self) {
-        self.depth -= 1;
-        tracing::trace!(depth = self.depth);
-        self.stack.retain(|(d, _)| *d <= self.depth);
-    }
-}
-
-impl<T> Default for DepthStack<T> {
-    fn default() -> Self {
-        Self::new()
-    }
 }
 
 impl<'a> TransformVisitor<'a> {
@@ -130,6 +87,7 @@ impl<'a> TransformVisitor<'a> {
         Self {
             config: config.config,
             strict: config.strict,
+            engine: config.engine,
             ..Default::default()
         }
     }
@@ -179,17 +137,15 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                     },
                 };
 
-                let x = match d.to_literal(*span, &self.config) {
-                    Ok(x) => x,
-                    Err(e) => {
-                        HANDLER.with(|h| {
-                            self.report(h,  *span, &e.to_string())
-                                .note("when evaluating plugin")
-                                .emit()
-                        });
-                        return;
-                    },
-                };
+                let (x, errs) = d.to_literal(&self.config);
+
+                for e in errs {
+                    HANDLER.with(|h| {
+                        self.report(h,  *span, &e.to_string())
+                            .note("when evaluating plugin")
+                            .emit()
+                    });
+                }
 
                 if let Some((span, _val)) = self.tw_attr_stack.push((*span, x)) {
                     HANDLER.with(|h| {
@@ -224,44 +180,17 @@ impl<'a> VisitMut for TransformVisitor<'a> {
     /// b) extract any tw attributes and transform them into a css declarations
     fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
         if self.tw_style_imported && let JSXElementName::Ident(i) = &n.name && i.sym.eq("TailwindStyle") {
-
-            let atom: Atom = css::format_css(
-                true,
-                self.config.theme.font_family.get("sans").map(|v| v.as_slice()).unwrap_or(&[]),
-                self.config.theme.font_family.get("mono").map(|v| v.as_slice()).unwrap_or(&[])
-            ).into();
-
-            n.name = JSXElementName::Ident(Ident::new("Global".into(), i.span));
-            n.attrs.push(JSXAttrOrSpread::JSXAttr(
-                JSXAttr {
-                    span: n.span,
-                    name: JSXAttrName::Ident(Ident::new("styles".into(), n.span)),
-                    value: Some(JSXAttrValue::JSXExprContainer(JSXExprContainer {
-                        span: n.span,
-                        expr: JSXExpr::Expr(Box::new(Expr::TaggedTpl(
-                            TaggedTpl {
-                                span: n.span,
-                                tag: Box::new(Expr::Ident(Ident {
-                                    span: n.span,
-                                    sym: "css".into(), 
-                                    optional: false
-                                })),
-                                type_params: None, tpl: Tpl{
-                                    span: n.span,
-                                    exprs: vec![],
-                                    quasis: vec![TplElement{
-                                        cooked: Some(atom.clone()),
-                                        raw: atom,
-                                        span: n.span,
-                                        tail: true
-                                    }],
-                                }
-                            })
-
-                        ))
-                    })),
-                }
-            ));
+            match self.engine {
+                Engine::Emotion => {
+                    let atom: Atom = css::format_css(
+                        true,
+                        self.config.theme.font_family.get("sans").map(|v| v.as_slice()).unwrap_or(&[]),
+                        self.config.theme.font_family.get("mono").map(|v| v.as_slice()).unwrap_or(&[])
+                    ).into();
+                    self.emotion_global(i.span, n, atom)
+                },
+                Engine::StyledComponents => self.styled_components_global(i.span, n),
+            }
         }
 
         self.tw_attr_stack.inc_depth();
@@ -348,7 +277,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                     HANDLER.with(|h| {
                         h.span_err(n.span, "variables inside template tags are not supported")
                     });
-                    return None;
+                    return ObjectLit::dummy();
                 }
             };
 
@@ -360,53 +289,40 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                             .note(&e.to_string())
                             .emit()
                     });
-                    return None;
+                    return ObjectLit::dummy();
                 }
             };
 
-            match d.to_literal(*span, &self.config) {
-                Ok(lit) => Some(lit),
-                Err(e) => {
-                    HANDLER.with(|h| {
-                        self.report(h, *span, &e.to_string())
-                            .note("when evaluating plugin")
-                            .emit()
-                    });
-                    None
-                }
+            let (lit, errs) = d.to_literal(&self.config);
+
+            for e in &errs {
+                HANDLER.with(|h| {
+                    self.report(h, e.span(), &e.to_string())
+                        .note("when evaluating plugin")
+                        .emit()
+                });
             }
+
+            lit
         };
 
         let transform = match &n.tag {
+            // tw`...`
             box Expr::Ident(Ident { sym, .. }) if sym == "tw" => {
-                if let Some(lit) = extract_literal() {
-                    TplTransform::Style(lit)
-                } else {
-                    return;
-                }
+                TplTransform::Style(extract_literal())
             }
+            // tw.button`...`
             box Expr::Member(MemberExpr {
                 obj: box Expr::Ident(Ident { sym, .. }),
                 prop: MemberProp::Ident(ident),
                 ..
-            }) if sym == "tw" => {
-                if let Some(lit) = extract_literal() {
-                    TplTransform::Component(ident.to_owned(), lit)
-                } else {
-                    return;
-                }
-            }
+            }) if sym == "tw" => TplTransform::Component(ident.to_owned(), extract_literal()),
+            // tw(Button)`...`
             box Expr::Call(CallExpr {
                 callee: Callee::Expr(box Expr::Ident(Ident { sym, .. })),
                 args,
                 ..
-            }) if sym == "tw" => {
-                if let Some(lit) = extract_literal() {
-                    TplTransform::ComponentCustom(args.to_owned(), lit)
-                } else {
-                    return;
-                }
-            }
+            }) if sym == "tw" => TplTransform::ComponentCustom(args.to_owned(), extract_literal()),
             _ => {
                 n.visit_mut_children_with(self);
                 return;
@@ -476,16 +392,129 @@ impl<'a> VisitMut for TransformVisitor<'a> {
 
     /// Visit the import declarations, and mark whether tw_style is imported.
     fn visit_mut_module(&mut self, n: &mut Module) {
-        n.body.drain_filter(|stmt| {
-            if let ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl { src, .. })) = stmt {
-                if src.value.eq("stailwc") {
-                    self.tw_style_imported = true;
-                    return true;
+        for stmt in &mut n.body {
+            if let ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
+                src, specifiers, ..
+            })) = stmt
+            {
+                let has_style_import = specifiers.iter().any(|s| match s {
+                    ImportSpecifier::Named(ImportNamedSpecifier { local, .. }) => {
+                        local.sym.eq("TailwindStyle")
+                    }
+                    _ => false,
+                });
+
+                if !src.value.eq("stailwc") || !has_style_import {
+                    continue;
+                }
+
+                self.tw_style_imported = true;
+
+                match self.engine {
+                    Engine::Emotion => {
+                        *stmt = ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
+                            src: Box::new(Str {
+                                raw: None,
+                                value: "@emotion/react".into(),
+                                span: DUMMY_SP,
+                            }),
+                            span: DUMMY_SP,
+                            specifiers: vec![
+                                ImportSpecifier::Named(ImportNamedSpecifier {
+                                    span: DUMMY_SP,
+                                    local: Ident::new("css".into(), DUMMY_SP),
+                                    is_type_only: false,
+                                    imported: None,
+                                }),
+                                ImportSpecifier::Named(ImportNamedSpecifier {
+                                    span: DUMMY_SP,
+                                    local: Ident::new("Global".into(), DUMMY_SP),
+                                    is_type_only: false,
+                                    imported: None,
+                                }),
+                            ],
+                            asserts: None,
+                            type_only: false,
+                        }));
+                    }
+                    Engine::StyledComponents => {
+                        // import createGlobalStyle and create the Global object
+                        *stmt = ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
+                            src: Box::new(Str {
+                                raw: None,
+                                value: "styled-components".into(),
+                                span: DUMMY_SP,
+                            }),
+                            span: DUMMY_SP,
+                            specifiers: vec![ImportSpecifier::Named(ImportNamedSpecifier {
+                                span: DUMMY_SP,
+                                local: Ident::new("createGlobalStyle".into(), DUMMY_SP),
+                                is_type_only: false,
+                                imported: None,
+                            })],
+                            asserts: None,
+                            type_only: false,
+                        }));
+                    }
                 }
             }
+        }
 
-            false
-        });
+        if self.engine == Engine::StyledComponents && self.tw_style_imported {
+            let atom = css::format_css(
+                true,
+                self.config
+                    .theme
+                    .font_family
+                    .get("sans")
+                    .map(|v| v.as_slice())
+                    .unwrap_or(&[]),
+                self.config
+                    .theme
+                    .font_family
+                    .get("mono")
+                    .map(|v| v.as_slice())
+                    .unwrap_or(&[]),
+            )
+            .into();
+
+            n.body
+                .push(ModuleItem::Stmt(Stmt::Decl(Decl::Var(Box::new(VarDecl {
+                    span: DUMMY_SP,
+                    kind: VarDeclKind::Const,
+                    declare: false,
+                    decls: vec![VarDeclarator {
+                        span: DUMMY_SP,
+                        definite: true,
+                        name: Pat::Ident(BindingIdent {
+                            id: Ident::new("Global".into(), DUMMY_SP),
+                            type_ann: None,
+                        }),
+                        init: Some(Box::new(Expr::Call(CallExpr {
+                            span: DUMMY_SP,
+                            callee: Callee::Expr(Box::new(Expr::Ident(Ident::new(
+                                "createGlobalStyle".into(),
+                                DUMMY_SP,
+                            )))),
+                            args: vec![ExprOrSpread {
+                                spread: None,
+                                expr: Box::new(Expr::Tpl(Tpl {
+                                    span: DUMMY_SP,
+                                    exprs: vec![],
+                                    quasis: vec![TplElement {
+                                        span: DUMMY_SP,
+                                        tail: true,
+                                        cooked: None,
+                                        raw: atom,
+                                    }],
+                                })),
+                            }],
+                            type_args: None,
+                        }))),
+                    }],
+                })))));
+        };
+
         n.visit_mut_children_with(self);
     }
 }

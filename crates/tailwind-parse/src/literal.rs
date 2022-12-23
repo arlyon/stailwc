@@ -51,6 +51,7 @@ enum PluginType {
     Required(fn(&Value, &TailwindTheme) -> Option<ObjectLit>),
     Optional(fn(Option<&Value>, &TailwindTheme) -> Option<ObjectLit>),
     RequiredArbitrary(fn(&SubjectValue, &TailwindTheme) -> Option<ObjectLit>),
+    #[allow(dead_code)]
     OptionalArbitrary(fn(Option<&SubjectValue>, &TailwindTheme) -> Option<ObjectLit>),
 }
 
