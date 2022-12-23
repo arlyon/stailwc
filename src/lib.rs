@@ -137,17 +137,15 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                     },
                 };
 
-                let x = match d.to_literal(*span, &self.config) {
-                    Ok(x) => x,
-                    Err(e) => {
-                        HANDLER.with(|h| {
-                            self.report(h,  *span, &e.to_string())
-                                .note("when evaluating plugin")
-                                .emit()
-                        });
-                        return;
-                    },
-                };
+                let (x, errs) = d.to_literal(&self.config);
+
+                for e in errs {
+                    HANDLER.with(|h| {
+                        self.report(h,  *span, &e.to_string())
+                            .note("when evaluating plugin")
+                            .emit()
+                    });
+                }
 
                 if let Some((span, _val)) = self.tw_attr_stack.push((*span, x)) {
                     HANDLER.with(|h| {
@@ -182,7 +180,6 @@ impl<'a> VisitMut for TransformVisitor<'a> {
     /// b) extract any tw attributes and transform them into a css declarations
     fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
         if self.tw_style_imported && let JSXElementName::Ident(i) = &n.name && i.sym.eq("TailwindStyle") {
-            
             match self.engine {
                 Engine::Emotion => {
                     let atom: Atom = css::format_css(
@@ -280,7 +277,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                     HANDLER.with(|h| {
                         h.span_err(n.span, "variables inside template tags are not supported")
                     });
-                    return None;
+                    return ObjectLit::dummy();
                 }
             };
 
@@ -292,53 +289,40 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                             .note(&e.to_string())
                             .emit()
                     });
-                    return None;
+                    return ObjectLit::dummy();
                 }
             };
 
-            match d.to_literal(*span, &self.config) {
-                Ok(lit) => Some(lit),
-                Err(e) => {
-                    HANDLER.with(|h| {
-                        self.report(h, *span, &e.to_string())
-                            .note("when evaluating plugin")
-                            .emit()
-                    });
-                    None
-                }
+            let (lit, errs) = d.to_literal(&self.config);
+
+            for e in &errs {
+                HANDLER.with(|h| {
+                    self.report(h, e.span(), &e.to_string())
+                        .note("when evaluating plugin")
+                        .emit()
+                });
             }
+
+            lit
         };
 
         let transform = match &n.tag {
+            // tw`...`
             box Expr::Ident(Ident { sym, .. }) if sym == "tw" => {
-                if let Some(lit) = extract_literal() {
-                    TplTransform::Style(lit)
-                } else {
-                    return;
-                }
+                TplTransform::Style(extract_literal())
             }
+            // tw.button`...`
             box Expr::Member(MemberExpr {
                 obj: box Expr::Ident(Ident { sym, .. }),
                 prop: MemberProp::Ident(ident),
                 ..
-            }) if sym == "tw" => {
-                if let Some(lit) = extract_literal() {
-                    TplTransform::Component(ident.to_owned(), lit)
-                } else {
-                    return;
-                }
-            }
+            }) if sym == "tw" => TplTransform::Component(ident.to_owned(), extract_literal()),
+            // tw(Button)`...`
             box Expr::Call(CallExpr {
                 callee: Callee::Expr(box Expr::Ident(Ident { sym, .. })),
                 args,
                 ..
-            }) if sym == "tw" => {
-                if let Some(lit) = extract_literal() {
-                    TplTransform::ComponentCustom(args.to_owned(), lit)
-                } else {
-                    return;
-                }
-            }
+            }) if sym == "tw" => TplTransform::ComponentCustom(args.to_owned(), extract_literal()),
             _ => {
                 n.visit_mut_children_with(self);
                 return;
@@ -408,7 +392,6 @@ impl<'a> VisitMut for TransformVisitor<'a> {
 
     /// Visit the import declarations, and mark whether tw_style is imported.
     fn visit_mut_module(&mut self, n: &mut Module) {
-
         for stmt in &mut n.body {
             if let ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
                 src, specifiers, ..
@@ -436,22 +419,26 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                                 span: DUMMY_SP,
                             }),
                             span: DUMMY_SP,
-                            specifiers: vec![ImportSpecifier::Named(ImportNamedSpecifier {
-                                span: DUMMY_SP,
-                                local: Ident::new("css".into(), DUMMY_SP),
-                                is_type_only: false,
-                                imported: None,
-                            }), ImportSpecifier::Named(ImportNamedSpecifier {
-                                span: DUMMY_SP,
-                                local: Ident::new("Global".into(), DUMMY_SP),
-                                is_type_only: false,
-                                imported: None,
-                            })],
+                            specifiers: vec![
+                                ImportSpecifier::Named(ImportNamedSpecifier {
+                                    span: DUMMY_SP,
+                                    local: Ident::new("css".into(), DUMMY_SP),
+                                    is_type_only: false,
+                                    imported: None,
+                                }),
+                                ImportSpecifier::Named(ImportNamedSpecifier {
+                                    span: DUMMY_SP,
+                                    local: Ident::new("Global".into(), DUMMY_SP),
+                                    is_type_only: false,
+                                    imported: None,
+                                }),
+                            ],
                             asserts: None,
                             type_only: false,
                         }));
-                    },
-                    Engine::StyledComponents => {                                            // import createGlobalStyle and create the Global object
+                    }
+                    Engine::StyledComponents => {
+                        // import createGlobalStyle and create the Global object
                         *stmt = ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
                             src: Box::new(Str {
                                 raw: None,
@@ -468,7 +455,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                             asserts: None,
                             type_only: false,
                         }));
-                    },
+                    }
                 }
             }
         }
@@ -476,9 +463,20 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         if self.engine == Engine::StyledComponents && self.tw_style_imported {
             let atom = css::format_css(
                 true,
-                self.config.theme.font_family.get("sans").map(|v| v.as_slice()).unwrap_or(&[]),
-                self.config.theme.font_family.get("mono").map(|v| v.as_slice()).unwrap_or(&[])
-            ).into();
+                self.config
+                    .theme
+                    .font_family
+                    .get("sans")
+                    .map(|v| v.as_slice())
+                    .unwrap_or(&[]),
+                self.config
+                    .theme
+                    .font_family
+                    .get("mono")
+                    .map(|v| v.as_slice())
+                    .unwrap_or(&[]),
+            )
+            .into();
 
             n.body
                 .push(ModuleItem::Stmt(Stmt::Decl(Decl::Var(Box::new(VarDecl {

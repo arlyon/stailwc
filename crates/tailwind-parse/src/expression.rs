@@ -30,9 +30,18 @@ pub struct Expression<'a> {
 #[derive(thiserror::Error, Debug)]
 pub enum ExpressionConversionError<'a> {
     #[error("{0}")]
-    UnknownSubject(SubjectConversionError<'a>),
+    UnknownSubject(SubjectConversionError<'a>, Span),
     #[error("unknown modifier `{0}`")]
-    UnknownModifier(&'a str),
+    UnknownModifier(&'a str, Span),
+}
+
+impl<'a> ExpressionConversionError<'a> {
+    pub fn span(&self) -> Span {
+        match self {
+            ExpressionConversionError::UnknownSubject(_, span) => *span,
+            ExpressionConversionError::UnknownModifier(_, span) => *span,
+        }
+    }
 }
 
 impl<'a> Expression<'a> {
@@ -53,8 +62,8 @@ impl<'a> Expression<'a> {
             .and(important)
             .parse(s)?;
 
-        let lo = s.extra.lo() + BytePos(s.location_offset() as u32 + 2);
-        let hi = s_next.extra.lo() + BytePos(s_next.location_offset() as u32 + 1);
+        let lo = s.extra.lo() + BytePos(s.location_offset() as u32 + 1);
+        let hi = s_next.extra.lo() + BytePos(s_next.location_offset() as u32);
 
         Ok((
             s_next,
@@ -77,7 +86,7 @@ impl<'a> Expression<'a> {
         let mut object: ObjectLit = self
             .subject
             .to_literal(span, config)
-            .map_err(ExpressionConversionError::UnknownSubject)?;
+            .map_err(|e| ExpressionConversionError::UnknownSubject(e, span))?;
 
         for prop in &mut object.props {
             if let PropOrSpread::Prop(box Prop::KeyValue(KeyValueProp {
@@ -172,7 +181,12 @@ impl<'a> Expression<'a> {
                     "landscape" => "@media landscape",
                     "group-hover" => ".group:hover &",
                     "group-focus" => ".group:focus &",
-                    x => return Err(ExpressionConversionError::UnknownModifier(x)),
+                    x => {
+                        return Err(ExpressionConversionError::UnknownModifier(
+                            x,
+                            self.span.unwrap_or(DUMMY_SP),
+                        ))
+                    }
                 }
                 .into(),
             };

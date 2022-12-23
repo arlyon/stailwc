@@ -6,10 +6,7 @@ use nom::{
     IResult, Parser,
 };
 use stailwc_swc_utils::merge_literals;
-use swc_core::{
-    common::{Span, DUMMY_SP},
-    ecma::ast::ObjectLit,
-};
+use swc_core::{common::DUMMY_SP, ecma::ast::ObjectLit};
 use tailwind_config::TailwindConfig;
 
 use crate::{Expression, ExpressionConversionError, NomSpan};
@@ -36,20 +33,35 @@ impl<'a> Directive<'a> {
             .parse(s)
     }
 
+    /// Attempts to parse a literal from the given directive,
     pub fn to_literal(
         self,
-        span: Span,
         config: &TailwindConfig,
-    ) -> Result<ObjectLit, ExpressionConversionError<'a>> {
+    ) -> (ObjectLit, Vec<ExpressionConversionError<'a>>) {
         self.exps
             .into_iter()
-            .map(|e| e.to_literal(span, config))
-            .try_fold(
-                ObjectLit {
-                    span: DUMMY_SP,
-                    props: vec![],
+            .map(|e| {
+                let span = e.span;
+                e.to_literal(span.unwrap_or(DUMMY_SP), config)
+            })
+            .fold(
+                (
+                    ObjectLit {
+                        span: DUMMY_SP,
+                        props: vec![],
+                    },
+                    vec![],
+                ),
+                |(lit, mut errs), next| match next {
+                    Ok(obj) => {
+                        let obj = merge_literals(lit, obj);
+                        (obj, errs)
+                    }
+                    Err(err) => {
+                        errs.push(err);
+                        (lit, errs)
+                    }
                 },
-                |curr, next| Ok(merge_literals(curr, next?)),
             )
     }
 }

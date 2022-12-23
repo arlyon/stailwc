@@ -1,9 +1,6 @@
 use swc_core::{
     common::Span,
-    ecma::{
-        ast::{Ident, JSXElementName, JSXOpeningElement},
-        atoms::Atom,
-    },
+    ecma::ast::{Ident, JSXElementName, JSXOpeningElement},
 };
 
 use crate::TransformVisitor;
