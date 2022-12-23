@@ -20,11 +20,11 @@ use swc_core::{
     },
     ecma::{
         ast::{
-            ArrayLit, CallExpr, Callee, Expr, ExprOrSpread, Ident, ImportDecl,
+            ArrayLit, BindingIdent, CallExpr, Callee, Decl, Expr, ExprOrSpread, Ident, ImportDecl,
             ImportNamedSpecifier, ImportSpecifier, JSXAttr, JSXAttrName, JSXAttrOrSpread,
             JSXAttrValue, JSXElementName, JSXExpr, JSXExprContainer, JSXOpeningElement, Lit,
-            MemberExpr, MemberProp, Module, ModuleDecl, ModuleItem, ObjectLit, Program, Str,
-            TaggedTpl, Tpl, TplElement,
+            MemberExpr, MemberProp, Module, ModuleDecl, ModuleItem, ObjectLit, Pat, Program, Stmt,
+            Str, TaggedTpl, Tpl, TplElement, VarDecl, VarDeclKind, VarDeclarator,
         },
         atoms::Atom,
         visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
@@ -46,7 +46,7 @@ pub struct AppConfig<'a> {
     pub engine: Engine,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Eq, PartialEq, Clone, Copy)]
 #[serde(rename_all = "kebab-case")]
 pub enum Engine {
     Emotion,
@@ -244,15 +244,17 @@ impl<'a> VisitMut for TransformVisitor<'a> {
     /// b) extract any tw attributes and transform them into a css declarations
     fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
         if self.tw_style_imported && let JSXElementName::Ident(i) = &n.name && i.sym.eq("TailwindStyle") {
-            let atom: Atom = css::format_css(
-                true,
-                self.config.theme.font_family.get("sans").map(|v| v.as_slice()).unwrap_or(&[]),
-                self.config.theme.font_family.get("mono").map(|v| v.as_slice()).unwrap_or(&[])
-            ).into();
-
+            
             match self.engine {
-                Engine::Emotion => self.emotion_global(i.span, n, atom),
-                Engine::StyledComponents => self.styled_components_global(i.span, n, atom),
+                Engine::Emotion => {
+                    let atom: Atom = css::format_css(
+                        true,
+                        self.config.theme.font_family.get("sans").map(|v| v.as_slice()).unwrap_or(&[]),
+                        self.config.theme.font_family.get("mono").map(|v| v.as_slice()).unwrap_or(&[])
+                    ).into();
+                    self.emotion_global(i.span, n, atom)
+                },
+                Engine::StyledComponents => self.styled_components_global(i.span, n),
             }
         }
 
@@ -468,7 +470,8 @@ impl<'a> VisitMut for TransformVisitor<'a> {
 
     /// Visit the import declarations, and mark whether tw_style is imported.
     fn visit_mut_module(&mut self, n: &mut Module) {
-        n.body.drain_filter(|stmt| {
+
+        for stmt in &mut n.body {
             if let ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
                 src, specifiers, ..
             })) = stmt
@@ -480,26 +483,40 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                     _ => false,
                 });
 
-                if src.value.eq("stailwc") && has_style_import {
-                    self.tw_style_imported = true;
-                    return true;
+                if !src.value.eq("stailwc") || !has_style_import {
+                    continue;
                 }
-            }
 
-            false
-        });
+                self.tw_style_imported = true;
 
-        if self.tw_style_imported {
-            match self.engine {
-                Engine::Emotion => {
-                    // no-op
-                }
-                Engine::StyledComponents => {
-                    // import createGlobalStyle and create the Global object
-                    n.body
-                        .push(ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
+                match self.engine {
+                    Engine::Emotion => {
+                        *stmt = ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
                             src: Box::new(Str {
-                                raw: Some("styled-components".into()),
+                                raw: None,
+                                value: "@emotion/react".into(),
+                                span: DUMMY_SP,
+                            }),
+                            span: DUMMY_SP,
+                            specifiers: vec![ImportSpecifier::Named(ImportNamedSpecifier {
+                                span: DUMMY_SP,
+                                local: Ident::new("css".into(), DUMMY_SP),
+                                is_type_only: false,
+                                imported: None,
+                            }), ImportSpecifier::Named(ImportNamedSpecifier {
+                                span: DUMMY_SP,
+                                local: Ident::new("Global".into(), DUMMY_SP),
+                                is_type_only: false,
+                                imported: None,
+                            })],
+                            asserts: None,
+                            type_only: false,
+                        }));
+                    },
+                    Engine::StyledComponents => {                                            // import createGlobalStyle and create the Global object
+                        *stmt = ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
+                            src: Box::new(Str {
+                                raw: None,
                                 value: "styled-components".into(),
                                 span: DUMMY_SP,
                             }),
@@ -512,10 +529,55 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                             })],
                             asserts: None,
                             type_only: false,
-                        })))
+                        }));
+                    },
                 }
             }
         }
+
+        if self.engine == Engine::StyledComponents && self.tw_style_imported {
+            let atom = css::format_css(
+                true,
+                self.config.theme.font_family.get("sans").map(|v| v.as_slice()).unwrap_or(&[]),
+                self.config.theme.font_family.get("mono").map(|v| v.as_slice()).unwrap_or(&[])
+            ).into();
+
+            n.body
+                .push(ModuleItem::Stmt(Stmt::Decl(Decl::Var(Box::new(VarDecl {
+                    span: DUMMY_SP,
+                    kind: VarDeclKind::Const,
+                    declare: false,
+                    decls: vec![VarDeclarator {
+                        span: DUMMY_SP,
+                        definite: true,
+                        name: Pat::Ident(BindingIdent {
+                            id: Ident::new("Global".into(), DUMMY_SP),
+                            type_ann: None,
+                        }),
+                        init: Some(Box::new(Expr::Call(CallExpr {
+                            span: DUMMY_SP,
+                            callee: Callee::Expr(Box::new(Expr::Ident(Ident::new(
+                                "createGlobalStyle".into(),
+                                DUMMY_SP,
+                            )))),
+                            args: vec![ExprOrSpread {
+                                spread: None,
+                                expr: Box::new(Expr::Tpl(Tpl {
+                                    span: DUMMY_SP,
+                                    exprs: vec![],
+                                    quasis: vec![TplElement {
+                                        span: DUMMY_SP,
+                                        tail: true,
+                                        cooked: None,
+                                        raw: atom,
+                                    }],
+                                })),
+                            }],
+                            type_args: None,
+                        }))),
+                    }],
+                })))));
+        };
 
         n.visit_mut_children_with(self);
     }
