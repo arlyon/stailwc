@@ -11,7 +11,8 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: nightly
+          # regular nightly currently causes panics, so pin this
+          toolchain: nightly-2022-09-27-x86_64-unknown-linux-gnu
           override: true
       - uses: Swatinem/rust-cache@v2
       - uses: actions-rs/cargo@v1
@@ -26,7 +27,8 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: nightly
+          # regular nightly currently causes panics, so pin this
+          toolchain: nightly-2022-09-27-x86_64-unknown-linux-gnu
           override: true
       - uses: Swatinem/rust-cache@v2
       - uses: actions-rs/cargo@v1
@@ -41,7 +43,8 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: nightly
+          # regular nightly currently causes panics, so pin this
+          toolchain: nightly-2022-09-27-x86_64-unknown-linux-gnu
           override: true
       - uses: Swatinem/rust-cache@v2
       - run: rustup component add rustfmt
@@ -58,7 +61,8 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: nightly
+          # regular nightly currently causes panics, so pin this
+          toolchain: nightly-2022-09-27-x86_64-unknown-linux-gnu
           override: true
       - uses: Swatinem/rust-cache@v2
       - run: rustup component add clippy

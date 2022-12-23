@@ -2,6 +2,7 @@
 #![feature(box_patterns)]
 #![feature(iterator_try_reduce)]
 #![feature(assert_matches)]
+#![feature(unzip_option)]
 
 mod directive;
 mod eval;
