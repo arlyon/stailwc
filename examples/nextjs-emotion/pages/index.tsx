@@ -2,6 +2,11 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
+import _styled from "@emotion/styled";
+_styled;
+
+const UnderlineLink = tw(Link)`underline`;
+
 export default function Home() {
   return (
     <div tw="mx-auto my-16 w-max">
@@ -14,15 +19,8 @@ export default function Home() {
       <main tw="flex flex-col gap-4">
         <div tw="text-center">
           <h1 tw="font-extrabold text-xl">
-            Welcome to{" "}
-            <a href="https://nextjs.org" tw="underline">
-              Next.js
-            </a>{" "}
-            and{" "}
-            <a href="https://stailwc.vercel.app" tw="underline">
-              stailwc
-            </a>
-            !
+            Welcome to <UnderlineLink href="https://nextjs.org">Next.js</UnderlineLink> and{" "}
+            <UnderlineLink href="https://stailwc.vercel.app">stailwc</UnderlineLink>!
           </h1>
           <p tw="text-neutral-500">
             Get started by editing <code>pages/index.tsx</code>
