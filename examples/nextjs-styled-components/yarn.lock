@@ -861,17 +861,9 @@ source-map-js@^1.0.2:
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"
   integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
 
-stailwc@../../:
-  version "0.11.1"
-  dependencies:
-    app-root-path "^3.1.0"
-
-stailwc@^0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/stailwc/-/stailwc-0.11.1.tgz#19d25174faacae14e8e21cba11d1cc8a0a6ac940"
-  integrity sha512-bNUlh7cPVvCF8xVp/pVyPk448yH7eToXSo1kWDxGmxywjCfGcf9vpxNnnBbTjRvcHA5svuWwG3p/mS36LdeOgQ==
-  dependencies:
-    app-root-path "^3.1.0"
+"stailwc@link:../..":
+  version "0.0.0"
+  uid ""
 
 styled-components@^5.3.6:
   version "5.3.6"
