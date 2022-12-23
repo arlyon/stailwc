@@ -6,10 +6,12 @@
 #![allow(clippy::not_unsafe_ptr_arg_deref)]
 
 mod css;
+mod depth_stack;
 mod engine;
 #[cfg(test)]
 mod test;
 
+use depth_stack::DepthStack;
 use nom_locate::LocatedSpan;
 use serde::Deserialize;
 use swc_core::{
@@ -78,70 +80,6 @@ pub struct TransformVisitor<'a> {
     tw_attr_stack: DepthStack<(Span, ObjectLit)>,
     tw_tpl: Option<TplTransform>,
     tw_style_imported: bool,
-}
-
-/// A stack that only allows a single item to be pushed at a given depth.
-#[derive(Debug)]
-struct DepthStack<T> {
-    stack: Vec<(usize, T)>,
-    depth: usize,
-}
-
-impl<T> DepthStack<T> {
-    fn new() -> Self {
-        Self {
-            stack: Vec::new(),
-            depth: 0,
-        }
-    }
-
-    fn push(&mut self, item: T) -> Option<T> {
-        if self
-            .stack
-            .last()
-            .filter(|(d, _)| *d == self.depth)
-            .is_some()
-        {
-            return self.stack.pop().map(|(_, v)| v);
-        }
-
-        self.stack.push((self.depth, item));
-        None
-    }
-
-    fn pop(&mut self) -> Option<T> {
-        self.stack.pop().map(|(_, item)| item)
-    }
-
-    fn peek(&self) -> Option<&T> {
-        self.stack
-            .last()
-            .filter(|(d, _)| *d == self.depth)
-            .map(|(_, item)| item)
-    }
-
-    fn depth(&self) -> usize {
-        self.depth
-    }
-
-    #[tracing::instrument(skip(self))]
-    fn inc_depth(&mut self) {
-        self.depth += 1;
-        tracing::trace!(depth = self.depth);
-    }
-
-    #[tracing::instrument(skip(self))]
-    fn dec_depth(&mut self) {
-        self.depth -= 1;
-        tracing::trace!(depth = self.depth);
-        self.stack.retain(|(d, _)| *d <= self.depth);
-    }
-}
-
-impl<T> Default for DepthStack<T> {
-    fn default() -> Self {
-        Self::new()
-    }
 }
 
 impl<'a> TransformVisitor<'a> {
