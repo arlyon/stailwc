@@ -3,15 +3,38 @@
 This is an experimental SWC transpiler to bring compile time
 tailwind macros to SWC (and nextjs) a-la twin macro. The goal
 is to give the same great performance and flexibility while
-performing considerably better than babel-based alternatives
-(about 11x faster in my experience, proper benchmarks coming soon!)
+performing considerably better than babel-based alternatives.
+Supports both `emotion` and `styled-components`.
 
-> 🚨 We currently only support NextJS 13.0.1
+## Compatibility Chart
+
+We are currently testing against the following versions:
+
+| stailwc | NextJS | Emotion | Styled Components |
+| ------- | ------ | ------- | ----------------- |
+| latest  | 13.0.1 | 11.10.5 | 5.3.6             |
+
+## Feature Chart
+
+| Feature                         | Emotion        | Styled Components |
+| ------------------------------- | -------------- | ----------------- |
+| `tw` jsx attribute              | ✅             | ✅                |
+| `tw` template tag               | ✅             | ✅                |
+| `tw` component syntax           | ✅<sup>1</sup> | ✅                |
+| `tw` component extension syntax | ✅<sup>1</sup> | ✅                |
+| Global styles                   | ✅<sup>2</sup> | ⛔<sup>3</sup>    |
+
+1. Currently `emotion` requires a dummy import at the top of the file
+   due to a swc bug. This will be fixed in the future.
+2. Due to the same issue, a dummy import is required at the top of
+   the for `emotion`. This will be fixed in the future.
+3. Due to the same issue, `styled-components` global css does not work.
 
 ## Getting started
 
 ```bash
-> yarn add stailwc
+> npm add -D stailwc
+> yarn add -D stailwc
 ```
 
 Currently the setup process is a little bit convoluted, but it
@@ -32,6 +55,8 @@ const nextConfig = {
   },
   compiler: {
     emotion: true,
+    // or
+    styledComponents: true,
   },
 };
 
@@ -39,12 +64,13 @@ module.exports = nextConfig;
 ```
 
 Optionally, you can also include the tailwind normalizer + forms
-plugin by including the `<TailwindStyle />` component.
+plugin by including the `<TailwindStyle />` component. This is
+currently not possible with `styled-components`, but will be once
+issue [#22](https://github.com/arlyon/stailwc/issues/23) is resolved.
 
 `_document.tsx`
 
 ```tsx
-import { Html, Head, Main, NextScript } from "next/document";
 import { TailwindStyle } from "stailwc";
 
 // currently needed due to a swc bug
@@ -54,15 +80,12 @@ css;
 Global;
 // ===
 
-export default function Document() {
+export default function App({ Component, pageProps }) {
   return (
-    <Html>
+    <>
       <TailwindStyle />
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
+      <Component {...pageProps} />
+    </>
   );
 }
 ```
@@ -94,18 +117,25 @@ export const ColorButton = () => {
 };
 ```
 
-### Styled components
+### Component syntax
 
 You can also create styled components using the `tw` template tag.
+This will automatically create the correct syntax for both `emotion`
+and `styled-components`.
 
 ```tsx
-import _styled from "@emotion/styled";
-
-// currently needed due to a swc bug
+// currently needed with emotion due to a swc bug
 // ===
+import _styled from "@emotion/styled";
 _styled;
 // ===
 
 export const StyledButton = tw.button`p-1 m-4 text-green bg-white hover:(bg-gray text-yellow md:text-red) border-3`;
 export const ShadowButton = tw(StyledButton)`shadow-lg`;
 ```
+
+## Examples
+
+There are examples available for both `emotion` and `styled-components`.
+You can run them by cloning the repo and running `yarn` followed by
+`yarn dev` in the example directory. You will need to `stailwc` first.
