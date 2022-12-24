@@ -1,3 +1,4 @@
+use std::boxed::Box as StdBox;
 use std::fmt::Display;
 
 use nom::bytes::complete::take_while;
@@ -18,6 +19,7 @@ use tailwind_config::TailwindTheme;
 use crate::eval::{plugin, prose};
 use crate::NomSpan;
 use crate::Plugin;
+use crate::Subject;
 
 /// The core 'rule' of a tailwind directive.
 ///
@@ -46,13 +48,15 @@ impl<'a> LiteralConversionError<'a> {
     }
 }
 
-enum PluginType {
-    Singular(fn() -> Option<ObjectLit>),
-    Required(fn(&Value, &TailwindTheme) -> Option<ObjectLit>),
-    Optional(fn(Option<&Value>, &TailwindTheme) -> Option<ObjectLit>),
-    RequiredArbitrary(fn(&SubjectValue, &TailwindTheme) -> Option<ObjectLit>),
-    #[allow(dead_code)]
-    OptionalArbitrary(fn(Option<&SubjectValue>, &TailwindTheme) -> Option<ObjectLit>),
+pub type PluginResult<'a> = Result<ObjectLit, Vec<&'a str>>;
+
+enum PluginType<'a> {
+    Singular(fn() -> ObjectLit),
+    Required(fn(&Value, &'a TailwindTheme) -> PluginResult<'a>),
+    RequiredBox(Box<dyn Fn(&Value, &'a TailwindTheme) -> PluginResult<'a>>),
+    OptionalAbitraryBox(Box<dyn Fn(&Option<SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>>),
+    Optional(fn(Option<&Value>, &'a TailwindTheme) -> PluginResult<'a>),
+    RequiredArbitrary(fn(&SubjectValue, &'a TailwindTheme) -> PluginResult<'a>),
 }
 
 impl<'a> Literal<'a> {
@@ -70,70 +74,40 @@ impl<'a> Literal<'a> {
 
         let plugin = match self.cmd {
             // stateful plugins require some arg from their subject
-            Border(b) => {
-                return plugin::border(b, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+            Border(b) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::border(b, v, t))),
+            Rounded(r) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::rounded(r, v, t))),
+            Position(p) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::position(p, v, t))),
+            Visibility(vis) => {
+                OptionalAbitraryBox(StdBox::new(move |v, t| plugin::visibility(vis, v, t)))
             }
-            Rounded(r) => {
-                return plugin::rounded(r, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
-            Position(p) => {
-                return plugin::position(p, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
-            Visibility(v) => {
-                return plugin::visibility(v, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
-            Display(d) => {
-                return plugin::display(d, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
+            Display(d) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::display(d, v, t))),
             TextTransform(tt) => {
-                return plugin::text_transform(tt, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+                OptionalAbitraryBox(StdBox::new(move |v, t| plugin::text_transform(tt, v, t)))
             }
             TextDecoration(td) => {
-                return plugin::text_decoration(td, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+                OptionalAbitraryBox(StdBox::new(move |v, t| plugin::text_decoration(td, v, t)))
             }
-            Flex(f) => {
-                return plugin::flex(f, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
-            Grid(g) => {
-                return plugin::grid(g, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
-            Object(o) => {
-                return plugin::object(o, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
+            Flex(f) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::flex(f, v, t))),
+            Grid(g) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::grid(g, v, t))),
+            Object(o) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::object(o, v, t))),
             Whitespace(ws) => {
-                return plugin::white_space(ws, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+                OptionalAbitraryBox(StdBox::new(move |v, t| plugin::white_space(ws, v, t)))
             }
-            Divide(d) => {
-                return plugin::divide(d, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
+            Divide(d) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::divide(d, v, t))),
             AlignSelf(align) => {
-                return plugin::align_self(align, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+                OptionalAbitraryBox(StdBox::new(move |v, t| plugin::align_self(align, v, t)))
             }
-            Prose(p) => {
-                return prose::prose(p, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+            Prose(p) => OptionalAbitraryBox(StdBox::new(move |v, t| prose::prose(p, v, t))),
+            Translate(tr) => {
+                OptionalAbitraryBox(StdBox::new(move |v, t| plugin::translate(tr, v, t)))
             }
-            Translate(t) => {
-                return plugin::translate(t, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
+            Col(c) => RequiredBox(StdBox::new(move |v, t| plugin::col(c, v, t))),
+            Row(r) => RequiredBox(StdBox::new(move |v, t| plugin::row(r, v, t))),
+            Overflow(o) => RequiredBox(StdBox::new(move |v, t| plugin::overflow(o, v, t))),
             Not(_) => todo!(),
 
             // all other plugins
-            Text => Required(plugin::text),
+            Text => RequiredArbitrary(plugin::text),
             Font => Required(plugin::font),
             Shadow => Optional(plugin::shadow),
             Transition => Optional(plugin::transition),
@@ -150,9 +124,7 @@ impl<'a> Literal<'a> {
             To => Required(plugin::to),
             Outline => Optional(plugin::outline),
             Mix => Required(plugin::mix),
-            Col => Required(plugin::col),
             Content => RequiredArbitrary(plugin::content),
-            Row => Required(plugin::row),
             Grow => Optional(plugin::grow),
             Shrink => Optional(plugin::shrink),
             Basis => Required(plugin::basis),
@@ -166,7 +138,6 @@ impl<'a> Literal<'a> {
             Scale => Required(plugin::scale),
             Box => Required(plugin::box_),
             Select => Required(plugin::select),
-            Overflow => Required(plugin::overflow),
             Top => RequiredArbitrary(plugin::top),
             Bottom => RequiredArbitrary(plugin::bottom),
             Left => RequiredArbitrary(plugin::left),
@@ -209,7 +180,7 @@ impl<'a> Literal<'a> {
             Inset(Some(Inset::X)) => RequiredArbitrary(plugin::inset_x),
             Inset(Some(Inset::Y)) => RequiredArbitrary(plugin::inset_y),
             Leading => Required(plugin::leading),
-            Truncate => Optional(plugin::truncate),
+            Truncate => Singular(plugin::truncate),
             Animate => Required(plugin::animation),
         };
 
@@ -218,11 +189,11 @@ impl<'a> Literal<'a> {
             (Optional(p), Some(SubjectValue::Value(s))) => p(Some(s), theme),
             (Optional(p), None) => p(None, theme),
             (RequiredArbitrary(p), Some(value)) => p(value, theme),
-            (OptionalArbitrary(p), value) => p(value.as_ref(), theme),
-            (Singular(p), None) => p(),
-            _ => None,
+            (Singular(p), None) => Ok(p()),
+            (RequiredBox(p), Some(SubjectValue::Value(value))) => p(value, theme),
+            _ => Err(vec![]),
         }
-        .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+        .map_err(|e| LiteralConversionError::new(self.cmd, self.value))
     }
 }
 
