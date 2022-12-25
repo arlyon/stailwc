@@ -33,7 +33,15 @@ macro_rules! array_plugin {
                 .iter()
                 .find(|&x| x == rest)
                 .map(|_| to_lit(&[($target, rest)]))
-                .ok_or_else(|| vec![])
+                .ok_or_else(|| {
+                    let sort = eddie::Levenshtein::new();
+                    $options
+                        .iter()
+                        .sorted_by_key(|val| sort.distance(rest, val))
+                        .copied()
+                        .take(5)
+                        .collect()
+                })
         }
     };
 }
