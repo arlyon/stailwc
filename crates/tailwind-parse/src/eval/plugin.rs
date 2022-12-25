@@ -710,6 +710,9 @@ pub fn ring<'a>(rest: Option<&Value>, theme: &'a TailwindTheme) -> PluginResult<
     }
 }
 
+lookup_plugin_opt!(flex_grow, flex_grow, "flexGrow");
+lookup_plugin_opt!(flex_shrink, flex_shrink, "flexShrink");
+
 pub fn flex<'a>(
     f: Option<Flex>,
     rest: &Option<SubjectValue>,
@@ -724,20 +727,8 @@ pub fn flex<'a>(
         (Some(Flex::WrapReverse), _) => [("flexWrap", "wrap-reverse")],
         (Some(Flex::NoWrap), _) => [("flexWrap", "nowrap")],
         (None, None) => [("display", "flex")],
-        (Some(Flex::Grow), val) => {
-            return simple_lookup(
-                &theme.flex_grow,
-                val.as_ref().map(|v| v.as_str()).unwrap_or("DEFAULT"),
-                "flexGrow",
-            )
-        }
-        (Some(Flex::Shrink), val) => {
-            return simple_lookup(
-                &theme.flex_grow,
-                val.as_ref().map(|v| v.as_str()).unwrap_or("DEFAULT"),
-                "flexShrink",
-            )
-        }
+        (Some(Flex::Grow), v) => return flex_grow(v.as_ref().and_then(|s| s.value()), theme),
+        (Some(Flex::Shrink), v) => return flex_shrink(v.as_ref().and_then(|s| s.value()), theme),
         (None, Some(val)) => return simple_lookup(&theme.flex, val.as_str(), "flex"),
     };
 

@@ -199,9 +199,9 @@ pub enum SubjectValue<'a> {
     Css(Css<'a>),
 }
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub struct Value<'a>(pub &'a str);
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub struct Css<'a>(pub &'a str);
 
 impl Display for SubjectValue<'_> {
@@ -218,6 +218,20 @@ impl<'a> SubjectValue<'a> {
         match self {
             SubjectValue::Value(Value(s)) => s,
             SubjectValue::Css(Css(s)) => s,
+        }
+    }
+
+    pub fn value(&self) -> Option<&Value> {
+        match self {
+            SubjectValue::Value(v) => Some(v),
+            _ => None,
+        }
+    }
+
+    pub fn css(&self) -> Option<&Css> {
+        match self {
+            SubjectValue::Css(s) => Some(s),
+            _ => None,
         }
     }
 
