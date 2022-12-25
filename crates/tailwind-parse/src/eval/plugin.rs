@@ -896,27 +896,44 @@ pub fn content<'a>(rest: &SubjectValue, _theme: &'a TailwindTheme) -> PluginResu
     Ok(to_lit(&[("content", rest.as_str())]))
 }
 
-pub fn justify<'a>(Value(rest): &Value, _theme: &'a TailwindTheme) -> PluginResult<'a> {
-    match *rest {
-        "start" => Ok(("justifyContent", "flex-start")),
-        "end" => Ok(("justifyContent", "flex-end")),
-        "center" => Ok(("justifyContent", "center")),
-        "between" => Ok(("justifyContent", "space-between")),
-        "around" => Ok(("justifyContent", "space-around")),
-        "evenly" => Ok(("justifyContent", "space-evenly")),
-        "items-start" => Ok(("justifyItems", "start")),
-        "items-end" => Ok(("justifyItems", "end")),
-        "items-center" => Ok(("justifyItems", "center")),
-        "items-stretch" => Ok(("justifyItems", "stretch")),
-        "self-auto" => Ok(("justifySelf", "auto")),
-        "self-start" => Ok(("justifySelf", "start")),
-        "self-end" => Ok(("justifySelf", "end")),
-        "self-center" => Ok(("justifySelf", "center")),
-        "self-stretch" => Ok(("justifySelf", "stretch")),
-        _ => Err(vec![]),
-    }
-    .map(|v| to_lit(&[v]))
-}
+array_map_plugin!(
+    justify_content,
+    [
+        ("start", "flex-start"),
+        ("end", "flex-end"),
+        ("center", "center"),
+        ("between", "space-between"),
+        ("around", "space-around"),
+        ("evenly", "space-evenly")
+    ],
+    "justifyContent"
+);
+
+array_map_plugin!(
+    justify_items,
+    [
+        ("items-start", "start"),
+        ("items-end", "end"),
+        ("items-center", "center"),
+        ("iterms-stretch", "stretch")
+    ],
+    "justifyItems"
+);
+
+array_map_plugin!(
+    justify_self,
+    [
+        ("self-auto", "auto"),
+        ("self-start", "start"),
+        ("self-end", "end"),
+        ("self-center", "center"),
+        ("self-stretch", "stretch")
+    ],
+    "justifySelf"
+);
+
+merge_plugins!(justify_content_items, justify_content, justify_items);
+merge_plugins!(justify, justify_content_items, justify_self);
 
 pub fn italic() -> ObjectLit {
     to_lit(&[("fontStyle", "italic")])
