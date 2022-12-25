@@ -183,7 +183,15 @@ fn simple_lookup<'a>(
     hashmap
         .get(search)
         .map(|val| to_lit(&[(output, val)]))
-        .ok_or_else(|| vec![])
+        .ok_or_else(|| {
+            let sort = eddie::Levenshtein::new();
+            hashmap
+                .keys()
+                .sorted_by_key(|val| sort.distance(search, val))
+                .copied()
+                .take(5)
+                .collect()
+        })
 }
 
 fn simple_lookup_map<'a, V>(
