@@ -53,7 +53,16 @@ macro_rules! array_map_plugin {
                 .iter()
                 .find(|(x, _)| x == rest)
                 .map(|(_, y)| to_lit(&[($target, y)]))
-                .ok_or_else(|| vec![])
+                .ok_or_else(|| {
+                    let sort = eddie::Levenshtein::new();
+                    $options
+                        .iter()
+                        .map(|(x, _)| x)
+                        .sorted_by_key(|val| sort.distance(rest, val))
+                        .copied()
+                        .take(5)
+                        .collect()
+                })
         }
     };
 }
