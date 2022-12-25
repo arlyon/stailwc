@@ -424,43 +424,34 @@ merge_plugins_arbitrary!(mx, ml, mr);
 merge_plugins_arbitrary!(py, pt, pb);
 merge_plugins_arbitrary!(px, pl, pr);
 
+lookup_plugin_arbitrary_opt!(rounded_base, border_radius, "borderRadius");
+lookup_plugin_arbitrary_opt!(rounded_tl, border_radius, "borderTopLeftRadius");
+lookup_plugin_arbitrary_opt!(rounded_tr, border_radius, "borderTopRightRadius");
+lookup_plugin_arbitrary_opt!(rounded_bl, border_radius, "borderBottomLeftRadius");
+lookup_plugin_arbitrary_opt!(rounded_br, border_radius, "borderBottomRightRadius");
+merge_plugins_arbitrary_opt!(rounded_t, rounded_tl, rounded_tr);
+merge_plugins_arbitrary_opt!(rounded_b, rounded_bl, rounded_br);
+merge_plugins_arbitrary_opt!(rounded_l, rounded_tl, rounded_bl);
+merge_plugins_arbitrary_opt!(rounded_r, rounded_tr, rounded_br);
+
 pub fn rounded<'a>(
     subcommand: Option<Rounded>,
     rest: &Option<SubjectValue>,
     theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
-    let cmds = match subcommand {
-        None => {
-            return match rest {
-                Some(SubjectValue::Value(Value(v))) => {
-                    simple_lookup(&theme.border_radius, v, "borderRadius")
-                }
-                Some(SubjectValue::Css(Css(v))) => Ok(to_lit(&[("borderRadius", v)])),
-                None => simple_lookup(&theme.border_radius, "DEFAULT", "borderRadius"),
-            }
-        }
-        Some(Rounded::T) => ("borderTopLeftRadius", Some("borderTopRightRadius")),
-        Some(Rounded::B) => ("borderBottomLeftRadius", Some("borderBottomRightRadius")),
-        Some(Rounded::L) => ("borderTopLeftRadius", Some("borderBottomLeftRadius")),
-        Some(Rounded::R) => ("borderTopRightRadius", Some("borderBottomRightRadius")),
-        Some(Rounded::Tr) => ("borderTopRightRadius", None),
-        Some(Rounded::Tl) => ("borderTopLeftRadius", None),
-        Some(Rounded::Br) => ("borderBottomRightRadius", None),
-        Some(Rounded::Bl) => ("borderBottomLeftRadius", None),
+    let fun = match subcommand {
+        None => rounded_base,
+        Some(Rounded::T) => rounded_t,
+        Some(Rounded::B) => rounded_b,
+        Some(Rounded::L) => rounded_l,
+        Some(Rounded::R) => rounded_r,
+        Some(Rounded::Tr) => rounded_tr,
+        Some(Rounded::Tl) => rounded_tl,
+        Some(Rounded::Br) => rounded_br,
+        Some(Rounded::Bl) => rounded_bl,
     };
 
-    let radius = match rest {
-        Some(SubjectValue::Value(Value(v))) => theme.border_radius.get(v),
-        Some(SubjectValue::Css(Css(v))) => Some(v),
-        None => theme.border_radius.get("DEFAULT"),
-    };
-
-    radius
-        .map(|lookup| match cmds {
-            (a, Some(b)) => to_lit(&[(a, lookup), (b, lookup)]),
-            (a, None) => to_lit(&[(a, lookup)]),
-        })
-        .ok_or(vec![])
+    fun(rest.as_ref(), theme)
 }
 
 pub fn mix<'a>(rest: &Value, theme: &'a TailwindTheme) -> PluginResult<'a> {
