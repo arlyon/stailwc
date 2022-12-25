@@ -108,7 +108,7 @@ impl<'a> TransformVisitor<'a> {
             h.struct_span_warn(span, msg)
         };
 
-        if let Some(s) = suggestions {
+        if let Some(s) = suggestions && !s.is_empty() {
             b.allow_suggestions(true)
                 .help(&format!("maybe you meant {:?}", s))
                 .span_suggestions(
