@@ -254,21 +254,21 @@ merge_plugins!(ring_base, ring_width, ring_color);
 lookup_plugin!(to, colors, "--tw-gradient-to");
 lookup_plugin_arbitrary!(w, width, "width");
 lookup_plugin!(rotate, rotate, "--tw-rotate");
-lookup_plugin!(p, padding, "padding");
-lookup_plugin!(pl, padding, "paddingLeft");
-lookup_plugin!(pr, padding, "paddingRight");
-lookup_plugin!(pt, padding, "paddingTop");
-lookup_plugin!(pb, padding, "paddingBottom");
+lookup_plugin_arbitrary!(p, padding, "padding");
+lookup_plugin_arbitrary!(pl, padding, "paddingLeft");
+lookup_plugin_arbitrary!(pr, padding, "paddingRight");
+lookup_plugin_arbitrary!(pt, padding, "paddingTop");
+lookup_plugin_arbitrary!(pb, padding, "paddingBottom");
 
-lookup_plugin!(m, margin, "margin");
-lookup_plugin!(ml, margin, "marginLeft");
-lookup_plugin!(mr, margin, "marginRight");
-lookup_plugin!(mt, margin, "marginTop");
-lookup_plugin!(mb, margin, "marginBottom");
-lookup_plugin!(z, z_index, "zIndex");
+lookup_plugin_arbitrary!(m, margin, "margin");
+lookup_plugin_arbitrary!(ml, margin, "marginLeft");
+lookup_plugin_arbitrary!(mr, margin, "marginRight");
+lookup_plugin_arbitrary!(mt, margin, "marginTop");
+lookup_plugin_arbitrary!(mb, margin, "marginBottom");
+lookup_plugin_arbitrary!(z, z_index, "zIndex");
 lookup_plugin_arbitrary!(gap, gap, "gap");
-lookup_plugin!(gap_x, gap, "columnGap");
-lookup_plugin!(gap_y, gap, "rowGap");
+lookup_plugin_arbitrary!(gap_x, gap, "columnGap");
+lookup_plugin_arbitrary!(gap_y, gap, "rowGap");
 lookup_plugin!(cursor, cursor, "cursor");
 lookup_plugin!(scale, scale, "transform", |v| format!("scale({v})"));
 
@@ -419,10 +419,10 @@ array_plugin!(
 lookup_plugin_arbitrary!(translate_x, translate, "--tw-translate-x");
 lookup_plugin_arbitrary!(translate_y, translate, "--tw-translate-y");
 
-merge_plugins!(my, mt, mb);
-merge_plugins!(mx, ml, mr);
-merge_plugins!(py, pt, pb);
-merge_plugins!(px, pl, pr);
+merge_plugins_arbitrary!(my, mt, mb);
+merge_plugins_arbitrary!(mx, ml, mr);
+merge_plugins_arbitrary!(py, pt, pb);
+merge_plugins_arbitrary!(px, pl, pr);
 
 pub fn rounded<'a>(
     subcommand: Option<Rounded>,
