@@ -1,4 +1,4 @@
-use std::{array, collections::HashMap};
+use std::collections::HashMap;
 
 use crate::{
     AlignSelf, Border, Col, Css, Display, Divide, Flex, Grid, Object, Overflow, PluginResult,
@@ -16,7 +16,6 @@ use tailwind_config::TailwindTheme;
 macro_rules! lookup_plugin {
     ($def:ident, $map:tt, $target:expr) => {
         pub fn $def<'a>(Value(rest): &Value, theme: &'a TailwindTheme) -> PluginResult<'a> {
-            println!("{}: {}", stringify!($def), rest);
             simple_lookup(&theme.$map, rest, $target)
         }
     };
@@ -30,7 +29,6 @@ macro_rules! lookup_plugin {
 macro_rules! array_plugin {
     ($def:ident, $options:expr, $target:expr) => {
         pub fn $def<'a>(Value(rest): &Value, _theme: &'a TailwindTheme) -> PluginResult<'a> {
-            println!("{}: {}", stringify!($def), rest);
             $options
                 .iter()
                 .find(|&x| x == rest)
@@ -203,7 +201,7 @@ fn simple_lookup_map<'a, V>(
     hashmap
         .get(search)
         .map(|val| to_lit(&[(output, &f(val))]))
-        .ok_or_else(|| vec![])
+        .ok_or_else(Vec::new)
 }
 
 lookup_plugin_opt!(transition, transition_property, "transitionProperty");
@@ -463,7 +461,7 @@ pub fn transform_origin<'a>(Value(rest): &Value, _theme: &'a TailwindTheme) -> P
 
 pub fn text<'a>(value: &SubjectValue, theme: &'a TailwindTheme) -> PluginResult<'a> {
     text_size(value, theme)
-        .or_else(|e| text_color(value, theme))
+        .or_else(|_e| text_color(value, theme))
         .or_else(|e| match value {
             SubjectValue::Value(v) => text_align(v, theme),
             SubjectValue::Css(_) => Err(e),
@@ -581,18 +579,18 @@ pub fn outline<'a>(rest: Option<&Value>, theme: &'a TailwindTheme) -> PluginResu
         Some(Value("double")) => Ok(to_lit(&[("outlineStyle", "double")])),
         Some(Value("hidden")) => Ok(to_lit(&[("outlineStyle", "hidden")])),
         Some(rest) => simple_lookup(&theme.colors, rest.0, "outlineColor")
-            .or_else(|e| simple_lookup(&theme.outline_offset, rest.0, "outlineOffset"))
-            .or_else(|e| simple_lookup(&theme.outline_width, rest.0, "outlineWidth")),
+            .or_else(|_e| simple_lookup(&theme.outline_offset, rest.0, "outlineOffset"))
+            .or_else(|_e| simple_lookup(&theme.outline_width, rest.0, "outlineWidth")),
     }
 }
 
 pub fn bg<'a>(val: &SubjectValue, theme: &'a TailwindTheme) -> PluginResult<'a> {
     match val {
         SubjectValue::Value(Value(rest)) => simple_lookup(&theme.colors, rest, "backgroundColor")
-            .or_else(|e| simple_lookup(&theme.background_image, rest, "backgroundImage"))
-            .or_else(|e| simple_lookup(&theme.background_size, rest, "backgroundSize"))
-            .or_else(|e| simple_lookup(&theme.background_position, rest, "backgroundPosition"))
-            .or_else(|e| bg_repeat(&Value(rest), theme)),
+            .or_else(|_e| simple_lookup(&theme.background_image, rest, "backgroundImage"))
+            .or_else(|_e| simple_lookup(&theme.background_size, rest, "backgroundSize"))
+            .or_else(|_e| simple_lookup(&theme.background_position, rest, "backgroundPosition"))
+            .or_else(|_e| bg_repeat(&Value(rest), theme)),
         SubjectValue::Css(Css(css)) => Ok(to_lit(&[("background", css)])),
     }
 }

@@ -43,7 +43,9 @@ pub type PluginResult<'a> = Result<ObjectLit, Vec<&'a str>>;
 enum PluginType<'a> {
     Singular(fn() -> ObjectLit),
     Required(fn(&Value, &'a TailwindTheme) -> PluginResult<'a>),
+    #[allow(clippy::type_complexity)]
     RequiredBox(Box<dyn Fn(&Value, &'a TailwindTheme) -> PluginResult<'a>>),
+    #[allow(clippy::type_complexity)]
     OptionalAbitraryBox(Box<dyn Fn(&Option<SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>>),
     Optional(fn(Option<&Value>, &'a TailwindTheme) -> PluginResult<'a>),
     RequiredArbitrary(fn(&SubjectValue, &'a TailwindTheme) -> PluginResult<'a>),
