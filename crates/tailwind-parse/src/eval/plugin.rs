@@ -362,7 +362,7 @@ lookup_plugin_arbitrary_opt!(border_b, border_width, "borderBottomWidth");
 merge_plugins_arbitrary_opt!(border_x, border_l, border_r);
 merge_plugins_arbitrary_opt!(border_y, border_t, border_b);
 merge_plugins_arbitrary_opt!(border_cw, border_color, border_width);
-merge_plugins_arbitrary_opt!(border_inner, border_cw, border_style);
+merge_plugins_arbitrary_opt!(border_inner, border_cw, border_style_wrapped);
 
 merge_plugins_arbitrary!(inset_x, left, right);
 merge_plugins_arbitrary!(inset_y, top, bottom);
@@ -656,14 +656,19 @@ pub fn border<'a>(
     func(rest.as_ref(), theme)
 }
 
-fn border_style(rest: Option<&SubjectValue>, _theme: &TailwindTheme) -> PluginResult<'static> {
+array_plugin!(
+    border_style,
+    ["solid", "dashed", "dotted", "double", "hidden", "none"],
+    "borderStyle"
+);
+
+/// wrap border_style to be composed with other plugins
+fn border_style_wrapped<'a>(
+    rest: Option<&SubjectValue>,
+    theme: &'a TailwindTheme,
+) -> PluginResult<'a> {
     match rest {
-        Some(SubjectValue::Value(Value("solid"))) => Ok(to_lit(&[("borderStyle", "solid")])),
-        Some(SubjectValue::Value(Value("dashed"))) => Ok(to_lit(&[("borderStyle", "dashed")])),
-        Some(SubjectValue::Value(Value("dotted"))) => Ok(to_lit(&[("borderStyle", "dotted")])),
-        Some(SubjectValue::Value(Value("double"))) => Ok(to_lit(&[("borderStyle", "double")])),
-        Some(SubjectValue::Value(Value("hidden"))) => Ok(to_lit(&[("borderStyle", "hidden")])),
-        Some(SubjectValue::Value(Value("none"))) => Ok(to_lit(&[("borderStyle", "none")])),
+        Some(SubjectValue::Value(val)) => border_style(val, theme),
         _ => Err(vec![]),
     }
 }
