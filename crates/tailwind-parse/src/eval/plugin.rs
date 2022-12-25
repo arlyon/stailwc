@@ -201,7 +201,15 @@ fn simple_lookup_map<'a, V>(
     hashmap
         .get(search)
         .map(|val| to_lit(&[(output, &f(val))]))
-        .ok_or_else(Vec::new)
+        .ok_or_else(|| {
+            let sort = eddie::Levenshtein::new();
+            hashmap
+                .keys()
+                .sorted_by_key(|val| sort.distance(search, val))
+                .copied()
+                .take(5)
+                .collect()
+        })
 }
 
 lookup_plugin_opt!(transition, transition_property, "transitionProperty");
