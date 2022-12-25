@@ -36,7 +36,7 @@ impl<'a> Directive<'a> {
     /// Attempts to parse a literal from the given directive,
     pub fn to_literal(
         self,
-        config: &TailwindConfig,
+        config: &'a TailwindConfig,
     ) -> (ObjectLit, Vec<ExpressionConversionError<'a>>) {
         self.exps
             .into_iter()

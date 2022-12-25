@@ -81,7 +81,7 @@ impl<'a> Expression<'a> {
     pub fn to_literal(
         self,
         span: Span,
-        config: &TailwindConfig,
+        config: &'a TailwindConfig,
     ) -> Result<ObjectLit, ExpressionConversionError<'a>> {
         let mut object: ObjectLit = self
             .subject

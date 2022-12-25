@@ -57,7 +57,7 @@ impl<'a> Subject<'a> {
     pub fn to_literal(
         self,
         span: Span,
-        config: &TailwindConfig,
+        config: &'a TailwindConfig,
     ) -> Result<ObjectLit, SubjectConversionError<'a>> {
         match self {
             Subject::Literal(lit) => lit

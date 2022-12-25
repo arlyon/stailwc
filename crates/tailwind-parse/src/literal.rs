@@ -19,7 +19,6 @@ use tailwind_config::TailwindTheme;
 use crate::eval::{plugin, prose};
 use crate::NomSpan;
 use crate::Plugin;
-use crate::Subject;
 
 /// The core 'rule' of a tailwind directive.
 ///
@@ -36,16 +35,7 @@ pub enum LiteralConversionError<'a> {
     #[error("missing argument for `{0:?}`")]
     MissingArguments(Plugin),
     #[error("invalid argument for `{0:?}` - `{1}`")]
-    InvalidArguments(Plugin, SubjectValue<'a>),
-}
-
-impl<'a> LiteralConversionError<'a> {
-    pub fn new<'b: 'a>(cmd: Plugin, value: Option<SubjectValue<'a>>) -> Self {
-        match value {
-            Some(value) => Self::InvalidArguments(cmd, value),
-            None => Self::MissingArguments(cmd),
-        }
-    }
+    InvalidArguments(Plugin, SubjectValue<'a>, Vec<&'a str>),
 }
 
 pub type PluginResult<'a> = Result<ObjectLit, Vec<&'a str>>;
@@ -63,7 +53,7 @@ impl<'a> Literal<'a> {
     pub fn to_object_lit(
         self,
         _span: Span,
-        theme: &TailwindTheme,
+        theme: &'a TailwindTheme,
     ) -> Result<ObjectLit, LiteralConversionError<'a>> {
         use crate::Gap;
         use crate::Inset;
@@ -191,9 +181,13 @@ impl<'a> Literal<'a> {
             (RequiredArbitrary(p), Some(value)) => p(value, theme),
             (Singular(p), None) => Ok(p()),
             (RequiredBox(p), Some(SubjectValue::Value(value))) => p(value, theme),
+            (OptionalAbitraryBox(p), value) => p(value, theme),
             _ => Err(vec![]),
         }
-        .map_err(|e| LiteralConversionError::new(self.cmd, self.value))
+        .map_err(|e| match self.value {
+            Some(v) => LiteralConversionError::InvalidArguments(self.cmd, v, e),
+            None => LiteralConversionError::MissingArguments(self.cmd),
+        })
     }
 }
 
