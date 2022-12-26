@@ -83,8 +83,8 @@ mod plugin {
         Mix,
         Flex(Option<Flex>),
         Grid(Option<Grid>),
-        Col,
-        Row,
+        Col(Option<Col>),
+        Row(Option<Row>),
         Float,
         Grow,
         Shrink,
@@ -98,7 +98,7 @@ mod plugin {
         Scale,
         Box,
         Select,
-        Overflow,
+        Overflow(Option<Overflow>),
         Top,
         Bottom,
         Left,
@@ -118,6 +118,24 @@ mod plugin {
 
         Prose(Option<Prose>),
         Not(Not),
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Col {
+        Start,
+        End,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Row {
+        Start,
+        End,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Overflow {
+        X,
+        Y,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

@@ -12,6 +12,7 @@ mod engine;
 mod test;
 
 use depth_stack::DepthStack;
+
 use nom_locate::LocatedSpan;
 use serde::Deserialize;
 use swc_core::{
@@ -34,7 +35,9 @@ use swc_core::{
     plugin::{errors::HANDLER, plugin_transform, proxies::TransformPluginProgramMetadata},
 };
 use tailwind_config::TailwindConfig;
-use tailwind_parse::Directive;
+use tailwind_parse::{
+    Directive, ExpressionConversionError, LiteralConversionError, SubjectConversionError,
+};
 
 #[derive(serde::Deserialize, Debug)]
 pub struct AppConfig<'a> {
@@ -92,12 +95,30 @@ impl<'a> TransformVisitor<'a> {
         }
     }
 
-    fn report<'s>(&self, h: &'s Handler, span: Span, msg: &'s str) -> DiagnosticBuilder<'s> {
-        if self.strict {
+    fn report<'s>(
+        &self,
+        h: &'s Handler,
+        span: Span,
+        msg: &'s str,
+        suggestions: Option<&[&str]>,
+    ) -> DiagnosticBuilder<'s> {
+        let mut b = if self.strict {
             h.struct_span_err(span, msg)
         } else {
             h.struct_span_warn(span, msg)
+        };
+
+        if let Some(s) = suggestions && !s.is_empty() {
+            b.allow_suggestions(true)
+                .help(&format!("maybe you meant {:?}", s))
+                .span_suggestions(
+                    span,
+                    "maybe you meant",
+                    s.iter().map(|s| s.to_string()).collect(),
+                );
         }
+
+        b
     }
 }
 
@@ -129,7 +150,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                     Ok((_, d)) => d,
                     Err(e) => {
                         HANDLER.with(|h| {
-                            self.report(h,  *span, &e.to_string())
+                            self.report(h,  *span, &e.to_string(), None)
                                 .note("unknown plugin")
                                 .emit()
                         });
@@ -141,15 +162,24 @@ impl<'a> VisitMut for TransformVisitor<'a> {
 
                 for e in errs {
                     HANDLER.with(|h| {
-                        self.report(h,  *span, &e.to_string())
-                            .note("when evaluating plugin")
-                            .emit()
+                        match e {
+                            ExpressionConversionError::UnknownSubject(SubjectConversionError::InvalidLiteral(LiteralConversionError::InvalidArguments(_p, _v, s)), span) => {
+                                self
+                                    .report(h, span, "unknown parameter", Some(&s))
+                                    .emit()
+                            }
+                            _ => {
+                                self.report(h,  *span, &e.to_string(), None)
+                                    .emit()
+                            }
+                        }
+
                     });
                 }
 
                 if let Some((span, _val)) = self.tw_attr_stack.push((*span, x)) {
                     HANDLER.with(|h| {
-                        self.report(h, n.span, "tw attribute already exists, ignoring")
+                        self.report(h, n.span, "tw attribute already exists, ignoring", None)
                             .span_note(
                                 span,
                                 "previous encountered here",
@@ -164,7 +194,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 ..
             })) => {
                 HANDLER.with(|h| {
-                    self.report(h, *span, "variables are not supported")
+                    self.report(h, *span, "variables are not supported", None)
                             .emit()
                 });
             }
@@ -285,7 +315,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 Ok((_, d)) => d,
                 Err(e) => {
                     HANDLER.with(|h| {
-                        self.report(h, *span, "invalid syntax")
+                        self.report(h, *span, "invalid syntax", None)
                             .note(&e.to_string())
                             .emit()
                     });
@@ -295,11 +325,15 @@ impl<'a> VisitMut for TransformVisitor<'a> {
 
             let (lit, errs) = d.to_literal(&self.config);
 
-            for e in &errs {
-                HANDLER.with(|h| {
-                    self.report(h, e.span(), &e.to_string())
-                        .note("when evaluating plugin")
-                        .emit()
+            for e in errs {
+                HANDLER.with(|h| match e {
+                    ExpressionConversionError::UnknownSubject(
+                        SubjectConversionError::InvalidLiteral(
+                            LiteralConversionError::InvalidArguments(_p, _v, s),
+                        ),
+                        span,
+                    ) => self.report(h, span, "unknown parameter", Some(&s)).emit(),
+                    _ => self.report(h, *span, &e.to_string(), None).emit(),
                 });
             }
 

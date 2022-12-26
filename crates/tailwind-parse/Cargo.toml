@@ -9,6 +9,7 @@ version = "0.11.1"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+eddie = "0.4.2"
 itertools = "0.10.5"
 nom = "7.1.1"
 nom_locate = "4.0.0"

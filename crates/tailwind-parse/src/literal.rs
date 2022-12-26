@@ -1,3 +1,4 @@
+use std::boxed::Box as StdBox;
 use std::fmt::Display;
 
 use nom::bytes::complete::take_while;
@@ -34,32 +35,27 @@ pub enum LiteralConversionError<'a> {
     #[error("missing argument for `{0:?}`")]
     MissingArguments(Plugin),
     #[error("invalid argument for `{0:?}` - `{1}`")]
-    InvalidArguments(Plugin, SubjectValue<'a>),
+    InvalidArguments(Plugin, SubjectValue<'a>, Vec<&'a str>),
 }
 
-impl<'a> LiteralConversionError<'a> {
-    pub fn new<'b: 'a>(cmd: Plugin, value: Option<SubjectValue<'a>>) -> Self {
-        match value {
-            Some(value) => Self::InvalidArguments(cmd, value),
-            None => Self::MissingArguments(cmd),
-        }
-    }
-}
+pub type PluginResult<'a> = Result<ObjectLit, Vec<&'a str>>;
 
-enum PluginType {
-    Singular(fn() -> Option<ObjectLit>),
-    Required(fn(&Value, &TailwindTheme) -> Option<ObjectLit>),
-    Optional(fn(Option<&Value>, &TailwindTheme) -> Option<ObjectLit>),
-    RequiredArbitrary(fn(&SubjectValue, &TailwindTheme) -> Option<ObjectLit>),
-    #[allow(dead_code)]
-    OptionalArbitrary(fn(Option<&SubjectValue>, &TailwindTheme) -> Option<ObjectLit>),
+enum PluginType<'a> {
+    Singular(fn() -> ObjectLit),
+    Required(fn(&Value, &'a TailwindTheme) -> PluginResult<'a>),
+    #[allow(clippy::type_complexity)]
+    RequiredBox(Box<dyn Fn(&Value, &'a TailwindTheme) -> PluginResult<'a>>),
+    #[allow(clippy::type_complexity)]
+    OptionalAbitraryBox(Box<dyn Fn(&Option<SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>>),
+    Optional(fn(Option<&Value>, &'a TailwindTheme) -> PluginResult<'a>),
+    RequiredArbitrary(fn(&SubjectValue, &'a TailwindTheme) -> PluginResult<'a>),
 }
 
 impl<'a> Literal<'a> {
     pub fn to_object_lit(
         self,
         _span: Span,
-        theme: &TailwindTheme,
+        theme: &'a TailwindTheme,
     ) -> Result<ObjectLit, LiteralConversionError<'a>> {
         use crate::Gap;
         use crate::Inset;
@@ -70,70 +66,40 @@ impl<'a> Literal<'a> {
 
         let plugin = match self.cmd {
             // stateful plugins require some arg from their subject
-            Border(b) => {
-                return plugin::border(b, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+            Border(b) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::border(b, v, t))),
+            Rounded(r) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::rounded(r, v, t))),
+            Position(p) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::position(p, v, t))),
+            Visibility(vis) => {
+                OptionalAbitraryBox(StdBox::new(move |v, t| plugin::visibility(vis, v, t)))
             }
-            Rounded(r) => {
-                return plugin::rounded(r, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
-            Position(p) => {
-                return plugin::position(p, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
-            Visibility(v) => {
-                return plugin::visibility(v, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
-            Display(d) => {
-                return plugin::display(d, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
+            Display(d) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::display(d, v, t))),
             TextTransform(tt) => {
-                return plugin::text_transform(tt, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+                OptionalAbitraryBox(StdBox::new(move |v, t| plugin::text_transform(tt, v, t)))
             }
             TextDecoration(td) => {
-                return plugin::text_decoration(td, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+                OptionalAbitraryBox(StdBox::new(move |v, t| plugin::text_decoration(td, v, t)))
             }
-            Flex(f) => {
-                return plugin::flex(f, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
-            Grid(g) => {
-                return plugin::grid(g, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
-            Object(o) => {
-                return plugin::object(o, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
+            Flex(f) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::flex(f, v, t))),
+            Grid(g) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::grid(g, v, t))),
+            Object(o) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::object(o, v, t))),
             Whitespace(ws) => {
-                return plugin::white_space(ws, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+                OptionalAbitraryBox(StdBox::new(move |v, t| plugin::white_space(ws, v, t)))
             }
-            Divide(d) => {
-                return plugin::divide(d, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
+            Divide(d) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::divide(d, v, t))),
             AlignSelf(align) => {
-                return plugin::align_self(align, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+                OptionalAbitraryBox(StdBox::new(move |v, t| plugin::align_self(align, v, t)))
             }
-            Prose(p) => {
-                return prose::prose(p, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+            Prose(p) => OptionalAbitraryBox(StdBox::new(move |v, t| prose::prose(p, v, t))),
+            Translate(tr) => {
+                OptionalAbitraryBox(StdBox::new(move |v, t| plugin::translate(tr, v, t)))
             }
-            Translate(t) => {
-                return plugin::translate(t, &self.value, theme)
-                    .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
-            }
+            Col(c) => RequiredBox(StdBox::new(move |v, t| plugin::col(c, v, t))),
+            Row(r) => RequiredBox(StdBox::new(move |v, t| plugin::row(r, v, t))),
+            Overflow(o) => RequiredBox(StdBox::new(move |v, t| plugin::overflow(o, v, t))),
             Not(_) => todo!(),
 
             // all other plugins
-            Text => Required(plugin::text),
+            Text => RequiredArbitrary(plugin::text),
             Font => Required(plugin::font),
             Shadow => Optional(plugin::shadow),
             Transition => Optional(plugin::transition),
@@ -150,9 +116,7 @@ impl<'a> Literal<'a> {
             To => Required(plugin::to),
             Outline => Optional(plugin::outline),
             Mix => Required(plugin::mix),
-            Col => Required(plugin::col),
             Content => RequiredArbitrary(plugin::content),
-            Row => Required(plugin::row),
             Grow => Optional(plugin::grow),
             Shrink => Optional(plugin::shrink),
             Basis => Required(plugin::basis),
@@ -160,13 +124,12 @@ impl<'a> Literal<'a> {
             Justify => Required(plugin::justify),
             Items => Required(plugin::items),
             Gap(None) => RequiredArbitrary(plugin::gap),
-            Gap(Some(Gap::X)) => Required(plugin::gap_x),
-            Gap(Some(Gap::Y)) => Required(plugin::gap_y),
+            Gap(Some(Gap::X)) => RequiredArbitrary(plugin::gap_x),
+            Gap(Some(Gap::Y)) => RequiredArbitrary(plugin::gap_y),
             Cursor => Required(plugin::cursor),
             Scale => Required(plugin::scale),
             Box => Required(plugin::box_),
             Select => Required(plugin::select),
-            Overflow => Required(plugin::overflow),
             Top => RequiredArbitrary(plugin::top),
             Bottom => RequiredArbitrary(plugin::bottom),
             Left => RequiredArbitrary(plugin::left),
@@ -184,22 +147,22 @@ impl<'a> Literal<'a> {
             H => RequiredArbitrary(plugin::h),
             W => RequiredArbitrary(plugin::w),
             TransformOrigin => Required(plugin::transform_origin),
-            P => Required(plugin::p),
-            Px => Required(plugin::px),
-            Pl => Required(plugin::pl),
-            Pr => Required(plugin::pr),
+            P => RequiredArbitrary(plugin::p),
+            Px => RequiredArbitrary(plugin::px),
+            Pl => RequiredArbitrary(plugin::pl),
+            Pr => RequiredArbitrary(plugin::pr),
             VerticalAlign => Required(plugin::align),
-            Py => Required(plugin::py),
-            Pt => Required(plugin::pt),
-            Pb => Required(plugin::pb),
-            M => Required(plugin::m),
-            Mx => Required(plugin::mx),
-            Ml => Required(plugin::ml),
-            Mr => Required(plugin::mr),
-            My => Required(plugin::my),
-            Mt => Required(plugin::mt),
-            Mb => Required(plugin::mb),
-            Z => Required(plugin::z),
+            Py => RequiredArbitrary(plugin::py),
+            Pt => RequiredArbitrary(plugin::pt),
+            Pb => RequiredArbitrary(plugin::pb),
+            M => RequiredArbitrary(plugin::m),
+            Mx => RequiredArbitrary(plugin::mx),
+            Ml => RequiredArbitrary(plugin::ml),
+            Mr => RequiredArbitrary(plugin::mr),
+            My => RequiredArbitrary(plugin::my),
+            Mt => RequiredArbitrary(plugin::mt),
+            Mb => RequiredArbitrary(plugin::mb),
+            Z => RequiredArbitrary(plugin::z),
             Min(Min::H) => RequiredArbitrary(plugin::min_h),
             Min(Min::W) => RequiredArbitrary(plugin::min_w),
             Max(Max::H) => RequiredArbitrary(plugin::max_h),
@@ -209,7 +172,7 @@ impl<'a> Literal<'a> {
             Inset(Some(Inset::X)) => RequiredArbitrary(plugin::inset_x),
             Inset(Some(Inset::Y)) => RequiredArbitrary(plugin::inset_y),
             Leading => Required(plugin::leading),
-            Truncate => Optional(plugin::truncate),
+            Truncate => Singular(plugin::truncate),
             Animate => Required(plugin::animation),
         };
 
@@ -218,11 +181,15 @@ impl<'a> Literal<'a> {
             (Optional(p), Some(SubjectValue::Value(s))) => p(Some(s), theme),
             (Optional(p), None) => p(None, theme),
             (RequiredArbitrary(p), Some(value)) => p(value, theme),
-            (OptionalArbitrary(p), value) => p(value.as_ref(), theme),
-            (Singular(p), None) => p(),
-            _ => None,
+            (Singular(p), None) => Ok(p()),
+            (RequiredBox(p), Some(SubjectValue::Value(value))) => p(value, theme),
+            (OptionalAbitraryBox(p), value) => p(value, theme),
+            _ => Err(vec![]),
         }
-        .ok_or_else(|| LiteralConversionError::new(self.cmd, self.value))
+        .map_err(|e| match self.value {
+            Some(v) => LiteralConversionError::InvalidArguments(self.cmd, v, e),
+            None => LiteralConversionError::MissingArguments(self.cmd),
+        })
     }
 }
 
@@ -232,9 +199,9 @@ pub enum SubjectValue<'a> {
     Css(Css<'a>),
 }
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub struct Value<'a>(pub &'a str);
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub struct Css<'a>(pub &'a str);
 
 impl Display for SubjectValue<'_> {
@@ -251,6 +218,20 @@ impl<'a> SubjectValue<'a> {
         match self {
             SubjectValue::Value(Value(s)) => s,
             SubjectValue::Css(Css(s)) => s,
+        }
+    }
+
+    pub fn value(&self) -> Option<&Value> {
+        match self {
+            SubjectValue::Value(v) => Some(v),
+            _ => None,
+        }
+    }
+
+    pub fn css(&self) -> Option<&Css> {
+        match self {
+            SubjectValue::Css(s) => Some(s),
+            _ => None,
         }
     }
 

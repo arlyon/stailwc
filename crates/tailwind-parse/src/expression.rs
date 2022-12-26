@@ -62,8 +62,8 @@ impl<'a> Expression<'a> {
             .and(important)
             .parse(s)?;
 
-        let lo = s.extra.lo() + BytePos(s.location_offset() as u32 + 1);
-        let hi = s_next.extra.lo() + BytePos(s_next.location_offset() as u32);
+        let lo = s.extra.lo() + BytePos(s.location_offset() as u32 + 2);
+        let hi = s_next.extra.lo() + BytePos(s_next.location_offset() as u32 + 1);
 
         Ok((
             s_next,
@@ -81,7 +81,7 @@ impl<'a> Expression<'a> {
     pub fn to_literal(
         self,
         span: Span,
-        config: &TailwindConfig,
+        config: &'a TailwindConfig,
     ) -> Result<ObjectLit, ExpressionConversionError<'a>> {
         let mut object: ObjectLit = self
             .subject

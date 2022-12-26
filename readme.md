@@ -23,6 +23,7 @@ We are currently testing against the following versions:
 | `tw` component syntax           | ✅<sup>1</sup> | ✅                |
 | `tw` component extension syntax | ✅<sup>1</sup> | ✅                |
 | Global styles                   | ✅<sup>2</sup> | ⛔<sup>3</sup>    |
+| plugin parameter suggestions    | ✅             | ✅                |
 
 1. Currently `emotion` requires a dummy import at the top of the file
    due to a swc bug. This will be fixed in the future.

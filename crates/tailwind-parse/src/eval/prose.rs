@@ -1,16 +1,16 @@
 use stailwc_swc_utils::{merge_literals, named_literal, to_lit};
-use swc_core::ecma::ast::ObjectLit;
+
 use tailwind_config::TailwindTheme;
 
-use crate::{Prose, SubjectValue};
+use crate::{PluginResult, Prose, SubjectValue};
 
-pub fn prose(
+pub fn prose<'a>(
     p: Option<Prose>,
     _rest: &Option<SubjectValue>,
-    _theme: &TailwindTheme,
-) -> Option<ObjectLit> {
+    _theme: &'a TailwindTheme,
+) -> PluginResult<'a> {
     match p {
-        Some(Prose::Invert) => Some(to_lit(&[
+        Some(Prose::Invert) => Ok(to_lit(&[
             ("--tw-prose-body", "var(--tw-prose-invert-body)"),
             ("--tw-prose-headings", "var(--tw-prose-invert-headings)"),
             ("--tw-prose-lead", "var(--tw-prose-invert-lead)"),
@@ -460,6 +460,7 @@ pub fn prose(
             ),
         ]
         .into_iter()
-        .reduce(merge_literals),
+        .reduce(merge_literals)
+        .ok_or(vec![]),
     }
 }
