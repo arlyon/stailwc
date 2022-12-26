@@ -40,6 +40,7 @@ mod plugin {
         P,
         Px,
         Pl,
+        Auto(Auto),
         Pr,
         LineClamp,
         Py,
@@ -118,6 +119,12 @@ mod plugin {
 
         Prose(Option<Prose>),
         Not(Not),
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Auto {
+        Cols,
+        Rows,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

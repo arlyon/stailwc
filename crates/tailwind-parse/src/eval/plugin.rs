@@ -64,6 +64,26 @@ lookup_plugin!(basis, flex_basis, "flexBasis");
 lookup_plugin_opt!(grow, flex_grow, "flexGrow");
 lookup_plugin_opt!(shrink, flex_shrink, "flexShrink");
 lookup_plugin_arbitrary!(top, height, "top");
+array_map_plugin!(
+    auto_rows,
+    [
+        ("auto", "auto"),
+        ("min", "min-content"),
+        ("max", "max-content"),
+        ("fr", "minmax(0, 1fr)")
+    ],
+    "gridAutoRows"
+);
+array_map_plugin!(
+    auto_cols,
+    [
+        ("auto", "auto"),
+        ("min", "min-content"),
+        ("max", "max-content"),
+        ("fr", "minmax(0, 1fr)")
+    ],
+    "gridAutoColumns"
+);
 lookup_plugin!(opacity, opacity, "opacity");
 lookup_plugin!(animation, animation, "animation");
 lookup_plugin!(order, order, "order");
