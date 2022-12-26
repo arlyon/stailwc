@@ -139,6 +139,11 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
         .collect::<Vec<_>>();
 
     let has_subsegments = has_subsegments.iter();
+    let subcommands_true = if subcommands.is_empty() {
+        quote! {}
+    } else {
+        quote! {#(#name::#subcommands(_))|* => true, }
+    };
 
     TokenStream::from(quote! {
         mod plugin {
@@ -161,7 +166,7 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
 
                 pub fn has_subcommand(&self) -> bool {
                     match self {
-                        #(#name::#subcommands(_))|* => true,
+                        #subcommands_true
                         _ => false
                     }
                 }

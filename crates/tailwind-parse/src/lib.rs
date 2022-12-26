@@ -42,14 +42,32 @@ mod test {
 
     #[test]
     fn directive() -> anyhow::Result<()> {
-        let (rest, _d) = Directive::parse(LocatedSpan::new_extra(
+        let (rest, _d, _errs) = Directive::parse(LocatedSpan::new_extra(
             "-h-4 md:bg-blue text-white! hover:(text-blue bg-white lg:text-black!)",
             DUMMY_SP,
-        ))?;
+        ));
 
         assert!(rest.len() == 0);
 
         Ok(())
+    }
+
+    #[test]
+    fn recovery() {
+        let (rest, _d, errs) =
+            Directive::parse(LocatedSpan::new_extra(" fail text-white", DUMMY_SP));
+
+        assert!(rest.len() == 0);
+        assert_eq!(errs.len(), 1);
+    }
+
+    #[test]
+    fn recovery2() {
+        let (rest, _d, errs) =
+            Directive::parse(LocatedSpan::new_extra("sm:max--3xl smpx-6", DUMMY_SP));
+
+        assert!(rest.len() == 0);
+        assert_eq!(errs.len(), 2);
     }
 
     #[test_case("flex!", None, None, true ; "important")]
@@ -106,7 +124,9 @@ mod test {
     #[test_case("relative rounded-2xl px-6 py-10 bg-primary-500 overflow-hidden shadow-xl sm:px-12 sm:py-20"; "example")]
     #[test_case("text-white/40 bg-white/50" ; "chained transparency")]
     fn directive_tests(s: &str) {
-        Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
+        let (s, _d, e) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP));
+        assert_matches!(*s, "");
+        assert_eq!(e.len(), 0);
     }
 
     #[test_case(&["bg-white", "text-black"] ; "basic case")]
@@ -135,7 +155,7 @@ mod test {
         let lits = inputs
             .iter()
             .map(|s| {
-                let (_, d) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
+                let (_, d, _e) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP));
                 let (lit, _) = d.to_literal(&config);
                 (s, sort_recursive(lit))
             })
@@ -149,12 +169,12 @@ mod test {
         }
     }
 
-    #[should_panic]
     #[test_case("-mod:sub" ; "when the minus is in the wrong place")]
     #[test_case("()" ; "rejects empty group")]
     fn parse_failure_tests(s: &str) {
-        let (rest, _d) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
+        let (rest, _d, errs) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP));
         assert_matches!(*rest, "");
+        assert_eq!(errs.len(), 1);
     }
 
     #[test_case("40" ; "a number")]
