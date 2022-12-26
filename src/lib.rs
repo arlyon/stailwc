@@ -146,17 +146,14 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 expr: JSXExpr::Expr(box Expr::Lit(Lit::Str(Str{span, value, ..}))),
                 ..
             })) => {
-                let d = match Directive::parse(LocatedSpan::new_extra(value, *span)) {
-                    Ok((_, d)) => d,
-                    Err(e) => {
-                        HANDLER.with(|h| {
-                            self.report(h,  *span, &e.to_string(), None)
-                                .note("unknown plugin")
-                                .emit()
-                        });
-                        return;
-                    },
-                };
+                let (_s, d, errs)  = Directive::parse(LocatedSpan::new_extra(value, *span));
+
+                for err in errs {
+                    HANDLER.with(|h| {
+                        self.report(h,  err.extra, "unknown plugin", None)
+                            .emit()
+                    });
+                }
 
                 let (x, errs) = d.to_literal(&self.config);
 
@@ -311,17 +308,11 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 }
             };
 
-            let d = match Directive::parse(LocatedSpan::new_extra(text, *span)) {
-                Ok((_, d)) => d,
-                Err(e) => {
-                    HANDLER.with(|h| {
-                        self.report(h, *span, "invalid syntax", None)
-                            .note(&e.to_string())
-                            .emit()
-                    });
-                    return ObjectLit::dummy();
-                }
-            };
+            let (_s, d, errs) = Directive::parse(LocatedSpan::new_extra(text, *span));
+
+            for err in errs {
+                HANDLER.with(|h| self.report(h, err.extra, "unknown plugin", None).emit());
+            }
 
             let (lit, errs) = d.to_literal(&self.config);
 
