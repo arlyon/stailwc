@@ -57,6 +57,7 @@ impl<'a> Literal<'a> {
         _span: Span,
         theme: &'a TailwindTheme,
     ) -> Result<ObjectLit, LiteralConversionError<'a>> {
+        use crate::Auto;
         use crate::Gap;
         use crate::Inset;
         use crate::Max;
@@ -97,6 +98,9 @@ impl<'a> Literal<'a> {
             Row(r) => RequiredBox(StdBox::new(move |v, t| plugin::row(r, v, t))),
             Overflow(o) => RequiredBox(StdBox::new(move |v, t| plugin::overflow(o, v, t))),
             Not(_) => todo!(),
+
+            Auto(Auto::Cols) => Required(plugin::auto_cols),
+            Auto(Auto::Rows) => Required(plugin::auto_rows),
 
             // all other plugins
             Text => RequiredArbitrary(plugin::text),
