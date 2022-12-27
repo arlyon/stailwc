@@ -1,3 +1,28 @@
+# [0.12.0](https://github.com/arlyon/stailwc/compare/0.11.1...0.12.0) (2022-12-27)
+
+
+### Bug Fixes
+
+* allow the macro to support enums without subcommands ([3ddd529](https://github.com/arlyon/stailwc/commit/3ddd5293e0713abff2c5dc9587654ef17505d56c))
+* improve suggestion in text plugin ([497a8b1](https://github.com/arlyon/stailwc/commit/497a8b1c31b996587b28f6093ce209e5db96da61))
+* only inject import if actually importing TailwindStyle ([1dadff6](https://github.com/arlyon/stailwc/commit/1dadff6af3a35ea7a0de4bb87e72514c37a922d6))
+* revert span offset fix ([9cb7a36](https://github.com/arlyon/stailwc/commit/9cb7a36db397372fdb6f7bff1c216880a797d1bf))
+
+
+### Features
+
+* add alternative suggestions for array plugins ([1a722ad](https://github.com/arlyon/stailwc/commit/1a722ad064118c0efc78bf62fb8bba34dc086647))
+* add alternative suggestions for array_map plugins ([b35e853](https://github.com/arlyon/stailwc/commit/b35e8536bc8a0df1e33883779c803151f15b088a))
+* add alternative suggestions for simple_lookup_map plugins ([0137a45](https://github.com/arlyon/stailwc/commit/0137a45e19e425776dd6e52121b6900c95bf2d42))
+* add auto plugin ([4c24526](https://github.com/arlyon/stailwc/commit/4c24526c0f9169192c33a916278760b0313de5ca))
+* add proper error handling for bad plugin params ([66d6fb1](https://github.com/arlyon/stailwc/commit/66d6fb1b0a121a6a56a52eaac60c18b7baf65cb4))
+* add styled-components engine ([79bd086](https://github.com/arlyon/stailwc/commit/79bd086836f1cf881f8d67e0476755ff6cddfa07))
+* expose suggestions on swc error handler ([b14872c](https://github.com/arlyon/stailwc/commit/b14872ca26ba60efb2c2b7f01d0dc058e2917a26))
+* have simple_lookup plugins suggest alternatives ([62ec998](https://github.com/arlyon/stailwc/commit/62ec9987bcf2468c8d81206598df1d15094a3f29))
+* make a bunch of plugins support arbitrary parameters ([21dbe0b](https://github.com/arlyon/stailwc/commit/21dbe0b8074a74d187a408f96e0a273ff23a5a76))
+* support full recovery when parsing plugins ([4f78b54](https://github.com/arlyon/stailwc/commit/4f78b54c0af635392a35245f00f8846a54b0e072))
+* support style injection for styled-components ([79ba0ff](https://github.com/arlyon/stailwc/commit/79ba0ff15b06dc98fc6af167cf5c9fd7a5f2f284))
+
 ## [0.11.1](https://github.com/arlyon/stailwc/compare/0.11.0...0.11.1) (2022-12-05)
 
 
