@@ -299,6 +299,13 @@ pub fn rounded<'a>(
     fun(rest.as_ref(), theme)
 }
 
+pub fn antialiased() -> ObjectLit {
+    to_lit(&[
+        ("-webkit-font-smoothing", "antialiased"),
+        ("-moz-osx-font-smoothing", "grayscale"),
+    ])
+}
+
 pub fn mix<'a>(rest: &Value, theme: &'a TailwindTheme) -> PluginResult<'a> {
     match rest.0.split_once('-') {
         Some(("blend", rest)) => blend(&Value(rest), theme),

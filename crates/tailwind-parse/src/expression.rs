@@ -17,6 +17,21 @@ use tailwind_config::{Screens, TailwindConfig};
 
 use crate::{subject::Subject, NomSpan, SubjectConversionError, SubjectValue};
 
+/// An expression is a single tailwind class. An example is: `bg-red-500`
+///
+/// It can have modifiers, a subject, an alpha value, and be important.
+///
+/// Examples:
+/// - `bg-red-500`
+/// - `bg-red-500/50`
+/// - `bg-red-500/50!`
+/// - `dark:hover:bg-red-800`
+/// - -px-4
+/// - dark:(bg-red-800 hover:bg-red-900)
+///
+/// bg-red-500
+/// ------ ---
+/// plugin value
 #[derive(Debug, PartialEq)]
 pub struct Expression<'a> {
     pub negative: bool,

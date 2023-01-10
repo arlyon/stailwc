@@ -17,9 +17,21 @@ mod plugin {
         IResult, Slice,
     };
 
+    /// The plugin represents the core command the tailwind parser is
+    /// looking for. For example, the `text` plugin is represented by
+    /// the `Text` variant.
+    ///
+    /// Missing:
+    /// - aspect
+    /// - container
+    /// - columns
+    ///
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
     #[root]
     pub enum Plugin {
+        /// Transparent plugins do not add to the class name.
+        ///
+        /// Example: 'sticky', 'static', 'fixed'
         #[transparent]
         Position(Position),
         #[transparent]
@@ -31,10 +43,14 @@ mod plugin {
         #[transparent]
         TextDecoration(TextDecoration),
 
+        /// Border has an optional sub-item
+        ///
+        /// Example: 'border', 'border-t', 'border-b', 'border-l', 'border-r'
         Border(Option<Border>),
         Rounded(Option<Rounded>),
         Min(Min),
         Max(Max),
+        List(List),
         H,
         W,
         P,
@@ -96,6 +112,7 @@ mod plugin {
         Leading,
         Gap(Option<Gap>),
         Cursor,
+        Antialiased,
         Scale,
         Box,
         Select,
@@ -143,6 +160,13 @@ mod plugin {
     pub enum Overflow {
         X,
         Y,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum List {
+        None,
+        Disc,
+        Decimal,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

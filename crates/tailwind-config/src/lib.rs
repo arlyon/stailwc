@@ -40,6 +40,8 @@ pub struct TailwindTheme<'a> {
     #[serde(borrow)]
     pub scale: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
+    pub columns: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
     pub colors: HashMap<&'a str, &'a str>,
     #[serde(borrow, alias = "fontFamily")]
     pub font_family: HashMap<&'a str, Vec<Cow<'a, str>>>,
