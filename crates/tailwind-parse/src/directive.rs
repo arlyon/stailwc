@@ -9,6 +9,8 @@ use tailwind_config::TailwindConfig;
 
 use crate::{Expression, ExpressionConversionError, NomSpan};
 
+/// A directive is a list of expressions separated by one or more spaces.
+/// An example is: `bg-red-500 text-white`
 #[derive(Debug, PartialEq)]
 pub struct Directive<'a> {
     pub exps: Vec<Expression<'a>>,

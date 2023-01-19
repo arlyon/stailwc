@@ -40,18 +40,29 @@ pub enum LiteralConversionError<'a> {
 
 pub type PluginResult<'a> = Result<ObjectLit, Vec<&'a str>>;
 
+/// The types of plugin evaluators that can be used.
 enum PluginType<'a> {
+    /// This plugin takes no input, and produces an object literal.
     Singular(fn() -> ObjectLit),
+    SingularBox(Box<dyn Fn() -> ObjectLit>),
+    /// This plugin requires a value, and produces an object literal.
     Required(fn(&Value, &'a TailwindTheme) -> PluginResult<'a>),
     #[allow(clippy::type_complexity)]
     RequiredBox(Box<dyn Fn(&Value, &'a TailwindTheme) -> PluginResult<'a>>),
     #[allow(clippy::type_complexity)]
     OptionalAbitraryBox(Box<dyn Fn(&Option<SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>>),
+
+    /// This plugin takes an optional value, and produces an object literal.
     Optional(fn(Option<&Value>, &'a TailwindTheme) -> PluginResult<'a>),
+    /// This plugin requires a value, or arbitrary css.
     RequiredArbitrary(fn(&SubjectValue, &'a TailwindTheme) -> PluginResult<'a>),
+    /// This plugin takes an optional value, or arbitrary css.
+    OptionalArbitrary(fn(&Option<SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>),
 }
 
 impl<'a> Literal<'a> {
+    /// Takes the combination of a plugin and a value and converts it into a
+    /// javascript object literal with the equivalent css.
     pub fn to_object_lit(
         self,
         _span: Span,
@@ -188,6 +199,7 @@ impl<'a> Literal<'a> {
             (Singular(p), None) => Ok(p()),
             (RequiredBox(p), Some(SubjectValue::Value(value))) => p(value, theme),
             (OptionalAbitraryBox(p), value) => p(value, theme),
+            (OptionalArbitrary(p), value) => p(value, theme),
             _ => Err(vec![]),
         }
         .map_err(|e| match self.value {
