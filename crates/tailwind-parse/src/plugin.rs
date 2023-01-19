@@ -108,6 +108,7 @@ mod plugin {
         Leading,
         Gap(Option<Gap>),
         Cursor,
+        Antialiased,
         Scale,
         Box,
         Select,

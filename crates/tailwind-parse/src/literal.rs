@@ -150,6 +150,7 @@ impl<'a> Literal<'a> {
             Select => Required(plugin::select),
             Top => RequiredArbitrary(plugin::top),
             Bottom => RequiredArbitrary(plugin::bottom),
+            Antialiased => Singular(plugin::antialiased),
             Left => RequiredArbitrary(plugin::left),
             Right => RequiredArbitrary(plugin::right),
             Tracking => RequiredArbitrary(plugin::tracking),
