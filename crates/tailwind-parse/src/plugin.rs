@@ -44,6 +44,7 @@ mod plugin {
         Rounded(Option<Rounded>),
         Min(Min),
         Max(Max),
+        List(List),
         H,
         W,
         P,
@@ -210,6 +211,13 @@ mod plugin {
     pub enum Overflow {
         X,
         Y,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum List {
+        None,
+        Disc,
+        Decimal,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

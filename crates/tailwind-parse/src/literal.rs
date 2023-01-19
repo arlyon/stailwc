@@ -13,6 +13,7 @@ use nom::Err;
 use nom::IResult;
 use nom::Parser;
 use nom::Slice;
+use stailwc_swc_utils::to_lit;
 use swc_core::{common::Span, ecma::ast::ObjectLit};
 use tailwind_config::TailwindTheme;
 
@@ -71,6 +72,7 @@ impl<'a> Literal<'a> {
         use crate::Auto;
         use crate::Gap;
         use crate::Inset;
+        use crate::List;
         use crate::Max;
         use crate::Min;
         use crate::Plugin::*;
@@ -110,6 +112,14 @@ impl<'a> Literal<'a> {
             Overflow(o) => RequiredBox(StdBox::new(move |v, t| plugin::overflow(o, v, t))),
             Not(_) => todo!(),
 
+            List(list) => SingularBox(StdBox::new(move || {
+                let var = match list {
+                    List::None => "none",
+                    List::Disc => "disc",
+                    List::Decimal => "decimal",
+                };
+                to_lit(&[("listStyleType", var)])
+            })),
             Backdrop(b) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::backdrop(b, v, t))),
             Snap(s) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::snap(s, v, t))),
             Scroll(s) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::scroll(s, v, t))),
