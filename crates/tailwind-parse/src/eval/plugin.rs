@@ -429,6 +429,8 @@ pub fn truncate() -> ObjectLit {
     ])
 }
 
+lookup_plugin_arbitrary!(aspect, aspect_ratio, "aspectRatio");
+
 pub fn outline<'a>(rest: Option<&Value>, theme: &'a TailwindTheme) -> PluginResult<'a> {
     match rest {
         None => Ok(to_lit(&[("outlineStyle", "solid")])),

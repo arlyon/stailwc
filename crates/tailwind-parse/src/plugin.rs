@@ -84,6 +84,7 @@ mod plugin {
         Truncate,
         Animate,
         Pointer,
+        Aspect,
         Ease,
         Order,
         Whitespace(Whitespace),

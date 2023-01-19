@@ -130,6 +130,7 @@ impl<'a> Literal<'a> {
             From => Required(plugin::from),
             To => Required(plugin::to),
             Outline => Optional(plugin::outline),
+            Aspect => RequiredArbitrary(plugin::aspect),
             Mix => Required(plugin::mix),
             Content => RequiredArbitrary(plugin::content),
             Grow => Optional(plugin::grow),
