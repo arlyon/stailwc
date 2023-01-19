@@ -79,6 +79,7 @@ mod plugin {
         Placeholder,
         Inset(Option<Inset>),
         Delay,
+        Snap(Snap),
         Duration,
         Divide(Option<Divide>),
         Rotate,
@@ -155,6 +156,23 @@ mod plugin {
         Pl,
         Pr,
         Pb,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Snap {
+        Start,
+        End,
+        Center,
+
+        Normal,
+        Always,
+
+        None,
+        X,
+        Y,
+        Both,
+        Mandatory,
+        Proximity,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

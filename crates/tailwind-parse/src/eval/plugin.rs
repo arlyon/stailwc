@@ -2,8 +2,8 @@ use std::collections::HashMap;
 
 use crate::{
     AlignSelf, Backdrop, Border, Col, Css, Display, Divide, Flex, Grid, Object, Overflow,
-    PluginResult, Position, Rounded, Row, Scroll, SubjectValue, TextDecoration, TextTransform,
-    Translate, Value, Visibility, Whitespace,
+    PluginResult, Position, Rounded, Row, Scroll, Snap, SubjectValue, TextDecoration,
+    TextTransform, Translate, Value, Visibility, Whitespace,
 };
 use itertools::Itertools;
 use stailwc_swc_utils::{merge_literals, to_lit};
@@ -483,6 +483,27 @@ pub fn scroll<'a>(
         Scroll::Pb => todo!(),
     }]))
 }
+
+pub fn snap<'a>(
+    s: Snap,
+    _rest: &Option<SubjectValue>,
+    _theme: &'a TailwindTheme,
+) -> PluginResult<'a> {
+    Ok(to_lit(&[match s {
+        Snap::None => ("scrollSnapType", "none"),
+        Snap::X => ("scrollSnapType", "x var(--tw-scroll-snap-strictness)"),
+        Snap::Y => ("scrollSnapType", "y var(--tw-scroll-snap-strictness)"),
+        Snap::Both => ("scrollSnapType", "both var(--tw-scroll-snap-strictness)"),
+        Snap::Mandatory => ("--tw-scroll-snap-strictness", "mandatory"),
+        Snap::Proximity => ("--tw-scroll-snap-strictness", "proximity"),
+        Snap::Start => ("scrollSnapAlign", "start"),
+        Snap::End => ("scrollSnapAlign", "end"),
+        Snap::Center => ("scrollSnapAlign", "center"),
+        Snap::Normal => ("scrollSnapStop", "normal"),
+        Snap::Always => ("scrollSnapStop", "always"),
+    }]))
+}
+
 pub fn bg<'a>(val: &SubjectValue, theme: &'a TailwindTheme) -> PluginResult<'a> {
     match val {
         SubjectValue::Value(Value(rest)) => simple_lookup(&theme.colors, rest, "backgroundColor")
