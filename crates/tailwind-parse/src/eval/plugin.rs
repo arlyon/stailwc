@@ -1,9 +1,9 @@
 use std::collections::HashMap;
 
 use crate::{
-    AlignSelf, Border, Col, Css, Display, Divide, Flex, Grid, Object, Overflow, PluginResult,
-    Position, Rounded, Row, SubjectValue, TextDecoration, TextTransform, Translate, Value,
-    Visibility, Whitespace,
+    AlignSelf, Backdrop, Border, Col, Css, Display, Divide, Flex, Grid, Object, Overflow,
+    PluginResult, Position, Rounded, Row, SubjectValue, TextDecoration, TextTransform, Translate,
+    Value, Visibility, Whitespace,
 };
 use itertools::Itertools;
 use stailwc_swc_utils::{merge_literals, to_lit};
@@ -700,6 +700,29 @@ pub fn grid<'a>(
         _ => return Err(vec![]),
     };
     Ok(to_lit(&pair))
+}
+
+lookup_plugin_arbitrary_opt!(backdrop_blur, backdrop_blur, "backdropBlur", |s| format!(
+    "blur({})",
+    s
+));
+
+pub fn backdrop<'a>(
+    o: Backdrop,
+    value: &Option<SubjectValue>,
+    theme: &'a TailwindTheme,
+) -> PluginResult<'a> {
+    match o {
+        Backdrop::Blur => backdrop_blur(value.as_ref(), theme),
+        Backdrop::Brightness => todo!(),
+        Backdrop::Contrast => todo!(),
+        Backdrop::Grayscale => todo!(),
+        Backdrop::HueRotate => todo!(),
+        Backdrop::Invert => todo!(),
+        Backdrop::Opacity => todo!(),
+        Backdrop::Saturate => todo!(),
+        Backdrop::Sepia => todo!(),
+    }
 }
 
 pub fn object(

@@ -62,6 +62,7 @@ mod plugin {
         Mx,
         My,
         Ml,
+        Backdrop(Backdrop),
         Stroke,
         Mr,
         Mt,
@@ -130,6 +131,19 @@ mod plugin {
 
         Prose(Option<Prose>),
         Not(Not),
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Backdrop {
+        Blur,
+        Brightness,
+        Contrast,
+        Grayscale,
+        HueRotate,
+        Invert,
+        Opacity,
+        Saturate,
+        Sepia,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

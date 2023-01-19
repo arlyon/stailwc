@@ -110,6 +110,7 @@ impl<'a> Literal<'a> {
             Overflow(o) => RequiredBox(StdBox::new(move |v, t| plugin::overflow(o, v, t))),
             Not(_) => todo!(),
 
+            Backdrop(b) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::backdrop(b, v, t))),
             Auto(Auto::Cols) => Required(plugin::auto_cols),
             Auto(Auto::Rows) => Required(plugin::auto_rows),
 

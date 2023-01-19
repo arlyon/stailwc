@@ -137,6 +137,9 @@ pub struct TailwindTheme<'a> {
     #[serde(borrow, alias = "strokeWidth")]
     pub stroke_width: HashMap<&'a str, &'a str>,
 
+    #[serde(borrow, alias = "backdropBlur")]
+    pub backdrop_blur: HashMap<&'a str, &'a str>,
+
     #[serde(borrow, alias = "aspectRatio")]
     pub aspect_ratio: HashMap<&'a str, &'a str>,
 }
