@@ -54,6 +54,10 @@ fn simple_lookup_map<'a, V>(
         })
 }
 
+lookup_plugin_arbitrary!(stroke_width, stroke_width, "strokeWidth");
+lookup_plugin_arbitrary!(stroke_color, colors, "stroke");
+merge_plugins_arbitrary!(stroke, stroke_width, stroke_color);
+
 lookup_plugin_opt!(transition, transition_property, "transitionProperty");
 lookup_plugin!(delay, transition_delay, "transitionDelay");
 lookup_plugin_opt!(duration, transition_duration, "transitionDuration");

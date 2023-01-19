@@ -62,6 +62,7 @@ mod plugin {
         Mx,
         My,
         Ml,
+        Stroke,
         Mr,
         Mt,
         #[rename("origin")]

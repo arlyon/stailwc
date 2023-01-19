@@ -137,6 +137,7 @@ impl<'a> Literal<'a> {
             Shrink => Optional(plugin::shrink),
             Basis => Required(plugin::basis),
             Italic => Singular(plugin::italic),
+            Stroke => RequiredArbitrary(plugin::stroke),
             Justify => Required(plugin::justify),
             Items => Required(plugin::items),
             Gap(None) => RequiredArbitrary(plugin::gap),
