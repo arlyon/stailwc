@@ -59,7 +59,7 @@ lookup_plugin_arbitrary!(stroke_color, colors, "stroke");
 merge_plugins_arbitrary!(stroke, stroke_width, stroke_color);
 
 lookup_plugin_opt!(transition, transition_property, "transitionProperty");
-lookup_plugin!(delay, transition_delay, "transitionDelay");
+lookup_plugin_arbitrary!(delay, transition_delay, "transitionDelay");
 lookup_plugin_opt!(duration, transition_duration, "transitionDuration");
 lookup_plugin_opt!(ease, transition_timing_function, "transitionTimingFunction");
 lookup_plugin_opt!(blur, blur, "filter", |s| format!("blur({s})"));

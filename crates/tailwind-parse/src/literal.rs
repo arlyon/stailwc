@@ -120,7 +120,7 @@ impl<'a> Literal<'a> {
             Shadow => Optional(plugin::shadow),
             Transition => Optional(plugin::transition),
             Placeholder => Required(plugin::placeholder),
-            Delay => Required(plugin::delay),
+            Delay => RequiredArbitrary(plugin::delay),
             Duration => Optional(plugin::duration),
             Rotate => Required(plugin::rotate),
             Appearance => Required(plugin::appearance),
