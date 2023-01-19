@@ -114,7 +114,7 @@ macro_rules! lookup_plugin_arbitrary_opt {
                 Some(SubjectValue::Value(Value(v))) => {
                     simple_lookup_map(&theme.$map, v, $target, $closure)
                 }
-                Some(SubjectValue::Css(Css(v))) => to_lit(&[($target, v)]),
+                Some(SubjectValue::Css(Css(v))) => Ok(to_lit(&[($target, &$closure(v))])),
                 // if there is no value, attempt to look up the default
                 None => simple_lookup_map(&theme.$map, "DEFAULT", $target, $closure),
             }

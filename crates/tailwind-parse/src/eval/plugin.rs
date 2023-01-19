@@ -1,9 +1,9 @@
 use std::collections::HashMap;
 
 use crate::{
-    AlignSelf, Border, Col, Css, Display, Divide, Flex, Grid, Object, Overflow, PluginResult,
-    Position, Rounded, Row, SubjectValue, TextDecoration, TextTransform, Translate, Value,
-    Visibility, Whitespace,
+    AlignSelf, Backdrop, Border, Col, Css, Display, Divide, Flex, Grid, Object, Overflow,
+    PluginResult, Position, Rounded, Row, Scroll, Snap, SubjectValue, TextDecoration,
+    TextTransform, Translate, Value, Visibility, Whitespace,
 };
 use itertools::Itertools;
 use stailwc_swc_utils::{merge_literals, to_lit};
@@ -54,8 +54,12 @@ fn simple_lookup_map<'a, V>(
         })
 }
 
+lookup_plugin_arbitrary!(stroke_width, stroke_width, "strokeWidth");
+lookup_plugin_arbitrary!(stroke_color, colors, "stroke");
+merge_plugins_arbitrary!(stroke, stroke_width, stroke_color);
+
 lookup_plugin_opt!(transition, transition_property, "transitionProperty");
-lookup_plugin!(delay, transition_delay, "transitionDelay");
+lookup_plugin_arbitrary!(delay, transition_delay, "transitionDelay");
 lookup_plugin_opt!(duration, transition_duration, "transitionDuration");
 lookup_plugin_opt!(ease, transition_timing_function, "transitionTimingFunction");
 lookup_plugin_opt!(blur, blur, "filter", |s| format!("blur({s})"));
@@ -299,6 +303,13 @@ pub fn rounded<'a>(
     fun(rest.as_ref(), theme)
 }
 
+pub fn antialiased() -> ObjectLit {
+    to_lit(&[
+        ("-webkit-font-smoothing", "antialiased"),
+        ("-moz-osx-font-smoothing", "grayscale"),
+    ])
+}
+
 pub fn mix<'a>(rest: &Value, theme: &'a TailwindTheme) -> PluginResult<'a> {
     match rest.0.split_once('-') {
         Some(("blend", rest)) => blend(&Value(rest), theme),
@@ -429,21 +440,70 @@ pub fn truncate() -> ObjectLit {
     ])
 }
 
-pub fn outline<'a>(rest: Option<&Value>, theme: &'a TailwindTheme) -> PluginResult<'a> {
+lookup_plugin_arbitrary!(outline_offset, outline_offset, "outlineOffset");
+lookup_plugin_arbitrary!(outline_width, outline_width, "outlineWidth");
+
+lookup_plugin_arbitrary!(aspect, aspect_ratio, "aspectRatio");
+
+pub fn outline<'a>(rest: &Option<SubjectValue>, theme: &'a TailwindTheme) -> PluginResult<'a> {
     match rest {
         None => Ok(to_lit(&[("outlineStyle", "solid")])),
-        Some(Value("none")) => Ok(to_lit(&[
+        Some(SubjectValue::Value(Value("none"))) => Ok(to_lit(&[
             ("outline", "2px solid transparent"),
             ("outlineOffset", "2px"),
         ])),
-        Some(Value("dashed")) => Ok(to_lit(&[("outlineStyle", "dashed")])),
-        Some(Value("dotted")) => Ok(to_lit(&[("outlineStyle", "dotted")])),
-        Some(Value("double")) => Ok(to_lit(&[("outlineStyle", "double")])),
-        Some(Value("hidden")) => Ok(to_lit(&[("outlineStyle", "hidden")])),
-        Some(rest) => simple_lookup(&theme.colors, rest.0, "outlineColor")
-            .or_else(|_e| simple_lookup(&theme.outline_offset, rest.0, "outlineOffset"))
-            .or_else(|_e| simple_lookup(&theme.outline_width, rest.0, "outlineWidth")),
+        Some(SubjectValue::Value(Value("dashed"))) => Ok(to_lit(&[("outlineStyle", "dashed")])),
+        Some(SubjectValue::Value(Value("dotted"))) => Ok(to_lit(&[("outlineStyle", "dotted")])),
+        Some(SubjectValue::Value(Value("double"))) => Ok(to_lit(&[("outlineStyle", "double")])),
+        Some(SubjectValue::Value(Value("hidden"))) => Ok(to_lit(&[("outlineStyle", "hidden")])),
+        Some(SubjectValue::Value(rest)) => simple_lookup(&theme.colors, rest.0, "outlineColor"),
+        Some(rest) => outline_offset(rest, theme).or_else(|_e| outline_width(rest, theme)),
     }
+}
+
+pub fn scroll<'a>(
+    s: Scroll,
+    _rest: &Option<SubjectValue>,
+    _theme: &'a TailwindTheme,
+) -> PluginResult<'a> {
+    Ok(to_lit(&[match s {
+        Scroll::Auto => ("scrollBehavior", "auto"),
+        Scroll::Smooth => ("scrollBehavior", "smooth"),
+        Scroll::M => todo!(),
+        Scroll::Mx => todo!(),
+        Scroll::My => todo!(),
+        Scroll::Ml => todo!(),
+        Scroll::Mr => todo!(),
+        Scroll::Mt => todo!(),
+        Scroll::Mb => todo!(),
+        Scroll::P => todo!(),
+        Scroll::Px => todo!(),
+        Scroll::Py => todo!(),
+        Scroll::Pt => todo!(),
+        Scroll::Pl => todo!(),
+        Scroll::Pr => todo!(),
+        Scroll::Pb => todo!(),
+    }]))
+}
+
+pub fn snap<'a>(
+    s: Snap,
+    _rest: &Option<SubjectValue>,
+    _theme: &'a TailwindTheme,
+) -> PluginResult<'a> {
+    Ok(to_lit(&[match s {
+        Snap::None => ("scrollSnapType", "none"),
+        Snap::X => ("scrollSnapType", "x var(--tw-scroll-snap-strictness)"),
+        Snap::Y => ("scrollSnapType", "y var(--tw-scroll-snap-strictness)"),
+        Snap::Both => ("scrollSnapType", "both var(--tw-scroll-snap-strictness)"),
+        Snap::Mandatory => ("--tw-scroll-snap-strictness", "mandatory"),
+        Snap::Proximity => ("--tw-scroll-snap-strictness", "proximity"),
+        Snap::Start => ("scrollSnapAlign", "start"),
+        Snap::End => ("scrollSnapAlign", "end"),
+        Snap::Center => ("scrollSnapAlign", "center"),
+        Snap::Normal => ("scrollSnapStop", "normal"),
+        Snap::Always => ("scrollSnapStop", "always"),
+    }]))
 }
 
 pub fn bg<'a>(val: &SubjectValue, theme: &'a TailwindTheme) -> PluginResult<'a> {
@@ -694,6 +754,29 @@ pub fn grid<'a>(
         _ => return Err(vec![]),
     };
     Ok(to_lit(&pair))
+}
+
+lookup_plugin_arbitrary_opt!(backdrop_blur, backdrop_blur, "backdropBlur", |s| format!(
+    "blur({})",
+    s
+));
+
+pub fn backdrop<'a>(
+    o: Backdrop,
+    value: &Option<SubjectValue>,
+    theme: &'a TailwindTheme,
+) -> PluginResult<'a> {
+    match o {
+        Backdrop::Blur => backdrop_blur(value.as_ref(), theme),
+        Backdrop::Brightness => todo!(),
+        Backdrop::Contrast => todo!(),
+        Backdrop::Grayscale => todo!(),
+        Backdrop::HueRotate => todo!(),
+        Backdrop::Invert => todo!(),
+        Backdrop::Opacity => todo!(),
+        Backdrop::Saturate => todo!(),
+        Backdrop::Sepia => todo!(),
+    }
 }
 
 pub fn object(

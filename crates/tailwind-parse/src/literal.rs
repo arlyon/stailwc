@@ -13,6 +13,7 @@ use nom::Err;
 use nom::IResult;
 use nom::Parser;
 use nom::Slice;
+use stailwc_swc_utils::to_lit;
 use swc_core::{common::Span, ecma::ast::ObjectLit};
 use tailwind_config::TailwindTheme;
 
@@ -40,18 +41,29 @@ pub enum LiteralConversionError<'a> {
 
 pub type PluginResult<'a> = Result<ObjectLit, Vec<&'a str>>;
 
+/// The types of plugin evaluators that can be used.
 enum PluginType<'a> {
+    /// This plugin takes no input, and produces an object literal.
     Singular(fn() -> ObjectLit),
+    SingularBox(Box<dyn Fn() -> ObjectLit>),
+    /// This plugin requires a value, and produces an object literal.
     Required(fn(&Value, &'a TailwindTheme) -> PluginResult<'a>),
     #[allow(clippy::type_complexity)]
     RequiredBox(Box<dyn Fn(&Value, &'a TailwindTheme) -> PluginResult<'a>>),
     #[allow(clippy::type_complexity)]
     OptionalAbitraryBox(Box<dyn Fn(&Option<SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>>),
+
+    /// This plugin takes an optional value, and produces an object literal.
     Optional(fn(Option<&Value>, &'a TailwindTheme) -> PluginResult<'a>),
+    /// This plugin requires a value, or arbitrary css.
     RequiredArbitrary(fn(&SubjectValue, &'a TailwindTheme) -> PluginResult<'a>),
+    /// This plugin takes an optional value, or arbitrary css.
+    OptionalArbitrary(fn(&Option<SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>),
 }
 
 impl<'a> Literal<'a> {
+    /// Takes the combination of a plugin and a value and converts it into a
+    /// javascript object literal with the equivalent css.
     pub fn to_object_lit(
         self,
         _span: Span,
@@ -60,6 +72,7 @@ impl<'a> Literal<'a> {
         use crate::Auto;
         use crate::Gap;
         use crate::Inset;
+        use crate::List;
         use crate::Max;
         use crate::Min;
         use crate::Plugin::*;
@@ -99,6 +112,18 @@ impl<'a> Literal<'a> {
             Overflow(o) => RequiredBox(StdBox::new(move |v, t| plugin::overflow(o, v, t))),
             Not(_) => todo!(),
 
+            List(list) => SingularBox(StdBox::new(move || {
+                let var = match list {
+                    List::None => "none",
+                    List::Disc => "disc",
+                    List::Decimal => "decimal",
+                };
+                to_lit(&[("listStyleType", var)])
+            })),
+            Backdrop(b) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::backdrop(b, v, t))),
+            Snap(s) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::snap(s, v, t))),
+            Scroll(s) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::scroll(s, v, t))),
+
             Auto(Auto::Cols) => Required(plugin::auto_cols),
             Auto(Auto::Rows) => Required(plugin::auto_rows),
 
@@ -108,7 +133,7 @@ impl<'a> Literal<'a> {
             Shadow => Optional(plugin::shadow),
             Transition => Optional(plugin::transition),
             Placeholder => Required(plugin::placeholder),
-            Delay => Required(plugin::delay),
+            Delay => RequiredArbitrary(plugin::delay),
             Duration => Optional(plugin::duration),
             Rotate => Required(plugin::rotate),
             Appearance => Required(plugin::appearance),
@@ -118,13 +143,15 @@ impl<'a> Literal<'a> {
             Order => Required(plugin::order),
             From => Required(plugin::from),
             To => Required(plugin::to),
-            Outline => Optional(plugin::outline),
+            Aspect => RequiredArbitrary(plugin::aspect),
+            Outline => OptionalArbitrary(plugin::outline),
             Mix => Required(plugin::mix),
             Content => RequiredArbitrary(plugin::content),
             Grow => Optional(plugin::grow),
             Shrink => Optional(plugin::shrink),
             Basis => Required(plugin::basis),
             Italic => Singular(plugin::italic),
+            Stroke => RequiredArbitrary(plugin::stroke),
             Justify => Required(plugin::justify),
             Items => Required(plugin::items),
             Gap(None) => RequiredArbitrary(plugin::gap),
@@ -136,6 +163,7 @@ impl<'a> Literal<'a> {
             Select => Required(plugin::select),
             Top => RequiredArbitrary(plugin::top),
             Bottom => RequiredArbitrary(plugin::bottom),
+            Antialiased => Singular(plugin::antialiased),
             Left => RequiredArbitrary(plugin::left),
             Right => RequiredArbitrary(plugin::right),
             Tracking => RequiredArbitrary(plugin::tracking),
@@ -188,6 +216,7 @@ impl<'a> Literal<'a> {
             (Singular(p), None) => Ok(p()),
             (RequiredBox(p), Some(SubjectValue::Value(value))) => p(value, theme),
             (OptionalAbitraryBox(p), value) => p(value, theme),
+            (OptionalArbitrary(p), value) => p(value, theme),
             _ => Err(vec![]),
         }
         .map_err(|e| match self.value {

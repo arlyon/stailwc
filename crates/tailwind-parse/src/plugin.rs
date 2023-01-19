@@ -17,9 +17,15 @@ mod plugin {
         IResult, Slice,
     };
 
+    /// The plugin represents the core command the tailwind parser is
+    /// looking for. For example, the `text` plugin is represented by
+    /// the `Text` variant.
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
     #[root]
     pub enum Plugin {
+        /// Transparent plugins do not add to the class name.
+        ///
+        /// Example: 'sticky', 'static', 'fixed'
         #[transparent]
         Position(Position),
         #[transparent]
@@ -31,10 +37,14 @@ mod plugin {
         #[transparent]
         TextDecoration(TextDecoration),
 
+        /// Border has an optional sub-item
+        ///
+        /// Example: 'border', 'border-t', 'border-b', 'border-l', 'border-r'
         Border(Option<Border>),
         Rounded(Option<Rounded>),
         Min(Min),
         Max(Max),
+        List(List),
         H,
         W,
         P,
@@ -53,6 +63,8 @@ mod plugin {
         Mx,
         My,
         Ml,
+        Backdrop(Backdrop),
+        Stroke,
         Mr,
         Mt,
         #[rename("origin")]
@@ -68,6 +80,7 @@ mod plugin {
         Placeholder,
         Inset(Option<Inset>),
         Delay,
+        Snap(Snap),
         Duration,
         Divide(Option<Divide>),
         Rotate,
@@ -75,6 +88,7 @@ mod plugin {
         Truncate,
         Animate,
         Pointer,
+        Aspect,
         Ease,
         Order,
         Whitespace(Whitespace),
@@ -96,6 +110,8 @@ mod plugin {
         Leading,
         Gap(Option<Gap>),
         Cursor,
+        Antialiased,
+        Scroll(Scroll),
         Scale,
         Box,
         Select,
@@ -122,6 +138,58 @@ mod plugin {
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Scroll {
+        Auto,
+        Smooth,
+
+        M,
+        Mx,
+        My,
+        Ml,
+        Mr,
+        Mt,
+        Mb,
+
+        P,
+        Px,
+        Py,
+        Pt,
+        Pl,
+        Pr,
+        Pb,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Snap {
+        Start,
+        End,
+        Center,
+
+        Normal,
+        Always,
+
+        None,
+        X,
+        Y,
+        Both,
+        Mandatory,
+        Proximity,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Backdrop {
+        Blur,
+        Brightness,
+        Contrast,
+        Grayscale,
+        HueRotate,
+        Invert,
+        Opacity,
+        Saturate,
+        Sepia,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
     pub enum Auto {
         Cols,
         Rows,
@@ -143,6 +211,13 @@ mod plugin {
     pub enum Overflow {
         X,
         Y,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum List {
+        None,
+        Disc,
+        Decimal,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
