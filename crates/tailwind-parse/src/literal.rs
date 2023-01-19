@@ -111,6 +111,8 @@ impl<'a> Literal<'a> {
             Not(_) => todo!(),
 
             Backdrop(b) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::backdrop(b, v, t))),
+            Scroll(s) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::scroll(s, v, t))),
+
             Auto(Auto::Cols) => Required(plugin::auto_cols),
             Auto(Auto::Rows) => Required(plugin::auto_rows),
 

@@ -109,6 +109,7 @@ mod plugin {
         Gap(Option<Gap>),
         Cursor,
         Antialiased,
+        Scroll(Scroll),
         Scale,
         Box,
         Select,
@@ -132,6 +133,28 @@ mod plugin {
 
         Prose(Option<Prose>),
         Not(Not),
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Scroll {
+        Auto,
+        Smooth,
+
+        M,
+        Mx,
+        My,
+        Ml,
+        Mr,
+        Mt,
+        Mb,
+
+        P,
+        Px,
+        Py,
+        Pt,
+        Pl,
+        Pr,
+        Pb,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

@@ -2,8 +2,8 @@ use std::collections::HashMap;
 
 use crate::{
     AlignSelf, Backdrop, Border, Col, Css, Display, Divide, Flex, Grid, Object, Overflow,
-    PluginResult, Position, Rounded, Row, SubjectValue, TextDecoration, TextTransform, Translate,
-    Value, Visibility, Whitespace,
+    PluginResult, Position, Rounded, Row, Scroll, SubjectValue, TextDecoration, TextTransform,
+    Translate, Value, Visibility, Whitespace,
 };
 use itertools::Itertools;
 use stailwc_swc_utils::{merge_literals, to_lit};
@@ -459,6 +459,30 @@ pub fn outline<'a>(rest: Option<&Value>, theme: &'a TailwindTheme) -> PluginResu
     }
 }
 
+pub fn scroll<'a>(
+    s: Scroll,
+    _rest: &Option<SubjectValue>,
+    _theme: &'a TailwindTheme,
+) -> PluginResult<'a> {
+    Ok(to_lit(&[match s {
+        Scroll::Auto => ("scrollBehavior", "auto"),
+        Scroll::Smooth => ("scrollBehavior", "smooth"),
+        Scroll::M => todo!(),
+        Scroll::Mx => todo!(),
+        Scroll::My => todo!(),
+        Scroll::Ml => todo!(),
+        Scroll::Mr => todo!(),
+        Scroll::Mt => todo!(),
+        Scroll::Mb => todo!(),
+        Scroll::P => todo!(),
+        Scroll::Px => todo!(),
+        Scroll::Py => todo!(),
+        Scroll::Pt => todo!(),
+        Scroll::Pl => todo!(),
+        Scroll::Pr => todo!(),
+        Scroll::Pb => todo!(),
+    }]))
+}
 pub fn bg<'a>(val: &SubjectValue, theme: &'a TailwindTheme) -> PluginResult<'a> {
     match val {
         SubjectValue::Value(Value(rest)) => simple_lookup(&theme.colors, rest, "backgroundColor")
