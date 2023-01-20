@@ -1,3 +1,18 @@
+# [0.13.0](https://github.com/arlyon/stailwc/compare/0.12.0...0.13.0) (2023-01-20)
+
+
+### Features
+
+* add antialiased plugin ([d22886d](https://github.com/arlyon/stailwc/commit/d22886d60e6ba8f6a6546435da716f4c5a807df1))
+* add aspect plugin ([2eaecc3](https://github.com/arlyon/stailwc/commit/2eaecc3f339c2aa2430f384b325af4d23cacd5b4))
+* add backdrop-blur plugin ([9783916](https://github.com/arlyon/stailwc/commit/978391671e87faae9974f0a1601f62fb2d9922b0))
+* add List plugin ([74e2824](https://github.com/arlyon/stailwc/commit/74e28246a7cd8c6a0bae638f7c64117513ae354f))
+* add scroll-auto and scroll-smooth ([a5be83e](https://github.com/arlyon/stailwc/commit/a5be83eae8fe18dda2e210d84660859a03be6956))
+* add snap ([9c00ec9](https://github.com/arlyon/stailwc/commit/9c00ec958f7a49980b1bf55f0c6e42948e0e3be1))
+* add stroke plugin ([4cfbaed](https://github.com/arlyon/stailwc/commit/4cfbaed4f52b287271d9cab938aa7d2c6ec765fe))
+* make outline OptionalArbitrary ([0321871](https://github.com/arlyon/stailwc/commit/03218717216df935774dfd3d6a71a2cedc8ebd77))
+* make transition delay arbitrary ([f6d7a79](https://github.com/arlyon/stailwc/commit/f6d7a7926e6660e09da52c3f5523ff38be00362f))
+
 # [0.12.0](https://github.com/arlyon/stailwc/compare/0.11.1...0.12.0) (2022-12-27)
 
 
