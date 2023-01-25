@@ -1,6 +1,6 @@
 {
   "name": "stailwc",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "description": "An experimental transpiler to bring tailwind macros to SWC rocket",
   "author": "arlyon@me.com",
   "license": "MIT",
@@ -22,7 +22,8 @@
     "prepublishOnly": "cargo build-wasi --release"
   },
   "files": [
-    "install.js"
+    "install.js",
+    "index.d.ts"
   ],
   "dependencies": {
     "app-root-path": "^3.1.0"
