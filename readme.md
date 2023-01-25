@@ -140,3 +140,8 @@ export const ShadowButton = tw(StyledButton)`shadow-lg`;
 There are examples available for both `emotion` and `styled-components`.
 You can run them by cloning the repo and running `yarn` followed by
 `yarn dev` in the example directory. You will need to `stailwc` first.
+
+## Types
+
+There is one step you need to take to get types working. You need to add `stailwc.d.ts` to the root of your source
+folder.
