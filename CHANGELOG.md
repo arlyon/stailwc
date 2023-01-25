@@ -1,3 +1,10 @@
+# [0.14.0](https://github.com/arlyon/stailwc/compare/0.13.0...0.14.0) (2023-01-25)
+
+
+### Features
+
+* add typescript type support ([a57d722](https://github.com/arlyon/stailwc/commit/a57d722c2a50c6d77c49882567decd1119c5699b))
+
 # [0.13.0](https://github.com/arlyon/stailwc/compare/0.12.0...0.13.0) (2023-01-20)
 
 
