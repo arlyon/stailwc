@@ -1,8 +1,8 @@
 use std::collections::HashMap;
 
 use crate::{
-    AlignSelf, Backdrop, Border, Col, Css, Display, Divide, Flex, Grid, Object, Overflow,
-    PluginResult, Position, Rounded, Row, Scroll, Snap, SubjectValue, TextDecoration,
+    AlignSelf, Backdrop, Border, Col, Content, Css, Display, Divide, Flex, Grid, Object, Overflow,
+    PluginResult, Position, Rounded, Row, Scroll, Snap, Subject, SubjectValue, TextDecoration,
     TextTransform, Translate, Value, Visibility, Whitespace,
 };
 use itertools::Itertools;
@@ -285,7 +285,7 @@ merge_plugins_arbitrary_opt!(rounded_r, rounded_tr, rounded_br);
 
 pub fn rounded<'a>(
     subcommand: Option<Rounded>,
-    rest: &Option<SubjectValue>,
+    rest: Option<&SubjectValue>,
     theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     let fun = match subcommand {
@@ -300,7 +300,7 @@ pub fn rounded<'a>(
         Some(Rounded::Bl) => rounded_bl,
     };
 
-    fun(rest.as_ref(), theme)
+    fun(rest, theme)
 }
 
 pub fn antialiased() -> ObjectLit {
@@ -402,7 +402,7 @@ pub fn space<'a>(Value(rest): &Value, theme: &'a TailwindTheme) -> PluginResult<
 
 pub fn text_transform<'a>(
     tt: TextTransform,
-    _rest: &Option<SubjectValue>,
+    _rest: Option<&SubjectValue>,
     _theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     Ok(to_lit(&[(
@@ -418,7 +418,7 @@ pub fn text_transform<'a>(
 
 pub fn text_decoration<'a>(
     td: TextDecoration,
-    _rest: &Option<SubjectValue>,
+    _rest: Option<&SubjectValue>,
     _theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     Ok(to_lit(&[(
@@ -445,7 +445,7 @@ lookup_plugin_arbitrary!(outline_width, outline_width, "outlineWidth");
 
 lookup_plugin_arbitrary!(aspect, aspect_ratio, "aspectRatio");
 
-pub fn outline<'a>(rest: &Option<SubjectValue>, theme: &'a TailwindTheme) -> PluginResult<'a> {
+pub fn outline<'a>(rest: Option<&SubjectValue>, theme: &'a TailwindTheme) -> PluginResult<'a> {
     match rest {
         None => Ok(to_lit(&[("outlineStyle", "solid")])),
         Some(SubjectValue::Value(Value("none"))) => Ok(to_lit(&[
@@ -463,7 +463,7 @@ pub fn outline<'a>(rest: &Option<SubjectValue>, theme: &'a TailwindTheme) -> Plu
 
 pub fn scroll<'a>(
     s: Scroll,
-    _rest: &Option<SubjectValue>,
+    _rest: Option<&SubjectValue>,
     _theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     Ok(to_lit(&[match s {
@@ -488,7 +488,7 @@ pub fn scroll<'a>(
 
 pub fn snap<'a>(
     s: Snap,
-    _rest: &Option<SubjectValue>,
+    _rest: Option<&SubjectValue>,
     _theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     Ok(to_lit(&[match s {
@@ -545,7 +545,7 @@ pub fn shadow<'a>(rest: Option<&Value>, theme: &'a TailwindTheme) -> PluginResul
 
 pub fn border<'a>(
     subcommand: Option<Border>,
-    rest: &Option<SubjectValue>,
+    rest: Option<&SubjectValue>,
     theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     let func = match subcommand {
@@ -558,7 +558,7 @@ pub fn border<'a>(
         Some(Border::Y) => border_y,
     };
 
-    func(rest.as_ref(), theme)
+    func(rest, theme)
 }
 
 array_plugin!(
@@ -615,7 +615,7 @@ lookup_plugin_arbitrary!(flex_inner, flex, "flex");
 
 pub fn flex<'a>(
     f: Option<Flex>,
-    rest: &Option<SubjectValue>,
+    rest: Option<&SubjectValue>,
     theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     let rule = match (f, rest) {
@@ -637,7 +637,7 @@ pub fn flex<'a>(
 
 pub fn divide(
     d: Option<Divide>,
-    rest: &Option<SubjectValue>,
+    rest: Option<&SubjectValue>,
     theme: &TailwindTheme,
 ) -> PluginResult<'static> {
     match (d, rest.as_ref().map(|r| r.as_str())) {
@@ -704,7 +704,7 @@ pub fn divide(
 
 pub fn align_self(
     a: AlignSelf,
-    _rest: &Option<SubjectValue>,
+    _rest: Option<&SubjectValue>,
     _theme: &TailwindTheme,
 ) -> PluginResult<'static> {
     let rule = match a {
@@ -736,7 +736,7 @@ pub fn placeholder<'a>(Value(rest): &Value, theme: &'a TailwindTheme) -> PluginR
 
 pub fn grid<'a>(
     g: Option<Grid>,
-    rest: &Option<SubjectValue>,
+    rest: Option<&SubjectValue>,
     theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     let pair = match (g, rest) {
@@ -762,11 +762,11 @@ lookup_plugin_arbitrary_opt!(backdrop_blur, backdrop_blur, "backdropBlur", |s| f
 
 pub fn backdrop<'a>(
     o: Backdrop,
-    value: &Option<SubjectValue>,
+    value: Option<&SubjectValue>,
     theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     match o {
-        Backdrop::Blur => backdrop_blur(value.as_ref(), theme),
+        Backdrop::Blur => backdrop_blur(value, theme),
         Backdrop::Brightness => todo!(),
         Backdrop::Contrast => todo!(),
         Backdrop::Grayscale => todo!(),
@@ -780,7 +780,7 @@ pub fn backdrop<'a>(
 
 pub fn object(
     o: Object,
-    _rest: &Option<SubjectValue>,
+    _rest: Option<&SubjectValue>,
     _theme: &TailwindTheme,
 ) -> PluginResult<'static> {
     let rule = match o {
@@ -795,7 +795,7 @@ pub fn object(
 
 pub fn white_space(
     o: Whitespace,
-    _rest: &Option<SubjectValue>,
+    _rest: Option<&SubjectValue>,
     _theme: &TailwindTheme,
 ) -> PluginResult<'static> {
     let rule = match o {
@@ -834,7 +834,7 @@ pub fn row<'a>(
 
 pub fn content<'a>(
     c: Option<Content>,
-    rest: &Option<SubjectValue>,
+    rest: Option<&SubjectValue>,
     _theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     let rule = match c {
@@ -912,7 +912,7 @@ pub fn transform<'a>(rest: Option<&Value>, _theme: &'a TailwindTheme) -> PluginR
 
 pub fn display<'a>(
     d: Display,
-    _rest: &Option<SubjectValue>,
+    _rest: Option<&SubjectValue>,
     _theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     Ok(to_lit(&[(
@@ -964,7 +964,7 @@ pub fn overflow<'a>(
 
 pub fn position<'a>(
     p: Position,
-    _rest: &Option<SubjectValue>,
+    _rest: Option<&SubjectValue>,
     _theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     Ok(to_lit(&[(
@@ -981,7 +981,7 @@ pub fn position<'a>(
 
 pub fn visibility<'a>(
     v: Visibility,
-    _rest: &Option<SubjectValue>,
+    _rest: Option<&SubjectValue>,
     _theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     Ok(to_lit(&[(
@@ -995,7 +995,7 @@ pub fn visibility<'a>(
 
 pub fn translate<'a>(
     t: Translate,
-    val: &Option<SubjectValue>,
+    val: Option<&SubjectValue>,
     theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     let val = match val {

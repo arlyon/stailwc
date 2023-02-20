@@ -51,7 +51,7 @@ enum PluginType<'a> {
     #[allow(clippy::type_complexity)]
     RequiredBox(Box<dyn Fn(&Value, &'a TailwindTheme) -> PluginResult<'a>>),
     #[allow(clippy::type_complexity)]
-    OptionalAbitraryBox(Box<dyn Fn(&Option<SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>>),
+    OptionalAbitraryBox(Box<dyn Fn(Option<&SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>>),
 
     /// This plugin takes an optional value, and produces an object literal.
     Optional(fn(Option<&Value>, &'a TailwindTheme) -> PluginResult<'a>),
@@ -217,8 +217,8 @@ impl<'a> Literal<'a> {
             (RequiredArbitraryBox(p), Some(value)) => p(value, theme),
             (Singular(p), None) => Ok(p()),
             (RequiredBox(p), Some(SubjectValue::Value(value))) => p(value, theme),
-            (OptionalAbitraryBox(p), value) => p(value, theme),
-            (OptionalArbitrary(p), value) => p(value, theme),
+            (OptionalAbitraryBox(p), value) => p(value.as_ref(), theme),
+            (OptionalArbitrary(p), value) => p(value.as_ref(), theme),
             _ => Err(vec![]),
         }
         .map_err(|e| match self.value {

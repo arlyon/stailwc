@@ -6,7 +6,7 @@ use crate::{PluginResult, Prose, SubjectValue};
 
 pub fn prose<'a>(
     p: Option<Prose>,
-    _rest: &Option<SubjectValue>,
+    _rest: Option<&SubjectValue>,
     _theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
     match p {
