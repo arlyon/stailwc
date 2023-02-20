@@ -877,7 +877,7 @@ array_map_plugin!(
         ("items-start", "start"),
         ("items-end", "end"),
         ("items-center", "center"),
-        ("iterms-stretch", "stretch")
+        ("items-stretch", "stretch")
     ],
     "justifyItems"
 );
