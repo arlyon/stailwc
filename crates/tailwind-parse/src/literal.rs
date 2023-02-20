@@ -141,7 +141,7 @@ impl<'a> Literal<'a> {
             Pointer => Required(plugin::pointer_events),
             Ease => Optional(plugin::ease),
             LineClamp => RequiredArbitrary(plugin::line_clamp),
-            Order => Required(plugin::order),
+            Order => RequiredArbitrary(plugin::order),
             From => Required(plugin::from),
             To => Required(plugin::to),
             Aspect => RequiredArbitrary(plugin::aspect),

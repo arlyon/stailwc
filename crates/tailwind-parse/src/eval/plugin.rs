@@ -90,7 +90,7 @@ array_map_plugin_arbitrary!(
 );
 lookup_plugin!(opacity, opacity, "opacity");
 lookup_plugin!(animation, animation, "animation");
-lookup_plugin!(order, order, "order");
+lookup_plugin_arbitrary!(order, order, "order");
 lookup_plugin_arbitrary!(bottom, height, "bottom");
 lookup_plugin!(fill, colors, "fill");
 lookup_plugin_arbitrary!(left, width, "left");
