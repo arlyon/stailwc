@@ -126,7 +126,7 @@ impl<'a> Literal<'a> {
             Content(c) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::content(c, v, t))),
 
             Auto(Auto::Cols) => Required(plugin::auto_cols),
-            Auto(Auto::Rows) => Required(plugin::auto_rows),
+            Auto(Auto::Rows) => RequiredArbitrary(plugin::auto_rows),
 
             // all other plugins
             Text => RequiredArbitrary(plugin::text),

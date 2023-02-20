@@ -52,6 +52,30 @@ macro_rules! array_map_plugin {
     };
 }
 
+macro_rules! array_map_plugin_arbitrary {
+    ($def:ident, $options:expr, $target:expr) => {
+        pub fn $def<'a>(value: &SubjectValue, _theme: &'a TailwindTheme) -> PluginResult<'a> {
+            match value {
+                SubjectValue::Value(Value(v)) => $options
+                    .iter()
+                    .find(|(x, _)| x == v)
+                    .map(|(_, y)| to_lit(&[($target, y)]))
+                    .ok_or_else(|| {
+                        let sort = eddie::Levenshtein::new();
+                        $options
+                            .iter()
+                            .map(|(x, _)| x)
+                            .sorted_by_key(|val| sort.distance(v, val))
+                            .copied()
+                            .take(5)
+                            .collect()
+                    }),
+                SubjectValue::Css(Css(v)) => Ok(to_lit(&[($target, v)])),
+            }
+        }
+    };
+}
+
 macro_rules! lookup_plugin_arbitrary {
     ($def:ident, $map:tt, $target:expr) => {
         pub fn $def<'a>(value: &SubjectValue, theme: &'a TailwindTheme) -> PluginResult<'a> {
@@ -162,6 +186,7 @@ macro_rules! merge_plugins_arbitrary_opt {
 }
 
 pub(crate) use array_map_plugin;
+pub(crate) use array_map_plugin_arbitrary;
 pub(crate) use array_plugin;
 pub(crate) use lookup_plugin;
 pub(crate) use lookup_plugin_arbitrary;

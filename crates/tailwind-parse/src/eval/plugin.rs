@@ -68,7 +68,7 @@ lookup_plugin_arbitrary!(basis, flex_basis, "flexBasis");
 lookup_plugin_arbitrary_opt!(grow, flex_grow, "flexGrow");
 lookup_plugin_arbitrary_opt!(shrink, flex_shrink, "flexShrink");
 lookup_plugin_arbitrary!(top, height, "top");
-array_map_plugin!(
+array_map_plugin_arbitrary!(
     auto_rows,
     [
         ("auto", "auto"),
