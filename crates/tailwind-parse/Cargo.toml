@@ -17,7 +17,7 @@ phf = {version = "0.11.1", features = ["macros"]}
 stailwc-swc-utils = {version = "0.13.0", path = "../swc-utils"}
 swc_core = {version = "=0.55.5", features = ["common", "ecma_ast"]}
 tailwind-config = {version = "0.15.0", path = "../tailwind-config"}
-tailwind-parse-macro = {version = "0.11.0", path = "../tailwind-parse-macro"}
+tailwind-parse-macro = {version = "0.15.0", path = "../tailwind-parse-macro"}
 thiserror = "1.0.37"
 
 [dev-dependencies]
