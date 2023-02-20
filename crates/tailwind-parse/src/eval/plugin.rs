@@ -825,8 +825,30 @@ pub fn row<'a>(row: Option<Row>, value: &Value, theme: &'a TailwindTheme) -> Plu
     }
 }
 
-pub fn content<'a>(rest: &SubjectValue, _theme: &'a TailwindTheme) -> PluginResult<'a> {
-    Ok(to_lit(&[("content", rest.as_str())]))
+pub fn content<'a>(
+    c: Option<Content>,
+    rest: &Option<SubjectValue>,
+    _theme: &'a TailwindTheme,
+) -> PluginResult<'a> {
+    let rule = match c {
+        None | Some(Content::None) => "content",
+        _ => "alignContent",
+    };
+
+    let value = match (c, rest) {
+        (None, Some(rest)) => rest.as_str(),
+        (Some(Content::None), None) => "none",
+        (Some(Content::Around), None) => "space-around",
+        (Some(Content::Between), None) => "space-between",
+        (Some(Content::Center), None) => "center",
+        (Some(Content::End), None) => "flex-end",
+        (Some(Content::Evenly), None) => "space-evenly",
+        (Some(Content::Start), None) => "flex-start",
+        (Some(Content::Baseline), None) => "baseline",
+        _ => return Err(vec![]),
+    };
+
+    Ok(to_lit(&[(rule, value)]))
 }
 
 array_map_plugin!(

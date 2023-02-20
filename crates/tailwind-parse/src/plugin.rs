@@ -58,7 +58,7 @@ mod plugin {
         #[rename("align")]
         VerticalAlign,
         Pb,
-        Content,
+        Content(Option<Content>),
         M,
         Mx,
         My,
@@ -351,6 +351,18 @@ mod plugin {
         Contents,
         ListItem,
         Hidden,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Content {
+        None,
+        Center,
+        Start,
+        End,
+        Between,
+        Around,
+        Evenly,
+        Baseline,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

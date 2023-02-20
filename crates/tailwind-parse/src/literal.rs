@@ -123,6 +123,7 @@ impl<'a> Literal<'a> {
             Backdrop(b) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::backdrop(b, v, t))),
             Snap(s) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::snap(s, v, t))),
             Scroll(s) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::scroll(s, v, t))),
+            Content(c) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::content(c, v, t))),
 
             Auto(Auto::Cols) => Required(plugin::auto_cols),
             Auto(Auto::Rows) => Required(plugin::auto_rows),
@@ -146,7 +147,6 @@ impl<'a> Literal<'a> {
             Aspect => RequiredArbitrary(plugin::aspect),
             Outline => OptionalArbitrary(plugin::outline),
             Mix => Required(plugin::mix),
-            Content => RequiredArbitrary(plugin::content),
             Grow => Optional(plugin::grow),
             Shrink => Optional(plugin::shrink),
             Basis => Required(plugin::basis),
