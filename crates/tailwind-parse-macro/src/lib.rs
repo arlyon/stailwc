@@ -104,9 +104,13 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
                 let subcommands = subcommand.variants.iter().map(|v| {
                     let kebab = format(v, &kebab);
                     let sub_name = subcommand.ident.clone();
-                    if let Some((l, _)) = kebab.split_once('-') {
+
+                    let mut split = kebab.rsplit_once('-');
+                    while let Some((l, _)) = split {
                         has_subsegments.insert(l.to_string());
+                        split = l.rsplit_once('-');
                     }
+
                     let sub_ident = v.ident.clone();
                     if optional.is_some() {
                         quote! {

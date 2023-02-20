@@ -411,24 +411,32 @@ mod plugin {
         /// this code is ugly
         pub fn parse(s: NomSpan<'a>) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
             let parse_segment = || take_while1(|c| c != '-' && c != ' ' && c != '[' && c != '!');
+            let next_segment = || preceded(tag("-"), parse_segment());
 
-            let (rest, segment) = parse_segment()(s)?;
+            let (mut rest, mut segment) = parse_segment()(s)?;
+            let (mut prev_rest, mut prev_segment) = (rest, segment);
 
-            // attempt to take the next one and parse
-            // this currently only goes one layer deep,
-            // but we may need to make this recursive
-            if Plugin::has_subsegments(&segment) && let Ok((rest, subsegment)) = preceded(tag("-"), parse_segment())(rest) {
-                let plugin_span = s
-                    .slice(..subsegment.location_offset() + subsegment.len() - s.location_offset());
-                if let Ok(p) = plugin_span.parse::<Plugin>() {
-                    return Ok((rest, p));
+            while Plugin::has_subsegments(&segment) {
+                if let Ok((rest2, subsegment)) = next_segment()(rest) {
+                    prev_segment = segment;
+                    prev_rest = rest;
+
+                    rest = rest2;
+                    segment = s.slice(
+                        ..subsegment.location_offset() + subsegment.len()
+                            - segment.location_offset(),
+                    );
+                } else {
+                    break;
                 }
             }
 
-            // try and parse a plugin and if there is no subcommand, return it
+            // attempt to parse a plugin, instead parsing the previous segment if it fails
+            // this is to allow for plugins with subcommands to be parsed
             let plugin_parse = segment
                 .parse::<Plugin>()
                 .map(|p| (rest, p))
+                .or_else(|_| prev_segment.parse::<Plugin>().map(|p| (prev_rest, p)))
                 .map_err(|_| nom::Err::Error(Error::new(segment, nom::error::ErrorKind::Tag)));
 
             if !plugin_parse

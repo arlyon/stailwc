@@ -27,7 +27,7 @@ mod test {
     use std::assert_matches::assert_matches;
 
     use crate::{
-        Border, Css, Directive, Display, Expression, Literal, Max, Plugin, Position, Subject,
+        Border, Css, Directive, Display, Expression, Grid, Literal, Max, Plugin, Position, Subject,
         SubjectValue, TextDecoration, Value,
     };
 
@@ -104,6 +104,7 @@ mod test {
     #[test_case("border-[min-content min-content]", Plugin::Border(None), Some(SubjectValue::Css(Css("min-content min-content"))) ; "when spaces are in arbitrary css")]
     #[test_case("line-through", Plugin::TextDecoration(TextDecoration::LineThrough), None ; "when we have a transparent plugin")]
     #[test_case("table-cell", Plugin::Display(Display::TableCell), None ; "do not eagerly parse")]
+    #[test_case("grid-flow-col", Plugin::Grid(Some(Grid::FlowCol)), None; "handles multiple words")]
     fn plugin(s: &str, p: Plugin, v: Option<SubjectValue>) {
         let (rest, s) = Subject::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
         let lit = match s {
