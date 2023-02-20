@@ -224,9 +224,9 @@ lookup_plugin_arbitrary!(grid_col, grid_column, "gridColumn");
 lookup_plugin_arbitrary!(grid_col_start, grid_column_start, "gridColumnStart");
 lookup_plugin_arbitrary!(grid_col_end, grid_column_end, "gridColumnEnd");
 
-lookup_plugin!(grid_row, grid_row, "gridRow");
-lookup_plugin!(grid_row_start, grid_row_start, "gridRowStart");
-lookup_plugin!(grid_row_end, grid_row_end, "gridRowEnd");
+lookup_plugin_arbitrary!(grid_row, grid_row, "gridRow");
+lookup_plugin_arbitrary!(grid_row_start, grid_row_start, "gridRowStart");
+lookup_plugin_arbitrary!(grid_row_end, grid_row_end, "gridRowEnd");
 
 array_map_plugin!(
     items,
