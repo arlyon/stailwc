@@ -1,23 +1,21 @@
 const stailwc = require("stailwc/install");
-const { config } = require("@swc/core/spack");
 
-module.exports = config({
-  entry: {
-    web: __dirname + "/index.tsx",
-  },
-  output: {
-    path: __dirname + "/lib",
-  },
-  options: {
+console.log(JSON.stringify({
+
     jsc: {
+      parser: {
+        "syntax": "ecmascript",
+        "jsx": true,
+      },
       experimental: {
         plugins: [
           stailwc({
             engine: "emotion",
+            strict: true,
             tailwindPath: "./examples/swc/tailwind.config.json",
+            silent: true,
           }),
         ],
       },
     },
-  },
-});
+  }));
