@@ -1,7 +1,7 @@
 use nom::{
     bytes::complete::take_while1,
     character::{
-        complete::{char, space0},
+        complete::{char, multispace0},
         is_alphanumeric,
     },
     combinator::opt,
@@ -65,7 +65,7 @@ impl<'a> Expression<'a> {
         let alpha = opt(preceded(char('/'), SubjectValue::parse));
         let important = opt(char('!')).map(|o| o.is_some());
 
-        let (s_next, (((((_, mods), negative), subject), alpha), important)) = space0
+        let (s_next, (((((_, mods), negative), subject), alpha), important)) = multispace0
             .and(mods)
             .and(negative)
             .and(subject)

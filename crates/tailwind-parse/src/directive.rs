@@ -1,4 +1,4 @@
-use nom::{character::complete::space0, combinator::eof, multi::many1, IResult, Parser};
+use nom::{character::complete::multispace0, combinator::eof, multi::many1, IResult, Parser};
 use nom_locate::LocatedSpan;
 use stailwc_swc_utils::merge_literals;
 use swc_core::{
@@ -17,17 +17,17 @@ pub struct Directive<'a> {
 }
 
 impl<'a> Directive<'a> {
-    /// Same as parse, but with an added check for an EOF.     
+    /// Same as parse, but with an added check for an EOF.
     pub fn parse(s: NomSpan<'a>) -> (NomSpan<'a>, Self, Vec<LocatedSpan<&str, Span>>) {
         let mut exps = vec![];
         let mut errs = vec![];
 
-        let (mut s, _) = space0::<LocatedSpan<&str, Span>, ()>.parse(s).unwrap();
+        let (mut s, _) = multispace0::<LocatedSpan<&str, Span>, ()>.parse(s).unwrap();
 
-        let mut exp = Expression::parse.and(space0);
+        let mut exp = Expression::parse.and(multispace0);
         let mut fast_forward =
             nom::bytes::complete::take_while::<_, LocatedSpan<&str, Span>, ()>(|c: char| c != ' ')
-                .and(space0);
+                .and(multispace0);
 
         // todo: we can probably move the expression parser first
         loop {
@@ -65,7 +65,7 @@ impl<'a> Directive<'a> {
         s: NomSpan<'a>,
     ) -> IResult<NomSpan<'a>, Self, nom::error::Error<NomSpan<'a>>> {
         many1(Expression::parse)
-            .and(space0)
+            .and(multispace0)
             .map(|(exps, _)| Directive { exps })
             .parse(s)
     }

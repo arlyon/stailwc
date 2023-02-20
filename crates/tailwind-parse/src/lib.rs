@@ -124,10 +124,13 @@ mod test {
     #[test_case("mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8" ; "random prefixes")]
     #[test_case("relative rounded-2xl px-6 py-10 bg-primary-500 overflow-hidden shadow-xl sm:px-12 sm:py-20"; "example")]
     #[test_case("text-white/40 bg-white/50" ; "chained transparency")]
+    #[test_case(r#"
+p-4
+    "# ; "newline")]
     fn directive_tests(s: &str) {
-        let (s, _d, e) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP));
-        assert_matches!(*s, "");
-        assert_eq!(e.len(), 0);
+        let (rest, _d, errors) = Directive::parse(LocatedSpan::new_extra(s, DUMMY_SP));
+        assert_matches!(*rest, "");
+        assert_eq!(errors, vec![]);
     }
 
     #[test_case(&["bg-white", "text-black"] ; "basic case")]
