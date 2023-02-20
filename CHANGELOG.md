@@ -1,3 +1,30 @@
+# [0.15.0](https://github.com/arlyon/stailwc/compare/0.14.0...0.15.0) (2023-02-20)
+
+
+### Bug Fixes
+
+* include d.ts file in npm package ([b3cc831](https://github.com/arlyon/stailwc/commit/b3cc83183a1085c783b79980a19592986e9da30b))
+* rename flex-nowrap ([1db8d6d](https://github.com/arlyon/stailwc/commit/1db8d6d0fe2417adc69ddf2c57e4b9a5e6d04f2d))
+* rename grid-auto-flow col to column ([b54c3cb](https://github.com/arlyon/stailwc/commit/b54c3cba72ff1490cac774075d80eb802415665b))
+* rename iterms-stretch to items-stretch ([95c423d](https://github.com/arlyon/stailwc/commit/95c423d8979ac7f4451d198378087fa5173511a3))
+
+
+### Features
+
+* allow parser to handle infinitely nested plugin segments ([1b96169](https://github.com/arlyon/stailwc/commit/1b961698faf84694e53cd23b21994303c7e6311e))
+* make auto_cols plugin support arbitrary CSS ([f7df759](https://github.com/arlyon/stailwc/commit/f7df7596d9caea8ac38a805ffdb89d895d40cc5c))
+* make auto-rows plugin support arbitrary CSS ([41ed335](https://github.com/arlyon/stailwc/commit/41ed335aedc091c7d62e484188f2bd645158c58d))
+* make basis plugin support arbitrary CSS ([c7288f8](https://github.com/arlyon/stailwc/commit/c7288f84b2b001869c9c8ef057b06f520cc432d9))
+* make col plugin support arbitrary CSS ([c3d7b19](https://github.com/arlyon/stailwc/commit/c3d7b198a5c49006f454a17d017c6c88a5ddd280))
+* make flex plugin support arbitrary CSS ([ca48c18](https://github.com/arlyon/stailwc/commit/ca48c1821519bdfdaf6eb3a10eb51edda151358e))
+* make grid-col utilities support arbitrary CSS ([f4e038a](https://github.com/arlyon/stailwc/commit/f4e038a0781ef755bd580bf4520a419ebafe04cc))
+* make grid-row utilities support arbitrary CSS ([70ff15b](https://github.com/arlyon/stailwc/commit/70ff15bd2796ddc6b20b01b8e9692f4a9e713596))
+* make grow plugin support arbitrary css ([acf02bc](https://github.com/arlyon/stailwc/commit/acf02bc431ac0fc02e86d79504a0064e6552a582))
+* make order plugin support arbitrary CSS ([dd7656b](https://github.com/arlyon/stailwc/commit/dd7656bf4b5af1aeb9cdd0b75eec87c34dbe3941))
+* make row plugin support arbitrary CSS ([70b279c](https://github.com/arlyon/stailwc/commit/70b279cfea3804d6045c4ba5f22ef5ebd8111f81))
+* make shrink plugin support arbitrary CSS ([1e20218](https://github.com/arlyon/stailwc/commit/1e2021863c03a6e9e2b1c437807296c993c1c6ee))
+* support content subcommands ([41b4d60](https://github.com/arlyon/stailwc/commit/41b4d60bbb86e563e0ea3e1b158b7fac1c293414))
+
 # [0.14.0](https://github.com/arlyon/stailwc/compare/0.13.0...0.14.0) (2023-01-25)
 
 
