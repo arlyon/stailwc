@@ -200,15 +200,11 @@ fn extract_type_from_option(path: &syn::Path) -> Option<&syn::Type> {
     // TODO store (with lazy static) the vec of string
     // TODO maybe optimization, reverse the order of segments
     fn extract_option_segment(path: &Path) -> Option<&PathSegment> {
-        let idents_of_path = path
-            .segments
-            .iter()
-            .into_iter()
-            .fold(String::new(), |mut acc, v| {
-                acc.push_str(&v.ident.to_string());
-                acc.push('|');
-                acc
-            });
+        let idents_of_path = path.segments.iter().fold(String::new(), |mut acc, v| {
+            acc.push_str(&v.ident.to_string());
+            acc.push('|');
+            acc
+        });
         ["Option|", "std|option|Option|", "core|option|Option|"]
             .into_iter()
             .find(|s| idents_of_path == *s)

@@ -110,7 +110,7 @@ impl<'a> TransformVisitor<'a> {
 
         if let Some(s) = suggestions && !s.is_empty() {
             b.allow_suggestions(true)
-                .help(&format!("maybe you meant {:?}", s))
+                .help(&format!("maybe you meant {s:?}"))
                 .span_suggestions(
                     span,
                     "maybe you meant",

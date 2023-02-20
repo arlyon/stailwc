@@ -57,6 +57,7 @@ enum PluginType<'a> {
     Optional(fn(Option<&Value>, &'a TailwindTheme) -> PluginResult<'a>),
     /// This plugin requires a value, or arbitrary css.
     RequiredArbitrary(fn(&SubjectValue, &'a TailwindTheme) -> PluginResult<'a>),
+    #[allow(clippy::type_complexity)]
     RequiredArbitraryBox(Box<dyn Fn(&SubjectValue, &'a TailwindTheme) -> PluginResult<'a>>),
     /// This plugin takes an optional value, or arbitrary css.
     OptionalArbitrary(fn(Option<&SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>),

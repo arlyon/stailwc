@@ -8,7 +8,6 @@ use glob::glob;
 fn main() {
     let test_files = glob("snapshots/tests/**/*.js")
         .expect("Failed to read glob pattern")
-        .into_iter()
         .filter_map(Result::ok)
         .filter(|s| !s.ends_with("tailwind.config.js") && !s.ends_with("stitches.config.js"));
 

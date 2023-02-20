@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use crate::{
     AlignSelf, Backdrop, Border, Col, Content, Css, Display, Divide, Flex, Grid, Object, Overflow,
-    PluginResult, Position, Rounded, Row, Scroll, Snap, Subject, SubjectValue, TextDecoration,
+    PluginResult, Position, Rounded, Row, Scroll, Snap, SubjectValue, TextDecoration,
     TextTransform, Translate, Value, Visibility, Whitespace,
 };
 use itertools::Itertools;
@@ -756,8 +756,7 @@ pub fn grid<'a>(
 }
 
 lookup_plugin_arbitrary_opt!(backdrop_blur, backdrop_blur, "backdropBlur", |s| format!(
-    "blur({})",
-    s
+    "blur({s})"
 ));
 
 pub fn backdrop<'a>(
