@@ -149,7 +149,7 @@ impl<'a> Literal<'a> {
             Mix => Required(plugin::mix),
             Grow => Optional(plugin::grow),
             Shrink => Optional(plugin::shrink),
-            Basis => Required(plugin::basis),
+            Basis => RequiredArbitrary(plugin::basis),
             Italic => Singular(plugin::italic),
             Stroke => RequiredArbitrary(plugin::stroke),
             Justify => Required(plugin::justify),
