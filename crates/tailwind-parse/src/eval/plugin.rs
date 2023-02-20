@@ -808,7 +808,11 @@ pub fn white_space(
     Ok(to_lit(&rule))
 }
 
-pub fn col<'a>(col: Option<Col>, value: &Value, theme: &'a TailwindTheme) -> PluginResult<'a> {
+pub fn col<'a>(
+    col: Option<Col>,
+    value: &SubjectValue,
+    theme: &'a TailwindTheme,
+) -> PluginResult<'a> {
     match col {
         None => grid_col(value, theme),
         Some(Col::Start) => grid_col_start(value, theme),

@@ -57,8 +57,9 @@ enum PluginType<'a> {
     Optional(fn(Option<&Value>, &'a TailwindTheme) -> PluginResult<'a>),
     /// This plugin requires a value, or arbitrary css.
     RequiredArbitrary(fn(&SubjectValue, &'a TailwindTheme) -> PluginResult<'a>),
+    RequiredArbitraryBox(Box<dyn Fn(&SubjectValue, &'a TailwindTheme) -> PluginResult<'a>>),
     /// This plugin takes an optional value, or arbitrary css.
-    OptionalArbitrary(fn(&Option<SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>),
+    OptionalArbitrary(fn(Option<&SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>),
 }
 
 impl<'a> Literal<'a> {
@@ -107,7 +108,7 @@ impl<'a> Literal<'a> {
             Translate(tr) => {
                 OptionalAbitraryBox(StdBox::new(move |v, t| plugin::translate(tr, v, t)))
             }
-            Col(c) => RequiredBox(StdBox::new(move |v, t| plugin::col(c, v, t))),
+            Col(c) => RequiredArbitraryBox(StdBox::new(move |v, t| plugin::col(c, v, t))),
             Row(r) => RequiredBox(StdBox::new(move |v, t| plugin::row(r, v, t))),
             Overflow(o) => RequiredBox(StdBox::new(move |v, t| plugin::overflow(o, v, t))),
             Not(_) => todo!(),
@@ -213,6 +214,7 @@ impl<'a> Literal<'a> {
             (Optional(p), Some(SubjectValue::Value(s))) => p(Some(s), theme),
             (Optional(p), None) => p(None, theme),
             (RequiredArbitrary(p), Some(value)) => p(value, theme),
+            (RequiredArbitraryBox(p), Some(value)) => p(value, theme),
             (Singular(p), None) => Ok(p()),
             (RequiredBox(p), Some(SubjectValue::Value(value))) => p(value, theme),
             (OptionalAbitraryBox(p), value) => p(value, theme),
