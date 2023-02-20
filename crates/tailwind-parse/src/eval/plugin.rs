@@ -220,9 +220,9 @@ merge_plugins_arbitrary!(inset, inset_x, inset_y);
 lookup_plugin_arbitrary!(grid_t_col, grid_template_columns, "gridTemplateColumns");
 lookup_plugin_arbitrary!(grid_t_row, grid_template_rows, "gridTemplateRows");
 
-lookup_plugin!(grid_col, grid_column, "gridColumn");
-lookup_plugin!(grid_col_start, grid_column_start, "gridColumnStart");
-lookup_plugin!(grid_col_end, grid_column_end, "gridColumnEnd");
+lookup_plugin_arbitrary!(grid_col, grid_column, "gridColumn");
+lookup_plugin_arbitrary!(grid_col_start, grid_column_start, "gridColumnStart");
+lookup_plugin_arbitrary!(grid_col_end, grid_column_end, "gridColumnEnd");
 
 lookup_plugin!(grid_row, grid_row, "gridRow");
 lookup_plugin!(grid_row_start, grid_row_start, "gridRowStart");
