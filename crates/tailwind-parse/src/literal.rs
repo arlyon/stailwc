@@ -109,7 +109,7 @@ impl<'a> Literal<'a> {
                 OptionalAbitraryBox(StdBox::new(move |v, t| plugin::translate(tr, v, t)))
             }
             Col(c) => RequiredArbitraryBox(StdBox::new(move |v, t| plugin::col(c, v, t))),
-            Row(r) => RequiredBox(StdBox::new(move |v, t| plugin::row(r, v, t))),
+            Row(r) => RequiredArbitraryBox(StdBox::new(move |v, t| plugin::row(r, v, t))),
             Overflow(o) => RequiredBox(StdBox::new(move |v, t| plugin::overflow(o, v, t))),
             Not(_) => todo!(),
 

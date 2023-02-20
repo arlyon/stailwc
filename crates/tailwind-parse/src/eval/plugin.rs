@@ -820,7 +820,11 @@ pub fn col<'a>(
     }
 }
 
-pub fn row<'a>(row: Option<Row>, value: &Value, theme: &'a TailwindTheme) -> PluginResult<'a> {
+pub fn row<'a>(
+    row: Option<Row>,
+    value: &SubjectValue,
+    theme: &'a TailwindTheme,
+) -> PluginResult<'a> {
     match row {
         None => grid_row(value, theme),
         Some(Row::Start) => grid_row_start(value, theme),
