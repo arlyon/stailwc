@@ -309,7 +309,7 @@ mod plugin {
         ColReverse,
         Wrap,
         WrapReverse,
-        NoWrap,
+        Nowrap,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]

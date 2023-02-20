@@ -625,7 +625,7 @@ pub fn flex<'a>(
         (Some(Flex::ColReverse), _) => [("flexDirection", "column-reverse")],
         (Some(Flex::Wrap), _) => [("flexWrap", "wrap")],
         (Some(Flex::WrapReverse), _) => [("flexWrap", "wrap-reverse")],
-        (Some(Flex::NoWrap), _) => [("flexWrap", "nowrap")],
+        (Some(Flex::Nowrap), _) => [("flexWrap", "nowrap")],
         (None, None) => [("display", "flex")],
         (Some(Flex::Grow), v) => return grow(v, theme),
         (Some(Flex::Shrink), v) => return shrink(v, theme),
