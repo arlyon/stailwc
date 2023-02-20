@@ -125,7 +125,7 @@ impl<'a> Literal<'a> {
             Scroll(s) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::scroll(s, v, t))),
             Content(c) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::content(c, v, t))),
 
-            Auto(Auto::Cols) => Required(plugin::auto_cols),
+            Auto(Auto::Cols) => RequiredArbitrary(plugin::auto_cols),
             Auto(Auto::Rows) => RequiredArbitrary(plugin::auto_rows),
 
             // all other plugins

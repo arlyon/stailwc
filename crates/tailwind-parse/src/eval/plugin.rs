@@ -78,7 +78,7 @@ array_map_plugin_arbitrary!(
     ],
     "gridAutoRows"
 );
-array_map_plugin!(
+array_map_plugin_arbitrary!(
     auto_cols,
     [
         ("auto", "auto"),
