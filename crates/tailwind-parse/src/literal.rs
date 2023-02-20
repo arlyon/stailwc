@@ -147,7 +147,7 @@ impl<'a> Literal<'a> {
             Aspect => RequiredArbitrary(plugin::aspect),
             Outline => OptionalArbitrary(plugin::outline),
             Mix => Required(plugin::mix),
-            Grow => Optional(plugin::grow),
+            Grow => OptionalArbitrary(plugin::grow),
             Shrink => Optional(plugin::shrink),
             Basis => RequiredArbitrary(plugin::basis),
             Italic => Singular(plugin::italic),
