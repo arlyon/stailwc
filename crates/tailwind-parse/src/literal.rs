@@ -208,6 +208,7 @@ impl<'a> Literal<'a> {
             Leading => Required(plugin::leading),
             Truncate => Singular(plugin::truncate),
             Animate => Required(plugin::animation),
+            Columns => RequiredArbitrary(plugin::columns),
         };
 
         match (plugin, &self.value) {

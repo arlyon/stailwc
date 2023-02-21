@@ -56,6 +56,8 @@ pub struct TailwindTheme<'a> {
     #[serde(borrow, rename = "zIndex")]
     pub z_index: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
+    pub columns: HashMap<&'a str, &'a str>,
+    #[serde(borrow)]
     pub translate: HashMap<&'a str, &'a str>,
     #[serde(borrow)]
     pub width: HashMap<&'a str, &'a str>,

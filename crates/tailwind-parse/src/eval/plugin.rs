@@ -115,6 +115,7 @@ lookup_plugin_arbitrary!(mr, margin, "marginRight");
 lookup_plugin_arbitrary!(mt, margin, "marginTop");
 lookup_plugin_arbitrary!(mb, margin, "marginBottom");
 lookup_plugin_arbitrary!(z, z_index, "zIndex");
+lookup_plugin_arbitrary!(columns, columns, "columns");
 lookup_plugin_arbitrary!(gap, gap, "gap");
 lookup_plugin_arbitrary!(gap_x, gap, "columnGap");
 lookup_plugin_arbitrary!(gap_y, gap, "rowGap");
