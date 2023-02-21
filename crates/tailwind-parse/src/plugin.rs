@@ -132,7 +132,7 @@ mod plugin {
         Blur,
         Ring,
         Sr,
-
+        Columns,
         Prose(Option<Prose>),
         Not(Not),
     }
