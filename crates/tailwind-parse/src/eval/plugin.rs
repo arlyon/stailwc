@@ -921,7 +921,7 @@ pub fn display<'a>(
             Display::Block => "block",
             Display::InlineBlock => "inline-block",
             Display::Inline => "inline",
-            Display::InlineFlex => "inline-fled",
+            Display::InlineFlex => "inline-flex",
             Display::Table => "table",
             Display::InlineTable => "inline-table",
             Display::TableCaption => "table-caption",
