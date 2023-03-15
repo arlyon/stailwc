@@ -2,8 +2,8 @@
 
 This is an experimental SWC transpiler to bring compile time
 tailwind macros to SWC (and nextjs) a-la twin macro. The goal
-is to give the same great performance and flexibility while
-performing considerably better than babel-based alternatives.
+is to give the same great compile-time ergonomics and flexibility 
+while performing considerably better than babel-based alternatives.
 Supports both `emotion` and `styled-components`.
 
 ## Compatibility Chart
