@@ -462,29 +462,46 @@ pub fn outline<'a>(rest: Option<&SubjectValue>, theme: &'a TailwindTheme) -> Plu
     }
 }
 
+lookup_plugin_arbitrary!(scroll_pl, padding, "scrollPaddingLeft");
+lookup_plugin_arbitrary!(scroll_pr, padding, "scrollPaddingRight");
+lookup_plugin_arbitrary!(scroll_pt, padding, "scrollPaddingTop");
+lookup_plugin_arbitrary!(scroll_pb, padding, "scrollPaddingBottom");
+merge_plugins_arbitrary!(scroll_px, scroll_pl, scroll_pr);
+merge_plugins_arbitrary!(scroll_py, scroll_pt, scroll_pb);
+lookup_plugin_arbitrary!(scroll_p, padding, "scrollPadding");
+
+lookup_plugin_arbitrary!(scroll_ml, margin, "scrollMarginLeft");
+lookup_plugin_arbitrary!(scroll_mr, margin, "scrollMarginRight");
+lookup_plugin_arbitrary!(scroll_mt, margin, "scrollMarginTop");
+lookup_plugin_arbitrary!(scroll_mb, margin, "scrollMarginBottom");
+merge_plugins_arbitrary!(scroll_mx, scroll_ml, scroll_mr);
+merge_plugins_arbitrary!(scroll_my, scroll_mt, scroll_mb);
+lookup_plugin_arbitrary!(scroll_m, margin, "scrollMargin");
+
 pub fn scroll<'a>(
     s: Scroll,
-    _rest: Option<&SubjectValue>,
-    _theme: &'a TailwindTheme,
+    rest: Option<&SubjectValue>,
+    theme: &'a TailwindTheme,
 ) -> PluginResult<'a> {
-    Ok(to_lit(&[match s {
-        Scroll::Auto => ("scrollBehavior", "auto"),
-        Scroll::Smooth => ("scrollBehavior", "smooth"),
-        Scroll::M => todo!(),
-        Scroll::Mx => todo!(),
-        Scroll::My => todo!(),
-        Scroll::Ml => todo!(),
-        Scroll::Mr => todo!(),
-        Scroll::Mt => todo!(),
-        Scroll::Mb => todo!(),
-        Scroll::P => todo!(),
-        Scroll::Px => todo!(),
-        Scroll::Py => todo!(),
-        Scroll::Pt => todo!(),
-        Scroll::Pl => todo!(),
-        Scroll::Pr => todo!(),
-        Scroll::Pb => todo!(),
-    }]))
+    Ok(match (s, rest) {
+        (Scroll::Auto, None) => to_lit(&[("scrollBehavior", "auto")]),
+        (Scroll::Smooth, None) => to_lit(&[("scrollBehavior", "smooth")]),
+        (Scroll::M, Some(val)) => scroll_m(val, theme)?,
+        (Scroll::Mx, Some(val)) => scroll_mx(val, theme)?,
+        (Scroll::My, Some(val)) => scroll_my(val, theme)?,
+        (Scroll::Ml, Some(val)) => scroll_ml(val, theme)?,
+        (Scroll::Mr, Some(val)) => scroll_mr(val, theme)?,
+        (Scroll::Mt, Some(val)) => scroll_mt(val, theme)?,
+        (Scroll::Mb, Some(val)) => scroll_mb(val, theme)?,
+        (Scroll::P, Some(val)) => scroll_p(val, theme)?,
+        (Scroll::Px, Some(val)) => scroll_px(val, theme)?,
+        (Scroll::Py, Some(val)) => scroll_py(val, theme)?,
+        (Scroll::Pt, Some(val)) => scroll_pt(val, theme)?,
+        (Scroll::Pr, Some(val)) => scroll_pr(val, theme)?,
+        (Scroll::Pb, Some(val)) => scroll_pb(val, theme)?,
+        (Scroll::Pl, Some(val)) => scroll_pl(val, theme)?,
+        _ => return Err(vec!["not supported"]),
+    })
 }
 
 pub fn snap<'a>(
