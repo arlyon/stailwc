@@ -1,9 +1,13 @@
 use std::cell::LazyCell;
 
-use swc_core::ecma::{
-    parser::{EsConfig, Syntax},
-    transforms::testing::test_transform,
-    visit::as_folder,
+use swc_core::{
+    common::errors::{ColorConfig, Handler},
+    ecma::{
+        parser::{EsConfig, Syntax},
+        transforms::testing::test_transform,
+        visit::as_folder,
+    },
+    plugin::errors::HANDLER,
 };
 use tailwind_config::TailwindConfig;
 
@@ -354,6 +358,15 @@ const CONFIG: LazyCell<TailwindConfig> = std::cell::LazyCell::new(|| {
 
 pub fn snapshot_inner(input: &str, expected: &str) {
     let config = CONFIG;
+
+    if let Err(_) = HANDLER.inner.set(Handler::with_tty_emitter(
+        ColorConfig::Auto,
+        true,
+        false,
+        None,
+    )) {
+        // set on a previous run
+    };
 
     test_transform(
         Syntax::Es(EsConfig {
