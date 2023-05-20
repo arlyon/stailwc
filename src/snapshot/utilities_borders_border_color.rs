@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { theme } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"theme`borderColor.`"#####, r#####"({
   inherit: "inherit",
   current: "currentColor",
@@ -297,4945 +296,4945 @@ use test_case::test_case;
   electric: void 0,
   DEFAULT: "#e5e7eb",
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`border-inherit`"#####, r#####"({
   borderColor: "inherit",
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`border-current`"#####, r#####"({
   borderColor: "currentColor",
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`border-transparent`"#####, r#####"({
   borderColor: "transparent",
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`border-black`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(0 0 0 / var(--tw-border-opacity))",
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`border-white`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(255 255 255 / var(--tw-border-opacity))",
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"tw`border-slate-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(248 250 252 / var(--tw-border-opacity))",
 })
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"tw`border-slate-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(241 245 249 / var(--tw-border-opacity))",
 })
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"tw`border-slate-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(226 232 240 / var(--tw-border-opacity))",
 })
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"tw`border-slate-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(203 213 225 / var(--tw-border-opacity))",
 })
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"tw`border-slate-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(148 163 184 / var(--tw-border-opacity))",
 })
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"tw`border-slate-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(100 116 139 / var(--tw-border-opacity))",
 })
-;"##### ; "12")]
+;"##### ; "11")]
 #[test_case(r#####"tw`border-slate-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(71 85 105 / var(--tw-border-opacity))",
 })
-;"##### ; "13")]
+;"##### ; "12")]
 #[test_case(r#####"tw`border-slate-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(51 65 85 / var(--tw-border-opacity))",
 })
-;"##### ; "14")]
+;"##### ; "13")]
 #[test_case(r#####"tw`border-slate-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(30 41 59 / var(--tw-border-opacity))",
 })
-;"##### ; "15")]
+;"##### ; "14")]
 #[test_case(r#####"tw`border-slate-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(15 23 42 / var(--tw-border-opacity))",
 })
-;"##### ; "16")]
+;"##### ; "15")]
 #[test_case(r#####"tw`border-gray-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(249 250 251 / var(--tw-border-opacity))",
 })
-;"##### ; "17")]
+;"##### ; "16")]
 #[test_case(r#####"tw`border-gray-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(243 244 246 / var(--tw-border-opacity))",
 })
-;"##### ; "18")]
+;"##### ; "17")]
 #[test_case(r#####"tw`border-gray-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(229 231 235 / var(--tw-border-opacity))",
 })
-;"##### ; "19")]
+;"##### ; "18")]
 #[test_case(r#####"tw`border-gray-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(209 213 219 / var(--tw-border-opacity))",
 })
-;"##### ; "20")]
+;"##### ; "19")]
 #[test_case(r#####"tw`border-gray-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(156 163 175 / var(--tw-border-opacity))",
 })
-;"##### ; "21")]
+;"##### ; "20")]
 #[test_case(r#####"tw`border-gray-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(107 114 128 / var(--tw-border-opacity))",
 })
-;"##### ; "22")]
+;"##### ; "21")]
 #[test_case(r#####"tw`border-gray-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(75 85 99 / var(--tw-border-opacity))",
 })
-;"##### ; "23")]
+;"##### ; "22")]
 #[test_case(r#####"tw`border-gray-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(55 65 81 / var(--tw-border-opacity))",
 })
-;"##### ; "24")]
+;"##### ; "23")]
 #[test_case(r#####"tw`border-gray-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(31 41 55 / var(--tw-border-opacity))",
 })
-;"##### ; "25")]
+;"##### ; "24")]
 #[test_case(r#####"tw`border-gray-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(17 24 39 / var(--tw-border-opacity))",
 })
-;"##### ; "26")]
+;"##### ; "25")]
 #[test_case(r#####"tw`border-zinc-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "27")]
+;"##### ; "26")]
 #[test_case(r#####"tw`border-zinc-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(244 244 245 / var(--tw-border-opacity))",
 })
-;"##### ; "28")]
+;"##### ; "27")]
 #[test_case(r#####"tw`border-zinc-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(228 228 231 / var(--tw-border-opacity))",
 })
-;"##### ; "29")]
+;"##### ; "28")]
 #[test_case(r#####"tw`border-zinc-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(212 212 216 / var(--tw-border-opacity))",
 })
-;"##### ; "30")]
+;"##### ; "29")]
 #[test_case(r#####"tw`border-zinc-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(161 161 170 / var(--tw-border-opacity))",
 })
-;"##### ; "31")]
+;"##### ; "30")]
 #[test_case(r#####"tw`border-zinc-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(113 113 122 / var(--tw-border-opacity))",
 })
-;"##### ; "32")]
+;"##### ; "31")]
 #[test_case(r#####"tw`border-zinc-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(82 82 91 / var(--tw-border-opacity))",
 })
-;"##### ; "33")]
+;"##### ; "32")]
 #[test_case(r#####"tw`border-zinc-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(63 63 70 / var(--tw-border-opacity))",
 })
-;"##### ; "34")]
+;"##### ; "33")]
 #[test_case(r#####"tw`border-zinc-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(39 39 42 / var(--tw-border-opacity))",
 })
-;"##### ; "35")]
+;"##### ; "34")]
 #[test_case(r#####"tw`border-zinc-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(24 24 27 / var(--tw-border-opacity))",
 })
-;"##### ; "36")]
+;"##### ; "35")]
 #[test_case(r#####"tw`border-neutral-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "37")]
+;"##### ; "36")]
 #[test_case(r#####"tw`border-neutral-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(245 245 245 / var(--tw-border-opacity))",
 })
-;"##### ; "38")]
+;"##### ; "37")]
 #[test_case(r#####"tw`border-neutral-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(229 229 229 / var(--tw-border-opacity))",
 })
-;"##### ; "39")]
+;"##### ; "38")]
 #[test_case(r#####"tw`border-neutral-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(212 212 212 / var(--tw-border-opacity))",
 })
-;"##### ; "40")]
+;"##### ; "39")]
 #[test_case(r#####"tw`border-neutral-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(163 163 163 / var(--tw-border-opacity))",
 })
-;"##### ; "41")]
+;"##### ; "40")]
 #[test_case(r#####"tw`border-neutral-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(115 115 115 / var(--tw-border-opacity))",
 })
-;"##### ; "42")]
+;"##### ; "41")]
 #[test_case(r#####"tw`border-neutral-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(82 82 82 / var(--tw-border-opacity))",
 })
-;"##### ; "43")]
+;"##### ; "42")]
 #[test_case(r#####"tw`border-neutral-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(64 64 64 / var(--tw-border-opacity))",
 })
-;"##### ; "44")]
+;"##### ; "43")]
 #[test_case(r#####"tw`border-neutral-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(38 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "45")]
+;"##### ; "44")]
 #[test_case(r#####"tw`border-neutral-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(23 23 23 / var(--tw-border-opacity))",
 })
-;"##### ; "46")]
+;"##### ; "45")]
 #[test_case(r#####"tw`border-stone-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(250 250 249 / var(--tw-border-opacity))",
 })
-;"##### ; "47")]
+;"##### ; "46")]
 #[test_case(r#####"tw`border-stone-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(245 245 244 / var(--tw-border-opacity))",
 })
-;"##### ; "48")]
+;"##### ; "47")]
 #[test_case(r#####"tw`border-stone-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(231 229 228 / var(--tw-border-opacity))",
 })
-;"##### ; "49")]
+;"##### ; "48")]
 #[test_case(r#####"tw`border-stone-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(214 211 209 / var(--tw-border-opacity))",
 })
-;"##### ; "50")]
+;"##### ; "49")]
 #[test_case(r#####"tw`border-stone-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(168 162 158 / var(--tw-border-opacity))",
 })
-;"##### ; "51")]
+;"##### ; "50")]
 #[test_case(r#####"tw`border-stone-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(120 113 108 / var(--tw-border-opacity))",
 })
-;"##### ; "52")]
+;"##### ; "51")]
 #[test_case(r#####"tw`border-stone-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(87 83 78 / var(--tw-border-opacity))",
 })
-;"##### ; "53")]
+;"##### ; "52")]
 #[test_case(r#####"tw`border-stone-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(68 64 60 / var(--tw-border-opacity))",
 })
-;"##### ; "54")]
+;"##### ; "53")]
 #[test_case(r#####"tw`border-stone-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(41 37 36 / var(--tw-border-opacity))",
 })
-;"##### ; "55")]
+;"##### ; "54")]
 #[test_case(r#####"tw`border-stone-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(28 25 23 / var(--tw-border-opacity))",
 })
-;"##### ; "56")]
+;"##### ; "55")]
 #[test_case(r#####"tw`border-red-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(254 242 242 / var(--tw-border-opacity))",
 })
-;"##### ; "57")]
+;"##### ; "56")]
 #[test_case(r#####"tw`border-red-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(254 226 226 / var(--tw-border-opacity))",
 })
-;"##### ; "58")]
+;"##### ; "57")]
 #[test_case(r#####"tw`border-red-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(254 202 202 / var(--tw-border-opacity))",
 })
-;"##### ; "59")]
+;"##### ; "58")]
 #[test_case(r#####"tw`border-red-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(252 165 165 / var(--tw-border-opacity))",
 })
-;"##### ; "60")]
+;"##### ; "59")]
 #[test_case(r#####"tw`border-red-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(248 113 113 / var(--tw-border-opacity))",
 })
-;"##### ; "61")]
+;"##### ; "60")]
 #[test_case(r#####"tw`border-red-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(239 68 68 / var(--tw-border-opacity))",
 })
-;"##### ; "62")]
+;"##### ; "61")]
 #[test_case(r#####"tw`border-red-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(220 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "63")]
+;"##### ; "62")]
 #[test_case(r#####"tw`border-red-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(185 28 28 / var(--tw-border-opacity))",
 })
-;"##### ; "64")]
+;"##### ; "63")]
 #[test_case(r#####"tw`border-red-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(153 27 27 / var(--tw-border-opacity))",
 })
-;"##### ; "65")]
+;"##### ; "64")]
 #[test_case(r#####"tw`border-red-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(127 29 29 / var(--tw-border-opacity))",
 })
-;"##### ; "66")]
+;"##### ; "65")]
 #[test_case(r#####"tw`border-orange-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(255 247 237 / var(--tw-border-opacity))",
 })
-;"##### ; "67")]
+;"##### ; "66")]
 #[test_case(r#####"tw`border-orange-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(255 237 213 / var(--tw-border-opacity))",
 })
-;"##### ; "68")]
+;"##### ; "67")]
 #[test_case(r#####"tw`border-orange-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(254 215 170 / var(--tw-border-opacity))",
 })
-;"##### ; "69")]
+;"##### ; "68")]
 #[test_case(r#####"tw`border-orange-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(253 186 116 / var(--tw-border-opacity))",
 })
-;"##### ; "70")]
+;"##### ; "69")]
 #[test_case(r#####"tw`border-orange-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(251 146 60 / var(--tw-border-opacity))",
 })
-;"##### ; "71")]
+;"##### ; "70")]
 #[test_case(r#####"tw`border-orange-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(249 115 22 / var(--tw-border-opacity))",
 })
-;"##### ; "72")]
+;"##### ; "71")]
 #[test_case(r#####"tw`border-orange-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(234 88 12 / var(--tw-border-opacity))",
 })
-;"##### ; "73")]
+;"##### ; "72")]
 #[test_case(r#####"tw`border-orange-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(194 65 12 / var(--tw-border-opacity))",
 })
-;"##### ; "74")]
+;"##### ; "73")]
 #[test_case(r#####"tw`border-orange-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(154 52 18 / var(--tw-border-opacity))",
 })
-;"##### ; "75")]
+;"##### ; "74")]
 #[test_case(r#####"tw`border-orange-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(124 45 18 / var(--tw-border-opacity))",
 })
-;"##### ; "76")]
+;"##### ; "75")]
 #[test_case(r#####"tw`border-amber-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(255 251 235 / var(--tw-border-opacity))",
 })
-;"##### ; "77")]
+;"##### ; "76")]
 #[test_case(r#####"tw`border-amber-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(254 243 199 / var(--tw-border-opacity))",
 })
-;"##### ; "78")]
+;"##### ; "77")]
 #[test_case(r#####"tw`border-amber-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(253 230 138 / var(--tw-border-opacity))",
 })
-;"##### ; "79")]
+;"##### ; "78")]
 #[test_case(r#####"tw`border-amber-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(252 211 77 / var(--tw-border-opacity))",
 })
-;"##### ; "80")]
+;"##### ; "79")]
 #[test_case(r#####"tw`border-amber-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(251 191 36 / var(--tw-border-opacity))",
 })
-;"##### ; "81")]
+;"##### ; "80")]
 #[test_case(r#####"tw`border-amber-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(245 158 11 / var(--tw-border-opacity))",
 })
-;"##### ; "82")]
+;"##### ; "81")]
 #[test_case(r#####"tw`border-amber-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(217 119 6 / var(--tw-border-opacity))",
 })
-;"##### ; "83")]
+;"##### ; "82")]
 #[test_case(r#####"tw`border-amber-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(180 83 9 / var(--tw-border-opacity))",
 })
-;"##### ; "84")]
+;"##### ; "83")]
 #[test_case(r#####"tw`border-amber-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(146 64 14 / var(--tw-border-opacity))",
 })
-;"##### ; "85")]
+;"##### ; "84")]
 #[test_case(r#####"tw`border-amber-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(120 53 15 / var(--tw-border-opacity))",
 })
-;"##### ; "86")]
+;"##### ; "85")]
 #[test_case(r#####"tw`border-yellow-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(254 252 232 / var(--tw-border-opacity))",
 })
-;"##### ; "87")]
+;"##### ; "86")]
 #[test_case(r#####"tw`border-yellow-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(254 249 195 / var(--tw-border-opacity))",
 })
-;"##### ; "88")]
+;"##### ; "87")]
 #[test_case(r#####"tw`border-yellow-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(254 240 138 / var(--tw-border-opacity))",
 })
-;"##### ; "89")]
+;"##### ; "88")]
 #[test_case(r#####"tw`border-yellow-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(253 224 71 / var(--tw-border-opacity))",
 })
-;"##### ; "90")]
+;"##### ; "89")]
 #[test_case(r#####"tw`border-yellow-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(250 204 21 / var(--tw-border-opacity))",
 })
-;"##### ; "91")]
+;"##### ; "90")]
 #[test_case(r#####"tw`border-yellow-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(234 179 8 / var(--tw-border-opacity))",
 })
-;"##### ; "92")]
+;"##### ; "91")]
 #[test_case(r#####"tw`border-yellow-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(202 138 4 / var(--tw-border-opacity))",
 })
-;"##### ; "93")]
+;"##### ; "92")]
 #[test_case(r#####"tw`border-yellow-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(161 98 7 / var(--tw-border-opacity))",
 })
-;"##### ; "94")]
+;"##### ; "93")]
 #[test_case(r#####"tw`border-yellow-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(133 77 14 / var(--tw-border-opacity))",
 })
-;"##### ; "95")]
+;"##### ; "94")]
 #[test_case(r#####"tw`border-yellow-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(113 63 18 / var(--tw-border-opacity))",
 })
-;"##### ; "96")]
+;"##### ; "95")]
 #[test_case(r#####"tw`border-lime-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(247 254 231 / var(--tw-border-opacity))",
 })
-;"##### ; "97")]
+;"##### ; "96")]
 #[test_case(r#####"tw`border-lime-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(236 252 203 / var(--tw-border-opacity))",
 })
-;"##### ; "98")]
+;"##### ; "97")]
 #[test_case(r#####"tw`border-lime-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(217 249 157 / var(--tw-border-opacity))",
 })
-;"##### ; "99")]
+;"##### ; "98")]
 #[test_case(r#####"tw`border-lime-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(190 242 100 / var(--tw-border-opacity))",
 })
-;"##### ; "100")]
+;"##### ; "99")]
 #[test_case(r#####"tw`border-lime-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(163 230 53 / var(--tw-border-opacity))",
 })
-;"##### ; "101")]
+;"##### ; "100")]
 #[test_case(r#####"tw`border-lime-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(132 204 22 / var(--tw-border-opacity))",
 })
-;"##### ; "102")]
+;"##### ; "101")]
 #[test_case(r#####"tw`border-lime-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(101 163 13 / var(--tw-border-opacity))",
 })
-;"##### ; "103")]
+;"##### ; "102")]
 #[test_case(r#####"tw`border-lime-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(77 124 15 / var(--tw-border-opacity))",
 })
-;"##### ; "104")]
+;"##### ; "103")]
 #[test_case(r#####"tw`border-lime-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(63 98 18 / var(--tw-border-opacity))",
 })
-;"##### ; "105")]
+;"##### ; "104")]
 #[test_case(r#####"tw`border-lime-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(54 83 20 / var(--tw-border-opacity))",
 })
-;"##### ; "106")]
+;"##### ; "105")]
 #[test_case(r#####"tw`border-green-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(240 253 244 / var(--tw-border-opacity))",
 })
-;"##### ; "107")]
+;"##### ; "106")]
 #[test_case(r#####"tw`border-green-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(220 252 231 / var(--tw-border-opacity))",
 })
-;"##### ; "108")]
+;"##### ; "107")]
 #[test_case(r#####"tw`border-green-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(187 247 208 / var(--tw-border-opacity))",
 })
-;"##### ; "109")]
+;"##### ; "108")]
 #[test_case(r#####"tw`border-green-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(134 239 172 / var(--tw-border-opacity))",
 })
-;"##### ; "110")]
+;"##### ; "109")]
 #[test_case(r#####"tw`border-green-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(74 222 128 / var(--tw-border-opacity))",
 })
-;"##### ; "111")]
+;"##### ; "110")]
 #[test_case(r#####"tw`border-green-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(34 197 94 / var(--tw-border-opacity))",
 })
-;"##### ; "112")]
+;"##### ; "111")]
 #[test_case(r#####"tw`border-green-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(22 163 74 / var(--tw-border-opacity))",
 })
-;"##### ; "113")]
+;"##### ; "112")]
 #[test_case(r#####"tw`border-green-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(21 128 61 / var(--tw-border-opacity))",
 })
-;"##### ; "114")]
+;"##### ; "113")]
 #[test_case(r#####"tw`border-green-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(22 101 52 / var(--tw-border-opacity))",
 })
-;"##### ; "115")]
+;"##### ; "114")]
 #[test_case(r#####"tw`border-green-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(20 83 45 / var(--tw-border-opacity))",
 })
-;"##### ; "116")]
+;"##### ; "115")]
 #[test_case(r#####"tw`border-emerald-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(236 253 245 / var(--tw-border-opacity))",
 })
-;"##### ; "117")]
+;"##### ; "116")]
 #[test_case(r#####"tw`border-emerald-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(209 250 229 / var(--tw-border-opacity))",
 })
-;"##### ; "118")]
+;"##### ; "117")]
 #[test_case(r#####"tw`border-emerald-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(167 243 208 / var(--tw-border-opacity))",
 })
-;"##### ; "119")]
+;"##### ; "118")]
 #[test_case(r#####"tw`border-emerald-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(110 231 183 / var(--tw-border-opacity))",
 })
-;"##### ; "120")]
+;"##### ; "119")]
 #[test_case(r#####"tw`border-emerald-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(52 211 153 / var(--tw-border-opacity))",
 })
-;"##### ; "121")]
+;"##### ; "120")]
 #[test_case(r#####"tw`border-emerald-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(16 185 129 / var(--tw-border-opacity))",
 })
-;"##### ; "122")]
+;"##### ; "121")]
 #[test_case(r#####"tw`border-emerald-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(5 150 105 / var(--tw-border-opacity))",
 })
-;"##### ; "123")]
+;"##### ; "122")]
 #[test_case(r#####"tw`border-emerald-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(4 120 87 / var(--tw-border-opacity))",
 })
-;"##### ; "124")]
+;"##### ; "123")]
 #[test_case(r#####"tw`border-emerald-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(6 95 70 / var(--tw-border-opacity))",
 })
-;"##### ; "125")]
+;"##### ; "124")]
 #[test_case(r#####"tw`border-emerald-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(6 78 59 / var(--tw-border-opacity))",
 })
-;"##### ; "126")]
+;"##### ; "125")]
 #[test_case(r#####"tw`border-teal-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(240 253 250 / var(--tw-border-opacity))",
 })
-;"##### ; "127")]
+;"##### ; "126")]
 #[test_case(r#####"tw`border-teal-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(204 251 241 / var(--tw-border-opacity))",
 })
-;"##### ; "128")]
+;"##### ; "127")]
 #[test_case(r#####"tw`border-teal-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(153 246 228 / var(--tw-border-opacity))",
 })
-;"##### ; "129")]
+;"##### ; "128")]
 #[test_case(r#####"tw`border-teal-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(94 234 212 / var(--tw-border-opacity))",
 })
-;"##### ; "130")]
+;"##### ; "129")]
 #[test_case(r#####"tw`border-teal-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(45 212 191 / var(--tw-border-opacity))",
 })
-;"##### ; "131")]
+;"##### ; "130")]
 #[test_case(r#####"tw`border-teal-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(20 184 166 / var(--tw-border-opacity))",
 })
-;"##### ; "132")]
+;"##### ; "131")]
 #[test_case(r#####"tw`border-teal-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(13 148 136 / var(--tw-border-opacity))",
 })
-;"##### ; "133")]
+;"##### ; "132")]
 #[test_case(r#####"tw`border-teal-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(15 118 110 / var(--tw-border-opacity))",
 })
-;"##### ; "134")]
+;"##### ; "133")]
 #[test_case(r#####"tw`border-teal-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(17 94 89 / var(--tw-border-opacity))",
 })
-;"##### ; "135")]
+;"##### ; "134")]
 #[test_case(r#####"tw`border-teal-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(19 78 74 / var(--tw-border-opacity))",
 })
-;"##### ; "136")]
+;"##### ; "135")]
 #[test_case(r#####"tw`border-cyan-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(236 254 255 / var(--tw-border-opacity))",
 })
-;"##### ; "137")]
+;"##### ; "136")]
 #[test_case(r#####"tw`border-cyan-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(207 250 254 / var(--tw-border-opacity))",
 })
-;"##### ; "138")]
+;"##### ; "137")]
 #[test_case(r#####"tw`border-cyan-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(165 243 252 / var(--tw-border-opacity))",
 })
-;"##### ; "139")]
+;"##### ; "138")]
 #[test_case(r#####"tw`border-cyan-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(103 232 249 / var(--tw-border-opacity))",
 })
-;"##### ; "140")]
+;"##### ; "139")]
 #[test_case(r#####"tw`border-cyan-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(34 211 238 / var(--tw-border-opacity))",
 })
-;"##### ; "141")]
+;"##### ; "140")]
 #[test_case(r#####"tw`border-cyan-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(6 182 212 / var(--tw-border-opacity))",
 })
-;"##### ; "142")]
+;"##### ; "141")]
 #[test_case(r#####"tw`border-cyan-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(8 145 178 / var(--tw-border-opacity))",
 })
-;"##### ; "143")]
+;"##### ; "142")]
 #[test_case(r#####"tw`border-cyan-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(14 116 144 / var(--tw-border-opacity))",
 })
-;"##### ; "144")]
+;"##### ; "143")]
 #[test_case(r#####"tw`border-cyan-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(21 94 117 / var(--tw-border-opacity))",
 })
-;"##### ; "145")]
+;"##### ; "144")]
 #[test_case(r#####"tw`border-cyan-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(22 78 99 / var(--tw-border-opacity))",
 })
-;"##### ; "146")]
+;"##### ; "145")]
 #[test_case(r#####"tw`border-sky-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(240 249 255 / var(--tw-border-opacity))",
 })
-;"##### ; "147")]
+;"##### ; "146")]
 #[test_case(r#####"tw`border-sky-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(224 242 254 / var(--tw-border-opacity))",
 })
-;"##### ; "148")]
+;"##### ; "147")]
 #[test_case(r#####"tw`border-sky-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(186 230 253 / var(--tw-border-opacity))",
 })
-;"##### ; "149")]
+;"##### ; "148")]
 #[test_case(r#####"tw`border-sky-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(125 211 252 / var(--tw-border-opacity))",
 })
-;"##### ; "150")]
+;"##### ; "149")]
 #[test_case(r#####"tw`border-sky-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(56 189 248 / var(--tw-border-opacity))",
 })
-;"##### ; "151")]
+;"##### ; "150")]
 #[test_case(r#####"tw`border-sky-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(14 165 233 / var(--tw-border-opacity))",
 })
-;"##### ; "152")]
+;"##### ; "151")]
 #[test_case(r#####"tw`border-sky-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(2 132 199 / var(--tw-border-opacity))",
 })
-;"##### ; "153")]
+;"##### ; "152")]
 #[test_case(r#####"tw`border-sky-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(3 105 161 / var(--tw-border-opacity))",
 })
-;"##### ; "154")]
+;"##### ; "153")]
 #[test_case(r#####"tw`border-sky-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(7 89 133 / var(--tw-border-opacity))",
 })
-;"##### ; "155")]
+;"##### ; "154")]
 #[test_case(r#####"tw`border-sky-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(12 74 110 / var(--tw-border-opacity))",
 })
-;"##### ; "156")]
+;"##### ; "155")]
 #[test_case(r#####"tw`border-blue-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(239 246 255 / var(--tw-border-opacity))",
 })
-;"##### ; "157")]
+;"##### ; "156")]
 #[test_case(r#####"tw`border-blue-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(219 234 254 / var(--tw-border-opacity))",
 })
-;"##### ; "158")]
+;"##### ; "157")]
 #[test_case(r#####"tw`border-blue-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(191 219 254 / var(--tw-border-opacity))",
 })
-;"##### ; "159")]
+;"##### ; "158")]
 #[test_case(r#####"tw`border-blue-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(147 197 253 / var(--tw-border-opacity))",
 })
-;"##### ; "160")]
+;"##### ; "159")]
 #[test_case(r#####"tw`border-blue-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(96 165 250 / var(--tw-border-opacity))",
 })
-;"##### ; "161")]
+;"##### ; "160")]
 #[test_case(r#####"tw`border-blue-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(59 130 246 / var(--tw-border-opacity))",
 })
-;"##### ; "162")]
+;"##### ; "161")]
 #[test_case(r#####"tw`border-blue-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(37 99 235 / var(--tw-border-opacity))",
 })
-;"##### ; "163")]
+;"##### ; "162")]
 #[test_case(r#####"tw`border-blue-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(29 78 216 / var(--tw-border-opacity))",
 })
-;"##### ; "164")]
+;"##### ; "163")]
 #[test_case(r#####"tw`border-blue-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(30 64 175 / var(--tw-border-opacity))",
 })
-;"##### ; "165")]
+;"##### ; "164")]
 #[test_case(r#####"tw`border-blue-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(30 58 138 / var(--tw-border-opacity))",
 })
-;"##### ; "166")]
+;"##### ; "165")]
 #[test_case(r#####"tw`border-indigo-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(238 242 255 / var(--tw-border-opacity))",
 })
-;"##### ; "167")]
+;"##### ; "166")]
 #[test_case(r#####"tw`border-indigo-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(224 231 255 / var(--tw-border-opacity))",
 })
-;"##### ; "168")]
+;"##### ; "167")]
 #[test_case(r#####"tw`border-indigo-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(199 210 254 / var(--tw-border-opacity))",
 })
-;"##### ; "169")]
+;"##### ; "168")]
 #[test_case(r#####"tw`border-indigo-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(165 180 252 / var(--tw-border-opacity))",
 })
-;"##### ; "170")]
+;"##### ; "169")]
 #[test_case(r#####"tw`border-indigo-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(129 140 248 / var(--tw-border-opacity))",
 })
-;"##### ; "171")]
+;"##### ; "170")]
 #[test_case(r#####"tw`border-indigo-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(99 102 241 / var(--tw-border-opacity))",
 })
-;"##### ; "172")]
+;"##### ; "171")]
 #[test_case(r#####"tw`border-indigo-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(79 70 229 / var(--tw-border-opacity))",
 })
-;"##### ; "173")]
+;"##### ; "172")]
 #[test_case(r#####"tw`border-indigo-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(67 56 202 / var(--tw-border-opacity))",
 })
-;"##### ; "174")]
+;"##### ; "173")]
 #[test_case(r#####"tw`border-indigo-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(55 48 163 / var(--tw-border-opacity))",
 })
-;"##### ; "175")]
+;"##### ; "174")]
 #[test_case(r#####"tw`border-indigo-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(49 46 129 / var(--tw-border-opacity))",
 })
-;"##### ; "176")]
+;"##### ; "175")]
 #[test_case(r#####"tw`border-violet-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(245 243 255 / var(--tw-border-opacity))",
 })
-;"##### ; "177")]
+;"##### ; "176")]
 #[test_case(r#####"tw`border-violet-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(237 233 254 / var(--tw-border-opacity))",
 })
-;"##### ; "178")]
+;"##### ; "177")]
 #[test_case(r#####"tw`border-violet-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(221 214 254 / var(--tw-border-opacity))",
 })
-;"##### ; "179")]
+;"##### ; "178")]
 #[test_case(r#####"tw`border-violet-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(196 181 253 / var(--tw-border-opacity))",
 })
-;"##### ; "180")]
+;"##### ; "179")]
 #[test_case(r#####"tw`border-violet-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(167 139 250 / var(--tw-border-opacity))",
 })
-;"##### ; "181")]
+;"##### ; "180")]
 #[test_case(r#####"tw`border-violet-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(139 92 246 / var(--tw-border-opacity))",
 })
-;"##### ; "182")]
+;"##### ; "181")]
 #[test_case(r#####"tw`border-violet-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(124 58 237 / var(--tw-border-opacity))",
 })
-;"##### ; "183")]
+;"##### ; "182")]
 #[test_case(r#####"tw`border-violet-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(109 40 217 / var(--tw-border-opacity))",
 })
-;"##### ; "184")]
+;"##### ; "183")]
 #[test_case(r#####"tw`border-violet-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(91 33 182 / var(--tw-border-opacity))",
 })
-;"##### ; "185")]
+;"##### ; "184")]
 #[test_case(r#####"tw`border-violet-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(76 29 149 / var(--tw-border-opacity))",
 })
-;"##### ; "186")]
+;"##### ; "185")]
 #[test_case(r#####"tw`border-purple-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(250 245 255 / var(--tw-border-opacity))",
 })
-;"##### ; "187")]
+;"##### ; "186")]
 #[test_case(r#####"tw`border-purple-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(243 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "188")]
+;"##### ; "187")]
 #[test_case(r#####"tw`border-purple-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(233 213 255 / var(--tw-border-opacity))",
 })
-;"##### ; "189")]
+;"##### ; "188")]
 #[test_case(r#####"tw`border-purple-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(216 180 254 / var(--tw-border-opacity))",
 })
-;"##### ; "190")]
+;"##### ; "189")]
 #[test_case(r#####"tw`border-purple-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(192 132 252 / var(--tw-border-opacity))",
 })
-;"##### ; "191")]
+;"##### ; "190")]
 #[test_case(r#####"tw`border-purple-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(168 85 247 / var(--tw-border-opacity))",
 })
-;"##### ; "192")]
+;"##### ; "191")]
 #[test_case(r#####"tw`border-purple-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(147 51 234 / var(--tw-border-opacity))",
 })
-;"##### ; "193")]
+;"##### ; "192")]
 #[test_case(r#####"tw`border-purple-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(126 34 206 / var(--tw-border-opacity))",
 })
-;"##### ; "194")]
+;"##### ; "193")]
 #[test_case(r#####"tw`border-purple-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(107 33 168 / var(--tw-border-opacity))",
 })
-;"##### ; "195")]
+;"##### ; "194")]
 #[test_case(r#####"tw`border-purple-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(88 28 135 / var(--tw-border-opacity))",
 })
-;"##### ; "196")]
+;"##### ; "195")]
 #[test_case(r#####"tw`border-fuchsia-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(253 244 255 / var(--tw-border-opacity))",
 })
-;"##### ; "197")]
+;"##### ; "196")]
 #[test_case(r#####"tw`border-fuchsia-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(250 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "198")]
+;"##### ; "197")]
 #[test_case(r#####"tw`border-fuchsia-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(245 208 254 / var(--tw-border-opacity))",
 })
-;"##### ; "199")]
+;"##### ; "198")]
 #[test_case(r#####"tw`border-fuchsia-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(240 171 252 / var(--tw-border-opacity))",
 })
-;"##### ; "200")]
+;"##### ; "199")]
 #[test_case(r#####"tw`border-fuchsia-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(232 121 249 / var(--tw-border-opacity))",
 })
-;"##### ; "201")]
+;"##### ; "200")]
 #[test_case(r#####"tw`border-fuchsia-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(217 70 239 / var(--tw-border-opacity))",
 })
-;"##### ; "202")]
+;"##### ; "201")]
 #[test_case(r#####"tw`border-fuchsia-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(192 38 211 / var(--tw-border-opacity))",
 })
-;"##### ; "203")]
+;"##### ; "202")]
 #[test_case(r#####"tw`border-fuchsia-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(162 28 175 / var(--tw-border-opacity))",
 })
-;"##### ; "204")]
+;"##### ; "203")]
 #[test_case(r#####"tw`border-fuchsia-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(134 25 143 / var(--tw-border-opacity))",
 })
-;"##### ; "205")]
+;"##### ; "204")]
 #[test_case(r#####"tw`border-fuchsia-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(112 26 117 / var(--tw-border-opacity))",
 })
-;"##### ; "206")]
+;"##### ; "205")]
 #[test_case(r#####"tw`border-pink-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(253 242 248 / var(--tw-border-opacity))",
 })
-;"##### ; "207")]
+;"##### ; "206")]
 #[test_case(r#####"tw`border-pink-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(252 231 243 / var(--tw-border-opacity))",
 })
-;"##### ; "208")]
+;"##### ; "207")]
 #[test_case(r#####"tw`border-pink-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(251 207 232 / var(--tw-border-opacity))",
 })
-;"##### ; "209")]
+;"##### ; "208")]
 #[test_case(r#####"tw`border-pink-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(249 168 212 / var(--tw-border-opacity))",
 })
-;"##### ; "210")]
+;"##### ; "209")]
 #[test_case(r#####"tw`border-pink-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(244 114 182 / var(--tw-border-opacity))",
 })
-;"##### ; "211")]
+;"##### ; "210")]
 #[test_case(r#####"tw`border-pink-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(236 72 153 / var(--tw-border-opacity))",
 })
-;"##### ; "212")]
+;"##### ; "211")]
 #[test_case(r#####"tw`border-pink-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(219 39 119 / var(--tw-border-opacity))",
 })
-;"##### ; "213")]
+;"##### ; "212")]
 #[test_case(r#####"tw`border-pink-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(190 24 93 / var(--tw-border-opacity))",
 })
-;"##### ; "214")]
+;"##### ; "213")]
 #[test_case(r#####"tw`border-pink-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(157 23 77 / var(--tw-border-opacity))",
 })
-;"##### ; "215")]
+;"##### ; "214")]
 #[test_case(r#####"tw`border-pink-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(131 24 67 / var(--tw-border-opacity))",
 })
-;"##### ; "216")]
+;"##### ; "215")]
 #[test_case(r#####"tw`border-rose-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(255 241 242 / var(--tw-border-opacity))",
 })
-;"##### ; "217")]
+;"##### ; "216")]
 #[test_case(r#####"tw`border-rose-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(255 228 230 / var(--tw-border-opacity))",
 })
-;"##### ; "218")]
+;"##### ; "217")]
 #[test_case(r#####"tw`border-rose-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(254 205 211 / var(--tw-border-opacity))",
 })
-;"##### ; "219")]
+;"##### ; "218")]
 #[test_case(r#####"tw`border-rose-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(253 164 175 / var(--tw-border-opacity))",
 })
-;"##### ; "220")]
+;"##### ; "219")]
 #[test_case(r#####"tw`border-rose-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(251 113 133 / var(--tw-border-opacity))",
 })
-;"##### ; "221")]
+;"##### ; "220")]
 #[test_case(r#####"tw`border-rose-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(244 63 94 / var(--tw-border-opacity))",
 })
-;"##### ; "222")]
+;"##### ; "221")]
 #[test_case(r#####"tw`border-rose-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(225 29 72 / var(--tw-border-opacity))",
 })
-;"##### ; "223")]
+;"##### ; "222")]
 #[test_case(r#####"tw`border-rose-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(190 18 60 / var(--tw-border-opacity))",
 })
-;"##### ; "224")]
+;"##### ; "223")]
 #[test_case(r#####"tw`border-rose-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(159 18 57 / var(--tw-border-opacity))",
 })
-;"##### ; "225")]
+;"##### ; "224")]
 #[test_case(r#####"tw`border-rose-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(136 19 55 / var(--tw-border-opacity))",
 })
-;"##### ; "226")]
+;"##### ; "225")]
 #[test_case(r#####"tw`border-x-inherit`"#####, r#####"({
   borderLeftColor: "inherit",
   borderRightColor: "inherit",
 })
-;"##### ; "227")]
+;"##### ; "226")]
 #[test_case(r#####"tw`border-x-current`"#####, r#####"({
   borderLeftColor: "currentColor",
   borderRightColor: "currentColor",
 })
-;"##### ; "228")]
+;"##### ; "227")]
 #[test_case(r#####"tw`border-x-transparent`"#####, r#####"({
   borderLeftColor: "transparent",
   borderRightColor: "transparent",
 })
-;"##### ; "229")]
+;"##### ; "228")]
 #[test_case(r#####"tw`border-x-black`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(0 0 0 / var(--tw-border-opacity))",
   borderRightColor: "rgb(0 0 0 / var(--tw-border-opacity))",
 })
-;"##### ; "230")]
+;"##### ; "229")]
 #[test_case(r#####"tw`border-x-white`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(255 255 255 / var(--tw-border-opacity))",
   borderRightColor: "rgb(255 255 255 / var(--tw-border-opacity))",
 })
-;"##### ; "231")]
+;"##### ; "230")]
 #[test_case(r#####"tw`border-x-slate-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(248 250 252 / var(--tw-border-opacity))",
   borderRightColor: "rgb(248 250 252 / var(--tw-border-opacity))",
 })
-;"##### ; "232")]
+;"##### ; "231")]
 #[test_case(r#####"tw`border-x-slate-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(241 245 249 / var(--tw-border-opacity))",
   borderRightColor: "rgb(241 245 249 / var(--tw-border-opacity))",
 })
-;"##### ; "233")]
+;"##### ; "232")]
 #[test_case(r#####"tw`border-x-slate-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(226 232 240 / var(--tw-border-opacity))",
   borderRightColor: "rgb(226 232 240 / var(--tw-border-opacity))",
 })
-;"##### ; "234")]
+;"##### ; "233")]
 #[test_case(r#####"tw`border-x-slate-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(203 213 225 / var(--tw-border-opacity))",
   borderRightColor: "rgb(203 213 225 / var(--tw-border-opacity))",
 })
-;"##### ; "235")]
+;"##### ; "234")]
 #[test_case(r#####"tw`border-x-slate-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(148 163 184 / var(--tw-border-opacity))",
   borderRightColor: "rgb(148 163 184 / var(--tw-border-opacity))",
 })
-;"##### ; "236")]
+;"##### ; "235")]
 #[test_case(r#####"tw`border-x-slate-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(100 116 139 / var(--tw-border-opacity))",
   borderRightColor: "rgb(100 116 139 / var(--tw-border-opacity))",
 })
-;"##### ; "237")]
+;"##### ; "236")]
 #[test_case(r#####"tw`border-x-slate-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(71 85 105 / var(--tw-border-opacity))",
   borderRightColor: "rgb(71 85 105 / var(--tw-border-opacity))",
 })
-;"##### ; "238")]
+;"##### ; "237")]
 #[test_case(r#####"tw`border-x-slate-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(51 65 85 / var(--tw-border-opacity))",
   borderRightColor: "rgb(51 65 85 / var(--tw-border-opacity))",
 })
-;"##### ; "239")]
+;"##### ; "238")]
 #[test_case(r#####"tw`border-x-slate-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(30 41 59 / var(--tw-border-opacity))",
   borderRightColor: "rgb(30 41 59 / var(--tw-border-opacity))",
 })
-;"##### ; "240")]
+;"##### ; "239")]
 #[test_case(r#####"tw`border-x-slate-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(15 23 42 / var(--tw-border-opacity))",
   borderRightColor: "rgb(15 23 42 / var(--tw-border-opacity))",
 })
-;"##### ; "241")]
+;"##### ; "240")]
 #[test_case(r#####"tw`border-x-gray-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(249 250 251 / var(--tw-border-opacity))",
   borderRightColor: "rgb(249 250 251 / var(--tw-border-opacity))",
 })
-;"##### ; "242")]
+;"##### ; "241")]
 #[test_case(r#####"tw`border-x-gray-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(243 244 246 / var(--tw-border-opacity))",
   borderRightColor: "rgb(243 244 246 / var(--tw-border-opacity))",
 })
-;"##### ; "243")]
+;"##### ; "242")]
 #[test_case(r#####"tw`border-x-gray-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(229 231 235 / var(--tw-border-opacity))",
   borderRightColor: "rgb(229 231 235 / var(--tw-border-opacity))",
 })
-;"##### ; "244")]
+;"##### ; "243")]
 #[test_case(r#####"tw`border-x-gray-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(209 213 219 / var(--tw-border-opacity))",
   borderRightColor: "rgb(209 213 219 / var(--tw-border-opacity))",
 })
-;"##### ; "245")]
+;"##### ; "244")]
 #[test_case(r#####"tw`border-x-gray-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(156 163 175 / var(--tw-border-opacity))",
   borderRightColor: "rgb(156 163 175 / var(--tw-border-opacity))",
 })
-;"##### ; "246")]
+;"##### ; "245")]
 #[test_case(r#####"tw`border-x-gray-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(107 114 128 / var(--tw-border-opacity))",
   borderRightColor: "rgb(107 114 128 / var(--tw-border-opacity))",
 })
-;"##### ; "247")]
+;"##### ; "246")]
 #[test_case(r#####"tw`border-x-gray-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(75 85 99 / var(--tw-border-opacity))",
   borderRightColor: "rgb(75 85 99 / var(--tw-border-opacity))",
 })
-;"##### ; "248")]
+;"##### ; "247")]
 #[test_case(r#####"tw`border-x-gray-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(55 65 81 / var(--tw-border-opacity))",
   borderRightColor: "rgb(55 65 81 / var(--tw-border-opacity))",
 })
-;"##### ; "249")]
+;"##### ; "248")]
 #[test_case(r#####"tw`border-x-gray-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(31 41 55 / var(--tw-border-opacity))",
   borderRightColor: "rgb(31 41 55 / var(--tw-border-opacity))",
 })
-;"##### ; "250")]
+;"##### ; "249")]
 #[test_case(r#####"tw`border-x-gray-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(17 24 39 / var(--tw-border-opacity))",
   borderRightColor: "rgb(17 24 39 / var(--tw-border-opacity))",
 })
-;"##### ; "251")]
+;"##### ; "250")]
 #[test_case(r#####"tw`border-x-zinc-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(250 250 250 / var(--tw-border-opacity))",
   borderRightColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "252")]
+;"##### ; "251")]
 #[test_case(r#####"tw`border-x-zinc-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(244 244 245 / var(--tw-border-opacity))",
   borderRightColor: "rgb(244 244 245 / var(--tw-border-opacity))",
 })
-;"##### ; "253")]
+;"##### ; "252")]
 #[test_case(r#####"tw`border-x-zinc-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(228 228 231 / var(--tw-border-opacity))",
   borderRightColor: "rgb(228 228 231 / var(--tw-border-opacity))",
 })
-;"##### ; "254")]
+;"##### ; "253")]
 #[test_case(r#####"tw`border-x-zinc-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(212 212 216 / var(--tw-border-opacity))",
   borderRightColor: "rgb(212 212 216 / var(--tw-border-opacity))",
 })
-;"##### ; "255")]
+;"##### ; "254")]
 #[test_case(r#####"tw`border-x-zinc-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(161 161 170 / var(--tw-border-opacity))",
   borderRightColor: "rgb(161 161 170 / var(--tw-border-opacity))",
 })
-;"##### ; "256")]
+;"##### ; "255")]
 #[test_case(r#####"tw`border-x-zinc-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(113 113 122 / var(--tw-border-opacity))",
   borderRightColor: "rgb(113 113 122 / var(--tw-border-opacity))",
 })
-;"##### ; "257")]
+;"##### ; "256")]
 #[test_case(r#####"tw`border-x-zinc-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(82 82 91 / var(--tw-border-opacity))",
   borderRightColor: "rgb(82 82 91 / var(--tw-border-opacity))",
 })
-;"##### ; "258")]
+;"##### ; "257")]
 #[test_case(r#####"tw`border-x-zinc-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(63 63 70 / var(--tw-border-opacity))",
   borderRightColor: "rgb(63 63 70 / var(--tw-border-opacity))",
 })
-;"##### ; "259")]
+;"##### ; "258")]
 #[test_case(r#####"tw`border-x-zinc-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(39 39 42 / var(--tw-border-opacity))",
   borderRightColor: "rgb(39 39 42 / var(--tw-border-opacity))",
 })
-;"##### ; "260")]
+;"##### ; "259")]
 #[test_case(r#####"tw`border-x-zinc-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(24 24 27 / var(--tw-border-opacity))",
   borderRightColor: "rgb(24 24 27 / var(--tw-border-opacity))",
 })
-;"##### ; "261")]
+;"##### ; "260")]
 #[test_case(r#####"tw`border-x-neutral-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(250 250 250 / var(--tw-border-opacity))",
   borderRightColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "262")]
+;"##### ; "261")]
 #[test_case(r#####"tw`border-x-neutral-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(245 245 245 / var(--tw-border-opacity))",
   borderRightColor: "rgb(245 245 245 / var(--tw-border-opacity))",
 })
-;"##### ; "263")]
+;"##### ; "262")]
 #[test_case(r#####"tw`border-x-neutral-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(229 229 229 / var(--tw-border-opacity))",
   borderRightColor: "rgb(229 229 229 / var(--tw-border-opacity))",
 })
-;"##### ; "264")]
+;"##### ; "263")]
 #[test_case(r#####"tw`border-x-neutral-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(212 212 212 / var(--tw-border-opacity))",
   borderRightColor: "rgb(212 212 212 / var(--tw-border-opacity))",
 })
-;"##### ; "265")]
+;"##### ; "264")]
 #[test_case(r#####"tw`border-x-neutral-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(163 163 163 / var(--tw-border-opacity))",
   borderRightColor: "rgb(163 163 163 / var(--tw-border-opacity))",
 })
-;"##### ; "266")]
+;"##### ; "265")]
 #[test_case(r#####"tw`border-x-neutral-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(115 115 115 / var(--tw-border-opacity))",
   borderRightColor: "rgb(115 115 115 / var(--tw-border-opacity))",
 })
-;"##### ; "267")]
+;"##### ; "266")]
 #[test_case(r#####"tw`border-x-neutral-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(82 82 82 / var(--tw-border-opacity))",
   borderRightColor: "rgb(82 82 82 / var(--tw-border-opacity))",
 })
-;"##### ; "268")]
+;"##### ; "267")]
 #[test_case(r#####"tw`border-x-neutral-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(64 64 64 / var(--tw-border-opacity))",
   borderRightColor: "rgb(64 64 64 / var(--tw-border-opacity))",
 })
-;"##### ; "269")]
+;"##### ; "268")]
 #[test_case(r#####"tw`border-x-neutral-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(38 38 38 / var(--tw-border-opacity))",
   borderRightColor: "rgb(38 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "270")]
+;"##### ; "269")]
 #[test_case(r#####"tw`border-x-neutral-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(23 23 23 / var(--tw-border-opacity))",
   borderRightColor: "rgb(23 23 23 / var(--tw-border-opacity))",
 })
-;"##### ; "271")]
+;"##### ; "270")]
 #[test_case(r#####"tw`border-x-stone-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(250 250 249 / var(--tw-border-opacity))",
   borderRightColor: "rgb(250 250 249 / var(--tw-border-opacity))",
 })
-;"##### ; "272")]
+;"##### ; "271")]
 #[test_case(r#####"tw`border-x-stone-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(245 245 244 / var(--tw-border-opacity))",
   borderRightColor: "rgb(245 245 244 / var(--tw-border-opacity))",
 })
-;"##### ; "273")]
+;"##### ; "272")]
 #[test_case(r#####"tw`border-x-stone-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(231 229 228 / var(--tw-border-opacity))",
   borderRightColor: "rgb(231 229 228 / var(--tw-border-opacity))",
 })
-;"##### ; "274")]
+;"##### ; "273")]
 #[test_case(r#####"tw`border-x-stone-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(214 211 209 / var(--tw-border-opacity))",
   borderRightColor: "rgb(214 211 209 / var(--tw-border-opacity))",
 })
-;"##### ; "275")]
+;"##### ; "274")]
 #[test_case(r#####"tw`border-x-stone-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(168 162 158 / var(--tw-border-opacity))",
   borderRightColor: "rgb(168 162 158 / var(--tw-border-opacity))",
 })
-;"##### ; "276")]
+;"##### ; "275")]
 #[test_case(r#####"tw`border-x-stone-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(120 113 108 / var(--tw-border-opacity))",
   borderRightColor: "rgb(120 113 108 / var(--tw-border-opacity))",
 })
-;"##### ; "277")]
+;"##### ; "276")]
 #[test_case(r#####"tw`border-x-stone-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(87 83 78 / var(--tw-border-opacity))",
   borderRightColor: "rgb(87 83 78 / var(--tw-border-opacity))",
 })
-;"##### ; "278")]
+;"##### ; "277")]
 #[test_case(r#####"tw`border-x-stone-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(68 64 60 / var(--tw-border-opacity))",
   borderRightColor: "rgb(68 64 60 / var(--tw-border-opacity))",
 })
-;"##### ; "279")]
+;"##### ; "278")]
 #[test_case(r#####"tw`border-x-stone-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(41 37 36 / var(--tw-border-opacity))",
   borderRightColor: "rgb(41 37 36 / var(--tw-border-opacity))",
 })
-;"##### ; "280")]
+;"##### ; "279")]
 #[test_case(r#####"tw`border-x-stone-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(28 25 23 / var(--tw-border-opacity))",
   borderRightColor: "rgb(28 25 23 / var(--tw-border-opacity))",
 })
-;"##### ; "281")]
+;"##### ; "280")]
 #[test_case(r#####"tw`border-x-red-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 242 242 / var(--tw-border-opacity))",
   borderRightColor: "rgb(254 242 242 / var(--tw-border-opacity))",
 })
-;"##### ; "282")]
+;"##### ; "281")]
 #[test_case(r#####"tw`border-x-red-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 226 226 / var(--tw-border-opacity))",
   borderRightColor: "rgb(254 226 226 / var(--tw-border-opacity))",
 })
-;"##### ; "283")]
+;"##### ; "282")]
 #[test_case(r#####"tw`border-x-red-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 202 202 / var(--tw-border-opacity))",
   borderRightColor: "rgb(254 202 202 / var(--tw-border-opacity))",
 })
-;"##### ; "284")]
+;"##### ; "283")]
 #[test_case(r#####"tw`border-x-red-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(252 165 165 / var(--tw-border-opacity))",
   borderRightColor: "rgb(252 165 165 / var(--tw-border-opacity))",
 })
-;"##### ; "285")]
+;"##### ; "284")]
 #[test_case(r#####"tw`border-x-red-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(248 113 113 / var(--tw-border-opacity))",
   borderRightColor: "rgb(248 113 113 / var(--tw-border-opacity))",
 })
-;"##### ; "286")]
+;"##### ; "285")]
 #[test_case(r#####"tw`border-x-red-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(239 68 68 / var(--tw-border-opacity))",
   borderRightColor: "rgb(239 68 68 / var(--tw-border-opacity))",
 })
-;"##### ; "287")]
+;"##### ; "286")]
 #[test_case(r#####"tw`border-x-red-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(220 38 38 / var(--tw-border-opacity))",
   borderRightColor: "rgb(220 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "288")]
+;"##### ; "287")]
 #[test_case(r#####"tw`border-x-red-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(185 28 28 / var(--tw-border-opacity))",
   borderRightColor: "rgb(185 28 28 / var(--tw-border-opacity))",
 })
-;"##### ; "289")]
+;"##### ; "288")]
 #[test_case(r#####"tw`border-x-red-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(153 27 27 / var(--tw-border-opacity))",
   borderRightColor: "rgb(153 27 27 / var(--tw-border-opacity))",
 })
-;"##### ; "290")]
+;"##### ; "289")]
 #[test_case(r#####"tw`border-x-red-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(127 29 29 / var(--tw-border-opacity))",
   borderRightColor: "rgb(127 29 29 / var(--tw-border-opacity))",
 })
-;"##### ; "291")]
+;"##### ; "290")]
 #[test_case(r#####"tw`border-x-orange-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(255 247 237 / var(--tw-border-opacity))",
   borderRightColor: "rgb(255 247 237 / var(--tw-border-opacity))",
 })
-;"##### ; "292")]
+;"##### ; "291")]
 #[test_case(r#####"tw`border-x-orange-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(255 237 213 / var(--tw-border-opacity))",
   borderRightColor: "rgb(255 237 213 / var(--tw-border-opacity))",
 })
-;"##### ; "293")]
+;"##### ; "292")]
 #[test_case(r#####"tw`border-x-orange-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 215 170 / var(--tw-border-opacity))",
   borderRightColor: "rgb(254 215 170 / var(--tw-border-opacity))",
 })
-;"##### ; "294")]
+;"##### ; "293")]
 #[test_case(r#####"tw`border-x-orange-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(253 186 116 / var(--tw-border-opacity))",
   borderRightColor: "rgb(253 186 116 / var(--tw-border-opacity))",
 })
-;"##### ; "295")]
+;"##### ; "294")]
 #[test_case(r#####"tw`border-x-orange-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(251 146 60 / var(--tw-border-opacity))",
   borderRightColor: "rgb(251 146 60 / var(--tw-border-opacity))",
 })
-;"##### ; "296")]
+;"##### ; "295")]
 #[test_case(r#####"tw`border-x-orange-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(249 115 22 / var(--tw-border-opacity))",
   borderRightColor: "rgb(249 115 22 / var(--tw-border-opacity))",
 })
-;"##### ; "297")]
+;"##### ; "296")]
 #[test_case(r#####"tw`border-x-orange-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(234 88 12 / var(--tw-border-opacity))",
   borderRightColor: "rgb(234 88 12 / var(--tw-border-opacity))",
 })
-;"##### ; "298")]
+;"##### ; "297")]
 #[test_case(r#####"tw`border-x-orange-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(194 65 12 / var(--tw-border-opacity))",
   borderRightColor: "rgb(194 65 12 / var(--tw-border-opacity))",
 })
-;"##### ; "299")]
+;"##### ; "298")]
 #[test_case(r#####"tw`border-x-orange-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(154 52 18 / var(--tw-border-opacity))",
   borderRightColor: "rgb(154 52 18 / var(--tw-border-opacity))",
 })
-;"##### ; "300")]
+;"##### ; "299")]
 #[test_case(r#####"tw`border-x-orange-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(124 45 18 / var(--tw-border-opacity))",
   borderRightColor: "rgb(124 45 18 / var(--tw-border-opacity))",
 })
-;"##### ; "301")]
+;"##### ; "300")]
 #[test_case(r#####"tw`border-x-amber-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(255 251 235 / var(--tw-border-opacity))",
   borderRightColor: "rgb(255 251 235 / var(--tw-border-opacity))",
 })
-;"##### ; "302")]
+;"##### ; "301")]
 #[test_case(r#####"tw`border-x-amber-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 243 199 / var(--tw-border-opacity))",
   borderRightColor: "rgb(254 243 199 / var(--tw-border-opacity))",
 })
-;"##### ; "303")]
+;"##### ; "302")]
 #[test_case(r#####"tw`border-x-amber-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(253 230 138 / var(--tw-border-opacity))",
   borderRightColor: "rgb(253 230 138 / var(--tw-border-opacity))",
 })
-;"##### ; "304")]
+;"##### ; "303")]
 #[test_case(r#####"tw`border-x-amber-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(252 211 77 / var(--tw-border-opacity))",
   borderRightColor: "rgb(252 211 77 / var(--tw-border-opacity))",
 })
-;"##### ; "305")]
+;"##### ; "304")]
 #[test_case(r#####"tw`border-x-amber-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(251 191 36 / var(--tw-border-opacity))",
   borderRightColor: "rgb(251 191 36 / var(--tw-border-opacity))",
 })
-;"##### ; "306")]
+;"##### ; "305")]
 #[test_case(r#####"tw`border-x-amber-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(245 158 11 / var(--tw-border-opacity))",
   borderRightColor: "rgb(245 158 11 / var(--tw-border-opacity))",
 })
-;"##### ; "307")]
+;"##### ; "306")]
 #[test_case(r#####"tw`border-x-amber-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(217 119 6 / var(--tw-border-opacity))",
   borderRightColor: "rgb(217 119 6 / var(--tw-border-opacity))",
 })
-;"##### ; "308")]
+;"##### ; "307")]
 #[test_case(r#####"tw`border-x-amber-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(180 83 9 / var(--tw-border-opacity))",
   borderRightColor: "rgb(180 83 9 / var(--tw-border-opacity))",
 })
-;"##### ; "309")]
+;"##### ; "308")]
 #[test_case(r#####"tw`border-x-amber-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(146 64 14 / var(--tw-border-opacity))",
   borderRightColor: "rgb(146 64 14 / var(--tw-border-opacity))",
 })
-;"##### ; "310")]
+;"##### ; "309")]
 #[test_case(r#####"tw`border-x-amber-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(120 53 15 / var(--tw-border-opacity))",
   borderRightColor: "rgb(120 53 15 / var(--tw-border-opacity))",
 })
-;"##### ; "311")]
+;"##### ; "310")]
 #[test_case(r#####"tw`border-x-yellow-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 252 232 / var(--tw-border-opacity))",
   borderRightColor: "rgb(254 252 232 / var(--tw-border-opacity))",
 })
-;"##### ; "312")]
+;"##### ; "311")]
 #[test_case(r#####"tw`border-x-yellow-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 249 195 / var(--tw-border-opacity))",
   borderRightColor: "rgb(254 249 195 / var(--tw-border-opacity))",
 })
-;"##### ; "313")]
+;"##### ; "312")]
 #[test_case(r#####"tw`border-x-yellow-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 240 138 / var(--tw-border-opacity))",
   borderRightColor: "rgb(254 240 138 / var(--tw-border-opacity))",
 })
-;"##### ; "314")]
+;"##### ; "313")]
 #[test_case(r#####"tw`border-x-yellow-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(253 224 71 / var(--tw-border-opacity))",
   borderRightColor: "rgb(253 224 71 / var(--tw-border-opacity))",
 })
-;"##### ; "315")]
+;"##### ; "314")]
 #[test_case(r#####"tw`border-x-yellow-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(250 204 21 / var(--tw-border-opacity))",
   borderRightColor: "rgb(250 204 21 / var(--tw-border-opacity))",
 })
-;"##### ; "316")]
+;"##### ; "315")]
 #[test_case(r#####"tw`border-x-yellow-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(234 179 8 / var(--tw-border-opacity))",
   borderRightColor: "rgb(234 179 8 / var(--tw-border-opacity))",
 })
-;"##### ; "317")]
+;"##### ; "316")]
 #[test_case(r#####"tw`border-x-yellow-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(202 138 4 / var(--tw-border-opacity))",
   borderRightColor: "rgb(202 138 4 / var(--tw-border-opacity))",
 })
-;"##### ; "318")]
+;"##### ; "317")]
 #[test_case(r#####"tw`border-x-yellow-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(161 98 7 / var(--tw-border-opacity))",
   borderRightColor: "rgb(161 98 7 / var(--tw-border-opacity))",
 })
-;"##### ; "319")]
+;"##### ; "318")]
 #[test_case(r#####"tw`border-x-yellow-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(133 77 14 / var(--tw-border-opacity))",
   borderRightColor: "rgb(133 77 14 / var(--tw-border-opacity))",
 })
-;"##### ; "320")]
+;"##### ; "319")]
 #[test_case(r#####"tw`border-x-yellow-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(113 63 18 / var(--tw-border-opacity))",
   borderRightColor: "rgb(113 63 18 / var(--tw-border-opacity))",
 })
-;"##### ; "321")]
+;"##### ; "320")]
 #[test_case(r#####"tw`border-x-lime-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(247 254 231 / var(--tw-border-opacity))",
   borderRightColor: "rgb(247 254 231 / var(--tw-border-opacity))",
 })
-;"##### ; "322")]
+;"##### ; "321")]
 #[test_case(r#####"tw`border-x-lime-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(236 252 203 / var(--tw-border-opacity))",
   borderRightColor: "rgb(236 252 203 / var(--tw-border-opacity))",
 })
-;"##### ; "323")]
+;"##### ; "322")]
 #[test_case(r#####"tw`border-x-lime-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(217 249 157 / var(--tw-border-opacity))",
   borderRightColor: "rgb(217 249 157 / var(--tw-border-opacity))",
 })
-;"##### ; "324")]
+;"##### ; "323")]
 #[test_case(r#####"tw`border-x-lime-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(190 242 100 / var(--tw-border-opacity))",
   borderRightColor: "rgb(190 242 100 / var(--tw-border-opacity))",
 })
-;"##### ; "325")]
+;"##### ; "324")]
 #[test_case(r#####"tw`border-x-lime-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(163 230 53 / var(--tw-border-opacity))",
   borderRightColor: "rgb(163 230 53 / var(--tw-border-opacity))",
 })
-;"##### ; "326")]
+;"##### ; "325")]
 #[test_case(r#####"tw`border-x-lime-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(132 204 22 / var(--tw-border-opacity))",
   borderRightColor: "rgb(132 204 22 / var(--tw-border-opacity))",
 })
-;"##### ; "327")]
+;"##### ; "326")]
 #[test_case(r#####"tw`border-x-lime-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(101 163 13 / var(--tw-border-opacity))",
   borderRightColor: "rgb(101 163 13 / var(--tw-border-opacity))",
 })
-;"##### ; "328")]
+;"##### ; "327")]
 #[test_case(r#####"tw`border-x-lime-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(77 124 15 / var(--tw-border-opacity))",
   borderRightColor: "rgb(77 124 15 / var(--tw-border-opacity))",
 })
-;"##### ; "329")]
+;"##### ; "328")]
 #[test_case(r#####"tw`border-x-lime-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(63 98 18 / var(--tw-border-opacity))",
   borderRightColor: "rgb(63 98 18 / var(--tw-border-opacity))",
 })
-;"##### ; "330")]
+;"##### ; "329")]
 #[test_case(r#####"tw`border-x-lime-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(54 83 20 / var(--tw-border-opacity))",
   borderRightColor: "rgb(54 83 20 / var(--tw-border-opacity))",
 })
-;"##### ; "331")]
+;"##### ; "330")]
 #[test_case(r#####"tw`border-x-green-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(240 253 244 / var(--tw-border-opacity))",
   borderRightColor: "rgb(240 253 244 / var(--tw-border-opacity))",
 })
-;"##### ; "332")]
+;"##### ; "331")]
 #[test_case(r#####"tw`border-x-green-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(220 252 231 / var(--tw-border-opacity))",
   borderRightColor: "rgb(220 252 231 / var(--tw-border-opacity))",
 })
-;"##### ; "333")]
+;"##### ; "332")]
 #[test_case(r#####"tw`border-x-green-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(187 247 208 / var(--tw-border-opacity))",
   borderRightColor: "rgb(187 247 208 / var(--tw-border-opacity))",
 })
-;"##### ; "334")]
+;"##### ; "333")]
 #[test_case(r#####"tw`border-x-green-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(134 239 172 / var(--tw-border-opacity))",
   borderRightColor: "rgb(134 239 172 / var(--tw-border-opacity))",
 })
-;"##### ; "335")]
+;"##### ; "334")]
 #[test_case(r#####"tw`border-x-green-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(74 222 128 / var(--tw-border-opacity))",
   borderRightColor: "rgb(74 222 128 / var(--tw-border-opacity))",
 })
-;"##### ; "336")]
+;"##### ; "335")]
 #[test_case(r#####"tw`border-x-green-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(34 197 94 / var(--tw-border-opacity))",
   borderRightColor: "rgb(34 197 94 / var(--tw-border-opacity))",
 })
-;"##### ; "337")]
+;"##### ; "336")]
 #[test_case(r#####"tw`border-x-green-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(22 163 74 / var(--tw-border-opacity))",
   borderRightColor: "rgb(22 163 74 / var(--tw-border-opacity))",
 })
-;"##### ; "338")]
+;"##### ; "337")]
 #[test_case(r#####"tw`border-x-green-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(21 128 61 / var(--tw-border-opacity))",
   borderRightColor: "rgb(21 128 61 / var(--tw-border-opacity))",
 })
-;"##### ; "339")]
+;"##### ; "338")]
 #[test_case(r#####"tw`border-x-green-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(22 101 52 / var(--tw-border-opacity))",
   borderRightColor: "rgb(22 101 52 / var(--tw-border-opacity))",
 })
-;"##### ; "340")]
+;"##### ; "339")]
 #[test_case(r#####"tw`border-x-green-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(20 83 45 / var(--tw-border-opacity))",
   borderRightColor: "rgb(20 83 45 / var(--tw-border-opacity))",
 })
-;"##### ; "341")]
+;"##### ; "340")]
 #[test_case(r#####"tw`border-x-emerald-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(236 253 245 / var(--tw-border-opacity))",
   borderRightColor: "rgb(236 253 245 / var(--tw-border-opacity))",
 })
-;"##### ; "342")]
+;"##### ; "341")]
 #[test_case(r#####"tw`border-x-emerald-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(209 250 229 / var(--tw-border-opacity))",
   borderRightColor: "rgb(209 250 229 / var(--tw-border-opacity))",
 })
-;"##### ; "343")]
+;"##### ; "342")]
 #[test_case(r#####"tw`border-x-emerald-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(167 243 208 / var(--tw-border-opacity))",
   borderRightColor: "rgb(167 243 208 / var(--tw-border-opacity))",
 })
-;"##### ; "344")]
+;"##### ; "343")]
 #[test_case(r#####"tw`border-x-emerald-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(110 231 183 / var(--tw-border-opacity))",
   borderRightColor: "rgb(110 231 183 / var(--tw-border-opacity))",
 })
-;"##### ; "345")]
+;"##### ; "344")]
 #[test_case(r#####"tw`border-x-emerald-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(52 211 153 / var(--tw-border-opacity))",
   borderRightColor: "rgb(52 211 153 / var(--tw-border-opacity))",
 })
-;"##### ; "346")]
+;"##### ; "345")]
 #[test_case(r#####"tw`border-x-emerald-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(16 185 129 / var(--tw-border-opacity))",
   borderRightColor: "rgb(16 185 129 / var(--tw-border-opacity))",
 })
-;"##### ; "347")]
+;"##### ; "346")]
 #[test_case(r#####"tw`border-x-emerald-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(5 150 105 / var(--tw-border-opacity))",
   borderRightColor: "rgb(5 150 105 / var(--tw-border-opacity))",
 })
-;"##### ; "348")]
+;"##### ; "347")]
 #[test_case(r#####"tw`border-x-emerald-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(4 120 87 / var(--tw-border-opacity))",
   borderRightColor: "rgb(4 120 87 / var(--tw-border-opacity))",
 })
-;"##### ; "349")]
+;"##### ; "348")]
 #[test_case(r#####"tw`border-x-emerald-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(6 95 70 / var(--tw-border-opacity))",
   borderRightColor: "rgb(6 95 70 / var(--tw-border-opacity))",
 })
-;"##### ; "350")]
+;"##### ; "349")]
 #[test_case(r#####"tw`border-x-emerald-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(6 78 59 / var(--tw-border-opacity))",
   borderRightColor: "rgb(6 78 59 / var(--tw-border-opacity))",
 })
-;"##### ; "351")]
+;"##### ; "350")]
 #[test_case(r#####"tw`border-x-teal-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(240 253 250 / var(--tw-border-opacity))",
   borderRightColor: "rgb(240 253 250 / var(--tw-border-opacity))",
 })
-;"##### ; "352")]
+;"##### ; "351")]
 #[test_case(r#####"tw`border-x-teal-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(204 251 241 / var(--tw-border-opacity))",
   borderRightColor: "rgb(204 251 241 / var(--tw-border-opacity))",
 })
-;"##### ; "353")]
+;"##### ; "352")]
 #[test_case(r#####"tw`border-x-teal-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(153 246 228 / var(--tw-border-opacity))",
   borderRightColor: "rgb(153 246 228 / var(--tw-border-opacity))",
 })
-;"##### ; "354")]
+;"##### ; "353")]
 #[test_case(r#####"tw`border-x-teal-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(94 234 212 / var(--tw-border-opacity))",
   borderRightColor: "rgb(94 234 212 / var(--tw-border-opacity))",
 })
-;"##### ; "355")]
+;"##### ; "354")]
 #[test_case(r#####"tw`border-x-teal-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(45 212 191 / var(--tw-border-opacity))",
   borderRightColor: "rgb(45 212 191 / var(--tw-border-opacity))",
 })
-;"##### ; "356")]
+;"##### ; "355")]
 #[test_case(r#####"tw`border-x-teal-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(20 184 166 / var(--tw-border-opacity))",
   borderRightColor: "rgb(20 184 166 / var(--tw-border-opacity))",
 })
-;"##### ; "357")]
+;"##### ; "356")]
 #[test_case(r#####"tw`border-x-teal-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(13 148 136 / var(--tw-border-opacity))",
   borderRightColor: "rgb(13 148 136 / var(--tw-border-opacity))",
 })
-;"##### ; "358")]
+;"##### ; "357")]
 #[test_case(r#####"tw`border-x-teal-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(15 118 110 / var(--tw-border-opacity))",
   borderRightColor: "rgb(15 118 110 / var(--tw-border-opacity))",
 })
-;"##### ; "359")]
+;"##### ; "358")]
 #[test_case(r#####"tw`border-x-teal-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(17 94 89 / var(--tw-border-opacity))",
   borderRightColor: "rgb(17 94 89 / var(--tw-border-opacity))",
 })
-;"##### ; "360")]
+;"##### ; "359")]
 #[test_case(r#####"tw`border-x-teal-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(19 78 74 / var(--tw-border-opacity))",
   borderRightColor: "rgb(19 78 74 / var(--tw-border-opacity))",
 })
-;"##### ; "361")]
+;"##### ; "360")]
 #[test_case(r#####"tw`border-x-cyan-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(236 254 255 / var(--tw-border-opacity))",
   borderRightColor: "rgb(236 254 255 / var(--tw-border-opacity))",
 })
-;"##### ; "362")]
+;"##### ; "361")]
 #[test_case(r#####"tw`border-x-cyan-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(207 250 254 / var(--tw-border-opacity))",
   borderRightColor: "rgb(207 250 254 / var(--tw-border-opacity))",
 })
-;"##### ; "363")]
+;"##### ; "362")]
 #[test_case(r#####"tw`border-x-cyan-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(165 243 252 / var(--tw-border-opacity))",
   borderRightColor: "rgb(165 243 252 / var(--tw-border-opacity))",
 })
-;"##### ; "364")]
+;"##### ; "363")]
 #[test_case(r#####"tw`border-x-cyan-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(103 232 249 / var(--tw-border-opacity))",
   borderRightColor: "rgb(103 232 249 / var(--tw-border-opacity))",
 })
-;"##### ; "365")]
+;"##### ; "364")]
 #[test_case(r#####"tw`border-x-cyan-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(34 211 238 / var(--tw-border-opacity))",
   borderRightColor: "rgb(34 211 238 / var(--tw-border-opacity))",
 })
-;"##### ; "366")]
+;"##### ; "365")]
 #[test_case(r#####"tw`border-x-cyan-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(6 182 212 / var(--tw-border-opacity))",
   borderRightColor: "rgb(6 182 212 / var(--tw-border-opacity))",
 })
-;"##### ; "367")]
+;"##### ; "366")]
 #[test_case(r#####"tw`border-x-cyan-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(8 145 178 / var(--tw-border-opacity))",
   borderRightColor: "rgb(8 145 178 / var(--tw-border-opacity))",
 })
-;"##### ; "368")]
+;"##### ; "367")]
 #[test_case(r#####"tw`border-x-cyan-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(14 116 144 / var(--tw-border-opacity))",
   borderRightColor: "rgb(14 116 144 / var(--tw-border-opacity))",
 })
-;"##### ; "369")]
+;"##### ; "368")]
 #[test_case(r#####"tw`border-x-cyan-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(21 94 117 / var(--tw-border-opacity))",
   borderRightColor: "rgb(21 94 117 / var(--tw-border-opacity))",
 })
-;"##### ; "370")]
+;"##### ; "369")]
 #[test_case(r#####"tw`border-x-cyan-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(22 78 99 / var(--tw-border-opacity))",
   borderRightColor: "rgb(22 78 99 / var(--tw-border-opacity))",
 })
-;"##### ; "371")]
+;"##### ; "370")]
 #[test_case(r#####"tw`border-x-sky-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(240 249 255 / var(--tw-border-opacity))",
   borderRightColor: "rgb(240 249 255 / var(--tw-border-opacity))",
 })
-;"##### ; "372")]
+;"##### ; "371")]
 #[test_case(r#####"tw`border-x-sky-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(224 242 254 / var(--tw-border-opacity))",
   borderRightColor: "rgb(224 242 254 / var(--tw-border-opacity))",
 })
-;"##### ; "373")]
+;"##### ; "372")]
 #[test_case(r#####"tw`border-x-sky-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(186 230 253 / var(--tw-border-opacity))",
   borderRightColor: "rgb(186 230 253 / var(--tw-border-opacity))",
 })
-;"##### ; "374")]
+;"##### ; "373")]
 #[test_case(r#####"tw`border-x-sky-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(125 211 252 / var(--tw-border-opacity))",
   borderRightColor: "rgb(125 211 252 / var(--tw-border-opacity))",
 })
-;"##### ; "375")]
+;"##### ; "374")]
 #[test_case(r#####"tw`border-x-sky-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(56 189 248 / var(--tw-border-opacity))",
   borderRightColor: "rgb(56 189 248 / var(--tw-border-opacity))",
 })
-;"##### ; "376")]
+;"##### ; "375")]
 #[test_case(r#####"tw`border-x-sky-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(14 165 233 / var(--tw-border-opacity))",
   borderRightColor: "rgb(14 165 233 / var(--tw-border-opacity))",
 })
-;"##### ; "377")]
+;"##### ; "376")]
 #[test_case(r#####"tw`border-x-sky-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(2 132 199 / var(--tw-border-opacity))",
   borderRightColor: "rgb(2 132 199 / var(--tw-border-opacity))",
 })
-;"##### ; "378")]
+;"##### ; "377")]
 #[test_case(r#####"tw`border-x-sky-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(3 105 161 / var(--tw-border-opacity))",
   borderRightColor: "rgb(3 105 161 / var(--tw-border-opacity))",
 })
-;"##### ; "379")]
+;"##### ; "378")]
 #[test_case(r#####"tw`border-x-sky-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(7 89 133 / var(--tw-border-opacity))",
   borderRightColor: "rgb(7 89 133 / var(--tw-border-opacity))",
 })
-;"##### ; "380")]
+;"##### ; "379")]
 #[test_case(r#####"tw`border-x-sky-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(12 74 110 / var(--tw-border-opacity))",
   borderRightColor: "rgb(12 74 110 / var(--tw-border-opacity))",
 })
-;"##### ; "381")]
+;"##### ; "380")]
 #[test_case(r#####"tw`border-x-blue-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(239 246 255 / var(--tw-border-opacity))",
   borderRightColor: "rgb(239 246 255 / var(--tw-border-opacity))",
 })
-;"##### ; "382")]
+;"##### ; "381")]
 #[test_case(r#####"tw`border-x-blue-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(219 234 254 / var(--tw-border-opacity))",
   borderRightColor: "rgb(219 234 254 / var(--tw-border-opacity))",
 })
-;"##### ; "383")]
+;"##### ; "382")]
 #[test_case(r#####"tw`border-x-blue-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(191 219 254 / var(--tw-border-opacity))",
   borderRightColor: "rgb(191 219 254 / var(--tw-border-opacity))",
 })
-;"##### ; "384")]
+;"##### ; "383")]
 #[test_case(r#####"tw`border-x-blue-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(147 197 253 / var(--tw-border-opacity))",
   borderRightColor: "rgb(147 197 253 / var(--tw-border-opacity))",
 })
-;"##### ; "385")]
+;"##### ; "384")]
 #[test_case(r#####"tw`border-x-blue-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(96 165 250 / var(--tw-border-opacity))",
   borderRightColor: "rgb(96 165 250 / var(--tw-border-opacity))",
 })
-;"##### ; "386")]
+;"##### ; "385")]
 #[test_case(r#####"tw`border-x-blue-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(59 130 246 / var(--tw-border-opacity))",
   borderRightColor: "rgb(59 130 246 / var(--tw-border-opacity))",
 })
-;"##### ; "387")]
+;"##### ; "386")]
 #[test_case(r#####"tw`border-x-blue-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(37 99 235 / var(--tw-border-opacity))",
   borderRightColor: "rgb(37 99 235 / var(--tw-border-opacity))",
 })
-;"##### ; "388")]
+;"##### ; "387")]
 #[test_case(r#####"tw`border-x-blue-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(29 78 216 / var(--tw-border-opacity))",
   borderRightColor: "rgb(29 78 216 / var(--tw-border-opacity))",
 })
-;"##### ; "389")]
+;"##### ; "388")]
 #[test_case(r#####"tw`border-x-blue-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(30 64 175 / var(--tw-border-opacity))",
   borderRightColor: "rgb(30 64 175 / var(--tw-border-opacity))",
 })
-;"##### ; "390")]
+;"##### ; "389")]
 #[test_case(r#####"tw`border-x-blue-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(30 58 138 / var(--tw-border-opacity))",
   borderRightColor: "rgb(30 58 138 / var(--tw-border-opacity))",
 })
-;"##### ; "391")]
+;"##### ; "390")]
 #[test_case(r#####"tw`border-x-indigo-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(238 242 255 / var(--tw-border-opacity))",
   borderRightColor: "rgb(238 242 255 / var(--tw-border-opacity))",
 })
-;"##### ; "392")]
+;"##### ; "391")]
 #[test_case(r#####"tw`border-x-indigo-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(224 231 255 / var(--tw-border-opacity))",
   borderRightColor: "rgb(224 231 255 / var(--tw-border-opacity))",
 })
-;"##### ; "393")]
+;"##### ; "392")]
 #[test_case(r#####"tw`border-x-indigo-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(199 210 254 / var(--tw-border-opacity))",
   borderRightColor: "rgb(199 210 254 / var(--tw-border-opacity))",
 })
-;"##### ; "394")]
+;"##### ; "393")]
 #[test_case(r#####"tw`border-x-indigo-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(165 180 252 / var(--tw-border-opacity))",
   borderRightColor: "rgb(165 180 252 / var(--tw-border-opacity))",
 })
-;"##### ; "395")]
+;"##### ; "394")]
 #[test_case(r#####"tw`border-x-indigo-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(129 140 248 / var(--tw-border-opacity))",
   borderRightColor: "rgb(129 140 248 / var(--tw-border-opacity))",
 })
-;"##### ; "396")]
+;"##### ; "395")]
 #[test_case(r#####"tw`border-x-indigo-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(99 102 241 / var(--tw-border-opacity))",
   borderRightColor: "rgb(99 102 241 / var(--tw-border-opacity))",
 })
-;"##### ; "397")]
+;"##### ; "396")]
 #[test_case(r#####"tw`border-x-indigo-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(79 70 229 / var(--tw-border-opacity))",
   borderRightColor: "rgb(79 70 229 / var(--tw-border-opacity))",
 })
-;"##### ; "398")]
+;"##### ; "397")]
 #[test_case(r#####"tw`border-x-indigo-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(67 56 202 / var(--tw-border-opacity))",
   borderRightColor: "rgb(67 56 202 / var(--tw-border-opacity))",
 })
-;"##### ; "399")]
+;"##### ; "398")]
 #[test_case(r#####"tw`border-x-indigo-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(55 48 163 / var(--tw-border-opacity))",
   borderRightColor: "rgb(55 48 163 / var(--tw-border-opacity))",
 })
-;"##### ; "400")]
+;"##### ; "399")]
 #[test_case(r#####"tw`border-x-indigo-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(49 46 129 / var(--tw-border-opacity))",
   borderRightColor: "rgb(49 46 129 / var(--tw-border-opacity))",
 })
-;"##### ; "401")]
+;"##### ; "400")]
 #[test_case(r#####"tw`border-x-violet-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(245 243 255 / var(--tw-border-opacity))",
   borderRightColor: "rgb(245 243 255 / var(--tw-border-opacity))",
 })
-;"##### ; "402")]
+;"##### ; "401")]
 #[test_case(r#####"tw`border-x-violet-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(237 233 254 / var(--tw-border-opacity))",
   borderRightColor: "rgb(237 233 254 / var(--tw-border-opacity))",
 })
-;"##### ; "403")]
+;"##### ; "402")]
 #[test_case(r#####"tw`border-x-violet-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(221 214 254 / var(--tw-border-opacity))",
   borderRightColor: "rgb(221 214 254 / var(--tw-border-opacity))",
 })
-;"##### ; "404")]
+;"##### ; "403")]
 #[test_case(r#####"tw`border-x-violet-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(196 181 253 / var(--tw-border-opacity))",
   borderRightColor: "rgb(196 181 253 / var(--tw-border-opacity))",
 })
-;"##### ; "405")]
+;"##### ; "404")]
 #[test_case(r#####"tw`border-x-violet-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(167 139 250 / var(--tw-border-opacity))",
   borderRightColor: "rgb(167 139 250 / var(--tw-border-opacity))",
 })
-;"##### ; "406")]
+;"##### ; "405")]
 #[test_case(r#####"tw`border-x-violet-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(139 92 246 / var(--tw-border-opacity))",
   borderRightColor: "rgb(139 92 246 / var(--tw-border-opacity))",
 })
-;"##### ; "407")]
+;"##### ; "406")]
 #[test_case(r#####"tw`border-x-violet-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(124 58 237 / var(--tw-border-opacity))",
   borderRightColor: "rgb(124 58 237 / var(--tw-border-opacity))",
 })
-;"##### ; "408")]
+;"##### ; "407")]
 #[test_case(r#####"tw`border-x-violet-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(109 40 217 / var(--tw-border-opacity))",
   borderRightColor: "rgb(109 40 217 / var(--tw-border-opacity))",
 })
-;"##### ; "409")]
+;"##### ; "408")]
 #[test_case(r#####"tw`border-x-violet-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(91 33 182 / var(--tw-border-opacity))",
   borderRightColor: "rgb(91 33 182 / var(--tw-border-opacity))",
 })
-;"##### ; "410")]
+;"##### ; "409")]
 #[test_case(r#####"tw`border-x-violet-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(76 29 149 / var(--tw-border-opacity))",
   borderRightColor: "rgb(76 29 149 / var(--tw-border-opacity))",
 })
-;"##### ; "411")]
+;"##### ; "410")]
 #[test_case(r#####"tw`border-x-purple-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(250 245 255 / var(--tw-border-opacity))",
   borderRightColor: "rgb(250 245 255 / var(--tw-border-opacity))",
 })
-;"##### ; "412")]
+;"##### ; "411")]
 #[test_case(r#####"tw`border-x-purple-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(243 232 255 / var(--tw-border-opacity))",
   borderRightColor: "rgb(243 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "413")]
+;"##### ; "412")]
 #[test_case(r#####"tw`border-x-purple-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(233 213 255 / var(--tw-border-opacity))",
   borderRightColor: "rgb(233 213 255 / var(--tw-border-opacity))",
 })
-;"##### ; "414")]
+;"##### ; "413")]
 #[test_case(r#####"tw`border-x-purple-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(216 180 254 / var(--tw-border-opacity))",
   borderRightColor: "rgb(216 180 254 / var(--tw-border-opacity))",
 })
-;"##### ; "415")]
+;"##### ; "414")]
 #[test_case(r#####"tw`border-x-purple-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(192 132 252 / var(--tw-border-opacity))",
   borderRightColor: "rgb(192 132 252 / var(--tw-border-opacity))",
 })
-;"##### ; "416")]
+;"##### ; "415")]
 #[test_case(r#####"tw`border-x-purple-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(168 85 247 / var(--tw-border-opacity))",
   borderRightColor: "rgb(168 85 247 / var(--tw-border-opacity))",
 })
-;"##### ; "417")]
+;"##### ; "416")]
 #[test_case(r#####"tw`border-x-purple-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(147 51 234 / var(--tw-border-opacity))",
   borderRightColor: "rgb(147 51 234 / var(--tw-border-opacity))",
 })
-;"##### ; "418")]
+;"##### ; "417")]
 #[test_case(r#####"tw`border-x-purple-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(126 34 206 / var(--tw-border-opacity))",
   borderRightColor: "rgb(126 34 206 / var(--tw-border-opacity))",
 })
-;"##### ; "419")]
+;"##### ; "418")]
 #[test_case(r#####"tw`border-x-purple-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(107 33 168 / var(--tw-border-opacity))",
   borderRightColor: "rgb(107 33 168 / var(--tw-border-opacity))",
 })
-;"##### ; "420")]
+;"##### ; "419")]
 #[test_case(r#####"tw`border-x-purple-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(88 28 135 / var(--tw-border-opacity))",
   borderRightColor: "rgb(88 28 135 / var(--tw-border-opacity))",
 })
-;"##### ; "421")]
+;"##### ; "420")]
 #[test_case(r#####"tw`border-x-fuchsia-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(253 244 255 / var(--tw-border-opacity))",
   borderRightColor: "rgb(253 244 255 / var(--tw-border-opacity))",
 })
-;"##### ; "422")]
+;"##### ; "421")]
 #[test_case(r#####"tw`border-x-fuchsia-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(250 232 255 / var(--tw-border-opacity))",
   borderRightColor: "rgb(250 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "423")]
+;"##### ; "422")]
 #[test_case(r#####"tw`border-x-fuchsia-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(245 208 254 / var(--tw-border-opacity))",
   borderRightColor: "rgb(245 208 254 / var(--tw-border-opacity))",
 })
-;"##### ; "424")]
+;"##### ; "423")]
 #[test_case(r#####"tw`border-x-fuchsia-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(240 171 252 / var(--tw-border-opacity))",
   borderRightColor: "rgb(240 171 252 / var(--tw-border-opacity))",
 })
-;"##### ; "425")]
+;"##### ; "424")]
 #[test_case(r#####"tw`border-x-fuchsia-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(232 121 249 / var(--tw-border-opacity))",
   borderRightColor: "rgb(232 121 249 / var(--tw-border-opacity))",
 })
-;"##### ; "426")]
+;"##### ; "425")]
 #[test_case(r#####"tw`border-x-fuchsia-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(217 70 239 / var(--tw-border-opacity))",
   borderRightColor: "rgb(217 70 239 / var(--tw-border-opacity))",
 })
-;"##### ; "427")]
+;"##### ; "426")]
 #[test_case(r#####"tw`border-x-fuchsia-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(192 38 211 / var(--tw-border-opacity))",
   borderRightColor: "rgb(192 38 211 / var(--tw-border-opacity))",
 })
-;"##### ; "428")]
+;"##### ; "427")]
 #[test_case(r#####"tw`border-x-fuchsia-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(162 28 175 / var(--tw-border-opacity))",
   borderRightColor: "rgb(162 28 175 / var(--tw-border-opacity))",
 })
-;"##### ; "429")]
+;"##### ; "428")]
 #[test_case(r#####"tw`border-x-fuchsia-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(134 25 143 / var(--tw-border-opacity))",
   borderRightColor: "rgb(134 25 143 / var(--tw-border-opacity))",
 })
-;"##### ; "430")]
+;"##### ; "429")]
 #[test_case(r#####"tw`border-x-fuchsia-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(112 26 117 / var(--tw-border-opacity))",
   borderRightColor: "rgb(112 26 117 / var(--tw-border-opacity))",
 })
-;"##### ; "431")]
+;"##### ; "430")]
 #[test_case(r#####"tw`border-x-pink-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(253 242 248 / var(--tw-border-opacity))",
   borderRightColor: "rgb(253 242 248 / var(--tw-border-opacity))",
 })
-;"##### ; "432")]
+;"##### ; "431")]
 #[test_case(r#####"tw`border-x-pink-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(252 231 243 / var(--tw-border-opacity))",
   borderRightColor: "rgb(252 231 243 / var(--tw-border-opacity))",
 })
-;"##### ; "433")]
+;"##### ; "432")]
 #[test_case(r#####"tw`border-x-pink-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(251 207 232 / var(--tw-border-opacity))",
   borderRightColor: "rgb(251 207 232 / var(--tw-border-opacity))",
 })
-;"##### ; "434")]
+;"##### ; "433")]
 #[test_case(r#####"tw`border-x-pink-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(249 168 212 / var(--tw-border-opacity))",
   borderRightColor: "rgb(249 168 212 / var(--tw-border-opacity))",
 })
-;"##### ; "435")]
+;"##### ; "434")]
 #[test_case(r#####"tw`border-x-pink-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(244 114 182 / var(--tw-border-opacity))",
   borderRightColor: "rgb(244 114 182 / var(--tw-border-opacity))",
 })
-;"##### ; "436")]
+;"##### ; "435")]
 #[test_case(r#####"tw`border-x-pink-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(236 72 153 / var(--tw-border-opacity))",
   borderRightColor: "rgb(236 72 153 / var(--tw-border-opacity))",
 })
-;"##### ; "437")]
+;"##### ; "436")]
 #[test_case(r#####"tw`border-x-pink-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(219 39 119 / var(--tw-border-opacity))",
   borderRightColor: "rgb(219 39 119 / var(--tw-border-opacity))",
 })
-;"##### ; "438")]
+;"##### ; "437")]
 #[test_case(r#####"tw`border-x-pink-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(190 24 93 / var(--tw-border-opacity))",
   borderRightColor: "rgb(190 24 93 / var(--tw-border-opacity))",
 })
-;"##### ; "439")]
+;"##### ; "438")]
 #[test_case(r#####"tw`border-x-pink-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(157 23 77 / var(--tw-border-opacity))",
   borderRightColor: "rgb(157 23 77 / var(--tw-border-opacity))",
 })
-;"##### ; "440")]
+;"##### ; "439")]
 #[test_case(r#####"tw`border-x-pink-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(131 24 67 / var(--tw-border-opacity))",
   borderRightColor: "rgb(131 24 67 / var(--tw-border-opacity))",
 })
-;"##### ; "441")]
+;"##### ; "440")]
 #[test_case(r#####"tw`border-x-rose-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(255 241 242 / var(--tw-border-opacity))",
   borderRightColor: "rgb(255 241 242 / var(--tw-border-opacity))",
 })
-;"##### ; "442")]
+;"##### ; "441")]
 #[test_case(r#####"tw`border-x-rose-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(255 228 230 / var(--tw-border-opacity))",
   borderRightColor: "rgb(255 228 230 / var(--tw-border-opacity))",
 })
-;"##### ; "443")]
+;"##### ; "442")]
 #[test_case(r#####"tw`border-x-rose-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 205 211 / var(--tw-border-opacity))",
   borderRightColor: "rgb(254 205 211 / var(--tw-border-opacity))",
 })
-;"##### ; "444")]
+;"##### ; "443")]
 #[test_case(r#####"tw`border-x-rose-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(253 164 175 / var(--tw-border-opacity))",
   borderRightColor: "rgb(253 164 175 / var(--tw-border-opacity))",
 })
-;"##### ; "445")]
+;"##### ; "444")]
 #[test_case(r#####"tw`border-x-rose-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(251 113 133 / var(--tw-border-opacity))",
   borderRightColor: "rgb(251 113 133 / var(--tw-border-opacity))",
 })
-;"##### ; "446")]
+;"##### ; "445")]
 #[test_case(r#####"tw`border-x-rose-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(244 63 94 / var(--tw-border-opacity))",
   borderRightColor: "rgb(244 63 94 / var(--tw-border-opacity))",
 })
-;"##### ; "447")]
+;"##### ; "446")]
 #[test_case(r#####"tw`border-x-rose-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(225 29 72 / var(--tw-border-opacity))",
   borderRightColor: "rgb(225 29 72 / var(--tw-border-opacity))",
 })
-;"##### ; "448")]
+;"##### ; "447")]
 #[test_case(r#####"tw`border-x-rose-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(190 18 60 / var(--tw-border-opacity))",
   borderRightColor: "rgb(190 18 60 / var(--tw-border-opacity))",
 })
-;"##### ; "449")]
+;"##### ; "448")]
 #[test_case(r#####"tw`border-x-rose-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(159 18 57 / var(--tw-border-opacity))",
   borderRightColor: "rgb(159 18 57 / var(--tw-border-opacity))",
 })
-;"##### ; "450")]
+;"##### ; "449")]
 #[test_case(r#####"tw`border-x-rose-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(136 19 55 / var(--tw-border-opacity))",
   borderRightColor: "rgb(136 19 55 / var(--tw-border-opacity))",
 })
-;"##### ; "451")]
+;"##### ; "450")]
 #[test_case(r#####"tw`border-y-inherit`"#####, r#####"({
   borderTopColor: "inherit",
   borderBottomColor: "inherit",
 })
-;"##### ; "452")]
+;"##### ; "451")]
 #[test_case(r#####"tw`border-y-current`"#####, r#####"({
   borderTopColor: "currentColor",
   borderBottomColor: "currentColor",
 })
-;"##### ; "453")]
+;"##### ; "452")]
 #[test_case(r#####"tw`border-y-transparent`"#####, r#####"({
   borderTopColor: "transparent",
   borderBottomColor: "transparent",
 })
-;"##### ; "454")]
+;"##### ; "453")]
 #[test_case(r#####"tw`border-y-black`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(0 0 0 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(0 0 0 / var(--tw-border-opacity))",
 })
-;"##### ; "455")]
+;"##### ; "454")]
 #[test_case(r#####"tw`border-y-white`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(255 255 255 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(255 255 255 / var(--tw-border-opacity))",
 })
-;"##### ; "456")]
+;"##### ; "455")]
 #[test_case(r#####"tw`border-y-slate-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(248 250 252 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(248 250 252 / var(--tw-border-opacity))",
 })
-;"##### ; "457")]
+;"##### ; "456")]
 #[test_case(r#####"tw`border-y-slate-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(241 245 249 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(241 245 249 / var(--tw-border-opacity))",
 })
-;"##### ; "458")]
+;"##### ; "457")]
 #[test_case(r#####"tw`border-y-slate-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(226 232 240 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(226 232 240 / var(--tw-border-opacity))",
 })
-;"##### ; "459")]
+;"##### ; "458")]
 #[test_case(r#####"tw`border-y-slate-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(203 213 225 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(203 213 225 / var(--tw-border-opacity))",
 })
-;"##### ; "460")]
+;"##### ; "459")]
 #[test_case(r#####"tw`border-y-slate-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(148 163 184 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(148 163 184 / var(--tw-border-opacity))",
 })
-;"##### ; "461")]
+;"##### ; "460")]
 #[test_case(r#####"tw`border-y-slate-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(100 116 139 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(100 116 139 / var(--tw-border-opacity))",
 })
-;"##### ; "462")]
+;"##### ; "461")]
 #[test_case(r#####"tw`border-y-slate-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(71 85 105 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(71 85 105 / var(--tw-border-opacity))",
 })
-;"##### ; "463")]
+;"##### ; "462")]
 #[test_case(r#####"tw`border-y-slate-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(51 65 85 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(51 65 85 / var(--tw-border-opacity))",
 })
-;"##### ; "464")]
+;"##### ; "463")]
 #[test_case(r#####"tw`border-y-slate-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(30 41 59 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(30 41 59 / var(--tw-border-opacity))",
 })
-;"##### ; "465")]
+;"##### ; "464")]
 #[test_case(r#####"tw`border-y-slate-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(15 23 42 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(15 23 42 / var(--tw-border-opacity))",
 })
-;"##### ; "466")]
+;"##### ; "465")]
 #[test_case(r#####"tw`border-y-gray-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(249 250 251 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(249 250 251 / var(--tw-border-opacity))",
 })
-;"##### ; "467")]
+;"##### ; "466")]
 #[test_case(r#####"tw`border-y-gray-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(243 244 246 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(243 244 246 / var(--tw-border-opacity))",
 })
-;"##### ; "468")]
+;"##### ; "467")]
 #[test_case(r#####"tw`border-y-gray-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(229 231 235 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(229 231 235 / var(--tw-border-opacity))",
 })
-;"##### ; "469")]
+;"##### ; "468")]
 #[test_case(r#####"tw`border-y-gray-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(209 213 219 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(209 213 219 / var(--tw-border-opacity))",
 })
-;"##### ; "470")]
+;"##### ; "469")]
 #[test_case(r#####"tw`border-y-gray-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(156 163 175 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(156 163 175 / var(--tw-border-opacity))",
 })
-;"##### ; "471")]
+;"##### ; "470")]
 #[test_case(r#####"tw`border-y-gray-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(107 114 128 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(107 114 128 / var(--tw-border-opacity))",
 })
-;"##### ; "472")]
+;"##### ; "471")]
 #[test_case(r#####"tw`border-y-gray-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(75 85 99 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(75 85 99 / var(--tw-border-opacity))",
 })
-;"##### ; "473")]
+;"##### ; "472")]
 #[test_case(r#####"tw`border-y-gray-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(55 65 81 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(55 65 81 / var(--tw-border-opacity))",
 })
-;"##### ; "474")]
+;"##### ; "473")]
 #[test_case(r#####"tw`border-y-gray-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(31 41 55 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(31 41 55 / var(--tw-border-opacity))",
 })
-;"##### ; "475")]
+;"##### ; "474")]
 #[test_case(r#####"tw`border-y-gray-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(17 24 39 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(17 24 39 / var(--tw-border-opacity))",
 })
-;"##### ; "476")]
+;"##### ; "475")]
 #[test_case(r#####"tw`border-y-zinc-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(250 250 250 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "477")]
+;"##### ; "476")]
 #[test_case(r#####"tw`border-y-zinc-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(244 244 245 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(244 244 245 / var(--tw-border-opacity))",
 })
-;"##### ; "478")]
+;"##### ; "477")]
 #[test_case(r#####"tw`border-y-zinc-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(228 228 231 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(228 228 231 / var(--tw-border-opacity))",
 })
-;"##### ; "479")]
+;"##### ; "478")]
 #[test_case(r#####"tw`border-y-zinc-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(212 212 216 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(212 212 216 / var(--tw-border-opacity))",
 })
-;"##### ; "480")]
+;"##### ; "479")]
 #[test_case(r#####"tw`border-y-zinc-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(161 161 170 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(161 161 170 / var(--tw-border-opacity))",
 })
-;"##### ; "481")]
+;"##### ; "480")]
 #[test_case(r#####"tw`border-y-zinc-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(113 113 122 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(113 113 122 / var(--tw-border-opacity))",
 })
-;"##### ; "482")]
+;"##### ; "481")]
 #[test_case(r#####"tw`border-y-zinc-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(82 82 91 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(82 82 91 / var(--tw-border-opacity))",
 })
-;"##### ; "483")]
+;"##### ; "482")]
 #[test_case(r#####"tw`border-y-zinc-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(63 63 70 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(63 63 70 / var(--tw-border-opacity))",
 })
-;"##### ; "484")]
+;"##### ; "483")]
 #[test_case(r#####"tw`border-y-zinc-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(39 39 42 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(39 39 42 / var(--tw-border-opacity))",
 })
-;"##### ; "485")]
+;"##### ; "484")]
 #[test_case(r#####"tw`border-y-zinc-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(24 24 27 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(24 24 27 / var(--tw-border-opacity))",
 })
-;"##### ; "486")]
+;"##### ; "485")]
 #[test_case(r#####"tw`border-y-neutral-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(250 250 250 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "487")]
+;"##### ; "486")]
 #[test_case(r#####"tw`border-y-neutral-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(245 245 245 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(245 245 245 / var(--tw-border-opacity))",
 })
-;"##### ; "488")]
+;"##### ; "487")]
 #[test_case(r#####"tw`border-y-neutral-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(229 229 229 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(229 229 229 / var(--tw-border-opacity))",
 })
-;"##### ; "489")]
+;"##### ; "488")]
 #[test_case(r#####"tw`border-y-neutral-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(212 212 212 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(212 212 212 / var(--tw-border-opacity))",
 })
-;"##### ; "490")]
+;"##### ; "489")]
 #[test_case(r#####"tw`border-y-neutral-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(163 163 163 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(163 163 163 / var(--tw-border-opacity))",
 })
-;"##### ; "491")]
+;"##### ; "490")]
 #[test_case(r#####"tw`border-y-neutral-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(115 115 115 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(115 115 115 / var(--tw-border-opacity))",
 })
-;"##### ; "492")]
+;"##### ; "491")]
 #[test_case(r#####"tw`border-y-neutral-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(82 82 82 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(82 82 82 / var(--tw-border-opacity))",
 })
-;"##### ; "493")]
+;"##### ; "492")]
 #[test_case(r#####"tw`border-y-neutral-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(64 64 64 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(64 64 64 / var(--tw-border-opacity))",
 })
-;"##### ; "494")]
+;"##### ; "493")]
 #[test_case(r#####"tw`border-y-neutral-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(38 38 38 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(38 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "495")]
+;"##### ; "494")]
 #[test_case(r#####"tw`border-y-neutral-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(23 23 23 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(23 23 23 / var(--tw-border-opacity))",
 })
-;"##### ; "496")]
+;"##### ; "495")]
 #[test_case(r#####"tw`border-y-stone-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(250 250 249 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(250 250 249 / var(--tw-border-opacity))",
 })
-;"##### ; "497")]
+;"##### ; "496")]
 #[test_case(r#####"tw`border-y-stone-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(245 245 244 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(245 245 244 / var(--tw-border-opacity))",
 })
-;"##### ; "498")]
+;"##### ; "497")]
 #[test_case(r#####"tw`border-y-stone-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(231 229 228 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(231 229 228 / var(--tw-border-opacity))",
 })
-;"##### ; "499")]
+;"##### ; "498")]
 #[test_case(r#####"tw`border-y-stone-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(214 211 209 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(214 211 209 / var(--tw-border-opacity))",
 })
-;"##### ; "500")]
+;"##### ; "499")]
 #[test_case(r#####"tw`border-y-stone-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(168 162 158 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(168 162 158 / var(--tw-border-opacity))",
 })
-;"##### ; "501")]
+;"##### ; "500")]
 #[test_case(r#####"tw`border-y-stone-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(120 113 108 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(120 113 108 / var(--tw-border-opacity))",
 })
-;"##### ; "502")]
+;"##### ; "501")]
 #[test_case(r#####"tw`border-y-stone-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(87 83 78 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(87 83 78 / var(--tw-border-opacity))",
 })
-;"##### ; "503")]
+;"##### ; "502")]
 #[test_case(r#####"tw`border-y-stone-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(68 64 60 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(68 64 60 / var(--tw-border-opacity))",
 })
-;"##### ; "504")]
+;"##### ; "503")]
 #[test_case(r#####"tw`border-y-stone-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(41 37 36 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(41 37 36 / var(--tw-border-opacity))",
 })
-;"##### ; "505")]
+;"##### ; "504")]
 #[test_case(r#####"tw`border-y-stone-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(28 25 23 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(28 25 23 / var(--tw-border-opacity))",
 })
-;"##### ; "506")]
+;"##### ; "505")]
 #[test_case(r#####"tw`border-y-red-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 242 242 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(254 242 242 / var(--tw-border-opacity))",
 })
-;"##### ; "507")]
+;"##### ; "506")]
 #[test_case(r#####"tw`border-y-red-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 226 226 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(254 226 226 / var(--tw-border-opacity))",
 })
-;"##### ; "508")]
+;"##### ; "507")]
 #[test_case(r#####"tw`border-y-red-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 202 202 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(254 202 202 / var(--tw-border-opacity))",
 })
-;"##### ; "509")]
+;"##### ; "508")]
 #[test_case(r#####"tw`border-y-red-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(252 165 165 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(252 165 165 / var(--tw-border-opacity))",
 })
-;"##### ; "510")]
+;"##### ; "509")]
 #[test_case(r#####"tw`border-y-red-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(248 113 113 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(248 113 113 / var(--tw-border-opacity))",
 })
-;"##### ; "511")]
+;"##### ; "510")]
 #[test_case(r#####"tw`border-y-red-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(239 68 68 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(239 68 68 / var(--tw-border-opacity))",
 })
-;"##### ; "512")]
+;"##### ; "511")]
 #[test_case(r#####"tw`border-y-red-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(220 38 38 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(220 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "513")]
+;"##### ; "512")]
 #[test_case(r#####"tw`border-y-red-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(185 28 28 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(185 28 28 / var(--tw-border-opacity))",
 })
-;"##### ; "514")]
+;"##### ; "513")]
 #[test_case(r#####"tw`border-y-red-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(153 27 27 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(153 27 27 / var(--tw-border-opacity))",
 })
-;"##### ; "515")]
+;"##### ; "514")]
 #[test_case(r#####"tw`border-y-red-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(127 29 29 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(127 29 29 / var(--tw-border-opacity))",
 })
-;"##### ; "516")]
+;"##### ; "515")]
 #[test_case(r#####"tw`border-y-orange-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(255 247 237 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(255 247 237 / var(--tw-border-opacity))",
 })
-;"##### ; "517")]
+;"##### ; "516")]
 #[test_case(r#####"tw`border-y-orange-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(255 237 213 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(255 237 213 / var(--tw-border-opacity))",
 })
-;"##### ; "518")]
+;"##### ; "517")]
 #[test_case(r#####"tw`border-y-orange-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 215 170 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(254 215 170 / var(--tw-border-opacity))",
 })
-;"##### ; "519")]
+;"##### ; "518")]
 #[test_case(r#####"tw`border-y-orange-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(253 186 116 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(253 186 116 / var(--tw-border-opacity))",
 })
-;"##### ; "520")]
+;"##### ; "519")]
 #[test_case(r#####"tw`border-y-orange-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(251 146 60 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(251 146 60 / var(--tw-border-opacity))",
 })
-;"##### ; "521")]
+;"##### ; "520")]
 #[test_case(r#####"tw`border-y-orange-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(249 115 22 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(249 115 22 / var(--tw-border-opacity))",
 })
-;"##### ; "522")]
+;"##### ; "521")]
 #[test_case(r#####"tw`border-y-orange-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(234 88 12 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(234 88 12 / var(--tw-border-opacity))",
 })
-;"##### ; "523")]
+;"##### ; "522")]
 #[test_case(r#####"tw`border-y-orange-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(194 65 12 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(194 65 12 / var(--tw-border-opacity))",
 })
-;"##### ; "524")]
+;"##### ; "523")]
 #[test_case(r#####"tw`border-y-orange-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(154 52 18 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(154 52 18 / var(--tw-border-opacity))",
 })
-;"##### ; "525")]
+;"##### ; "524")]
 #[test_case(r#####"tw`border-y-orange-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(124 45 18 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(124 45 18 / var(--tw-border-opacity))",
 })
-;"##### ; "526")]
+;"##### ; "525")]
 #[test_case(r#####"tw`border-y-amber-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(255 251 235 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(255 251 235 / var(--tw-border-opacity))",
 })
-;"##### ; "527")]
+;"##### ; "526")]
 #[test_case(r#####"tw`border-y-amber-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 243 199 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(254 243 199 / var(--tw-border-opacity))",
 })
-;"##### ; "528")]
+;"##### ; "527")]
 #[test_case(r#####"tw`border-y-amber-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(253 230 138 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(253 230 138 / var(--tw-border-opacity))",
 })
-;"##### ; "529")]
+;"##### ; "528")]
 #[test_case(r#####"tw`border-y-amber-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(252 211 77 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(252 211 77 / var(--tw-border-opacity))",
 })
-;"##### ; "530")]
+;"##### ; "529")]
 #[test_case(r#####"tw`border-y-amber-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(251 191 36 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(251 191 36 / var(--tw-border-opacity))",
 })
-;"##### ; "531")]
+;"##### ; "530")]
 #[test_case(r#####"tw`border-y-amber-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(245 158 11 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(245 158 11 / var(--tw-border-opacity))",
 })
-;"##### ; "532")]
+;"##### ; "531")]
 #[test_case(r#####"tw`border-y-amber-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(217 119 6 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(217 119 6 / var(--tw-border-opacity))",
 })
-;"##### ; "533")]
+;"##### ; "532")]
 #[test_case(r#####"tw`border-y-amber-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(180 83 9 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(180 83 9 / var(--tw-border-opacity))",
 })
-;"##### ; "534")]
+;"##### ; "533")]
 #[test_case(r#####"tw`border-y-amber-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(146 64 14 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(146 64 14 / var(--tw-border-opacity))",
 })
-;"##### ; "535")]
+;"##### ; "534")]
 #[test_case(r#####"tw`border-y-amber-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(120 53 15 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(120 53 15 / var(--tw-border-opacity))",
 })
-;"##### ; "536")]
+;"##### ; "535")]
 #[test_case(r#####"tw`border-y-yellow-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 252 232 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(254 252 232 / var(--tw-border-opacity))",
 })
-;"##### ; "537")]
+;"##### ; "536")]
 #[test_case(r#####"tw`border-y-yellow-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 249 195 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(254 249 195 / var(--tw-border-opacity))",
 })
-;"##### ; "538")]
+;"##### ; "537")]
 #[test_case(r#####"tw`border-y-yellow-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 240 138 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(254 240 138 / var(--tw-border-opacity))",
 })
-;"##### ; "539")]
+;"##### ; "538")]
 #[test_case(r#####"tw`border-y-yellow-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(253 224 71 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(253 224 71 / var(--tw-border-opacity))",
 })
-;"##### ; "540")]
+;"##### ; "539")]
 #[test_case(r#####"tw`border-y-yellow-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(250 204 21 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(250 204 21 / var(--tw-border-opacity))",
 })
-;"##### ; "541")]
+;"##### ; "540")]
 #[test_case(r#####"tw`border-y-yellow-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(234 179 8 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(234 179 8 / var(--tw-border-opacity))",
 })
-;"##### ; "542")]
+;"##### ; "541")]
 #[test_case(r#####"tw`border-y-yellow-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(202 138 4 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(202 138 4 / var(--tw-border-opacity))",
 })
-;"##### ; "543")]
+;"##### ; "542")]
 #[test_case(r#####"tw`border-y-yellow-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(161 98 7 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(161 98 7 / var(--tw-border-opacity))",
 })
-;"##### ; "544")]
+;"##### ; "543")]
 #[test_case(r#####"tw`border-y-yellow-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(133 77 14 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(133 77 14 / var(--tw-border-opacity))",
 })
-;"##### ; "545")]
+;"##### ; "544")]
 #[test_case(r#####"tw`border-y-yellow-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(113 63 18 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(113 63 18 / var(--tw-border-opacity))",
 })
-;"##### ; "546")]
+;"##### ; "545")]
 #[test_case(r#####"tw`border-y-lime-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(247 254 231 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(247 254 231 / var(--tw-border-opacity))",
 })
-;"##### ; "547")]
+;"##### ; "546")]
 #[test_case(r#####"tw`border-y-lime-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(236 252 203 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(236 252 203 / var(--tw-border-opacity))",
 })
-;"##### ; "548")]
+;"##### ; "547")]
 #[test_case(r#####"tw`border-y-lime-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(217 249 157 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(217 249 157 / var(--tw-border-opacity))",
 })
-;"##### ; "549")]
+;"##### ; "548")]
 #[test_case(r#####"tw`border-y-lime-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(190 242 100 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(190 242 100 / var(--tw-border-opacity))",
 })
-;"##### ; "550")]
+;"##### ; "549")]
 #[test_case(r#####"tw`border-y-lime-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(163 230 53 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(163 230 53 / var(--tw-border-opacity))",
 })
-;"##### ; "551")]
+;"##### ; "550")]
 #[test_case(r#####"tw`border-y-lime-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(132 204 22 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(132 204 22 / var(--tw-border-opacity))",
 })
-;"##### ; "552")]
+;"##### ; "551")]
 #[test_case(r#####"tw`border-y-lime-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(101 163 13 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(101 163 13 / var(--tw-border-opacity))",
 })
-;"##### ; "553")]
+;"##### ; "552")]
 #[test_case(r#####"tw`border-y-lime-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(77 124 15 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(77 124 15 / var(--tw-border-opacity))",
 })
-;"##### ; "554")]
+;"##### ; "553")]
 #[test_case(r#####"tw`border-y-lime-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(63 98 18 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(63 98 18 / var(--tw-border-opacity))",
 })
-;"##### ; "555")]
+;"##### ; "554")]
 #[test_case(r#####"tw`border-y-lime-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(54 83 20 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(54 83 20 / var(--tw-border-opacity))",
 })
-;"##### ; "556")]
+;"##### ; "555")]
 #[test_case(r#####"tw`border-y-green-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(240 253 244 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(240 253 244 / var(--tw-border-opacity))",
 })
-;"##### ; "557")]
+;"##### ; "556")]
 #[test_case(r#####"tw`border-y-green-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(220 252 231 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(220 252 231 / var(--tw-border-opacity))",
 })
-;"##### ; "558")]
+;"##### ; "557")]
 #[test_case(r#####"tw`border-y-green-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(187 247 208 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(187 247 208 / var(--tw-border-opacity))",
 })
-;"##### ; "559")]
+;"##### ; "558")]
 #[test_case(r#####"tw`border-y-green-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(134 239 172 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(134 239 172 / var(--tw-border-opacity))",
 })
-;"##### ; "560")]
+;"##### ; "559")]
 #[test_case(r#####"tw`border-y-green-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(74 222 128 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(74 222 128 / var(--tw-border-opacity))",
 })
-;"##### ; "561")]
+;"##### ; "560")]
 #[test_case(r#####"tw`border-y-green-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(34 197 94 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(34 197 94 / var(--tw-border-opacity))",
 })
-;"##### ; "562")]
+;"##### ; "561")]
 #[test_case(r#####"tw`border-y-green-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(22 163 74 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(22 163 74 / var(--tw-border-opacity))",
 })
-;"##### ; "563")]
+;"##### ; "562")]
 #[test_case(r#####"tw`border-y-green-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(21 128 61 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(21 128 61 / var(--tw-border-opacity))",
 })
-;"##### ; "564")]
+;"##### ; "563")]
 #[test_case(r#####"tw`border-y-green-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(22 101 52 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(22 101 52 / var(--tw-border-opacity))",
 })
-;"##### ; "565")]
+;"##### ; "564")]
 #[test_case(r#####"tw`border-y-green-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(20 83 45 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(20 83 45 / var(--tw-border-opacity))",
 })
-;"##### ; "566")]
+;"##### ; "565")]
 #[test_case(r#####"tw`border-y-emerald-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(236 253 245 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(236 253 245 / var(--tw-border-opacity))",
 })
-;"##### ; "567")]
+;"##### ; "566")]
 #[test_case(r#####"tw`border-y-emerald-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(209 250 229 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(209 250 229 / var(--tw-border-opacity))",
 })
-;"##### ; "568")]
+;"##### ; "567")]
 #[test_case(r#####"tw`border-y-emerald-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(167 243 208 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(167 243 208 / var(--tw-border-opacity))",
 })
-;"##### ; "569")]
+;"##### ; "568")]
 #[test_case(r#####"tw`border-y-emerald-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(110 231 183 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(110 231 183 / var(--tw-border-opacity))",
 })
-;"##### ; "570")]
+;"##### ; "569")]
 #[test_case(r#####"tw`border-y-emerald-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(52 211 153 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(52 211 153 / var(--tw-border-opacity))",
 })
-;"##### ; "571")]
+;"##### ; "570")]
 #[test_case(r#####"tw`border-y-emerald-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(16 185 129 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(16 185 129 / var(--tw-border-opacity))",
 })
-;"##### ; "572")]
+;"##### ; "571")]
 #[test_case(r#####"tw`border-y-emerald-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(5 150 105 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(5 150 105 / var(--tw-border-opacity))",
 })
-;"##### ; "573")]
+;"##### ; "572")]
 #[test_case(r#####"tw`border-y-emerald-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(4 120 87 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(4 120 87 / var(--tw-border-opacity))",
 })
-;"##### ; "574")]
+;"##### ; "573")]
 #[test_case(r#####"tw`border-y-emerald-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(6 95 70 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(6 95 70 / var(--tw-border-opacity))",
 })
-;"##### ; "575")]
+;"##### ; "574")]
 #[test_case(r#####"tw`border-y-emerald-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(6 78 59 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(6 78 59 / var(--tw-border-opacity))",
 })
-;"##### ; "576")]
+;"##### ; "575")]
 #[test_case(r#####"tw`border-y-teal-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(240 253 250 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(240 253 250 / var(--tw-border-opacity))",
 })
-;"##### ; "577")]
+;"##### ; "576")]
 #[test_case(r#####"tw`border-y-teal-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(204 251 241 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(204 251 241 / var(--tw-border-opacity))",
 })
-;"##### ; "578")]
+;"##### ; "577")]
 #[test_case(r#####"tw`border-y-teal-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(153 246 228 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(153 246 228 / var(--tw-border-opacity))",
 })
-;"##### ; "579")]
+;"##### ; "578")]
 #[test_case(r#####"tw`border-y-teal-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(94 234 212 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(94 234 212 / var(--tw-border-opacity))",
 })
-;"##### ; "580")]
+;"##### ; "579")]
 #[test_case(r#####"tw`border-y-teal-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(45 212 191 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(45 212 191 / var(--tw-border-opacity))",
 })
-;"##### ; "581")]
+;"##### ; "580")]
 #[test_case(r#####"tw`border-y-teal-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(20 184 166 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(20 184 166 / var(--tw-border-opacity))",
 })
-;"##### ; "582")]
+;"##### ; "581")]
 #[test_case(r#####"tw`border-y-teal-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(13 148 136 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(13 148 136 / var(--tw-border-opacity))",
 })
-;"##### ; "583")]
+;"##### ; "582")]
 #[test_case(r#####"tw`border-y-teal-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(15 118 110 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(15 118 110 / var(--tw-border-opacity))",
 })
-;"##### ; "584")]
+;"##### ; "583")]
 #[test_case(r#####"tw`border-y-teal-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(17 94 89 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(17 94 89 / var(--tw-border-opacity))",
 })
-;"##### ; "585")]
+;"##### ; "584")]
 #[test_case(r#####"tw`border-y-teal-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(19 78 74 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(19 78 74 / var(--tw-border-opacity))",
 })
-;"##### ; "586")]
+;"##### ; "585")]
 #[test_case(r#####"tw`border-y-cyan-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(236 254 255 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(236 254 255 / var(--tw-border-opacity))",
 })
-;"##### ; "587")]
+;"##### ; "586")]
 #[test_case(r#####"tw`border-y-cyan-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(207 250 254 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(207 250 254 / var(--tw-border-opacity))",
 })
-;"##### ; "588")]
+;"##### ; "587")]
 #[test_case(r#####"tw`border-y-cyan-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(165 243 252 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(165 243 252 / var(--tw-border-opacity))",
 })
-;"##### ; "589")]
+;"##### ; "588")]
 #[test_case(r#####"tw`border-y-cyan-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(103 232 249 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(103 232 249 / var(--tw-border-opacity))",
 })
-;"##### ; "590")]
+;"##### ; "589")]
 #[test_case(r#####"tw`border-y-cyan-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(34 211 238 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(34 211 238 / var(--tw-border-opacity))",
 })
-;"##### ; "591")]
+;"##### ; "590")]
 #[test_case(r#####"tw`border-y-cyan-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(6 182 212 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(6 182 212 / var(--tw-border-opacity))",
 })
-;"##### ; "592")]
+;"##### ; "591")]
 #[test_case(r#####"tw`border-y-cyan-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(8 145 178 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(8 145 178 / var(--tw-border-opacity))",
 })
-;"##### ; "593")]
+;"##### ; "592")]
 #[test_case(r#####"tw`border-y-cyan-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(14 116 144 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(14 116 144 / var(--tw-border-opacity))",
 })
-;"##### ; "594")]
+;"##### ; "593")]
 #[test_case(r#####"tw`border-y-cyan-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(21 94 117 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(21 94 117 / var(--tw-border-opacity))",
 })
-;"##### ; "595")]
+;"##### ; "594")]
 #[test_case(r#####"tw`border-y-cyan-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(22 78 99 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(22 78 99 / var(--tw-border-opacity))",
 })
-;"##### ; "596")]
+;"##### ; "595")]
 #[test_case(r#####"tw`border-y-sky-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(240 249 255 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(240 249 255 / var(--tw-border-opacity))",
 })
-;"##### ; "597")]
+;"##### ; "596")]
 #[test_case(r#####"tw`border-y-sky-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(224 242 254 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(224 242 254 / var(--tw-border-opacity))",
 })
-;"##### ; "598")]
+;"##### ; "597")]
 #[test_case(r#####"tw`border-y-sky-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(186 230 253 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(186 230 253 / var(--tw-border-opacity))",
 })
-;"##### ; "599")]
+;"##### ; "598")]
 #[test_case(r#####"tw`border-y-sky-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(125 211 252 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(125 211 252 / var(--tw-border-opacity))",
 })
-;"##### ; "600")]
+;"##### ; "599")]
 #[test_case(r#####"tw`border-y-sky-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(56 189 248 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(56 189 248 / var(--tw-border-opacity))",
 })
-;"##### ; "601")]
+;"##### ; "600")]
 #[test_case(r#####"tw`border-y-sky-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(14 165 233 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(14 165 233 / var(--tw-border-opacity))",
 })
-;"##### ; "602")]
+;"##### ; "601")]
 #[test_case(r#####"tw`border-y-sky-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(2 132 199 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(2 132 199 / var(--tw-border-opacity))",
 })
-;"##### ; "603")]
+;"##### ; "602")]
 #[test_case(r#####"tw`border-y-sky-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(3 105 161 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(3 105 161 / var(--tw-border-opacity))",
 })
-;"##### ; "604")]
+;"##### ; "603")]
 #[test_case(r#####"tw`border-y-sky-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(7 89 133 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(7 89 133 / var(--tw-border-opacity))",
 })
-;"##### ; "605")]
+;"##### ; "604")]
 #[test_case(r#####"tw`border-y-sky-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(12 74 110 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(12 74 110 / var(--tw-border-opacity))",
 })
-;"##### ; "606")]
+;"##### ; "605")]
 #[test_case(r#####"tw`border-y-blue-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(239 246 255 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(239 246 255 / var(--tw-border-opacity))",
 })
-;"##### ; "607")]
+;"##### ; "606")]
 #[test_case(r#####"tw`border-y-blue-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(219 234 254 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(219 234 254 / var(--tw-border-opacity))",
 })
-;"##### ; "608")]
+;"##### ; "607")]
 #[test_case(r#####"tw`border-y-blue-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(191 219 254 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(191 219 254 / var(--tw-border-opacity))",
 })
-;"##### ; "609")]
+;"##### ; "608")]
 #[test_case(r#####"tw`border-y-blue-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(147 197 253 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(147 197 253 / var(--tw-border-opacity))",
 })
-;"##### ; "610")]
+;"##### ; "609")]
 #[test_case(r#####"tw`border-y-blue-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(96 165 250 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(96 165 250 / var(--tw-border-opacity))",
 })
-;"##### ; "611")]
+;"##### ; "610")]
 #[test_case(r#####"tw`border-y-blue-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(59 130 246 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(59 130 246 / var(--tw-border-opacity))",
 })
-;"##### ; "612")]
+;"##### ; "611")]
 #[test_case(r#####"tw`border-y-blue-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(37 99 235 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(37 99 235 / var(--tw-border-opacity))",
 })
-;"##### ; "613")]
+;"##### ; "612")]
 #[test_case(r#####"tw`border-y-blue-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(29 78 216 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(29 78 216 / var(--tw-border-opacity))",
 })
-;"##### ; "614")]
+;"##### ; "613")]
 #[test_case(r#####"tw`border-y-blue-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(30 64 175 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(30 64 175 / var(--tw-border-opacity))",
 })
-;"##### ; "615")]
+;"##### ; "614")]
 #[test_case(r#####"tw`border-y-blue-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(30 58 138 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(30 58 138 / var(--tw-border-opacity))",
 })
-;"##### ; "616")]
+;"##### ; "615")]
 #[test_case(r#####"tw`border-y-indigo-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(238 242 255 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(238 242 255 / var(--tw-border-opacity))",
 })
-;"##### ; "617")]
+;"##### ; "616")]
 #[test_case(r#####"tw`border-y-indigo-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(224 231 255 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(224 231 255 / var(--tw-border-opacity))",
 })
-;"##### ; "618")]
+;"##### ; "617")]
 #[test_case(r#####"tw`border-y-indigo-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(199 210 254 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(199 210 254 / var(--tw-border-opacity))",
 })
-;"##### ; "619")]
+;"##### ; "618")]
 #[test_case(r#####"tw`border-y-indigo-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(165 180 252 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(165 180 252 / var(--tw-border-opacity))",
 })
-;"##### ; "620")]
+;"##### ; "619")]
 #[test_case(r#####"tw`border-y-indigo-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(129 140 248 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(129 140 248 / var(--tw-border-opacity))",
 })
-;"##### ; "621")]
+;"##### ; "620")]
 #[test_case(r#####"tw`border-y-indigo-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(99 102 241 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(99 102 241 / var(--tw-border-opacity))",
 })
-;"##### ; "622")]
+;"##### ; "621")]
 #[test_case(r#####"tw`border-y-indigo-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(79 70 229 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(79 70 229 / var(--tw-border-opacity))",
 })
-;"##### ; "623")]
+;"##### ; "622")]
 #[test_case(r#####"tw`border-y-indigo-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(67 56 202 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(67 56 202 / var(--tw-border-opacity))",
 })
-;"##### ; "624")]
+;"##### ; "623")]
 #[test_case(r#####"tw`border-y-indigo-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(55 48 163 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(55 48 163 / var(--tw-border-opacity))",
 })
-;"##### ; "625")]
+;"##### ; "624")]
 #[test_case(r#####"tw`border-y-indigo-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(49 46 129 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(49 46 129 / var(--tw-border-opacity))",
 })
-;"##### ; "626")]
+;"##### ; "625")]
 #[test_case(r#####"tw`border-y-violet-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(245 243 255 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(245 243 255 / var(--tw-border-opacity))",
 })
-;"##### ; "627")]
+;"##### ; "626")]
 #[test_case(r#####"tw`border-y-violet-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(237 233 254 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(237 233 254 / var(--tw-border-opacity))",
 })
-;"##### ; "628")]
+;"##### ; "627")]
 #[test_case(r#####"tw`border-y-violet-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(221 214 254 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(221 214 254 / var(--tw-border-opacity))",
 })
-;"##### ; "629")]
+;"##### ; "628")]
 #[test_case(r#####"tw`border-y-violet-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(196 181 253 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(196 181 253 / var(--tw-border-opacity))",
 })
-;"##### ; "630")]
+;"##### ; "629")]
 #[test_case(r#####"tw`border-y-violet-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(167 139 250 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(167 139 250 / var(--tw-border-opacity))",
 })
-;"##### ; "631")]
+;"##### ; "630")]
 #[test_case(r#####"tw`border-y-violet-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(139 92 246 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(139 92 246 / var(--tw-border-opacity))",
 })
-;"##### ; "632")]
+;"##### ; "631")]
 #[test_case(r#####"tw`border-y-violet-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(124 58 237 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(124 58 237 / var(--tw-border-opacity))",
 })
-;"##### ; "633")]
+;"##### ; "632")]
 #[test_case(r#####"tw`border-y-violet-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(109 40 217 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(109 40 217 / var(--tw-border-opacity))",
 })
-;"##### ; "634")]
+;"##### ; "633")]
 #[test_case(r#####"tw`border-y-violet-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(91 33 182 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(91 33 182 / var(--tw-border-opacity))",
 })
-;"##### ; "635")]
+;"##### ; "634")]
 #[test_case(r#####"tw`border-y-violet-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(76 29 149 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(76 29 149 / var(--tw-border-opacity))",
 })
-;"##### ; "636")]
+;"##### ; "635")]
 #[test_case(r#####"tw`border-y-purple-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(250 245 255 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(250 245 255 / var(--tw-border-opacity))",
 })
-;"##### ; "637")]
+;"##### ; "636")]
 #[test_case(r#####"tw`border-y-purple-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(243 232 255 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(243 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "638")]
+;"##### ; "637")]
 #[test_case(r#####"tw`border-y-purple-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(233 213 255 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(233 213 255 / var(--tw-border-opacity))",
 })
-;"##### ; "639")]
+;"##### ; "638")]
 #[test_case(r#####"tw`border-y-purple-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(216 180 254 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(216 180 254 / var(--tw-border-opacity))",
 })
-;"##### ; "640")]
+;"##### ; "639")]
 #[test_case(r#####"tw`border-y-purple-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(192 132 252 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(192 132 252 / var(--tw-border-opacity))",
 })
-;"##### ; "641")]
+;"##### ; "640")]
 #[test_case(r#####"tw`border-y-purple-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(168 85 247 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(168 85 247 / var(--tw-border-opacity))",
 })
-;"##### ; "642")]
+;"##### ; "641")]
 #[test_case(r#####"tw`border-y-purple-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(147 51 234 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(147 51 234 / var(--tw-border-opacity))",
 })
-;"##### ; "643")]
+;"##### ; "642")]
 #[test_case(r#####"tw`border-y-purple-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(126 34 206 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(126 34 206 / var(--tw-border-opacity))",
 })
-;"##### ; "644")]
+;"##### ; "643")]
 #[test_case(r#####"tw`border-y-purple-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(107 33 168 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(107 33 168 / var(--tw-border-opacity))",
 })
-;"##### ; "645")]
+;"##### ; "644")]
 #[test_case(r#####"tw`border-y-purple-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(88 28 135 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(88 28 135 / var(--tw-border-opacity))",
 })
-;"##### ; "646")]
+;"##### ; "645")]
 #[test_case(r#####"tw`border-y-fuchsia-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(253 244 255 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(253 244 255 / var(--tw-border-opacity))",
 })
-;"##### ; "647")]
+;"##### ; "646")]
 #[test_case(r#####"tw`border-y-fuchsia-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(250 232 255 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(250 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "648")]
+;"##### ; "647")]
 #[test_case(r#####"tw`border-y-fuchsia-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(245 208 254 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(245 208 254 / var(--tw-border-opacity))",
 })
-;"##### ; "649")]
+;"##### ; "648")]
 #[test_case(r#####"tw`border-y-fuchsia-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(240 171 252 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(240 171 252 / var(--tw-border-opacity))",
 })
-;"##### ; "650")]
+;"##### ; "649")]
 #[test_case(r#####"tw`border-y-fuchsia-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(232 121 249 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(232 121 249 / var(--tw-border-opacity))",
 })
-;"##### ; "651")]
+;"##### ; "650")]
 #[test_case(r#####"tw`border-y-fuchsia-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(217 70 239 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(217 70 239 / var(--tw-border-opacity))",
 })
-;"##### ; "652")]
+;"##### ; "651")]
 #[test_case(r#####"tw`border-y-fuchsia-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(192 38 211 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(192 38 211 / var(--tw-border-opacity))",
 })
-;"##### ; "653")]
+;"##### ; "652")]
 #[test_case(r#####"tw`border-y-fuchsia-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(162 28 175 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(162 28 175 / var(--tw-border-opacity))",
 })
-;"##### ; "654")]
+;"##### ; "653")]
 #[test_case(r#####"tw`border-y-fuchsia-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(134 25 143 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(134 25 143 / var(--tw-border-opacity))",
 })
-;"##### ; "655")]
+;"##### ; "654")]
 #[test_case(r#####"tw`border-y-fuchsia-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(112 26 117 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(112 26 117 / var(--tw-border-opacity))",
 })
-;"##### ; "656")]
+;"##### ; "655")]
 #[test_case(r#####"tw`border-y-pink-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(253 242 248 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(253 242 248 / var(--tw-border-opacity))",
 })
-;"##### ; "657")]
+;"##### ; "656")]
 #[test_case(r#####"tw`border-y-pink-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(252 231 243 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(252 231 243 / var(--tw-border-opacity))",
 })
-;"##### ; "658")]
+;"##### ; "657")]
 #[test_case(r#####"tw`border-y-pink-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(251 207 232 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(251 207 232 / var(--tw-border-opacity))",
 })
-;"##### ; "659")]
+;"##### ; "658")]
 #[test_case(r#####"tw`border-y-pink-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(249 168 212 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(249 168 212 / var(--tw-border-opacity))",
 })
-;"##### ; "660")]
+;"##### ; "659")]
 #[test_case(r#####"tw`border-y-pink-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(244 114 182 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(244 114 182 / var(--tw-border-opacity))",
 })
-;"##### ; "661")]
+;"##### ; "660")]
 #[test_case(r#####"tw`border-y-pink-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(236 72 153 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(236 72 153 / var(--tw-border-opacity))",
 })
-;"##### ; "662")]
+;"##### ; "661")]
 #[test_case(r#####"tw`border-y-pink-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(219 39 119 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(219 39 119 / var(--tw-border-opacity))",
 })
-;"##### ; "663")]
+;"##### ; "662")]
 #[test_case(r#####"tw`border-y-pink-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(190 24 93 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(190 24 93 / var(--tw-border-opacity))",
 })
-;"##### ; "664")]
+;"##### ; "663")]
 #[test_case(r#####"tw`border-y-pink-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(157 23 77 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(157 23 77 / var(--tw-border-opacity))",
 })
-;"##### ; "665")]
+;"##### ; "664")]
 #[test_case(r#####"tw`border-y-pink-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(131 24 67 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(131 24 67 / var(--tw-border-opacity))",
 })
-;"##### ; "666")]
+;"##### ; "665")]
 #[test_case(r#####"tw`border-y-rose-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(255 241 242 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(255 241 242 / var(--tw-border-opacity))",
 })
-;"##### ; "667")]
+;"##### ; "666")]
 #[test_case(r#####"tw`border-y-rose-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(255 228 230 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(255 228 230 / var(--tw-border-opacity))",
 })
-;"##### ; "668")]
+;"##### ; "667")]
 #[test_case(r#####"tw`border-y-rose-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 205 211 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(254 205 211 / var(--tw-border-opacity))",
 })
-;"##### ; "669")]
+;"##### ; "668")]
 #[test_case(r#####"tw`border-y-rose-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(253 164 175 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(253 164 175 / var(--tw-border-opacity))",
 })
-;"##### ; "670")]
+;"##### ; "669")]
 #[test_case(r#####"tw`border-y-rose-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(251 113 133 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(251 113 133 / var(--tw-border-opacity))",
 })
-;"##### ; "671")]
+;"##### ; "670")]
 #[test_case(r#####"tw`border-y-rose-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(244 63 94 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(244 63 94 / var(--tw-border-opacity))",
 })
-;"##### ; "672")]
+;"##### ; "671")]
 #[test_case(r#####"tw`border-y-rose-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(225 29 72 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(225 29 72 / var(--tw-border-opacity))",
 })
-;"##### ; "673")]
+;"##### ; "672")]
 #[test_case(r#####"tw`border-y-rose-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(190 18 60 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(190 18 60 / var(--tw-border-opacity))",
 })
-;"##### ; "674")]
+;"##### ; "673")]
 #[test_case(r#####"tw`border-y-rose-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(159 18 57 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(159 18 57 / var(--tw-border-opacity))",
 })
-;"##### ; "675")]
+;"##### ; "674")]
 #[test_case(r#####"tw`border-y-rose-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(136 19 55 / var(--tw-border-opacity))",
   borderBottomColor: "rgb(136 19 55 / var(--tw-border-opacity))",
 })
-;"##### ; "676")]
+;"##### ; "675")]
 #[test_case(r#####"tw`border-t-inherit`"#####, r#####"({
   borderTopColor: "inherit",
 })
-;"##### ; "677")]
+;"##### ; "676")]
 #[test_case(r#####"tw`border-t-current`"#####, r#####"({
   borderTopColor: "currentColor",
 })
-;"##### ; "678")]
+;"##### ; "677")]
 #[test_case(r#####"tw`border-t-transparent`"#####, r#####"({
   borderTopColor: "transparent",
 })
-;"##### ; "679")]
+;"##### ; "678")]
 #[test_case(r#####"tw`border-t-black`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(0 0 0 / var(--tw-border-opacity))",
 })
-;"##### ; "680")]
+;"##### ; "679")]
 #[test_case(r#####"tw`border-t-white`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(255 255 255 / var(--tw-border-opacity))",
 })
-;"##### ; "681")]
+;"##### ; "680")]
 #[test_case(r#####"tw`border-t-slate-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(248 250 252 / var(--tw-border-opacity))",
 })
-;"##### ; "682")]
+;"##### ; "681")]
 #[test_case(r#####"tw`border-t-slate-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(241 245 249 / var(--tw-border-opacity))",
 })
-;"##### ; "683")]
+;"##### ; "682")]
 #[test_case(r#####"tw`border-t-slate-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(226 232 240 / var(--tw-border-opacity))",
 })
-;"##### ; "684")]
+;"##### ; "683")]
 #[test_case(r#####"tw`border-t-slate-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(203 213 225 / var(--tw-border-opacity))",
 })
-;"##### ; "685")]
+;"##### ; "684")]
 #[test_case(r#####"tw`border-t-slate-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(148 163 184 / var(--tw-border-opacity))",
 })
-;"##### ; "686")]
+;"##### ; "685")]
 #[test_case(r#####"tw`border-t-slate-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(100 116 139 / var(--tw-border-opacity))",
 })
-;"##### ; "687")]
+;"##### ; "686")]
 #[test_case(r#####"tw`border-t-slate-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(71 85 105 / var(--tw-border-opacity))",
 })
-;"##### ; "688")]
+;"##### ; "687")]
 #[test_case(r#####"tw`border-t-slate-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(51 65 85 / var(--tw-border-opacity))",
 })
-;"##### ; "689")]
+;"##### ; "688")]
 #[test_case(r#####"tw`border-t-slate-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(30 41 59 / var(--tw-border-opacity))",
 })
-;"##### ; "690")]
+;"##### ; "689")]
 #[test_case(r#####"tw`border-t-slate-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(15 23 42 / var(--tw-border-opacity))",
 })
-;"##### ; "691")]
+;"##### ; "690")]
 #[test_case(r#####"tw`border-t-gray-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(249 250 251 / var(--tw-border-opacity))",
 })
-;"##### ; "692")]
+;"##### ; "691")]
 #[test_case(r#####"tw`border-t-gray-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(243 244 246 / var(--tw-border-opacity))",
 })
-;"##### ; "693")]
+;"##### ; "692")]
 #[test_case(r#####"tw`border-t-gray-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(229 231 235 / var(--tw-border-opacity))",
 })
-;"##### ; "694")]
+;"##### ; "693")]
 #[test_case(r#####"tw`border-t-gray-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(209 213 219 / var(--tw-border-opacity))",
 })
-;"##### ; "695")]
+;"##### ; "694")]
 #[test_case(r#####"tw`border-t-gray-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(156 163 175 / var(--tw-border-opacity))",
 })
-;"##### ; "696")]
+;"##### ; "695")]
 #[test_case(r#####"tw`border-t-gray-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(107 114 128 / var(--tw-border-opacity))",
 })
-;"##### ; "697")]
+;"##### ; "696")]
 #[test_case(r#####"tw`border-t-gray-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(75 85 99 / var(--tw-border-opacity))",
 })
-;"##### ; "698")]
+;"##### ; "697")]
 #[test_case(r#####"tw`border-t-gray-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(55 65 81 / var(--tw-border-opacity))",
 })
-;"##### ; "699")]
+;"##### ; "698")]
 #[test_case(r#####"tw`border-t-gray-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(31 41 55 / var(--tw-border-opacity))",
 })
-;"##### ; "700")]
+;"##### ; "699")]
 #[test_case(r#####"tw`border-t-gray-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(17 24 39 / var(--tw-border-opacity))",
 })
-;"##### ; "701")]
+;"##### ; "700")]
 #[test_case(r#####"tw`border-t-zinc-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "702")]
+;"##### ; "701")]
 #[test_case(r#####"tw`border-t-zinc-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(244 244 245 / var(--tw-border-opacity))",
 })
-;"##### ; "703")]
+;"##### ; "702")]
 #[test_case(r#####"tw`border-t-zinc-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(228 228 231 / var(--tw-border-opacity))",
 })
-;"##### ; "704")]
+;"##### ; "703")]
 #[test_case(r#####"tw`border-t-zinc-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(212 212 216 / var(--tw-border-opacity))",
 })
-;"##### ; "705")]
+;"##### ; "704")]
 #[test_case(r#####"tw`border-t-zinc-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(161 161 170 / var(--tw-border-opacity))",
 })
-;"##### ; "706")]
+;"##### ; "705")]
 #[test_case(r#####"tw`border-t-zinc-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(113 113 122 / var(--tw-border-opacity))",
 })
-;"##### ; "707")]
+;"##### ; "706")]
 #[test_case(r#####"tw`border-t-zinc-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(82 82 91 / var(--tw-border-opacity))",
 })
-;"##### ; "708")]
+;"##### ; "707")]
 #[test_case(r#####"tw`border-t-zinc-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(63 63 70 / var(--tw-border-opacity))",
 })
-;"##### ; "709")]
+;"##### ; "708")]
 #[test_case(r#####"tw`border-t-zinc-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(39 39 42 / var(--tw-border-opacity))",
 })
-;"##### ; "710")]
+;"##### ; "709")]
 #[test_case(r#####"tw`border-t-zinc-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(24 24 27 / var(--tw-border-opacity))",
 })
-;"##### ; "711")]
+;"##### ; "710")]
 #[test_case(r#####"tw`border-t-neutral-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "712")]
+;"##### ; "711")]
 #[test_case(r#####"tw`border-t-neutral-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(245 245 245 / var(--tw-border-opacity))",
 })
-;"##### ; "713")]
+;"##### ; "712")]
 #[test_case(r#####"tw`border-t-neutral-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(229 229 229 / var(--tw-border-opacity))",
 })
-;"##### ; "714")]
+;"##### ; "713")]
 #[test_case(r#####"tw`border-t-neutral-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(212 212 212 / var(--tw-border-opacity))",
 })
-;"##### ; "715")]
+;"##### ; "714")]
 #[test_case(r#####"tw`border-t-neutral-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(163 163 163 / var(--tw-border-opacity))",
 })
-;"##### ; "716")]
+;"##### ; "715")]
 #[test_case(r#####"tw`border-t-neutral-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(115 115 115 / var(--tw-border-opacity))",
 })
-;"##### ; "717")]
+;"##### ; "716")]
 #[test_case(r#####"tw`border-t-neutral-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(82 82 82 / var(--tw-border-opacity))",
 })
-;"##### ; "718")]
+;"##### ; "717")]
 #[test_case(r#####"tw`border-t-neutral-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(64 64 64 / var(--tw-border-opacity))",
 })
-;"##### ; "719")]
+;"##### ; "718")]
 #[test_case(r#####"tw`border-t-neutral-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(38 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "720")]
+;"##### ; "719")]
 #[test_case(r#####"tw`border-t-neutral-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(23 23 23 / var(--tw-border-opacity))",
 })
-;"##### ; "721")]
+;"##### ; "720")]
 #[test_case(r#####"tw`border-t-stone-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(250 250 249 / var(--tw-border-opacity))",
 })
-;"##### ; "722")]
+;"##### ; "721")]
 #[test_case(r#####"tw`border-t-stone-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(245 245 244 / var(--tw-border-opacity))",
 })
-;"##### ; "723")]
+;"##### ; "722")]
 #[test_case(r#####"tw`border-t-stone-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(231 229 228 / var(--tw-border-opacity))",
 })
-;"##### ; "724")]
+;"##### ; "723")]
 #[test_case(r#####"tw`border-t-stone-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(214 211 209 / var(--tw-border-opacity))",
 })
-;"##### ; "725")]
+;"##### ; "724")]
 #[test_case(r#####"tw`border-t-stone-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(168 162 158 / var(--tw-border-opacity))",
 })
-;"##### ; "726")]
+;"##### ; "725")]
 #[test_case(r#####"tw`border-t-stone-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(120 113 108 / var(--tw-border-opacity))",
 })
-;"##### ; "727")]
+;"##### ; "726")]
 #[test_case(r#####"tw`border-t-stone-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(87 83 78 / var(--tw-border-opacity))",
 })
-;"##### ; "728")]
+;"##### ; "727")]
 #[test_case(r#####"tw`border-t-stone-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(68 64 60 / var(--tw-border-opacity))",
 })
-;"##### ; "729")]
+;"##### ; "728")]
 #[test_case(r#####"tw`border-t-stone-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(41 37 36 / var(--tw-border-opacity))",
 })
-;"##### ; "730")]
+;"##### ; "729")]
 #[test_case(r#####"tw`border-t-stone-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(28 25 23 / var(--tw-border-opacity))",
 })
-;"##### ; "731")]
+;"##### ; "730")]
 #[test_case(r#####"tw`border-t-red-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 242 242 / var(--tw-border-opacity))",
 })
-;"##### ; "732")]
+;"##### ; "731")]
 #[test_case(r#####"tw`border-t-red-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 226 226 / var(--tw-border-opacity))",
 })
-;"##### ; "733")]
+;"##### ; "732")]
 #[test_case(r#####"tw`border-t-red-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 202 202 / var(--tw-border-opacity))",
 })
-;"##### ; "734")]
+;"##### ; "733")]
 #[test_case(r#####"tw`border-t-red-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(252 165 165 / var(--tw-border-opacity))",
 })
-;"##### ; "735")]
+;"##### ; "734")]
 #[test_case(r#####"tw`border-t-red-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(248 113 113 / var(--tw-border-opacity))",
 })
-;"##### ; "736")]
+;"##### ; "735")]
 #[test_case(r#####"tw`border-t-red-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(239 68 68 / var(--tw-border-opacity))",
 })
-;"##### ; "737")]
+;"##### ; "736")]
 #[test_case(r#####"tw`border-t-red-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(220 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "738")]
+;"##### ; "737")]
 #[test_case(r#####"tw`border-t-red-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(185 28 28 / var(--tw-border-opacity))",
 })
-;"##### ; "739")]
+;"##### ; "738")]
 #[test_case(r#####"tw`border-t-red-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(153 27 27 / var(--tw-border-opacity))",
 })
-;"##### ; "740")]
+;"##### ; "739")]
 #[test_case(r#####"tw`border-t-red-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(127 29 29 / var(--tw-border-opacity))",
 })
-;"##### ; "741")]
+;"##### ; "740")]
 #[test_case(r#####"tw`border-t-orange-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(255 247 237 / var(--tw-border-opacity))",
 })
-;"##### ; "742")]
+;"##### ; "741")]
 #[test_case(r#####"tw`border-t-orange-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(255 237 213 / var(--tw-border-opacity))",
 })
-;"##### ; "743")]
+;"##### ; "742")]
 #[test_case(r#####"tw`border-t-orange-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 215 170 / var(--tw-border-opacity))",
 })
-;"##### ; "744")]
+;"##### ; "743")]
 #[test_case(r#####"tw`border-t-orange-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(253 186 116 / var(--tw-border-opacity))",
 })
-;"##### ; "745")]
+;"##### ; "744")]
 #[test_case(r#####"tw`border-t-orange-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(251 146 60 / var(--tw-border-opacity))",
 })
-;"##### ; "746")]
+;"##### ; "745")]
 #[test_case(r#####"tw`border-t-orange-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(249 115 22 / var(--tw-border-opacity))",
 })
-;"##### ; "747")]
+;"##### ; "746")]
 #[test_case(r#####"tw`border-t-orange-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(234 88 12 / var(--tw-border-opacity))",
 })
-;"##### ; "748")]
+;"##### ; "747")]
 #[test_case(r#####"tw`border-t-orange-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(194 65 12 / var(--tw-border-opacity))",
 })
-;"##### ; "749")]
+;"##### ; "748")]
 #[test_case(r#####"tw`border-t-orange-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(154 52 18 / var(--tw-border-opacity))",
 })
-;"##### ; "750")]
+;"##### ; "749")]
 #[test_case(r#####"tw`border-t-orange-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(124 45 18 / var(--tw-border-opacity))",
 })
-;"##### ; "751")]
+;"##### ; "750")]
 #[test_case(r#####"tw`border-t-amber-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(255 251 235 / var(--tw-border-opacity))",
 })
-;"##### ; "752")]
+;"##### ; "751")]
 #[test_case(r#####"tw`border-t-amber-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 243 199 / var(--tw-border-opacity))",
 })
-;"##### ; "753")]
+;"##### ; "752")]
 #[test_case(r#####"tw`border-t-amber-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(253 230 138 / var(--tw-border-opacity))",
 })
-;"##### ; "754")]
+;"##### ; "753")]
 #[test_case(r#####"tw`border-t-amber-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(252 211 77 / var(--tw-border-opacity))",
 })
-;"##### ; "755")]
+;"##### ; "754")]
 #[test_case(r#####"tw`border-t-amber-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(251 191 36 / var(--tw-border-opacity))",
 })
-;"##### ; "756")]
+;"##### ; "755")]
 #[test_case(r#####"tw`border-t-amber-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(245 158 11 / var(--tw-border-opacity))",
 })
-;"##### ; "757")]
+;"##### ; "756")]
 #[test_case(r#####"tw`border-t-amber-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(217 119 6 / var(--tw-border-opacity))",
 })
-;"##### ; "758")]
+;"##### ; "757")]
 #[test_case(r#####"tw`border-t-amber-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(180 83 9 / var(--tw-border-opacity))",
 })
-;"##### ; "759")]
+;"##### ; "758")]
 #[test_case(r#####"tw`border-t-amber-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(146 64 14 / var(--tw-border-opacity))",
 })
-;"##### ; "760")]
+;"##### ; "759")]
 #[test_case(r#####"tw`border-t-amber-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(120 53 15 / var(--tw-border-opacity))",
 })
-;"##### ; "761")]
+;"##### ; "760")]
 #[test_case(r#####"tw`border-t-yellow-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 252 232 / var(--tw-border-opacity))",
 })
-;"##### ; "762")]
+;"##### ; "761")]
 #[test_case(r#####"tw`border-t-yellow-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 249 195 / var(--tw-border-opacity))",
 })
-;"##### ; "763")]
+;"##### ; "762")]
 #[test_case(r#####"tw`border-t-yellow-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 240 138 / var(--tw-border-opacity))",
 })
-;"##### ; "764")]
+;"##### ; "763")]
 #[test_case(r#####"tw`border-t-yellow-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(253 224 71 / var(--tw-border-opacity))",
 })
-;"##### ; "765")]
+;"##### ; "764")]
 #[test_case(r#####"tw`border-t-yellow-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(250 204 21 / var(--tw-border-opacity))",
 })
-;"##### ; "766")]
+;"##### ; "765")]
 #[test_case(r#####"tw`border-t-yellow-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(234 179 8 / var(--tw-border-opacity))",
 })
-;"##### ; "767")]
+;"##### ; "766")]
 #[test_case(r#####"tw`border-t-yellow-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(202 138 4 / var(--tw-border-opacity))",
 })
-;"##### ; "768")]
+;"##### ; "767")]
 #[test_case(r#####"tw`border-t-yellow-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(161 98 7 / var(--tw-border-opacity))",
 })
-;"##### ; "769")]
+;"##### ; "768")]
 #[test_case(r#####"tw`border-t-yellow-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(133 77 14 / var(--tw-border-opacity))",
 })
-;"##### ; "770")]
+;"##### ; "769")]
 #[test_case(r#####"tw`border-t-yellow-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(113 63 18 / var(--tw-border-opacity))",
 })
-;"##### ; "771")]
+;"##### ; "770")]
 #[test_case(r#####"tw`border-t-lime-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(247 254 231 / var(--tw-border-opacity))",
 })
-;"##### ; "772")]
+;"##### ; "771")]
 #[test_case(r#####"tw`border-t-lime-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(236 252 203 / var(--tw-border-opacity))",
 })
-;"##### ; "773")]
+;"##### ; "772")]
 #[test_case(r#####"tw`border-t-lime-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(217 249 157 / var(--tw-border-opacity))",
 })
-;"##### ; "774")]
+;"##### ; "773")]
 #[test_case(r#####"tw`border-t-lime-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(190 242 100 / var(--tw-border-opacity))",
 })
-;"##### ; "775")]
+;"##### ; "774")]
 #[test_case(r#####"tw`border-t-lime-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(163 230 53 / var(--tw-border-opacity))",
 })
-;"##### ; "776")]
+;"##### ; "775")]
 #[test_case(r#####"tw`border-t-lime-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(132 204 22 / var(--tw-border-opacity))",
 })
-;"##### ; "777")]
+;"##### ; "776")]
 #[test_case(r#####"tw`border-t-lime-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(101 163 13 / var(--tw-border-opacity))",
 })
-;"##### ; "778")]
+;"##### ; "777")]
 #[test_case(r#####"tw`border-t-lime-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(77 124 15 / var(--tw-border-opacity))",
 })
-;"##### ; "779")]
+;"##### ; "778")]
 #[test_case(r#####"tw`border-t-lime-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(63 98 18 / var(--tw-border-opacity))",
 })
-;"##### ; "780")]
+;"##### ; "779")]
 #[test_case(r#####"tw`border-t-lime-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(54 83 20 / var(--tw-border-opacity))",
 })
-;"##### ; "781")]
+;"##### ; "780")]
 #[test_case(r#####"tw`border-t-green-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(240 253 244 / var(--tw-border-opacity))",
 })
-;"##### ; "782")]
+;"##### ; "781")]
 #[test_case(r#####"tw`border-t-green-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(220 252 231 / var(--tw-border-opacity))",
 })
-;"##### ; "783")]
+;"##### ; "782")]
 #[test_case(r#####"tw`border-t-green-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(187 247 208 / var(--tw-border-opacity))",
 })
-;"##### ; "784")]
+;"##### ; "783")]
 #[test_case(r#####"tw`border-t-green-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(134 239 172 / var(--tw-border-opacity))",
 })
-;"##### ; "785")]
+;"##### ; "784")]
 #[test_case(r#####"tw`border-t-green-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(74 222 128 / var(--tw-border-opacity))",
 })
-;"##### ; "786")]
+;"##### ; "785")]
 #[test_case(r#####"tw`border-t-green-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(34 197 94 / var(--tw-border-opacity))",
 })
-;"##### ; "787")]
+;"##### ; "786")]
 #[test_case(r#####"tw`border-t-green-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(22 163 74 / var(--tw-border-opacity))",
 })
-;"##### ; "788")]
+;"##### ; "787")]
 #[test_case(r#####"tw`border-t-green-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(21 128 61 / var(--tw-border-opacity))",
 })
-;"##### ; "789")]
+;"##### ; "788")]
 #[test_case(r#####"tw`border-t-green-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(22 101 52 / var(--tw-border-opacity))",
 })
-;"##### ; "790")]
+;"##### ; "789")]
 #[test_case(r#####"tw`border-t-green-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(20 83 45 / var(--tw-border-opacity))",
 })
-;"##### ; "791")]
+;"##### ; "790")]
 #[test_case(r#####"tw`border-t-emerald-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(236 253 245 / var(--tw-border-opacity))",
 })
-;"##### ; "792")]
+;"##### ; "791")]
 #[test_case(r#####"tw`border-t-emerald-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(209 250 229 / var(--tw-border-opacity))",
 })
-;"##### ; "793")]
+;"##### ; "792")]
 #[test_case(r#####"tw`border-t-emerald-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(167 243 208 / var(--tw-border-opacity))",
 })
-;"##### ; "794")]
+;"##### ; "793")]
 #[test_case(r#####"tw`border-t-emerald-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(110 231 183 / var(--tw-border-opacity))",
 })
-;"##### ; "795")]
+;"##### ; "794")]
 #[test_case(r#####"tw`border-t-emerald-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(52 211 153 / var(--tw-border-opacity))",
 })
-;"##### ; "796")]
+;"##### ; "795")]
 #[test_case(r#####"tw`border-t-emerald-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(16 185 129 / var(--tw-border-opacity))",
 })
-;"##### ; "797")]
+;"##### ; "796")]
 #[test_case(r#####"tw`border-t-emerald-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(5 150 105 / var(--tw-border-opacity))",
 })
-;"##### ; "798")]
+;"##### ; "797")]
 #[test_case(r#####"tw`border-t-emerald-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(4 120 87 / var(--tw-border-opacity))",
 })
-;"##### ; "799")]
+;"##### ; "798")]
 #[test_case(r#####"tw`border-t-emerald-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(6 95 70 / var(--tw-border-opacity))",
 })
-;"##### ; "800")]
+;"##### ; "799")]
 #[test_case(r#####"tw`border-t-emerald-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(6 78 59 / var(--tw-border-opacity))",
 })
-;"##### ; "801")]
+;"##### ; "800")]
 #[test_case(r#####"tw`border-t-teal-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(240 253 250 / var(--tw-border-opacity))",
 })
-;"##### ; "802")]
+;"##### ; "801")]
 #[test_case(r#####"tw`border-t-teal-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(204 251 241 / var(--tw-border-opacity))",
 })
-;"##### ; "803")]
+;"##### ; "802")]
 #[test_case(r#####"tw`border-t-teal-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(153 246 228 / var(--tw-border-opacity))",
 })
-;"##### ; "804")]
+;"##### ; "803")]
 #[test_case(r#####"tw`border-t-teal-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(94 234 212 / var(--tw-border-opacity))",
 })
-;"##### ; "805")]
+;"##### ; "804")]
 #[test_case(r#####"tw`border-t-teal-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(45 212 191 / var(--tw-border-opacity))",
 })
-;"##### ; "806")]
+;"##### ; "805")]
 #[test_case(r#####"tw`border-t-teal-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(20 184 166 / var(--tw-border-opacity))",
 })
-;"##### ; "807")]
+;"##### ; "806")]
 #[test_case(r#####"tw`border-t-teal-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(13 148 136 / var(--tw-border-opacity))",
 })
-;"##### ; "808")]
+;"##### ; "807")]
 #[test_case(r#####"tw`border-t-teal-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(15 118 110 / var(--tw-border-opacity))",
 })
-;"##### ; "809")]
+;"##### ; "808")]
 #[test_case(r#####"tw`border-t-teal-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(17 94 89 / var(--tw-border-opacity))",
 })
-;"##### ; "810")]
+;"##### ; "809")]
 #[test_case(r#####"tw`border-t-teal-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(19 78 74 / var(--tw-border-opacity))",
 })
-;"##### ; "811")]
+;"##### ; "810")]
 #[test_case(r#####"tw`border-t-cyan-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(236 254 255 / var(--tw-border-opacity))",
 })
-;"##### ; "812")]
+;"##### ; "811")]
 #[test_case(r#####"tw`border-t-cyan-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(207 250 254 / var(--tw-border-opacity))",
 })
-;"##### ; "813")]
+;"##### ; "812")]
 #[test_case(r#####"tw`border-t-cyan-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(165 243 252 / var(--tw-border-opacity))",
 })
-;"##### ; "814")]
+;"##### ; "813")]
 #[test_case(r#####"tw`border-t-cyan-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(103 232 249 / var(--tw-border-opacity))",
 })
-;"##### ; "815")]
+;"##### ; "814")]
 #[test_case(r#####"tw`border-t-cyan-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(34 211 238 / var(--tw-border-opacity))",
 })
-;"##### ; "816")]
+;"##### ; "815")]
 #[test_case(r#####"tw`border-t-cyan-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(6 182 212 / var(--tw-border-opacity))",
 })
-;"##### ; "817")]
+;"##### ; "816")]
 #[test_case(r#####"tw`border-t-cyan-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(8 145 178 / var(--tw-border-opacity))",
 })
-;"##### ; "818")]
+;"##### ; "817")]
 #[test_case(r#####"tw`border-t-cyan-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(14 116 144 / var(--tw-border-opacity))",
 })
-;"##### ; "819")]
+;"##### ; "818")]
 #[test_case(r#####"tw`border-t-cyan-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(21 94 117 / var(--tw-border-opacity))",
 })
-;"##### ; "820")]
+;"##### ; "819")]
 #[test_case(r#####"tw`border-t-cyan-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(22 78 99 / var(--tw-border-opacity))",
 })
-;"##### ; "821")]
+;"##### ; "820")]
 #[test_case(r#####"tw`border-t-sky-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(240 249 255 / var(--tw-border-opacity))",
 })
-;"##### ; "822")]
+;"##### ; "821")]
 #[test_case(r#####"tw`border-t-sky-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(224 242 254 / var(--tw-border-opacity))",
 })
-;"##### ; "823")]
+;"##### ; "822")]
 #[test_case(r#####"tw`border-t-sky-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(186 230 253 / var(--tw-border-opacity))",
 })
-;"##### ; "824")]
+;"##### ; "823")]
 #[test_case(r#####"tw`border-t-sky-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(125 211 252 / var(--tw-border-opacity))",
 })
-;"##### ; "825")]
+;"##### ; "824")]
 #[test_case(r#####"tw`border-t-sky-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(56 189 248 / var(--tw-border-opacity))",
 })
-;"##### ; "826")]
+;"##### ; "825")]
 #[test_case(r#####"tw`border-t-sky-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(14 165 233 / var(--tw-border-opacity))",
 })
-;"##### ; "827")]
+;"##### ; "826")]
 #[test_case(r#####"tw`border-t-sky-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(2 132 199 / var(--tw-border-opacity))",
 })
-;"##### ; "828")]
+;"##### ; "827")]
 #[test_case(r#####"tw`border-t-sky-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(3 105 161 / var(--tw-border-opacity))",
 })
-;"##### ; "829")]
+;"##### ; "828")]
 #[test_case(r#####"tw`border-t-sky-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(7 89 133 / var(--tw-border-opacity))",
 })
-;"##### ; "830")]
+;"##### ; "829")]
 #[test_case(r#####"tw`border-t-sky-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(12 74 110 / var(--tw-border-opacity))",
 })
-;"##### ; "831")]
+;"##### ; "830")]
 #[test_case(r#####"tw`border-t-blue-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(239 246 255 / var(--tw-border-opacity))",
 })
-;"##### ; "832")]
+;"##### ; "831")]
 #[test_case(r#####"tw`border-t-blue-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(219 234 254 / var(--tw-border-opacity))",
 })
-;"##### ; "833")]
+;"##### ; "832")]
 #[test_case(r#####"tw`border-t-blue-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(191 219 254 / var(--tw-border-opacity))",
 })
-;"##### ; "834")]
+;"##### ; "833")]
 #[test_case(r#####"tw`border-t-blue-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(147 197 253 / var(--tw-border-opacity))",
 })
-;"##### ; "835")]
+;"##### ; "834")]
 #[test_case(r#####"tw`border-t-blue-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(96 165 250 / var(--tw-border-opacity))",
 })
-;"##### ; "836")]
+;"##### ; "835")]
 #[test_case(r#####"tw`border-t-blue-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(59 130 246 / var(--tw-border-opacity))",
 })
-;"##### ; "837")]
+;"##### ; "836")]
 #[test_case(r#####"tw`border-t-blue-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(37 99 235 / var(--tw-border-opacity))",
 })
-;"##### ; "838")]
+;"##### ; "837")]
 #[test_case(r#####"tw`border-t-blue-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(29 78 216 / var(--tw-border-opacity))",
 })
-;"##### ; "839")]
+;"##### ; "838")]
 #[test_case(r#####"tw`border-t-blue-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(30 64 175 / var(--tw-border-opacity))",
 })
-;"##### ; "840")]
+;"##### ; "839")]
 #[test_case(r#####"tw`border-t-blue-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(30 58 138 / var(--tw-border-opacity))",
 })
-;"##### ; "841")]
+;"##### ; "840")]
 #[test_case(r#####"tw`border-t-indigo-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(238 242 255 / var(--tw-border-opacity))",
 })
-;"##### ; "842")]
+;"##### ; "841")]
 #[test_case(r#####"tw`border-t-indigo-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(224 231 255 / var(--tw-border-opacity))",
 })
-;"##### ; "843")]
+;"##### ; "842")]
 #[test_case(r#####"tw`border-t-indigo-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(199 210 254 / var(--tw-border-opacity))",
 })
-;"##### ; "844")]
+;"##### ; "843")]
 #[test_case(r#####"tw`border-t-indigo-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(165 180 252 / var(--tw-border-opacity))",
 })
-;"##### ; "845")]
+;"##### ; "844")]
 #[test_case(r#####"tw`border-t-indigo-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(129 140 248 / var(--tw-border-opacity))",
 })
-;"##### ; "846")]
+;"##### ; "845")]
 #[test_case(r#####"tw`border-t-indigo-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(99 102 241 / var(--tw-border-opacity))",
 })
-;"##### ; "847")]
+;"##### ; "846")]
 #[test_case(r#####"tw`border-t-indigo-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(79 70 229 / var(--tw-border-opacity))",
 })
-;"##### ; "848")]
+;"##### ; "847")]
 #[test_case(r#####"tw`border-t-indigo-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(67 56 202 / var(--tw-border-opacity))",
 })
-;"##### ; "849")]
+;"##### ; "848")]
 #[test_case(r#####"tw`border-t-indigo-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(55 48 163 / var(--tw-border-opacity))",
 })
-;"##### ; "850")]
+;"##### ; "849")]
 #[test_case(r#####"tw`border-t-indigo-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(49 46 129 / var(--tw-border-opacity))",
 })
-;"##### ; "851")]
+;"##### ; "850")]
 #[test_case(r#####"tw`border-t-violet-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(245 243 255 / var(--tw-border-opacity))",
 })
-;"##### ; "852")]
+;"##### ; "851")]
 #[test_case(r#####"tw`border-t-violet-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(237 233 254 / var(--tw-border-opacity))",
 })
-;"##### ; "853")]
+;"##### ; "852")]
 #[test_case(r#####"tw`border-t-violet-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(221 214 254 / var(--tw-border-opacity))",
 })
-;"##### ; "854")]
+;"##### ; "853")]
 #[test_case(r#####"tw`border-t-violet-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(196 181 253 / var(--tw-border-opacity))",
 })
-;"##### ; "855")]
+;"##### ; "854")]
 #[test_case(r#####"tw`border-t-violet-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(167 139 250 / var(--tw-border-opacity))",
 })
-;"##### ; "856")]
+;"##### ; "855")]
 #[test_case(r#####"tw`border-t-violet-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(139 92 246 / var(--tw-border-opacity))",
 })
-;"##### ; "857")]
+;"##### ; "856")]
 #[test_case(r#####"tw`border-t-violet-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(124 58 237 / var(--tw-border-opacity))",
 })
-;"##### ; "858")]
+;"##### ; "857")]
 #[test_case(r#####"tw`border-t-violet-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(109 40 217 / var(--tw-border-opacity))",
 })
-;"##### ; "859")]
+;"##### ; "858")]
 #[test_case(r#####"tw`border-t-violet-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(91 33 182 / var(--tw-border-opacity))",
 })
-;"##### ; "860")]
+;"##### ; "859")]
 #[test_case(r#####"tw`border-t-violet-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(76 29 149 / var(--tw-border-opacity))",
 })
-;"##### ; "861")]
+;"##### ; "860")]
 #[test_case(r#####"tw`border-t-purple-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(250 245 255 / var(--tw-border-opacity))",
 })
-;"##### ; "862")]
+;"##### ; "861")]
 #[test_case(r#####"tw`border-t-purple-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(243 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "863")]
+;"##### ; "862")]
 #[test_case(r#####"tw`border-t-purple-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(233 213 255 / var(--tw-border-opacity))",
 })
-;"##### ; "864")]
+;"##### ; "863")]
 #[test_case(r#####"tw`border-t-purple-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(216 180 254 / var(--tw-border-opacity))",
 })
-;"##### ; "865")]
+;"##### ; "864")]
 #[test_case(r#####"tw`border-t-purple-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(192 132 252 / var(--tw-border-opacity))",
 })
-;"##### ; "866")]
+;"##### ; "865")]
 #[test_case(r#####"tw`border-t-purple-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(168 85 247 / var(--tw-border-opacity))",
 })
-;"##### ; "867")]
+;"##### ; "866")]
 #[test_case(r#####"tw`border-t-purple-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(147 51 234 / var(--tw-border-opacity))",
 })
-;"##### ; "868")]
+;"##### ; "867")]
 #[test_case(r#####"tw`border-t-purple-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(126 34 206 / var(--tw-border-opacity))",
 })
-;"##### ; "869")]
+;"##### ; "868")]
 #[test_case(r#####"tw`border-t-purple-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(107 33 168 / var(--tw-border-opacity))",
 })
-;"##### ; "870")]
+;"##### ; "869")]
 #[test_case(r#####"tw`border-t-purple-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(88 28 135 / var(--tw-border-opacity))",
 })
-;"##### ; "871")]
+;"##### ; "870")]
 #[test_case(r#####"tw`border-t-fuchsia-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(253 244 255 / var(--tw-border-opacity))",
 })
-;"##### ; "872")]
+;"##### ; "871")]
 #[test_case(r#####"tw`border-t-fuchsia-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(250 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "873")]
+;"##### ; "872")]
 #[test_case(r#####"tw`border-t-fuchsia-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(245 208 254 / var(--tw-border-opacity))",
 })
-;"##### ; "874")]
+;"##### ; "873")]
 #[test_case(r#####"tw`border-t-fuchsia-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(240 171 252 / var(--tw-border-opacity))",
 })
-;"##### ; "875")]
+;"##### ; "874")]
 #[test_case(r#####"tw`border-t-fuchsia-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(232 121 249 / var(--tw-border-opacity))",
 })
-;"##### ; "876")]
+;"##### ; "875")]
 #[test_case(r#####"tw`border-t-fuchsia-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(217 70 239 / var(--tw-border-opacity))",
 })
-;"##### ; "877")]
+;"##### ; "876")]
 #[test_case(r#####"tw`border-t-fuchsia-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(192 38 211 / var(--tw-border-opacity))",
 })
-;"##### ; "878")]
+;"##### ; "877")]
 #[test_case(r#####"tw`border-t-fuchsia-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(162 28 175 / var(--tw-border-opacity))",
 })
-;"##### ; "879")]
+;"##### ; "878")]
 #[test_case(r#####"tw`border-t-fuchsia-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(134 25 143 / var(--tw-border-opacity))",
 })
-;"##### ; "880")]
+;"##### ; "879")]
 #[test_case(r#####"tw`border-t-fuchsia-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(112 26 117 / var(--tw-border-opacity))",
 })
-;"##### ; "881")]
+;"##### ; "880")]
 #[test_case(r#####"tw`border-t-pink-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(253 242 248 / var(--tw-border-opacity))",
 })
-;"##### ; "882")]
+;"##### ; "881")]
 #[test_case(r#####"tw`border-t-pink-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(252 231 243 / var(--tw-border-opacity))",
 })
-;"##### ; "883")]
+;"##### ; "882")]
 #[test_case(r#####"tw`border-t-pink-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(251 207 232 / var(--tw-border-opacity))",
 })
-;"##### ; "884")]
+;"##### ; "883")]
 #[test_case(r#####"tw`border-t-pink-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(249 168 212 / var(--tw-border-opacity))",
 })
-;"##### ; "885")]
+;"##### ; "884")]
 #[test_case(r#####"tw`border-t-pink-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(244 114 182 / var(--tw-border-opacity))",
 })
-;"##### ; "886")]
+;"##### ; "885")]
 #[test_case(r#####"tw`border-t-pink-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(236 72 153 / var(--tw-border-opacity))",
 })
-;"##### ; "887")]
+;"##### ; "886")]
 #[test_case(r#####"tw`border-t-pink-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(219 39 119 / var(--tw-border-opacity))",
 })
-;"##### ; "888")]
+;"##### ; "887")]
 #[test_case(r#####"tw`border-t-pink-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(190 24 93 / var(--tw-border-opacity))",
 })
-;"##### ; "889")]
+;"##### ; "888")]
 #[test_case(r#####"tw`border-t-pink-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(157 23 77 / var(--tw-border-opacity))",
 })
-;"##### ; "890")]
+;"##### ; "889")]
 #[test_case(r#####"tw`border-t-pink-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(131 24 67 / var(--tw-border-opacity))",
 })
-;"##### ; "891")]
+;"##### ; "890")]
 #[test_case(r#####"tw`border-t-rose-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(255 241 242 / var(--tw-border-opacity))",
 })
-;"##### ; "892")]
+;"##### ; "891")]
 #[test_case(r#####"tw`border-t-rose-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(255 228 230 / var(--tw-border-opacity))",
 })
-;"##### ; "893")]
+;"##### ; "892")]
 #[test_case(r#####"tw`border-t-rose-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(254 205 211 / var(--tw-border-opacity))",
 })
-;"##### ; "894")]
+;"##### ; "893")]
 #[test_case(r#####"tw`border-t-rose-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(253 164 175 / var(--tw-border-opacity))",
 })
-;"##### ; "895")]
+;"##### ; "894")]
 #[test_case(r#####"tw`border-t-rose-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(251 113 133 / var(--tw-border-opacity))",
 })
-;"##### ; "896")]
+;"##### ; "895")]
 #[test_case(r#####"tw`border-t-rose-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(244 63 94 / var(--tw-border-opacity))",
 })
-;"##### ; "897")]
+;"##### ; "896")]
 #[test_case(r#####"tw`border-t-rose-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(225 29 72 / var(--tw-border-opacity))",
 })
-;"##### ; "898")]
+;"##### ; "897")]
 #[test_case(r#####"tw`border-t-rose-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(190 18 60 / var(--tw-border-opacity))",
 })
-;"##### ; "899")]
+;"##### ; "898")]
 #[test_case(r#####"tw`border-t-rose-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(159 18 57 / var(--tw-border-opacity))",
 })
-;"##### ; "900")]
+;"##### ; "899")]
 #[test_case(r#####"tw`border-t-rose-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(136 19 55 / var(--tw-border-opacity))",
 })
-;"##### ; "901")]
+;"##### ; "900")]
 #[test_case(r#####"tw`border-r-inherit
 border-r-current
 border-r-transparent
@@ -5245,3527 +5244,3527 @@ border-r-slate-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(255 255 255 / var(--tw-border-opacity))",
 })
-;"##### ; "902")]
+;"##### ; "901")]
 #[test_case(r#####"tw`border-r-slate-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(241 245 249 / var(--tw-border-opacity))",
 })
-;"##### ; "903")]
+;"##### ; "902")]
 #[test_case(r#####"tw`border-r-slate-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(226 232 240 / var(--tw-border-opacity))",
 })
-;"##### ; "904")]
+;"##### ; "903")]
 #[test_case(r#####"tw`border-r-slate-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(203 213 225 / var(--tw-border-opacity))",
 })
-;"##### ; "905")]
+;"##### ; "904")]
 #[test_case(r#####"tw`border-r-slate-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(148 163 184 / var(--tw-border-opacity))",
 })
-;"##### ; "906")]
+;"##### ; "905")]
 #[test_case(r#####"tw`border-r-slate-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(100 116 139 / var(--tw-border-opacity))",
 })
-;"##### ; "907")]
+;"##### ; "906")]
 #[test_case(r#####"tw`border-r-slate-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(71 85 105 / var(--tw-border-opacity))",
 })
-;"##### ; "908")]
+;"##### ; "907")]
 #[test_case(r#####"tw`border-r-slate-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(51 65 85 / var(--tw-border-opacity))",
 })
-;"##### ; "909")]
+;"##### ; "908")]
 #[test_case(r#####"tw`border-r-slate-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(30 41 59 / var(--tw-border-opacity))",
 })
-;"##### ; "910")]
+;"##### ; "909")]
 #[test_case(r#####"tw`border-r-slate-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(15 23 42 / var(--tw-border-opacity))",
 })
-;"##### ; "911")]
+;"##### ; "910")]
 #[test_case(r#####"tw`border-r-gray-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(249 250 251 / var(--tw-border-opacity))",
 })
-;"##### ; "912")]
+;"##### ; "911")]
 #[test_case(r#####"tw`border-r-gray-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(243 244 246 / var(--tw-border-opacity))",
 })
-;"##### ; "913")]
+;"##### ; "912")]
 #[test_case(r#####"tw`border-r-gray-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(229 231 235 / var(--tw-border-opacity))",
 })
-;"##### ; "914")]
+;"##### ; "913")]
 #[test_case(r#####"tw`border-r-gray-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(209 213 219 / var(--tw-border-opacity))",
 })
-;"##### ; "915")]
+;"##### ; "914")]
 #[test_case(r#####"tw`border-r-gray-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(156 163 175 / var(--tw-border-opacity))",
 })
-;"##### ; "916")]
+;"##### ; "915")]
 #[test_case(r#####"tw`border-r-gray-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(107 114 128 / var(--tw-border-opacity))",
 })
-;"##### ; "917")]
+;"##### ; "916")]
 #[test_case(r#####"tw`border-r-gray-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(75 85 99 / var(--tw-border-opacity))",
 })
-;"##### ; "918")]
+;"##### ; "917")]
 #[test_case(r#####"tw`border-r-gray-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(55 65 81 / var(--tw-border-opacity))",
 })
-;"##### ; "919")]
+;"##### ; "918")]
 #[test_case(r#####"tw`border-r-gray-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(31 41 55 / var(--tw-border-opacity))",
 })
-;"##### ; "920")]
+;"##### ; "919")]
 #[test_case(r#####"tw`border-r-gray-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(17 24 39 / var(--tw-border-opacity))",
 })
-;"##### ; "921")]
+;"##### ; "920")]
 #[test_case(r#####"tw`border-r-zinc-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "922")]
+;"##### ; "921")]
 #[test_case(r#####"tw`border-r-zinc-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(244 244 245 / var(--tw-border-opacity))",
 })
-;"##### ; "923")]
+;"##### ; "922")]
 #[test_case(r#####"tw`border-r-zinc-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(228 228 231 / var(--tw-border-opacity))",
 })
-;"##### ; "924")]
+;"##### ; "923")]
 #[test_case(r#####"tw`border-r-zinc-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(212 212 216 / var(--tw-border-opacity))",
 })
-;"##### ; "925")]
+;"##### ; "924")]
 #[test_case(r#####"tw`border-r-zinc-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(161 161 170 / var(--tw-border-opacity))",
 })
-;"##### ; "926")]
+;"##### ; "925")]
 #[test_case(r#####"tw`border-r-zinc-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(113 113 122 / var(--tw-border-opacity))",
 })
-;"##### ; "927")]
+;"##### ; "926")]
 #[test_case(r#####"tw`border-r-zinc-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(82 82 91 / var(--tw-border-opacity))",
 })
-;"##### ; "928")]
+;"##### ; "927")]
 #[test_case(r#####"tw`border-r-zinc-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(63 63 70 / var(--tw-border-opacity))",
 })
-;"##### ; "929")]
+;"##### ; "928")]
 #[test_case(r#####"tw`border-r-zinc-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(39 39 42 / var(--tw-border-opacity))",
 })
-;"##### ; "930")]
+;"##### ; "929")]
 #[test_case(r#####"tw`border-r-zinc-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(24 24 27 / var(--tw-border-opacity))",
 })
-;"##### ; "931")]
+;"##### ; "930")]
 #[test_case(r#####"tw`border-r-neutral-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "932")]
+;"##### ; "931")]
 #[test_case(r#####"tw`border-r-neutral-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(245 245 245 / var(--tw-border-opacity))",
 })
-;"##### ; "933")]
+;"##### ; "932")]
 #[test_case(r#####"tw`border-r-neutral-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(229 229 229 / var(--tw-border-opacity))",
 })
-;"##### ; "934")]
+;"##### ; "933")]
 #[test_case(r#####"tw`border-r-neutral-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(212 212 212 / var(--tw-border-opacity))",
 })
-;"##### ; "935")]
+;"##### ; "934")]
 #[test_case(r#####"tw`border-r-neutral-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(163 163 163 / var(--tw-border-opacity))",
 })
-;"##### ; "936")]
+;"##### ; "935")]
 #[test_case(r#####"tw`border-r-neutral-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(115 115 115 / var(--tw-border-opacity))",
 })
-;"##### ; "937")]
+;"##### ; "936")]
 #[test_case(r#####"tw`border-r-neutral-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(82 82 82 / var(--tw-border-opacity))",
 })
-;"##### ; "938")]
+;"##### ; "937")]
 #[test_case(r#####"tw`border-r-neutral-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(64 64 64 / var(--tw-border-opacity))",
 })
-;"##### ; "939")]
+;"##### ; "938")]
 #[test_case(r#####"tw`border-r-neutral-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(38 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "940")]
+;"##### ; "939")]
 #[test_case(r#####"tw`border-r-neutral-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(23 23 23 / var(--tw-border-opacity))",
 })
-;"##### ; "941")]
+;"##### ; "940")]
 #[test_case(r#####"tw`border-r-stone-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(250 250 249 / var(--tw-border-opacity))",
 })
-;"##### ; "942")]
+;"##### ; "941")]
 #[test_case(r#####"tw`border-r-stone-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(245 245 244 / var(--tw-border-opacity))",
 })
-;"##### ; "943")]
+;"##### ; "942")]
 #[test_case(r#####"tw`border-r-stone-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(231 229 228 / var(--tw-border-opacity))",
 })
-;"##### ; "944")]
+;"##### ; "943")]
 #[test_case(r#####"tw`border-r-stone-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(214 211 209 / var(--tw-border-opacity))",
 })
-;"##### ; "945")]
+;"##### ; "944")]
 #[test_case(r#####"tw`border-r-stone-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(168 162 158 / var(--tw-border-opacity))",
 })
-;"##### ; "946")]
+;"##### ; "945")]
 #[test_case(r#####"tw`border-r-stone-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(120 113 108 / var(--tw-border-opacity))",
 })
-;"##### ; "947")]
+;"##### ; "946")]
 #[test_case(r#####"tw`border-r-stone-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(87 83 78 / var(--tw-border-opacity))",
 })
-;"##### ; "948")]
+;"##### ; "947")]
 #[test_case(r#####"tw`border-r-stone-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(68 64 60 / var(--tw-border-opacity))",
 })
-;"##### ; "949")]
+;"##### ; "948")]
 #[test_case(r#####"tw`border-r-stone-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(41 37 36 / var(--tw-border-opacity))",
 })
-;"##### ; "950")]
+;"##### ; "949")]
 #[test_case(r#####"tw`border-r-stone-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(28 25 23 / var(--tw-border-opacity))",
 })
-;"##### ; "951")]
+;"##### ; "950")]
 #[test_case(r#####"tw`border-r-red-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(254 242 242 / var(--tw-border-opacity))",
 })
-;"##### ; "952")]
+;"##### ; "951")]
 #[test_case(r#####"tw`border-r-red-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(254 226 226 / var(--tw-border-opacity))",
 })
-;"##### ; "953")]
+;"##### ; "952")]
 #[test_case(r#####"tw`border-r-red-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(254 202 202 / var(--tw-border-opacity))",
 })
-;"##### ; "954")]
+;"##### ; "953")]
 #[test_case(r#####"tw`border-r-red-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(252 165 165 / var(--tw-border-opacity))",
 })
-;"##### ; "955")]
+;"##### ; "954")]
 #[test_case(r#####"tw`border-r-red-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(248 113 113 / var(--tw-border-opacity))",
 })
-;"##### ; "956")]
+;"##### ; "955")]
 #[test_case(r#####"tw`border-r-red-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(239 68 68 / var(--tw-border-opacity))",
 })
-;"##### ; "957")]
+;"##### ; "956")]
 #[test_case(r#####"tw`border-r-red-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(220 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "958")]
+;"##### ; "957")]
 #[test_case(r#####"tw`border-r-red-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(185 28 28 / var(--tw-border-opacity))",
 })
-;"##### ; "959")]
+;"##### ; "958")]
 #[test_case(r#####"tw`border-r-red-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(153 27 27 / var(--tw-border-opacity))",
 })
-;"##### ; "960")]
+;"##### ; "959")]
 #[test_case(r#####"tw`border-r-red-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(127 29 29 / var(--tw-border-opacity))",
 })
-;"##### ; "961")]
+;"##### ; "960")]
 #[test_case(r#####"tw`border-r-orange-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(255 247 237 / var(--tw-border-opacity))",
 })
-;"##### ; "962")]
+;"##### ; "961")]
 #[test_case(r#####"tw`border-r-orange-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(255 237 213 / var(--tw-border-opacity))",
 })
-;"##### ; "963")]
+;"##### ; "962")]
 #[test_case(r#####"tw`border-r-orange-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(254 215 170 / var(--tw-border-opacity))",
 })
-;"##### ; "964")]
+;"##### ; "963")]
 #[test_case(r#####"tw`border-r-orange-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(253 186 116 / var(--tw-border-opacity))",
 })
-;"##### ; "965")]
+;"##### ; "964")]
 #[test_case(r#####"tw`border-r-orange-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(251 146 60 / var(--tw-border-opacity))",
 })
-;"##### ; "966")]
+;"##### ; "965")]
 #[test_case(r#####"tw`border-r-orange-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(249 115 22 / var(--tw-border-opacity))",
 })
-;"##### ; "967")]
+;"##### ; "966")]
 #[test_case(r#####"tw`border-r-orange-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(234 88 12 / var(--tw-border-opacity))",
 })
-;"##### ; "968")]
+;"##### ; "967")]
 #[test_case(r#####"tw`border-r-orange-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(194 65 12 / var(--tw-border-opacity))",
 })
-;"##### ; "969")]
+;"##### ; "968")]
 #[test_case(r#####"tw`border-r-orange-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(154 52 18 / var(--tw-border-opacity))",
 })
-;"##### ; "970")]
+;"##### ; "969")]
 #[test_case(r#####"tw`border-r-orange-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(124 45 18 / var(--tw-border-opacity))",
 })
-;"##### ; "971")]
+;"##### ; "970")]
 #[test_case(r#####"tw`border-r-amber-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(255 251 235 / var(--tw-border-opacity))",
 })
-;"##### ; "972")]
+;"##### ; "971")]
 #[test_case(r#####"tw`border-r-amber-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(254 243 199 / var(--tw-border-opacity))",
 })
-;"##### ; "973")]
+;"##### ; "972")]
 #[test_case(r#####"tw`border-r-amber-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(253 230 138 / var(--tw-border-opacity))",
 })
-;"##### ; "974")]
+;"##### ; "973")]
 #[test_case(r#####"tw`border-r-amber-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(252 211 77 / var(--tw-border-opacity))",
 })
-;"##### ; "975")]
+;"##### ; "974")]
 #[test_case(r#####"tw`border-r-amber-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(251 191 36 / var(--tw-border-opacity))",
 })
-;"##### ; "976")]
+;"##### ; "975")]
 #[test_case(r#####"tw`border-r-amber-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(245 158 11 / var(--tw-border-opacity))",
 })
-;"##### ; "977")]
+;"##### ; "976")]
 #[test_case(r#####"tw`border-r-amber-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(217 119 6 / var(--tw-border-opacity))",
 })
-;"##### ; "978")]
+;"##### ; "977")]
 #[test_case(r#####"tw`border-r-amber-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(180 83 9 / var(--tw-border-opacity))",
 })
-;"##### ; "979")]
+;"##### ; "978")]
 #[test_case(r#####"tw`border-r-amber-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(146 64 14 / var(--tw-border-opacity))",
 })
-;"##### ; "980")]
+;"##### ; "979")]
 #[test_case(r#####"tw`border-r-amber-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(120 53 15 / var(--tw-border-opacity))",
 })
-;"##### ; "981")]
+;"##### ; "980")]
 #[test_case(r#####"tw`border-r-yellow-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(254 252 232 / var(--tw-border-opacity))",
 })
-;"##### ; "982")]
+;"##### ; "981")]
 #[test_case(r#####"tw`border-r-yellow-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(254 249 195 / var(--tw-border-opacity))",
 })
-;"##### ; "983")]
+;"##### ; "982")]
 #[test_case(r#####"tw`border-r-yellow-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(254 240 138 / var(--tw-border-opacity))",
 })
-;"##### ; "984")]
+;"##### ; "983")]
 #[test_case(r#####"tw`border-r-yellow-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(253 224 71 / var(--tw-border-opacity))",
 })
-;"##### ; "985")]
+;"##### ; "984")]
 #[test_case(r#####"tw`border-r-yellow-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(250 204 21 / var(--tw-border-opacity))",
 })
-;"##### ; "986")]
+;"##### ; "985")]
 #[test_case(r#####"tw`border-r-yellow-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(234 179 8 / var(--tw-border-opacity))",
 })
-;"##### ; "987")]
+;"##### ; "986")]
 #[test_case(r#####"tw`border-r-yellow-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(202 138 4 / var(--tw-border-opacity))",
 })
-;"##### ; "988")]
+;"##### ; "987")]
 #[test_case(r#####"tw`border-r-yellow-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(161 98 7 / var(--tw-border-opacity))",
 })
-;"##### ; "989")]
+;"##### ; "988")]
 #[test_case(r#####"tw`border-r-yellow-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(133 77 14 / var(--tw-border-opacity))",
 })
-;"##### ; "990")]
+;"##### ; "989")]
 #[test_case(r#####"tw`border-r-yellow-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(113 63 18 / var(--tw-border-opacity))",
 })
-;"##### ; "991")]
+;"##### ; "990")]
 #[test_case(r#####"tw`border-r-lime-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(247 254 231 / var(--tw-border-opacity))",
 })
-;"##### ; "992")]
+;"##### ; "991")]
 #[test_case(r#####"tw`border-r-lime-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(236 252 203 / var(--tw-border-opacity))",
 })
-;"##### ; "993")]
+;"##### ; "992")]
 #[test_case(r#####"tw`border-r-lime-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(217 249 157 / var(--tw-border-opacity))",
 })
-;"##### ; "994")]
+;"##### ; "993")]
 #[test_case(r#####"tw`border-r-lime-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(190 242 100 / var(--tw-border-opacity))",
 })
-;"##### ; "995")]
+;"##### ; "994")]
 #[test_case(r#####"tw`border-r-lime-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(163 230 53 / var(--tw-border-opacity))",
 })
-;"##### ; "996")]
+;"##### ; "995")]
 #[test_case(r#####"tw`border-r-lime-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(132 204 22 / var(--tw-border-opacity))",
 })
-;"##### ; "997")]
+;"##### ; "996")]
 #[test_case(r#####"tw`border-r-lime-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(101 163 13 / var(--tw-border-opacity))",
 })
-;"##### ; "998")]
+;"##### ; "997")]
 #[test_case(r#####"tw`border-r-lime-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(77 124 15 / var(--tw-border-opacity))",
 })
-;"##### ; "999")]
+;"##### ; "998")]
 #[test_case(r#####"tw`border-r-lime-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(63 98 18 / var(--tw-border-opacity))",
 })
-;"##### ; "1000")]
+;"##### ; "999")]
 #[test_case(r#####"tw`border-r-lime-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(54 83 20 / var(--tw-border-opacity))",
 })
-;"##### ; "1001")]
+;"##### ; "1000")]
 #[test_case(r#####"tw`border-r-green-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(240 253 244 / var(--tw-border-opacity))",
 })
-;"##### ; "1002")]
+;"##### ; "1001")]
 #[test_case(r#####"tw`border-r-green-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(220 252 231 / var(--tw-border-opacity))",
 })
-;"##### ; "1003")]
+;"##### ; "1002")]
 #[test_case(r#####"tw`border-r-green-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(187 247 208 / var(--tw-border-opacity))",
 })
-;"##### ; "1004")]
+;"##### ; "1003")]
 #[test_case(r#####"tw`border-r-green-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(134 239 172 / var(--tw-border-opacity))",
 })
-;"##### ; "1005")]
+;"##### ; "1004")]
 #[test_case(r#####"tw`border-r-green-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(74 222 128 / var(--tw-border-opacity))",
 })
-;"##### ; "1006")]
+;"##### ; "1005")]
 #[test_case(r#####"tw`border-r-green-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(34 197 94 / var(--tw-border-opacity))",
 })
-;"##### ; "1007")]
+;"##### ; "1006")]
 #[test_case(r#####"tw`border-r-green-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(22 163 74 / var(--tw-border-opacity))",
 })
-;"##### ; "1008")]
+;"##### ; "1007")]
 #[test_case(r#####"tw`border-r-green-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(21 128 61 / var(--tw-border-opacity))",
 })
-;"##### ; "1009")]
+;"##### ; "1008")]
 #[test_case(r#####"tw`border-r-green-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(22 101 52 / var(--tw-border-opacity))",
 })
-;"##### ; "1010")]
+;"##### ; "1009")]
 #[test_case(r#####"tw`border-r-green-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(20 83 45 / var(--tw-border-opacity))",
 })
-;"##### ; "1011")]
+;"##### ; "1010")]
 #[test_case(r#####"tw`border-r-emerald-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(236 253 245 / var(--tw-border-opacity))",
 })
-;"##### ; "1012")]
+;"##### ; "1011")]
 #[test_case(r#####"tw`border-r-emerald-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(209 250 229 / var(--tw-border-opacity))",
 })
-;"##### ; "1013")]
+;"##### ; "1012")]
 #[test_case(r#####"tw`border-r-emerald-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(167 243 208 / var(--tw-border-opacity))",
 })
-;"##### ; "1014")]
+;"##### ; "1013")]
 #[test_case(r#####"tw`border-r-emerald-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(110 231 183 / var(--tw-border-opacity))",
 })
-;"##### ; "1015")]
+;"##### ; "1014")]
 #[test_case(r#####"tw`border-r-emerald-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(52 211 153 / var(--tw-border-opacity))",
 })
-;"##### ; "1016")]
+;"##### ; "1015")]
 #[test_case(r#####"tw`border-r-emerald-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(16 185 129 / var(--tw-border-opacity))",
 })
-;"##### ; "1017")]
+;"##### ; "1016")]
 #[test_case(r#####"tw`border-r-emerald-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(5 150 105 / var(--tw-border-opacity))",
 })
-;"##### ; "1018")]
+;"##### ; "1017")]
 #[test_case(r#####"tw`border-r-emerald-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(4 120 87 / var(--tw-border-opacity))",
 })
-;"##### ; "1019")]
+;"##### ; "1018")]
 #[test_case(r#####"tw`border-r-emerald-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(6 95 70 / var(--tw-border-opacity))",
 })
-;"##### ; "1020")]
+;"##### ; "1019")]
 #[test_case(r#####"tw`border-r-emerald-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(6 78 59 / var(--tw-border-opacity))",
 })
-;"##### ; "1021")]
+;"##### ; "1020")]
 #[test_case(r#####"tw`border-r-teal-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(240 253 250 / var(--tw-border-opacity))",
 })
-;"##### ; "1022")]
+;"##### ; "1021")]
 #[test_case(r#####"tw`border-r-teal-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(204 251 241 / var(--tw-border-opacity))",
 })
-;"##### ; "1023")]
+;"##### ; "1022")]
 #[test_case(r#####"tw`border-r-teal-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(153 246 228 / var(--tw-border-opacity))",
 })
-;"##### ; "1024")]
+;"##### ; "1023")]
 #[test_case(r#####"tw`border-r-teal-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(94 234 212 / var(--tw-border-opacity))",
 })
-;"##### ; "1025")]
+;"##### ; "1024")]
 #[test_case(r#####"tw`border-r-teal-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(45 212 191 / var(--tw-border-opacity))",
 })
-;"##### ; "1026")]
+;"##### ; "1025")]
 #[test_case(r#####"tw`border-r-teal-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(20 184 166 / var(--tw-border-opacity))",
 })
-;"##### ; "1027")]
+;"##### ; "1026")]
 #[test_case(r#####"tw`border-r-teal-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(13 148 136 / var(--tw-border-opacity))",
 })
-;"##### ; "1028")]
+;"##### ; "1027")]
 #[test_case(r#####"tw`border-r-teal-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(15 118 110 / var(--tw-border-opacity))",
 })
-;"##### ; "1029")]
+;"##### ; "1028")]
 #[test_case(r#####"tw`border-r-teal-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(17 94 89 / var(--tw-border-opacity))",
 })
-;"##### ; "1030")]
+;"##### ; "1029")]
 #[test_case(r#####"tw`border-r-teal-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(19 78 74 / var(--tw-border-opacity))",
 })
-;"##### ; "1031")]
+;"##### ; "1030")]
 #[test_case(r#####"tw`border-r-cyan-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(236 254 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1032")]
+;"##### ; "1031")]
 #[test_case(r#####"tw`border-r-cyan-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(207 250 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1033")]
+;"##### ; "1032")]
 #[test_case(r#####"tw`border-r-cyan-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(165 243 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1034")]
+;"##### ; "1033")]
 #[test_case(r#####"tw`border-r-cyan-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(103 232 249 / var(--tw-border-opacity))",
 })
-;"##### ; "1035")]
+;"##### ; "1034")]
 #[test_case(r#####"tw`border-r-cyan-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(34 211 238 / var(--tw-border-opacity))",
 })
-;"##### ; "1036")]
+;"##### ; "1035")]
 #[test_case(r#####"tw`border-r-cyan-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(6 182 212 / var(--tw-border-opacity))",
 })
-;"##### ; "1037")]
+;"##### ; "1036")]
 #[test_case(r#####"tw`border-r-cyan-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(8 145 178 / var(--tw-border-opacity))",
 })
-;"##### ; "1038")]
+;"##### ; "1037")]
 #[test_case(r#####"tw`border-r-cyan-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(14 116 144 / var(--tw-border-opacity))",
 })
-;"##### ; "1039")]
+;"##### ; "1038")]
 #[test_case(r#####"tw`border-r-cyan-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(21 94 117 / var(--tw-border-opacity))",
 })
-;"##### ; "1040")]
+;"##### ; "1039")]
 #[test_case(r#####"tw`border-r-cyan-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(22 78 99 / var(--tw-border-opacity))",
 })
-;"##### ; "1041")]
+;"##### ; "1040")]
 #[test_case(r#####"tw`border-r-sky-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(240 249 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1042")]
+;"##### ; "1041")]
 #[test_case(r#####"tw`border-r-sky-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(224 242 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1043")]
+;"##### ; "1042")]
 #[test_case(r#####"tw`border-r-sky-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(186 230 253 / var(--tw-border-opacity))",
 })
-;"##### ; "1044")]
+;"##### ; "1043")]
 #[test_case(r#####"tw`border-r-sky-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(125 211 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1045")]
+;"##### ; "1044")]
 #[test_case(r#####"tw`border-r-sky-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(56 189 248 / var(--tw-border-opacity))",
 })
-;"##### ; "1046")]
+;"##### ; "1045")]
 #[test_case(r#####"tw`border-r-sky-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(14 165 233 / var(--tw-border-opacity))",
 })
-;"##### ; "1047")]
+;"##### ; "1046")]
 #[test_case(r#####"tw`border-r-sky-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(2 132 199 / var(--tw-border-opacity))",
 })
-;"##### ; "1048")]
+;"##### ; "1047")]
 #[test_case(r#####"tw`border-r-sky-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(3 105 161 / var(--tw-border-opacity))",
 })
-;"##### ; "1049")]
+;"##### ; "1048")]
 #[test_case(r#####"tw`border-r-sky-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(7 89 133 / var(--tw-border-opacity))",
 })
-;"##### ; "1050")]
+;"##### ; "1049")]
 #[test_case(r#####"tw`border-r-sky-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(12 74 110 / var(--tw-border-opacity))",
 })
-;"##### ; "1051")]
+;"##### ; "1050")]
 #[test_case(r#####"tw`border-r-blue-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(239 246 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1052")]
+;"##### ; "1051")]
 #[test_case(r#####"tw`border-r-blue-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(219 234 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1053")]
+;"##### ; "1052")]
 #[test_case(r#####"tw`border-r-blue-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(191 219 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1054")]
+;"##### ; "1053")]
 #[test_case(r#####"tw`border-r-blue-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(147 197 253 / var(--tw-border-opacity))",
 })
-;"##### ; "1055")]
+;"##### ; "1054")]
 #[test_case(r#####"tw`border-r-blue-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(96 165 250 / var(--tw-border-opacity))",
 })
-;"##### ; "1056")]
+;"##### ; "1055")]
 #[test_case(r#####"tw`border-r-blue-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(59 130 246 / var(--tw-border-opacity))",
 })
-;"##### ; "1057")]
+;"##### ; "1056")]
 #[test_case(r#####"tw`border-r-blue-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(37 99 235 / var(--tw-border-opacity))",
 })
-;"##### ; "1058")]
+;"##### ; "1057")]
 #[test_case(r#####"tw`border-r-blue-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(29 78 216 / var(--tw-border-opacity))",
 })
-;"##### ; "1059")]
+;"##### ; "1058")]
 #[test_case(r#####"tw`border-r-blue-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(30 64 175 / var(--tw-border-opacity))",
 })
-;"##### ; "1060")]
+;"##### ; "1059")]
 #[test_case(r#####"tw`border-r-blue-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(30 58 138 / var(--tw-border-opacity))",
 })
-;"##### ; "1061")]
+;"##### ; "1060")]
 #[test_case(r#####"tw`border-r-indigo-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(238 242 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1062")]
+;"##### ; "1061")]
 #[test_case(r#####"tw`border-r-indigo-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(224 231 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1063")]
+;"##### ; "1062")]
 #[test_case(r#####"tw`border-r-indigo-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(199 210 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1064")]
+;"##### ; "1063")]
 #[test_case(r#####"tw`border-r-indigo-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(165 180 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1065")]
+;"##### ; "1064")]
 #[test_case(r#####"tw`border-r-indigo-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(129 140 248 / var(--tw-border-opacity))",
 })
-;"##### ; "1066")]
+;"##### ; "1065")]
 #[test_case(r#####"tw`border-r-indigo-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(99 102 241 / var(--tw-border-opacity))",
 })
-;"##### ; "1067")]
+;"##### ; "1066")]
 #[test_case(r#####"tw`border-r-indigo-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(79 70 229 / var(--tw-border-opacity))",
 })
-;"##### ; "1068")]
+;"##### ; "1067")]
 #[test_case(r#####"tw`border-r-indigo-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(67 56 202 / var(--tw-border-opacity))",
 })
-;"##### ; "1069")]
+;"##### ; "1068")]
 #[test_case(r#####"tw`border-r-indigo-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(55 48 163 / var(--tw-border-opacity))",
 })
-;"##### ; "1070")]
+;"##### ; "1069")]
 #[test_case(r#####"tw`border-r-indigo-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(49 46 129 / var(--tw-border-opacity))",
 })
-;"##### ; "1071")]
+;"##### ; "1070")]
 #[test_case(r#####"tw`border-r-violet-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(245 243 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1072")]
+;"##### ; "1071")]
 #[test_case(r#####"tw`border-r-violet-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(237 233 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1073")]
+;"##### ; "1072")]
 #[test_case(r#####"tw`border-r-violet-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(221 214 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1074")]
+;"##### ; "1073")]
 #[test_case(r#####"tw`border-r-violet-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(196 181 253 / var(--tw-border-opacity))",
 })
-;"##### ; "1075")]
+;"##### ; "1074")]
 #[test_case(r#####"tw`border-r-violet-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(167 139 250 / var(--tw-border-opacity))",
 })
-;"##### ; "1076")]
+;"##### ; "1075")]
 #[test_case(r#####"tw`border-r-violet-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(139 92 246 / var(--tw-border-opacity))",
 })
-;"##### ; "1077")]
+;"##### ; "1076")]
 #[test_case(r#####"tw`border-r-violet-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(124 58 237 / var(--tw-border-opacity))",
 })
-;"##### ; "1078")]
+;"##### ; "1077")]
 #[test_case(r#####"tw`border-r-violet-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(109 40 217 / var(--tw-border-opacity))",
 })
-;"##### ; "1079")]
+;"##### ; "1078")]
 #[test_case(r#####"tw`border-r-violet-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(91 33 182 / var(--tw-border-opacity))",
 })
-;"##### ; "1080")]
+;"##### ; "1079")]
 #[test_case(r#####"tw`border-r-violet-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(76 29 149 / var(--tw-border-opacity))",
 })
-;"##### ; "1081")]
+;"##### ; "1080")]
 #[test_case(r#####"tw`border-r-purple-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(250 245 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1082")]
+;"##### ; "1081")]
 #[test_case(r#####"tw`border-r-purple-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(243 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1083")]
+;"##### ; "1082")]
 #[test_case(r#####"tw`border-r-purple-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(233 213 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1084")]
+;"##### ; "1083")]
 #[test_case(r#####"tw`border-r-purple-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(216 180 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1085")]
+;"##### ; "1084")]
 #[test_case(r#####"tw`border-r-purple-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(192 132 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1086")]
+;"##### ; "1085")]
 #[test_case(r#####"tw`border-r-purple-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(168 85 247 / var(--tw-border-opacity))",
 })
-;"##### ; "1087")]
+;"##### ; "1086")]
 #[test_case(r#####"tw`border-r-purple-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(147 51 234 / var(--tw-border-opacity))",
 })
-;"##### ; "1088")]
+;"##### ; "1087")]
 #[test_case(r#####"tw`border-r-purple-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(126 34 206 / var(--tw-border-opacity))",
 })
-;"##### ; "1089")]
+;"##### ; "1088")]
 #[test_case(r#####"tw`border-r-purple-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(107 33 168 / var(--tw-border-opacity))",
 })
-;"##### ; "1090")]
+;"##### ; "1089")]
 #[test_case(r#####"tw`border-r-purple-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(88 28 135 / var(--tw-border-opacity))",
 })
-;"##### ; "1091")]
+;"##### ; "1090")]
 #[test_case(r#####"tw`border-r-fuchsia-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(253 244 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1092")]
+;"##### ; "1091")]
 #[test_case(r#####"tw`border-r-fuchsia-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(250 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1093")]
+;"##### ; "1092")]
 #[test_case(r#####"tw`border-r-fuchsia-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(245 208 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1094")]
+;"##### ; "1093")]
 #[test_case(r#####"tw`border-r-fuchsia-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(240 171 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1095")]
+;"##### ; "1094")]
 #[test_case(r#####"tw`border-r-fuchsia-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(232 121 249 / var(--tw-border-opacity))",
 })
-;"##### ; "1096")]
+;"##### ; "1095")]
 #[test_case(r#####"tw`border-r-fuchsia-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(217 70 239 / var(--tw-border-opacity))",
 })
-;"##### ; "1097")]
+;"##### ; "1096")]
 #[test_case(r#####"tw`border-r-fuchsia-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(192 38 211 / var(--tw-border-opacity))",
 })
-;"##### ; "1098")]
+;"##### ; "1097")]
 #[test_case(r#####"tw`border-r-fuchsia-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(162 28 175 / var(--tw-border-opacity))",
 })
-;"##### ; "1099")]
+;"##### ; "1098")]
 #[test_case(r#####"tw`border-r-fuchsia-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(134 25 143 / var(--tw-border-opacity))",
 })
-;"##### ; "1100")]
+;"##### ; "1099")]
 #[test_case(r#####"tw`border-r-fuchsia-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(112 26 117 / var(--tw-border-opacity))",
 })
-;"##### ; "1101")]
+;"##### ; "1100")]
 #[test_case(r#####"tw`border-r-pink-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(253 242 248 / var(--tw-border-opacity))",
 })
-;"##### ; "1102")]
+;"##### ; "1101")]
 #[test_case(r#####"tw`border-r-pink-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(252 231 243 / var(--tw-border-opacity))",
 })
-;"##### ; "1103")]
+;"##### ; "1102")]
 #[test_case(r#####"tw`border-r-pink-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(251 207 232 / var(--tw-border-opacity))",
 })
-;"##### ; "1104")]
+;"##### ; "1103")]
 #[test_case(r#####"tw`border-r-pink-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(249 168 212 / var(--tw-border-opacity))",
 })
-;"##### ; "1105")]
+;"##### ; "1104")]
 #[test_case(r#####"tw`border-r-pink-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(244 114 182 / var(--tw-border-opacity))",
 })
-;"##### ; "1106")]
+;"##### ; "1105")]
 #[test_case(r#####"tw`border-r-pink-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(236 72 153 / var(--tw-border-opacity))",
 })
-;"##### ; "1107")]
+;"##### ; "1106")]
 #[test_case(r#####"tw`border-r-pink-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(219 39 119 / var(--tw-border-opacity))",
 })
-;"##### ; "1108")]
+;"##### ; "1107")]
 #[test_case(r#####"tw`border-r-pink-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(190 24 93 / var(--tw-border-opacity))",
 })
-;"##### ; "1109")]
+;"##### ; "1108")]
 #[test_case(r#####"tw`border-r-pink-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(157 23 77 / var(--tw-border-opacity))",
 })
-;"##### ; "1110")]
+;"##### ; "1109")]
 #[test_case(r#####"tw`border-r-pink-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(131 24 67 / var(--tw-border-opacity))",
 })
-;"##### ; "1111")]
+;"##### ; "1110")]
 #[test_case(r#####"tw`border-r-rose-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(255 241 242 / var(--tw-border-opacity))",
 })
-;"##### ; "1112")]
+;"##### ; "1111")]
 #[test_case(r#####"tw`border-r-rose-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(255 228 230 / var(--tw-border-opacity))",
 })
-;"##### ; "1113")]
+;"##### ; "1112")]
 #[test_case(r#####"tw`border-r-rose-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(254 205 211 / var(--tw-border-opacity))",
 })
-;"##### ; "1114")]
+;"##### ; "1113")]
 #[test_case(r#####"tw`border-r-rose-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(253 164 175 / var(--tw-border-opacity))",
 })
-;"##### ; "1115")]
+;"##### ; "1114")]
 #[test_case(r#####"tw`border-r-rose-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(251 113 133 / var(--tw-border-opacity))",
 })
-;"##### ; "1116")]
+;"##### ; "1115")]
 #[test_case(r#####"tw`border-r-rose-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(244 63 94 / var(--tw-border-opacity))",
 })
-;"##### ; "1117")]
+;"##### ; "1116")]
 #[test_case(r#####"tw`border-r-rose-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(225 29 72 / var(--tw-border-opacity))",
 })
-;"##### ; "1118")]
+;"##### ; "1117")]
 #[test_case(r#####"tw`border-r-rose-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(190 18 60 / var(--tw-border-opacity))",
 })
-;"##### ; "1119")]
+;"##### ; "1118")]
 #[test_case(r#####"tw`border-r-rose-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(159 18 57 / var(--tw-border-opacity))",
 })
-;"##### ; "1120")]
+;"##### ; "1119")]
 #[test_case(r#####"tw`border-r-rose-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(136 19 55 / var(--tw-border-opacity))",
 })
-;"##### ; "1121")]
+;"##### ; "1120")]
 #[test_case(r#####"tw`border-b-inherit`"#####, r#####"({
   borderBottomColor: "inherit",
 })
-;"##### ; "1122")]
+;"##### ; "1121")]
 #[test_case(r#####"tw`border-b-current`"#####, r#####"({
   borderBottomColor: "currentColor",
 })
-;"##### ; "1123")]
+;"##### ; "1122")]
 #[test_case(r#####"tw`border-b-transparent`"#####, r#####"({
   borderBottomColor: "transparent",
 })
-;"##### ; "1124")]
+;"##### ; "1123")]
 #[test_case(r#####"tw`border-b-black`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(0 0 0 / var(--tw-border-opacity))",
 })
-;"##### ; "1125")]
+;"##### ; "1124")]
 #[test_case(r#####"tw`border-b-white`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(255 255 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1126")]
+;"##### ; "1125")]
 #[test_case(r#####"tw`border-b-slate-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(248 250 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1127")]
+;"##### ; "1126")]
 #[test_case(r#####"tw`border-b-slate-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(241 245 249 / var(--tw-border-opacity))",
 })
-;"##### ; "1128")]
+;"##### ; "1127")]
 #[test_case(r#####"tw`border-b-slate-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(226 232 240 / var(--tw-border-opacity))",
 })
-;"##### ; "1129")]
+;"##### ; "1128")]
 #[test_case(r#####"tw`border-b-slate-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(203 213 225 / var(--tw-border-opacity))",
 })
-;"##### ; "1130")]
+;"##### ; "1129")]
 #[test_case(r#####"tw`border-b-slate-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(148 163 184 / var(--tw-border-opacity))",
 })
-;"##### ; "1131")]
+;"##### ; "1130")]
 #[test_case(r#####"tw`border-b-slate-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(100 116 139 / var(--tw-border-opacity))",
 })
-;"##### ; "1132")]
+;"##### ; "1131")]
 #[test_case(r#####"tw`border-b-slate-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(71 85 105 / var(--tw-border-opacity))",
 })
-;"##### ; "1133")]
+;"##### ; "1132")]
 #[test_case(r#####"tw`border-b-slate-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(51 65 85 / var(--tw-border-opacity))",
 })
-;"##### ; "1134")]
+;"##### ; "1133")]
 #[test_case(r#####"tw`border-b-slate-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(30 41 59 / var(--tw-border-opacity))",
 })
-;"##### ; "1135")]
+;"##### ; "1134")]
 #[test_case(r#####"tw`border-b-slate-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(15 23 42 / var(--tw-border-opacity))",
 })
-;"##### ; "1136")]
+;"##### ; "1135")]
 #[test_case(r#####"tw`border-b-gray-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(249 250 251 / var(--tw-border-opacity))",
 })
-;"##### ; "1137")]
+;"##### ; "1136")]
 #[test_case(r#####"tw`border-b-gray-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(243 244 246 / var(--tw-border-opacity))",
 })
-;"##### ; "1138")]
+;"##### ; "1137")]
 #[test_case(r#####"tw`border-b-gray-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(229 231 235 / var(--tw-border-opacity))",
 })
-;"##### ; "1139")]
+;"##### ; "1138")]
 #[test_case(r#####"tw`border-b-gray-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(209 213 219 / var(--tw-border-opacity))",
 })
-;"##### ; "1140")]
+;"##### ; "1139")]
 #[test_case(r#####"tw`border-b-gray-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(156 163 175 / var(--tw-border-opacity))",
 })
-;"##### ; "1141")]
+;"##### ; "1140")]
 #[test_case(r#####"tw`border-b-gray-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(107 114 128 / var(--tw-border-opacity))",
 })
-;"##### ; "1142")]
+;"##### ; "1141")]
 #[test_case(r#####"tw`border-b-gray-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(75 85 99 / var(--tw-border-opacity))",
 })
-;"##### ; "1143")]
+;"##### ; "1142")]
 #[test_case(r#####"tw`border-b-gray-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(55 65 81 / var(--tw-border-opacity))",
 })
-;"##### ; "1144")]
+;"##### ; "1143")]
 #[test_case(r#####"tw`border-b-gray-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(31 41 55 / var(--tw-border-opacity))",
 })
-;"##### ; "1145")]
+;"##### ; "1144")]
 #[test_case(r#####"tw`border-b-gray-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(17 24 39 / var(--tw-border-opacity))",
 })
-;"##### ; "1146")]
+;"##### ; "1145")]
 #[test_case(r#####"tw`border-b-zinc-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "1147")]
+;"##### ; "1146")]
 #[test_case(r#####"tw`border-b-zinc-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(244 244 245 / var(--tw-border-opacity))",
 })
-;"##### ; "1148")]
+;"##### ; "1147")]
 #[test_case(r#####"tw`border-b-zinc-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(228 228 231 / var(--tw-border-opacity))",
 })
-;"##### ; "1149")]
+;"##### ; "1148")]
 #[test_case(r#####"tw`border-b-zinc-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(212 212 216 / var(--tw-border-opacity))",
 })
-;"##### ; "1150")]
+;"##### ; "1149")]
 #[test_case(r#####"tw`border-b-zinc-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(161 161 170 / var(--tw-border-opacity))",
 })
-;"##### ; "1151")]
+;"##### ; "1150")]
 #[test_case(r#####"tw`border-b-zinc-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(113 113 122 / var(--tw-border-opacity))",
 })
-;"##### ; "1152")]
+;"##### ; "1151")]
 #[test_case(r#####"tw`border-b-zinc-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(82 82 91 / var(--tw-border-opacity))",
 })
-;"##### ; "1153")]
+;"##### ; "1152")]
 #[test_case(r#####"tw`border-b-zinc-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(63 63 70 / var(--tw-border-opacity))",
 })
-;"##### ; "1154")]
+;"##### ; "1153")]
 #[test_case(r#####"tw`border-b-zinc-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(39 39 42 / var(--tw-border-opacity))",
 })
-;"##### ; "1155")]
+;"##### ; "1154")]
 #[test_case(r#####"tw`border-b-zinc-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(24 24 27 / var(--tw-border-opacity))",
 })
-;"##### ; "1156")]
+;"##### ; "1155")]
 #[test_case(r#####"tw`border-b-neutral-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "1157")]
+;"##### ; "1156")]
 #[test_case(r#####"tw`border-b-neutral-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(245 245 245 / var(--tw-border-opacity))",
 })
-;"##### ; "1158")]
+;"##### ; "1157")]
 #[test_case(r#####"tw`border-b-neutral-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(229 229 229 / var(--tw-border-opacity))",
 })
-;"##### ; "1159")]
+;"##### ; "1158")]
 #[test_case(r#####"tw`border-b-neutral-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(212 212 212 / var(--tw-border-opacity))",
 })
-;"##### ; "1160")]
+;"##### ; "1159")]
 #[test_case(r#####"tw`border-b-neutral-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(163 163 163 / var(--tw-border-opacity))",
 })
-;"##### ; "1161")]
+;"##### ; "1160")]
 #[test_case(r#####"tw`border-b-neutral-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(115 115 115 / var(--tw-border-opacity))",
 })
-;"##### ; "1162")]
+;"##### ; "1161")]
 #[test_case(r#####"tw`border-b-neutral-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(82 82 82 / var(--tw-border-opacity))",
 })
-;"##### ; "1163")]
+;"##### ; "1162")]
 #[test_case(r#####"tw`border-b-neutral-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(64 64 64 / var(--tw-border-opacity))",
 })
-;"##### ; "1164")]
+;"##### ; "1163")]
 #[test_case(r#####"tw`border-b-neutral-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(38 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "1165")]
+;"##### ; "1164")]
 #[test_case(r#####"tw`border-b-neutral-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(23 23 23 / var(--tw-border-opacity))",
 })
-;"##### ; "1166")]
+;"##### ; "1165")]
 #[test_case(r#####"tw`border-b-stone-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(250 250 249 / var(--tw-border-opacity))",
 })
-;"##### ; "1167")]
+;"##### ; "1166")]
 #[test_case(r#####"tw`border-b-stone-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(245 245 244 / var(--tw-border-opacity))",
 })
-;"##### ; "1168")]
+;"##### ; "1167")]
 #[test_case(r#####"tw`border-b-stone-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(231 229 228 / var(--tw-border-opacity))",
 })
-;"##### ; "1169")]
+;"##### ; "1168")]
 #[test_case(r#####"tw`border-b-stone-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(214 211 209 / var(--tw-border-opacity))",
 })
-;"##### ; "1170")]
+;"##### ; "1169")]
 #[test_case(r#####"tw`border-b-stone-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(168 162 158 / var(--tw-border-opacity))",
 })
-;"##### ; "1171")]
+;"##### ; "1170")]
 #[test_case(r#####"tw`border-b-stone-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(120 113 108 / var(--tw-border-opacity))",
 })
-;"##### ; "1172")]
+;"##### ; "1171")]
 #[test_case(r#####"tw`border-b-stone-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(87 83 78 / var(--tw-border-opacity))",
 })
-;"##### ; "1173")]
+;"##### ; "1172")]
 #[test_case(r#####"tw`border-b-stone-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(68 64 60 / var(--tw-border-opacity))",
 })
-;"##### ; "1174")]
+;"##### ; "1173")]
 #[test_case(r#####"tw`border-b-stone-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(41 37 36 / var(--tw-border-opacity))",
 })
-;"##### ; "1175")]
+;"##### ; "1174")]
 #[test_case(r#####"tw`border-b-stone-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(28 25 23 / var(--tw-border-opacity))",
 })
-;"##### ; "1176")]
+;"##### ; "1175")]
 #[test_case(r#####"tw`border-b-red-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(254 242 242 / var(--tw-border-opacity))",
 })
-;"##### ; "1177")]
+;"##### ; "1176")]
 #[test_case(r#####"tw`border-b-red-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(254 226 226 / var(--tw-border-opacity))",
 })
-;"##### ; "1178")]
+;"##### ; "1177")]
 #[test_case(r#####"tw`border-b-red-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(254 202 202 / var(--tw-border-opacity))",
 })
-;"##### ; "1179")]
+;"##### ; "1178")]
 #[test_case(r#####"tw`border-b-red-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(252 165 165 / var(--tw-border-opacity))",
 })
-;"##### ; "1180")]
+;"##### ; "1179")]
 #[test_case(r#####"tw`border-b-red-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(248 113 113 / var(--tw-border-opacity))",
 })
-;"##### ; "1181")]
+;"##### ; "1180")]
 #[test_case(r#####"tw`border-b-red-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(239 68 68 / var(--tw-border-opacity))",
 })
-;"##### ; "1182")]
+;"##### ; "1181")]
 #[test_case(r#####"tw`border-b-red-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(220 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "1183")]
+;"##### ; "1182")]
 #[test_case(r#####"tw`border-b-red-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(185 28 28 / var(--tw-border-opacity))",
 })
-;"##### ; "1184")]
+;"##### ; "1183")]
 #[test_case(r#####"tw`border-b-red-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(153 27 27 / var(--tw-border-opacity))",
 })
-;"##### ; "1185")]
+;"##### ; "1184")]
 #[test_case(r#####"tw`border-b-red-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(127 29 29 / var(--tw-border-opacity))",
 })
-;"##### ; "1186")]
+;"##### ; "1185")]
 #[test_case(r#####"tw`border-b-orange-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(255 247 237 / var(--tw-border-opacity))",
 })
-;"##### ; "1187")]
+;"##### ; "1186")]
 #[test_case(r#####"tw`border-b-orange-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(255 237 213 / var(--tw-border-opacity))",
 })
-;"##### ; "1188")]
+;"##### ; "1187")]
 #[test_case(r#####"tw`border-b-orange-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(254 215 170 / var(--tw-border-opacity))",
 })
-;"##### ; "1189")]
+;"##### ; "1188")]
 #[test_case(r#####"tw`border-b-orange-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(253 186 116 / var(--tw-border-opacity))",
 })
-;"##### ; "1190")]
+;"##### ; "1189")]
 #[test_case(r#####"tw`border-b-orange-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(251 146 60 / var(--tw-border-opacity))",
 })
-;"##### ; "1191")]
+;"##### ; "1190")]
 #[test_case(r#####"tw`border-b-orange-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(249 115 22 / var(--tw-border-opacity))",
 })
-;"##### ; "1192")]
+;"##### ; "1191")]
 #[test_case(r#####"tw`border-b-orange-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(234 88 12 / var(--tw-border-opacity))",
 })
-;"##### ; "1193")]
+;"##### ; "1192")]
 #[test_case(r#####"tw`border-b-orange-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(194 65 12 / var(--tw-border-opacity))",
 })
-;"##### ; "1194")]
+;"##### ; "1193")]
 #[test_case(r#####"tw`border-b-orange-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(154 52 18 / var(--tw-border-opacity))",
 })
-;"##### ; "1195")]
+;"##### ; "1194")]
 #[test_case(r#####"tw`border-b-orange-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(124 45 18 / var(--tw-border-opacity))",
 })
-;"##### ; "1196")]
+;"##### ; "1195")]
 #[test_case(r#####"tw`border-b-amber-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(255 251 235 / var(--tw-border-opacity))",
 })
-;"##### ; "1197")]
+;"##### ; "1196")]
 #[test_case(r#####"tw`border-b-amber-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(254 243 199 / var(--tw-border-opacity))",
 })
-;"##### ; "1198")]
+;"##### ; "1197")]
 #[test_case(r#####"tw`border-b-amber-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(253 230 138 / var(--tw-border-opacity))",
 })
-;"##### ; "1199")]
+;"##### ; "1198")]
 #[test_case(r#####"tw`border-b-amber-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(252 211 77 / var(--tw-border-opacity))",
 })
-;"##### ; "1200")]
+;"##### ; "1199")]
 #[test_case(r#####"tw`border-b-amber-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(251 191 36 / var(--tw-border-opacity))",
 })
-;"##### ; "1201")]
+;"##### ; "1200")]
 #[test_case(r#####"tw`border-b-amber-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(245 158 11 / var(--tw-border-opacity))",
 })
-;"##### ; "1202")]
+;"##### ; "1201")]
 #[test_case(r#####"tw`border-b-amber-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(217 119 6 / var(--tw-border-opacity))",
 })
-;"##### ; "1203")]
+;"##### ; "1202")]
 #[test_case(r#####"tw`border-b-amber-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(180 83 9 / var(--tw-border-opacity))",
 })
-;"##### ; "1204")]
+;"##### ; "1203")]
 #[test_case(r#####"tw`border-b-amber-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(146 64 14 / var(--tw-border-opacity))",
 })
-;"##### ; "1205")]
+;"##### ; "1204")]
 #[test_case(r#####"tw`border-b-amber-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(120 53 15 / var(--tw-border-opacity))",
 })
-;"##### ; "1206")]
+;"##### ; "1205")]
 #[test_case(r#####"tw`border-b-yellow-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(254 252 232 / var(--tw-border-opacity))",
 })
-;"##### ; "1207")]
+;"##### ; "1206")]
 #[test_case(r#####"tw`border-b-yellow-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(254 249 195 / var(--tw-border-opacity))",
 })
-;"##### ; "1208")]
+;"##### ; "1207")]
 #[test_case(r#####"tw`border-b-yellow-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(254 240 138 / var(--tw-border-opacity))",
 })
-;"##### ; "1209")]
+;"##### ; "1208")]
 #[test_case(r#####"tw`border-b-yellow-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(253 224 71 / var(--tw-border-opacity))",
 })
-;"##### ; "1210")]
+;"##### ; "1209")]
 #[test_case(r#####"tw`border-b-yellow-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(250 204 21 / var(--tw-border-opacity))",
 })
-;"##### ; "1211")]
+;"##### ; "1210")]
 #[test_case(r#####"tw`border-b-yellow-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(234 179 8 / var(--tw-border-opacity))",
 })
-;"##### ; "1212")]
+;"##### ; "1211")]
 #[test_case(r#####"tw`border-b-yellow-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(202 138 4 / var(--tw-border-opacity))",
 })
-;"##### ; "1213")]
+;"##### ; "1212")]
 #[test_case(r#####"tw`border-b-yellow-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(161 98 7 / var(--tw-border-opacity))",
 })
-;"##### ; "1214")]
+;"##### ; "1213")]
 #[test_case(r#####"tw`border-b-yellow-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(133 77 14 / var(--tw-border-opacity))",
 })
-;"##### ; "1215")]
+;"##### ; "1214")]
 #[test_case(r#####"tw`border-b-yellow-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(113 63 18 / var(--tw-border-opacity))",
 })
-;"##### ; "1216")]
+;"##### ; "1215")]
 #[test_case(r#####"tw`border-b-lime-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(247 254 231 / var(--tw-border-opacity))",
 })
-;"##### ; "1217")]
+;"##### ; "1216")]
 #[test_case(r#####"tw`border-b-lime-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(236 252 203 / var(--tw-border-opacity))",
 })
-;"##### ; "1218")]
+;"##### ; "1217")]
 #[test_case(r#####"tw`border-b-lime-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(217 249 157 / var(--tw-border-opacity))",
 })
-;"##### ; "1219")]
+;"##### ; "1218")]
 #[test_case(r#####"tw`border-b-lime-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(190 242 100 / var(--tw-border-opacity))",
 })
-;"##### ; "1220")]
+;"##### ; "1219")]
 #[test_case(r#####"tw`border-b-lime-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(163 230 53 / var(--tw-border-opacity))",
 })
-;"##### ; "1221")]
+;"##### ; "1220")]
 #[test_case(r#####"tw`border-b-lime-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(132 204 22 / var(--tw-border-opacity))",
 })
-;"##### ; "1222")]
+;"##### ; "1221")]
 #[test_case(r#####"tw`border-b-lime-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(101 163 13 / var(--tw-border-opacity))",
 })
-;"##### ; "1223")]
+;"##### ; "1222")]
 #[test_case(r#####"tw`border-b-lime-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(77 124 15 / var(--tw-border-opacity))",
 })
-;"##### ; "1224")]
+;"##### ; "1223")]
 #[test_case(r#####"tw`border-b-lime-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(63 98 18 / var(--tw-border-opacity))",
 })
-;"##### ; "1225")]
+;"##### ; "1224")]
 #[test_case(r#####"tw`border-b-lime-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(54 83 20 / var(--tw-border-opacity))",
 })
-;"##### ; "1226")]
+;"##### ; "1225")]
 #[test_case(r#####"tw`border-b-green-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(240 253 244 / var(--tw-border-opacity))",
 })
-;"##### ; "1227")]
+;"##### ; "1226")]
 #[test_case(r#####"tw`border-b-green-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(220 252 231 / var(--tw-border-opacity))",
 })
-;"##### ; "1228")]
+;"##### ; "1227")]
 #[test_case(r#####"tw`border-b-green-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(187 247 208 / var(--tw-border-opacity))",
 })
-;"##### ; "1229")]
+;"##### ; "1228")]
 #[test_case(r#####"tw`border-b-green-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(134 239 172 / var(--tw-border-opacity))",
 })
-;"##### ; "1230")]
+;"##### ; "1229")]
 #[test_case(r#####"tw`border-b-green-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(74 222 128 / var(--tw-border-opacity))",
 })
-;"##### ; "1231")]
+;"##### ; "1230")]
 #[test_case(r#####"tw`border-b-green-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(34 197 94 / var(--tw-border-opacity))",
 })
-;"##### ; "1232")]
+;"##### ; "1231")]
 #[test_case(r#####"tw`border-b-green-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(22 163 74 / var(--tw-border-opacity))",
 })
-;"##### ; "1233")]
+;"##### ; "1232")]
 #[test_case(r#####"tw`border-b-green-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(21 128 61 / var(--tw-border-opacity))",
 })
-;"##### ; "1234")]
+;"##### ; "1233")]
 #[test_case(r#####"tw`border-b-green-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(22 101 52 / var(--tw-border-opacity))",
 })
-;"##### ; "1235")]
+;"##### ; "1234")]
 #[test_case(r#####"tw`border-b-green-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(20 83 45 / var(--tw-border-opacity))",
 })
-;"##### ; "1236")]
+;"##### ; "1235")]
 #[test_case(r#####"tw`border-b-emerald-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(236 253 245 / var(--tw-border-opacity))",
 })
-;"##### ; "1237")]
+;"##### ; "1236")]
 #[test_case(r#####"tw`border-b-emerald-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(209 250 229 / var(--tw-border-opacity))",
 })
-;"##### ; "1238")]
+;"##### ; "1237")]
 #[test_case(r#####"tw`border-b-emerald-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(167 243 208 / var(--tw-border-opacity))",
 })
-;"##### ; "1239")]
+;"##### ; "1238")]
 #[test_case(r#####"tw`border-b-emerald-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(110 231 183 / var(--tw-border-opacity))",
 })
-;"##### ; "1240")]
+;"##### ; "1239")]
 #[test_case(r#####"tw`border-b-emerald-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(52 211 153 / var(--tw-border-opacity))",
 })
-;"##### ; "1241")]
+;"##### ; "1240")]
 #[test_case(r#####"tw`border-b-emerald-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(16 185 129 / var(--tw-border-opacity))",
 })
-;"##### ; "1242")]
+;"##### ; "1241")]
 #[test_case(r#####"tw`border-b-emerald-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(5 150 105 / var(--tw-border-opacity))",
 })
-;"##### ; "1243")]
+;"##### ; "1242")]
 #[test_case(r#####"tw`border-b-emerald-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(4 120 87 / var(--tw-border-opacity))",
 })
-;"##### ; "1244")]
+;"##### ; "1243")]
 #[test_case(r#####"tw`border-b-emerald-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(6 95 70 / var(--tw-border-opacity))",
 })
-;"##### ; "1245")]
+;"##### ; "1244")]
 #[test_case(r#####"tw`border-b-emerald-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(6 78 59 / var(--tw-border-opacity))",
 })
-;"##### ; "1246")]
+;"##### ; "1245")]
 #[test_case(r#####"tw`border-b-teal-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(240 253 250 / var(--tw-border-opacity))",
 })
-;"##### ; "1247")]
+;"##### ; "1246")]
 #[test_case(r#####"tw`border-b-teal-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(204 251 241 / var(--tw-border-opacity))",
 })
-;"##### ; "1248")]
+;"##### ; "1247")]
 #[test_case(r#####"tw`border-b-teal-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(153 246 228 / var(--tw-border-opacity))",
 })
-;"##### ; "1249")]
+;"##### ; "1248")]
 #[test_case(r#####"tw`border-b-teal-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(94 234 212 / var(--tw-border-opacity))",
 })
-;"##### ; "1250")]
+;"##### ; "1249")]
 #[test_case(r#####"tw`border-b-teal-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(45 212 191 / var(--tw-border-opacity))",
 })
-;"##### ; "1251")]
+;"##### ; "1250")]
 #[test_case(r#####"tw`border-b-teal-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(20 184 166 / var(--tw-border-opacity))",
 })
-;"##### ; "1252")]
+;"##### ; "1251")]
 #[test_case(r#####"tw`border-b-teal-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(13 148 136 / var(--tw-border-opacity))",
 })
-;"##### ; "1253")]
+;"##### ; "1252")]
 #[test_case(r#####"tw`border-b-teal-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(15 118 110 / var(--tw-border-opacity))",
 })
-;"##### ; "1254")]
+;"##### ; "1253")]
 #[test_case(r#####"tw`border-b-teal-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(17 94 89 / var(--tw-border-opacity))",
 })
-;"##### ; "1255")]
+;"##### ; "1254")]
 #[test_case(r#####"tw`border-b-teal-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(19 78 74 / var(--tw-border-opacity))",
 })
-;"##### ; "1256")]
+;"##### ; "1255")]
 #[test_case(r#####"tw`border-b-cyan-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(236 254 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1257")]
+;"##### ; "1256")]
 #[test_case(r#####"tw`border-b-cyan-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(207 250 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1258")]
+;"##### ; "1257")]
 #[test_case(r#####"tw`border-b-cyan-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(165 243 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1259")]
+;"##### ; "1258")]
 #[test_case(r#####"tw`border-b-cyan-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(103 232 249 / var(--tw-border-opacity))",
 })
-;"##### ; "1260")]
+;"##### ; "1259")]
 #[test_case(r#####"tw`border-b-cyan-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(34 211 238 / var(--tw-border-opacity))",
 })
-;"##### ; "1261")]
+;"##### ; "1260")]
 #[test_case(r#####"tw`border-b-cyan-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(6 182 212 / var(--tw-border-opacity))",
 })
-;"##### ; "1262")]
+;"##### ; "1261")]
 #[test_case(r#####"tw`border-b-cyan-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(8 145 178 / var(--tw-border-opacity))",
 })
-;"##### ; "1263")]
+;"##### ; "1262")]
 #[test_case(r#####"tw`border-b-cyan-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(14 116 144 / var(--tw-border-opacity))",
 })
-;"##### ; "1264")]
+;"##### ; "1263")]
 #[test_case(r#####"tw`border-b-cyan-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(21 94 117 / var(--tw-border-opacity))",
 })
-;"##### ; "1265")]
+;"##### ; "1264")]
 #[test_case(r#####"tw`border-b-cyan-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(22 78 99 / var(--tw-border-opacity))",
 })
-;"##### ; "1266")]
+;"##### ; "1265")]
 #[test_case(r#####"tw`border-b-sky-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(240 249 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1267")]
+;"##### ; "1266")]
 #[test_case(r#####"tw`border-b-sky-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(224 242 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1268")]
+;"##### ; "1267")]
 #[test_case(r#####"tw`border-b-sky-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(186 230 253 / var(--tw-border-opacity))",
 })
-;"##### ; "1269")]
+;"##### ; "1268")]
 #[test_case(r#####"tw`border-b-sky-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(125 211 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1270")]
+;"##### ; "1269")]
 #[test_case(r#####"tw`border-b-sky-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(56 189 248 / var(--tw-border-opacity))",
 })
-;"##### ; "1271")]
+;"##### ; "1270")]
 #[test_case(r#####"tw`border-b-sky-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(14 165 233 / var(--tw-border-opacity))",
 })
-;"##### ; "1272")]
+;"##### ; "1271")]
 #[test_case(r#####"tw`border-b-sky-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(2 132 199 / var(--tw-border-opacity))",
 })
-;"##### ; "1273")]
+;"##### ; "1272")]
 #[test_case(r#####"tw`border-b-sky-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(3 105 161 / var(--tw-border-opacity))",
 })
-;"##### ; "1274")]
+;"##### ; "1273")]
 #[test_case(r#####"tw`border-b-sky-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(7 89 133 / var(--tw-border-opacity))",
 })
-;"##### ; "1275")]
+;"##### ; "1274")]
 #[test_case(r#####"tw`border-b-sky-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(12 74 110 / var(--tw-border-opacity))",
 })
-;"##### ; "1276")]
+;"##### ; "1275")]
 #[test_case(r#####"tw`border-b-blue-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(239 246 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1277")]
+;"##### ; "1276")]
 #[test_case(r#####"tw`border-b-blue-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(219 234 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1278")]
+;"##### ; "1277")]
 #[test_case(r#####"tw`border-b-blue-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(191 219 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1279")]
+;"##### ; "1278")]
 #[test_case(r#####"tw`border-b-blue-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(147 197 253 / var(--tw-border-opacity))",
 })
-;"##### ; "1280")]
+;"##### ; "1279")]
 #[test_case(r#####"tw`border-b-blue-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(96 165 250 / var(--tw-border-opacity))",
 })
-;"##### ; "1281")]
+;"##### ; "1280")]
 #[test_case(r#####"tw`border-b-blue-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(59 130 246 / var(--tw-border-opacity))",
 })
-;"##### ; "1282")]
+;"##### ; "1281")]
 #[test_case(r#####"tw`border-b-blue-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(37 99 235 / var(--tw-border-opacity))",
 })
-;"##### ; "1283")]
+;"##### ; "1282")]
 #[test_case(r#####"tw`border-b-blue-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(29 78 216 / var(--tw-border-opacity))",
 })
-;"##### ; "1284")]
+;"##### ; "1283")]
 #[test_case(r#####"tw`border-b-blue-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(30 64 175 / var(--tw-border-opacity))",
 })
-;"##### ; "1285")]
+;"##### ; "1284")]
 #[test_case(r#####"tw`border-b-blue-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(30 58 138 / var(--tw-border-opacity))",
 })
-;"##### ; "1286")]
+;"##### ; "1285")]
 #[test_case(r#####"tw`border-b-indigo-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(238 242 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1287")]
+;"##### ; "1286")]
 #[test_case(r#####"tw`border-b-indigo-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(224 231 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1288")]
+;"##### ; "1287")]
 #[test_case(r#####"tw`border-b-indigo-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(199 210 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1289")]
+;"##### ; "1288")]
 #[test_case(r#####"tw`border-b-indigo-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(165 180 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1290")]
+;"##### ; "1289")]
 #[test_case(r#####"tw`border-b-indigo-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(129 140 248 / var(--tw-border-opacity))",
 })
-;"##### ; "1291")]
+;"##### ; "1290")]
 #[test_case(r#####"tw`border-b-indigo-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(99 102 241 / var(--tw-border-opacity))",
 })
-;"##### ; "1292")]
+;"##### ; "1291")]
 #[test_case(r#####"tw`border-b-indigo-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(79 70 229 / var(--tw-border-opacity))",
 })
-;"##### ; "1293")]
+;"##### ; "1292")]
 #[test_case(r#####"tw`border-b-indigo-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(67 56 202 / var(--tw-border-opacity))",
 })
-;"##### ; "1294")]
+;"##### ; "1293")]
 #[test_case(r#####"tw`border-b-indigo-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(55 48 163 / var(--tw-border-opacity))",
 })
-;"##### ; "1295")]
+;"##### ; "1294")]
 #[test_case(r#####"tw`border-b-indigo-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(49 46 129 / var(--tw-border-opacity))",
 })
-;"##### ; "1296")]
+;"##### ; "1295")]
 #[test_case(r#####"tw`border-b-violet-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(245 243 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1297")]
+;"##### ; "1296")]
 #[test_case(r#####"tw`border-b-violet-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(237 233 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1298")]
+;"##### ; "1297")]
 #[test_case(r#####"tw`border-b-violet-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(221 214 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1299")]
+;"##### ; "1298")]
 #[test_case(r#####"tw`border-b-violet-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(196 181 253 / var(--tw-border-opacity))",
 })
-;"##### ; "1300")]
+;"##### ; "1299")]
 #[test_case(r#####"tw`border-b-violet-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(167 139 250 / var(--tw-border-opacity))",
 })
-;"##### ; "1301")]
+;"##### ; "1300")]
 #[test_case(r#####"tw`border-b-violet-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(139 92 246 / var(--tw-border-opacity))",
 })
-;"##### ; "1302")]
+;"##### ; "1301")]
 #[test_case(r#####"tw`border-b-violet-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(124 58 237 / var(--tw-border-opacity))",
 })
-;"##### ; "1303")]
+;"##### ; "1302")]
 #[test_case(r#####"tw`border-b-violet-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(109 40 217 / var(--tw-border-opacity))",
 })
-;"##### ; "1304")]
+;"##### ; "1303")]
 #[test_case(r#####"tw`border-b-violet-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(91 33 182 / var(--tw-border-opacity))",
 })
-;"##### ; "1305")]
+;"##### ; "1304")]
 #[test_case(r#####"tw`border-b-violet-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(76 29 149 / var(--tw-border-opacity))",
 })
-;"##### ; "1306")]
+;"##### ; "1305")]
 #[test_case(r#####"tw`border-b-purple-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(250 245 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1307")]
+;"##### ; "1306")]
 #[test_case(r#####"tw`border-b-purple-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(243 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1308")]
+;"##### ; "1307")]
 #[test_case(r#####"tw`border-b-purple-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(233 213 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1309")]
+;"##### ; "1308")]
 #[test_case(r#####"tw`border-b-purple-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(216 180 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1310")]
+;"##### ; "1309")]
 #[test_case(r#####"tw`border-b-purple-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(192 132 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1311")]
+;"##### ; "1310")]
 #[test_case(r#####"tw`border-b-purple-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(168 85 247 / var(--tw-border-opacity))",
 })
-;"##### ; "1312")]
+;"##### ; "1311")]
 #[test_case(r#####"tw`border-b-purple-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(147 51 234 / var(--tw-border-opacity))",
 })
-;"##### ; "1313")]
+;"##### ; "1312")]
 #[test_case(r#####"tw`border-b-purple-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(126 34 206 / var(--tw-border-opacity))",
 })
-;"##### ; "1314")]
+;"##### ; "1313")]
 #[test_case(r#####"tw`border-b-purple-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(107 33 168 / var(--tw-border-opacity))",
 })
-;"##### ; "1315")]
+;"##### ; "1314")]
 #[test_case(r#####"tw`border-b-purple-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(88 28 135 / var(--tw-border-opacity))",
 })
-;"##### ; "1316")]
+;"##### ; "1315")]
 #[test_case(r#####"tw`border-b-fuchsia-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(253 244 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1317")]
+;"##### ; "1316")]
 #[test_case(r#####"tw`border-b-fuchsia-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(250 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1318")]
+;"##### ; "1317")]
 #[test_case(r#####"tw`border-b-fuchsia-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(245 208 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1319")]
+;"##### ; "1318")]
 #[test_case(r#####"tw`border-b-fuchsia-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(240 171 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1320")]
+;"##### ; "1319")]
 #[test_case(r#####"tw`border-b-fuchsia-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(232 121 249 / var(--tw-border-opacity))",
 })
-;"##### ; "1321")]
+;"##### ; "1320")]
 #[test_case(r#####"tw`border-b-fuchsia-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(217 70 239 / var(--tw-border-opacity))",
 })
-;"##### ; "1322")]
+;"##### ; "1321")]
 #[test_case(r#####"tw`border-b-fuchsia-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(192 38 211 / var(--tw-border-opacity))",
 })
-;"##### ; "1323")]
+;"##### ; "1322")]
 #[test_case(r#####"tw`border-b-fuchsia-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(162 28 175 / var(--tw-border-opacity))",
 })
-;"##### ; "1324")]
+;"##### ; "1323")]
 #[test_case(r#####"tw`border-b-fuchsia-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(134 25 143 / var(--tw-border-opacity))",
 })
-;"##### ; "1325")]
+;"##### ; "1324")]
 #[test_case(r#####"tw`border-b-fuchsia-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(112 26 117 / var(--tw-border-opacity))",
 })
-;"##### ; "1326")]
+;"##### ; "1325")]
 #[test_case(r#####"tw`border-b-pink-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(253 242 248 / var(--tw-border-opacity))",
 })
-;"##### ; "1327")]
+;"##### ; "1326")]
 #[test_case(r#####"tw`border-b-pink-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(252 231 243 / var(--tw-border-opacity))",
 })
-;"##### ; "1328")]
+;"##### ; "1327")]
 #[test_case(r#####"tw`border-b-pink-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(251 207 232 / var(--tw-border-opacity))",
 })
-;"##### ; "1329")]
+;"##### ; "1328")]
 #[test_case(r#####"tw`border-b-pink-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(249 168 212 / var(--tw-border-opacity))",
 })
-;"##### ; "1330")]
+;"##### ; "1329")]
 #[test_case(r#####"tw`border-b-pink-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(244 114 182 / var(--tw-border-opacity))",
 })
-;"##### ; "1331")]
+;"##### ; "1330")]
 #[test_case(r#####"tw`border-b-pink-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(236 72 153 / var(--tw-border-opacity))",
 })
-;"##### ; "1332")]
+;"##### ; "1331")]
 #[test_case(r#####"tw`border-b-pink-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(219 39 119 / var(--tw-border-opacity))",
 })
-;"##### ; "1333")]
+;"##### ; "1332")]
 #[test_case(r#####"tw`border-b-pink-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(190 24 93 / var(--tw-border-opacity))",
 })
-;"##### ; "1334")]
+;"##### ; "1333")]
 #[test_case(r#####"tw`border-b-pink-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(157 23 77 / var(--tw-border-opacity))",
 })
-;"##### ; "1335")]
+;"##### ; "1334")]
 #[test_case(r#####"tw`border-b-pink-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(131 24 67 / var(--tw-border-opacity))",
 })
-;"##### ; "1336")]
+;"##### ; "1335")]
 #[test_case(r#####"tw`border-b-rose-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(255 241 242 / var(--tw-border-opacity))",
 })
-;"##### ; "1337")]
+;"##### ; "1336")]
 #[test_case(r#####"tw`border-b-rose-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(255 228 230 / var(--tw-border-opacity))",
 })
-;"##### ; "1338")]
+;"##### ; "1337")]
 #[test_case(r#####"tw`border-b-rose-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(254 205 211 / var(--tw-border-opacity))",
 })
-;"##### ; "1339")]
+;"##### ; "1338")]
 #[test_case(r#####"tw`border-b-rose-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(253 164 175 / var(--tw-border-opacity))",
 })
-;"##### ; "1340")]
+;"##### ; "1339")]
 #[test_case(r#####"tw`border-b-rose-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(251 113 133 / var(--tw-border-opacity))",
 })
-;"##### ; "1341")]
+;"##### ; "1340")]
 #[test_case(r#####"tw`border-b-rose-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(244 63 94 / var(--tw-border-opacity))",
 })
-;"##### ; "1342")]
+;"##### ; "1341")]
 #[test_case(r#####"tw`border-b-rose-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(225 29 72 / var(--tw-border-opacity))",
 })
-;"##### ; "1343")]
+;"##### ; "1342")]
 #[test_case(r#####"tw`border-b-rose-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(190 18 60 / var(--tw-border-opacity))",
 })
-;"##### ; "1344")]
+;"##### ; "1343")]
 #[test_case(r#####"tw`border-b-rose-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(159 18 57 / var(--tw-border-opacity))",
 })
-;"##### ; "1345")]
+;"##### ; "1344")]
 #[test_case(r#####"tw`border-b-rose-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(136 19 55 / var(--tw-border-opacity))",
 })
-;"##### ; "1346")]
+;"##### ; "1345")]
 #[test_case(r#####"tw`border-l-inherit`"#####, r#####"({
   borderLeftColor: "inherit",
 })
-;"##### ; "1347")]
+;"##### ; "1346")]
 #[test_case(r#####"tw`border-l-current`"#####, r#####"({
   borderLeftColor: "currentColor",
 })
-;"##### ; "1348")]
+;"##### ; "1347")]
 #[test_case(r#####"tw`border-l-transparent`"#####, r#####"({
   borderLeftColor: "transparent",
 })
-;"##### ; "1349")]
+;"##### ; "1348")]
 #[test_case(r#####"tw`border-l-black`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(0 0 0 / var(--tw-border-opacity))",
 })
-;"##### ; "1350")]
+;"##### ; "1349")]
 #[test_case(r#####"tw`border-l-white`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(255 255 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1351")]
+;"##### ; "1350")]
 #[test_case(r#####"tw`border-l-slate-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(248 250 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1352")]
+;"##### ; "1351")]
 #[test_case(r#####"tw`border-l-slate-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(241 245 249 / var(--tw-border-opacity))",
 })
-;"##### ; "1353")]
+;"##### ; "1352")]
 #[test_case(r#####"tw`border-l-slate-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(226 232 240 / var(--tw-border-opacity))",
 })
-;"##### ; "1354")]
+;"##### ; "1353")]
 #[test_case(r#####"tw`border-l-slate-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(203 213 225 / var(--tw-border-opacity))",
 })
-;"##### ; "1355")]
+;"##### ; "1354")]
 #[test_case(r#####"tw`border-l-slate-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(148 163 184 / var(--tw-border-opacity))",
 })
-;"##### ; "1356")]
+;"##### ; "1355")]
 #[test_case(r#####"tw`border-l-slate-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(100 116 139 / var(--tw-border-opacity))",
 })
-;"##### ; "1357")]
+;"##### ; "1356")]
 #[test_case(r#####"tw`border-l-slate-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(71 85 105 / var(--tw-border-opacity))",
 })
-;"##### ; "1358")]
+;"##### ; "1357")]
 #[test_case(r#####"tw`border-l-slate-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(51 65 85 / var(--tw-border-opacity))",
 })
-;"##### ; "1359")]
+;"##### ; "1358")]
 #[test_case(r#####"tw`border-l-slate-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(30 41 59 / var(--tw-border-opacity))",
 })
-;"##### ; "1360")]
+;"##### ; "1359")]
 #[test_case(r#####"tw`border-l-slate-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(15 23 42 / var(--tw-border-opacity))",
 })
-;"##### ; "1361")]
+;"##### ; "1360")]
 #[test_case(r#####"tw`border-l-gray-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(249 250 251 / var(--tw-border-opacity))",
 })
-;"##### ; "1362")]
+;"##### ; "1361")]
 #[test_case(r#####"tw`border-l-gray-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(243 244 246 / var(--tw-border-opacity))",
 })
-;"##### ; "1363")]
+;"##### ; "1362")]
 #[test_case(r#####"tw`border-l-gray-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(229 231 235 / var(--tw-border-opacity))",
 })
-;"##### ; "1364")]
+;"##### ; "1363")]
 #[test_case(r#####"tw`border-l-gray-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(209 213 219 / var(--tw-border-opacity))",
 })
-;"##### ; "1365")]
+;"##### ; "1364")]
 #[test_case(r#####"tw`border-l-gray-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(156 163 175 / var(--tw-border-opacity))",
 })
-;"##### ; "1366")]
+;"##### ; "1365")]
 #[test_case(r#####"tw`border-l-gray-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(107 114 128 / var(--tw-border-opacity))",
 })
-;"##### ; "1367")]
+;"##### ; "1366")]
 #[test_case(r#####"tw`border-l-gray-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(75 85 99 / var(--tw-border-opacity))",
 })
-;"##### ; "1368")]
+;"##### ; "1367")]
 #[test_case(r#####"tw`border-l-gray-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(55 65 81 / var(--tw-border-opacity))",
 })
-;"##### ; "1369")]
+;"##### ; "1368")]
 #[test_case(r#####"tw`border-l-gray-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(31 41 55 / var(--tw-border-opacity))",
 })
-;"##### ; "1370")]
+;"##### ; "1369")]
 #[test_case(r#####"tw`border-l-gray-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(17 24 39 / var(--tw-border-opacity))",
 })
-;"##### ; "1371")]
+;"##### ; "1370")]
 #[test_case(r#####"tw`border-l-zinc-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "1372")]
+;"##### ; "1371")]
 #[test_case(r#####"tw`border-l-zinc-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(244 244 245 / var(--tw-border-opacity))",
 })
-;"##### ; "1373")]
+;"##### ; "1372")]
 #[test_case(r#####"tw`border-l-zinc-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(228 228 231 / var(--tw-border-opacity))",
 })
-;"##### ; "1374")]
+;"##### ; "1373")]
 #[test_case(r#####"tw`border-l-zinc-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(212 212 216 / var(--tw-border-opacity))",
 })
-;"##### ; "1375")]
+;"##### ; "1374")]
 #[test_case(r#####"tw`border-l-zinc-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(161 161 170 / var(--tw-border-opacity))",
 })
-;"##### ; "1376")]
+;"##### ; "1375")]
 #[test_case(r#####"tw`border-l-zinc-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(113 113 122 / var(--tw-border-opacity))",
 })
-;"##### ; "1377")]
+;"##### ; "1376")]
 #[test_case(r#####"tw`border-l-zinc-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(82 82 91 / var(--tw-border-opacity))",
 })
-;"##### ; "1378")]
+;"##### ; "1377")]
 #[test_case(r#####"tw`border-l-zinc-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(63 63 70 / var(--tw-border-opacity))",
 })
-;"##### ; "1379")]
+;"##### ; "1378")]
 #[test_case(r#####"tw`border-l-zinc-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(39 39 42 / var(--tw-border-opacity))",
 })
-;"##### ; "1380")]
+;"##### ; "1379")]
 #[test_case(r#####"tw`border-l-zinc-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(24 24 27 / var(--tw-border-opacity))",
 })
-;"##### ; "1381")]
+;"##### ; "1380")]
 #[test_case(r#####"tw`border-l-neutral-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(250 250 250 / var(--tw-border-opacity))",
 })
-;"##### ; "1382")]
+;"##### ; "1381")]
 #[test_case(r#####"tw`border-l-neutral-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(245 245 245 / var(--tw-border-opacity))",
 })
-;"##### ; "1383")]
+;"##### ; "1382")]
 #[test_case(r#####"tw`border-l-neutral-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(229 229 229 / var(--tw-border-opacity))",
 })
-;"##### ; "1384")]
+;"##### ; "1383")]
 #[test_case(r#####"tw`border-l-neutral-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(212 212 212 / var(--tw-border-opacity))",
 })
-;"##### ; "1385")]
+;"##### ; "1384")]
 #[test_case(r#####"tw`border-l-neutral-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(163 163 163 / var(--tw-border-opacity))",
 })
-;"##### ; "1386")]
+;"##### ; "1385")]
 #[test_case(r#####"tw`border-l-neutral-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(115 115 115 / var(--tw-border-opacity))",
 })
-;"##### ; "1387")]
+;"##### ; "1386")]
 #[test_case(r#####"tw`border-l-neutral-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(82 82 82 / var(--tw-border-opacity))",
 })
-;"##### ; "1388")]
+;"##### ; "1387")]
 #[test_case(r#####"tw`border-l-neutral-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(64 64 64 / var(--tw-border-opacity))",
 })
-;"##### ; "1389")]
+;"##### ; "1388")]
 #[test_case(r#####"tw`border-l-neutral-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(38 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "1390")]
+;"##### ; "1389")]
 #[test_case(r#####"tw`border-l-neutral-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(23 23 23 / var(--tw-border-opacity))",
 })
-;"##### ; "1391")]
+;"##### ; "1390")]
 #[test_case(r#####"tw`border-l-stone-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(250 250 249 / var(--tw-border-opacity))",
 })
-;"##### ; "1392")]
+;"##### ; "1391")]
 #[test_case(r#####"tw`border-l-stone-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(245 245 244 / var(--tw-border-opacity))",
 })
-;"##### ; "1393")]
+;"##### ; "1392")]
 #[test_case(r#####"tw`border-l-stone-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(231 229 228 / var(--tw-border-opacity))",
 })
-;"##### ; "1394")]
+;"##### ; "1393")]
 #[test_case(r#####"tw`border-l-stone-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(214 211 209 / var(--tw-border-opacity))",
 })
-;"##### ; "1395")]
+;"##### ; "1394")]
 #[test_case(r#####"tw`border-l-stone-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(168 162 158 / var(--tw-border-opacity))",
 })
-;"##### ; "1396")]
+;"##### ; "1395")]
 #[test_case(r#####"tw`border-l-stone-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(120 113 108 / var(--tw-border-opacity))",
 })
-;"##### ; "1397")]
+;"##### ; "1396")]
 #[test_case(r#####"tw`border-l-stone-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(87 83 78 / var(--tw-border-opacity))",
 })
-;"##### ; "1398")]
+;"##### ; "1397")]
 #[test_case(r#####"tw`border-l-stone-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(68 64 60 / var(--tw-border-opacity))",
 })
-;"##### ; "1399")]
+;"##### ; "1398")]
 #[test_case(r#####"tw`border-l-stone-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(41 37 36 / var(--tw-border-opacity))",
 })
-;"##### ; "1400")]
+;"##### ; "1399")]
 #[test_case(r#####"tw`border-l-stone-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(28 25 23 / var(--tw-border-opacity))",
 })
-;"##### ; "1401")]
+;"##### ; "1400")]
 #[test_case(r#####"tw`border-l-red-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 242 242 / var(--tw-border-opacity))",
 })
-;"##### ; "1402")]
+;"##### ; "1401")]
 #[test_case(r#####"tw`border-l-red-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 226 226 / var(--tw-border-opacity))",
 })
-;"##### ; "1403")]
+;"##### ; "1402")]
 #[test_case(r#####"tw`border-l-red-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 202 202 / var(--tw-border-opacity))",
 })
-;"##### ; "1404")]
+;"##### ; "1403")]
 #[test_case(r#####"tw`border-l-red-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(252 165 165 / var(--tw-border-opacity))",
 })
-;"##### ; "1405")]
+;"##### ; "1404")]
 #[test_case(r#####"tw`border-l-red-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(248 113 113 / var(--tw-border-opacity))",
 })
-;"##### ; "1406")]
+;"##### ; "1405")]
 #[test_case(r#####"tw`border-l-red-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(239 68 68 / var(--tw-border-opacity))",
 })
-;"##### ; "1407")]
+;"##### ; "1406")]
 #[test_case(r#####"tw`border-l-red-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(220 38 38 / var(--tw-border-opacity))",
 })
-;"##### ; "1408")]
+;"##### ; "1407")]
 #[test_case(r#####"tw`border-l-red-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(185 28 28 / var(--tw-border-opacity))",
 })
-;"##### ; "1409")]
+;"##### ; "1408")]
 #[test_case(r#####"tw`border-l-red-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(153 27 27 / var(--tw-border-opacity))",
 })
-;"##### ; "1410")]
+;"##### ; "1409")]
 #[test_case(r#####"tw`border-l-red-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(127 29 29 / var(--tw-border-opacity))",
 })
-;"##### ; "1411")]
+;"##### ; "1410")]
 #[test_case(r#####"tw`border-l-orange-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(255 247 237 / var(--tw-border-opacity))",
 })
-;"##### ; "1412")]
+;"##### ; "1411")]
 #[test_case(r#####"tw`border-l-orange-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(255 237 213 / var(--tw-border-opacity))",
 })
-;"##### ; "1413")]
+;"##### ; "1412")]
 #[test_case(r#####"tw`border-l-orange-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 215 170 / var(--tw-border-opacity))",
 })
-;"##### ; "1414")]
+;"##### ; "1413")]
 #[test_case(r#####"tw`border-l-orange-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(253 186 116 / var(--tw-border-opacity))",
 })
-;"##### ; "1415")]
+;"##### ; "1414")]
 #[test_case(r#####"tw`border-l-orange-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(251 146 60 / var(--tw-border-opacity))",
 })
-;"##### ; "1416")]
+;"##### ; "1415")]
 #[test_case(r#####"tw`border-l-orange-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(249 115 22 / var(--tw-border-opacity))",
 })
-;"##### ; "1417")]
+;"##### ; "1416")]
 #[test_case(r#####"tw`border-l-orange-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(234 88 12 / var(--tw-border-opacity))",
 })
-;"##### ; "1418")]
+;"##### ; "1417")]
 #[test_case(r#####"tw`border-l-orange-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(194 65 12 / var(--tw-border-opacity))",
 })
-;"##### ; "1419")]
+;"##### ; "1418")]
 #[test_case(r#####"tw`border-l-orange-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(154 52 18 / var(--tw-border-opacity))",
 })
-;"##### ; "1420")]
+;"##### ; "1419")]
 #[test_case(r#####"tw`border-l-orange-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(124 45 18 / var(--tw-border-opacity))",
 })
-;"##### ; "1421")]
+;"##### ; "1420")]
 #[test_case(r#####"tw`border-l-amber-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(255 251 235 / var(--tw-border-opacity))",
 })
-;"##### ; "1422")]
+;"##### ; "1421")]
 #[test_case(r#####"tw`border-l-amber-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 243 199 / var(--tw-border-opacity))",
 })
-;"##### ; "1423")]
+;"##### ; "1422")]
 #[test_case(r#####"tw`border-l-amber-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(253 230 138 / var(--tw-border-opacity))",
 })
-;"##### ; "1424")]
+;"##### ; "1423")]
 #[test_case(r#####"tw`border-l-amber-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(252 211 77 / var(--tw-border-opacity))",
 })
-;"##### ; "1425")]
+;"##### ; "1424")]
 #[test_case(r#####"tw`border-l-amber-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(251 191 36 / var(--tw-border-opacity))",
 })
-;"##### ; "1426")]
+;"##### ; "1425")]
 #[test_case(r#####"tw`border-l-amber-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(245 158 11 / var(--tw-border-opacity))",
 })
-;"##### ; "1427")]
+;"##### ; "1426")]
 #[test_case(r#####"tw`border-l-amber-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(217 119 6 / var(--tw-border-opacity))",
 })
-;"##### ; "1428")]
+;"##### ; "1427")]
 #[test_case(r#####"tw`border-l-amber-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(180 83 9 / var(--tw-border-opacity))",
 })
-;"##### ; "1429")]
+;"##### ; "1428")]
 #[test_case(r#####"tw`border-l-amber-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(146 64 14 / var(--tw-border-opacity))",
 })
-;"##### ; "1430")]
+;"##### ; "1429")]
 #[test_case(r#####"tw`border-l-amber-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(120 53 15 / var(--tw-border-opacity))",
 })
-;"##### ; "1431")]
+;"##### ; "1430")]
 #[test_case(r#####"tw`border-l-yellow-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 252 232 / var(--tw-border-opacity))",
 })
-;"##### ; "1432")]
+;"##### ; "1431")]
 #[test_case(r#####"tw`border-l-yellow-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 249 195 / var(--tw-border-opacity))",
 })
-;"##### ; "1433")]
+;"##### ; "1432")]
 #[test_case(r#####"tw`border-l-yellow-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 240 138 / var(--tw-border-opacity))",
 })
-;"##### ; "1434")]
+;"##### ; "1433")]
 #[test_case(r#####"tw`border-l-yellow-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(253 224 71 / var(--tw-border-opacity))",
 })
-;"##### ; "1435")]
+;"##### ; "1434")]
 #[test_case(r#####"tw`border-l-yellow-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(250 204 21 / var(--tw-border-opacity))",
 })
-;"##### ; "1436")]
+;"##### ; "1435")]
 #[test_case(r#####"tw`border-l-yellow-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(234 179 8 / var(--tw-border-opacity))",
 })
-;"##### ; "1437")]
+;"##### ; "1436")]
 #[test_case(r#####"tw`border-l-yellow-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(202 138 4 / var(--tw-border-opacity))",
 })
-;"##### ; "1438")]
+;"##### ; "1437")]
 #[test_case(r#####"tw`border-l-yellow-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(161 98 7 / var(--tw-border-opacity))",
 })
-;"##### ; "1439")]
+;"##### ; "1438")]
 #[test_case(r#####"tw`border-l-yellow-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(133 77 14 / var(--tw-border-opacity))",
 })
-;"##### ; "1440")]
+;"##### ; "1439")]
 #[test_case(r#####"tw`border-l-yellow-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(113 63 18 / var(--tw-border-opacity))",
 })
-;"##### ; "1441")]
+;"##### ; "1440")]
 #[test_case(r#####"tw`border-l-lime-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(247 254 231 / var(--tw-border-opacity))",
 })
-;"##### ; "1442")]
+;"##### ; "1441")]
 #[test_case(r#####"tw`border-l-lime-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(236 252 203 / var(--tw-border-opacity))",
 })
-;"##### ; "1443")]
+;"##### ; "1442")]
 #[test_case(r#####"tw`border-l-lime-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(217 249 157 / var(--tw-border-opacity))",
 })
-;"##### ; "1444")]
+;"##### ; "1443")]
 #[test_case(r#####"tw`border-l-lime-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(190 242 100 / var(--tw-border-opacity))",
 })
-;"##### ; "1445")]
+;"##### ; "1444")]
 #[test_case(r#####"tw`border-l-lime-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(163 230 53 / var(--tw-border-opacity))",
 })
-;"##### ; "1446")]
+;"##### ; "1445")]
 #[test_case(r#####"tw`border-l-lime-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(132 204 22 / var(--tw-border-opacity))",
 })
-;"##### ; "1447")]
+;"##### ; "1446")]
 #[test_case(r#####"tw`border-l-lime-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(101 163 13 / var(--tw-border-opacity))",
 })
-;"##### ; "1448")]
+;"##### ; "1447")]
 #[test_case(r#####"tw`border-l-lime-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(77 124 15 / var(--tw-border-opacity))",
 })
-;"##### ; "1449")]
+;"##### ; "1448")]
 #[test_case(r#####"tw`border-l-lime-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(63 98 18 / var(--tw-border-opacity))",
 })
-;"##### ; "1450")]
+;"##### ; "1449")]
 #[test_case(r#####"tw`border-l-lime-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(54 83 20 / var(--tw-border-opacity))",
 })
-;"##### ; "1451")]
+;"##### ; "1450")]
 #[test_case(r#####"tw`border-l-green-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(240 253 244 / var(--tw-border-opacity))",
 })
-;"##### ; "1452")]
+;"##### ; "1451")]
 #[test_case(r#####"tw`border-l-green-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(220 252 231 / var(--tw-border-opacity))",
 })
-;"##### ; "1453")]
+;"##### ; "1452")]
 #[test_case(r#####"tw`border-l-green-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(187 247 208 / var(--tw-border-opacity))",
 })
-;"##### ; "1454")]
+;"##### ; "1453")]
 #[test_case(r#####"tw`border-l-green-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(134 239 172 / var(--tw-border-opacity))",
 })
-;"##### ; "1455")]
+;"##### ; "1454")]
 #[test_case(r#####"tw`border-l-green-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(74 222 128 / var(--tw-border-opacity))",
 })
-;"##### ; "1456")]
+;"##### ; "1455")]
 #[test_case(r#####"tw`border-l-green-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(34 197 94 / var(--tw-border-opacity))",
 })
-;"##### ; "1457")]
+;"##### ; "1456")]
 #[test_case(r#####"tw`border-l-green-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(22 163 74 / var(--tw-border-opacity))",
 })
-;"##### ; "1458")]
+;"##### ; "1457")]
 #[test_case(r#####"tw`border-l-green-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(21 128 61 / var(--tw-border-opacity))",
 })
-;"##### ; "1459")]
+;"##### ; "1458")]
 #[test_case(r#####"tw`border-l-green-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(22 101 52 / var(--tw-border-opacity))",
 })
-;"##### ; "1460")]
+;"##### ; "1459")]
 #[test_case(r#####"tw`border-l-green-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(20 83 45 / var(--tw-border-opacity))",
 })
-;"##### ; "1461")]
+;"##### ; "1460")]
 #[test_case(r#####"tw`border-l-emerald-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(236 253 245 / var(--tw-border-opacity))",
 })
-;"##### ; "1462")]
+;"##### ; "1461")]
 #[test_case(r#####"tw`border-l-emerald-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(209 250 229 / var(--tw-border-opacity))",
 })
-;"##### ; "1463")]
+;"##### ; "1462")]
 #[test_case(r#####"tw`border-l-emerald-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(167 243 208 / var(--tw-border-opacity))",
 })
-;"##### ; "1464")]
+;"##### ; "1463")]
 #[test_case(r#####"tw`border-l-emerald-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(110 231 183 / var(--tw-border-opacity))",
 })
-;"##### ; "1465")]
+;"##### ; "1464")]
 #[test_case(r#####"tw`border-l-emerald-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(52 211 153 / var(--tw-border-opacity))",
 })
-;"##### ; "1466")]
+;"##### ; "1465")]
 #[test_case(r#####"tw`border-l-emerald-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(16 185 129 / var(--tw-border-opacity))",
 })
-;"##### ; "1467")]
+;"##### ; "1466")]
 #[test_case(r#####"tw`border-l-emerald-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(5 150 105 / var(--tw-border-opacity))",
 })
-;"##### ; "1468")]
+;"##### ; "1467")]
 #[test_case(r#####"tw`border-l-emerald-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(4 120 87 / var(--tw-border-opacity))",
 })
-;"##### ; "1469")]
+;"##### ; "1468")]
 #[test_case(r#####"tw`border-l-emerald-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(6 95 70 / var(--tw-border-opacity))",
 })
-;"##### ; "1470")]
+;"##### ; "1469")]
 #[test_case(r#####"tw`border-l-emerald-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(6 78 59 / var(--tw-border-opacity))",
 })
-;"##### ; "1471")]
+;"##### ; "1470")]
 #[test_case(r#####"tw`border-l-teal-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(240 253 250 / var(--tw-border-opacity))",
 })
-;"##### ; "1472")]
+;"##### ; "1471")]
 #[test_case(r#####"tw`border-l-teal-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(204 251 241 / var(--tw-border-opacity))",
 })
-;"##### ; "1473")]
+;"##### ; "1472")]
 #[test_case(r#####"tw`border-l-teal-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(153 246 228 / var(--tw-border-opacity))",
 })
-;"##### ; "1474")]
+;"##### ; "1473")]
 #[test_case(r#####"tw`border-l-teal-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(94 234 212 / var(--tw-border-opacity))",
 })
-;"##### ; "1475")]
+;"##### ; "1474")]
 #[test_case(r#####"tw`border-l-teal-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(45 212 191 / var(--tw-border-opacity))",
 })
-;"##### ; "1476")]
+;"##### ; "1475")]
 #[test_case(r#####"tw`border-l-teal-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(20 184 166 / var(--tw-border-opacity))",
 })
-;"##### ; "1477")]
+;"##### ; "1476")]
 #[test_case(r#####"tw`border-l-teal-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(13 148 136 / var(--tw-border-opacity))",
 })
-;"##### ; "1478")]
+;"##### ; "1477")]
 #[test_case(r#####"tw`border-l-teal-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(15 118 110 / var(--tw-border-opacity))",
 })
-;"##### ; "1479")]
+;"##### ; "1478")]
 #[test_case(r#####"tw`border-l-teal-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(17 94 89 / var(--tw-border-opacity))",
 })
-;"##### ; "1480")]
+;"##### ; "1479")]
 #[test_case(r#####"tw`border-l-teal-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(19 78 74 / var(--tw-border-opacity))",
 })
-;"##### ; "1481")]
+;"##### ; "1480")]
 #[test_case(r#####"tw`border-l-cyan-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(236 254 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1482")]
+;"##### ; "1481")]
 #[test_case(r#####"tw`border-l-cyan-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(207 250 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1483")]
+;"##### ; "1482")]
 #[test_case(r#####"tw`border-l-cyan-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(165 243 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1484")]
+;"##### ; "1483")]
 #[test_case(r#####"tw`border-l-cyan-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(103 232 249 / var(--tw-border-opacity))",
 })
-;"##### ; "1485")]
+;"##### ; "1484")]
 #[test_case(r#####"tw`border-l-cyan-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(34 211 238 / var(--tw-border-opacity))",
 })
-;"##### ; "1486")]
+;"##### ; "1485")]
 #[test_case(r#####"tw`border-l-cyan-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(6 182 212 / var(--tw-border-opacity))",
 })
-;"##### ; "1487")]
+;"##### ; "1486")]
 #[test_case(r#####"tw`border-l-cyan-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(8 145 178 / var(--tw-border-opacity))",
 })
-;"##### ; "1488")]
+;"##### ; "1487")]
 #[test_case(r#####"tw`border-l-cyan-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(14 116 144 / var(--tw-border-opacity))",
 })
-;"##### ; "1489")]
+;"##### ; "1488")]
 #[test_case(r#####"tw`border-l-cyan-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(21 94 117 / var(--tw-border-opacity))",
 })
-;"##### ; "1490")]
+;"##### ; "1489")]
 #[test_case(r#####"tw`border-l-cyan-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(22 78 99 / var(--tw-border-opacity))",
 })
-;"##### ; "1491")]
+;"##### ; "1490")]
 #[test_case(r#####"tw`border-l-sky-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(240 249 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1492")]
+;"##### ; "1491")]
 #[test_case(r#####"tw`border-l-sky-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(224 242 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1493")]
+;"##### ; "1492")]
 #[test_case(r#####"tw`border-l-sky-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(186 230 253 / var(--tw-border-opacity))",
 })
-;"##### ; "1494")]
+;"##### ; "1493")]
 #[test_case(r#####"tw`border-l-sky-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(125 211 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1495")]
+;"##### ; "1494")]
 #[test_case(r#####"tw`border-l-sky-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(56 189 248 / var(--tw-border-opacity))",
 })
-;"##### ; "1496")]
+;"##### ; "1495")]
 #[test_case(r#####"tw`border-l-sky-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(14 165 233 / var(--tw-border-opacity))",
 })
-;"##### ; "1497")]
+;"##### ; "1496")]
 #[test_case(r#####"tw`border-l-sky-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(2 132 199 / var(--tw-border-opacity))",
 })
-;"##### ; "1498")]
+;"##### ; "1497")]
 #[test_case(r#####"tw`border-l-sky-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(3 105 161 / var(--tw-border-opacity))",
 })
-;"##### ; "1499")]
+;"##### ; "1498")]
 #[test_case(r#####"tw`border-l-sky-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(7 89 133 / var(--tw-border-opacity))",
 })
-;"##### ; "1500")]
+;"##### ; "1499")]
 #[test_case(r#####"tw`border-l-sky-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(12 74 110 / var(--tw-border-opacity))",
 })
-;"##### ; "1501")]
+;"##### ; "1500")]
 #[test_case(r#####"tw`border-l-blue-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(239 246 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1502")]
+;"##### ; "1501")]
 #[test_case(r#####"tw`border-l-blue-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(219 234 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1503")]
+;"##### ; "1502")]
 #[test_case(r#####"tw`border-l-blue-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(191 219 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1504")]
+;"##### ; "1503")]
 #[test_case(r#####"tw`border-l-blue-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(147 197 253 / var(--tw-border-opacity))",
 })
-;"##### ; "1505")]
+;"##### ; "1504")]
 #[test_case(r#####"tw`border-l-blue-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(96 165 250 / var(--tw-border-opacity))",
 })
-;"##### ; "1506")]
+;"##### ; "1505")]
 #[test_case(r#####"tw`border-l-blue-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(59 130 246 / var(--tw-border-opacity))",
 })
-;"##### ; "1507")]
+;"##### ; "1506")]
 #[test_case(r#####"tw`border-l-blue-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(37 99 235 / var(--tw-border-opacity))",
 })
-;"##### ; "1508")]
+;"##### ; "1507")]
 #[test_case(r#####"tw`border-l-blue-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(29 78 216 / var(--tw-border-opacity))",
 })
-;"##### ; "1509")]
+;"##### ; "1508")]
 #[test_case(r#####"tw`border-l-blue-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(30 64 175 / var(--tw-border-opacity))",
 })
-;"##### ; "1510")]
+;"##### ; "1509")]
 #[test_case(r#####"tw`border-l-blue-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(30 58 138 / var(--tw-border-opacity))",
 })
-;"##### ; "1511")]
+;"##### ; "1510")]
 #[test_case(r#####"tw`border-l-indigo-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(238 242 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1512")]
+;"##### ; "1511")]
 #[test_case(r#####"tw`border-l-indigo-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(224 231 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1513")]
+;"##### ; "1512")]
 #[test_case(r#####"tw`border-l-indigo-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(199 210 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1514")]
+;"##### ; "1513")]
 #[test_case(r#####"tw`border-l-indigo-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(165 180 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1515")]
+;"##### ; "1514")]
 #[test_case(r#####"tw`border-l-indigo-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(129 140 248 / var(--tw-border-opacity))",
 })
-;"##### ; "1516")]
+;"##### ; "1515")]
 #[test_case(r#####"tw`border-l-indigo-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(99 102 241 / var(--tw-border-opacity))",
 })
-;"##### ; "1517")]
+;"##### ; "1516")]
 #[test_case(r#####"tw`border-l-indigo-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(79 70 229 / var(--tw-border-opacity))",
 })
-;"##### ; "1518")]
+;"##### ; "1517")]
 #[test_case(r#####"tw`border-l-indigo-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(67 56 202 / var(--tw-border-opacity))",
 })
-;"##### ; "1519")]
+;"##### ; "1518")]
 #[test_case(r#####"tw`border-l-indigo-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(55 48 163 / var(--tw-border-opacity))",
 })
-;"##### ; "1520")]
+;"##### ; "1519")]
 #[test_case(r#####"tw`border-l-indigo-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(49 46 129 / var(--tw-border-opacity))",
 })
-;"##### ; "1521")]
+;"##### ; "1520")]
 #[test_case(r#####"tw`border-l-violet-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(245 243 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1522")]
+;"##### ; "1521")]
 #[test_case(r#####"tw`border-l-violet-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(237 233 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1523")]
+;"##### ; "1522")]
 #[test_case(r#####"tw`border-l-violet-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(221 214 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1524")]
+;"##### ; "1523")]
 #[test_case(r#####"tw`border-l-violet-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(196 181 253 / var(--tw-border-opacity))",
 })
-;"##### ; "1525")]
+;"##### ; "1524")]
 #[test_case(r#####"tw`border-l-violet-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(167 139 250 / var(--tw-border-opacity))",
 })
-;"##### ; "1526")]
+;"##### ; "1525")]
 #[test_case(r#####"tw`border-l-violet-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(139 92 246 / var(--tw-border-opacity))",
 })
-;"##### ; "1527")]
+;"##### ; "1526")]
 #[test_case(r#####"tw`border-l-violet-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(124 58 237 / var(--tw-border-opacity))",
 })
-;"##### ; "1528")]
+;"##### ; "1527")]
 #[test_case(r#####"tw`border-l-violet-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(109 40 217 / var(--tw-border-opacity))",
 })
-;"##### ; "1529")]
+;"##### ; "1528")]
 #[test_case(r#####"tw`border-l-violet-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(91 33 182 / var(--tw-border-opacity))",
 })
-;"##### ; "1530")]
+;"##### ; "1529")]
 #[test_case(r#####"tw`border-l-violet-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(76 29 149 / var(--tw-border-opacity))",
 })
-;"##### ; "1531")]
+;"##### ; "1530")]
 #[test_case(r#####"tw`border-l-purple-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(250 245 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1532")]
+;"##### ; "1531")]
 #[test_case(r#####"tw`border-l-purple-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(243 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1533")]
+;"##### ; "1532")]
 #[test_case(r#####"tw`border-l-purple-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(233 213 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1534")]
+;"##### ; "1533")]
 #[test_case(r#####"tw`border-l-purple-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(216 180 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1535")]
+;"##### ; "1534")]
 #[test_case(r#####"tw`border-l-purple-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(192 132 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1536")]
+;"##### ; "1535")]
 #[test_case(r#####"tw`border-l-purple-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(168 85 247 / var(--tw-border-opacity))",
 })
-;"##### ; "1537")]
+;"##### ; "1536")]
 #[test_case(r#####"tw`border-l-purple-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(147 51 234 / var(--tw-border-opacity))",
 })
-;"##### ; "1538")]
+;"##### ; "1537")]
 #[test_case(r#####"tw`border-l-purple-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(126 34 206 / var(--tw-border-opacity))",
 })
-;"##### ; "1539")]
+;"##### ; "1538")]
 #[test_case(r#####"tw`border-l-purple-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(107 33 168 / var(--tw-border-opacity))",
 })
-;"##### ; "1540")]
+;"##### ; "1539")]
 #[test_case(r#####"tw`border-l-purple-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(88 28 135 / var(--tw-border-opacity))",
 })
-;"##### ; "1541")]
+;"##### ; "1540")]
 #[test_case(r#####"tw`border-l-fuchsia-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(253 244 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1542")]
+;"##### ; "1541")]
 #[test_case(r#####"tw`border-l-fuchsia-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(250 232 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1543")]
+;"##### ; "1542")]
 #[test_case(r#####"tw`border-l-fuchsia-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(245 208 254 / var(--tw-border-opacity))",
 })
-;"##### ; "1544")]
+;"##### ; "1543")]
 #[test_case(r#####"tw`border-l-fuchsia-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(240 171 252 / var(--tw-border-opacity))",
 })
-;"##### ; "1545")]
+;"##### ; "1544")]
 #[test_case(r#####"tw`border-l-fuchsia-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(232 121 249 / var(--tw-border-opacity))",
 })
-;"##### ; "1546")]
+;"##### ; "1545")]
 #[test_case(r#####"tw`border-l-fuchsia-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(217 70 239 / var(--tw-border-opacity))",
 })
-;"##### ; "1547")]
+;"##### ; "1546")]
 #[test_case(r#####"tw`border-l-fuchsia-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(192 38 211 / var(--tw-border-opacity))",
 })
-;"##### ; "1548")]
+;"##### ; "1547")]
 #[test_case(r#####"tw`border-l-fuchsia-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(162 28 175 / var(--tw-border-opacity))",
 })
-;"##### ; "1549")]
+;"##### ; "1548")]
 #[test_case(r#####"tw`border-l-fuchsia-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(134 25 143 / var(--tw-border-opacity))",
 })
-;"##### ; "1550")]
+;"##### ; "1549")]
 #[test_case(r#####"tw`border-l-fuchsia-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(112 26 117 / var(--tw-border-opacity))",
 })
-;"##### ; "1551")]
+;"##### ; "1550")]
 #[test_case(r#####"tw`border-l-pink-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(253 242 248 / var(--tw-border-opacity))",
 })
-;"##### ; "1552")]
+;"##### ; "1551")]
 #[test_case(r#####"tw`border-l-pink-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(252 231 243 / var(--tw-border-opacity))",
 })
-;"##### ; "1553")]
+;"##### ; "1552")]
 #[test_case(r#####"tw`border-l-pink-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(251 207 232 / var(--tw-border-opacity))",
 })
-;"##### ; "1554")]
+;"##### ; "1553")]
 #[test_case(r#####"tw`border-l-pink-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(249 168 212 / var(--tw-border-opacity))",
 })
-;"##### ; "1555")]
+;"##### ; "1554")]
 #[test_case(r#####"tw`border-l-pink-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(244 114 182 / var(--tw-border-opacity))",
 })
-;"##### ; "1556")]
+;"##### ; "1555")]
 #[test_case(r#####"tw`border-l-pink-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(236 72 153 / var(--tw-border-opacity))",
 })
-;"##### ; "1557")]
+;"##### ; "1556")]
 #[test_case(r#####"tw`border-l-pink-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(219 39 119 / var(--tw-border-opacity))",
 })
-;"##### ; "1558")]
+;"##### ; "1557")]
 #[test_case(r#####"tw`border-l-pink-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(190 24 93 / var(--tw-border-opacity))",
 })
-;"##### ; "1559")]
+;"##### ; "1558")]
 #[test_case(r#####"tw`border-l-pink-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(157 23 77 / var(--tw-border-opacity))",
 })
-;"##### ; "1560")]
+;"##### ; "1559")]
 #[test_case(r#####"tw`border-l-pink-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(131 24 67 / var(--tw-border-opacity))",
 })
-;"##### ; "1561")]
+;"##### ; "1560")]
 #[test_case(r#####"tw`border-l-rose-50`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(255 241 242 / var(--tw-border-opacity))",
 })
-;"##### ; "1562")]
+;"##### ; "1561")]
 #[test_case(r#####"tw`border-l-rose-100`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(255 228 230 / var(--tw-border-opacity))",
 })
-;"##### ; "1563")]
+;"##### ; "1562")]
 #[test_case(r#####"tw`border-l-rose-200`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(254 205 211 / var(--tw-border-opacity))",
 })
-;"##### ; "1564")]
+;"##### ; "1563")]
 #[test_case(r#####"tw`border-l-rose-300`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(253 164 175 / var(--tw-border-opacity))",
 })
-;"##### ; "1565")]
+;"##### ; "1564")]
 #[test_case(r#####"tw`border-l-rose-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(251 113 133 / var(--tw-border-opacity))",
 })
-;"##### ; "1566")]
+;"##### ; "1565")]
 #[test_case(r#####"tw`border-l-rose-500`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(244 63 94 / var(--tw-border-opacity))",
 })
-;"##### ; "1567")]
+;"##### ; "1566")]
 #[test_case(r#####"tw`border-l-rose-600`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(225 29 72 / var(--tw-border-opacity))",
 })
-;"##### ; "1568")]
+;"##### ; "1567")]
 #[test_case(r#####"tw`border-l-rose-700`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(190 18 60 / var(--tw-border-opacity))",
 })
-;"##### ; "1569")]
+;"##### ; "1568")]
 #[test_case(r#####"tw`border-l-rose-800`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(159 18 57 / var(--tw-border-opacity))",
 })
-;"##### ; "1570")]
+;"##### ; "1569")]
 #[test_case(r#####"tw`border-l-rose-900`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(136 19 55 / var(--tw-border-opacity))",
 })
-;"##### ; "1571")]
+;"##### ; "1570")]
 #[test_case(r#####"tw`border-4 border-indigo-500/100`"#####, r#####"({
   borderWidth: "4px",
   borderColor: "rgb(99 102 241 / 1)",
 })
-;"##### ; "1572")]
+;"##### ; "1571")]
 #[test_case(r#####"tw`border-4 border-indigo-500/75`"#####, r#####"({
   borderWidth: "4px",
   borderColor: "rgb(99 102 241 / 0.75)",
 })
-;"##### ; "1573")]
+;"##### ; "1572")]
 #[test_case(r#####"tw`border-4 border-indigo-500/50`"#####, r#####"({
   borderWidth: "4px",
   borderColor: "rgb(99 102 241 / 0.5)",
 })
-;"##### ; "1574")]
+;"##### ; "1573")]
 #[test_case(r#####"tw`border-4 border-indigo-600/[.55]`"#####, r#####"({
   borderWidth: "4px",
   borderColor: "rgb(79 70 229 / .55)",
 })
-;"##### ; "1575")]
+;"##### ; "1574")]
 #[test_case(r#####"tw`border-[#243c5a]`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(36 60 90 / var(--tw-border-opacity))",
 })
-;"##### ; "1576")]
+;"##### ; "1575")]
 #[test_case(r#####"tw`border-[#f00]`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(255 0 0 / var(--tw-border-opacity))",
 })
-;"##### ; "1577")]
+;"##### ; "1576")]
 #[test_case(r#####"tw`border-t-[#f00]`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(255 0 0 / var(--tw-border-opacity))",
 })
-;"##### ; "1578")]
+;"##### ; "1577")]
 #[test_case(r#####"tw`border-red-500/25`"#####, r#####"({
   borderColor: "rgb(239 68 68 / 0.25)",
 })
-;"##### ; "1579")]
+;"##### ; "1578")]
 #[test_case(r#####"tw`border-red-500/fromConfig`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(0 0 0 / var(--tw-border-opacity))",
 })
-;"##### ; "1580")]
+;"##### ; "1579")]
 #[test_case(r#####"tw`border-red-500/fromConfig/25`"#####, r#####"({
   borderColor: "rgb(0 0 0 / 0.25)",
 })
-;"##### ; "1581")]
+;"##### ; "1580")]
 #[test_case(r#####"tw`border-red-500/fromConfig/[.555]`"#####, r#####"({
   borderColor: "rgb(0 0 0 / .555)",
 })
-;"##### ; "1582")]
+;"##### ; "1581")]
 #[test_case(r#####"tw`border-red-500/fromConfig/[var(--myvar)]`"#####, r#####"({
   borderColor: "rgb(0 0 0 / var(--myvar))",
 })
-;"##### ; "1583")]
+;"##### ; "1582")]
 #[test_case(r#####"tw`border-red-500/[.555]`"#####, r#####"({
   borderColor: "rgb(239 68 68 / .555)",
 })
-;"##### ; "1584")]
+;"##### ; "1583")]
 #[test_case(r#####"tw`border-red-500/[var(--myvar)]`"#####, r#####"({
   borderColor: "rgb(239 68 68 / var(--myvar))",
 })
-;"##### ; "1585")]
+;"##### ; "1584")]
 #[test_case(r#####"tw`border-[theme('colors.red.500')]`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(239 68 68 / var(--tw-border-opacity))",
 })
-;"##### ; "1586")]
+;"##### ; "1585")]
 #[test_case(r#####"tw`border-[theme('colors.red.500')]/20`"#####, r#####"({
   borderColor: "rgb(239 68 68 / 0.2)",
 })
-;"##### ; "1587")]
+;"##### ; "1586")]
 #[test_case(r#####"tw`border-electric/25`"#####, r#####"({
   borderColor: "rgba(219, 0, 255, 0.25)",
 })
-;"##### ; "1588")]
+;"##### ; "1587")]
 #[test_case(r#####"tw`border-electric/[.555]`"#####, r#####"({
   borderColor: "rgba(219, 0, 255, .555)",
 })
-;"##### ; "1589")]
+;"##### ; "1588")]
 #[test_case(r#####"tw`border-electric/[var(--myvar)]`"#####, r#####"({
   borderColor: "rgba(219, 0, 255, var(--myvar))",
 })
-;"##### ; "1590")]
+;"##### ; "1589")]
 #[test_case(r#####"tw`border-[theme('colors.electric')]`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(219 0 255 / var(--tw-border-opacity))",
 })
-;"##### ; "1591")]
+;"##### ; "1590")]
 #[test_case(r#####"tw`border-[theme('colors.electric')]/20`"#####, r#####"({
   borderColor: "rgb(219 0 255 / 0.2)",
 })
-;"##### ; "1592")]
+;"##### ; "1591")]
 #[test_case(r#####"tw`border-[hsla(235, 100%, 50%, .5)]`"#####, r#####"({
   borderColor: "hsla(235, 100%, 50%, .5)",
 })
-;"##### ; "1593")]
+;"##### ; "1592")]
 #[test_case(r#####"tw`border-[rgba(255, 255, 255, 0)]`"#####, r#####"({
   borderColor: "rgba(255, 255, 255, 0)",
 })
-;"##### ; "1594")]
+;"##### ; "1593")]
 #[test_case(r#####"tw`border-[red_black_white rgb(255, 255,255,0)]`"#####, r#####"({
   borderColor: "red black white rgb(255, 255,255,0)",
 })
-;"##### ; "1595")]
+;"##### ; "1594")]
 #[test_case(r#####"tw`border-[red black_blue]`"#####, r#####"({
   borderColor: "red black blue",
 })
-;"##### ; "1596")]
+;"##### ; "1595")]
 #[test_case(r#####"tw`border-[red black]`"#####, r#####"({
   borderColor: "red black",
 })
-;"##### ; "1597")]
+;"##### ; "1596")]
 #[test_case(r#####"tw`border-[hsl(50 50% 50%)]`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "hsl(50 50% 50% / var(--tw-border-opacity))",
 })
-;"##### ; "1598")]
+;"##### ; "1597")]
 #[test_case(r#####"tw`border-t-[color:green]`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderTopColor: "rgb(0 128 0 / var(--tw-border-opacity))",
 })
-;"##### ; "1599")]
+;"##### ; "1598")]
 #[test_case(r#####"tw`border-t-[color:rgba(255, 255, 255, .45)]`"#####, r#####"({
   borderTopColor: "rgba(255, 255, 255, .45)",
 })
-;"##### ; "1600")]
+;"##### ; "1599")]
 #[test_case(r#####"tw`border-r-[color:green]`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderRightColor: "rgb(0 128 0 / var(--tw-border-opacity))",
 })
-;"##### ; "1601")]
+;"##### ; "1600")]
 #[test_case(r#####"tw`border-r-[color:rgba(255, 255, 255, .45)]`"#####, r#####"({
   borderRightColor: "rgba(255, 255, 255, .45)",
 })
-;"##### ; "1602")]
+;"##### ; "1601")]
 #[test_case(r#####"tw`border-b-[color:green]`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderBottomColor: "rgb(0 128 0 / var(--tw-border-opacity))",
 })
-;"##### ; "1603")]
+;"##### ; "1602")]
 #[test_case(r#####"tw`border-b-[color:rgba(255, 255, 255, .45)]`"#####, r#####"({
   borderBottomColor: "rgba(255, 255, 255, .45)",
 })
-;"##### ; "1604")]
+;"##### ; "1603")]
 #[test_case(r#####"tw`border-l-[color:green]`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(0 128 0 / var(--tw-border-opacity))",
 })
-;"##### ; "1605")]
+;"##### ; "1604")]
 #[test_case(r#####"tw`border-l-[color:rgba(255, 255, 255, .45)]`"#####, r#####"({
   borderLeftColor: "rgba(255, 255, 255, .45)",
 })
-;"##### ; "1606")]
+;"##### ; "1605")]
 #[test_case(r#####"tw`border-[color:green]`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(0 128 0 / var(--tw-border-opacity))",
 })
-;"##### ; "1607")]
+;"##### ; "1606")]
 #[test_case(r#####"tw`border-[color:rgba(255, 255, 255, .45)]`"#####, r#####"({
   borderColor: "rgba(255, 255, 255, .45)",
 })
-;"##### ; "1608")]
+;"##### ; "1607")]
 #[test_case(r#####"tw`border-x-[color:green]`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderLeftColor: "rgb(0 128 0 / var(--tw-border-opacity))",
   borderRightColor: "rgb(0 128 0 / var(--tw-border-opacity))",
 })
-;"##### ; "1609")]
+;"##### ; "1608")]
 #[test_case(r#####"tw`border-y-[color:rgba(255, 255, 255, .45)]`"#####, r#####"({
   borderTopColor: "rgba(255, 255, 255, .45)",
   borderBottomColor: "rgba(255, 255, 255, .45)",
 })
-;"##### ; "1610")]
+;"##### ; "1609")]
 #[test_case(r#####"tw`border-black border-s-green-500 border-e-red-400`"#####, r#####"({
   '--tw-border-opacity': "1",
   borderColor: "rgb(0 0 0 / var(--tw-border-opacity))",
   borderInlineEndColor: "rgb(248 113 113 / var(--tw-border-opacity))",
   borderInlineStartColor: "rgb(34 197 94 / var(--tw-border-opacity))",
-})"##### ; "1611")]
+})"##### ; "1610")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

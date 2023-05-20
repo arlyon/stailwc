@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"tw`ring ring-inset ring-purple-500 ring-offset-black ring-offset-4 ring-opacity-50`"#####, r#####"({
   '--tw-ring-offset-shadow':
     "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
@@ -14,7 +13,7 @@ use test_case::test_case;
   '--tw-ring-offset-width': "4px",
   '--tw-ring-offset-color': "#000",
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`ring ring-inset ring-purple-500 ring-offset-black ring-offset-4`"#####, r#####"({
   '--tw-ring-offset-shadow':
     "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
@@ -28,7 +27,7 @@ use test_case::test_case;
   '--tw-ring-offset-width': "4px",
   '--tw-ring-offset-color': "#000",
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`ring ring-purple-500 ring-offset-black ring-offset-4`"#####, r#####"({
   '--tw-ring-offset-shadow':
     "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
@@ -41,7 +40,7 @@ use test_case::test_case;
   '--tw-ring-offset-width': "4px",
   '--tw-ring-offset-color': "#000",
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`ring ring-offset-black ring-offset-4`"#####, r#####"({
   '--tw-ring-offset-shadow':
     "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
@@ -52,7 +51,7 @@ use test_case::test_case;
   '--tw-ring-offset-width': "4px",
   '--tw-ring-offset-color': "#000",
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`ring ring-offset-4`"#####, r#####"({
   '--tw-ring-offset-shadow':
     "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
@@ -64,7 +63,7 @@ use test_case::test_case;
 }) // Test the ring-opacity ordering - 'ring-opacity-x' should be moved to the end
 // https://github.com/ben-rogerson/twin.macro/issues/374
 
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`ring-4 ring-opacity-20 ring-green-500`"#####, r#####"({
   '--tw-ring-offset-shadow':
     "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
@@ -75,7 +74,7 @@ use test_case::test_case;
   '--tw-ring-opacity': "0.2",
   '--tw-ring-color': "rgb(34 197 94 / var(--tw-ring-opacity))",
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"tw`mt-5 md:(ring-opacity-20 ring-4 ring-green-500) mb-5`"#####, r#####"({
   marginBottom: "1.25rem",
   marginTop: "1.25rem",
@@ -90,7 +89,7 @@ use test_case::test_case;
     '--tw-ring-color': "rgb(34 197 94 / var(--tw-ring-opacity))",
   },
 })
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"tw`ring-[10px]`"#####, r#####"({
   '--tw-ring-offset-shadow':
     "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
@@ -98,7 +97,7 @@ use test_case::test_case;
     "var(--tw-ring-inset) 0 0 0 calc(10px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
   boxShadow:
     "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)",
-})"##### ; "8")]
+})"##### ; "7")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

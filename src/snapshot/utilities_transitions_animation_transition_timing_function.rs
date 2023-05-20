@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { theme } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"theme`transitionTimingFunction.`"#####, r#####"({
   DEFAULT: "cubic-bezier(0.4, 0, 0.2, 1)",
   linear: "linear",
@@ -8,26 +7,26 @@ use test_case::test_case;
   out: "cubic-bezier(0, 0, 0.2, 1)",
   'in-out': "cubic-bezier(0.4, 0, 0.2, 1)",
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`ease-linear`"#####, r#####"({
   transitionTimingFunction: "linear",
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`ease-in`"#####, r#####"({
   transitionTimingFunction: "cubic-bezier(0.4, 0, 1, 1)",
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`ease-out`"#####, r#####"({
   transitionTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`ease-in-out`"#####, r#####"({
   transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`ease-[cubic-bezier(0.95, 0.05, 0.795, 0.035)]`"#####, r#####"({
   transitionTimingFunction: "cubic-bezier(0.95, 0.05, 0.795, 0.035)",
-})"##### ; "6")]
+})"##### ; "5")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

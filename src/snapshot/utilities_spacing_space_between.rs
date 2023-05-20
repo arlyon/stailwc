@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { theme } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"theme`space`"#####, r#####"({
   0: "0px",
   1: "0.25rem",
@@ -38,7 +37,7 @@ use test_case::test_case;
   2.5: "0.625rem",
   3.5: "0.875rem",
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`space-x-0`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -46,7 +45,7 @@ use test_case::test_case;
     marginLeft: "calc(0px * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`space-x-0.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -54,7 +53,7 @@ use test_case::test_case;
     marginLeft: "calc(0.125rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`space-x-1`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -62,7 +61,7 @@ use test_case::test_case;
     marginLeft: "calc(0.25rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`space-x-1.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -70,7 +69,7 @@ use test_case::test_case;
     marginLeft: "calc(0.375rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`space-x-2`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -78,7 +77,7 @@ use test_case::test_case;
     marginLeft: "calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"tw`space-x-2.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -86,7 +85,7 @@ use test_case::test_case;
     marginLeft: "calc(0.625rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"tw`space-x-3`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -94,7 +93,7 @@ use test_case::test_case;
     marginLeft: "calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"tw`space-x-3.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -102,7 +101,7 @@ use test_case::test_case;
     marginLeft: "calc(0.875rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"tw`space-x-4`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -110,7 +109,7 @@ use test_case::test_case;
     marginLeft: "calc(1rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"tw`space-x-5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -118,7 +117,7 @@ use test_case::test_case;
     marginLeft: "calc(1.25rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"tw`space-x-6`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -126,7 +125,7 @@ use test_case::test_case;
     marginLeft: "calc(1.5rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "12")]
+;"##### ; "11")]
 #[test_case(r#####"tw`space-x-7`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -134,7 +133,7 @@ use test_case::test_case;
     marginLeft: "calc(1.75rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "13")]
+;"##### ; "12")]
 #[test_case(r#####"tw`space-x-8`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -142,7 +141,7 @@ use test_case::test_case;
     marginLeft: "calc(2rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "14")]
+;"##### ; "13")]
 #[test_case(r#####"tw`space-x-9`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -150,7 +149,7 @@ use test_case::test_case;
     marginLeft: "calc(2.25rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "15")]
+;"##### ; "14")]
 #[test_case(r#####"tw`space-x-10`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -158,7 +157,7 @@ use test_case::test_case;
     marginLeft: "calc(2.5rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "16")]
+;"##### ; "15")]
 #[test_case(r#####"tw`space-x-11`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -166,7 +165,7 @@ use test_case::test_case;
     marginLeft: "calc(2.75rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "17")]
+;"##### ; "16")]
 #[test_case(r#####"tw`space-x-12`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -174,7 +173,7 @@ use test_case::test_case;
     marginLeft: "calc(3rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "18")]
+;"##### ; "17")]
 #[test_case(r#####"tw`space-x-14`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -182,7 +181,7 @@ use test_case::test_case;
     marginLeft: "calc(3.5rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "19")]
+;"##### ; "18")]
 #[test_case(r#####"tw`space-x-16`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -190,7 +189,7 @@ use test_case::test_case;
     marginLeft: "calc(4rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "20")]
+;"##### ; "19")]
 #[test_case(r#####"tw`space-x-20`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -198,7 +197,7 @@ use test_case::test_case;
     marginLeft: "calc(5rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "21")]
+;"##### ; "20")]
 #[test_case(r#####"tw`space-x-24`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -206,7 +205,7 @@ use test_case::test_case;
     marginLeft: "calc(6rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "22")]
+;"##### ; "21")]
 #[test_case(r#####"tw`space-x-28`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -214,7 +213,7 @@ use test_case::test_case;
     marginLeft: "calc(7rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "23")]
+;"##### ; "22")]
 #[test_case(r#####"tw`space-x-32`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -222,7 +221,7 @@ use test_case::test_case;
     marginLeft: "calc(8rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "24")]
+;"##### ; "23")]
 #[test_case(r#####"tw`space-x-36`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -230,7 +229,7 @@ use test_case::test_case;
     marginLeft: "calc(9rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "25")]
+;"##### ; "24")]
 #[test_case(r#####"tw`space-x-40`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -238,7 +237,7 @@ use test_case::test_case;
     marginLeft: "calc(10rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "26")]
+;"##### ; "25")]
 #[test_case(r#####"tw`space-x-44`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -246,7 +245,7 @@ use test_case::test_case;
     marginLeft: "calc(11rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "27")]
+;"##### ; "26")]
 #[test_case(r#####"tw`space-x-48`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -254,7 +253,7 @@ use test_case::test_case;
     marginLeft: "calc(12rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "28")]
+;"##### ; "27")]
 #[test_case(r#####"tw`space-x-52`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -262,7 +261,7 @@ use test_case::test_case;
     marginLeft: "calc(13rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "29")]
+;"##### ; "28")]
 #[test_case(r#####"tw`space-x-56`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -270,7 +269,7 @@ use test_case::test_case;
     marginLeft: "calc(14rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "30")]
+;"##### ; "29")]
 #[test_case(r#####"tw`space-x-60`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -278,7 +277,7 @@ use test_case::test_case;
     marginLeft: "calc(15rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "31")]
+;"##### ; "30")]
 #[test_case(r#####"tw`space-x-64`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -286,7 +285,7 @@ use test_case::test_case;
     marginLeft: "calc(16rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "32")]
+;"##### ; "31")]
 #[test_case(r#####"tw`space-x-72`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -294,7 +293,7 @@ use test_case::test_case;
     marginLeft: "calc(18rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "33")]
+;"##### ; "32")]
 #[test_case(r#####"tw`space-x-80`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -302,7 +301,7 @@ use test_case::test_case;
     marginLeft: "calc(20rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "34")]
+;"##### ; "33")]
 #[test_case(r#####"tw`space-x-96`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -310,7 +309,7 @@ use test_case::test_case;
     marginLeft: "calc(24rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "35")]
+;"##### ; "34")]
 #[test_case(r#####"tw`space-x-px`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -318,7 +317,7 @@ use test_case::test_case;
     marginLeft: "calc(1px * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "36")]
+;"##### ; "35")]
 #[test_case(r#####"tw`space-y-0`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -326,7 +325,7 @@ use test_case::test_case;
     marginBottom: "calc(0px * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "37")]
+;"##### ; "36")]
 #[test_case(r#####"tw`space-y-0.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -334,7 +333,7 @@ use test_case::test_case;
     marginBottom: "calc(0.125rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "38")]
+;"##### ; "37")]
 #[test_case(r#####"tw`space-y-1`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -342,7 +341,7 @@ use test_case::test_case;
     marginBottom: "calc(0.25rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "39")]
+;"##### ; "38")]
 #[test_case(r#####"tw`space-y-1.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -350,7 +349,7 @@ use test_case::test_case;
     marginBottom: "calc(0.375rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "40")]
+;"##### ; "39")]
 #[test_case(r#####"tw`space-y-2`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -358,7 +357,7 @@ use test_case::test_case;
     marginBottom: "calc(0.5rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "41")]
+;"##### ; "40")]
 #[test_case(r#####"tw`space-y-2.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -366,7 +365,7 @@ use test_case::test_case;
     marginBottom: "calc(0.625rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "42")]
+;"##### ; "41")]
 #[test_case(r#####"tw`space-y-3`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -374,7 +373,7 @@ use test_case::test_case;
     marginBottom: "calc(0.75rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "43")]
+;"##### ; "42")]
 #[test_case(r#####"tw`space-y-3.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -382,7 +381,7 @@ use test_case::test_case;
     marginBottom: "calc(0.875rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "44")]
+;"##### ; "43")]
 #[test_case(r#####"tw`space-y-4`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -390,7 +389,7 @@ use test_case::test_case;
     marginBottom: "calc(1rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "45")]
+;"##### ; "44")]
 #[test_case(r#####"tw`space-y-5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -398,7 +397,7 @@ use test_case::test_case;
     marginBottom: "calc(1.25rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "46")]
+;"##### ; "45")]
 #[test_case(r#####"tw`space-y-6`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -406,7 +405,7 @@ use test_case::test_case;
     marginBottom: "calc(1.5rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "47")]
+;"##### ; "46")]
 #[test_case(r#####"tw`space-y-7`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -414,7 +413,7 @@ use test_case::test_case;
     marginBottom: "calc(1.75rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "48")]
+;"##### ; "47")]
 #[test_case(r#####"tw`space-y-8`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -422,7 +421,7 @@ use test_case::test_case;
     marginBottom: "calc(2rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "49")]
+;"##### ; "48")]
 #[test_case(r#####"tw`space-y-9`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -430,7 +429,7 @@ use test_case::test_case;
     marginBottom: "calc(2.25rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "50")]
+;"##### ; "49")]
 #[test_case(r#####"tw`space-y-10`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -438,7 +437,7 @@ use test_case::test_case;
     marginBottom: "calc(2.5rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "51")]
+;"##### ; "50")]
 #[test_case(r#####"tw`space-y-12`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -446,7 +445,7 @@ use test_case::test_case;
     marginBottom: "calc(3rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "52")]
+;"##### ; "51")]
 #[test_case(r#####"tw`space-y-14`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -454,7 +453,7 @@ use test_case::test_case;
     marginBottom: "calc(3.5rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "53")]
+;"##### ; "52")]
 #[test_case(r#####"tw`space-y-16`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -462,7 +461,7 @@ use test_case::test_case;
     marginBottom: "calc(4rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "54")]
+;"##### ; "53")]
 #[test_case(r#####"tw`space-y-20`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -470,7 +469,7 @@ use test_case::test_case;
     marginBottom: "calc(5rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "55")]
+;"##### ; "54")]
 #[test_case(r#####"tw`space-y-24`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -478,7 +477,7 @@ use test_case::test_case;
     marginBottom: "calc(6rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "56")]
+;"##### ; "55")]
 #[test_case(r#####"tw`space-y-28`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -486,7 +485,7 @@ use test_case::test_case;
     marginBottom: "calc(7rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "57")]
+;"##### ; "56")]
 #[test_case(r#####"tw`space-y-32`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -494,7 +493,7 @@ use test_case::test_case;
     marginBottom: "calc(8rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "58")]
+;"##### ; "57")]
 #[test_case(r#####"tw`space-y-36`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -502,7 +501,7 @@ use test_case::test_case;
     marginBottom: "calc(9rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "59")]
+;"##### ; "58")]
 #[test_case(r#####"tw`space-y-40`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -510,7 +509,7 @@ use test_case::test_case;
     marginBottom: "calc(10rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "60")]
+;"##### ; "59")]
 #[test_case(r#####"tw`space-y-44`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -518,7 +517,7 @@ use test_case::test_case;
     marginBottom: "calc(11rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "61")]
+;"##### ; "60")]
 #[test_case(r#####"tw`space-y-48`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -526,7 +525,7 @@ use test_case::test_case;
     marginBottom: "calc(12rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "62")]
+;"##### ; "61")]
 #[test_case(r#####"tw`space-y-52`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -534,7 +533,7 @@ use test_case::test_case;
     marginBottom: "calc(13rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "63")]
+;"##### ; "62")]
 #[test_case(r#####"tw`space-y-56`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -542,7 +541,7 @@ use test_case::test_case;
     marginBottom: "calc(14rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "64")]
+;"##### ; "63")]
 #[test_case(r#####"tw`space-y-60`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -550,7 +549,7 @@ use test_case::test_case;
     marginBottom: "calc(15rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "65")]
+;"##### ; "64")]
 #[test_case(r#####"tw`space-y-64`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -558,7 +557,7 @@ use test_case::test_case;
     marginBottom: "calc(16rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "66")]
+;"##### ; "65")]
 #[test_case(r#####"tw`space-y-72`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -566,7 +565,7 @@ use test_case::test_case;
     marginBottom: "calc(18rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "67")]
+;"##### ; "66")]
 #[test_case(r#####"tw`space-y-80`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -574,7 +573,7 @@ use test_case::test_case;
     marginBottom: "calc(20rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "68")]
+;"##### ; "67")]
 #[test_case(r#####"tw`space-y-px`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -582,7 +581,7 @@ use test_case::test_case;
     marginBottom: "calc(1px * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "69")]
+;"##### ; "68")]
 #[test_case(r#####"tw`-space-x-0`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -590,7 +589,7 @@ use test_case::test_case;
     marginLeft: "calc(-0px * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "70")]
+;"##### ; "69")]
 #[test_case(r#####"tw`-space-x-0.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -598,7 +597,7 @@ use test_case::test_case;
     marginLeft: "calc(-0.125rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "71")]
+;"##### ; "70")]
 #[test_case(r#####"tw`-space-x-1`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -606,7 +605,7 @@ use test_case::test_case;
     marginLeft: "calc(-0.25rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "72")]
+;"##### ; "71")]
 #[test_case(r#####"tw`-space-x-1.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -614,7 +613,7 @@ use test_case::test_case;
     marginLeft: "calc(-0.375rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "73")]
+;"##### ; "72")]
 #[test_case(r#####"tw`-space-x-2`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -622,7 +621,7 @@ use test_case::test_case;
     marginLeft: "calc(-0.5rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "74")]
+;"##### ; "73")]
 #[test_case(r#####"tw`-space-x-2.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -630,7 +629,7 @@ use test_case::test_case;
     marginLeft: "calc(-0.625rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "75")]
+;"##### ; "74")]
 #[test_case(r#####"tw`-space-x-3`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -638,7 +637,7 @@ use test_case::test_case;
     marginLeft: "calc(-0.75rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "76")]
+;"##### ; "75")]
 #[test_case(r#####"tw`-space-x-3.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -646,7 +645,7 @@ use test_case::test_case;
     marginLeft: "calc(-0.875rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "77")]
+;"##### ; "76")]
 #[test_case(r#####"tw`-space-x-4`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -654,7 +653,7 @@ use test_case::test_case;
     marginLeft: "calc(-1rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "78")]
+;"##### ; "77")]
 #[test_case(r#####"tw`-space-x-5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -662,7 +661,7 @@ use test_case::test_case;
     marginLeft: "calc(-1.25rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "79")]
+;"##### ; "78")]
 #[test_case(r#####"tw`-space-x-6`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -670,7 +669,7 @@ use test_case::test_case;
     marginLeft: "calc(-1.5rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "80")]
+;"##### ; "79")]
 #[test_case(r#####"tw`-space-x-7`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -678,7 +677,7 @@ use test_case::test_case;
     marginLeft: "calc(-1.75rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "81")]
+;"##### ; "80")]
 #[test_case(r#####"tw`-space-x-8`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -686,7 +685,7 @@ use test_case::test_case;
     marginLeft: "calc(-2rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "82")]
+;"##### ; "81")]
 #[test_case(r#####"tw`-space-x-9`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -694,7 +693,7 @@ use test_case::test_case;
     marginLeft: "calc(-2.25rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "83")]
+;"##### ; "82")]
 #[test_case(r#####"tw`-space-x-10`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -702,7 +701,7 @@ use test_case::test_case;
     marginLeft: "calc(-2.5rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "84")]
+;"##### ; "83")]
 #[test_case(r#####"tw`-space-x-12`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -710,7 +709,7 @@ use test_case::test_case;
     marginLeft: "calc(-3rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "85")]
+;"##### ; "84")]
 #[test_case(r#####"tw`-space-x-14`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -718,7 +717,7 @@ use test_case::test_case;
     marginLeft: "calc(-3.5rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "86")]
+;"##### ; "85")]
 #[test_case(r#####"tw`-space-x-16`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -726,7 +725,7 @@ use test_case::test_case;
     marginLeft: "calc(-4rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "87")]
+;"##### ; "86")]
 #[test_case(r#####"tw`-space-x-20`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -734,7 +733,7 @@ use test_case::test_case;
     marginLeft: "calc(-5rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "88")]
+;"##### ; "87")]
 #[test_case(r#####"tw`-space-x-24`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -742,7 +741,7 @@ use test_case::test_case;
     marginLeft: "calc(-6rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "89")]
+;"##### ; "88")]
 #[test_case(r#####"tw`-space-x-28`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -750,7 +749,7 @@ use test_case::test_case;
     marginLeft: "calc(-7rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "90")]
+;"##### ; "89")]
 #[test_case(r#####"tw`-space-x-32`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -758,7 +757,7 @@ use test_case::test_case;
     marginLeft: "calc(-8rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "91")]
+;"##### ; "90")]
 #[test_case(r#####"tw`-space-x-36`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -766,7 +765,7 @@ use test_case::test_case;
     marginLeft: "calc(-9rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "92")]
+;"##### ; "91")]
 #[test_case(r#####"tw`-space-x-40`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -774,7 +773,7 @@ use test_case::test_case;
     marginLeft: "calc(-10rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "93")]
+;"##### ; "92")]
 #[test_case(r#####"tw`-space-x-44`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -782,7 +781,7 @@ use test_case::test_case;
     marginLeft: "calc(-11rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "94")]
+;"##### ; "93")]
 #[test_case(r#####"tw`-space-x-48`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -790,7 +789,7 @@ use test_case::test_case;
     marginLeft: "calc(-12rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "95")]
+;"##### ; "94")]
 #[test_case(r#####"tw`-space-x-52`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -798,7 +797,7 @@ use test_case::test_case;
     marginLeft: "calc(-13rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "96")]
+;"##### ; "95")]
 #[test_case(r#####"tw`-space-x-56`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -806,7 +805,7 @@ use test_case::test_case;
     marginLeft: "calc(-14rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "97")]
+;"##### ; "96")]
 #[test_case(r#####"tw`-space-x-60`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -814,7 +813,7 @@ use test_case::test_case;
     marginLeft: "calc(-15rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "98")]
+;"##### ; "97")]
 #[test_case(r#####"tw`-space-x-64`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -822,7 +821,7 @@ use test_case::test_case;
     marginLeft: "calc(-16rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "99")]
+;"##### ; "98")]
 #[test_case(r#####"tw`-space-x-72`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -830,7 +829,7 @@ use test_case::test_case;
     marginLeft: "calc(-18rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "100")]
+;"##### ; "99")]
 #[test_case(r#####"tw`-space-x-80`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -838,7 +837,7 @@ use test_case::test_case;
     marginLeft: "calc(-20rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "101")]
+;"##### ; "100")]
 #[test_case(r#####"tw`-space-x-96`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -846,7 +845,7 @@ use test_case::test_case;
     marginLeft: "calc(-24rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "102")]
+;"##### ; "101")]
 #[test_case(r#####"tw`-space-x-px`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -854,7 +853,7 @@ use test_case::test_case;
     marginLeft: "calc(-1px * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "103")]
+;"##### ; "102")]
 #[test_case(r#####"tw`-space-y-0`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -862,7 +861,7 @@ use test_case::test_case;
     marginBottom: "calc(-0px * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "104")]
+;"##### ; "103")]
 #[test_case(r#####"tw`-space-y-0.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -870,7 +869,7 @@ use test_case::test_case;
     marginBottom: "calc(-0.125rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "105")]
+;"##### ; "104")]
 #[test_case(r#####"tw`-space-y-1`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -878,7 +877,7 @@ use test_case::test_case;
     marginBottom: "calc(-0.25rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "106")]
+;"##### ; "105")]
 #[test_case(r#####"tw`-space-y-1.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -886,7 +885,7 @@ use test_case::test_case;
     marginBottom: "calc(-0.375rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "107")]
+;"##### ; "106")]
 #[test_case(r#####"tw`-space-y-2`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -894,7 +893,7 @@ use test_case::test_case;
     marginBottom: "calc(-0.5rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "108")]
+;"##### ; "107")]
 #[test_case(r#####"tw`-space-y-2.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -902,7 +901,7 @@ use test_case::test_case;
     marginBottom: "calc(-0.625rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "109")]
+;"##### ; "108")]
 #[test_case(r#####"tw`-space-y-3`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -910,7 +909,7 @@ use test_case::test_case;
     marginBottom: "calc(-0.75rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "110")]
+;"##### ; "109")]
 #[test_case(r#####"tw`-space-y-3.5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -918,7 +917,7 @@ use test_case::test_case;
     marginBottom: "calc(-0.875rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "111")]
+;"##### ; "110")]
 #[test_case(r#####"tw`-space-y-4`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -926,7 +925,7 @@ use test_case::test_case;
     marginBottom: "calc(-1rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "112")]
+;"##### ; "111")]
 #[test_case(r#####"tw`-space-y-5`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -934,7 +933,7 @@ use test_case::test_case;
     marginBottom: "calc(-1.25rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "113")]
+;"##### ; "112")]
 #[test_case(r#####"tw`-space-y-6`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -942,7 +941,7 @@ use test_case::test_case;
     marginBottom: "calc(-1.5rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "114")]
+;"##### ; "113")]
 #[test_case(r#####"tw`-space-y-7`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -950,7 +949,7 @@ use test_case::test_case;
     marginBottom: "calc(-1.75rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "115")]
+;"##### ; "114")]
 #[test_case(r#####"tw`-space-y-8`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -958,7 +957,7 @@ use test_case::test_case;
     marginBottom: "calc(-2rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "116")]
+;"##### ; "115")]
 #[test_case(r#####"tw`-space-y-9`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -966,7 +965,7 @@ use test_case::test_case;
     marginBottom: "calc(-2.25rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "117")]
+;"##### ; "116")]
 #[test_case(r#####"tw`-space-y-10`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -974,7 +973,7 @@ use test_case::test_case;
     marginBottom: "calc(-2.5rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "118")]
+;"##### ; "117")]
 #[test_case(r#####"tw`-space-y-12`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -982,7 +981,7 @@ use test_case::test_case;
     marginBottom: "calc(-3rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "119")]
+;"##### ; "118")]
 #[test_case(r#####"tw`-space-y-14`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -990,7 +989,7 @@ use test_case::test_case;
     marginBottom: "calc(-3.5rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "120")]
+;"##### ; "119")]
 #[test_case(r#####"tw`-space-y-16`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -998,7 +997,7 @@ use test_case::test_case;
     marginBottom: "calc(-4rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "121")]
+;"##### ; "120")]
 #[test_case(r#####"tw`-space-y-20`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1006,7 +1005,7 @@ use test_case::test_case;
     marginBottom: "calc(-5rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "122")]
+;"##### ; "121")]
 #[test_case(r#####"tw`-space-y-24`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1014,7 +1013,7 @@ use test_case::test_case;
     marginBottom: "calc(-6rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "123")]
+;"##### ; "122")]
 #[test_case(r#####"tw`-space-y-28`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1022,7 +1021,7 @@ use test_case::test_case;
     marginBottom: "calc(-7rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "124")]
+;"##### ; "123")]
 #[test_case(r#####"tw`-space-y-32`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1030,7 +1029,7 @@ use test_case::test_case;
     marginBottom: "calc(-8rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "125")]
+;"##### ; "124")]
 #[test_case(r#####"tw`-space-y-36`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1038,7 +1037,7 @@ use test_case::test_case;
     marginBottom: "calc(-9rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "126")]
+;"##### ; "125")]
 #[test_case(r#####"tw`-space-y-40`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1046,7 +1045,7 @@ use test_case::test_case;
     marginBottom: "calc(-10rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "127")]
+;"##### ; "126")]
 #[test_case(r#####"tw`-space-y-44`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1054,7 +1053,7 @@ use test_case::test_case;
     marginBottom: "calc(-11rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "128")]
+;"##### ; "127")]
 #[test_case(r#####"tw`-space-y-48`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1062,7 +1061,7 @@ use test_case::test_case;
     marginBottom: "calc(-12rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "129")]
+;"##### ; "128")]
 #[test_case(r#####"tw`-space-y-52`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1070,7 +1069,7 @@ use test_case::test_case;
     marginBottom: "calc(-13rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "130")]
+;"##### ; "129")]
 #[test_case(r#####"tw`-space-y-56`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1078,7 +1077,7 @@ use test_case::test_case;
     marginBottom: "calc(-14rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "131")]
+;"##### ; "130")]
 #[test_case(r#####"tw`-space-y-60`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1086,7 +1085,7 @@ use test_case::test_case;
     marginBottom: "calc(-15rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "132")]
+;"##### ; "131")]
 #[test_case(r#####"tw`-space-y-64`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1094,7 +1093,7 @@ use test_case::test_case;
     marginBottom: "calc(-16rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "133")]
+;"##### ; "132")]
 #[test_case(r#####"tw`-space-y-72`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1102,7 +1101,7 @@ use test_case::test_case;
     marginBottom: "calc(-18rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "134")]
+;"##### ; "133")]
 #[test_case(r#####"tw`-space-y-80`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1110,7 +1109,7 @@ use test_case::test_case;
     marginBottom: "calc(-20rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "135")]
+;"##### ; "134")]
 #[test_case(r#####"tw`-space-y-96`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1118,7 +1117,7 @@ use test_case::test_case;
     marginBottom: "calc(-24rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "136")]
+;"##### ; "135")]
 #[test_case(r#####"tw`-space-y-px`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1126,19 +1125,19 @@ use test_case::test_case;
     marginBottom: "calc(-1px * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "137")]
+;"##### ; "136")]
 #[test_case(r#####"tw`space-x-reverse`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "1",
   },
 })
-;"##### ; "138")]
+;"##### ; "137")]
 #[test_case(r#####"tw`space-y-reverse`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "1",
   },
 })
-;"##### ; "139")]
+;"##### ; "138")]
 #[test_case(r#####"tw`space-x-[5px]`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -1146,7 +1145,7 @@ use test_case::test_case;
     marginLeft: "calc(5px * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "140")]
+;"##### ; "139")]
 #[test_case(r#####"tw`space-y-[5px]`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1154,7 +1153,7 @@ use test_case::test_case;
     marginBottom: "calc(5px * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "141")]
+;"##### ; "140")]
 #[test_case(r#####"tw`-space-x-[5px]`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -1162,7 +1161,7 @@ use test_case::test_case;
     marginLeft: "calc(-5px * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "142")]
+;"##### ; "141")]
 #[test_case(r#####"tw`-space-y-[5px]`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "0",
@@ -1170,7 +1169,7 @@ use test_case::test_case;
     marginBottom: "calc(-5px * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "143")]
+;"##### ; "142")]
 #[test_case(r#####"tw`space-x-reverse space-x-0`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "1",
@@ -1178,7 +1177,7 @@ use test_case::test_case;
     marginLeft: "calc(0px * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "144")]
+;"##### ; "143")]
 #[test_case(r#####"tw`space-x-0 space-x-reverse`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "1",
@@ -1186,7 +1185,7 @@ use test_case::test_case;
     marginLeft: "calc(0px * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "145")]
+;"##### ; "144")]
 #[test_case(r#####"tw`space-y-reverse space-y-0`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "1",
@@ -1194,7 +1193,7 @@ use test_case::test_case;
     marginBottom: "calc(0px * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "146")]
+;"##### ; "145")]
 #[test_case(r#####"tw`space-y-0 space-y-reverse`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "1",
@@ -1202,7 +1201,7 @@ use test_case::test_case;
     marginBottom: "calc(0px * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "147")]
+;"##### ; "146")]
 #[test_case(r#####"tw`space-x-reverse space-x-32`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "1",
@@ -1210,7 +1209,7 @@ use test_case::test_case;
     marginLeft: "calc(8rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "148")]
+;"##### ; "147")]
 #[test_case(r#####"tw`space-x-32 space-x-reverse`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "1",
@@ -1218,7 +1217,7 @@ use test_case::test_case;
     marginLeft: "calc(8rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "149")]
+;"##### ; "148")]
 #[test_case(r#####"tw`space-y-reverse space-y-32`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "1",
@@ -1226,7 +1225,7 @@ use test_case::test_case;
     marginBottom: "calc(8rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "150")]
+;"##### ; "149")]
 #[test_case(r#####"tw`space-y-32 space-y-reverse`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "1",
@@ -1234,7 +1233,7 @@ use test_case::test_case;
     marginBottom: "calc(8rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "151")]
+;"##### ; "150")]
 #[test_case(r#####"tw`space-x-reverse space-x-px`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "1",
@@ -1242,7 +1241,7 @@ use test_case::test_case;
     marginLeft: "calc(1px * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "152")]
+;"##### ; "151")]
 #[test_case(r#####"tw`space-x-px space-x-reverse`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "1",
@@ -1250,7 +1249,7 @@ use test_case::test_case;
     marginLeft: "calc(1px * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "153")]
+;"##### ; "152")]
 #[test_case(r#####"tw`space-y-reverse space-y-px`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "1",
@@ -1258,7 +1257,7 @@ use test_case::test_case;
     marginBottom: "calc(1px * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "154")]
+;"##### ; "153")]
 #[test_case(r#####"tw`space-y-px space-y-reverse`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "1",
@@ -1266,7 +1265,7 @@ use test_case::test_case;
     marginBottom: "calc(1px * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "155")]
+;"##### ; "154")]
 #[test_case(r#####"tw`space-x-reverse space-x-12`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "1",
@@ -1274,7 +1273,7 @@ use test_case::test_case;
     marginLeft: "calc(3rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "156")]
+;"##### ; "155")]
 #[test_case(r#####"tw`space-x-12 space-x-reverse`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "1",
@@ -1282,7 +1281,7 @@ use test_case::test_case;
     marginLeft: "calc(3rem * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "157")]
+;"##### ; "156")]
 #[test_case(r#####"tw`space-y-reverse space-y-12`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "1",
@@ -1290,7 +1289,7 @@ use test_case::test_case;
     marginBottom: "calc(3rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "158")]
+;"##### ; "157")]
 #[test_case(r#####"tw`space-y-12 space-y-reverse`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-y-reverse': "1",
@@ -1298,7 +1297,7 @@ use test_case::test_case;
     marginBottom: "calc(3rem * var(--tw-space-y-reverse))",
   },
 })
-;"##### ; "159")]
+;"##### ; "158")]
 #[test_case(r#####"tw`space-x-[20cm]`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
@@ -1306,14 +1305,14 @@ use test_case::test_case;
     marginLeft: "calc(20cm * calc(1 - var(--tw-space-x-reverse)))",
   },
 })
-;"##### ; "160")]
+;"##### ; "159")]
 #[test_case(r#####"tw`space-x-[calc(20%-1cm)]`"#####, r#####"({
   '> :not([hidden]) ~ :not([hidden])': {
     '--tw-space-x-reverse': "0",
     marginRight: "calc(calc(20% - 1cm) * var(--tw-space-x-reverse))",
     marginLeft: "calc(calc(20% - 1cm) * calc(1 - var(--tw-space-x-reverse)))",
   },
-})"##### ; "161")]
+})"##### ; "160")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

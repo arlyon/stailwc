@@ -1,23 +1,19 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw from '../macro'
-
-// within cs prop
-;"#####, r#####";"##### ; "0")]
 #[test_case(r#####"<div cs="maxWidth[100vw - 2rem]" />
 ;"#####, r#####"<div
   css={{
     maxWidth: "100vw - 2rem",
   }}
 />
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"<div cs="maxWidth[100vw - 2rem]!" />
 ;"#####, r#####"<div
   css={{
     maxWidth: "100vw - 2rem !important",
   }}
 />
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"<div cs="md:maxWidth[100vw - 2rem]" />
 ;"#####, r#####"<div
   css={{
@@ -26,7 +22,7 @@ use test_case::test_case;
     },
   }}
 />
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"<div cs="hover:(maxWidth[100vw - 2rem] width[2rem])" />
 ;"#####, r#####"<div
   css={{
@@ -36,7 +32,7 @@ use test_case::test_case;
     },
   }}
 />
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"<div cs="hover:(maxWidth[100vw - 2rem] before:content['test'])" />
 ;"#####, r#####"<div
   css={{
@@ -48,7 +44,7 @@ use test_case::test_case;
     },
   }}
 />
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"<div cs="hover:(maxWidth[100vw - 2rem] before:content['test'])!" />
 ;"#####, r#####"<div
   css={{
@@ -60,7 +56,7 @@ use test_case::test_case;
     },
   }}
 />
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"<div cs="hover:(maxWidth[100vw - 2rem]! before:content['test'])" />
 
 // within tw prop
@@ -74,14 +70,14 @@ use test_case::test_case;
     },
   }}
 /> // within tw prop
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"<div tw="maxWidth[100vw - 2rem]" />
 ;"#####, r#####"<div
   css={{
     maxWidth: "100vw - 2rem",
   }}
 />
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"<div tw="maxWidth[100vw - 2rem] block" />
 ;"#####, r#####"<div
   css={{
@@ -89,7 +85,7 @@ use test_case::test_case;
     maxWidth: "100vw - 2rem",
   }}
 />
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"<div tw="md:maxWidth[100vw - 2rem]" />
 ;"#####, r#####"<div
   css={{
@@ -98,7 +94,7 @@ use test_case::test_case;
     },
   }}
 />
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"<div tw="hover:(maxWidth[100vw - 2rem] width[2rem])" />
 ;"#####, r#####"<div
   css={{
@@ -108,7 +104,7 @@ use test_case::test_case;
     },
   }}
 />
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"<div tw="hover:(maxWidth[100vw - 2rem] before:content['test'])" />
 ;"#####, r#####"<div
   css={{
@@ -120,7 +116,7 @@ use test_case::test_case;
     },
   }}
 />
-;"##### ; "12")]
+;"##### ; "11")]
 #[test_case(r#####"<div tw="hover:(maxWidth[100vw - 2rem] before:content['test'])!" />
 ;"#####, r#####"<div
   css={{
@@ -132,7 +128,7 @@ use test_case::test_case;
     },
   }}
 />
-;"##### ; "13")]
+;"##### ; "12")]
 #[test_case(r#####"<div tw="hover:(maxWidth[100vw - 2rem]! before:content['test'])" />
 
 // within css prop
@@ -146,7 +142,7 @@ use test_case::test_case;
     },
   }}
 /> // within css prop
-;"##### ; "14")]
+;"##### ; "13")]
 #[test_case(r#####"<div css={tw`lg:bg-red-500 max-width[100vw]`} />"#####, r#####"<div
   css={{
     maxWidth: "100vw",
@@ -157,29 +153,29 @@ use test_case::test_case;
   }}
 /> // within tw import
 
-;"##### ; "15")]
+;"##### ; "14")]
 #[test_case(r#####"tw`maxWidth[100vw - 2rem]`"#####, r#####"({
   maxWidth: "100vw - 2rem",
 })
-;"##### ; "16")]
+;"##### ; "15")]
 #[test_case(r#####"tw`maxWidth[100vw - 2rem] block`"#####, r#####"({
   display: "block",
   maxWidth: "100vw - 2rem",
 })
-;"##### ; "17")]
+;"##### ; "16")]
 #[test_case(r#####"tw`md:maxWidth[100vw - 2rem]`"#####, r#####"({
   '@media (min-width: 768px)': {
     maxWidth: "100vw - 2rem",
   },
 })
-;"##### ; "18")]
+;"##### ; "17")]
 #[test_case(r#####"tw`hover:(maxWidth[100vw - 2rem] width[2rem])`"#####, r#####"({
   ':hover': {
     maxWidth: "100vw - 2rem",
     width: "2rem",
   },
 })
-;"##### ; "19")]
+;"##### ; "18")]
 #[test_case(r#####"tw`hover:(maxWidth[100vw - 2rem] before:content['test'])`"#####, r#####"({
   ':hover': {
     maxWidth: "100vw - 2rem",
@@ -188,7 +184,7 @@ use test_case::test_case;
     content: "'test'",
   },
 })
-;"##### ; "20")]
+;"##### ; "19")]
 #[test_case(r#####"tw`hover:(maxWidth[100vw - 2rem] before:content['test'])!`"#####, r#####"({
   ':hover': {
     maxWidth: "100vw - 2rem !important",
@@ -197,7 +193,7 @@ use test_case::test_case;
     content: "'test' !important",
   },
 })
-;"##### ; "21")]
+;"##### ; "20")]
 #[test_case(r#####"tw`hover:(maxWidth[100vw - 2rem]! before:content['test'])`
 
 // prop ordering
@@ -209,7 +205,7 @@ use test_case::test_case;
     content: "'test'",
   },
 }) // prop ordering
-;"##### ; "22")]
+;"##### ; "21")]
 #[test_case(r#####"<div css={{ color: "red" }} cs="margin[50px]" tw="mt-4 content['content']" />"#####, r#####"<div
   css={[
     {
@@ -225,7 +221,7 @@ use test_case::test_case;
   ]}
 /> // Setting css variables
 
-;"##### ; "23")]
+;"##### ; "22")]
 #[test_case(r#####"tw`--css-prop[true] md:--css-prop[false]`"#####, r#####"({
   '--css-prop': "true",
   '@media (min-width: 768px)': {
@@ -233,7 +229,7 @@ use test_case::test_case;
   },
 }) // Using css variables
 
-;"##### ; "24")]
+;"##### ; "23")]
 #[test_case(r#####"tw`max-width[var(--css-react)] md:max-width[var(--css-react-md)]`"#####, r#####"({
   maxWidth: "var(--css-react)",
   '@media (min-width: 768px)': {
@@ -241,7 +237,7 @@ use test_case::test_case;
   },
 }) // Browser vendor prefixes
 
-;"##### ; "25")]
+;"##### ; "24")]
 #[test_case(r#####"tw`-webkit-gradient[gradient here] md:-webkit-gradient[gradient here md]`"#####, r#####"({
   WebkitGradient: "gradient here",
   '@media (min-width: 768px)': {
@@ -249,7 +245,7 @@ use test_case::test_case;
   },
 }) // Grid template
 
-;"##### ; "26")]
+;"##### ; "25")]
 #[test_case(r#####"tw`grid-template-columns[[main-start] 1fr [content-start] 1fr [content-end] 1fr [main-end]] md:grid-template-columns[[main-start-md] 1fr [content-start-md] 1fr [content-end-md] 1fr [main-end-md]]`"#####, r#####"({
   gridTemplateColumns:
     "[main-start] 1fr [content-start] 1fr [content-end] 1fr [main-end]",
@@ -259,23 +255,23 @@ use test_case::test_case;
   },
 }) // Short css trumps core plugins
 
-;"##### ; "27")]
+;"##### ; "26")]
 #[test_case(r#####"tw`transition-property[margin]`"#####, r#####"({
   transitionProperty: "margin",
 }) // Crazy calcs
 
-;"##### ; "28")]
+;"##### ; "27")]
 #[test_case(r#####"tw`padding[calc((2em * -1) + var(--myVar))]`"#####, r#####"({
   padding: "calc((2em * -1) + var(--myVar))",
 }) // Multiline
 
-;"##### ; "29")]
+;"##### ; "28")]
 #[test_case(r#####"tw`padding[
     calc((2em * -1) + var(--myVar))
 ]`"#####, r#####"({
   padding: "calc((2em * -1) + var(--myVar))",
 })
-;"##### ; "30")]
+;"##### ; "29")]
 #[test_case(r#####"tw`padding[
     calc((2em * -1) +
     var(--myVar))
@@ -283,19 +279,19 @@ use test_case::test_case;
   padding: "calc((2em * -1) + var(--myVar))",
 }) // Theme value
 
-;"##### ; "31")]
+;"##### ; "30")]
 #[test_case(r#####"tw`--color[theme(colors.red.500)]`"#####, r#####"({
   '--color': "#ef4444",
 })
-;"##### ; "32")]
+;"##### ; "31")]
 #[test_case(r#####"tw`--color[this theme(colors.red.500) that]`"#####, r#####"({
   '--color': "this #ef4444 that",
 }) // Automatic '' value
 
-;"##### ; "33")]
+;"##### ; "32")]
 #[test_case(r#####"tw`touch-action[]`"#####, r#####"({
   touchAction: "''",
-})"##### ; "34")]
+})"##### ; "33")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

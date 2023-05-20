@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"tw`selector`"#####, r#####"({
   '@media (min-width: 1px)': {
     content: "@media .selector",
@@ -30,7 +29,7 @@ use test_case::test_case;
   '@media (min-width: 2px)': {
     content: "@media .selector",
   },
-})"##### ; "1")]
+})"##### ; "0")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

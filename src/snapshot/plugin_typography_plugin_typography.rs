@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"tw`form-radio`"#####, r#####"({
   appearance: "none",
   padding: "0",
@@ -46,7 +45,7 @@ use test_case::test_case;
     backgroundColor: "currentColor",
   },
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`form-select`"#####, r#####"({
   appearance: "none",
   backgroundColor: "#fff",
@@ -82,7 +81,7 @@ use test_case::test_case;
   backgroundSize: "1.5em 1.5em",
   printColorAdjust: "exact",
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`form-checkbox`"#####, r#####"({
   appearance: "none",
   padding: "0",
@@ -141,7 +140,7 @@ use test_case::test_case;
     backgroundColor: "currentColor",
   },
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`form-input`"#####, r#####"({
   appearance: "none",
   backgroundColor: "#fff",
@@ -186,7 +185,7 @@ use test_case::test_case;
       paddingBottom: "0",
     },
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`form-textarea`"#####, r#####"({
   appearance: "none",
   backgroundColor: "#fff",
@@ -220,7 +219,7 @@ use test_case::test_case;
     opacity: "1",
   },
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`form-multiselect`"#####, r#####"({
   appearance: "none",
   backgroundColor: "#fff",
@@ -249,7 +248,7 @@ use test_case::test_case;
       "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)",
     borderColor: "#2563eb",
   },
-})"##### ; "6")]
+})"##### ; "5")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

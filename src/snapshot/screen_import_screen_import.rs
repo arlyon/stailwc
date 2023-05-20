@@ -1,20 +1,17 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { styled, screen } from '../macro'"#####, r#####"import _styled from '@emotion/styled'
-// Media query only
-;"##### ; "0")]
 #[test_case(r#####"screen`sm`"#####, r#####"("@media (min-width: 100px)")
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"screen.md"#####, r#####"("@media (min-width: 200px)") // Can't work with screen values that begin with a number, eg: screen.2xl
 
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"screen("lg")"#####, r#####"("@media (min-width: 300px)")
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"screen(`xl`)
 
 // Constructed media queries
 ;"#####, r#####"("@media (min-width: 400px)") // Constructed media queries
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"`
     ${screen`sm`} {
         display: block;
@@ -29,14 +26,14 @@ use test_case::test_case;
         }}
     }
 `
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"({ [screen`sm`]: `display: block; ${tw`inline`}` })
 ;"#####, r#####"({
   '@media (min-width: 100px)': `display: block; ${{
     display: "inline",
   }}`,
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"({ [screen`sm`]: { display: "block", ...tw`inline` } })"#####, r#####"({
   '@media (min-width: 100px)': {
     display: "block",
@@ -46,45 +43,45 @@ use test_case::test_case;
   },
 }) // Media queries with styles
 
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"screen.sm({ color: `red` })"#####, r#####"({
   '@media (min-width: 100px)': {
     color: `red`,
   },
 })
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"screen`md`({ color: `red` })"#####, r#####"({
   '@media (min-width: 200px)': {
     color: `red`,
   },
 })
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"screen("lg")({ color: `red` })"#####, r#####"({
   '@media (min-width: 300px)': {
     color: `red`,
   },
 })
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"screen(`xl`)({ color: `red` })"#####, r#####"({
   '@media (min-width: 400px)': {
     color: `red`,
   },
 })
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"screen.sm`color: red;`"#####, r#####"`@media (min-width: 100px) { ${`color: red;`} }`
-;"##### ; "12")]
+;"##### ; "11")]
 #[test_case(r#####"screen`md``color: red;`"#####, r#####"`@media (min-width: 200px) { ${`color: red;`} }`
-;"##### ; "13")]
+;"##### ; "12")]
 #[test_case(r#####"screen("lg")`color: red;`"#####, r#####"`@media (min-width: 300px) { ${`color: red;`} }`
-;"##### ; "14")]
+;"##### ; "13")]
 #[test_case(r#####"screen(`xl`)`color: red;`"#####, r#####"`@media (min-width: 400px) { ${`color: red;`} }`
-;"##### ; "15")]
+;"##### ; "14")]
 #[test_case(r#####"screen.xl(tw`inline`)"#####, r#####"({
   '@media (min-width: 400px)': {
     display: "inline",
   },
 })
-;"##### ; "16")]
+;"##### ; "15")]
 #[test_case(r#####"screen.xl({ ...tw`inline` })"#####, r#####"({
   '@media (min-width: 400px)': {
     ...{
@@ -92,7 +89,7 @@ use test_case::test_case;
     },
   },
 })
-;"##### ; "17")]
+;"##### ; "16")]
 #[test_case(r#####"screen.xl({ ...tw`inline`, display: "block" })"#####, r#####"({
   '@media (min-width: 400px)': {
     ...{
@@ -101,7 +98,7 @@ use test_case::test_case;
     display: "block",
   },
 })
-;"##### ; "18")]
+;"##### ; "17")]
 #[test_case(r#####"screen.xl`
     ${tw`inline`}
     display: block;
@@ -111,26 +108,26 @@ use test_case::test_case;
     }}
     display: block;
 `} }`
-;"##### ; "19")]
+;"##### ; "18")]
 #[test_case(r#####"screen.xl`color: ${true && "blue"};`
 
 // Within template literals
 ;"#####, r#####"`@media (min-width: 400px) { ${`color: ${true && "blue"};`} }` // Within template literals
-;"##### ; "20")]
+;"##### ; "19")]
 #[test_case(r#####"`${screen.lg}`
 ;"#####, r#####"`${"@media (min-width: 300px)"}`
-;"##### ; "21")]
+;"##### ; "20")]
 #[test_case(r#####"`${screen`xl`}`
 ;"#####, r#####"`${"@media (min-width: 400px)"}`
-;"##### ; "22")]
+;"##### ; "21")]
 #[test_case(r#####"`${screen(`xl`)}`
 ;"#####, r#####"`${"@media (min-width: 400px)"}`
-;"##### ; "23")]
+;"##### ; "22")]
 #[test_case(r#####"`${screen("xl")}`
 
 // Screen keys
 ;"#####, r#####"`${"@media (min-width: 400px)"}` // Screen keys
-;"##### ; "24")]
+;"##### ; "23")]
 #[test_case(r#####"<div
   css={{
     [screen.xl]: { color: "red" },
@@ -143,7 +140,7 @@ use test_case::test_case;
     },
   }}
 />
-;"##### ; "25")]
+;"##### ; "24")]
 #[test_case(r#####"<div
   css={`
     ${{ [screen.xl]: { color: "red" } }}
@@ -158,7 +155,7 @@ use test_case::test_case;
     }}
   `}
 />
-;"##### ; "26")]
+;"##### ; "25")]
 #[test_case(r#####"<div css={[{ [screen.xl]: { color: "red" } }]} />
 ;"#####, r#####"<div
   css={[
@@ -169,7 +166,7 @@ use test_case::test_case;
     },
   ]}
 />
-;"##### ; "27")]
+;"##### ; "26")]
 #[test_case(r#####"<div
   css={`
     ${screen.xl} {
@@ -182,7 +179,7 @@ use test_case::test_case;
       color: red;
     }
   `}
-/>"##### ; "28")]
+/>"##### ; "27")]
 #[test_case(r#####"styled.div`
   ${{ [screen.xl]: { color: "red" } }}
 `"#####, r#####"_styled.div`
@@ -191,7 +188,7 @@ use test_case::test_case;
       color: "red",
     },
   }}
-`"##### ; "29")]
+`"##### ; "28")]
 #[test_case(r#####"styled.div([{ [screen.xl]: { color: "red" } }])
 
 // Logical expressions
@@ -203,7 +200,7 @@ use test_case::test_case;
   },
 ]) // Logical expressions
 
-;"##### ; "30")]
+;"##### ; "29")]
 #[test_case(r#####"<div
   css={{
     [true && screen.xl]: { color: "red" },
@@ -214,7 +211,7 @@ use test_case::test_case;
       color: "red",
     },
   }}
-/>"##### ; "31")]
+/>"##### ; "30")]
 #[test_case(r#####"styled.div([{ [true && screen.xl]: { color: "red" } }])
 
 // Conditional expressions
@@ -226,7 +223,7 @@ use test_case::test_case;
   },
 ]) // Conditional expressions
 
-;"##### ; "32")]
+;"##### ; "31")]
 #[test_case(r#####"<div
   css={{
     // eslint-disable-next-line no-constant-condition
@@ -239,7 +236,7 @@ use test_case::test_case;
       color: "red",
     },
   }}
-/>"##### ; "33")]
+/>"##### ; "32")]
 #[test_case(r#####"styled.div`
   ${{
     // eslint-disable-next-line no-constant-condition
@@ -256,7 +253,7 @@ use test_case::test_case;
     },
   }}
 ` // Screen with values
-;"##### ; "34")]
+;"##### ; "33")]
 #[test_case(r#####"<div css={screen.xl({ color: "red" })} />
 ;"#####, r#####"<div
   css={{
@@ -265,7 +262,7 @@ use test_case::test_case;
     },
   }}
 />
-;"##### ; "35")]
+;"##### ; "34")]
 #[test_case(r#####"<div css={[screen.xl({ color: "red" })]} />
 ;"#####, r#####"<div
   css={[
@@ -276,7 +273,7 @@ use test_case::test_case;
     },
   ]}
 />
-;"##### ; "36")]
+;"##### ; "35")]
 #[test_case(r#####"<div
   css={`
     ${screen.xl({ color: "red" })}
@@ -291,7 +288,7 @@ use test_case::test_case;
     }}
   `}
 />
-;"##### ; "37")]
+;"##### ; "36")]
 #[test_case(r#####"<div css={screen.xl`color: red;`} />
 ;"#####, r#####"<div
   css={`
@@ -300,10 +297,10 @@ use test_case::test_case;
     }
   `}
 />
-;"##### ; "38")]
+;"##### ; "37")]
 #[test_case(r#####"<div css={[screen.xl`color: red;`]} />
 ;"#####, r#####"<div css={[`@media (min-width: 400px) { ${`color: red;`} }`]} />
-;"##### ; "39")]
+;"##### ; "38")]
 #[test_case(r#####"<div
   css={`
     ${screen.xl`color: red;`}
@@ -312,7 +309,7 @@ use test_case::test_case;
   css={`
     ${`@media (min-width: 400px) { ${`color: red;`} }`}
   `}
-/>"##### ; "40")]
+/>"##### ; "39")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

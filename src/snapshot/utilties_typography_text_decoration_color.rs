@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { theme } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"theme`textDecorationColor`"#####, r#####"({
   inherit: "inherit",
   current: "currentColor",
@@ -296,948 +295,948 @@ use test_case::test_case;
   'red-500/fromConfig': "#000",
   electric: void 0,
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`decoration-inherit`"#####, r#####"({
   textDecorationColor: "inherit",
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`decoration-current`"#####, r#####"({
   textDecorationColor: "currentColor",
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`decoration-transparent`"#####, r#####"({
   textDecorationColor: "transparent",
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`decoration-black`"#####, r#####"({
   textDecorationColor: "#000",
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`decoration-white`"#####, r#####"({
   textDecorationColor: "#fff",
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"tw`decoration-slate-50`"#####, r#####"({
   textDecorationColor: "#f8fafc",
 })
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"tw`decoration-slate-100`"#####, r#####"({
   textDecorationColor: "#f1f5f9",
 })
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"tw`decoration-slate-200`"#####, r#####"({
   textDecorationColor: "#e2e8f0",
 })
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"tw`decoration-slate-300`"#####, r#####"({
   textDecorationColor: "#cbd5e1",
 })
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"tw`decoration-slate-400`"#####, r#####"({
   textDecorationColor: "#94a3b8",
 })
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"tw`decoration-slate-500`"#####, r#####"({
   textDecorationColor: "#64748b",
 })
-;"##### ; "12")]
+;"##### ; "11")]
 #[test_case(r#####"tw`decoration-slate-600`"#####, r#####"({
   textDecorationColor: "#475569",
 })
-;"##### ; "13")]
+;"##### ; "12")]
 #[test_case(r#####"tw`decoration-slate-700`"#####, r#####"({
   textDecorationColor: "#334155",
 })
-;"##### ; "14")]
+;"##### ; "13")]
 #[test_case(r#####"tw`decoration-slate-800`"#####, r#####"({
   textDecorationColor: "#1e293b",
 })
-;"##### ; "15")]
+;"##### ; "14")]
 #[test_case(r#####"tw`decoration-slate-900`"#####, r#####"({
   textDecorationColor: "#0f172a",
 })
-;"##### ; "16")]
+;"##### ; "15")]
 #[test_case(r#####"tw`decoration-gray-50`"#####, r#####"({
   textDecorationColor: "#f9fafb",
 })
-;"##### ; "17")]
+;"##### ; "16")]
 #[test_case(r#####"tw`decoration-gray-100`"#####, r#####"({
   textDecorationColor: "#f3f4f6",
 })
-;"##### ; "18")]
+;"##### ; "17")]
 #[test_case(r#####"tw`decoration-gray-200`"#####, r#####"({
   textDecorationColor: "#e5e7eb",
 })
-;"##### ; "19")]
+;"##### ; "18")]
 #[test_case(r#####"tw`decoration-gray-300`"#####, r#####"({
   textDecorationColor: "#d1d5db",
 })
-;"##### ; "20")]
+;"##### ; "19")]
 #[test_case(r#####"tw`decoration-gray-400`"#####, r#####"({
   textDecorationColor: "#9ca3af",
 })
-;"##### ; "21")]
+;"##### ; "20")]
 #[test_case(r#####"tw`decoration-gray-500`"#####, r#####"({
   textDecorationColor: "#6b7280",
 })
-;"##### ; "22")]
+;"##### ; "21")]
 #[test_case(r#####"tw`decoration-gray-600`"#####, r#####"({
   textDecorationColor: "#4b5563",
 })
-;"##### ; "23")]
+;"##### ; "22")]
 #[test_case(r#####"tw`decoration-gray-700`"#####, r#####"({
   textDecorationColor: "#374151",
 })
-;"##### ; "24")]
+;"##### ; "23")]
 #[test_case(r#####"tw`decoration-gray-800`"#####, r#####"({
   textDecorationColor: "#1f2937",
 })
-;"##### ; "25")]
+;"##### ; "24")]
 #[test_case(r#####"tw`decoration-gray-900`"#####, r#####"({
   textDecorationColor: "#111827",
 })
-;"##### ; "26")]
+;"##### ; "25")]
 #[test_case(r#####"tw`decoration-zinc-50`"#####, r#####"({
   textDecorationColor: "#fafafa",
 })
-;"##### ; "27")]
+;"##### ; "26")]
 #[test_case(r#####"tw`decoration-zinc-100`"#####, r#####"({
   textDecorationColor: "#f4f4f5",
 })
-;"##### ; "28")]
+;"##### ; "27")]
 #[test_case(r#####"tw`decoration-zinc-200`"#####, r#####"({
   textDecorationColor: "#e4e4e7",
 })
-;"##### ; "29")]
+;"##### ; "28")]
 #[test_case(r#####"tw`decoration-zinc-300`"#####, r#####"({
   textDecorationColor: "#d4d4d8",
 })
-;"##### ; "30")]
+;"##### ; "29")]
 #[test_case(r#####"tw`decoration-zinc-400`"#####, r#####"({
   textDecorationColor: "#a1a1aa",
 })
-;"##### ; "31")]
+;"##### ; "30")]
 #[test_case(r#####"tw`decoration-zinc-500`"#####, r#####"({
   textDecorationColor: "#71717a",
 })
-;"##### ; "32")]
+;"##### ; "31")]
 #[test_case(r#####"tw`decoration-zinc-600`"#####, r#####"({
   textDecorationColor: "#52525b",
 })
-;"##### ; "33")]
+;"##### ; "32")]
 #[test_case(r#####"tw`decoration-zinc-700`"#####, r#####"({
   textDecorationColor: "#3f3f46",
 })
-;"##### ; "34")]
+;"##### ; "33")]
 #[test_case(r#####"tw`decoration-zinc-800`"#####, r#####"({
   textDecorationColor: "#27272a",
 })
-;"##### ; "35")]
+;"##### ; "34")]
 #[test_case(r#####"tw`decoration-zinc-900`"#####, r#####"({
   textDecorationColor: "#18181b",
 })
-;"##### ; "36")]
+;"##### ; "35")]
 #[test_case(r#####"tw`decoration-neutral-50`"#####, r#####"({
   textDecorationColor: "#fafafa",
 })
-;"##### ; "37")]
+;"##### ; "36")]
 #[test_case(r#####"tw`decoration-neutral-100`"#####, r#####"({
   textDecorationColor: "#f5f5f5",
 })
-;"##### ; "38")]
+;"##### ; "37")]
 #[test_case(r#####"tw`decoration-neutral-200`"#####, r#####"({
   textDecorationColor: "#e5e5e5",
 })
-;"##### ; "39")]
+;"##### ; "38")]
 #[test_case(r#####"tw`decoration-neutral-300`"#####, r#####"({
   textDecorationColor: "#d4d4d4",
 })
-;"##### ; "40")]
+;"##### ; "39")]
 #[test_case(r#####"tw`decoration-neutral-400`"#####, r#####"({
   textDecorationColor: "#a3a3a3",
 })
-;"##### ; "41")]
+;"##### ; "40")]
 #[test_case(r#####"tw`decoration-neutral-500`"#####, r#####"({
   textDecorationColor: "#737373",
 })
-;"##### ; "42")]
+;"##### ; "41")]
 #[test_case(r#####"tw`decoration-neutral-600`"#####, r#####"({
   textDecorationColor: "#525252",
 })
-;"##### ; "43")]
+;"##### ; "42")]
 #[test_case(r#####"tw`decoration-neutral-700`"#####, r#####"({
   textDecorationColor: "#404040",
 })
-;"##### ; "44")]
+;"##### ; "43")]
 #[test_case(r#####"tw`decoration-neutral-800`"#####, r#####"({
   textDecorationColor: "#262626",
 })
-;"##### ; "45")]
+;"##### ; "44")]
 #[test_case(r#####"tw`decoration-neutral-900`"#####, r#####"({
   textDecorationColor: "#171717",
 })
-;"##### ; "46")]
+;"##### ; "45")]
 #[test_case(r#####"tw`decoration-stone-50`"#####, r#####"({
   textDecorationColor: "#fafaf9",
 })
-;"##### ; "47")]
+;"##### ; "46")]
 #[test_case(r#####"tw`decoration-stone-100`"#####, r#####"({
   textDecorationColor: "#f5f5f4",
 })
-;"##### ; "48")]
+;"##### ; "47")]
 #[test_case(r#####"tw`decoration-stone-200`"#####, r#####"({
   textDecorationColor: "#e7e5e4",
 })
-;"##### ; "49")]
+;"##### ; "48")]
 #[test_case(r#####"tw`decoration-stone-300`"#####, r#####"({
   textDecorationColor: "#d6d3d1",
 })
-;"##### ; "50")]
+;"##### ; "49")]
 #[test_case(r#####"tw`decoration-stone-400`"#####, r#####"({
   textDecorationColor: "#a8a29e",
 })
-;"##### ; "51")]
+;"##### ; "50")]
 #[test_case(r#####"tw`decoration-stone-500`"#####, r#####"({
   textDecorationColor: "#78716c",
 })
-;"##### ; "52")]
+;"##### ; "51")]
 #[test_case(r#####"tw`decoration-stone-600`"#####, r#####"({
   textDecorationColor: "#57534e",
 })
-;"##### ; "53")]
+;"##### ; "52")]
 #[test_case(r#####"tw`decoration-stone-700`"#####, r#####"({
   textDecorationColor: "#44403c",
 })
-;"##### ; "54")]
+;"##### ; "53")]
 #[test_case(r#####"tw`decoration-stone-800`"#####, r#####"({
   textDecorationColor: "#292524",
 })
-;"##### ; "55")]
+;"##### ; "54")]
 #[test_case(r#####"tw`decoration-stone-900`"#####, r#####"({
   textDecorationColor: "#1c1917",
 })
-;"##### ; "56")]
+;"##### ; "55")]
 #[test_case(r#####"tw`decoration-red-50`"#####, r#####"({
   textDecorationColor: "#fef2f2",
 })
-;"##### ; "57")]
+;"##### ; "56")]
 #[test_case(r#####"tw`decoration-red-100`"#####, r#####"({
   textDecorationColor: "#fee2e2",
 })
-;"##### ; "58")]
+;"##### ; "57")]
 #[test_case(r#####"tw`decoration-red-200`"#####, r#####"({
   textDecorationColor: "#fecaca",
 })
-;"##### ; "59")]
+;"##### ; "58")]
 #[test_case(r#####"tw`decoration-red-300`"#####, r#####"({
   textDecorationColor: "#fca5a5",
 })
-;"##### ; "60")]
+;"##### ; "59")]
 #[test_case(r#####"tw`decoration-red-400`"#####, r#####"({
   textDecorationColor: "#f87171",
 })
-;"##### ; "61")]
+;"##### ; "60")]
 #[test_case(r#####"tw`decoration-red-500`"#####, r#####"({
   textDecorationColor: "#ef4444",
 })
-;"##### ; "62")]
+;"##### ; "61")]
 #[test_case(r#####"tw`decoration-red-600`"#####, r#####"({
   textDecorationColor: "#dc2626",
 })
-;"##### ; "63")]
+;"##### ; "62")]
 #[test_case(r#####"tw`decoration-red-700`"#####, r#####"({
   textDecorationColor: "#b91c1c",
 })
-;"##### ; "64")]
+;"##### ; "63")]
 #[test_case(r#####"tw`decoration-red-800`"#####, r#####"({
   textDecorationColor: "#991b1b",
 })
-;"##### ; "65")]
+;"##### ; "64")]
 #[test_case(r#####"tw`decoration-red-900`"#####, r#####"({
   textDecorationColor: "#7f1d1d",
 })
-;"##### ; "66")]
+;"##### ; "65")]
 #[test_case(r#####"tw`decoration-orange-50`"#####, r#####"({
   textDecorationColor: "#fff7ed",
 })
-;"##### ; "67")]
+;"##### ; "66")]
 #[test_case(r#####"tw`decoration-orange-100`"#####, r#####"({
   textDecorationColor: "#ffedd5",
 })
-;"##### ; "68")]
+;"##### ; "67")]
 #[test_case(r#####"tw`decoration-orange-200`"#####, r#####"({
   textDecorationColor: "#fed7aa",
 })
-;"##### ; "69")]
+;"##### ; "68")]
 #[test_case(r#####"tw`decoration-orange-300`"#####, r#####"({
   textDecorationColor: "#fdba74",
 })
-;"##### ; "70")]
+;"##### ; "69")]
 #[test_case(r#####"tw`decoration-orange-400`"#####, r#####"({
   textDecorationColor: "#fb923c",
 })
-;"##### ; "71")]
+;"##### ; "70")]
 #[test_case(r#####"tw`decoration-orange-500`"#####, r#####"({
   textDecorationColor: "#f97316",
 })
-;"##### ; "72")]
+;"##### ; "71")]
 #[test_case(r#####"tw`decoration-orange-600`"#####, r#####"({
   textDecorationColor: "#ea580c",
 })
-;"##### ; "73")]
+;"##### ; "72")]
 #[test_case(r#####"tw`decoration-orange-700`"#####, r#####"({
   textDecorationColor: "#c2410c",
 })
-;"##### ; "74")]
+;"##### ; "73")]
 #[test_case(r#####"tw`decoration-orange-800`"#####, r#####"({
   textDecorationColor: "#9a3412",
 })
-;"##### ; "75")]
+;"##### ; "74")]
 #[test_case(r#####"tw`decoration-orange-900`"#####, r#####"({
   textDecorationColor: "#7c2d12",
 })
-;"##### ; "76")]
+;"##### ; "75")]
 #[test_case(r#####"tw`decoration-amber-50`"#####, r#####"({
   textDecorationColor: "#fffbeb",
 })
-;"##### ; "77")]
+;"##### ; "76")]
 #[test_case(r#####"tw`decoration-amber-100`"#####, r#####"({
   textDecorationColor: "#fef3c7",
 })
-;"##### ; "78")]
+;"##### ; "77")]
 #[test_case(r#####"tw`decoration-amber-200`"#####, r#####"({
   textDecorationColor: "#fde68a",
 })
-;"##### ; "79")]
+;"##### ; "78")]
 #[test_case(r#####"tw`decoration-amber-300`"#####, r#####"({
   textDecorationColor: "#fcd34d",
 })
-;"##### ; "80")]
+;"##### ; "79")]
 #[test_case(r#####"tw`decoration-amber-400`"#####, r#####"({
   textDecorationColor: "#fbbf24",
 })
-;"##### ; "81")]
+;"##### ; "80")]
 #[test_case(r#####"tw`decoration-amber-500`"#####, r#####"({
   textDecorationColor: "#f59e0b",
 })
-;"##### ; "82")]
+;"##### ; "81")]
 #[test_case(r#####"tw`decoration-amber-600`"#####, r#####"({
   textDecorationColor: "#d97706",
 })
-;"##### ; "83")]
+;"##### ; "82")]
 #[test_case(r#####"tw`decoration-amber-700`"#####, r#####"({
   textDecorationColor: "#b45309",
 })
-;"##### ; "84")]
+;"##### ; "83")]
 #[test_case(r#####"tw`decoration-amber-800`"#####, r#####"({
   textDecorationColor: "#92400e",
 })
-;"##### ; "85")]
+;"##### ; "84")]
 #[test_case(r#####"tw`decoration-amber-900`"#####, r#####"({
   textDecorationColor: "#78350f",
 })
-;"##### ; "86")]
+;"##### ; "85")]
 #[test_case(r#####"tw`decoration-yellow-50`"#####, r#####"({
   textDecorationColor: "#fefce8",
 })
-;"##### ; "87")]
+;"##### ; "86")]
 #[test_case(r#####"tw`decoration-yellow-100`"#####, r#####"({
   textDecorationColor: "#fef9c3",
 })
-;"##### ; "88")]
+;"##### ; "87")]
 #[test_case(r#####"tw`decoration-yellow-200`"#####, r#####"({
   textDecorationColor: "#fef08a",
 })
-;"##### ; "89")]
+;"##### ; "88")]
 #[test_case(r#####"tw`decoration-yellow-300`"#####, r#####"({
   textDecorationColor: "#fde047",
 })
-;"##### ; "90")]
+;"##### ; "89")]
 #[test_case(r#####"tw`decoration-yellow-400`"#####, r#####"({
   textDecorationColor: "#facc15",
 })
-;"##### ; "91")]
+;"##### ; "90")]
 #[test_case(r#####"tw`decoration-yellow-500`"#####, r#####"({
   textDecorationColor: "#eab308",
 })
-;"##### ; "92")]
+;"##### ; "91")]
 #[test_case(r#####"tw`decoration-yellow-600`"#####, r#####"({
   textDecorationColor: "#ca8a04",
 })
-;"##### ; "93")]
+;"##### ; "92")]
 #[test_case(r#####"tw`decoration-yellow-700`"#####, r#####"({
   textDecorationColor: "#a16207",
 })
-;"##### ; "94")]
+;"##### ; "93")]
 #[test_case(r#####"tw`decoration-yellow-800`"#####, r#####"({
   textDecorationColor: "#854d0e",
 })
-;"##### ; "95")]
+;"##### ; "94")]
 #[test_case(r#####"tw`decoration-yellow-900`"#####, r#####"({
   textDecorationColor: "#713f12",
 })
-;"##### ; "96")]
+;"##### ; "95")]
 #[test_case(r#####"tw`decoration-lime-50`"#####, r#####"({
   textDecorationColor: "#f7fee7",
 })
-;"##### ; "97")]
+;"##### ; "96")]
 #[test_case(r#####"tw`decoration-lime-100`"#####, r#####"({
   textDecorationColor: "#ecfccb",
 })
-;"##### ; "98")]
+;"##### ; "97")]
 #[test_case(r#####"tw`decoration-lime-200`"#####, r#####"({
   textDecorationColor: "#d9f99d",
 })
-;"##### ; "99")]
+;"##### ; "98")]
 #[test_case(r#####"tw`decoration-lime-300`"#####, r#####"({
   textDecorationColor: "#bef264",
 })
-;"##### ; "100")]
+;"##### ; "99")]
 #[test_case(r#####"tw`decoration-lime-400`"#####, r#####"({
   textDecorationColor: "#a3e635",
 })
-;"##### ; "101")]
+;"##### ; "100")]
 #[test_case(r#####"tw`decoration-lime-500`"#####, r#####"({
   textDecorationColor: "#84cc16",
 })
-;"##### ; "102")]
+;"##### ; "101")]
 #[test_case(r#####"tw`decoration-lime-600`"#####, r#####"({
   textDecorationColor: "#65a30d",
 })
-;"##### ; "103")]
+;"##### ; "102")]
 #[test_case(r#####"tw`decoration-lime-700`"#####, r#####"({
   textDecorationColor: "#4d7c0f",
 })
-;"##### ; "104")]
+;"##### ; "103")]
 #[test_case(r#####"tw`decoration-lime-800`"#####, r#####"({
   textDecorationColor: "#3f6212",
 })
-;"##### ; "105")]
+;"##### ; "104")]
 #[test_case(r#####"tw`decoration-lime-900`"#####, r#####"({
   textDecorationColor: "#365314",
 })
-;"##### ; "106")]
+;"##### ; "105")]
 #[test_case(r#####"tw`decoration-green-50`"#####, r#####"({
   textDecorationColor: "#f0fdf4",
 })
-;"##### ; "107")]
+;"##### ; "106")]
 #[test_case(r#####"tw`decoration-green-100`"#####, r#####"({
   textDecorationColor: "#dcfce7",
 })
-;"##### ; "108")]
+;"##### ; "107")]
 #[test_case(r#####"tw`decoration-green-200`"#####, r#####"({
   textDecorationColor: "#bbf7d0",
 })
-;"##### ; "109")]
+;"##### ; "108")]
 #[test_case(r#####"tw`decoration-green-300`"#####, r#####"({
   textDecorationColor: "#86efac",
 })
-;"##### ; "110")]
+;"##### ; "109")]
 #[test_case(r#####"tw`decoration-green-400`"#####, r#####"({
   textDecorationColor: "#4ade80",
 })
-;"##### ; "111")]
+;"##### ; "110")]
 #[test_case(r#####"tw`decoration-green-500`"#####, r#####"({
   textDecorationColor: "#22c55e",
 })
-;"##### ; "112")]
+;"##### ; "111")]
 #[test_case(r#####"tw`decoration-green-600`"#####, r#####"({
   textDecorationColor: "#16a34a",
 })
-;"##### ; "113")]
+;"##### ; "112")]
 #[test_case(r#####"tw`decoration-green-700`"#####, r#####"({
   textDecorationColor: "#15803d",
 })
-;"##### ; "114")]
+;"##### ; "113")]
 #[test_case(r#####"tw`decoration-green-800`"#####, r#####"({
   textDecorationColor: "#166534",
 })
-;"##### ; "115")]
+;"##### ; "114")]
 #[test_case(r#####"tw`decoration-green-900`"#####, r#####"({
   textDecorationColor: "#14532d",
 })
-;"##### ; "116")]
+;"##### ; "115")]
 #[test_case(r#####"tw`decoration-emerald-50`"#####, r#####"({
   textDecorationColor: "#ecfdf5",
 })
-;"##### ; "117")]
+;"##### ; "116")]
 #[test_case(r#####"tw`decoration-emerald-100`"#####, r#####"({
   textDecorationColor: "#d1fae5",
 })
-;"##### ; "118")]
+;"##### ; "117")]
 #[test_case(r#####"tw`decoration-emerald-200`"#####, r#####"({
   textDecorationColor: "#a7f3d0",
 })
-;"##### ; "119")]
+;"##### ; "118")]
 #[test_case(r#####"tw`decoration-emerald-300`"#####, r#####"({
   textDecorationColor: "#6ee7b7",
 })
-;"##### ; "120")]
+;"##### ; "119")]
 #[test_case(r#####"tw`decoration-emerald-400`"#####, r#####"({
   textDecorationColor: "#34d399",
 })
-;"##### ; "121")]
+;"##### ; "120")]
 #[test_case(r#####"tw`decoration-emerald-500`"#####, r#####"({
   textDecorationColor: "#10b981",
 })
-;"##### ; "122")]
+;"##### ; "121")]
 #[test_case(r#####"tw`decoration-emerald-600`"#####, r#####"({
   textDecorationColor: "#059669",
 })
-;"##### ; "123")]
+;"##### ; "122")]
 #[test_case(r#####"tw`decoration-emerald-700`"#####, r#####"({
   textDecorationColor: "#047857",
 })
-;"##### ; "124")]
+;"##### ; "123")]
 #[test_case(r#####"tw`decoration-emerald-800`"#####, r#####"({
   textDecorationColor: "#065f46",
 })
-;"##### ; "125")]
+;"##### ; "124")]
 #[test_case(r#####"tw`decoration-emerald-900`"#####, r#####"({
   textDecorationColor: "#064e3b",
 })
-;"##### ; "126")]
+;"##### ; "125")]
 #[test_case(r#####"tw`decoration-teal-50`"#####, r#####"({
   textDecorationColor: "#f0fdfa",
 })
-;"##### ; "127")]
+;"##### ; "126")]
 #[test_case(r#####"tw`decoration-teal-100`"#####, r#####"({
   textDecorationColor: "#ccfbf1",
 })
-;"##### ; "128")]
+;"##### ; "127")]
 #[test_case(r#####"tw`decoration-teal-200`"#####, r#####"({
   textDecorationColor: "#99f6e4",
 })
-;"##### ; "129")]
+;"##### ; "128")]
 #[test_case(r#####"tw`decoration-teal-300`"#####, r#####"({
   textDecorationColor: "#5eead4",
 })
-;"##### ; "130")]
+;"##### ; "129")]
 #[test_case(r#####"tw`decoration-teal-400`"#####, r#####"({
   textDecorationColor: "#2dd4bf",
 })
-;"##### ; "131")]
+;"##### ; "130")]
 #[test_case(r#####"tw`decoration-teal-500`"#####, r#####"({
   textDecorationColor: "#14b8a6",
 })
-;"##### ; "132")]
+;"##### ; "131")]
 #[test_case(r#####"tw`decoration-teal-600`"#####, r#####"({
   textDecorationColor: "#0d9488",
 })
-;"##### ; "133")]
+;"##### ; "132")]
 #[test_case(r#####"tw`decoration-teal-700`"#####, r#####"({
   textDecorationColor: "#0f766e",
 })
-;"##### ; "134")]
+;"##### ; "133")]
 #[test_case(r#####"tw`decoration-teal-800`"#####, r#####"({
   textDecorationColor: "#115e59",
 })
-;"##### ; "135")]
+;"##### ; "134")]
 #[test_case(r#####"tw`decoration-teal-900`"#####, r#####"({
   textDecorationColor: "#134e4a",
 })
-;"##### ; "136")]
+;"##### ; "135")]
 #[test_case(r#####"tw`decoration-cyan-50`"#####, r#####"({
   textDecorationColor: "#ecfeff",
 })
-;"##### ; "137")]
+;"##### ; "136")]
 #[test_case(r#####"tw`decoration-cyan-100`"#####, r#####"({
   textDecorationColor: "#cffafe",
 })
-;"##### ; "138")]
+;"##### ; "137")]
 #[test_case(r#####"tw`decoration-cyan-200`"#####, r#####"({
   textDecorationColor: "#a5f3fc",
 })
-;"##### ; "139")]
+;"##### ; "138")]
 #[test_case(r#####"tw`decoration-cyan-300`"#####, r#####"({
   textDecorationColor: "#67e8f9",
 })
-;"##### ; "140")]
+;"##### ; "139")]
 #[test_case(r#####"tw`decoration-cyan-400`"#####, r#####"({
   textDecorationColor: "#22d3ee",
 })
-;"##### ; "141")]
+;"##### ; "140")]
 #[test_case(r#####"tw`decoration-cyan-500`"#####, r#####"({
   textDecorationColor: "#06b6d4",
 })
-;"##### ; "142")]
+;"##### ; "141")]
 #[test_case(r#####"tw`decoration-cyan-600`"#####, r#####"({
   textDecorationColor: "#0891b2",
 })
-;"##### ; "143")]
+;"##### ; "142")]
 #[test_case(r#####"tw`decoration-cyan-700`"#####, r#####"({
   textDecorationColor: "#0e7490",
 })
-;"##### ; "144")]
+;"##### ; "143")]
 #[test_case(r#####"tw`decoration-cyan-800`"#####, r#####"({
   textDecorationColor: "#155e75",
 })
-;"##### ; "145")]
+;"##### ; "144")]
 #[test_case(r#####"tw`decoration-cyan-900`"#####, r#####"({
   textDecorationColor: "#164e63",
 })
-;"##### ; "146")]
+;"##### ; "145")]
 #[test_case(r#####"tw`decoration-sky-50`"#####, r#####"({
   textDecorationColor: "#f0f9ff",
 })
-;"##### ; "147")]
+;"##### ; "146")]
 #[test_case(r#####"tw`decoration-sky-100`"#####, r#####"({
   textDecorationColor: "#e0f2fe",
 })
-;"##### ; "148")]
+;"##### ; "147")]
 #[test_case(r#####"tw`decoration-sky-200`"#####, r#####"({
   textDecorationColor: "#bae6fd",
 })
-;"##### ; "149")]
+;"##### ; "148")]
 #[test_case(r#####"tw`decoration-sky-300`"#####, r#####"({
   textDecorationColor: "#7dd3fc",
 })
-;"##### ; "150")]
+;"##### ; "149")]
 #[test_case(r#####"tw`decoration-sky-400`"#####, r#####"({
   textDecorationColor: "#38bdf8",
 })
-;"##### ; "151")]
+;"##### ; "150")]
 #[test_case(r#####"tw`decoration-sky-500`"#####, r#####"({
   textDecorationColor: "#0ea5e9",
 })
-;"##### ; "152")]
+;"##### ; "151")]
 #[test_case(r#####"tw`decoration-sky-600`"#####, r#####"({
   textDecorationColor: "#0284c7",
 })
-;"##### ; "153")]
+;"##### ; "152")]
 #[test_case(r#####"tw`decoration-sky-700`"#####, r#####"({
   textDecorationColor: "#0369a1",
 })
-;"##### ; "154")]
+;"##### ; "153")]
 #[test_case(r#####"tw`decoration-sky-800`"#####, r#####"({
   textDecorationColor: "#075985",
 })
-;"##### ; "155")]
+;"##### ; "154")]
 #[test_case(r#####"tw`decoration-sky-900`"#####, r#####"({
   textDecorationColor: "#0c4a6e",
 })
-;"##### ; "156")]
+;"##### ; "155")]
 #[test_case(r#####"tw`decoration-blue-50`"#####, r#####"({
   textDecorationColor: "#eff6ff",
 })
-;"##### ; "157")]
+;"##### ; "156")]
 #[test_case(r#####"tw`decoration-blue-100`"#####, r#####"({
   textDecorationColor: "#dbeafe",
 })
-;"##### ; "158")]
+;"##### ; "157")]
 #[test_case(r#####"tw`decoration-blue-200`"#####, r#####"({
   textDecorationColor: "#bfdbfe",
 })
-;"##### ; "159")]
+;"##### ; "158")]
 #[test_case(r#####"tw`decoration-blue-300`"#####, r#####"({
   textDecorationColor: "#93c5fd",
 })
-;"##### ; "160")]
+;"##### ; "159")]
 #[test_case(r#####"tw`decoration-blue-400`"#####, r#####"({
   textDecorationColor: "#60a5fa",
 })
-;"##### ; "161")]
+;"##### ; "160")]
 #[test_case(r#####"tw`decoration-blue-500`"#####, r#####"({
   textDecorationColor: "#3b82f6",
 })
-;"##### ; "162")]
+;"##### ; "161")]
 #[test_case(r#####"tw`decoration-blue-600`"#####, r#####"({
   textDecorationColor: "#2563eb",
 })
-;"##### ; "163")]
+;"##### ; "162")]
 #[test_case(r#####"tw`decoration-blue-700`"#####, r#####"({
   textDecorationColor: "#1d4ed8",
 })
-;"##### ; "164")]
+;"##### ; "163")]
 #[test_case(r#####"tw`decoration-blue-800`"#####, r#####"({
   textDecorationColor: "#1e40af",
 })
-;"##### ; "165")]
+;"##### ; "164")]
 #[test_case(r#####"tw`decoration-blue-900`"#####, r#####"({
   textDecorationColor: "#1e3a8a",
 })
-;"##### ; "166")]
+;"##### ; "165")]
 #[test_case(r#####"tw`decoration-indigo-50`"#####, r#####"({
   textDecorationColor: "#eef2ff",
 })
-;"##### ; "167")]
+;"##### ; "166")]
 #[test_case(r#####"tw`decoration-indigo-100`"#####, r#####"({
   textDecorationColor: "#e0e7ff",
 })
-;"##### ; "168")]
+;"##### ; "167")]
 #[test_case(r#####"tw`decoration-indigo-200`"#####, r#####"({
   textDecorationColor: "#c7d2fe",
 })
-;"##### ; "169")]
+;"##### ; "168")]
 #[test_case(r#####"tw`decoration-indigo-300`"#####, r#####"({
   textDecorationColor: "#a5b4fc",
 })
-;"##### ; "170")]
+;"##### ; "169")]
 #[test_case(r#####"tw`decoration-indigo-400`"#####, r#####"({
   textDecorationColor: "#818cf8",
 })
-;"##### ; "171")]
+;"##### ; "170")]
 #[test_case(r#####"tw`decoration-indigo-500`"#####, r#####"({
   textDecorationColor: "#6366f1",
 })
-;"##### ; "172")]
+;"##### ; "171")]
 #[test_case(r#####"tw`decoration-indigo-600`"#####, r#####"({
   textDecorationColor: "#4f46e5",
 })
-;"##### ; "173")]
+;"##### ; "172")]
 #[test_case(r#####"tw`decoration-indigo-700`"#####, r#####"({
   textDecorationColor: "#4338ca",
 })
-;"##### ; "174")]
+;"##### ; "173")]
 #[test_case(r#####"tw`decoration-indigo-800`"#####, r#####"({
   textDecorationColor: "#3730a3",
 })
-;"##### ; "175")]
+;"##### ; "174")]
 #[test_case(r#####"tw`decoration-indigo-900`"#####, r#####"({
   textDecorationColor: "#312e81",
 })
-;"##### ; "176")]
+;"##### ; "175")]
 #[test_case(r#####"tw`decoration-violet-50`"#####, r#####"({
   textDecorationColor: "#f5f3ff",
 })
-;"##### ; "177")]
+;"##### ; "176")]
 #[test_case(r#####"tw`decoration-violet-100`"#####, r#####"({
   textDecorationColor: "#ede9fe",
 })
-;"##### ; "178")]
+;"##### ; "177")]
 #[test_case(r#####"tw`decoration-violet-200`"#####, r#####"({
   textDecorationColor: "#ddd6fe",
 })
-;"##### ; "179")]
+;"##### ; "178")]
 #[test_case(r#####"tw`decoration-violet-300`"#####, r#####"({
   textDecorationColor: "#c4b5fd",
 })
-;"##### ; "180")]
+;"##### ; "179")]
 #[test_case(r#####"tw`decoration-violet-400`"#####, r#####"({
   textDecorationColor: "#a78bfa",
 })
-;"##### ; "181")]
+;"##### ; "180")]
 #[test_case(r#####"tw`decoration-violet-500`"#####, r#####"({
   textDecorationColor: "#8b5cf6",
 })
-;"##### ; "182")]
+;"##### ; "181")]
 #[test_case(r#####"tw`decoration-violet-600`"#####, r#####"({
   textDecorationColor: "#7c3aed",
 })
-;"##### ; "183")]
+;"##### ; "182")]
 #[test_case(r#####"tw`decoration-violet-700`"#####, r#####"({
   textDecorationColor: "#6d28d9",
 })
-;"##### ; "184")]
+;"##### ; "183")]
 #[test_case(r#####"tw`decoration-violet-800`"#####, r#####"({
   textDecorationColor: "#5b21b6",
 })
-;"##### ; "185")]
+;"##### ; "184")]
 #[test_case(r#####"tw`decoration-violet-900`"#####, r#####"({
   textDecorationColor: "#4c1d95",
 })
-;"##### ; "186")]
+;"##### ; "185")]
 #[test_case(r#####"tw`decoration-purple-50`"#####, r#####"({
   textDecorationColor: "#faf5ff",
 })
-;"##### ; "187")]
+;"##### ; "186")]
 #[test_case(r#####"tw`decoration-purple-100`"#####, r#####"({
   textDecorationColor: "#f3e8ff",
 })
-;"##### ; "188")]
+;"##### ; "187")]
 #[test_case(r#####"tw`decoration-purple-200`"#####, r#####"({
   textDecorationColor: "#e9d5ff",
 })
-;"##### ; "189")]
+;"##### ; "188")]
 #[test_case(r#####"tw`decoration-purple-300`"#####, r#####"({
   textDecorationColor: "#d8b4fe",
 })
-;"##### ; "190")]
+;"##### ; "189")]
 #[test_case(r#####"tw`decoration-purple-400`"#####, r#####"({
   textDecorationColor: "#c084fc",
 })
-;"##### ; "191")]
+;"##### ; "190")]
 #[test_case(r#####"tw`decoration-purple-500`"#####, r#####"({
   textDecorationColor: "#a855f7",
 })
-;"##### ; "192")]
+;"##### ; "191")]
 #[test_case(r#####"tw`decoration-purple-600`"#####, r#####"({
   textDecorationColor: "#9333ea",
 })
-;"##### ; "193")]
+;"##### ; "192")]
 #[test_case(r#####"tw`decoration-purple-700`"#####, r#####"({
   textDecorationColor: "#7e22ce",
 })
-;"##### ; "194")]
+;"##### ; "193")]
 #[test_case(r#####"tw`decoration-purple-800`"#####, r#####"({
   textDecorationColor: "#6b21a8",
 })
-;"##### ; "195")]
+;"##### ; "194")]
 #[test_case(r#####"tw`decoration-purple-900`"#####, r#####"({
   textDecorationColor: "#581c87",
 })
-;"##### ; "196")]
+;"##### ; "195")]
 #[test_case(r#####"tw`decoration-fuchsia-50`"#####, r#####"({
   textDecorationColor: "#fdf4ff",
 })
-;"##### ; "197")]
+;"##### ; "196")]
 #[test_case(r#####"tw`decoration-fuchsia-100`"#####, r#####"({
   textDecorationColor: "#fae8ff",
 })
-;"##### ; "198")]
+;"##### ; "197")]
 #[test_case(r#####"tw`decoration-fuchsia-200`"#####, r#####"({
   textDecorationColor: "#f5d0fe",
 })
-;"##### ; "199")]
+;"##### ; "198")]
 #[test_case(r#####"tw`decoration-fuchsia-300`"#####, r#####"({
   textDecorationColor: "#f0abfc",
 })
-;"##### ; "200")]
+;"##### ; "199")]
 #[test_case(r#####"tw`decoration-fuchsia-400`"#####, r#####"({
   textDecorationColor: "#e879f9",
 })
-;"##### ; "201")]
+;"##### ; "200")]
 #[test_case(r#####"tw`decoration-fuchsia-500`"#####, r#####"({
   textDecorationColor: "#d946ef",
 })
-;"##### ; "202")]
+;"##### ; "201")]
 #[test_case(r#####"tw`decoration-fuchsia-600`"#####, r#####"({
   textDecorationColor: "#c026d3",
 })
-;"##### ; "203")]
+;"##### ; "202")]
 #[test_case(r#####"tw`decoration-fuchsia-700`"#####, r#####"({
   textDecorationColor: "#a21caf",
 })
-;"##### ; "204")]
+;"##### ; "203")]
 #[test_case(r#####"tw`decoration-fuchsia-800`"#####, r#####"({
   textDecorationColor: "#86198f",
 })
-;"##### ; "205")]
+;"##### ; "204")]
 #[test_case(r#####"tw`decoration-fuchsia-900`"#####, r#####"({
   textDecorationColor: "#701a75",
 })
-;"##### ; "206")]
+;"##### ; "205")]
 #[test_case(r#####"tw`decoration-pink-50`"#####, r#####"({
   textDecorationColor: "#fdf2f8",
 })
-;"##### ; "207")]
+;"##### ; "206")]
 #[test_case(r#####"tw`decoration-pink-100`"#####, r#####"({
   textDecorationColor: "#fce7f3",
 })
-;"##### ; "208")]
+;"##### ; "207")]
 #[test_case(r#####"tw`decoration-pink-200`"#####, r#####"({
   textDecorationColor: "#fbcfe8",
 })
-;"##### ; "209")]
+;"##### ; "208")]
 #[test_case(r#####"tw`decoration-pink-300`"#####, r#####"({
   textDecorationColor: "#f9a8d4",
 })
-;"##### ; "210")]
+;"##### ; "209")]
 #[test_case(r#####"tw`decoration-pink-400`"#####, r#####"({
   textDecorationColor: "#f472b6",
 })
-;"##### ; "211")]
+;"##### ; "210")]
 #[test_case(r#####"tw`decoration-pink-500`"#####, r#####"({
   textDecorationColor: "#ec4899",
 })
-;"##### ; "212")]
+;"##### ; "211")]
 #[test_case(r#####"tw`decoration-pink-600`"#####, r#####"({
   textDecorationColor: "#db2777",
 })
-;"##### ; "213")]
+;"##### ; "212")]
 #[test_case(r#####"tw`decoration-pink-700`"#####, r#####"({
   textDecorationColor: "#be185d",
 })
-;"##### ; "214")]
+;"##### ; "213")]
 #[test_case(r#####"tw`decoration-pink-800`"#####, r#####"({
   textDecorationColor: "#9d174d",
 })
-;"##### ; "215")]
+;"##### ; "214")]
 #[test_case(r#####"tw`decoration-pink-900`"#####, r#####"({
   textDecorationColor: "#831843",
 })
-;"##### ; "216")]
+;"##### ; "215")]
 #[test_case(r#####"tw`decoration-rose-50`"#####, r#####"({
   textDecorationColor: "#fff1f2",
 })
-;"##### ; "217")]
+;"##### ; "216")]
 #[test_case(r#####"tw`decoration-rose-100`"#####, r#####"({
   textDecorationColor: "#ffe4e6",
 })
-;"##### ; "218")]
+;"##### ; "217")]
 #[test_case(r#####"tw`decoration-rose-200`"#####, r#####"({
   textDecorationColor: "#fecdd3",
 })
-;"##### ; "219")]
+;"##### ; "218")]
 #[test_case(r#####"tw`decoration-rose-300`"#####, r#####"({
   textDecorationColor: "#fda4af",
 })
-;"##### ; "220")]
+;"##### ; "219")]
 #[test_case(r#####"tw`decoration-rose-400`"#####, r#####"({
   textDecorationColor: "#fb7185",
 })
-;"##### ; "221")]
+;"##### ; "220")]
 #[test_case(r#####"tw`decoration-rose-500`"#####, r#####"({
   textDecorationColor: "#f43f5e",
 })
-;"##### ; "222")]
+;"##### ; "221")]
 #[test_case(r#####"tw`decoration-rose-600`"#####, r#####"({
   textDecorationColor: "#e11d48",
 })
-;"##### ; "223")]
+;"##### ; "222")]
 #[test_case(r#####"tw`decoration-rose-700`"#####, r#####"({
   textDecorationColor: "#be123c",
 })
-;"##### ; "224")]
+;"##### ; "223")]
 #[test_case(r#####"tw`decoration-rose-800`"#####, r#####"({
   textDecorationColor: "#9f1239",
 })
-;"##### ; "225")]
+;"##### ; "224")]
 #[test_case(r#####"tw`decoration-rose-900`"#####, r#####"({
   textDecorationColor: "#881337",
 })
-;"##### ; "226")]
+;"##### ; "225")]
 #[test_case(r#####"tw`decoration-red-600`"#####, r#####"({
   textDecorationColor: "#dc2626",
 })
-;"##### ; "227")]
+;"##### ; "226")]
 #[test_case(r#####"tw`decoration-[#50d71e]`"#####, r#####"({
   textDecorationColor: "#50d71e",
 })
-;"##### ; "228")]
+;"##### ; "227")]
 #[test_case(r#####"tw`decoration-[black]`"#####, r#####"({
   textDecorationColor: "black",
 })
-;"##### ; "229")]
+;"##### ; "228")]
 #[test_case(r#####"tw`decoration-[rgb(123,123,123)]`"#####, r#####"({
   textDecorationColor: "rgb(123,123,123)",
 })
-;"##### ; "230")]
+;"##### ; "229")]
 #[test_case(r#####"tw`decoration-[rgb(123,_123,_123)]`"#####, r#####"({
   textDecorationColor: "rgb(123, 123, 123)",
 })
-;"##### ; "231")]
+;"##### ; "230")]
 #[test_case(r#####"tw`decoration-[rgb(123_123_123)]`"#####, r#####"({
   textDecorationColor: "rgb(123 123 123)",
 })
-;"##### ; "232")]
+;"##### ; "231")]
 #[test_case(r#####"tw`decoration-[black]/20`"#####, r#####"({
   textDecorationColor: "rgb(0 0 0 1 / 0.2)",
 }) // `decoration-[rgb(123_123_123)]/20` unsupported
 
-;"##### ; "233")]
+;"##### ; "232")]
 #[test_case(r#####"tw`decoration-[black]/[20]`"#####, r#####"({
   textDecorationColor: "rgb(0 0 0 1 / 20)",
 }) // `decoration-[rgb(123_123_123)]/[20]` unsupported
 
-;"##### ; "234")]
+;"##### ; "233")]
 #[test_case(r#####"tw`decoration-[color:#50d71e]`"#####, r#####"({
   textDecorationColor: "#50d71e",
 })
-;"##### ; "235")]
+;"##### ; "234")]
 #[test_case(r#####"tw`decoration-[color:var(--color)]`"#####, r#####"({
   textDecorationColor: "var(--color)",
-})"##### ; "236")]
+})"##### ; "235")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

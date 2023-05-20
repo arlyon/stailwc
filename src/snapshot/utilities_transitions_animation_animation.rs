@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { theme } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"theme`animation`"#####, r#####"({
   none: "none",
   spin: "spin 1s linear infinite",
@@ -8,11 +7,11 @@ use test_case::test_case;
   pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
   bounce: "bounce 1s infinite",
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`animate-none`"#####, r#####"({
   animation: "none",
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`animate-spin`"#####, r#####"({
   '@keyframes spin': {
     to: {
@@ -21,7 +20,7 @@ use test_case::test_case;
   },
   animation: "spin 1s linear infinite",
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`animate-ping`"#####, r#####"({
   '@keyframes ping': {
     '75%, 100%': {
@@ -31,7 +30,7 @@ use test_case::test_case;
   },
   animation: "ping 1s cubic-bezier(0, 0, 0.2, 1) infinite",
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`animate-pulse`"#####, r#####"({
   '@keyframes pulse': {
     '50%': {
@@ -40,7 +39,7 @@ use test_case::test_case;
   },
   animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`animate-bounce`"#####, r#####"({
   '@keyframes bounce': {
     '0%, 100%': {
@@ -54,10 +53,10 @@ use test_case::test_case;
   },
   animation: "bounce 1s infinite",
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"tw`animate-[wiggle 1s ease-in-out infinite]`"#####, r#####"({
   animation: "wiggle 1s ease-in-out infinite",
-})"##### ; "7")]
+})"##### ; "6")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

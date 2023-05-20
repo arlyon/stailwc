@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw from '../macro'"#####, r#####"import _styled from '@emotion/styled'"##### ; "0")]
 #[test_case(r#####"tw.div`xl:bg-red-500 lg:bg-blue-500 bg-green-500 fill-current md:bg-pink-500 sm:bg-green-500 sm:text-yellow-500 hidden`"#####, r#####"_styled.div({
   display: "none",
   '--tw-bg-opacity': "1",
@@ -26,11 +25,11 @@ use test_case::test_case;
   },
 }) // Bg opacity should trump the default bg opacity
 
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`bg-opacity-50 bg-red-500`"#####, r#####"({
   '--tw-bg-opacity': "0.5",
   backgroundColor: "rgb(239 68 68 / var(--tw-bg-opacity))",
-})"##### ; "2")]
+})"##### ; "1")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

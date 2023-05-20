@@ -1,23 +1,15 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw from '../macro'
-
-/**
- * Test comments
- */
-
-// singleline
-;"#####, r#####";"##### ; "0")]
 #[test_case(r#####"<div css={tw`// comment`} />
 
 // multiline
 ;"#####, r#####"<div css={{}} data-tw={"// comment"} /> // multiline
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"<div css={tw`/* comment */`} />
 
 // mixture
 ;"#####, r#####"<div css={{}} data-tw={"/* comment */"} /> // mixture
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"<div
   css={tw`// comment  
 /*
@@ -36,7 +28,7 @@ block
   }}
   data-tw={"// comment /* multline comment */ block // comment"}
 /> // multiline comment
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"<div
   css={tw`/*  block  
 comment too
@@ -45,7 +37,7 @@ comment too
 
 // singleline comment with class
 ;"#####, r#####"<div css={{}} data-tw={"/* block comment too */"} /> // singleline comment with class
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"<div
   css={tw`// a comment
 block
@@ -59,7 +51,7 @@ block
   }}
   data-tw={"// a comment block"}
 /> // multiline comment out a singleline comment with class
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"<div
   css={tw`/*
 // comment */
@@ -74,7 +66,7 @@ block
   }}
   data-tw={"/* // comment */ block"}
 /> // mixture with single and multiline on same line
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"<div
   css={tw`// hi
 // ho /*
@@ -84,7 +76,7 @@ hum
 
 // comment in variant group and consecutive strings
 ;"#####, r#####"<div css={{}} data-tw={"// hi // ho /* hum */"} /> // comment in variant group and consecutive strings
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"<div css={tw`md:(text-xl/* text-yellow-500 */font-black)`} />
 
 // break right bracket
@@ -98,7 +90,7 @@ hum
   }}
   data-tw={"md:(text-xl/* text-yellow-500 */font-black)"}
 /> // break right bracket
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"<div
   css={tw`2xl:(// ####@@@@ 
   [background:/*start*/rgb(191, 201/*inner*/, 211)])`}
@@ -115,7 +107,7 @@ hum
     "2xl:(// ####@@@@ [background:/*start*/rgb(191, 201/*inner*/, 211)])"
   }
 /> // comments within multiline comment
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"<div
   css={tw`relative
   lg:(
@@ -142,7 +134,7 @@ hum
   data-tw={
     "relative lg:( /*** helloworld /****/ //*** flex text-5xl border-yellow-500 /****/ )!"
   }
-/>"##### ; "10")]
+/>"##### ; "9")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

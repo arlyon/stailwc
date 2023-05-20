@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { theme } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"theme`outlineColor`"#####, r#####"({
   inherit: "inherit",
   current: "currentColor",
@@ -296,947 +295,947 @@ use test_case::test_case;
   'red-500/fromConfig': "#000",
   electric: void 0,
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`outline-inherit`"#####, r#####"({
   outlineColor: "inherit",
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`outline-current`"#####, r#####"({
   outlineColor: "currentColor",
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`outline-transparent`"#####, r#####"({
   outlineColor: "transparent",
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`outline-black`"#####, r#####"({
   outlineColor: "#000",
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`outline-white`"#####, r#####"({
   outlineColor: "#fff",
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"tw`outline-slate-50`"#####, r#####"({
   outlineColor: "#f8fafc",
 })
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"tw`outline-slate-100`"#####, r#####"({
   outlineColor: "#f1f5f9",
 })
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"tw`outline-slate-200`"#####, r#####"({
   outlineColor: "#e2e8f0",
 })
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"tw`outline-slate-300`"#####, r#####"({
   outlineColor: "#cbd5e1",
 })
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"tw`outline-slate-400`"#####, r#####"({
   outlineColor: "#94a3b8",
 })
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"tw`outline-slate-500`"#####, r#####"({
   outlineColor: "#64748b",
 })
-;"##### ; "12")]
+;"##### ; "11")]
 #[test_case(r#####"tw`outline-slate-600`"#####, r#####"({
   outlineColor: "#475569",
 })
-;"##### ; "13")]
+;"##### ; "12")]
 #[test_case(r#####"tw`outline-slate-700`"#####, r#####"({
   outlineColor: "#334155",
 })
-;"##### ; "14")]
+;"##### ; "13")]
 #[test_case(r#####"tw`outline-slate-800`"#####, r#####"({
   outlineColor: "#1e293b",
 })
-;"##### ; "15")]
+;"##### ; "14")]
 #[test_case(r#####"tw`outline-slate-900`"#####, r#####"({
   outlineColor: "#0f172a",
 })
-;"##### ; "16")]
+;"##### ; "15")]
 #[test_case(r#####"tw`outline-gray-50`"#####, r#####"({
   outlineColor: "#f9fafb",
 })
-;"##### ; "17")]
+;"##### ; "16")]
 #[test_case(r#####"tw`outline-gray-100`"#####, r#####"({
   outlineColor: "#f3f4f6",
 })
-;"##### ; "18")]
+;"##### ; "17")]
 #[test_case(r#####"tw`outline-gray-200`"#####, r#####"({
   outlineColor: "#e5e7eb",
 })
-;"##### ; "19")]
+;"##### ; "18")]
 #[test_case(r#####"tw`outline-gray-300`"#####, r#####"({
   outlineColor: "#d1d5db",
 })
-;"##### ; "20")]
+;"##### ; "19")]
 #[test_case(r#####"tw`outline-gray-400`"#####, r#####"({
   outlineColor: "#9ca3af",
 })
-;"##### ; "21")]
+;"##### ; "20")]
 #[test_case(r#####"tw`outline-gray-500`"#####, r#####"({
   outlineColor: "#6b7280",
 })
-;"##### ; "22")]
+;"##### ; "21")]
 #[test_case(r#####"tw`outline-gray-600`"#####, r#####"({
   outlineColor: "#4b5563",
 })
-;"##### ; "23")]
+;"##### ; "22")]
 #[test_case(r#####"tw`outline-gray-700`"#####, r#####"({
   outlineColor: "#374151",
 })
-;"##### ; "24")]
+;"##### ; "23")]
 #[test_case(r#####"tw`outline-gray-800`"#####, r#####"({
   outlineColor: "#1f2937",
 })
-;"##### ; "25")]
+;"##### ; "24")]
 #[test_case(r#####"tw`outline-gray-900`"#####, r#####"({
   outlineColor: "#111827",
 })
-;"##### ; "26")]
+;"##### ; "25")]
 #[test_case(r#####"tw`outline-zinc-50`"#####, r#####"({
   outlineColor: "#fafafa",
 })
-;"##### ; "27")]
+;"##### ; "26")]
 #[test_case(r#####"tw`outline-zinc-100`"#####, r#####"({
   outlineColor: "#f4f4f5",
 })
-;"##### ; "28")]
+;"##### ; "27")]
 #[test_case(r#####"tw`outline-zinc-200`"#####, r#####"({
   outlineColor: "#e4e4e7",
 })
-;"##### ; "29")]
+;"##### ; "28")]
 #[test_case(r#####"tw`outline-zinc-300`"#####, r#####"({
   outlineColor: "#d4d4d8",
 })
-;"##### ; "30")]
+;"##### ; "29")]
 #[test_case(r#####"tw`outline-zinc-400`"#####, r#####"({
   outlineColor: "#a1a1aa",
 })
-;"##### ; "31")]
+;"##### ; "30")]
 #[test_case(r#####"tw`outline-zinc-500`"#####, r#####"({
   outlineColor: "#71717a",
 })
-;"##### ; "32")]
+;"##### ; "31")]
 #[test_case(r#####"tw`outline-zinc-600`"#####, r#####"({
   outlineColor: "#52525b",
 })
-;"##### ; "33")]
+;"##### ; "32")]
 #[test_case(r#####"tw`outline-zinc-700`"#####, r#####"({
   outlineColor: "#3f3f46",
 })
-;"##### ; "34")]
+;"##### ; "33")]
 #[test_case(r#####"tw`outline-zinc-800`"#####, r#####"({
   outlineColor: "#27272a",
 })
-;"##### ; "35")]
+;"##### ; "34")]
 #[test_case(r#####"tw`outline-zinc-900`"#####, r#####"({
   outlineColor: "#18181b",
 })
-;"##### ; "36")]
+;"##### ; "35")]
 #[test_case(r#####"tw`outline-neutral-50`"#####, r#####"({
   outlineColor: "#fafafa",
 })
-;"##### ; "37")]
+;"##### ; "36")]
 #[test_case(r#####"tw`outline-neutral-100`"#####, r#####"({
   outlineColor: "#f5f5f5",
 })
-;"##### ; "38")]
+;"##### ; "37")]
 #[test_case(r#####"tw`outline-neutral-200`"#####, r#####"({
   outlineColor: "#e5e5e5",
 })
-;"##### ; "39")]
+;"##### ; "38")]
 #[test_case(r#####"tw`outline-neutral-300`"#####, r#####"({
   outlineColor: "#d4d4d4",
 })
-;"##### ; "40")]
+;"##### ; "39")]
 #[test_case(r#####"tw`outline-neutral-400`"#####, r#####"({
   outlineColor: "#a3a3a3",
 })
-;"##### ; "41")]
+;"##### ; "40")]
 #[test_case(r#####"tw`outline-neutral-500`"#####, r#####"({
   outlineColor: "#737373",
 })
-;"##### ; "42")]
+;"##### ; "41")]
 #[test_case(r#####"tw`outline-neutral-600`"#####, r#####"({
   outlineColor: "#525252",
 })
-;"##### ; "43")]
+;"##### ; "42")]
 #[test_case(r#####"tw`outline-neutral-700`"#####, r#####"({
   outlineColor: "#404040",
 })
-;"##### ; "44")]
+;"##### ; "43")]
 #[test_case(r#####"tw`outline-neutral-800`"#####, r#####"({
   outlineColor: "#262626",
 })
-;"##### ; "45")]
+;"##### ; "44")]
 #[test_case(r#####"tw`outline-neutral-900`"#####, r#####"({
   outlineColor: "#171717",
 })
-;"##### ; "46")]
+;"##### ; "45")]
 #[test_case(r#####"tw`outline-stone-50`"#####, r#####"({
   outlineColor: "#fafaf9",
 })
-;"##### ; "47")]
+;"##### ; "46")]
 #[test_case(r#####"tw`outline-stone-100`"#####, r#####"({
   outlineColor: "#f5f5f4",
 })
-;"##### ; "48")]
+;"##### ; "47")]
 #[test_case(r#####"tw`outline-stone-200`"#####, r#####"({
   outlineColor: "#e7e5e4",
 })
-;"##### ; "49")]
+;"##### ; "48")]
 #[test_case(r#####"tw`outline-stone-300`"#####, r#####"({
   outlineColor: "#d6d3d1",
 })
-;"##### ; "50")]
+;"##### ; "49")]
 #[test_case(r#####"tw`outline-stone-400`"#####, r#####"({
   outlineColor: "#a8a29e",
 })
-;"##### ; "51")]
+;"##### ; "50")]
 #[test_case(r#####"tw`outline-stone-500`"#####, r#####"({
   outlineColor: "#78716c",
 })
-;"##### ; "52")]
+;"##### ; "51")]
 #[test_case(r#####"tw`outline-stone-600`"#####, r#####"({
   outlineColor: "#57534e",
 })
-;"##### ; "53")]
+;"##### ; "52")]
 #[test_case(r#####"tw`outline-stone-700`"#####, r#####"({
   outlineColor: "#44403c",
 })
-;"##### ; "54")]
+;"##### ; "53")]
 #[test_case(r#####"tw`outline-stone-800`"#####, r#####"({
   outlineColor: "#292524",
 })
-;"##### ; "55")]
+;"##### ; "54")]
 #[test_case(r#####"tw`outline-stone-900`"#####, r#####"({
   outlineColor: "#1c1917",
 })
-;"##### ; "56")]
+;"##### ; "55")]
 #[test_case(r#####"tw`outline-red-50`"#####, r#####"({
   outlineColor: "#fef2f2",
 })
-;"##### ; "57")]
+;"##### ; "56")]
 #[test_case(r#####"tw`outline-red-100`"#####, r#####"({
   outlineColor: "#fee2e2",
 })
-;"##### ; "58")]
+;"##### ; "57")]
 #[test_case(r#####"tw`outline-red-200`"#####, r#####"({
   outlineColor: "#fecaca",
 })
-;"##### ; "59")]
+;"##### ; "58")]
 #[test_case(r#####"tw`outline-red-300`"#####, r#####"({
   outlineColor: "#fca5a5",
 })
-;"##### ; "60")]
+;"##### ; "59")]
 #[test_case(r#####"tw`outline-red-400`"#####, r#####"({
   outlineColor: "#f87171",
 })
-;"##### ; "61")]
+;"##### ; "60")]
 #[test_case(r#####"tw`outline-red-500`"#####, r#####"({
   outlineColor: "#ef4444",
 })
-;"##### ; "62")]
+;"##### ; "61")]
 #[test_case(r#####"tw`outline-red-600`"#####, r#####"({
   outlineColor: "#dc2626",
 })
-;"##### ; "63")]
+;"##### ; "62")]
 #[test_case(r#####"tw`outline-red-700`"#####, r#####"({
   outlineColor: "#b91c1c",
 })
-;"##### ; "64")]
+;"##### ; "63")]
 #[test_case(r#####"tw`outline-red-800`"#####, r#####"({
   outlineColor: "#991b1b",
 })
-;"##### ; "65")]
+;"##### ; "64")]
 #[test_case(r#####"tw`outline-red-900`"#####, r#####"({
   outlineColor: "#7f1d1d",
 })
-;"##### ; "66")]
+;"##### ; "65")]
 #[test_case(r#####"tw`outline-orange-50`"#####, r#####"({
   outlineColor: "#fff7ed",
 })
-;"##### ; "67")]
+;"##### ; "66")]
 #[test_case(r#####"tw`outline-orange-100`"#####, r#####"({
   outlineColor: "#ffedd5",
 })
-;"##### ; "68")]
+;"##### ; "67")]
 #[test_case(r#####"tw`outline-orange-200`"#####, r#####"({
   outlineColor: "#fed7aa",
 })
-;"##### ; "69")]
+;"##### ; "68")]
 #[test_case(r#####"tw`outline-orange-300`"#####, r#####"({
   outlineColor: "#fdba74",
 })
-;"##### ; "70")]
+;"##### ; "69")]
 #[test_case(r#####"tw`outline-orange-400`"#####, r#####"({
   outlineColor: "#fb923c",
 })
-;"##### ; "71")]
+;"##### ; "70")]
 #[test_case(r#####"tw`outline-orange-500`"#####, r#####"({
   outlineColor: "#f97316",
 })
-;"##### ; "72")]
+;"##### ; "71")]
 #[test_case(r#####"tw`outline-orange-600`"#####, r#####"({
   outlineColor: "#ea580c",
 })
-;"##### ; "73")]
+;"##### ; "72")]
 #[test_case(r#####"tw`outline-orange-700`"#####, r#####"({
   outlineColor: "#c2410c",
 })
-;"##### ; "74")]
+;"##### ; "73")]
 #[test_case(r#####"tw`outline-orange-800`"#####, r#####"({
   outlineColor: "#9a3412",
 })
-;"##### ; "75")]
+;"##### ; "74")]
 #[test_case(r#####"tw`outline-orange-900`"#####, r#####"({
   outlineColor: "#7c2d12",
 })
-;"##### ; "76")]
+;"##### ; "75")]
 #[test_case(r#####"tw`outline-amber-50`"#####, r#####"({
   outlineColor: "#fffbeb",
 })
-;"##### ; "77")]
+;"##### ; "76")]
 #[test_case(r#####"tw`outline-amber-100`"#####, r#####"({
   outlineColor: "#fef3c7",
 })
-;"##### ; "78")]
+;"##### ; "77")]
 #[test_case(r#####"tw`outline-amber-200`"#####, r#####"({
   outlineColor: "#fde68a",
 })
-;"##### ; "79")]
+;"##### ; "78")]
 #[test_case(r#####"tw`outline-amber-300`"#####, r#####"({
   outlineColor: "#fcd34d",
 })
-;"##### ; "80")]
+;"##### ; "79")]
 #[test_case(r#####"tw`outline-amber-400`"#####, r#####"({
   outlineColor: "#fbbf24",
 })
-;"##### ; "81")]
+;"##### ; "80")]
 #[test_case(r#####"tw`outline-amber-500`"#####, r#####"({
   outlineColor: "#f59e0b",
 })
-;"##### ; "82")]
+;"##### ; "81")]
 #[test_case(r#####"tw`outline-amber-600`"#####, r#####"({
   outlineColor: "#d97706",
 })
-;"##### ; "83")]
+;"##### ; "82")]
 #[test_case(r#####"tw`outline-amber-700`"#####, r#####"({
   outlineColor: "#b45309",
 })
-;"##### ; "84")]
+;"##### ; "83")]
 #[test_case(r#####"tw`outline-amber-800`"#####, r#####"({
   outlineColor: "#92400e",
 })
-;"##### ; "85")]
+;"##### ; "84")]
 #[test_case(r#####"tw`outline-amber-900`"#####, r#####"({
   outlineColor: "#78350f",
 })
-;"##### ; "86")]
+;"##### ; "85")]
 #[test_case(r#####"tw`outline-yellow-50`"#####, r#####"({
   outlineColor: "#fefce8",
 })
-;"##### ; "87")]
+;"##### ; "86")]
 #[test_case(r#####"tw`outline-yellow-100`"#####, r#####"({
   outlineColor: "#fef9c3",
 })
-;"##### ; "88")]
+;"##### ; "87")]
 #[test_case(r#####"tw`outline-yellow-200`"#####, r#####"({
   outlineColor: "#fef08a",
 })
-;"##### ; "89")]
+;"##### ; "88")]
 #[test_case(r#####"tw`outline-yellow-300`"#####, r#####"({
   outlineColor: "#fde047",
 })
-;"##### ; "90")]
+;"##### ; "89")]
 #[test_case(r#####"tw`outline-yellow-400`"#####, r#####"({
   outlineColor: "#facc15",
 })
-;"##### ; "91")]
+;"##### ; "90")]
 #[test_case(r#####"tw`outline-yellow-500`"#####, r#####"({
   outlineColor: "#eab308",
 })
-;"##### ; "92")]
+;"##### ; "91")]
 #[test_case(r#####"tw`outline-yellow-600`"#####, r#####"({
   outlineColor: "#ca8a04",
 })
-;"##### ; "93")]
+;"##### ; "92")]
 #[test_case(r#####"tw`outline-yellow-700`"#####, r#####"({
   outlineColor: "#a16207",
 })
-;"##### ; "94")]
+;"##### ; "93")]
 #[test_case(r#####"tw`outline-yellow-800`"#####, r#####"({
   outlineColor: "#854d0e",
 })
-;"##### ; "95")]
+;"##### ; "94")]
 #[test_case(r#####"tw`outline-yellow-900`"#####, r#####"({
   outlineColor: "#713f12",
 })
-;"##### ; "96")]
+;"##### ; "95")]
 #[test_case(r#####"tw`outline-lime-50`"#####, r#####"({
   outlineColor: "#f7fee7",
 })
-;"##### ; "97")]
+;"##### ; "96")]
 #[test_case(r#####"tw`outline-lime-100`"#####, r#####"({
   outlineColor: "#ecfccb",
 })
-;"##### ; "98")]
+;"##### ; "97")]
 #[test_case(r#####"tw`outline-lime-200`"#####, r#####"({
   outlineColor: "#d9f99d",
 })
-;"##### ; "99")]
+;"##### ; "98")]
 #[test_case(r#####"tw`outline-lime-300`"#####, r#####"({
   outlineColor: "#bef264",
 })
-;"##### ; "100")]
+;"##### ; "99")]
 #[test_case(r#####"tw`outline-lime-400`"#####, r#####"({
   outlineColor: "#a3e635",
 })
-;"##### ; "101")]
+;"##### ; "100")]
 #[test_case(r#####"tw`outline-lime-500`"#####, r#####"({
   outlineColor: "#84cc16",
 })
-;"##### ; "102")]
+;"##### ; "101")]
 #[test_case(r#####"tw`outline-lime-600`"#####, r#####"({
   outlineColor: "#65a30d",
 })
-;"##### ; "103")]
+;"##### ; "102")]
 #[test_case(r#####"tw`outline-lime-700`"#####, r#####"({
   outlineColor: "#4d7c0f",
 })
-;"##### ; "104")]
+;"##### ; "103")]
 #[test_case(r#####"tw`outline-lime-800`"#####, r#####"({
   outlineColor: "#3f6212",
 })
-;"##### ; "105")]
+;"##### ; "104")]
 #[test_case(r#####"tw`outline-lime-900`"#####, r#####"({
   outlineColor: "#365314",
 })
-;"##### ; "106")]
+;"##### ; "105")]
 #[test_case(r#####"tw`outline-green-50`"#####, r#####"({
   outlineColor: "#f0fdf4",
 })
-;"##### ; "107")]
+;"##### ; "106")]
 #[test_case(r#####"tw`outline-green-100`"#####, r#####"({
   outlineColor: "#dcfce7",
 })
-;"##### ; "108")]
+;"##### ; "107")]
 #[test_case(r#####"tw`outline-green-200`"#####, r#####"({
   outlineColor: "#bbf7d0",
 })
-;"##### ; "109")]
+;"##### ; "108")]
 #[test_case(r#####"tw`outline-green-300`"#####, r#####"({
   outlineColor: "#86efac",
 })
-;"##### ; "110")]
+;"##### ; "109")]
 #[test_case(r#####"tw`outline-green-400`"#####, r#####"({
   outlineColor: "#4ade80",
 })
-;"##### ; "111")]
+;"##### ; "110")]
 #[test_case(r#####"tw`outline-green-500`"#####, r#####"({
   outlineColor: "#22c55e",
 })
-;"##### ; "112")]
+;"##### ; "111")]
 #[test_case(r#####"tw`outline-green-600`"#####, r#####"({
   outlineColor: "#16a34a",
 })
-;"##### ; "113")]
+;"##### ; "112")]
 #[test_case(r#####"tw`outline-green-700`"#####, r#####"({
   outlineColor: "#15803d",
 })
-;"##### ; "114")]
+;"##### ; "113")]
 #[test_case(r#####"tw`outline-green-800`"#####, r#####"({
   outlineColor: "#166534",
 })
-;"##### ; "115")]
+;"##### ; "114")]
 #[test_case(r#####"tw`outline-green-900`"#####, r#####"({
   outlineColor: "#14532d",
 })
-;"##### ; "116")]
+;"##### ; "115")]
 #[test_case(r#####"tw`outline-emerald-50`"#####, r#####"({
   outlineColor: "#ecfdf5",
 })
-;"##### ; "117")]
+;"##### ; "116")]
 #[test_case(r#####"tw`outline-emerald-100`"#####, r#####"({
   outlineColor: "#d1fae5",
 })
-;"##### ; "118")]
+;"##### ; "117")]
 #[test_case(r#####"tw`outline-emerald-200`"#####, r#####"({
   outlineColor: "#a7f3d0",
 })
-;"##### ; "119")]
+;"##### ; "118")]
 #[test_case(r#####"tw`outline-emerald-300`"#####, r#####"({
   outlineColor: "#6ee7b7",
 })
-;"##### ; "120")]
+;"##### ; "119")]
 #[test_case(r#####"tw`outline-emerald-400`"#####, r#####"({
   outlineColor: "#34d399",
 })
-;"##### ; "121")]
+;"##### ; "120")]
 #[test_case(r#####"tw`outline-emerald-500`"#####, r#####"({
   outlineColor: "#10b981",
 })
-;"##### ; "122")]
+;"##### ; "121")]
 #[test_case(r#####"tw`outline-emerald-600`"#####, r#####"({
   outlineColor: "#059669",
 })
-;"##### ; "123")]
+;"##### ; "122")]
 #[test_case(r#####"tw`outline-emerald-700`"#####, r#####"({
   outlineColor: "#047857",
 })
-;"##### ; "124")]
+;"##### ; "123")]
 #[test_case(r#####"tw`outline-emerald-800`"#####, r#####"({
   outlineColor: "#065f46",
 })
-;"##### ; "125")]
+;"##### ; "124")]
 #[test_case(r#####"tw`outline-emerald-900`"#####, r#####"({
   outlineColor: "#064e3b",
 })
-;"##### ; "126")]
+;"##### ; "125")]
 #[test_case(r#####"tw`outline-teal-50`"#####, r#####"({
   outlineColor: "#f0fdfa",
 })
-;"##### ; "127")]
+;"##### ; "126")]
 #[test_case(r#####"tw`outline-teal-100`"#####, r#####"({
   outlineColor: "#ccfbf1",
 })
-;"##### ; "128")]
+;"##### ; "127")]
 #[test_case(r#####"tw`outline-teal-200`"#####, r#####"({
   outlineColor: "#99f6e4",
 })
-;"##### ; "129")]
+;"##### ; "128")]
 #[test_case(r#####"tw`outline-teal-300`"#####, r#####"({
   outlineColor: "#5eead4",
 })
-;"##### ; "130")]
+;"##### ; "129")]
 #[test_case(r#####"tw`outline-teal-400`"#####, r#####"({
   outlineColor: "#2dd4bf",
 })
-;"##### ; "131")]
+;"##### ; "130")]
 #[test_case(r#####"tw`outline-teal-500`"#####, r#####"({
   outlineColor: "#14b8a6",
 })
-;"##### ; "132")]
+;"##### ; "131")]
 #[test_case(r#####"tw`outline-teal-600`"#####, r#####"({
   outlineColor: "#0d9488",
 })
-;"##### ; "133")]
+;"##### ; "132")]
 #[test_case(r#####"tw`outline-teal-700`"#####, r#####"({
   outlineColor: "#0f766e",
 })
-;"##### ; "134")]
+;"##### ; "133")]
 #[test_case(r#####"tw`outline-teal-800`"#####, r#####"({
   outlineColor: "#115e59",
 })
-;"##### ; "135")]
+;"##### ; "134")]
 #[test_case(r#####"tw`outline-teal-900`"#####, r#####"({
   outlineColor: "#134e4a",
 })
-;"##### ; "136")]
+;"##### ; "135")]
 #[test_case(r#####"tw`outline-cyan-50`"#####, r#####"({
   outlineColor: "#ecfeff",
 })
-;"##### ; "137")]
+;"##### ; "136")]
 #[test_case(r#####"tw`outline-cyan-100`"#####, r#####"({
   outlineColor: "#cffafe",
 })
-;"##### ; "138")]
+;"##### ; "137")]
 #[test_case(r#####"tw`outline-cyan-200`"#####, r#####"({
   outlineColor: "#a5f3fc",
 })
-;"##### ; "139")]
+;"##### ; "138")]
 #[test_case(r#####"tw`outline-cyan-300`"#####, r#####"({
   outlineColor: "#67e8f9",
 })
-;"##### ; "140")]
+;"##### ; "139")]
 #[test_case(r#####"tw`outline-cyan-400`"#####, r#####"({
   outlineColor: "#22d3ee",
 })
-;"##### ; "141")]
+;"##### ; "140")]
 #[test_case(r#####"tw`outline-cyan-500`"#####, r#####"({
   outlineColor: "#06b6d4",
 })
-;"##### ; "142")]
+;"##### ; "141")]
 #[test_case(r#####"tw`outline-cyan-600`"#####, r#####"({
   outlineColor: "#0891b2",
 })
-;"##### ; "143")]
+;"##### ; "142")]
 #[test_case(r#####"tw`outline-cyan-700`"#####, r#####"({
   outlineColor: "#0e7490",
 })
-;"##### ; "144")]
+;"##### ; "143")]
 #[test_case(r#####"tw`outline-cyan-800`"#####, r#####"({
   outlineColor: "#155e75",
 })
-;"##### ; "145")]
+;"##### ; "144")]
 #[test_case(r#####"tw`outline-cyan-900`"#####, r#####"({
   outlineColor: "#164e63",
 })
-;"##### ; "146")]
+;"##### ; "145")]
 #[test_case(r#####"tw`outline-sky-50`"#####, r#####"({
   outlineColor: "#f0f9ff",
 })
-;"##### ; "147")]
+;"##### ; "146")]
 #[test_case(r#####"tw`outline-sky-100`"#####, r#####"({
   outlineColor: "#e0f2fe",
 })
-;"##### ; "148")]
+;"##### ; "147")]
 #[test_case(r#####"tw`outline-sky-200`"#####, r#####"({
   outlineColor: "#bae6fd",
 })
-;"##### ; "149")]
+;"##### ; "148")]
 #[test_case(r#####"tw`outline-sky-300`"#####, r#####"({
   outlineColor: "#7dd3fc",
 })
-;"##### ; "150")]
+;"##### ; "149")]
 #[test_case(r#####"tw`outline-sky-400`"#####, r#####"({
   outlineColor: "#38bdf8",
 })
-;"##### ; "151")]
+;"##### ; "150")]
 #[test_case(r#####"tw`outline-sky-500`"#####, r#####"({
   outlineColor: "#0ea5e9",
 })
-;"##### ; "152")]
+;"##### ; "151")]
 #[test_case(r#####"tw`outline-sky-600`"#####, r#####"({
   outlineColor: "#0284c7",
 })
-;"##### ; "153")]
+;"##### ; "152")]
 #[test_case(r#####"tw`outline-sky-700`"#####, r#####"({
   outlineColor: "#0369a1",
 })
-;"##### ; "154")]
+;"##### ; "153")]
 #[test_case(r#####"tw`outline-sky-800`"#####, r#####"({
   outlineColor: "#075985",
 })
-;"##### ; "155")]
+;"##### ; "154")]
 #[test_case(r#####"tw`outline-sky-900`"#####, r#####"({
   outlineColor: "#0c4a6e",
 })
-;"##### ; "156")]
+;"##### ; "155")]
 #[test_case(r#####"tw`outline-blue-50`"#####, r#####"({
   outlineColor: "#eff6ff",
 })
-;"##### ; "157")]
+;"##### ; "156")]
 #[test_case(r#####"tw`outline-blue-100`"#####, r#####"({
   outlineColor: "#dbeafe",
 })
-;"##### ; "158")]
+;"##### ; "157")]
 #[test_case(r#####"tw`outline-blue-200`"#####, r#####"({
   outlineColor: "#bfdbfe",
 })
-;"##### ; "159")]
+;"##### ; "158")]
 #[test_case(r#####"tw`outline-blue-300`"#####, r#####"({
   outlineColor: "#93c5fd",
 })
-;"##### ; "160")]
+;"##### ; "159")]
 #[test_case(r#####"tw`outline-blue-400`"#####, r#####"({
   outlineColor: "#60a5fa",
 })
-;"##### ; "161")]
+;"##### ; "160")]
 #[test_case(r#####"tw`outline-blue-500`"#####, r#####"({
   outlineColor: "#3b82f6",
 })
-;"##### ; "162")]
+;"##### ; "161")]
 #[test_case(r#####"tw`outline-blue-600`"#####, r#####"({
   outlineColor: "#2563eb",
 })
-;"##### ; "163")]
+;"##### ; "162")]
 #[test_case(r#####"tw`outline-blue-700`"#####, r#####"({
   outlineColor: "#1d4ed8",
 })
-;"##### ; "164")]
+;"##### ; "163")]
 #[test_case(r#####"tw`outline-blue-800`"#####, r#####"({
   outlineColor: "#1e40af",
 })
-;"##### ; "165")]
+;"##### ; "164")]
 #[test_case(r#####"tw`outline-blue-900`"#####, r#####"({
   outlineColor: "#1e3a8a",
 })
-;"##### ; "166")]
+;"##### ; "165")]
 #[test_case(r#####"tw`outline-indigo-50`"#####, r#####"({
   outlineColor: "#eef2ff",
 })
-;"##### ; "167")]
+;"##### ; "166")]
 #[test_case(r#####"tw`outline-indigo-100`"#####, r#####"({
   outlineColor: "#e0e7ff",
 })
-;"##### ; "168")]
+;"##### ; "167")]
 #[test_case(r#####"tw`outline-indigo-200`"#####, r#####"({
   outlineColor: "#c7d2fe",
 })
-;"##### ; "169")]
+;"##### ; "168")]
 #[test_case(r#####"tw`outline-indigo-300`"#####, r#####"({
   outlineColor: "#a5b4fc",
 })
-;"##### ; "170")]
+;"##### ; "169")]
 #[test_case(r#####"tw`outline-indigo-400`"#####, r#####"({
   outlineColor: "#818cf8",
 })
-;"##### ; "171")]
+;"##### ; "170")]
 #[test_case(r#####"tw`outline-indigo-500`"#####, r#####"({
   outlineColor: "#6366f1",
 })
-;"##### ; "172")]
+;"##### ; "171")]
 #[test_case(r#####"tw`outline-indigo-600`"#####, r#####"({
   outlineColor: "#4f46e5",
 })
-;"##### ; "173")]
+;"##### ; "172")]
 #[test_case(r#####"tw`outline-indigo-700`"#####, r#####"({
   outlineColor: "#4338ca",
 })
-;"##### ; "174")]
+;"##### ; "173")]
 #[test_case(r#####"tw`outline-indigo-800`"#####, r#####"({
   outlineColor: "#3730a3",
 })
-;"##### ; "175")]
+;"##### ; "174")]
 #[test_case(r#####"tw`outline-indigo-900`"#####, r#####"({
   outlineColor: "#312e81",
 })
-;"##### ; "176")]
+;"##### ; "175")]
 #[test_case(r#####"tw`outline-violet-50`"#####, r#####"({
   outlineColor: "#f5f3ff",
 })
-;"##### ; "177")]
+;"##### ; "176")]
 #[test_case(r#####"tw`outline-violet-100`"#####, r#####"({
   outlineColor: "#ede9fe",
 })
-;"##### ; "178")]
+;"##### ; "177")]
 #[test_case(r#####"tw`outline-violet-200`"#####, r#####"({
   outlineColor: "#ddd6fe",
 })
-;"##### ; "179")]
+;"##### ; "178")]
 #[test_case(r#####"tw`outline-violet-300`"#####, r#####"({
   outlineColor: "#c4b5fd",
 })
-;"##### ; "180")]
+;"##### ; "179")]
 #[test_case(r#####"tw`outline-violet-400`"#####, r#####"({
   outlineColor: "#a78bfa",
 })
-;"##### ; "181")]
+;"##### ; "180")]
 #[test_case(r#####"tw`outline-violet-500`"#####, r#####"({
   outlineColor: "#8b5cf6",
 })
-;"##### ; "182")]
+;"##### ; "181")]
 #[test_case(r#####"tw`outline-violet-600`"#####, r#####"({
   outlineColor: "#7c3aed",
 })
-;"##### ; "183")]
+;"##### ; "182")]
 #[test_case(r#####"tw`outline-violet-700`"#####, r#####"({
   outlineColor: "#6d28d9",
 })
-;"##### ; "184")]
+;"##### ; "183")]
 #[test_case(r#####"tw`outline-violet-800`"#####, r#####"({
   outlineColor: "#5b21b6",
 })
-;"##### ; "185")]
+;"##### ; "184")]
 #[test_case(r#####"tw`outline-violet-900`"#####, r#####"({
   outlineColor: "#4c1d95",
 })
-;"##### ; "186")]
+;"##### ; "185")]
 #[test_case(r#####"tw`outline-purple-50`"#####, r#####"({
   outlineColor: "#faf5ff",
 })
-;"##### ; "187")]
+;"##### ; "186")]
 #[test_case(r#####"tw`outline-purple-100`"#####, r#####"({
   outlineColor: "#f3e8ff",
 })
-;"##### ; "188")]
+;"##### ; "187")]
 #[test_case(r#####"tw`outline-purple-200`"#####, r#####"({
   outlineColor: "#e9d5ff",
 })
-;"##### ; "189")]
+;"##### ; "188")]
 #[test_case(r#####"tw`outline-purple-300`"#####, r#####"({
   outlineColor: "#d8b4fe",
 })
-;"##### ; "190")]
+;"##### ; "189")]
 #[test_case(r#####"tw`outline-purple-400`"#####, r#####"({
   outlineColor: "#c084fc",
 })
-;"##### ; "191")]
+;"##### ; "190")]
 #[test_case(r#####"tw`outline-purple-500`"#####, r#####"({
   outlineColor: "#a855f7",
 })
-;"##### ; "192")]
+;"##### ; "191")]
 #[test_case(r#####"tw`outline-purple-600`"#####, r#####"({
   outlineColor: "#9333ea",
 })
-;"##### ; "193")]
+;"##### ; "192")]
 #[test_case(r#####"tw`outline-purple-700`"#####, r#####"({
   outlineColor: "#7e22ce",
 })
-;"##### ; "194")]
+;"##### ; "193")]
 #[test_case(r#####"tw`outline-purple-800`"#####, r#####"({
   outlineColor: "#6b21a8",
 })
-;"##### ; "195")]
+;"##### ; "194")]
 #[test_case(r#####"tw`outline-purple-900`"#####, r#####"({
   outlineColor: "#581c87",
 })
-;"##### ; "196")]
+;"##### ; "195")]
 #[test_case(r#####"tw`outline-fuchsia-50`"#####, r#####"({
   outlineColor: "#fdf4ff",
 })
-;"##### ; "197")]
+;"##### ; "196")]
 #[test_case(r#####"tw`outline-fuchsia-100`"#####, r#####"({
   outlineColor: "#fae8ff",
 })
-;"##### ; "198")]
+;"##### ; "197")]
 #[test_case(r#####"tw`outline-fuchsia-200`"#####, r#####"({
   outlineColor: "#f5d0fe",
 })
-;"##### ; "199")]
+;"##### ; "198")]
 #[test_case(r#####"tw`outline-fuchsia-300`"#####, r#####"({
   outlineColor: "#f0abfc",
 })
-;"##### ; "200")]
+;"##### ; "199")]
 #[test_case(r#####"tw`outline-fuchsia-400`"#####, r#####"({
   outlineColor: "#e879f9",
 })
-;"##### ; "201")]
+;"##### ; "200")]
 #[test_case(r#####"tw`outline-fuchsia-500`"#####, r#####"({
   outlineColor: "#d946ef",
 })
-;"##### ; "202")]
+;"##### ; "201")]
 #[test_case(r#####"tw`outline-fuchsia-600`"#####, r#####"({
   outlineColor: "#c026d3",
 })
-;"##### ; "203")]
+;"##### ; "202")]
 #[test_case(r#####"tw`outline-fuchsia-700`"#####, r#####"({
   outlineColor: "#a21caf",
 })
-;"##### ; "204")]
+;"##### ; "203")]
 #[test_case(r#####"tw`outline-fuchsia-800`"#####, r#####"({
   outlineColor: "#86198f",
 })
-;"##### ; "205")]
+;"##### ; "204")]
 #[test_case(r#####"tw`outline-fuchsia-900`"#####, r#####"({
   outlineColor: "#701a75",
 })
-;"##### ; "206")]
+;"##### ; "205")]
 #[test_case(r#####"tw`outline-pink-50`"#####, r#####"({
   outlineColor: "#fdf2f8",
 })
-;"##### ; "207")]
+;"##### ; "206")]
 #[test_case(r#####"tw`outline-pink-100`"#####, r#####"({
   outlineColor: "#fce7f3",
 })
-;"##### ; "208")]
+;"##### ; "207")]
 #[test_case(r#####"tw`outline-pink-200`"#####, r#####"({
   outlineColor: "#fbcfe8",
 })
-;"##### ; "209")]
+;"##### ; "208")]
 #[test_case(r#####"tw`outline-pink-300`"#####, r#####"({
   outlineColor: "#f9a8d4",
 })
-;"##### ; "210")]
+;"##### ; "209")]
 #[test_case(r#####"tw`outline-pink-400`"#####, r#####"({
   outlineColor: "#f472b6",
 })
-;"##### ; "211")]
+;"##### ; "210")]
 #[test_case(r#####"tw`outline-pink-500`"#####, r#####"({
   outlineColor: "#ec4899",
 })
-;"##### ; "212")]
+;"##### ; "211")]
 #[test_case(r#####"tw`outline-pink-600`"#####, r#####"({
   outlineColor: "#db2777",
 })
-;"##### ; "213")]
+;"##### ; "212")]
 #[test_case(r#####"tw`outline-pink-700`"#####, r#####"({
   outlineColor: "#be185d",
 })
-;"##### ; "214")]
+;"##### ; "213")]
 #[test_case(r#####"tw`outline-pink-800`"#####, r#####"({
   outlineColor: "#9d174d",
 })
-;"##### ; "215")]
+;"##### ; "214")]
 #[test_case(r#####"tw`outline-pink-900`"#####, r#####"({
   outlineColor: "#831843",
 })
-;"##### ; "216")]
+;"##### ; "215")]
 #[test_case(r#####"tw`outline-rose-50`"#####, r#####"({
   outlineColor: "#fff1f2",
 })
-;"##### ; "217")]
+;"##### ; "216")]
 #[test_case(r#####"tw`outline-rose-100`"#####, r#####"({
   outlineColor: "#ffe4e6",
 })
-;"##### ; "218")]
+;"##### ; "217")]
 #[test_case(r#####"tw`outline-rose-200`"#####, r#####"({
   outlineColor: "#fecdd3",
 })
-;"##### ; "219")]
+;"##### ; "218")]
 #[test_case(r#####"tw`outline-rose-300`"#####, r#####"({
   outlineColor: "#fda4af",
 })
-;"##### ; "220")]
+;"##### ; "219")]
 #[test_case(r#####"tw`outline-rose-400`"#####, r#####"({
   outlineColor: "#fb7185",
 })
-;"##### ; "221")]
+;"##### ; "220")]
 #[test_case(r#####"tw`outline-rose-500`"#####, r#####"({
   outlineColor: "#f43f5e",
 })
-;"##### ; "222")]
+;"##### ; "221")]
 #[test_case(r#####"tw`outline-rose-600`"#####, r#####"({
   outlineColor: "#e11d48",
 })
-;"##### ; "223")]
+;"##### ; "222")]
 #[test_case(r#####"tw`outline-rose-700`"#####, r#####"({
   outlineColor: "#be123c",
 })
-;"##### ; "224")]
+;"##### ; "223")]
 #[test_case(r#####"tw`outline-rose-800`"#####, r#####"({
   outlineColor: "#9f1239",
 })
-;"##### ; "225")]
+;"##### ; "224")]
 #[test_case(r#####"tw`outline-rose-900`"#####, r#####"({
   outlineColor: "#881337",
 })
-;"##### ; "226")]
+;"##### ; "225")]
 #[test_case(r#####"tw`outline-rose-900/50`"#####, r#####"({
   outlineColor: "rgb(136 19 55 / 0.5)",
 })
-;"##### ; "227")]
+;"##### ; "226")]
 #[test_case(r#####"tw`outline-rose-900/[.50]`"#####, r#####"({
   outlineColor: "rgb(136 19 55 / .50)",
 })
-;"##### ; "228")]
+;"##### ; "227")]
 #[test_case(r#####"tw`outline-[#243c5a]`"#####, r#####"({
   outlineColor: "#243c5a",
 })
-;"##### ; "229")]
+;"##### ; "228")]
 #[test_case(r#####"tw`outline-[length:500px]`"#####, r#####"({
   outlineWidth: "500px",
 })
-;"##### ; "230")]
+;"##### ; "229")]
 #[test_case(r#####"tw`outline-[color:red]`"#####, r#####"({
   outlineColor: "red",
 })
-;"##### ; "231")]
+;"##### ; "230")]
 #[test_case(r#####"tw`outline-[percentage:10%]`"#####, r#####"({
   outlineWidth: "10%",
 }) // tw`outline-[var(--outline)]` // Unsupported by tailwindcss
 
-;"##### ; "232")]
+;"##### ; "231")]
 #[test_case(r#####"tw`outline-[color:var(--outline)]`"#####, r#####"({
   outlineColor: "var(--outline)",
 })
-;"##### ; "233")]
+;"##### ; "232")]
 #[test_case(r#####"tw`outline-[length:var(--outline)]`"#####, r#####"({
   outlineWidth: "var(--outline)",
 })
-;"##### ; "234")]
+;"##### ; "233")]
 #[test_case(r#####"tw`outline outline-dashed outline-none outline-black outline-4 outline-offset-2`"#####, r#####"({
   outline: "2px solid transparent",
   outlineOffset: "2px",
   outlineStyle: "dashed",
   outlineWidth: "4px",
   outlineColor: "#000",
-})"##### ; "235")]
+})"##### ; "234")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

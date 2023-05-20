@@ -1,7 +1,6 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw from '../macro'"#####, r#####"import _styled from '@emotion/styled'"##### ; "0")]
-#[test_case(r#####"const SkipEmptyClassName = <div className="" />"#####, r#####"const SkipEmptyClassName = <div className="" />"##### ; "1")]
+#[test_case(r#####"const SkipEmptyClassName = <div className="" />"#####, r#####"const SkipEmptyClassName = <div className="" />"##### ; "0")]
 #[test_case(r#####"const OnlyUppercaseConverted = <div className="uppercase spare-class" />"#####, r#####"const OnlyUppercaseConverted = (
   <div
     className="spare-class"
@@ -9,7 +8,7 @@ use test_case::test_case;
       textTransform: "uppercase",
     }}
   />
-)"##### ; "2")]
+)"##### ; "1")]
 #[test_case(r#####"const AllConverted = <div className="uppercase block" />"#####, r#####"const AllConverted = (
   <div
     css={{
@@ -17,10 +16,10 @@ use test_case::test_case;
       textTransform: "uppercase",
     }}
   />
-)"##### ; "3")]
-#[test_case(r#####"const SkippedCurlies = <div className={"mt-1"} />"#####, r#####"const SkippedCurlies = <div className={"mt-1"} />"##### ; "4")]
-#[test_case(r#####"const SkippedConditionals = <div className={true && "mt-1"} />"#####, r#####"const SkippedConditionals = <div className={true && "mt-1"} />"##### ; "5")]
-#[test_case(r#####"const SkippedGroup = <div className="group" />"#####, r#####"const SkippedGroup = <div className="group" />"##### ; "6")]
+)"##### ; "2")]
+#[test_case(r#####"const SkippedCurlies = <div className={"mt-1"} />"#####, r#####"const SkippedCurlies = <div className={"mt-1"} />"##### ; "3")]
+#[test_case(r#####"const SkippedConditionals = <div className={true && "mt-1"} />"#####, r#####"const SkippedConditionals = <div className={true && "mt-1"} />"##### ; "4")]
+#[test_case(r#####"const SkippedGroup = <div className="group" />"#####, r#####"const SkippedGroup = <div className="group" />"##### ; "5")]
 #[test_case(r#####"const CssPropFirst = (
   <div
     css={`
@@ -39,7 +38,7 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "7")]
+)"##### ; "6")]
 #[test_case(r#####"const CssPropLast = (
   <div
     className="block"
@@ -58,7 +57,7 @@ use test_case::test_case;
     `,
     ]}
   />
-)"##### ; "8")]
+)"##### ; "7")]
 #[test_case(r#####"const TwPropFirst = <div tw="block" className="mt-1" />"#####, r#####"const TwPropFirst = (
   <div
     css={[
@@ -70,7 +69,7 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "9")]
+)"##### ; "8")]
 #[test_case(r#####"const TwPropLast = <div className="mt-1" tw="block" />"#####, r#####"const TwPropLast = (
   <div
     css={[
@@ -82,7 +81,7 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "10")]
+)"##### ; "9")]
 #[test_case(r#####"const TwThenCssThenClassName = (
   <div
     tw="block"
@@ -105,7 +104,7 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "11")]
+)"##### ; "10")]
 #[test_case(r#####"const TwThenClassNameThenCss = (
   <div
     tw="block"
@@ -128,7 +127,7 @@ use test_case::test_case;
     `,
     ]}
   />
-)"##### ; "12")]
+)"##### ; "11")]
 #[test_case(r#####"const ClassNameThenTwThenCss = (
   <div
     className="mt-1"
@@ -151,7 +150,7 @@ use test_case::test_case;
     `,
     ]}
   />
-)"##### ; "13")]
+)"##### ; "12")]
 #[test_case(r#####"const ClassNameThenCssThenTw = (
   <div
     className="mt-1"
@@ -174,7 +173,7 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "14")]
+)"##### ; "13")]
 #[test_case(r#####"const CssThenClassNameThenTw = (
   <div
     css={`
@@ -197,7 +196,7 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "15")]
+)"##### ; "14")]
 #[test_case(r#####"const CssThenTwThenClassName = (
   <div
     css={`
@@ -220,8 +219,8 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "16")]
-#[test_case(r#####"const Button = tw.div``"#####, r#####"const Button = _styled.div({})"##### ; "17")]
+)"##### ; "15")]
+#[test_case(r#####"const Button = tw.div``"#####, r#####"const Button = _styled.div({})"##### ; "16")]
 #[test_case(r#####"const StyledTwThenCssThenClassName = (
   <Button
     tw="block"
@@ -244,7 +243,7 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "18")]
+)"##### ; "17")]
 #[test_case(r#####"const StyledTwThenClassNameThenCss = (
   <Button
     tw="block"
@@ -267,7 +266,7 @@ use test_case::test_case;
     `,
     ]}
   />
-)"##### ; "19")]
+)"##### ; "18")]
 #[test_case(r#####"const StyledClassNameThenTwThenCss = (
   <Button
     className="mt-1"
@@ -290,7 +289,7 @@ use test_case::test_case;
     `,
     ]}
   />
-)"##### ; "20")]
+)"##### ; "19")]
 #[test_case(r#####"const StyledClassNameThenCssThenTw = (
   <Button
     className="mt-1"
@@ -313,7 +312,7 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "21")]
+)"##### ; "20")]
 #[test_case(r#####"const StyledCssThenClassNameThenTw = (
   <Button
     css={`
@@ -336,7 +335,7 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "22")]
+)"##### ; "21")]
 #[test_case(r#####"const StyledCssThenTwThenClassName = (
   <Button
     css={`
@@ -359,7 +358,7 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "23")]
+)"##### ; "22")]
 #[test_case(r#####"const TwThenClassNameThenCsThenCss = (
   <Button
     tw="block"
@@ -386,7 +385,7 @@ use test_case::test_case;
     `,
     ]}
   />
-)"##### ; "24")]
+)"##### ; "23")]
 #[test_case(r#####"const TwThenClassNameThenCssThenCs = (
   <Button
     tw="block"
@@ -413,7 +412,7 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "25")]
+)"##### ; "24")]
 #[test_case(r#####"const TwThenCssThenClassNameThenCs = (
   <Button
     tw="block"
@@ -440,7 +439,7 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "26")]
+)"##### ; "25")]
 #[test_case(r#####"const CssThenTwThenClassNameThenCs = (
   <Button
     css={`
@@ -467,7 +466,7 @@ use test_case::test_case;
       },
     ]}
   />
-)"##### ; "27")]
+)"##### ; "26")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

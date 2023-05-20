@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { theme } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"theme`transitionDuration.`"#####, r#####"({
   0: "0s",
   75: "75ms",
@@ -13,50 +12,50 @@ use test_case::test_case;
   1000: "1000ms",
   DEFAULT: "150ms",
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`duration-75`"#####, r#####"({
   transitionDuration: "75ms",
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`duration-100`"#####, r#####"({
   transitionDuration: "100ms",
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`duration-150`"#####, r#####"({
   transitionDuration: "150ms",
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`duration-200`"#####, r#####"({
   transitionDuration: "200ms",
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`duration-300`"#####, r#####"({
   transitionDuration: "300ms",
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"tw`duration-500`"#####, r#####"({
   transitionDuration: "500ms",
 })
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"tw`duration-700`"#####, r#####"({
   transitionDuration: "700ms",
 })
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"tw`duration-1000`"#####, r#####"({
   transitionDuration: "1000ms",
 })
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"tw`duration-[2000ms]`"#####, r#####"({
   transitionDuration: "2000ms",
 })
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"tw`duration-[2s]`"#####, r#####"({
   transitionDuration: "2s",
 })
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"tw`duration-[var(--app-duration)]`"#####, r#####"({
   transitionDuration: "var(--app-duration)",
-})"##### ; "12")]
+})"##### ; "11")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

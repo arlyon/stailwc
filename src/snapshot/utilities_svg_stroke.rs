@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { theme } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"theme`stroke`"#####, r#####"({
   none: "none",
   inherit: "inherit",
@@ -297,990 +296,990 @@ use test_case::test_case;
   'red-500/fromConfig': "#000",
   electric: void 0,
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`stroke-none`"#####, r#####"({
   stroke: "none",
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`stroke-inherit`"#####, r#####"({
   stroke: "inherit",
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`stroke-current`"#####, r#####"({
   stroke: "currentColor",
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`stroke-transparent`"#####, r#####"({
   stroke: "transparent",
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`stroke-black`"#####, r#####"({
   stroke: "#000",
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"tw`stroke-white`"#####, r#####"({
   stroke: "#fff",
 })
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"tw`stroke-slate-50`"#####, r#####"({
   stroke: "#f8fafc",
 })
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"tw`stroke-slate-100`"#####, r#####"({
   stroke: "#f1f5f9",
 })
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"tw`stroke-slate-200`"#####, r#####"({
   stroke: "#e2e8f0",
 })
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"tw`stroke-slate-300`"#####, r#####"({
   stroke: "#cbd5e1",
 })
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"tw`stroke-slate-400`"#####, r#####"({
   stroke: "#94a3b8",
 })
-;"##### ; "12")]
+;"##### ; "11")]
 #[test_case(r#####"tw`stroke-slate-500`"#####, r#####"({
   stroke: "#64748b",
 })
-;"##### ; "13")]
+;"##### ; "12")]
 #[test_case(r#####"tw`stroke-slate-600`"#####, r#####"({
   stroke: "#475569",
 })
-;"##### ; "14")]
+;"##### ; "13")]
 #[test_case(r#####"tw`stroke-slate-700`"#####, r#####"({
   stroke: "#334155",
 })
-;"##### ; "15")]
+;"##### ; "14")]
 #[test_case(r#####"tw`stroke-slate-800`"#####, r#####"({
   stroke: "#1e293b",
 })
-;"##### ; "16")]
+;"##### ; "15")]
 #[test_case(r#####"tw`stroke-slate-900`"#####, r#####"({
   stroke: "#0f172a",
 })
-;"##### ; "17")]
+;"##### ; "16")]
 #[test_case(r#####"tw`stroke-gray-50`"#####, r#####"({
   stroke: "#f9fafb",
 })
-;"##### ; "18")]
+;"##### ; "17")]
 #[test_case(r#####"tw`stroke-gray-100`"#####, r#####"({
   stroke: "#f3f4f6",
 })
-;"##### ; "19")]
+;"##### ; "18")]
 #[test_case(r#####"tw`stroke-gray-200`"#####, r#####"({
   stroke: "#e5e7eb",
 })
-;"##### ; "20")]
+;"##### ; "19")]
 #[test_case(r#####"tw`stroke-gray-300`"#####, r#####"({
   stroke: "#d1d5db",
 })
-;"##### ; "21")]
+;"##### ; "20")]
 #[test_case(r#####"tw`stroke-gray-400`"#####, r#####"({
   stroke: "#9ca3af",
 })
-;"##### ; "22")]
+;"##### ; "21")]
 #[test_case(r#####"tw`stroke-gray-500`"#####, r#####"({
   stroke: "#6b7280",
 })
-;"##### ; "23")]
+;"##### ; "22")]
 #[test_case(r#####"tw`stroke-gray-600`"#####, r#####"({
   stroke: "#4b5563",
 })
-;"##### ; "24")]
+;"##### ; "23")]
 #[test_case(r#####"tw`stroke-gray-700`"#####, r#####"({
   stroke: "#374151",
 })
-;"##### ; "25")]
+;"##### ; "24")]
 #[test_case(r#####"tw`stroke-gray-800`"#####, r#####"({
   stroke: "#1f2937",
 })
-;"##### ; "26")]
+;"##### ; "25")]
 #[test_case(r#####"tw`stroke-gray-900`"#####, r#####"({
   stroke: "#111827",
 })
-;"##### ; "27")]
+;"##### ; "26")]
 #[test_case(r#####"tw`stroke-zinc-50`"#####, r#####"({
   stroke: "#fafafa",
 })
-;"##### ; "28")]
+;"##### ; "27")]
 #[test_case(r#####"tw`stroke-zinc-100`"#####, r#####"({
   stroke: "#f4f4f5",
 })
-;"##### ; "29")]
+;"##### ; "28")]
 #[test_case(r#####"tw`stroke-zinc-200`"#####, r#####"({
   stroke: "#e4e4e7",
 })
-;"##### ; "30")]
+;"##### ; "29")]
 #[test_case(r#####"tw`stroke-zinc-300`"#####, r#####"({
   stroke: "#d4d4d8",
 })
-;"##### ; "31")]
+;"##### ; "30")]
 #[test_case(r#####"tw`stroke-zinc-400`"#####, r#####"({
   stroke: "#a1a1aa",
 })
-;"##### ; "32")]
+;"##### ; "31")]
 #[test_case(r#####"tw`stroke-zinc-500`"#####, r#####"({
   stroke: "#71717a",
 })
-;"##### ; "33")]
+;"##### ; "32")]
 #[test_case(r#####"tw`stroke-zinc-600`"#####, r#####"({
   stroke: "#52525b",
 })
-;"##### ; "34")]
+;"##### ; "33")]
 #[test_case(r#####"tw`stroke-zinc-700`"#####, r#####"({
   stroke: "#3f3f46",
 })
-;"##### ; "35")]
+;"##### ; "34")]
 #[test_case(r#####"tw`stroke-zinc-800`"#####, r#####"({
   stroke: "#27272a",
 })
-;"##### ; "36")]
+;"##### ; "35")]
 #[test_case(r#####"tw`stroke-zinc-900`"#####, r#####"({
   stroke: "#18181b",
 })
-;"##### ; "37")]
+;"##### ; "36")]
 #[test_case(r#####"tw`stroke-neutral-50`"#####, r#####"({
   stroke: "#fafafa",
 })
-;"##### ; "38")]
+;"##### ; "37")]
 #[test_case(r#####"tw`stroke-neutral-100`"#####, r#####"({
   stroke: "#f5f5f5",
 })
-;"##### ; "39")]
+;"##### ; "38")]
 #[test_case(r#####"tw`stroke-neutral-200`"#####, r#####"({
   stroke: "#e5e5e5",
 })
-;"##### ; "40")]
+;"##### ; "39")]
 #[test_case(r#####"tw`stroke-neutral-300`"#####, r#####"({
   stroke: "#d4d4d4",
 })
-;"##### ; "41")]
+;"##### ; "40")]
 #[test_case(r#####"tw`stroke-neutral-400`"#####, r#####"({
   stroke: "#a3a3a3",
 })
-;"##### ; "42")]
+;"##### ; "41")]
 #[test_case(r#####"tw`stroke-neutral-500`"#####, r#####"({
   stroke: "#737373",
 })
-;"##### ; "43")]
+;"##### ; "42")]
 #[test_case(r#####"tw`stroke-neutral-600`"#####, r#####"({
   stroke: "#525252",
 })
-;"##### ; "44")]
+;"##### ; "43")]
 #[test_case(r#####"tw`stroke-neutral-700`"#####, r#####"({
   stroke: "#404040",
 })
-;"##### ; "45")]
+;"##### ; "44")]
 #[test_case(r#####"tw`stroke-neutral-800`"#####, r#####"({
   stroke: "#262626",
 })
-;"##### ; "46")]
+;"##### ; "45")]
 #[test_case(r#####"tw`stroke-neutral-900`"#####, r#####"({
   stroke: "#171717",
 })
-;"##### ; "47")]
+;"##### ; "46")]
 #[test_case(r#####"tw`stroke-stone-50`"#####, r#####"({
   stroke: "#fafaf9",
 })
-;"##### ; "48")]
+;"##### ; "47")]
 #[test_case(r#####"tw`stroke-stone-100`"#####, r#####"({
   stroke: "#f5f5f4",
 })
-;"##### ; "49")]
+;"##### ; "48")]
 #[test_case(r#####"tw`stroke-stone-200`"#####, r#####"({
   stroke: "#e7e5e4",
 })
-;"##### ; "50")]
+;"##### ; "49")]
 #[test_case(r#####"tw`stroke-stone-300`"#####, r#####"({
   stroke: "#d6d3d1",
 })
-;"##### ; "51")]
+;"##### ; "50")]
 #[test_case(r#####"tw`stroke-stone-400`"#####, r#####"({
   stroke: "#a8a29e",
 })
-;"##### ; "52")]
+;"##### ; "51")]
 #[test_case(r#####"tw`stroke-stone-500`"#####, r#####"({
   stroke: "#78716c",
 })
-;"##### ; "53")]
+;"##### ; "52")]
 #[test_case(r#####"tw`stroke-stone-600`"#####, r#####"({
   stroke: "#57534e",
 })
-;"##### ; "54")]
+;"##### ; "53")]
 #[test_case(r#####"tw`stroke-stone-700`"#####, r#####"({
   stroke: "#44403c",
 })
-;"##### ; "55")]
+;"##### ; "54")]
 #[test_case(r#####"tw`stroke-stone-800`"#####, r#####"({
   stroke: "#292524",
 })
-;"##### ; "56")]
+;"##### ; "55")]
 #[test_case(r#####"tw`stroke-stone-900`"#####, r#####"({
   stroke: "#1c1917",
 })
-;"##### ; "57")]
+;"##### ; "56")]
 #[test_case(r#####"tw`stroke-red-50`"#####, r#####"({
   stroke: "#fef2f2",
 })
-;"##### ; "58")]
+;"##### ; "57")]
 #[test_case(r#####"tw`stroke-red-100`"#####, r#####"({
   stroke: "#fee2e2",
 })
-;"##### ; "59")]
+;"##### ; "58")]
 #[test_case(r#####"tw`stroke-red-200`"#####, r#####"({
   stroke: "#fecaca",
 })
-;"##### ; "60")]
+;"##### ; "59")]
 #[test_case(r#####"tw`stroke-red-300`"#####, r#####"({
   stroke: "#fca5a5",
 })
-;"##### ; "61")]
+;"##### ; "60")]
 #[test_case(r#####"tw`stroke-red-400`"#####, r#####"({
   stroke: "#f87171",
 })
-;"##### ; "62")]
+;"##### ; "61")]
 #[test_case(r#####"tw`stroke-red-500`"#####, r#####"({
   stroke: "#ef4444",
 })
-;"##### ; "63")]
+;"##### ; "62")]
 #[test_case(r#####"tw`stroke-red-600`"#####, r#####"({
   stroke: "#dc2626",
 })
-;"##### ; "64")]
+;"##### ; "63")]
 #[test_case(r#####"tw`stroke-red-700`"#####, r#####"({
   stroke: "#b91c1c",
 })
-;"##### ; "65")]
+;"##### ; "64")]
 #[test_case(r#####"tw`stroke-red-800`"#####, r#####"({
   stroke: "#991b1b",
 })
-;"##### ; "66")]
+;"##### ; "65")]
 #[test_case(r#####"tw`stroke-red-900`"#####, r#####"({
   stroke: "#7f1d1d",
 })
-;"##### ; "67")]
+;"##### ; "66")]
 #[test_case(r#####"tw`stroke-orange-50`"#####, r#####"({
   stroke: "#fff7ed",
 })
-;"##### ; "68")]
+;"##### ; "67")]
 #[test_case(r#####"tw`stroke-orange-100`"#####, r#####"({
   stroke: "#ffedd5",
 })
-;"##### ; "69")]
+;"##### ; "68")]
 #[test_case(r#####"tw`stroke-orange-200`"#####, r#####"({
   stroke: "#fed7aa",
 })
-;"##### ; "70")]
+;"##### ; "69")]
 #[test_case(r#####"tw`stroke-orange-300`"#####, r#####"({
   stroke: "#fdba74",
 })
-;"##### ; "71")]
+;"##### ; "70")]
 #[test_case(r#####"tw`stroke-orange-400`"#####, r#####"({
   stroke: "#fb923c",
 })
-;"##### ; "72")]
+;"##### ; "71")]
 #[test_case(r#####"tw`stroke-orange-500`"#####, r#####"({
   stroke: "#f97316",
 })
-;"##### ; "73")]
+;"##### ; "72")]
 #[test_case(r#####"tw`stroke-orange-600`"#####, r#####"({
   stroke: "#ea580c",
 })
-;"##### ; "74")]
+;"##### ; "73")]
 #[test_case(r#####"tw`stroke-orange-700`"#####, r#####"({
   stroke: "#c2410c",
 })
-;"##### ; "75")]
+;"##### ; "74")]
 #[test_case(r#####"tw`stroke-orange-800`"#####, r#####"({
   stroke: "#9a3412",
 })
-;"##### ; "76")]
+;"##### ; "75")]
 #[test_case(r#####"tw`stroke-orange-900`"#####, r#####"({
   stroke: "#7c2d12",
 })
-;"##### ; "77")]
+;"##### ; "76")]
 #[test_case(r#####"tw`stroke-amber-50`"#####, r#####"({
   stroke: "#fffbeb",
 })
-;"##### ; "78")]
+;"##### ; "77")]
 #[test_case(r#####"tw`stroke-amber-100`"#####, r#####"({
   stroke: "#fef3c7",
 })
-;"##### ; "79")]
+;"##### ; "78")]
 #[test_case(r#####"tw`stroke-amber-200`"#####, r#####"({
   stroke: "#fde68a",
 })
-;"##### ; "80")]
+;"##### ; "79")]
 #[test_case(r#####"tw`stroke-amber-300`"#####, r#####"({
   stroke: "#fcd34d",
 })
-;"##### ; "81")]
+;"##### ; "80")]
 #[test_case(r#####"tw`stroke-amber-400`"#####, r#####"({
   stroke: "#fbbf24",
 })
-;"##### ; "82")]
+;"##### ; "81")]
 #[test_case(r#####"tw`stroke-amber-500`"#####, r#####"({
   stroke: "#f59e0b",
 })
-;"##### ; "83")]
+;"##### ; "82")]
 #[test_case(r#####"tw`stroke-amber-600`"#####, r#####"({
   stroke: "#d97706",
 })
-;"##### ; "84")]
+;"##### ; "83")]
 #[test_case(r#####"tw`stroke-amber-700`"#####, r#####"({
   stroke: "#b45309",
 })
-;"##### ; "85")]
+;"##### ; "84")]
 #[test_case(r#####"tw`stroke-amber-800`"#####, r#####"({
   stroke: "#92400e",
 })
-;"##### ; "86")]
+;"##### ; "85")]
 #[test_case(r#####"tw`stroke-amber-900`"#####, r#####"({
   stroke: "#78350f",
 })
-;"##### ; "87")]
+;"##### ; "86")]
 #[test_case(r#####"tw`stroke-yellow-50`"#####, r#####"({
   stroke: "#fefce8",
 })
-;"##### ; "88")]
+;"##### ; "87")]
 #[test_case(r#####"tw`stroke-yellow-100`"#####, r#####"({
   stroke: "#fef9c3",
 })
-;"##### ; "89")]
+;"##### ; "88")]
 #[test_case(r#####"tw`stroke-yellow-200`"#####, r#####"({
   stroke: "#fef08a",
 })
-;"##### ; "90")]
+;"##### ; "89")]
 #[test_case(r#####"tw`stroke-yellow-300`"#####, r#####"({
   stroke: "#fde047",
 })
-;"##### ; "91")]
+;"##### ; "90")]
 #[test_case(r#####"tw`stroke-yellow-400`"#####, r#####"({
   stroke: "#facc15",
 })
-;"##### ; "92")]
+;"##### ; "91")]
 #[test_case(r#####"tw`stroke-yellow-500`"#####, r#####"({
   stroke: "#eab308",
 })
-;"##### ; "93")]
+;"##### ; "92")]
 #[test_case(r#####"tw`stroke-yellow-600`"#####, r#####"({
   stroke: "#ca8a04",
 })
-;"##### ; "94")]
+;"##### ; "93")]
 #[test_case(r#####"tw`stroke-yellow-700`"#####, r#####"({
   stroke: "#a16207",
 })
-;"##### ; "95")]
+;"##### ; "94")]
 #[test_case(r#####"tw`stroke-yellow-800`"#####, r#####"({
   stroke: "#854d0e",
 })
-;"##### ; "96")]
+;"##### ; "95")]
 #[test_case(r#####"tw`stroke-yellow-900`"#####, r#####"({
   stroke: "#713f12",
 })
-;"##### ; "97")]
+;"##### ; "96")]
 #[test_case(r#####"tw`stroke-lime-50`"#####, r#####"({
   stroke: "#f7fee7",
 })
-;"##### ; "98")]
+;"##### ; "97")]
 #[test_case(r#####"tw`stroke-lime-100`"#####, r#####"({
   stroke: "#ecfccb",
 })
-;"##### ; "99")]
+;"##### ; "98")]
 #[test_case(r#####"tw`stroke-lime-200`"#####, r#####"({
   stroke: "#d9f99d",
 })
-;"##### ; "100")]
+;"##### ; "99")]
 #[test_case(r#####"tw`stroke-lime-300`"#####, r#####"({
   stroke: "#bef264",
 })
-;"##### ; "101")]
+;"##### ; "100")]
 #[test_case(r#####"tw`stroke-lime-400`"#####, r#####"({
   stroke: "#a3e635",
 })
-;"##### ; "102")]
+;"##### ; "101")]
 #[test_case(r#####"tw`stroke-lime-500`"#####, r#####"({
   stroke: "#84cc16",
 })
-;"##### ; "103")]
+;"##### ; "102")]
 #[test_case(r#####"tw`stroke-lime-600`"#####, r#####"({
   stroke: "#65a30d",
 })
-;"##### ; "104")]
+;"##### ; "103")]
 #[test_case(r#####"tw`stroke-lime-700`"#####, r#####"({
   stroke: "#4d7c0f",
 })
-;"##### ; "105")]
+;"##### ; "104")]
 #[test_case(r#####"tw`stroke-lime-800`"#####, r#####"({
   stroke: "#3f6212",
 })
-;"##### ; "106")]
+;"##### ; "105")]
 #[test_case(r#####"tw`stroke-lime-900`"#####, r#####"({
   stroke: "#365314",
 })
-;"##### ; "107")]
+;"##### ; "106")]
 #[test_case(r#####"tw`stroke-green-50`"#####, r#####"({
   stroke: "#f0fdf4",
 })
-;"##### ; "108")]
+;"##### ; "107")]
 #[test_case(r#####"tw`stroke-green-100`"#####, r#####"({
   stroke: "#dcfce7",
 })
-;"##### ; "109")]
+;"##### ; "108")]
 #[test_case(r#####"tw`stroke-green-200`"#####, r#####"({
   stroke: "#bbf7d0",
 })
-;"##### ; "110")]
+;"##### ; "109")]
 #[test_case(r#####"tw`stroke-green-300`"#####, r#####"({
   stroke: "#86efac",
 })
-;"##### ; "111")]
+;"##### ; "110")]
 #[test_case(r#####"tw`stroke-green-400`"#####, r#####"({
   stroke: "#4ade80",
 })
-;"##### ; "112")]
+;"##### ; "111")]
 #[test_case(r#####"tw`stroke-green-500`"#####, r#####"({
   stroke: "#22c55e",
 })
-;"##### ; "113")]
+;"##### ; "112")]
 #[test_case(r#####"tw`stroke-green-600`"#####, r#####"({
   stroke: "#16a34a",
 })
-;"##### ; "114")]
+;"##### ; "113")]
 #[test_case(r#####"tw`stroke-green-700`"#####, r#####"({
   stroke: "#15803d",
 })
-;"##### ; "115")]
+;"##### ; "114")]
 #[test_case(r#####"tw`stroke-green-800`"#####, r#####"({
   stroke: "#166534",
 })
-;"##### ; "116")]
+;"##### ; "115")]
 #[test_case(r#####"tw`stroke-green-900`"#####, r#####"({
   stroke: "#14532d",
 })
-;"##### ; "117")]
+;"##### ; "116")]
 #[test_case(r#####"tw`stroke-emerald-50`"#####, r#####"({
   stroke: "#ecfdf5",
 })
-;"##### ; "118")]
+;"##### ; "117")]
 #[test_case(r#####"tw`stroke-emerald-100`"#####, r#####"({
   stroke: "#d1fae5",
 })
-;"##### ; "119")]
+;"##### ; "118")]
 #[test_case(r#####"tw`stroke-emerald-200`"#####, r#####"({
   stroke: "#a7f3d0",
 })
-;"##### ; "120")]
+;"##### ; "119")]
 #[test_case(r#####"tw`stroke-emerald-300`"#####, r#####"({
   stroke: "#6ee7b7",
 })
-;"##### ; "121")]
+;"##### ; "120")]
 #[test_case(r#####"tw`stroke-emerald-400`"#####, r#####"({
   stroke: "#34d399",
 })
-;"##### ; "122")]
+;"##### ; "121")]
 #[test_case(r#####"tw`stroke-emerald-500`"#####, r#####"({
   stroke: "#10b981",
 })
-;"##### ; "123")]
+;"##### ; "122")]
 #[test_case(r#####"tw`stroke-emerald-600`"#####, r#####"({
   stroke: "#059669",
 })
-;"##### ; "124")]
+;"##### ; "123")]
 #[test_case(r#####"tw`stroke-emerald-700`"#####, r#####"({
   stroke: "#047857",
 })
-;"##### ; "125")]
+;"##### ; "124")]
 #[test_case(r#####"tw`stroke-emerald-800`"#####, r#####"({
   stroke: "#065f46",
 })
-;"##### ; "126")]
+;"##### ; "125")]
 #[test_case(r#####"tw`stroke-emerald-900`"#####, r#####"({
   stroke: "#064e3b",
 })
-;"##### ; "127")]
+;"##### ; "126")]
 #[test_case(r#####"tw`stroke-teal-50`"#####, r#####"({
   stroke: "#f0fdfa",
 })
-;"##### ; "128")]
+;"##### ; "127")]
 #[test_case(r#####"tw`stroke-teal-100`"#####, r#####"({
   stroke: "#ccfbf1",
 })
-;"##### ; "129")]
+;"##### ; "128")]
 #[test_case(r#####"tw`stroke-teal-200`"#####, r#####"({
   stroke: "#99f6e4",
 })
-;"##### ; "130")]
+;"##### ; "129")]
 #[test_case(r#####"tw`stroke-teal-300`"#####, r#####"({
   stroke: "#5eead4",
 })
-;"##### ; "131")]
+;"##### ; "130")]
 #[test_case(r#####"tw`stroke-teal-400`"#####, r#####"({
   stroke: "#2dd4bf",
 })
-;"##### ; "132")]
+;"##### ; "131")]
 #[test_case(r#####"tw`stroke-teal-500`"#####, r#####"({
   stroke: "#14b8a6",
 })
-;"##### ; "133")]
+;"##### ; "132")]
 #[test_case(r#####"tw`stroke-teal-600`"#####, r#####"({
   stroke: "#0d9488",
 })
-;"##### ; "134")]
+;"##### ; "133")]
 #[test_case(r#####"tw`stroke-teal-700`"#####, r#####"({
   stroke: "#0f766e",
 })
-;"##### ; "135")]
+;"##### ; "134")]
 #[test_case(r#####"tw`stroke-teal-800`"#####, r#####"({
   stroke: "#115e59",
 })
-;"##### ; "136")]
+;"##### ; "135")]
 #[test_case(r#####"tw`stroke-teal-900`"#####, r#####"({
   stroke: "#134e4a",
 })
-;"##### ; "137")]
+;"##### ; "136")]
 #[test_case(r#####"tw`stroke-cyan-50`"#####, r#####"({
   stroke: "#ecfeff",
 })
-;"##### ; "138")]
+;"##### ; "137")]
 #[test_case(r#####"tw`stroke-cyan-100`"#####, r#####"({
   stroke: "#cffafe",
 })
-;"##### ; "139")]
+;"##### ; "138")]
 #[test_case(r#####"tw`stroke-cyan-200`"#####, r#####"({
   stroke: "#a5f3fc",
 })
-;"##### ; "140")]
+;"##### ; "139")]
 #[test_case(r#####"tw`stroke-cyan-300`"#####, r#####"({
   stroke: "#67e8f9",
 })
-;"##### ; "141")]
+;"##### ; "140")]
 #[test_case(r#####"tw`stroke-cyan-400`"#####, r#####"({
   stroke: "#22d3ee",
 })
-;"##### ; "142")]
+;"##### ; "141")]
 #[test_case(r#####"tw`stroke-cyan-500`"#####, r#####"({
   stroke: "#06b6d4",
 })
-;"##### ; "143")]
+;"##### ; "142")]
 #[test_case(r#####"tw`stroke-cyan-600`"#####, r#####"({
   stroke: "#0891b2",
 })
-;"##### ; "144")]
+;"##### ; "143")]
 #[test_case(r#####"tw`stroke-cyan-700`"#####, r#####"({
   stroke: "#0e7490",
 })
-;"##### ; "145")]
+;"##### ; "144")]
 #[test_case(r#####"tw`stroke-cyan-800`"#####, r#####"({
   stroke: "#155e75",
 })
-;"##### ; "146")]
+;"##### ; "145")]
 #[test_case(r#####"tw`stroke-cyan-900`"#####, r#####"({
   stroke: "#164e63",
 })
-;"##### ; "147")]
+;"##### ; "146")]
 #[test_case(r#####"tw`stroke-sky-50`"#####, r#####"({
   stroke: "#f0f9ff",
 })
-;"##### ; "148")]
+;"##### ; "147")]
 #[test_case(r#####"tw`stroke-sky-100`"#####, r#####"({
   stroke: "#e0f2fe",
 })
-;"##### ; "149")]
+;"##### ; "148")]
 #[test_case(r#####"tw`stroke-sky-200`"#####, r#####"({
   stroke: "#bae6fd",
 })
-;"##### ; "150")]
+;"##### ; "149")]
 #[test_case(r#####"tw`stroke-sky-300`"#####, r#####"({
   stroke: "#7dd3fc",
 })
-;"##### ; "151")]
+;"##### ; "150")]
 #[test_case(r#####"tw`stroke-sky-400`"#####, r#####"({
   stroke: "#38bdf8",
 })
-;"##### ; "152")]
+;"##### ; "151")]
 #[test_case(r#####"tw`stroke-sky-500`"#####, r#####"({
   stroke: "#0ea5e9",
 })
-;"##### ; "153")]
+;"##### ; "152")]
 #[test_case(r#####"tw`stroke-sky-600`"#####, r#####"({
   stroke: "#0284c7",
 })
-;"##### ; "154")]
+;"##### ; "153")]
 #[test_case(r#####"tw`stroke-sky-700`"#####, r#####"({
   stroke: "#0369a1",
 })
-;"##### ; "155")]
+;"##### ; "154")]
 #[test_case(r#####"tw`stroke-sky-800`"#####, r#####"({
   stroke: "#075985",
 })
-;"##### ; "156")]
+;"##### ; "155")]
 #[test_case(r#####"tw`stroke-sky-900`"#####, r#####"({
   stroke: "#0c4a6e",
 })
-;"##### ; "157")]
+;"##### ; "156")]
 #[test_case(r#####"tw`stroke-blue-50`"#####, r#####"({
   stroke: "#eff6ff",
 })
-;"##### ; "158")]
+;"##### ; "157")]
 #[test_case(r#####"tw`stroke-blue-100`"#####, r#####"({
   stroke: "#dbeafe",
 })
-;"##### ; "159")]
+;"##### ; "158")]
 #[test_case(r#####"tw`stroke-blue-200`"#####, r#####"({
   stroke: "#bfdbfe",
 })
-;"##### ; "160")]
+;"##### ; "159")]
 #[test_case(r#####"tw`stroke-blue-300`"#####, r#####"({
   stroke: "#93c5fd",
 })
-;"##### ; "161")]
+;"##### ; "160")]
 #[test_case(r#####"tw`stroke-blue-400`"#####, r#####"({
   stroke: "#60a5fa",
 })
-;"##### ; "162")]
+;"##### ; "161")]
 #[test_case(r#####"tw`stroke-blue-500`"#####, r#####"({
   stroke: "#3b82f6",
 })
-;"##### ; "163")]
+;"##### ; "162")]
 #[test_case(r#####"tw`stroke-blue-600`"#####, r#####"({
   stroke: "#2563eb",
 })
-;"##### ; "164")]
+;"##### ; "163")]
 #[test_case(r#####"tw`stroke-blue-700`"#####, r#####"({
   stroke: "#1d4ed8",
 })
-;"##### ; "165")]
+;"##### ; "164")]
 #[test_case(r#####"tw`stroke-blue-800`"#####, r#####"({
   stroke: "#1e40af",
 })
-;"##### ; "166")]
+;"##### ; "165")]
 #[test_case(r#####"tw`stroke-blue-900`"#####, r#####"({
   stroke: "#1e3a8a",
 })
-;"##### ; "167")]
+;"##### ; "166")]
 #[test_case(r#####"tw`stroke-indigo-50`"#####, r#####"({
   stroke: "#eef2ff",
 })
-;"##### ; "168")]
+;"##### ; "167")]
 #[test_case(r#####"tw`stroke-indigo-100`"#####, r#####"({
   stroke: "#e0e7ff",
 })
-;"##### ; "169")]
+;"##### ; "168")]
 #[test_case(r#####"tw`stroke-indigo-200`"#####, r#####"({
   stroke: "#c7d2fe",
 })
-;"##### ; "170")]
+;"##### ; "169")]
 #[test_case(r#####"tw`stroke-indigo-300`"#####, r#####"({
   stroke: "#a5b4fc",
 })
-;"##### ; "171")]
+;"##### ; "170")]
 #[test_case(r#####"tw`stroke-indigo-400`"#####, r#####"({
   stroke: "#818cf8",
 })
-;"##### ; "172")]
+;"##### ; "171")]
 #[test_case(r#####"tw`stroke-indigo-500`"#####, r#####"({
   stroke: "#6366f1",
 })
-;"##### ; "173")]
+;"##### ; "172")]
 #[test_case(r#####"tw`stroke-indigo-600`"#####, r#####"({
   stroke: "#4f46e5",
 })
-;"##### ; "174")]
+;"##### ; "173")]
 #[test_case(r#####"tw`stroke-indigo-700`"#####, r#####"({
   stroke: "#4338ca",
 })
-;"##### ; "175")]
+;"##### ; "174")]
 #[test_case(r#####"tw`stroke-indigo-800`"#####, r#####"({
   stroke: "#3730a3",
 })
-;"##### ; "176")]
+;"##### ; "175")]
 #[test_case(r#####"tw`stroke-indigo-900`"#####, r#####"({
   stroke: "#312e81",
 })
-;"##### ; "177")]
+;"##### ; "176")]
 #[test_case(r#####"tw`stroke-violet-50`"#####, r#####"({
   stroke: "#f5f3ff",
 })
-;"##### ; "178")]
+;"##### ; "177")]
 #[test_case(r#####"tw`stroke-violet-100`"#####, r#####"({
   stroke: "#ede9fe",
 })
-;"##### ; "179")]
+;"##### ; "178")]
 #[test_case(r#####"tw`stroke-violet-200`"#####, r#####"({
   stroke: "#ddd6fe",
 })
-;"##### ; "180")]
+;"##### ; "179")]
 #[test_case(r#####"tw`stroke-violet-300`"#####, r#####"({
   stroke: "#c4b5fd",
 })
-;"##### ; "181")]
+;"##### ; "180")]
 #[test_case(r#####"tw`stroke-violet-400`"#####, r#####"({
   stroke: "#a78bfa",
 })
-;"##### ; "182")]
+;"##### ; "181")]
 #[test_case(r#####"tw`stroke-violet-500`"#####, r#####"({
   stroke: "#8b5cf6",
 })
-;"##### ; "183")]
+;"##### ; "182")]
 #[test_case(r#####"tw`stroke-violet-600`"#####, r#####"({
   stroke: "#7c3aed",
 })
-;"##### ; "184")]
+;"##### ; "183")]
 #[test_case(r#####"tw`stroke-violet-700`"#####, r#####"({
   stroke: "#6d28d9",
 })
-;"##### ; "185")]
+;"##### ; "184")]
 #[test_case(r#####"tw`stroke-violet-800`"#####, r#####"({
   stroke: "#5b21b6",
 })
-;"##### ; "186")]
+;"##### ; "185")]
 #[test_case(r#####"tw`stroke-violet-900`"#####, r#####"({
   stroke: "#4c1d95",
 })
-;"##### ; "187")]
+;"##### ; "186")]
 #[test_case(r#####"tw`stroke-purple-50`"#####, r#####"({
   stroke: "#faf5ff",
 })
-;"##### ; "188")]
+;"##### ; "187")]
 #[test_case(r#####"tw`stroke-purple-100`"#####, r#####"({
   stroke: "#f3e8ff",
 })
-;"##### ; "189")]
+;"##### ; "188")]
 #[test_case(r#####"tw`stroke-purple-200`"#####, r#####"({
   stroke: "#e9d5ff",
 })
-;"##### ; "190")]
+;"##### ; "189")]
 #[test_case(r#####"tw`stroke-purple-300`"#####, r#####"({
   stroke: "#d8b4fe",
 })
-;"##### ; "191")]
+;"##### ; "190")]
 #[test_case(r#####"tw`stroke-purple-400`"#####, r#####"({
   stroke: "#c084fc",
 })
-;"##### ; "192")]
+;"##### ; "191")]
 #[test_case(r#####"tw`stroke-purple-500`"#####, r#####"({
   stroke: "#a855f7",
 })
-;"##### ; "193")]
+;"##### ; "192")]
 #[test_case(r#####"tw`stroke-purple-600`"#####, r#####"({
   stroke: "#9333ea",
 })
-;"##### ; "194")]
+;"##### ; "193")]
 #[test_case(r#####"tw`stroke-purple-700`"#####, r#####"({
   stroke: "#7e22ce",
 })
-;"##### ; "195")]
+;"##### ; "194")]
 #[test_case(r#####"tw`stroke-purple-800`"#####, r#####"({
   stroke: "#6b21a8",
 })
-;"##### ; "196")]
+;"##### ; "195")]
 #[test_case(r#####"tw`stroke-purple-900`"#####, r#####"({
   stroke: "#581c87",
 })
-;"##### ; "197")]
+;"##### ; "196")]
 #[test_case(r#####"tw`stroke-fuchsia-50`"#####, r#####"({
   stroke: "#fdf4ff",
 })
-;"##### ; "198")]
+;"##### ; "197")]
 #[test_case(r#####"tw`stroke-fuchsia-100`"#####, r#####"({
   stroke: "#fae8ff",
 })
-;"##### ; "199")]
+;"##### ; "198")]
 #[test_case(r#####"tw`stroke-fuchsia-200`"#####, r#####"({
   stroke: "#f5d0fe",
 })
-;"##### ; "200")]
+;"##### ; "199")]
 #[test_case(r#####"tw`stroke-fuchsia-300`"#####, r#####"({
   stroke: "#f0abfc",
 })
-;"##### ; "201")]
+;"##### ; "200")]
 #[test_case(r#####"tw`stroke-fuchsia-400`"#####, r#####"({
   stroke: "#e879f9",
 })
-;"##### ; "202")]
+;"##### ; "201")]
 #[test_case(r#####"tw`stroke-fuchsia-500`"#####, r#####"({
   stroke: "#d946ef",
 })
-;"##### ; "203")]
+;"##### ; "202")]
 #[test_case(r#####"tw`stroke-fuchsia-600`"#####, r#####"({
   stroke: "#c026d3",
 })
-;"##### ; "204")]
+;"##### ; "203")]
 #[test_case(r#####"tw`stroke-fuchsia-700`"#####, r#####"({
   stroke: "#a21caf",
 })
-;"##### ; "205")]
+;"##### ; "204")]
 #[test_case(r#####"tw`stroke-fuchsia-800`"#####, r#####"({
   stroke: "#86198f",
 })
-;"##### ; "206")]
+;"##### ; "205")]
 #[test_case(r#####"tw`stroke-fuchsia-900`"#####, r#####"({
   stroke: "#701a75",
 })
-;"##### ; "207")]
+;"##### ; "206")]
 #[test_case(r#####"tw`stroke-pink-50`"#####, r#####"({
   stroke: "#fdf2f8",
 })
-;"##### ; "208")]
+;"##### ; "207")]
 #[test_case(r#####"tw`stroke-pink-100`"#####, r#####"({
   stroke: "#fce7f3",
 })
-;"##### ; "209")]
+;"##### ; "208")]
 #[test_case(r#####"tw`stroke-pink-200`"#####, r#####"({
   stroke: "#fbcfe8",
 })
-;"##### ; "210")]
+;"##### ; "209")]
 #[test_case(r#####"tw`stroke-pink-300`"#####, r#####"({
   stroke: "#f9a8d4",
 })
-;"##### ; "211")]
+;"##### ; "210")]
 #[test_case(r#####"tw`stroke-pink-400`"#####, r#####"({
   stroke: "#f472b6",
 })
-;"##### ; "212")]
+;"##### ; "211")]
 #[test_case(r#####"tw`stroke-pink-500`"#####, r#####"({
   stroke: "#ec4899",
 })
-;"##### ; "213")]
+;"##### ; "212")]
 #[test_case(r#####"tw`stroke-pink-600`"#####, r#####"({
   stroke: "#db2777",
 })
-;"##### ; "214")]
+;"##### ; "213")]
 #[test_case(r#####"tw`stroke-pink-700`"#####, r#####"({
   stroke: "#be185d",
 })
-;"##### ; "215")]
+;"##### ; "214")]
 #[test_case(r#####"tw`stroke-pink-800`"#####, r#####"({
   stroke: "#9d174d",
 })
-;"##### ; "216")]
+;"##### ; "215")]
 #[test_case(r#####"tw`stroke-pink-900`"#####, r#####"({
   stroke: "#831843",
 })
-;"##### ; "217")]
+;"##### ; "216")]
 #[test_case(r#####"tw`stroke-rose-50`"#####, r#####"({
   stroke: "#fff1f2",
 })
-;"##### ; "218")]
+;"##### ; "217")]
 #[test_case(r#####"tw`stroke-rose-100`"#####, r#####"({
   stroke: "#ffe4e6",
 })
-;"##### ; "219")]
+;"##### ; "218")]
 #[test_case(r#####"tw`stroke-rose-200`"#####, r#####"({
   stroke: "#fecdd3",
 })
-;"##### ; "220")]
+;"##### ; "219")]
 #[test_case(r#####"tw`stroke-rose-300`"#####, r#####"({
   stroke: "#fda4af",
 })
-;"##### ; "221")]
+;"##### ; "220")]
 #[test_case(r#####"tw`stroke-rose-400`"#####, r#####"({
   stroke: "#fb7185",
 })
-;"##### ; "222")]
+;"##### ; "221")]
 #[test_case(r#####"tw`stroke-rose-500`"#####, r#####"({
   stroke: "#f43f5e",
 })
-;"##### ; "223")]
+;"##### ; "222")]
 #[test_case(r#####"tw`stroke-rose-600`"#####, r#####"({
   stroke: "#e11d48",
 })
-;"##### ; "224")]
+;"##### ; "223")]
 #[test_case(r#####"tw`stroke-rose-700`"#####, r#####"({
   stroke: "#be123c",
 })
-;"##### ; "225")]
+;"##### ; "224")]
 #[test_case(r#####"tw`stroke-rose-800`"#####, r#####"({
   stroke: "#9f1239",
 })
-;"##### ; "226")]
+;"##### ; "225")]
 #[test_case(r#####"tw`stroke-rose-900`"#####, r#####"({
   stroke: "#881337",
 })
-;"##### ; "227")]
+;"##### ; "226")]
 #[test_case(r#####"tw`stroke-[#243c5a]`"#####, r#####"({
   stroke: "#243c5a",
 })
-;"##### ; "228")]
+;"##### ; "227")]
 #[test_case(r#####"tw`stroke-red-500`"#####, r#####"({
   stroke: "#ef4444",
 })
-;"##### ; "229")]
+;"##### ; "228")]
 #[test_case(r#####"tw`stroke-red-500/25`"#####, r#####"({
   stroke: "rgb(239 68 68 / 0.25)",
 })
-;"##### ; "230")]
+;"##### ; "229")]
 #[test_case(r#####"tw`stroke-red-500/fromConfig`"#####, r#####"({
   stroke: "#000",
 })
-;"##### ; "231")]
+;"##### ; "230")]
 #[test_case(r#####"tw`stroke-red-500/fromConfig/25`"#####, r#####"({
   stroke: "rgb(0 0 0 / 0.25)",
 })
-;"##### ; "232")]
+;"##### ; "231")]
 #[test_case(r#####"tw`stroke-red-500/fromConfig/[.555]`"#####, r#####"({
   stroke: "rgb(0 0 0 / .555)",
 })
-;"##### ; "233")]
+;"##### ; "232")]
 #[test_case(r#####"tw`stroke-red-500/fromConfig/[var(--myvar)]`"#####, r#####"({
   stroke: "rgb(0 0 0 / var(--myvar))",
 })
-;"##### ; "234")]
+;"##### ; "233")]
 #[test_case(r#####"tw`stroke-red-500/[.555]`"#####, r#####"({
   stroke: "rgb(239 68 68 / .555)",
 })
-;"##### ; "235")]
+;"##### ; "234")]
 #[test_case(r#####"tw`stroke-red-500/[var(--myvar)]`"#####, r#####"({
   stroke: "rgb(239 68 68 / var(--myvar))",
 })
-;"##### ; "236")]
+;"##### ; "235")]
 #[test_case(r#####"tw`stroke-[theme('colors.red.500')]`"#####, r#####"({
   stroke: "#ef4444",
 })
-;"##### ; "237")]
+;"##### ; "236")]
 #[test_case(r#####"tw`stroke-[theme('colors.red.500')]/20`"#####, r#####"({
   stroke: "rgb(239 68 68 / 0.2)",
 })
-;"##### ; "238")]
+;"##### ; "237")]
 #[test_case(r#####"tw`stroke-electric`"#####, r#####"({
   stroke: "rgb(219, 0, 255)",
 })
-;"##### ; "239")]
+;"##### ; "238")]
 #[test_case(r#####"tw`stroke-electric/25`"#####, r#####"({
   stroke: "rgba(219, 0, 255, 0.25)",
 })
-;"##### ; "240")]
+;"##### ; "239")]
 #[test_case(r#####"tw`stroke-electric/[.555]`"#####, r#####"({
   stroke: "rgba(219, 0, 255, .555)",
 })
-;"##### ; "241")]
+;"##### ; "240")]
 #[test_case(r#####"tw`stroke-electric/[var(--myvar)]`"#####, r#####"({
   stroke: "rgba(219, 0, 255, var(--myvar))",
 })
-;"##### ; "242")]
+;"##### ; "241")]
 #[test_case(r#####"tw`stroke-[theme('colors.electric')]`"#####, r#####"({
   stroke: "rgb(219, 0, 255)",
 })
-;"##### ; "243")]
+;"##### ; "242")]
 #[test_case(r#####"tw`stroke-[theme('colors.electric')]/20`"#####, r#####"({
   stroke: "rgb(219 0 255 / 0.2)",
 })
-;"##### ; "244")]
+;"##### ; "243")]
 #[test_case(r#####"tw`stroke-[color:green]`"#####, r#####"({
   stroke: "green",
 })
-;"##### ; "245")]
+;"##### ; "244")]
 #[test_case(r#####"tw`stroke-[color:rgba(255, 255, 255, .45)]`"#####, r#####"({
   stroke: "rgba(255, 255, 255, .45)",
 })
-;"##### ; "246")]
+;"##### ; "245")]
 #[test_case(r#####"tw`stroke-[length:10px]`"#####, r#####"({
   strokeWidth: "10px",
-})"##### ; "247")]
+})"##### ; "246")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

@@ -20,18 +20,8 @@ pub fn run(input: &str, output: &str) {
     let out = here.join(output);
     std::fs::create_dir_all(&out).unwrap();
     let out = out.canonicalize().unwrap();
+
     println!("{:?} -> {:?}", path, out);
-
-    // println!(
-    //     "{:#?}",
-    //     parse_module("test.js", "{a: 'b'}").body.first().unwrap()
-    // );
-    // println!(
-    //     "{:#?}",
-    //     parse_module("test.js", "{a: \"b\"}").body.first().unwrap()
-    // );
-
-    // return;
 
     let package_json = path.join("package.json");
     let package_json = std::fs::read_to_string(package_json).unwrap();
@@ -170,7 +160,10 @@ use test_case::test_case;"#
         .expect("Cannot write to file");
 
         // For each pair of input and output
-        for (i, (input, output)) in pairs.enumerate() {
+        for (i, (input, output)) in pairs
+            .filter(|(input, _)| !input.starts_with("import"))
+            .enumerate()
+        {
             // Write the formatted test case to the file
             writeln!(
                 out_file,

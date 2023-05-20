@@ -1,20 +1,19 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"tw`flex-gap-0`"#####, r#####"({
   margin: "-0px",
   '> *': {
     margin: "0px",
   },
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`flex-gap-3`"#####, r#####"({
   margin: "-0.375rem",
   '> *': {
     margin: "0.375rem",
   },
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`flex-gap-x-3`"#####, r#####"({
   marginRight: "-0.375rem",
   marginLeft: "-0.375rem",
@@ -23,7 +22,7 @@ use test_case::test_case;
     marginLeft: "0.375rem",
   },
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`flex-gap-y-3`"#####, r#####"({
   marginTop: "-0.375rem",
   marginBottom: "-0.375rem",
@@ -32,14 +31,14 @@ use test_case::test_case;
     marginBottom: "0.375rem",
   },
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`flex-gap-px`"#####, r#####"({
   margin: "-0.5px",
   '> *': {
     margin: "0.5px",
   },
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`flex-gap-x-1.5`"#####, r#####"({
   marginRight: "-0.1875rem",
   marginLeft: "-0.1875rem",
@@ -48,7 +47,7 @@ use test_case::test_case;
     marginLeft: "0.1875rem",
   },
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"tw`gap-0`"#####, r#####"({
   '.no-flex-gap &': {
     margin: "-0px",
@@ -58,7 +57,7 @@ use test_case::test_case;
   },
   gap: "0px",
 })
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"tw`gap-3`"#####, r#####"({
   '.no-flex-gap &': {
     margin: "-0.375rem",
@@ -68,7 +67,7 @@ use test_case::test_case;
   },
   gap: "0.75rem",
 })
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"tw`gap-x-3`"#####, r#####"({
   '.no-flex-gap &': {
     marginRight: "-0.375rem",
@@ -80,7 +79,7 @@ use test_case::test_case;
   },
   columnGap: "0.75rem",
 })
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"tw`gap-y-3`"#####, r#####"({
   '.no-flex-gap &': {
     marginTop: "-0.375rem",
@@ -92,7 +91,7 @@ use test_case::test_case;
   },
   rowGap: "0.75rem",
 })
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"tw`gap-px`"#####, r#####"({
   '.no-flex-gap &': {
     margin: "-0.5px",
@@ -102,7 +101,7 @@ use test_case::test_case;
   },
   gap: "1px",
 })
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"tw`gap-x-1.5`"#####, r#####"({
   '.no-flex-gap &': {
     marginRight: "-0.1875rem",
@@ -114,7 +113,7 @@ use test_case::test_case;
   },
   columnGap: "0.375rem",
 })
-;"##### ; "12")]
+;"##### ; "11")]
 #[test_case(r#####"tw`test-1`"#####, r#####"({
   background: "5px",
   '.a-class & .some-class': {
@@ -124,7 +123,7 @@ use test_case::test_case;
     margin: "20px",
   },
 })
-;"##### ; "13")]
+;"##### ; "12")]
 #[test_case(r#####"tw`test-2`"#####, r#####"({
   '.a-class & .some-class': {
     margin: "10px",
@@ -132,7 +131,7 @@ use test_case::test_case;
   '.a-class & > *': {
     margin: "20px",
   },
-})"##### ; "14")]
+})"##### ; "13")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

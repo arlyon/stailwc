@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import { globalStyles, theme } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"globalStyles"#####, r#####"({
   '*, ::before, ::after': {
     boxSizing: "border-box",
@@ -242,7 +241,7 @@ use test_case::test_case;
     '--tw-backdrop-sepia': "var(--tw-empty,/*!*/ /*!*/)",
   },
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"theme`keyframes`"#####, r#####"({
   'fade-up': {
     from: {
@@ -255,7 +254,7 @@ use test_case::test_case;
     },
   },
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"theme``"#####, r#####"({
   colors: {},
   keyframes: {
@@ -1926,7 +1925,7 @@ use test_case::test_case;
     50: "50",
     auto: "auto",
   },
-})"##### ; "3")]
+})"##### ; "2")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

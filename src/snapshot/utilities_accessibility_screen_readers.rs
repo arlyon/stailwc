@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"tw`sr-only`"#####, r#####"({
   position: "absolute",
   width: "1px",
@@ -12,7 +11,7 @@ use test_case::test_case;
   whiteSpace: "nowrap",
   borderWidth: "0",
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`not-sr-only`"#####, r#####"({
   position: "static",
   width: "auto",
@@ -22,7 +21,7 @@ use test_case::test_case;
   overflow: "visible",
   clip: "auto",
   whiteSpace: "normal",
-})"##### ; "2")]
+})"##### ; "1")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

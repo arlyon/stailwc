@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { theme } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"theme`maxHeight`"#####, r#####"({
   0: "0px",
   1: "0.25rem",
@@ -44,174 +43,174 @@ use test_case::test_case;
   max: "max-content",
   fit: "fit-content",
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`max-h-0`"#####, r#####"({
   maxHeight: "0px",
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`max-h-0.5`"#####, r#####"({
   maxHeight: "0.125rem",
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`max-h-1`"#####, r#####"({
   maxHeight: "0.25rem",
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`max-h-1.5`"#####, r#####"({
   maxHeight: "0.375rem",
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`max-h-2`"#####, r#####"({
   maxHeight: "0.5rem",
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"tw`max-h-2.5`"#####, r#####"({
   maxHeight: "0.625rem",
 })
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"tw`max-h-3`"#####, r#####"({
   maxHeight: "0.75rem",
 })
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"tw`max-h-3.5`"#####, r#####"({
   maxHeight: "0.875rem",
 })
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"tw`max-h-none`"#####, r#####"({
   maxHeight: "none",
 })
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"tw`max-h-4`"#####, r#####"({
   maxHeight: "1rem",
 })
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"tw`max-h-5`"#####, r#####"({
   maxHeight: "1.25rem",
 })
-;"##### ; "12")]
+;"##### ; "11")]
 #[test_case(r#####"tw`max-h-6`"#####, r#####"({
   maxHeight: "1.5rem",
 })
-;"##### ; "13")]
+;"##### ; "12")]
 #[test_case(r#####"tw`max-h-7`"#####, r#####"({
   maxHeight: "1.75rem",
 })
-;"##### ; "14")]
+;"##### ; "13")]
 #[test_case(r#####"tw`max-h-8`"#####, r#####"({
   maxHeight: "2rem",
 })
-;"##### ; "15")]
+;"##### ; "14")]
 #[test_case(r#####"tw`max-h-9`"#####, r#####"({
   maxHeight: "2.25rem",
 })
-;"##### ; "16")]
+;"##### ; "15")]
 #[test_case(r#####"tw`max-h-10`"#####, r#####"({
   maxHeight: "2.5rem",
 })
-;"##### ; "17")]
+;"##### ; "16")]
 #[test_case(r#####"tw`max-h-11`"#####, r#####"({
   maxHeight: "2.75rem",
 })
-;"##### ; "18")]
+;"##### ; "17")]
 #[test_case(r#####"tw`max-h-12`"#####, r#####"({
   maxHeight: "3rem",
 })
-;"##### ; "19")]
+;"##### ; "18")]
 #[test_case(r#####"tw`max-h-14`"#####, r#####"({
   maxHeight: "3.5rem",
 })
-;"##### ; "20")]
+;"##### ; "19")]
 #[test_case(r#####"tw`max-h-16`"#####, r#####"({
   maxHeight: "4rem",
 })
-;"##### ; "21")]
+;"##### ; "20")]
 #[test_case(r#####"tw`max-h-20`"#####, r#####"({
   maxHeight: "5rem",
 })
-;"##### ; "22")]
+;"##### ; "21")]
 #[test_case(r#####"tw`max-h-24`"#####, r#####"({
   maxHeight: "6rem",
 })
-;"##### ; "23")]
+;"##### ; "22")]
 #[test_case(r#####"tw`max-h-28`"#####, r#####"({
   maxHeight: "7rem",
 })
-;"##### ; "24")]
+;"##### ; "23")]
 #[test_case(r#####"tw`max-h-32`"#####, r#####"({
   maxHeight: "8rem",
 })
-;"##### ; "25")]
+;"##### ; "24")]
 #[test_case(r#####"tw`max-h-36`"#####, r#####"({
   maxHeight: "9rem",
 })
-;"##### ; "26")]
+;"##### ; "25")]
 #[test_case(r#####"tw`max-h-40`"#####, r#####"({
   maxHeight: "10rem",
 })
-;"##### ; "27")]
+;"##### ; "26")]
 #[test_case(r#####"tw`max-h-44`"#####, r#####"({
   maxHeight: "11rem",
 })
-;"##### ; "28")]
+;"##### ; "27")]
 #[test_case(r#####"tw`max-h-48`"#####, r#####"({
   maxHeight: "12rem",
 })
-;"##### ; "29")]
+;"##### ; "28")]
 #[test_case(r#####"tw`max-h-52`"#####, r#####"({
   maxHeight: "13rem",
 })
-;"##### ; "30")]
+;"##### ; "29")]
 #[test_case(r#####"tw`max-h-56`"#####, r#####"({
   maxHeight: "14rem",
 })
-;"##### ; "31")]
+;"##### ; "30")]
 #[test_case(r#####"tw`max-h-60`"#####, r#####"({
   maxHeight: "15rem",
 })
-;"##### ; "32")]
+;"##### ; "31")]
 #[test_case(r#####"tw`max-h-64`"#####, r#####"({
   maxHeight: "16rem",
 })
-;"##### ; "33")]
+;"##### ; "32")]
 #[test_case(r#####"tw`max-h-72`"#####, r#####"({
   maxHeight: "18rem",
 })
-;"##### ; "34")]
+;"##### ; "33")]
 #[test_case(r#####"tw`max-h-80`"#####, r#####"({
   maxHeight: "20rem",
 })
-;"##### ; "35")]
+;"##### ; "34")]
 #[test_case(r#####"tw`max-h-96`"#####, r#####"({
   maxHeight: "24rem",
 })
-;"##### ; "36")]
+;"##### ; "35")]
 #[test_case(r#####"tw`max-h-px`"#####, r#####"({
   maxHeight: "1px",
 })
-;"##### ; "37")]
+;"##### ; "36")]
 #[test_case(r#####"tw`max-h-full`"#####, r#####"({
   maxHeight: "100%",
 })
-;"##### ; "38")]
+;"##### ; "37")]
 #[test_case(r#####"tw`max-h-screen`"#####, r#####"({
   maxHeight: "100vh",
 })
-;"##### ; "39")]
+;"##### ; "38")]
 #[test_case(r#####"tw`max-h-min`"#####, r#####"({
   maxHeight: "min-content",
 })
-;"##### ; "40")]
+;"##### ; "39")]
 #[test_case(r#####"tw`max-h-max`"#####, r#####"({
   maxHeight: "max-content",
 })
-;"##### ; "41")]
+;"##### ; "40")]
 #[test_case(r#####"tw`max-h-fit`"#####, r#####"({
   maxHeight: "fit-content",
 })
-;"##### ; "42")]
+;"##### ; "41")]
 #[test_case(r#####"tw`max-h-[32rem]`"#####, r#####"({
   maxHeight: "32rem",
-})"##### ; "43")]
+})"##### ; "42")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

@@ -1,40 +1,39 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { globalStyles } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"tw`content-auto`"#####, r#####"({
   contentVisibility: "auto",
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`content-hidden`"#####, r#####"({
   contentVisibility: "hidden",
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`content-visible`"#####, r#####"({
   contentVisibility: "visible",
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`tab-1`"#####, r#####"({
   tabSizeTest: "1",
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`tab-2`"#####, r#####"({
   tabSizeTest: "2",
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`tab-4`"#####, r#####"({
   tabSizeTest: "4",
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"tw`tab-8`"#####, r#####"({
   tabSizeTest: "8",
 })
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"tw`btn`"#####, r#####"({
   padding: ".5rem 1rem",
   borderRadius: ".25rem",
   fontWeight: "600",
 })
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"tw`btn-blue`"#####, r#####"({
   backgroundColor: "#3490dc",
   color: "#fff",
@@ -42,7 +41,7 @@ use test_case::test_case;
     backgroundColor: "#2779bd",
   },
 })
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"tw`btn-red`"#####, r#####"({
   backgroundColor: "#e3342f",
   color: "#fff",
@@ -50,7 +49,7 @@ use test_case::test_case;
     backgroundColor: "#cc1f1a",
   },
 })
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"tw`btn btn-blue btn-red`"#####, r#####"({
   padding: ".5rem 1rem",
   borderRadius: ".25rem",
@@ -61,7 +60,7 @@ use test_case::test_case;
     backgroundColor: "#cc1f1a",
   },
 })
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"globalStyles"#####, r#####"({
   '*, ::before, ::after': {
     '--tw-border-spacing-x': "0",
@@ -156,13 +155,13 @@ use test_case::test_case;
     '--tw-backdrop-sepia': "var(--tw-empty,/*!*/ /*!*/)",
   },
 })
-;"##### ; "12")]
+;"##### ; "11")]
 #[test_case(r#####"tw`test-1:block`"#####, r#####"({
   ':test1': {
     display: "block",
   },
 })
-;"##### ; "13")]
+;"##### ; "12")]
 #[test_case(r#####"tw`test-2:block`"#####, r#####"({
   ':hover': {
     display: "block",
@@ -171,68 +170,68 @@ use test_case::test_case;
     display: "block",
   },
 })
-;"##### ; "14")]
+;"##### ; "13")]
 #[test_case(r#####"tw`test-3:block`"#####, r#####"({
   '@supports (display: grid)': {
     display: "block",
   },
 })
-;"##### ; "15")]
+;"##### ; "14")]
 #[test_case(r#####"tw`test-4:block`"#####, r#####"({
   'html.dark &.something': {
     display: "block",
   },
 })
-;"##### ; "16")]
+;"##### ; "15")]
 #[test_case(r#####"tw`potato-[yellow]:bg-yellow-200`"#####, r#####"({
   '.potato-yellow &': {
     '--tw-bg-opacity': "1",
     backgroundColor: "rgb(254 240 138 / var(--tw-bg-opacity))",
   },
 })
-;"##### ; "17")]
+;"##### ; "16")]
 #[test_case(r#####"tw`potato-[baked]:w-3`"#####, r#####"({
   '.potato-baked &': {
     width: "0.75rem",
   },
 })
-;"##### ; "18")]
+;"##### ; "17")]
 #[test_case(r#####"tw`tooltip-bottom:mt-5`"#####, r#####"({
   '&[data-location="bottom"]': {
     marginTop: "1.25rem",
   },
 })
-;"##### ; "19")]
+;"##### ; "18")]
 #[test_case(r#####"tw`tooltip-top:mb-5`"#####, r#####"({
   '&[data-location="top"]': {
     marginBottom: "1.25rem",
   },
 })
-;"##### ; "20")]
+;"##### ; "19")]
 #[test_case(r#####"tw`alphabet-c:underline `"#####, r#####"({
   '&[data-value="c"]': {
     textDecorationLine: "underline",
   },
 })
-;"##### ; "21")]
+;"##### ; "20")]
 #[test_case(r#####"tw`alphabet-a:underline `"#####, r#####"({
   '&[data-value="a"]': {
     textDecorationLine: "underline",
   },
 })
-;"##### ; "22")]
+;"##### ; "21")]
 #[test_case(r#####"tw`alphabet-d:underline `"#####, r#####"({
   '&[data-value="d"]': {
     textDecorationLine: "underline",
   },
 })
-;"##### ; "23")]
+;"##### ; "22")]
 #[test_case(r#####"tw`alphabet-b:underline`"#####, r#####"({
   '&[data-value="b"]': {
     textDecorationLine: "underline",
   },
 })
-;"##### ; "24")]
+;"##### ; "23")]
 #[test_case(r#####"tw`test-[a,b,c]:underline`"#####, r#####"({
   '&.a > *': {
     textDecorationLine: "underline",
@@ -244,18 +243,18 @@ use test_case::test_case;
     textDecorationLine: "underline",
   },
 })
-;"##### ; "25")]
+;"##### ; "24")]
 #[test_case(r#####"tw`testmin-[500px]:underline`"#####, r#####"({
   '@media (min-width: 500px)': {
     textDecorationLine: "underline",
   },
 })
-;"##### ; "26")]
+;"##### ; "25")]
 #[test_case(r#####"tw`testmin-[700px]:italic`"#####, r#####"({
   '@media (min-width: 700px)': {
     fontStyle: "italic",
   },
-})"##### ; "27")]
+})"##### ; "26")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

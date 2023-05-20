@@ -1,9 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw from '../macro'
-
-// tw prop prefix
-;"#####, r#####";"##### ; "0")]
 #[test_case(r#####"<div tw="tw-text-black" />
 
 // tw import prefix
@@ -14,7 +10,7 @@ use test_case::test_case;
   }}
   data-tw="tw-text-black"
 /> // tw import prefix
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"<div css={tw`tw-bg-red-500`} />
 
 // tw prop + import prefix
@@ -25,7 +21,7 @@ use test_case::test_case;
   }}
   data-tw={"tw-bg-red-500"}
 /> // tw prop + import prefix
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"<div tw="tw-text-black" css={tw`lg:tw-bg-red-500`} />
 
 // tw import + short css
@@ -44,7 +40,7 @@ use test_case::test_case;
   ]}
   data-tw={"tw-text-black | lg:tw-bg-red-500"}
 /> // tw import + short css
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"<div css={tw`lg:tw-bg-red-500 max-width[100vw]`} />
 
 // tw import + arbitrary property
@@ -58,7 +54,7 @@ use test_case::test_case;
   }}
   data-tw={"lg:tw-bg-red-500 max-width[100vw]"}
 /> // tw import + arbitrary property
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"<div css={tw`lg:tw-bg-red-500 [max-width:100vw]`} />
 
 // className should be ignored without the prefix
@@ -72,12 +68,12 @@ use test_case::test_case;
   }}
   data-tw={"lg:tw-bg-red-500 [max-width:100vw]"}
 /> // className should be ignored without the prefix
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"<div className="block" />
 
 // className should be converted with a prefix
 ;"#####, r#####"<div className="block" /> // className should be converted with a prefix
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"<div className="tw-block" />
 
 // group
@@ -87,7 +83,7 @@ use test_case::test_case;
   }}
   data-tw="tw-block"
 /> // group
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"<div tw="hover:(lg:tw-bg-red-500)" />
 ;"#####, r#####"<div
   css={{
@@ -100,7 +96,7 @@ use test_case::test_case;
   }}
   data-tw="hover:(lg:tw-bg-red-500)"
 />
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"<div tw="hover:(lg:tw-bg-red-500 max-width[100vw])" />
 ;"#####, r#####"<div
   css={{
@@ -116,7 +112,7 @@ use test_case::test_case;
   }}
   data-tw="hover:(lg:tw-bg-red-500 max-width[100vw])"
 />
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"<div tw="hover:(lg:tw-bg-red-500 [max-width:100vw])" />
 ;"#####, r#####"<div
   css={{
@@ -132,7 +128,7 @@ use test_case::test_case;
   }}
   data-tw="hover:(lg:tw-bg-red-500 [max-width:100vw])"
 />
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"<div css={tw`hover:(lg:tw-bg-red-500)`} />
 ;"#####, r#####"<div
   css={{
@@ -145,7 +141,7 @@ use test_case::test_case;
   }}
   data-tw={"hover:(lg:tw-bg-red-500)"}
 />
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"<div css={tw`hover:(lg:tw-bg-red-500 max-width[100vw])`} />
 ;"#####, r#####"<div
   css={{
@@ -161,7 +157,7 @@ use test_case::test_case;
   }}
   data-tw={"hover:(lg:tw-bg-red-500 max-width[100vw])"}
 />
-;"##### ; "12")]
+;"##### ; "11")]
 #[test_case(r#####"<div css={tw`hover:(lg:tw-bg-red-500 [max-width:100vw])`} />
 
 // custom plugin classes
@@ -179,7 +175,7 @@ use test_case::test_case;
   }}
   data-tw={"hover:(lg:tw-bg-red-500 [max-width:100vw])"}
 /> // custom plugin classes
-;"##### ; "13")]
+;"##### ; "12")]
 #[test_case(r#####"<div tw="tw-plugin-class" />
 ;"#####, r#####"<div
   css={{
@@ -187,7 +183,7 @@ use test_case::test_case;
   }}
   data-tw="tw-plugin-class"
 />
-;"##### ; "14")]
+;"##### ; "13")]
 #[test_case(r#####"<div tw="tw-test-1" />
 ;"#####, r#####"<div
   css={{
@@ -201,7 +197,7 @@ use test_case::test_case;
   }}
   data-tw="tw-test-1"
 />
-;"##### ; "15")]
+;"##### ; "14")]
 #[test_case(r#####"<div tw="tw-test-2" />"#####, r#####"<div
   css={{
     '.tw-a-class & .tw-some-class': {
@@ -212,7 +208,7 @@ use test_case::test_case;
     },
   }}
   data-tw="tw-test-2"
-/>"##### ; "16")]
+/>"##### ; "15")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

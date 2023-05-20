@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { theme } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"theme`caretColor`"#####, r#####"({
   inherit: "inherit",
   current: "currentColor",
@@ -296,982 +295,982 @@ use test_case::test_case;
   'red-500/fromConfig': "#000",
   electric: void 0,
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`caret-inherit`"#####, r#####"({
   caretColor: "inherit",
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`caret-current`"#####, r#####"({
   caretColor: "currentColor",
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`caret-transparent`"#####, r#####"({
   caretColor: "transparent",
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`caret-black`"#####, r#####"({
   caretColor: "#000",
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`caret-white`"#####, r#####"({
   caretColor: "#fff",
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"tw`caret-slate-50`"#####, r#####"({
   caretColor: "#f8fafc",
 })
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"tw`caret-slate-100`"#####, r#####"({
   caretColor: "#f1f5f9",
 })
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"tw`caret-slate-200`"#####, r#####"({
   caretColor: "#e2e8f0",
 })
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"tw`caret-slate-300`"#####, r#####"({
   caretColor: "#cbd5e1",
 })
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"tw`caret-slate-400`"#####, r#####"({
   caretColor: "#94a3b8",
 })
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"tw`caret-slate-500`"#####, r#####"({
   caretColor: "#64748b",
 })
-;"##### ; "12")]
+;"##### ; "11")]
 #[test_case(r#####"tw`caret-slate-600`"#####, r#####"({
   caretColor: "#475569",
 })
-;"##### ; "13")]
+;"##### ; "12")]
 #[test_case(r#####"tw`caret-slate-700`"#####, r#####"({
   caretColor: "#334155",
 })
-;"##### ; "14")]
+;"##### ; "13")]
 #[test_case(r#####"tw`caret-slate-800`"#####, r#####"({
   caretColor: "#1e293b",
 })
-;"##### ; "15")]
+;"##### ; "14")]
 #[test_case(r#####"tw`caret-slate-900`"#####, r#####"({
   caretColor: "#0f172a",
 })
-;"##### ; "16")]
+;"##### ; "15")]
 #[test_case(r#####"tw`caret-gray-50`"#####, r#####"({
   caretColor: "#f9fafb",
 })
-;"##### ; "17")]
+;"##### ; "16")]
 #[test_case(r#####"tw`caret-gray-100`"#####, r#####"({
   caretColor: "#f3f4f6",
 })
-;"##### ; "18")]
+;"##### ; "17")]
 #[test_case(r#####"tw`caret-gray-200`"#####, r#####"({
   caretColor: "#e5e7eb",
 })
-;"##### ; "19")]
+;"##### ; "18")]
 #[test_case(r#####"tw`caret-gray-300`"#####, r#####"({
   caretColor: "#d1d5db",
 })
-;"##### ; "20")]
+;"##### ; "19")]
 #[test_case(r#####"tw`caret-gray-400`"#####, r#####"({
   caretColor: "#9ca3af",
 })
-;"##### ; "21")]
+;"##### ; "20")]
 #[test_case(r#####"tw`caret-gray-500`"#####, r#####"({
   caretColor: "#6b7280",
 })
-;"##### ; "22")]
+;"##### ; "21")]
 #[test_case(r#####"tw`caret-gray-600`"#####, r#####"({
   caretColor: "#4b5563",
 })
-;"##### ; "23")]
+;"##### ; "22")]
 #[test_case(r#####"tw`caret-gray-700`"#####, r#####"({
   caretColor: "#374151",
 })
-;"##### ; "24")]
+;"##### ; "23")]
 #[test_case(r#####"tw`caret-gray-800`"#####, r#####"({
   caretColor: "#1f2937",
 })
-;"##### ; "25")]
+;"##### ; "24")]
 #[test_case(r#####"tw`caret-gray-900`"#####, r#####"({
   caretColor: "#111827",
 })
-;"##### ; "26")]
+;"##### ; "25")]
 #[test_case(r#####"tw`caret-zinc-50`"#####, r#####"({
   caretColor: "#fafafa",
 })
-;"##### ; "27")]
+;"##### ; "26")]
 #[test_case(r#####"tw`caret-zinc-100`"#####, r#####"({
   caretColor: "#f4f4f5",
 })
-;"##### ; "28")]
+;"##### ; "27")]
 #[test_case(r#####"tw`caret-zinc-200`"#####, r#####"({
   caretColor: "#e4e4e7",
 })
-;"##### ; "29")]
+;"##### ; "28")]
 #[test_case(r#####"tw`caret-zinc-300`"#####, r#####"({
   caretColor: "#d4d4d8",
 })
-;"##### ; "30")]
+;"##### ; "29")]
 #[test_case(r#####"tw`caret-zinc-400`"#####, r#####"({
   caretColor: "#a1a1aa",
 })
-;"##### ; "31")]
+;"##### ; "30")]
 #[test_case(r#####"tw`caret-zinc-500`"#####, r#####"({
   caretColor: "#71717a",
 })
-;"##### ; "32")]
+;"##### ; "31")]
 #[test_case(r#####"tw`caret-zinc-600`"#####, r#####"({
   caretColor: "#52525b",
 })
-;"##### ; "33")]
+;"##### ; "32")]
 #[test_case(r#####"tw`caret-zinc-700`"#####, r#####"({
   caretColor: "#3f3f46",
 })
-;"##### ; "34")]
+;"##### ; "33")]
 #[test_case(r#####"tw`caret-zinc-800`"#####, r#####"({
   caretColor: "#27272a",
 })
-;"##### ; "35")]
+;"##### ; "34")]
 #[test_case(r#####"tw`caret-zinc-900`"#####, r#####"({
   caretColor: "#18181b",
 })
-;"##### ; "36")]
+;"##### ; "35")]
 #[test_case(r#####"tw`caret-neutral-50`"#####, r#####"({
   caretColor: "#fafafa",
 })
-;"##### ; "37")]
+;"##### ; "36")]
 #[test_case(r#####"tw`caret-neutral-100`"#####, r#####"({
   caretColor: "#f5f5f5",
 })
-;"##### ; "38")]
+;"##### ; "37")]
 #[test_case(r#####"tw`caret-neutral-200`"#####, r#####"({
   caretColor: "#e5e5e5",
 })
-;"##### ; "39")]
+;"##### ; "38")]
 #[test_case(r#####"tw`caret-neutral-300`"#####, r#####"({
   caretColor: "#d4d4d4",
 })
-;"##### ; "40")]
+;"##### ; "39")]
 #[test_case(r#####"tw`caret-neutral-400`"#####, r#####"({
   caretColor: "#a3a3a3",
 })
-;"##### ; "41")]
+;"##### ; "40")]
 #[test_case(r#####"tw`caret-neutral-500`"#####, r#####"({
   caretColor: "#737373",
 })
-;"##### ; "42")]
+;"##### ; "41")]
 #[test_case(r#####"tw`caret-neutral-600`"#####, r#####"({
   caretColor: "#525252",
 })
-;"##### ; "43")]
+;"##### ; "42")]
 #[test_case(r#####"tw`caret-neutral-700`"#####, r#####"({
   caretColor: "#404040",
 })
-;"##### ; "44")]
+;"##### ; "43")]
 #[test_case(r#####"tw`caret-neutral-800`"#####, r#####"({
   caretColor: "#262626",
 })
-;"##### ; "45")]
+;"##### ; "44")]
 #[test_case(r#####"tw`caret-neutral-900`"#####, r#####"({
   caretColor: "#171717",
 })
-;"##### ; "46")]
+;"##### ; "45")]
 #[test_case(r#####"tw`caret-stone-50`"#####, r#####"({
   caretColor: "#fafaf9",
 })
-;"##### ; "47")]
+;"##### ; "46")]
 #[test_case(r#####"tw`caret-stone-100`"#####, r#####"({
   caretColor: "#f5f5f4",
 })
-;"##### ; "48")]
+;"##### ; "47")]
 #[test_case(r#####"tw`caret-stone-200`"#####, r#####"({
   caretColor: "#e7e5e4",
 })
-;"##### ; "49")]
+;"##### ; "48")]
 #[test_case(r#####"tw`caret-stone-300`"#####, r#####"({
   caretColor: "#d6d3d1",
 })
-;"##### ; "50")]
+;"##### ; "49")]
 #[test_case(r#####"tw`caret-stone-400`"#####, r#####"({
   caretColor: "#a8a29e",
 })
-;"##### ; "51")]
+;"##### ; "50")]
 #[test_case(r#####"tw`caret-stone-500`"#####, r#####"({
   caretColor: "#78716c",
 })
-;"##### ; "52")]
+;"##### ; "51")]
 #[test_case(r#####"tw`caret-stone-600`"#####, r#####"({
   caretColor: "#57534e",
 })
-;"##### ; "53")]
+;"##### ; "52")]
 #[test_case(r#####"tw`caret-stone-700`"#####, r#####"({
   caretColor: "#44403c",
 })
-;"##### ; "54")]
+;"##### ; "53")]
 #[test_case(r#####"tw`caret-stone-800`"#####, r#####"({
   caretColor: "#292524",
 })
-;"##### ; "55")]
+;"##### ; "54")]
 #[test_case(r#####"tw`caret-stone-900`"#####, r#####"({
   caretColor: "#1c1917",
 })
-;"##### ; "56")]
+;"##### ; "55")]
 #[test_case(r#####"tw`caret-red-50`"#####, r#####"({
   caretColor: "#fef2f2",
 })
-;"##### ; "57")]
+;"##### ; "56")]
 #[test_case(r#####"tw`caret-red-100`"#####, r#####"({
   caretColor: "#fee2e2",
 })
-;"##### ; "58")]
+;"##### ; "57")]
 #[test_case(r#####"tw`caret-red-200`"#####, r#####"({
   caretColor: "#fecaca",
 })
-;"##### ; "59")]
+;"##### ; "58")]
 #[test_case(r#####"tw`caret-red-300`"#####, r#####"({
   caretColor: "#fca5a5",
 })
-;"##### ; "60")]
+;"##### ; "59")]
 #[test_case(r#####"tw`caret-red-400`"#####, r#####"({
   caretColor: "#f87171",
 })
-;"##### ; "61")]
+;"##### ; "60")]
 #[test_case(r#####"tw`caret-red-500`"#####, r#####"({
   caretColor: "#ef4444",
 })
-;"##### ; "62")]
+;"##### ; "61")]
 #[test_case(r#####"tw`caret-red-600`"#####, r#####"({
   caretColor: "#dc2626",
 })
-;"##### ; "63")]
+;"##### ; "62")]
 #[test_case(r#####"tw`caret-red-700`"#####, r#####"({
   caretColor: "#b91c1c",
 })
-;"##### ; "64")]
+;"##### ; "63")]
 #[test_case(r#####"tw`caret-red-800`"#####, r#####"({
   caretColor: "#991b1b",
 })
-;"##### ; "65")]
+;"##### ; "64")]
 #[test_case(r#####"tw`caret-red-900`"#####, r#####"({
   caretColor: "#7f1d1d",
 })
-;"##### ; "66")]
+;"##### ; "65")]
 #[test_case(r#####"tw`caret-orange-50`"#####, r#####"({
   caretColor: "#fff7ed",
 })
-;"##### ; "67")]
+;"##### ; "66")]
 #[test_case(r#####"tw`caret-orange-100`"#####, r#####"({
   caretColor: "#ffedd5",
 })
-;"##### ; "68")]
+;"##### ; "67")]
 #[test_case(r#####"tw`caret-orange-200`"#####, r#####"({
   caretColor: "#fed7aa",
 })
-;"##### ; "69")]
+;"##### ; "68")]
 #[test_case(r#####"tw`caret-orange-300`"#####, r#####"({
   caretColor: "#fdba74",
 })
-;"##### ; "70")]
+;"##### ; "69")]
 #[test_case(r#####"tw`caret-orange-400`"#####, r#####"({
   caretColor: "#fb923c",
 })
-;"##### ; "71")]
+;"##### ; "70")]
 #[test_case(r#####"tw`caret-orange-500`"#####, r#####"({
   caretColor: "#f97316",
 })
-;"##### ; "72")]
+;"##### ; "71")]
 #[test_case(r#####"tw`caret-orange-600`"#####, r#####"({
   caretColor: "#ea580c",
 })
-;"##### ; "73")]
+;"##### ; "72")]
 #[test_case(r#####"tw`caret-orange-700`"#####, r#####"({
   caretColor: "#c2410c",
 })
-;"##### ; "74")]
+;"##### ; "73")]
 #[test_case(r#####"tw`caret-orange-800`"#####, r#####"({
   caretColor: "#9a3412",
 })
-;"##### ; "75")]
+;"##### ; "74")]
 #[test_case(r#####"tw`caret-orange-900`"#####, r#####"({
   caretColor: "#7c2d12",
 })
-;"##### ; "76")]
+;"##### ; "75")]
 #[test_case(r#####"tw`caret-amber-50`"#####, r#####"({
   caretColor: "#fffbeb",
 })
-;"##### ; "77")]
+;"##### ; "76")]
 #[test_case(r#####"tw`caret-amber-100`"#####, r#####"({
   caretColor: "#fef3c7",
 })
-;"##### ; "78")]
+;"##### ; "77")]
 #[test_case(r#####"tw`caret-amber-200`"#####, r#####"({
   caretColor: "#fde68a",
 })
-;"##### ; "79")]
+;"##### ; "78")]
 #[test_case(r#####"tw`caret-amber-300`"#####, r#####"({
   caretColor: "#fcd34d",
 })
-;"##### ; "80")]
+;"##### ; "79")]
 #[test_case(r#####"tw`caret-amber-400`"#####, r#####"({
   caretColor: "#fbbf24",
 })
-;"##### ; "81")]
+;"##### ; "80")]
 #[test_case(r#####"tw`caret-amber-500`"#####, r#####"({
   caretColor: "#f59e0b",
 })
-;"##### ; "82")]
+;"##### ; "81")]
 #[test_case(r#####"tw`caret-amber-600`"#####, r#####"({
   caretColor: "#d97706",
 })
-;"##### ; "83")]
+;"##### ; "82")]
 #[test_case(r#####"tw`caret-amber-700`"#####, r#####"({
   caretColor: "#b45309",
 })
-;"##### ; "84")]
+;"##### ; "83")]
 #[test_case(r#####"tw`caret-amber-800`"#####, r#####"({
   caretColor: "#92400e",
 })
-;"##### ; "85")]
+;"##### ; "84")]
 #[test_case(r#####"tw`caret-amber-900`"#####, r#####"({
   caretColor: "#78350f",
 })
-;"##### ; "86")]
+;"##### ; "85")]
 #[test_case(r#####"tw`caret-yellow-50`"#####, r#####"({
   caretColor: "#fefce8",
 })
-;"##### ; "87")]
+;"##### ; "86")]
 #[test_case(r#####"tw`caret-yellow-100`"#####, r#####"({
   caretColor: "#fef9c3",
 })
-;"##### ; "88")]
+;"##### ; "87")]
 #[test_case(r#####"tw`caret-yellow-200`"#####, r#####"({
   caretColor: "#fef08a",
 })
-;"##### ; "89")]
+;"##### ; "88")]
 #[test_case(r#####"tw`caret-yellow-300`"#####, r#####"({
   caretColor: "#fde047",
 })
-;"##### ; "90")]
+;"##### ; "89")]
 #[test_case(r#####"tw`caret-yellow-400`"#####, r#####"({
   caretColor: "#facc15",
 })
-;"##### ; "91")]
+;"##### ; "90")]
 #[test_case(r#####"tw`caret-yellow-500`"#####, r#####"({
   caretColor: "#eab308",
 })
-;"##### ; "92")]
+;"##### ; "91")]
 #[test_case(r#####"tw`caret-yellow-600`"#####, r#####"({
   caretColor: "#ca8a04",
 })
-;"##### ; "93")]
+;"##### ; "92")]
 #[test_case(r#####"tw`caret-yellow-700`"#####, r#####"({
   caretColor: "#a16207",
 })
-;"##### ; "94")]
+;"##### ; "93")]
 #[test_case(r#####"tw`caret-yellow-800`"#####, r#####"({
   caretColor: "#854d0e",
 })
-;"##### ; "95")]
+;"##### ; "94")]
 #[test_case(r#####"tw`caret-yellow-900`"#####, r#####"({
   caretColor: "#713f12",
 })
-;"##### ; "96")]
+;"##### ; "95")]
 #[test_case(r#####"tw`caret-lime-50`"#####, r#####"({
   caretColor: "#f7fee7",
 })
-;"##### ; "97")]
+;"##### ; "96")]
 #[test_case(r#####"tw`caret-lime-100`"#####, r#####"({
   caretColor: "#ecfccb",
 })
-;"##### ; "98")]
+;"##### ; "97")]
 #[test_case(r#####"tw`caret-lime-200`"#####, r#####"({
   caretColor: "#d9f99d",
 })
-;"##### ; "99")]
+;"##### ; "98")]
 #[test_case(r#####"tw`caret-lime-300`"#####, r#####"({
   caretColor: "#bef264",
 })
-;"##### ; "100")]
+;"##### ; "99")]
 #[test_case(r#####"tw`caret-lime-400`"#####, r#####"({
   caretColor: "#a3e635",
 })
-;"##### ; "101")]
+;"##### ; "100")]
 #[test_case(r#####"tw`caret-lime-500`"#####, r#####"({
   caretColor: "#84cc16",
 })
-;"##### ; "102")]
+;"##### ; "101")]
 #[test_case(r#####"tw`caret-lime-600`"#####, r#####"({
   caretColor: "#65a30d",
 })
-;"##### ; "103")]
+;"##### ; "102")]
 #[test_case(r#####"tw`caret-lime-700`"#####, r#####"({
   caretColor: "#4d7c0f",
 })
-;"##### ; "104")]
+;"##### ; "103")]
 #[test_case(r#####"tw`caret-lime-800`"#####, r#####"({
   caretColor: "#3f6212",
 })
-;"##### ; "105")]
+;"##### ; "104")]
 #[test_case(r#####"tw`caret-lime-900`"#####, r#####"({
   caretColor: "#365314",
 })
-;"##### ; "106")]
+;"##### ; "105")]
 #[test_case(r#####"tw`caret-green-50`"#####, r#####"({
   caretColor: "#f0fdf4",
 })
-;"##### ; "107")]
+;"##### ; "106")]
 #[test_case(r#####"tw`caret-green-100`"#####, r#####"({
   caretColor: "#dcfce7",
 })
-;"##### ; "108")]
+;"##### ; "107")]
 #[test_case(r#####"tw`caret-green-200`"#####, r#####"({
   caretColor: "#bbf7d0",
 })
-;"##### ; "109")]
+;"##### ; "108")]
 #[test_case(r#####"tw`caret-green-300`"#####, r#####"({
   caretColor: "#86efac",
 })
-;"##### ; "110")]
+;"##### ; "109")]
 #[test_case(r#####"tw`caret-green-400`"#####, r#####"({
   caretColor: "#4ade80",
 })
-;"##### ; "111")]
+;"##### ; "110")]
 #[test_case(r#####"tw`caret-green-500`"#####, r#####"({
   caretColor: "#22c55e",
 })
-;"##### ; "112")]
+;"##### ; "111")]
 #[test_case(r#####"tw`caret-green-600`"#####, r#####"({
   caretColor: "#16a34a",
 })
-;"##### ; "113")]
+;"##### ; "112")]
 #[test_case(r#####"tw`caret-green-700`"#####, r#####"({
   caretColor: "#15803d",
 })
-;"##### ; "114")]
+;"##### ; "113")]
 #[test_case(r#####"tw`caret-green-800`"#####, r#####"({
   caretColor: "#166534",
 })
-;"##### ; "115")]
+;"##### ; "114")]
 #[test_case(r#####"tw`caret-green-900`"#####, r#####"({
   caretColor: "#14532d",
 })
-;"##### ; "116")]
+;"##### ; "115")]
 #[test_case(r#####"tw`caret-emerald-50`"#####, r#####"({
   caretColor: "#ecfdf5",
 })
-;"##### ; "117")]
+;"##### ; "116")]
 #[test_case(r#####"tw`caret-emerald-100`"#####, r#####"({
   caretColor: "#d1fae5",
 })
-;"##### ; "118")]
+;"##### ; "117")]
 #[test_case(r#####"tw`caret-emerald-200`"#####, r#####"({
   caretColor: "#a7f3d0",
 })
-;"##### ; "119")]
+;"##### ; "118")]
 #[test_case(r#####"tw`caret-emerald-300`"#####, r#####"({
   caretColor: "#6ee7b7",
 })
-;"##### ; "120")]
+;"##### ; "119")]
 #[test_case(r#####"tw`caret-emerald-400`"#####, r#####"({
   caretColor: "#34d399",
 })
-;"##### ; "121")]
+;"##### ; "120")]
 #[test_case(r#####"tw`caret-emerald-500`"#####, r#####"({
   caretColor: "#10b981",
 })
-;"##### ; "122")]
+;"##### ; "121")]
 #[test_case(r#####"tw`caret-emerald-600`"#####, r#####"({
   caretColor: "#059669",
 })
-;"##### ; "123")]
+;"##### ; "122")]
 #[test_case(r#####"tw`caret-emerald-700`"#####, r#####"({
   caretColor: "#047857",
 })
-;"##### ; "124")]
+;"##### ; "123")]
 #[test_case(r#####"tw`caret-emerald-800`"#####, r#####"({
   caretColor: "#065f46",
 })
-;"##### ; "125")]
+;"##### ; "124")]
 #[test_case(r#####"tw`caret-emerald-900`"#####, r#####"({
   caretColor: "#064e3b",
 })
-;"##### ; "126")]
+;"##### ; "125")]
 #[test_case(r#####"tw`caret-teal-50`"#####, r#####"({
   caretColor: "#f0fdfa",
 })
-;"##### ; "127")]
+;"##### ; "126")]
 #[test_case(r#####"tw`caret-teal-100`"#####, r#####"({
   caretColor: "#ccfbf1",
 })
-;"##### ; "128")]
+;"##### ; "127")]
 #[test_case(r#####"tw`caret-teal-200`"#####, r#####"({
   caretColor: "#99f6e4",
 })
-;"##### ; "129")]
+;"##### ; "128")]
 #[test_case(r#####"tw`caret-teal-300`"#####, r#####"({
   caretColor: "#5eead4",
 })
-;"##### ; "130")]
+;"##### ; "129")]
 #[test_case(r#####"tw`caret-teal-400`"#####, r#####"({
   caretColor: "#2dd4bf",
 })
-;"##### ; "131")]
+;"##### ; "130")]
 #[test_case(r#####"tw`caret-teal-500`"#####, r#####"({
   caretColor: "#14b8a6",
 })
-;"##### ; "132")]
+;"##### ; "131")]
 #[test_case(r#####"tw`caret-teal-600`"#####, r#####"({
   caretColor: "#0d9488",
 })
-;"##### ; "133")]
+;"##### ; "132")]
 #[test_case(r#####"tw`caret-teal-700`"#####, r#####"({
   caretColor: "#0f766e",
 })
-;"##### ; "134")]
+;"##### ; "133")]
 #[test_case(r#####"tw`caret-teal-800`"#####, r#####"({
   caretColor: "#115e59",
 })
-;"##### ; "135")]
+;"##### ; "134")]
 #[test_case(r#####"tw`caret-teal-900`"#####, r#####"({
   caretColor: "#134e4a",
 })
-;"##### ; "136")]
+;"##### ; "135")]
 #[test_case(r#####"tw`caret-cyan-50`"#####, r#####"({
   caretColor: "#ecfeff",
 })
-;"##### ; "137")]
+;"##### ; "136")]
 #[test_case(r#####"tw`caret-cyan-100`"#####, r#####"({
   caretColor: "#cffafe",
 })
-;"##### ; "138")]
+;"##### ; "137")]
 #[test_case(r#####"tw`caret-cyan-200`"#####, r#####"({
   caretColor: "#a5f3fc",
 })
-;"##### ; "139")]
+;"##### ; "138")]
 #[test_case(r#####"tw`caret-cyan-300`"#####, r#####"({
   caretColor: "#67e8f9",
 })
-;"##### ; "140")]
+;"##### ; "139")]
 #[test_case(r#####"tw`caret-cyan-400`"#####, r#####"({
   caretColor: "#22d3ee",
 })
-;"##### ; "141")]
+;"##### ; "140")]
 #[test_case(r#####"tw`caret-cyan-500`"#####, r#####"({
   caretColor: "#06b6d4",
 })
-;"##### ; "142")]
+;"##### ; "141")]
 #[test_case(r#####"tw`caret-cyan-600`"#####, r#####"({
   caretColor: "#0891b2",
 })
-;"##### ; "143")]
+;"##### ; "142")]
 #[test_case(r#####"tw`caret-cyan-700`"#####, r#####"({
   caretColor: "#0e7490",
 })
-;"##### ; "144")]
+;"##### ; "143")]
 #[test_case(r#####"tw`caret-cyan-800`"#####, r#####"({
   caretColor: "#155e75",
 })
-;"##### ; "145")]
+;"##### ; "144")]
 #[test_case(r#####"tw`caret-cyan-900`"#####, r#####"({
   caretColor: "#164e63",
 })
-;"##### ; "146")]
+;"##### ; "145")]
 #[test_case(r#####"tw`caret-sky-50`"#####, r#####"({
   caretColor: "#f0f9ff",
 })
-;"##### ; "147")]
+;"##### ; "146")]
 #[test_case(r#####"tw`caret-sky-100`"#####, r#####"({
   caretColor: "#e0f2fe",
 })
-;"##### ; "148")]
+;"##### ; "147")]
 #[test_case(r#####"tw`caret-sky-200`"#####, r#####"({
   caretColor: "#bae6fd",
 })
-;"##### ; "149")]
+;"##### ; "148")]
 #[test_case(r#####"tw`caret-sky-300`"#####, r#####"({
   caretColor: "#7dd3fc",
 })
-;"##### ; "150")]
+;"##### ; "149")]
 #[test_case(r#####"tw`caret-sky-400`"#####, r#####"({
   caretColor: "#38bdf8",
 })
-;"##### ; "151")]
+;"##### ; "150")]
 #[test_case(r#####"tw`caret-sky-500`"#####, r#####"({
   caretColor: "#0ea5e9",
 })
-;"##### ; "152")]
+;"##### ; "151")]
 #[test_case(r#####"tw`caret-sky-600`"#####, r#####"({
   caretColor: "#0284c7",
 })
-;"##### ; "153")]
+;"##### ; "152")]
 #[test_case(r#####"tw`caret-sky-700`"#####, r#####"({
   caretColor: "#0369a1",
 })
-;"##### ; "154")]
+;"##### ; "153")]
 #[test_case(r#####"tw`caret-sky-800`"#####, r#####"({
   caretColor: "#075985",
 })
-;"##### ; "155")]
+;"##### ; "154")]
 #[test_case(r#####"tw`caret-sky-900`"#####, r#####"({
   caretColor: "#0c4a6e",
 })
-;"##### ; "156")]
+;"##### ; "155")]
 #[test_case(r#####"tw`caret-blue-50`"#####, r#####"({
   caretColor: "#eff6ff",
 })
-;"##### ; "157")]
+;"##### ; "156")]
 #[test_case(r#####"tw`caret-blue-100`"#####, r#####"({
   caretColor: "#dbeafe",
 })
-;"##### ; "158")]
+;"##### ; "157")]
 #[test_case(r#####"tw`caret-blue-200`"#####, r#####"({
   caretColor: "#bfdbfe",
 })
-;"##### ; "159")]
+;"##### ; "158")]
 #[test_case(r#####"tw`caret-blue-300`"#####, r#####"({
   caretColor: "#93c5fd",
 })
-;"##### ; "160")]
+;"##### ; "159")]
 #[test_case(r#####"tw`caret-blue-400`"#####, r#####"({
   caretColor: "#60a5fa",
 })
-;"##### ; "161")]
+;"##### ; "160")]
 #[test_case(r#####"tw`caret-blue-500`"#####, r#####"({
   caretColor: "#3b82f6",
 })
-;"##### ; "162")]
+;"##### ; "161")]
 #[test_case(r#####"tw`caret-blue-600`"#####, r#####"({
   caretColor: "#2563eb",
 })
-;"##### ; "163")]
+;"##### ; "162")]
 #[test_case(r#####"tw`caret-blue-700`"#####, r#####"({
   caretColor: "#1d4ed8",
 })
-;"##### ; "164")]
+;"##### ; "163")]
 #[test_case(r#####"tw`caret-blue-800`"#####, r#####"({
   caretColor: "#1e40af",
 })
-;"##### ; "165")]
+;"##### ; "164")]
 #[test_case(r#####"tw`caret-blue-900`"#####, r#####"({
   caretColor: "#1e3a8a",
 })
-;"##### ; "166")]
+;"##### ; "165")]
 #[test_case(r#####"tw`caret-indigo-50`"#####, r#####"({
   caretColor: "#eef2ff",
 })
-;"##### ; "167")]
+;"##### ; "166")]
 #[test_case(r#####"tw`caret-indigo-100`"#####, r#####"({
   caretColor: "#e0e7ff",
 })
-;"##### ; "168")]
+;"##### ; "167")]
 #[test_case(r#####"tw`caret-indigo-200`"#####, r#####"({
   caretColor: "#c7d2fe",
 })
-;"##### ; "169")]
+;"##### ; "168")]
 #[test_case(r#####"tw`caret-indigo-300`"#####, r#####"({
   caretColor: "#a5b4fc",
 })
-;"##### ; "170")]
+;"##### ; "169")]
 #[test_case(r#####"tw`caret-indigo-400`"#####, r#####"({
   caretColor: "#818cf8",
 })
-;"##### ; "171")]
+;"##### ; "170")]
 #[test_case(r#####"tw`caret-indigo-500`"#####, r#####"({
   caretColor: "#6366f1",
 })
-;"##### ; "172")]
+;"##### ; "171")]
 #[test_case(r#####"tw`caret-indigo-600`"#####, r#####"({
   caretColor: "#4f46e5",
 })
-;"##### ; "173")]
+;"##### ; "172")]
 #[test_case(r#####"tw`caret-indigo-700`"#####, r#####"({
   caretColor: "#4338ca",
 })
-;"##### ; "174")]
+;"##### ; "173")]
 #[test_case(r#####"tw`caret-indigo-800`"#####, r#####"({
   caretColor: "#3730a3",
 })
-;"##### ; "175")]
+;"##### ; "174")]
 #[test_case(r#####"tw`caret-indigo-900`"#####, r#####"({
   caretColor: "#312e81",
 })
-;"##### ; "176")]
+;"##### ; "175")]
 #[test_case(r#####"tw`caret-violet-50`"#####, r#####"({
   caretColor: "#f5f3ff",
 })
-;"##### ; "177")]
+;"##### ; "176")]
 #[test_case(r#####"tw`caret-violet-100`"#####, r#####"({
   caretColor: "#ede9fe",
 })
-;"##### ; "178")]
+;"##### ; "177")]
 #[test_case(r#####"tw`caret-violet-200`"#####, r#####"({
   caretColor: "#ddd6fe",
 })
-;"##### ; "179")]
+;"##### ; "178")]
 #[test_case(r#####"tw`caret-violet-300`"#####, r#####"({
   caretColor: "#c4b5fd",
 })
-;"##### ; "180")]
+;"##### ; "179")]
 #[test_case(r#####"tw`caret-violet-400`"#####, r#####"({
   caretColor: "#a78bfa",
 })
-;"##### ; "181")]
+;"##### ; "180")]
 #[test_case(r#####"tw`caret-violet-500`"#####, r#####"({
   caretColor: "#8b5cf6",
 })
-;"##### ; "182")]
+;"##### ; "181")]
 #[test_case(r#####"tw`caret-violet-600`"#####, r#####"({
   caretColor: "#7c3aed",
 })
-;"##### ; "183")]
+;"##### ; "182")]
 #[test_case(r#####"tw`caret-violet-700`"#####, r#####"({
   caretColor: "#6d28d9",
 })
-;"##### ; "184")]
+;"##### ; "183")]
 #[test_case(r#####"tw`caret-violet-800`"#####, r#####"({
   caretColor: "#5b21b6",
 })
-;"##### ; "185")]
+;"##### ; "184")]
 #[test_case(r#####"tw`caret-violet-900`"#####, r#####"({
   caretColor: "#4c1d95",
 })
-;"##### ; "186")]
+;"##### ; "185")]
 #[test_case(r#####"tw`caret-purple-50`"#####, r#####"({
   caretColor: "#faf5ff",
 })
-;"##### ; "187")]
+;"##### ; "186")]
 #[test_case(r#####"tw`caret-purple-100`"#####, r#####"({
   caretColor: "#f3e8ff",
 })
-;"##### ; "188")]
+;"##### ; "187")]
 #[test_case(r#####"tw`caret-purple-200`"#####, r#####"({
   caretColor: "#e9d5ff",
 })
-;"##### ; "189")]
+;"##### ; "188")]
 #[test_case(r#####"tw`caret-purple-300`"#####, r#####"({
   caretColor: "#d8b4fe",
 })
-;"##### ; "190")]
+;"##### ; "189")]
 #[test_case(r#####"tw`caret-purple-400`"#####, r#####"({
   caretColor: "#c084fc",
 })
-;"##### ; "191")]
+;"##### ; "190")]
 #[test_case(r#####"tw`caret-purple-500`"#####, r#####"({
   caretColor: "#a855f7",
 })
-;"##### ; "192")]
+;"##### ; "191")]
 #[test_case(r#####"tw`caret-purple-600`"#####, r#####"({
   caretColor: "#9333ea",
 })
-;"##### ; "193")]
+;"##### ; "192")]
 #[test_case(r#####"tw`caret-purple-700`"#####, r#####"({
   caretColor: "#7e22ce",
 })
-;"##### ; "194")]
+;"##### ; "193")]
 #[test_case(r#####"tw`caret-purple-800`"#####, r#####"({
   caretColor: "#6b21a8",
 })
-;"##### ; "195")]
+;"##### ; "194")]
 #[test_case(r#####"tw`caret-purple-900`"#####, r#####"({
   caretColor: "#581c87",
 })
-;"##### ; "196")]
+;"##### ; "195")]
 #[test_case(r#####"tw`caret-fuchsia-50`"#####, r#####"({
   caretColor: "#fdf4ff",
 })
-;"##### ; "197")]
+;"##### ; "196")]
 #[test_case(r#####"tw`caret-fuchsia-100`"#####, r#####"({
   caretColor: "#fae8ff",
 })
-;"##### ; "198")]
+;"##### ; "197")]
 #[test_case(r#####"tw`caret-fuchsia-200`"#####, r#####"({
   caretColor: "#f5d0fe",
 })
-;"##### ; "199")]
+;"##### ; "198")]
 #[test_case(r#####"tw`caret-fuchsia-300`"#####, r#####"({
   caretColor: "#f0abfc",
 })
-;"##### ; "200")]
+;"##### ; "199")]
 #[test_case(r#####"tw`caret-fuchsia-400`"#####, r#####"({
   caretColor: "#e879f9",
 })
-;"##### ; "201")]
+;"##### ; "200")]
 #[test_case(r#####"tw`caret-fuchsia-500`"#####, r#####"({
   caretColor: "#d946ef",
 })
-;"##### ; "202")]
+;"##### ; "201")]
 #[test_case(r#####"tw`caret-fuchsia-600`"#####, r#####"({
   caretColor: "#c026d3",
 })
-;"##### ; "203")]
+;"##### ; "202")]
 #[test_case(r#####"tw`caret-fuchsia-700`"#####, r#####"({
   caretColor: "#a21caf",
 })
-;"##### ; "204")]
+;"##### ; "203")]
 #[test_case(r#####"tw`caret-fuchsia-800`"#####, r#####"({
   caretColor: "#86198f",
 })
-;"##### ; "205")]
+;"##### ; "204")]
 #[test_case(r#####"tw`caret-fuchsia-900`"#####, r#####"({
   caretColor: "#701a75",
 })
-;"##### ; "206")]
+;"##### ; "205")]
 #[test_case(r#####"tw`caret-pink-50`"#####, r#####"({
   caretColor: "#fdf2f8",
 })
-;"##### ; "207")]
+;"##### ; "206")]
 #[test_case(r#####"tw`caret-pink-100`"#####, r#####"({
   caretColor: "#fce7f3",
 })
-;"##### ; "208")]
+;"##### ; "207")]
 #[test_case(r#####"tw`caret-pink-200`"#####, r#####"({
   caretColor: "#fbcfe8",
 })
-;"##### ; "209")]
+;"##### ; "208")]
 #[test_case(r#####"tw`caret-pink-300`"#####, r#####"({
   caretColor: "#f9a8d4",
 })
-;"##### ; "210")]
+;"##### ; "209")]
 #[test_case(r#####"tw`caret-pink-400`"#####, r#####"({
   caretColor: "#f472b6",
 })
-;"##### ; "211")]
+;"##### ; "210")]
 #[test_case(r#####"tw`caret-pink-500`"#####, r#####"({
   caretColor: "#ec4899",
 })
-;"##### ; "212")]
+;"##### ; "211")]
 #[test_case(r#####"tw`caret-pink-600`"#####, r#####"({
   caretColor: "#db2777",
 })
-;"##### ; "213")]
+;"##### ; "212")]
 #[test_case(r#####"tw`caret-pink-700`"#####, r#####"({
   caretColor: "#be185d",
 })
-;"##### ; "214")]
+;"##### ; "213")]
 #[test_case(r#####"tw`caret-pink-800`"#####, r#####"({
   caretColor: "#9d174d",
 })
-;"##### ; "215")]
+;"##### ; "214")]
 #[test_case(r#####"tw`caret-pink-900`"#####, r#####"({
   caretColor: "#831843",
 })
-;"##### ; "216")]
+;"##### ; "215")]
 #[test_case(r#####"tw`caret-rose-50`"#####, r#####"({
   caretColor: "#fff1f2",
 })
-;"##### ; "217")]
+;"##### ; "216")]
 #[test_case(r#####"tw`caret-rose-100`"#####, r#####"({
   caretColor: "#ffe4e6",
 })
-;"##### ; "218")]
+;"##### ; "217")]
 #[test_case(r#####"tw`caret-rose-200`"#####, r#####"({
   caretColor: "#fecdd3",
 })
-;"##### ; "219")]
+;"##### ; "218")]
 #[test_case(r#####"tw`caret-rose-300`"#####, r#####"({
   caretColor: "#fda4af",
 })
-;"##### ; "220")]
+;"##### ; "219")]
 #[test_case(r#####"tw`caret-rose-400`"#####, r#####"({
   caretColor: "#fb7185",
 })
-;"##### ; "221")]
+;"##### ; "220")]
 #[test_case(r#####"tw`caret-rose-500`"#####, r#####"({
   caretColor: "#f43f5e",
 })
-;"##### ; "222")]
+;"##### ; "221")]
 #[test_case(r#####"tw`caret-rose-600`"#####, r#####"({
   caretColor: "#e11d48",
 })
-;"##### ; "223")]
+;"##### ; "222")]
 #[test_case(r#####"tw`caret-rose-700`"#####, r#####"({
   caretColor: "#be123c",
 })
-;"##### ; "224")]
+;"##### ; "223")]
 #[test_case(r#####"tw`caret-rose-800`"#####, r#####"({
   caretColor: "#9f1239",
 })
-;"##### ; "225")]
+;"##### ; "224")]
 #[test_case(r#####"tw`caret-rose-900`"#####, r#####"({
   caretColor: "#881337",
 })
-;"##### ; "226")]
+;"##### ; "225")]
 #[test_case(r#####"tw`caret-[#50d71e]`"#####, r#####"({
   caretColor: "#50d71e",
 })
-;"##### ; "227")]
+;"##### ; "226")]
 #[test_case(r#####"tw`caret-red-500/25`"#####, r#####"({
   caretColor: "rgb(239 68 68 / 0.25)",
 })
-;"##### ; "228")]
+;"##### ; "227")]
 #[test_case(r#####"tw`caret-red-500/fromConfig`"#####, r#####"({
   caretColor: "#000",
 })
-;"##### ; "229")]
+;"##### ; "228")]
 #[test_case(r#####"tw`caret-red-500/fromConfig/25`"#####, r#####"({
   caretColor: "rgb(0 0 0 / 0.25)",
 })
-;"##### ; "230")]
+;"##### ; "229")]
 #[test_case(r#####"tw`caret-red-500/fromConfig/[.555]`"#####, r#####"({
   caretColor: "rgb(0 0 0 / .555)",
 })
-;"##### ; "231")]
+;"##### ; "230")]
 #[test_case(r#####"tw`caret-red-500/fromConfig/[var(--myvar)]`"#####, r#####"({
   caretColor: "rgb(0 0 0 / var(--myvar))",
 })
-;"##### ; "232")]
+;"##### ; "231")]
 #[test_case(r#####"tw`caret-red-500/[.555]`"#####, r#####"({
   caretColor: "rgb(239 68 68 / .555)",
 })
-;"##### ; "233")]
+;"##### ; "232")]
 #[test_case(r#####"tw`caret-red-500/[var(--myvar)]`"#####, r#####"({
   caretColor: "rgb(239 68 68 / var(--myvar))",
 })
-;"##### ; "234")]
+;"##### ; "233")]
 #[test_case(r#####"tw`caret-[theme('colors.red.500')]`"#####, r#####"({
   caretColor: "#ef4444",
 })
-;"##### ; "235")]
+;"##### ; "234")]
 #[test_case(r#####"tw`caret-[theme('colors.red.500')]/20`"#####, r#####"({
   caretColor: "rgb(239 68 68 / 0.2)",
 })
-;"##### ; "236")]
+;"##### ; "235")]
 #[test_case(r#####"tw`caret-electric`"#####, r#####"({
   caretColor: "rgb(219, 0, 255)",
 })
-;"##### ; "237")]
+;"##### ; "236")]
 #[test_case(r#####"tw`caret-electric/25`"#####, r#####"({
   caretColor: "rgba(219, 0, 255, 0.25)",
 })
-;"##### ; "238")]
+;"##### ; "237")]
 #[test_case(r#####"tw`caret-electric/[.555]`"#####, r#####"({
   caretColor: "rgba(219, 0, 255, .555)",
 })
-;"##### ; "239")]
+;"##### ; "238")]
 #[test_case(r#####"tw`caret-electric/[var(--myvar)]`"#####, r#####"({
   caretColor: "rgba(219, 0, 255, var(--myvar))",
 })
-;"##### ; "240")]
+;"##### ; "239")]
 #[test_case(r#####"tw`caret-[theme('colors.electric')]`"#####, r#####"({
   caretColor: "rgb(219, 0, 255)",
 })
-;"##### ; "241")]
+;"##### ; "240")]
 #[test_case(r#####"tw`caret-[theme('colors.electric')]/20`"#####, r#####"({
   caretColor: "rgb(219 0 255 / 0.2)",
 })
-;"##### ; "242")]
+;"##### ; "241")]
 #[test_case(r#####"tw`caret-[color:green]`"#####, r#####"({
   caretColor: "green",
 })
-;"##### ; "243")]
+;"##### ; "242")]
 #[test_case(r#####"tw`caret-[color:rgba(255, 255, 255, .45)]`"#####, r#####"({
   caretColor: "rgba(255, 255, 255, .45)",
 })
-;"##### ; "244")]
+;"##### ; "243")]
 #[test_case(r#####"tw`caret-[any:blah]`"#####, r#####"({
   caretColor: "blah",
-})"##### ; "245")]
+})"##### ; "244")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

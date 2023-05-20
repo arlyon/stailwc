@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { theme } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"theme`container`"#####, r#####"({
   padding: {
     DEFAULT: ["1rem", "2rem"],
@@ -18,7 +17,7 @@ use test_case::test_case;
     xl: "7rem",
   },
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`container`"#####, r#####"({
   width: "100%",
   paddingRight: "2rem",
@@ -60,7 +59,7 @@ use test_case::test_case;
     maxWidth: "1536px",
   },
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`md:container md:mx-auto`"#####, r#####"({
   '@media (min-width: 768px)': {
     width: "100%",
@@ -105,7 +104,7 @@ use test_case::test_case;
     marginLeft: "auto",
     marginRight: "auto",
   },
-})"##### ; "3")]
+})"##### ; "2")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

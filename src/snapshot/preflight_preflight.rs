@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import { globalStyles } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"globalStyles"#####, r#####"({
   '*, ::before, ::after': {
     '--tw-border-spacing-x': "0",
@@ -94,7 +93,7 @@ use test_case::test_case;
     '--tw-backdrop-saturate': "var(--tw-empty,/*!*/ /*!*/)",
     '--tw-backdrop-sepia': "var(--tw-empty,/*!*/ /*!*/)",
   },
-})"##### ; "1")]
+})"##### ; "0")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

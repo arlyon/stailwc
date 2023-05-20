@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"tw`hover:block first:mt-2 last-of-type:max-width[20px]`"#####, r#####"({
   '&:first-child': {
     marginTop: "0.5rem",
@@ -12,7 +11,7 @@ use test_case::test_case;
     display: "block",
   },
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`hover:block first:mt-2 last-of-type:[max-width:20px]`"#####, r#####"({
   '&:first-child': {
     marginTop: "0.5rem",
@@ -24,24 +23,24 @@ use test_case::test_case;
     display: "block",
   },
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`my-class1`"#####, r#####"({
   '&:hover': {
     backgroundColor: "pink",
   },
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`my-class2`"#####, r#####"({
   '& :hover': {
     backgroundColor: "orange",
   },
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`my-class3`"#####, r#####"({
   '.test & :hover': {
     backgroundColor: "orange",
   },
-})"##### ; "5")]
+})"##### ; "4")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }

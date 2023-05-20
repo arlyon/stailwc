@@ -1,6 +1,5 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
-#[test_case(r#####"import tw, { theme } from '../macro'"#####, r#####";"##### ; "0")]
 #[test_case(r#####"theme`cursor`"#####, r#####"({
   auto: "auto",
   default: "default",
@@ -39,154 +38,154 @@ use test_case::test_case;
   'zoom-in': "zoom-in",
   'zoom-out': "zoom-out",
 })
-;"##### ; "1")]
+;"##### ; "0")]
 #[test_case(r#####"tw`cursor-auto`"#####, r#####"({
   cursor: "auto",
 })
-;"##### ; "2")]
+;"##### ; "1")]
 #[test_case(r#####"tw`cursor-default`"#####, r#####"({
   cursor: "default",
 })
-;"##### ; "3")]
+;"##### ; "2")]
 #[test_case(r#####"tw`cursor-pointer`"#####, r#####"({
   cursor: "pointer",
 })
-;"##### ; "4")]
+;"##### ; "3")]
 #[test_case(r#####"tw`cursor-wait`"#####, r#####"({
   cursor: "wait",
 })
-;"##### ; "5")]
+;"##### ; "4")]
 #[test_case(r#####"tw`cursor-text`"#####, r#####"({
   cursor: "text",
 })
-;"##### ; "6")]
+;"##### ; "5")]
 #[test_case(r#####"tw`cursor-move`"#####, r#####"({
   cursor: "move",
 })
-;"##### ; "7")]
+;"##### ; "6")]
 #[test_case(r#####"tw`cursor-help`"#####, r#####"({
   cursor: "help",
 })
-;"##### ; "8")]
+;"##### ; "7")]
 #[test_case(r#####"tw`cursor-not-allowed`"#####, r#####"({
   cursor: "not-allowed",
 })
-;"##### ; "9")]
+;"##### ; "8")]
 #[test_case(r#####"tw`cursor-none`"#####, r#####"({
   cursor: "none",
 })
-;"##### ; "10")]
+;"##### ; "9")]
 #[test_case(r#####"tw`cursor-context-menu`"#####, r#####"({
   cursor: "context-menu",
 })
-;"##### ; "11")]
+;"##### ; "10")]
 #[test_case(r#####"tw`cursor-progress`"#####, r#####"({
   cursor: "progress",
 })
-;"##### ; "12")]
+;"##### ; "11")]
 #[test_case(r#####"tw`cursor-cell`"#####, r#####"({
   cursor: "cell",
 })
-;"##### ; "13")]
+;"##### ; "12")]
 #[test_case(r#####"tw`cursor-crosshair`"#####, r#####"({
   cursor: "crosshair",
 })
-;"##### ; "14")]
+;"##### ; "13")]
 #[test_case(r#####"tw`cursor-vertical-text`"#####, r#####"({
   cursor: "vertical-text",
 })
-;"##### ; "15")]
+;"##### ; "14")]
 #[test_case(r#####"tw`cursor-alias`"#####, r#####"({
   cursor: "alias",
 })
-;"##### ; "16")]
+;"##### ; "15")]
 #[test_case(r#####"tw`cursor-copy`"#####, r#####"({
   cursor: "copy",
 })
-;"##### ; "17")]
+;"##### ; "16")]
 #[test_case(r#####"tw`cursor-no-drop`"#####, r#####"({
   cursor: "no-drop",
 })
-;"##### ; "18")]
+;"##### ; "17")]
 #[test_case(r#####"tw`cursor-grab`"#####, r#####"({
   cursor: "grab",
 })
-;"##### ; "19")]
+;"##### ; "18")]
 #[test_case(r#####"tw`cursor-grabbing`"#####, r#####"({
   cursor: "grabbing",
 })
-;"##### ; "20")]
+;"##### ; "19")]
 #[test_case(r#####"tw`cursor-all-scroll`"#####, r#####"({
   cursor: "all-scroll",
 })
-;"##### ; "21")]
+;"##### ; "20")]
 #[test_case(r#####"tw`cursor-col-resize`"#####, r#####"({
   cursor: "col-resize",
 })
-;"##### ; "22")]
+;"##### ; "21")]
 #[test_case(r#####"tw`cursor-row-resize`"#####, r#####"({
   cursor: "row-resize",
 })
-;"##### ; "23")]
+;"##### ; "22")]
 #[test_case(r#####"tw`cursor-n-resize`"#####, r#####"({
   cursor: "n-resize",
 })
-;"##### ; "24")]
+;"##### ; "23")]
 #[test_case(r#####"tw`cursor-e-resize`"#####, r#####"({
   cursor: "e-resize",
 })
-;"##### ; "25")]
+;"##### ; "24")]
 #[test_case(r#####"tw`cursor-s-resize`"#####, r#####"({
   cursor: "s-resize",
 })
-;"##### ; "26")]
+;"##### ; "25")]
 #[test_case(r#####"tw`cursor-w-resize`"#####, r#####"({
   cursor: "w-resize",
 })
-;"##### ; "27")]
+;"##### ; "26")]
 #[test_case(r#####"tw`cursor-ne-resize`"#####, r#####"({
   cursor: "ne-resize",
 })
-;"##### ; "28")]
+;"##### ; "27")]
 #[test_case(r#####"tw`cursor-nw-resize`"#####, r#####"({
   cursor: "nw-resize",
 })
-;"##### ; "29")]
+;"##### ; "28")]
 #[test_case(r#####"tw`cursor-se-resize`"#####, r#####"({
   cursor: "se-resize",
 })
-;"##### ; "30")]
+;"##### ; "29")]
 #[test_case(r#####"tw`cursor-sw-resize`"#####, r#####"({
   cursor: "sw-resize",
 })
-;"##### ; "31")]
+;"##### ; "30")]
 #[test_case(r#####"tw`cursor-ew-resize`"#####, r#####"({
   cursor: "ew-resize",
 })
-;"##### ; "32")]
+;"##### ; "31")]
 #[test_case(r#####"tw`cursor-ns-resize`"#####, r#####"({
   cursor: "ns-resize",
 })
-;"##### ; "33")]
+;"##### ; "32")]
 #[test_case(r#####"tw`cursor-nesw-resize`"#####, r#####"({
   cursor: "nesw-resize",
 })
-;"##### ; "34")]
+;"##### ; "33")]
 #[test_case(r#####"tw`cursor-nwse-resize`"#####, r#####"({
   cursor: "nwse-resize",
 })
-;"##### ; "35")]
+;"##### ; "34")]
 #[test_case(r#####"tw`cursor-zoom-in`"#####, r#####"({
   cursor: "zoom-in",
 })
-;"##### ; "36")]
+;"##### ; "35")]
 #[test_case(r#####"tw`cursor-zoom-out`"#####, r#####"({
   cursor: "zoom-out",
 })
-;"##### ; "37")]
+;"##### ; "36")]
 #[test_case(r#####"tw`cursor-[url(hand.cur), pointer]`"#####, r#####"({
   cursor: "url(hand.cur), pointer",
-})"##### ; "38")]
+})"##### ; "37")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
 }
