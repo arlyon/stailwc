@@ -1,0 +1,14 @@
+[package]
+edition = "2021"
+name = "test-generator"
+version = "0.1.0"
+
+[dependencies]
+aho-corasick = "1.0.1"
+clap = { version = "4.3.0", features = ["derive"] }
+convert_case = "0.6.0"
+swc_common = { version = "0.31.10", features = ["tty-emitter"] }
+swc_ecma_ast = "0.104.3"
+swc_ecma_parser = { version = "0.134.6", features = ["typescript"] }
+swc_ecma_visit = "0.90.3"
+walkdir = "2.3.3"

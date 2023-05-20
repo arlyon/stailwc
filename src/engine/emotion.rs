@@ -27,7 +27,7 @@ impl<'a> TransformVisitor<'a> {
                         optional: false,
                     })),
                     type_params: None,
-                    tpl: Tpl {
+                    tpl: Box::new(Tpl {
                         span: n.span,
                         exprs: vec![],
                         quasis: vec![TplElement {
@@ -36,7 +36,7 @@ impl<'a> TransformVisitor<'a> {
                             span: n.span,
                             tail: true,
                         }],
-                    },
+                    }),
                 }))),
             })),
         }));

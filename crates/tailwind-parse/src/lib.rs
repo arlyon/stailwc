@@ -2,7 +2,6 @@
 #![feature(box_patterns)]
 #![feature(iterator_try_reduce)]
 #![feature(assert_matches)]
-#![feature(unzip_option)]
 
 mod directive;
 mod eval;
@@ -151,9 +150,9 @@ p-4
             .insert("sm", ("1em", LineHeightOpt::Str("0.875rem")));
 
         let inputs = s
-            .into_iter()
+            .iter()
             .permutations(s.len())
-            .map(|v| v.iter().map(|s| *s).join(" "))
+            .map(|v| v.iter().copied().join(" "))
             .collect::<Vec<_>>();
 
         let lits = inputs

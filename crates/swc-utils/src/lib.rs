@@ -213,7 +213,7 @@ mod test {
         let a = to_lit(&[("replace", "a")]);
         let b = to_lit(&[("replace", "b")]);
 
-        let c = merge_literals(a.clone(), b);
+        let c = merge_literals(a, b);
 
         if let PropOrSpread::Prop(box Prop::KeyValue(KeyValueProp {
             value: box Expr::Lit(Lit::Str(Str { value, .. })),
@@ -251,7 +251,7 @@ mod test {
             })))],
         };
 
-        let c = merge_literals(a.clone(), b);
+        let c = merge_literals(a, b);
 
         if let PropOrSpread::Prop(box Prop::KeyValue(KeyValueProp {
             value: box Expr::Object(ObjectLit { props, .. }),
@@ -289,7 +289,7 @@ mod test {
             })))],
         };
 
-        let c = merge_literals(a.clone(), b);
+        let c = merge_literals(a, b);
 
         if let PropOrSpread::Prop(box Prop::KeyValue(KeyValueProp {
             value: box Expr::Object(ObjectLit { props, .. }),

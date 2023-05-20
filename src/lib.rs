@@ -2,12 +2,15 @@
 #![feature(let_chains)]
 #![feature(drain_filter)]
 #![deny(clippy::unwrap_used)]
+#![feature(once_cell)]
 // bug in swc
 #![allow(clippy::not_unsafe_ptr_arg_deref)]
 
 mod css;
 mod depth_stack;
 mod engine;
+#[cfg(test)]
+mod snapshot;
 #[cfg(test)]
 mod test;
 
@@ -39,7 +42,7 @@ use tailwind_parse::{
     Directive, ExpressionConversionError, LiteralConversionError, SubjectConversionError,
 };
 
-#[derive(serde::Deserialize, Debug)]
+#[derive(serde::Deserialize, Debug, Default)]
 pub struct AppConfig<'a> {
     #[serde(borrow)]
     pub config: TailwindConfig<'a>,
@@ -74,9 +77,9 @@ enum TplTransform {
     ComponentCustom(Vec<ExprOrSpread>, ObjectLit),
 }
 
-#[derive(Default, Debug)]
+#[derive(Debug)]
 pub struct TransformVisitor<'a> {
-    config: TailwindConfig<'a>,
+    config: &'a TailwindConfig<'a>,
     strict: bool,
     engine: Engine,
     /// This is treated as a stack because tw attrs can be nested
@@ -86,12 +89,14 @@ pub struct TransformVisitor<'a> {
 }
 
 impl<'a> TransformVisitor<'a> {
-    pub fn new(config: AppConfig<'a>) -> Self {
+    pub fn new(config: &'a AppConfig<'a>) -> Self {
         Self {
-            config: config.config,
+            config: &config.config,
             strict: config.strict,
             engine: config.engine,
-            ..Default::default()
+            tw_attr_stack: Default::default(),
+            tw_tpl: None,
+            tw_style_imported: false,
         }
     }
 
@@ -155,7 +160,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                     });
                 }
 
-                let (x, errs) = d.to_literal(&self.config);
+                let (x, errs) = d.to_literal(self.config);
 
                 for e in errs {
                     HANDLER.with(|h| {
@@ -314,7 +319,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 HANDLER.with(|h| self.report(h, err.extra, "unknown plugin", None).emit());
             }
 
-            let (lit, errs) = d.to_literal(&self.config);
+            let (lit, errs) = d.to_literal(self.config);
 
             for e in errs {
                 HANDLER.with(|h| match e {
@@ -554,7 +559,7 @@ pub fn process_transform(program: Program, metadata: TransformPluginProgramMetad
     let config: Result<AppConfig, _> = serde_path_to_error::deserialize(deser);
 
     match config {
-        Ok(config) => program.fold_with(&mut as_folder(TransformVisitor::new(config))),
+        Ok(config) => program.fold_with(&mut as_folder(TransformVisitor::new(&config))),
         Err(error) => {
             HANDLER.with(|h| {
                 h.struct_fatal("unable to parse tailwind config, aborting")
