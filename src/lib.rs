@@ -165,9 +165,9 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 for e in errs {
                     HANDLER.with(|h| {
                         match e {
-                            ExpressionConversionError::UnknownSubject(SubjectConversionError::InvalidLiteral(LiteralConversionError::InvalidArguments(_p, _v, s)), span) => {
+                            ExpressionConversionError::UnknownSubject(SubjectConversionError::InvalidLiteral(LiteralConversionError::InvalidArguments(_p, v, s)), span) => {
                                 self
-                                    .report(h, span, "unknown parameter", Some(&s))
+                                    .report(h, span, &format!("unknown parameter {}", v.as_str()), Some(&s))
                                     .emit()
                             }
                             _ => {
@@ -325,10 +325,17 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 HANDLER.with(|h| match e {
                     ExpressionConversionError::UnknownSubject(
                         SubjectConversionError::InvalidLiteral(
-                            LiteralConversionError::InvalidArguments(_p, _v, s),
+                            LiteralConversionError::InvalidArguments(_p, v, s),
                         ),
                         span,
-                    ) => self.report(h, span, "unknown parameter", Some(&s)).emit(),
+                    ) => self
+                        .report(
+                            h,
+                            span,
+                            &format!("unknown parameter {}", v.as_str()),
+                            Some(&s),
+                        )
+                        .emit(),
                     _ => self.report(h, *span, &e.to_string(), None).emit(),
                 });
             }
