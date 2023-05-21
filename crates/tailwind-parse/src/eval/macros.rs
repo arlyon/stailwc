@@ -222,6 +222,55 @@ macro_rules! merge_plugins {
             }
         }
     };
+    ($def:ident, arb opt $closure_a:expr, $closure_b:expr) => {
+        pub fn $def<'a>(rest: Option<&SubjectValue>, theme: &'a TailwindTheme) -> PluginResult<'a> {
+            match rest {
+                Some(SubjectValue::Value(v)) => {
+                    match ($closure_a(rest, theme), $closure_b(v, theme)) {
+                        (Err(e1), Err(e2)) => Err(e1.into_iter().chain(e2).collect()),
+                        (Err(_), Ok(a)) => Ok(a),
+                        (Ok(b), Err(_)) => Ok(b),
+                        (Ok(a), Ok(b)) => Ok(merge_literals(a, b)),
+                    }
+                }
+                value => $closure_a(value, theme),
+            }
+        }
+    };
+    ($def:ident, alpha arb $closure_a:expr, arb opt $closure_b:expr) => {
+        pub fn $def<'a>(
+            rest: Option<&SubjectValue>,
+            theme: &'a TailwindTheme,
+            alpha: Option<&Value>,
+        ) -> PluginResult<'a> {
+            match rest {
+                Some(value) => match ($closure_a(value, theme, alpha), $closure_b(rest, theme)) {
+                    (Err(e1), Err(e2)) => Err(e1.into_iter().chain(e2).collect()),
+                    (Err(_), Ok(a)) => Ok(a),
+                    (Ok(b), Err(_)) => Ok(b),
+                    (Ok(a), Ok(b)) => Ok(merge_literals(a, b)),
+                },
+                None => $closure_b(None, theme),
+            }
+        }
+    };
+    ($def:ident, alpha arb opt $closure_a:expr, alpha arb opt $closure_b:expr) => {
+        pub fn $def<'a>(
+            rest: Option<&SubjectValue>,
+            theme: &'a TailwindTheme,
+            alpha: Option<&Value>,
+        ) -> PluginResult<'a> {
+            match (
+                $closure_a(rest, theme, alpha),
+                $closure_b(rest, theme, alpha),
+            ) {
+                (Err(e1), Err(e2)) => Err(e1.into_iter().chain(e2).collect()),
+                (Err(_), Ok(a)) => Ok(a),
+                (Ok(b), Err(_)) => Ok(b),
+                (Ok(a), Ok(b)) => Ok(merge_literals(a, b)),
+            }
+        }
+    };
 }
 
 pub(crate) use array_map_plugin;

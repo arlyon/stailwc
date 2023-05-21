@@ -92,7 +92,9 @@ impl<'a> Literal<'a> {
 
         let plugin = match self.cmd {
             // stateful plugins require some arg from their subject
-            Border(b) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::border(b, v, t))),
+            Border(b) => OptionalAbitraryBox(StdBox::new(move |v, t| {
+                plugin::border(b, v, t, alpha.as_ref())
+            })),
             Rounded(r) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::rounded(r, v, t))),
             Position(p) => OptionalAbitraryBox(StdBox::new(move |v, t| plugin::position(p, v, t))),
             Visibility(vis) => {

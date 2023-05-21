@@ -255,16 +255,37 @@ array_map_plugin!(
     ],
     "backgroundRepeat"
 );
-lookup_plugin_arbitrary_opt!(border_color, colors, "borderColor");
+lookup_color_plugin_arbitrary!(border_color, colors, "borderColor", "--tw-border-opacity");
 lookup_plugin_arbitrary_opt!(border_width, border_width, "borderWidth");
-lookup_plugin_arbitrary_opt!(border_t, border_width, "borderTopWidth");
-lookup_plugin_arbitrary_opt!(border_l, border_width, "borderLeftWidth");
-lookup_plugin_arbitrary_opt!(border_r, border_width, "borderRightWidth");
-lookup_plugin_arbitrary_opt!(border_b, border_width, "borderBottomWidth");
-merge_plugins!(border_x, arb opt border_l, arb opt border_r);
-merge_plugins!(border_y, arb opt border_t, arb opt border_b);
-merge_plugins!(border_cw, arb opt border_color, arb opt border_width);
-merge_plugins!(border_inner, arb opt border_cw, arb opt border_style_wrapped);
+array_plugin!(
+    border_style,
+    ["solid", "dashed", "dotted", "double", "hidden", "none"],
+    "borderStyle"
+);
+
+lookup_plugin_arbitrary_opt!(border_tw, border_width, "borderTopWidth");
+lookup_plugin_arbitrary_opt!(border_lw, border_width, "borderLeftWidth");
+lookup_plugin_arbitrary_opt!(border_rw, border_width, "borderRightWidth");
+lookup_plugin_arbitrary_opt!(border_bw, border_width, "borderBottomWidth");
+lookup_color_plugin_arbitrary!(border_tc, colors, "borderTopColor", "--tw-border-opacity");
+lookup_color_plugin_arbitrary!(border_lc, colors, "borderLeftColor", "--tw-border-opacity");
+lookup_color_plugin_arbitrary!(border_rc, colors, "borderRightColor", "--tw-border-opacity");
+lookup_color_plugin_arbitrary!(
+    border_bc,
+    colors,
+    "borderBottomColor",
+    "--tw-border-opacity"
+);
+
+merge_plugins!(border_t, alpha arb border_tc, arb opt border_tw);
+merge_plugins!(border_l, alpha arb border_lc, arb opt border_lw);
+merge_plugins!(border_r, alpha arb border_rc, arb opt border_rw);
+merge_plugins!(border_b, alpha arb border_bc, arb opt border_bw);
+
+merge_plugins!(border_x, alpha arb opt border_l, alpha arb opt border_r);
+merge_plugins!(border_y, alpha arb opt border_t, alpha arb opt border_b);
+merge_plugins!(border_ws, arb opt border_width, border_style);
+merge_plugins!(border_inner, alpha arb border_color, arb opt border_ws);
 
 merge_plugins!(inset_x, arb left, arb right);
 merge_plugins!(inset_y, arb top, arb bottom);
@@ -621,6 +642,7 @@ pub fn border<'a>(
     subcommand: Option<Border>,
     rest: Option<&SubjectValue>,
     theme: &'a TailwindTheme,
+    alpha: Option<&Value>,
 ) -> PluginResult<'a> {
     let func = match subcommand {
         None => border_inner,
@@ -632,24 +654,7 @@ pub fn border<'a>(
         Some(Border::Y) => border_y,
     };
 
-    func(rest, theme)
-}
-
-array_plugin!(
-    border_style,
-    ["solid", "dashed", "dotted", "double", "hidden", "none"],
-    "borderStyle"
-);
-
-/// wrap border_style to be composed with other plugins
-fn border_style_wrapped<'a>(
-    rest: Option<&SubjectValue>,
-    theme: &'a TailwindTheme,
-) -> PluginResult<'a> {
-    match rest {
-        Some(SubjectValue::Value(val)) => border_style(val, theme),
-        _ => Err(vec![]),
-    }
+    func(rest, theme, alpha)
 }
 
 pub fn from(Value(rest): &Value, theme: &TailwindTheme) -> PluginResult<'static> {
