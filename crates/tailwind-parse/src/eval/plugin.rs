@@ -13,7 +13,7 @@ use swc_core::{
 };
 use tailwind_config::TailwindTheme;
 
-use super::macros::*;
+use super::{macros::*, util::convert_color};
 
 fn simple_lookup<'a>(
     hashmap: &HashMap<&'a str, &str>,
@@ -43,6 +43,38 @@ fn simple_lookup_map<'a, V>(
     hashmap
         .get(search)
         .map(|val| to_lit(&[(output, &f(val))]))
+        .ok_or_else(|| {
+            let sort = eddie::Levenshtein::new();
+            hashmap
+                .keys()
+                .sorted_by_key(|val| sort.distance(search, val))
+                .copied()
+                .take(5)
+                .collect()
+        })
+}
+
+fn simple_lookup_color<'a>(
+    hashmap: &HashMap<&'a str, &str>,
+    search: &str,
+    output: &str,
+    alpha: Option<&Value>,
+    output_opacity: Option<&str>,
+) -> PluginResult<'a> {
+    hashmap
+        .get(search)
+        .map(|s| {
+            convert_color(s, output_opacity, alpha.map(|a| a.0))
+                .map(|rgba| match output_opacity {
+                    Some(output_opacity) => {
+                        let alpha = alpha.map(|a| a.0).unwrap_or("1");
+                        to_lit(&[(output_opacity, alpha), (output, &rgba)])
+                    }
+                    None => to_lit(&[(output, &rgba)]),
+                })
+                .map_err(|e| PluginResult::Err(vec![e.as_str()]))
+                .unwrap_or_else(|_| to_lit(&[(output, s)]))
+        })
         .ok_or_else(|| {
             let sort = eddie::Levenshtein::new();
             hashmap

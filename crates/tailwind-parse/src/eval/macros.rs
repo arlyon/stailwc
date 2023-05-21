@@ -97,6 +97,37 @@ macro_rules! lookup_plugin_arbitrary {
     };
 }
 
+macro_rules! lookup_color_plugin_arbitrary {
+    ($def:ident, $map:tt, $target:expr, $target2:expr) => {
+        pub fn $def<'a>(
+            value: &SubjectValue,
+            theme: &'a TailwindTheme,
+            alpha: Option<&Value>,
+        ) -> PluginResult<'a> {
+            match value {
+                SubjectValue::Value(Value(v)) => {
+                    simple_lookup_color(&theme.$map, v, $target, alpha, Some($target2))
+                }
+                SubjectValue::Css(Css(v)) => Ok(to_lit(&[($target, v)])),
+            }
+        }
+    };
+    ($def:ident, $map:tt, $target:expr) => {
+        pub fn $def<'a>(
+            value: &SubjectValue,
+            theme: &'a TailwindTheme,
+            alpha: Option<&Value>,
+        ) -> PluginResult<'a> {
+            match value {
+                SubjectValue::Value(Value(v)) => {
+                    simple_lookup_color(&theme.$map, v, $target, alpha, None)
+                }
+                SubjectValue::Css(Css(v)) => Ok(to_lit(&[($target, v)])),
+            }
+        }
+    };
+}
+
 macro_rules! lookup_plugin_opt {
     ($def:ident, $map:tt, $target:expr) => {
         pub fn $def<'a>(rest: Option<&Value>, theme: &'a TailwindTheme) -> PluginResult<'a> {
