@@ -143,7 +143,7 @@ impl<'a> Literal<'a> {
             Auto(Auto::Rows) => RequiredArbitrary(plugin::auto_rows),
 
             // all other plugins
-            Text => RequiredArbitrary(plugin::text),
+            Text => RequiredArbitraryTransparency(plugin::text),
             Font => Required(plugin::font),
             Shadow => Optional(plugin::shadow),
             Transition => Optional(plugin::transition),

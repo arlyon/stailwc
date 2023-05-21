@@ -231,9 +231,8 @@ array_plugin!(
     ["left", "center", "right", "justify", "start", "end"],
     "textAlign"
 );
-lookup_plugin_arbitrary!(text_color, colors, "color");
+lookup_color_plugin_arbitrary!(text_color, colors, "color", "--tw-text-opacity");
 lookup_plugin_arbitrary!(text_size, font_size, "fontSize", |t| t.0.to_string());
-merge_plugins!(text_base, arb text_color, arb text_size);
 
 array_plugin!(appearance, ["none"], "appearance");
 
@@ -411,13 +410,19 @@ pub fn transform_origin<'a>(Value(rest): &Value, _theme: &'a TailwindTheme) -> P
     }
 }
 
-pub fn text<'a>(value: &SubjectValue, theme: &'a TailwindTheme) -> PluginResult<'a> {
-    text_base(value, theme).or_else(|e| match value {
-        SubjectValue::Value(v) => {
-            text_align(v, theme).map_err(|e2| e.into_iter().chain(e2).collect())
-        }
-        SubjectValue::Css(_) => Err(e),
-    })
+pub fn text<'a>(
+    value: &SubjectValue,
+    theme: &'a TailwindTheme,
+    alpha: Option<&Value>,
+) -> PluginResult<'a> {
+    text_color(value, theme, alpha)
+        .or_else(|_| text_size(value, theme))
+        .or_else(|e| match value {
+            SubjectValue::Value(v) => {
+                text_align(v, theme).map_err(|e2| e.into_iter().chain(e2).collect())
+            }
+            SubjectValue::Css(_) => Err(e),
+        })
 }
 
 pub fn space<'a>(Value(rest): &Value, theme: &'a TailwindTheme) -> PluginResult<'a> {
