@@ -69,16 +69,18 @@ mod test {
         assert_eq!(errs.len(), 2);
     }
 
-    #[test_case("flex!", None, None, true ; "important")]
-    #[test_case("underline!", None, None, true ; "important with transparent command")]
-    #[test_case("min-w-4!", Some(SubjectValue::Value(Value("4"))), None, true ; "important with rootless command")]
-    #[test_case("text-blue-500/40", Some(SubjectValue::Value(Value("blue-500"))), Some(SubjectValue::Value(Value("40"))), false ; "handles transparent")]
-    #[test_case("text-white/40!", Some(SubjectValue::Value(Value("white"))), Some(SubjectValue::Value(Value("40"))), true ; "handles transparent and important")]
+    #[test_case("flex!", None, None, true, false ; "important")]
+    #[test_case("underline!", None, None, true, false ; "important with transparent command")]
+    #[test_case("min-w-4!", Some(SubjectValue::Value(Value("4"))), None, true, false ; "important with rootless command")]
+    #[test_case("text-blue-500/40", Some(SubjectValue::Value(Value("blue-500"))), Some(Value("40")), false, false ; "handles transparent")]
+    #[test_case("text-white/40!", Some(SubjectValue::Value(Value("white"))), Some(Value("40")), true, false ; "handles transparent and important")]
+    #[test_case("-m-4", Some(SubjectValue::Value(Value("4"))), None, false, true ; "handles negative")]
     fn expression(
         s: &str,
         value_exp: Option<SubjectValue>,
-        transparency: Option<SubjectValue>,
+        transparency: Option<Value>,
         important: bool,
+        negative: bool,
     ) {
         let (rest, d) = Expression::parse(LocatedSpan::new_extra(s, DUMMY_SP)).unwrap();
 
@@ -88,6 +90,7 @@ mod test {
 
         assert_eq!(d.important, important);
         assert_eq!(d.alpha, transparency);
+        assert_eq!(d.negative, negative);
         assert_matches!(*rest, "");
     }
 
