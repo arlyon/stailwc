@@ -2,13 +2,13 @@ use crate::test::snapshot_inner;
 use test_case::test_case;
 #[test_case(r#####"theme`gridRow`"#####, r#####"({
   auto: "auto",
-  'span-1': "span 1 / span 1",
-  'span-2': "span 2 / span 2",
-  'span-3': "span 3 / span 3",
-  'span-4': "span 4 / span 4",
-  'span-5': "span 5 / span 5",
-  'span-6': "span 6 / span 6",
-  'span-full': "1 / -1",
+  "span-1": "span 1 / span 1",
+  "span-2": "span 2 / span 2",
+  "span-3": "span 3 / span 3",
+  "span-4": "span 4 / span 4",
+  "span-5": "span 5 / span 5",
+  "span-6": "span 6 / span 6",
+  "span-full": "1 / -1",
 })
 ;"##### ; "0")]
 #[test_case(r#####"tw`row-auto`"#####, r#####"({

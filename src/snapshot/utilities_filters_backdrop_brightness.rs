@@ -15,73 +15,73 @@ use test_case::test_case;
 })
 ;"##### ; "0")]
 #[test_case(r#####"tw`brightness-0`"#####, r#####"({
-  '--tw-brightness': "brightness(0)",
+  "--tw-brightness": "brightness(0)",
   filter:
     "var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)",
 })
 ;"##### ; "1")]
 #[test_case(r#####"tw`brightness-50`"#####, r#####"({
-  '--tw-brightness': "brightness(.5)",
+  "--tw-brightness": "brightness(.5)",
   filter:
     "var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)",
 })
 ;"##### ; "2")]
 #[test_case(r#####"tw`brightness-75`"#####, r#####"({
-  '--tw-brightness': "brightness(.75)",
+  "--tw-brightness": "brightness(.75)",
   filter:
     "var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)",
 })
 ;"##### ; "3")]
 #[test_case(r#####"tw`brightness-90`"#####, r#####"({
-  '--tw-brightness': "brightness(.9)",
+  "--tw-brightness": "brightness(.9)",
   filter:
     "var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)",
 })
 ;"##### ; "4")]
 #[test_case(r#####"tw`brightness-95`"#####, r#####"({
-  '--tw-brightness': "brightness(.95)",
+  "--tw-brightness": "brightness(.95)",
   filter:
     "var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)",
 })
 ;"##### ; "5")]
 #[test_case(r#####"tw`brightness-100`"#####, r#####"({
-  '--tw-brightness': "brightness(1)",
+  "--tw-brightness": "brightness(1)",
   filter:
     "var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)",
 })
 ;"##### ; "6")]
 #[test_case(r#####"tw`brightness-105`"#####, r#####"({
-  '--tw-brightness': "brightness(1.05)",
+  "--tw-brightness": "brightness(1.05)",
   filter:
     "var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)",
 })
 ;"##### ; "7")]
 #[test_case(r#####"tw`brightness-110`"#####, r#####"({
-  '--tw-brightness': "brightness(1.1)",
+  "--tw-brightness": "brightness(1.1)",
   filter:
     "var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)",
 })
 ;"##### ; "8")]
 #[test_case(r#####"tw`brightness-125`"#####, r#####"({
-  '--tw-brightness': "brightness(1.25)",
+  "--tw-brightness": "brightness(1.25)",
   filter:
     "var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)",
 })
 ;"##### ; "9")]
 #[test_case(r#####"tw`brightness-150`"#####, r#####"({
-  '--tw-brightness': "brightness(1.5)",
+  "--tw-brightness": "brightness(1.5)",
   filter:
     "var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)",
 })
 ;"##### ; "10")]
 #[test_case(r#####"tw`brightness-200`"#####, r#####"({
-  '--tw-brightness': "brightness(2)",
+  "--tw-brightness": "brightness(2)",
   filter:
     "var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)",
 })
 ;"##### ; "11")]
 #[test_case(r#####"tw`brightness-[1.75]`"#####, r#####"({
-  '--tw-brightness': "brightness(1.75)",
+  "--tw-brightness": "brightness(1.75)",
   filter:
     "var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)",
 })"##### ; "12")]

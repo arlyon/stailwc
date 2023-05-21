@@ -5,7 +5,7 @@ use test_case::test_case;
 // tw import prefix
 ;"#####, r#####"<div
   css={{
-    '--tw-text-opacity': "1",
+    "--tw-text-opacity": "1",
     color: "rgb(0 0 0 / var(--tw-text-opacity))",
   }}
   data-tw="tw-text-black"
@@ -16,7 +16,7 @@ use test_case::test_case;
 // tw prop + import prefix
 ;"#####, r#####"<div
   css={{
-    '--tw-bg-opacity': "1",
+    "--tw-bg-opacity": "1",
     backgroundColor: "rgb(239 68 68 / var(--tw-bg-opacity))",
   }}
   data-tw={"tw-bg-red-500"}
@@ -28,12 +28,12 @@ use test_case::test_case;
 ;"#####, r#####"<div
   css={[
     {
-      '--tw-text-opacity': "1",
+      "--tw-text-opacity": "1",
       color: "rgb(0 0 0 / var(--tw-text-opacity))",
     },
     {
-      '@media (min-width: 1024px)': {
-        '--tw-bg-opacity': "1",
+      "@media (min-width: 1024px)": {
+        "--tw-bg-opacity": "1",
         backgroundColor: "rgb(239 68 68 / var(--tw-bg-opacity))",
       },
     },
@@ -47,8 +47,8 @@ use test_case::test_case;
 ;"#####, r#####"<div
   css={{
     maxWidth: "100vw",
-    '@media (min-width: 1024px)': {
-      '--tw-bg-opacity': "1",
+    "@media (min-width: 1024px)": {
+      "--tw-bg-opacity": "1",
       backgroundColor: "rgb(239 68 68 / var(--tw-bg-opacity))",
     },
   }}
@@ -61,8 +61,8 @@ use test_case::test_case;
 ;"#####, r#####"<div
   css={{
     maxWidth: "100vw",
-    '@media (min-width: 1024px)': {
-      '--tw-bg-opacity': "1",
+    "@media (min-width: 1024px)": {
+      "--tw-bg-opacity": "1",
       backgroundColor: "rgb(239 68 68 / var(--tw-bg-opacity))",
     },
   }}
@@ -87,9 +87,9 @@ use test_case::test_case;
 #[test_case(r#####"<div tw="hover:(lg:tw-bg-red-500)" />
 ;"#####, r#####"<div
   css={{
-    '@media (min-width: 1024px)': {
-      ':hover': {
-        '--tw-bg-opacity': "1",
+    "@media (min-width: 1024px)": {
+      ":hover": {
+        "--tw-bg-opacity": "1",
         backgroundColor: "rgb(239 68 68 / var(--tw-bg-opacity))",
       },
     },
@@ -100,12 +100,12 @@ use test_case::test_case;
 #[test_case(r#####"<div tw="hover:(lg:tw-bg-red-500 max-width[100vw])" />
 ;"#####, r#####"<div
   css={{
-    ':hover': {
+    ":hover": {
       maxWidth: "100vw",
     },
-    '@media (min-width: 1024px)': {
-      ':hover': {
-        '--tw-bg-opacity': "1",
+    "@media (min-width: 1024px)": {
+      ":hover": {
+        "--tw-bg-opacity": "1",
         backgroundColor: "rgb(239 68 68 / var(--tw-bg-opacity))",
       },
     },
@@ -116,12 +116,12 @@ use test_case::test_case;
 #[test_case(r#####"<div tw="hover:(lg:tw-bg-red-500 [max-width:100vw])" />
 ;"#####, r#####"<div
   css={{
-    ':hover': {
+    ":hover": {
       maxWidth: "100vw",
     },
-    '@media (min-width: 1024px)': {
-      ':hover': {
-        '--tw-bg-opacity': "1",
+    "@media (min-width: 1024px)": {
+      ":hover": {
+        "--tw-bg-opacity": "1",
         backgroundColor: "rgb(239 68 68 / var(--tw-bg-opacity))",
       },
     },
@@ -132,9 +132,9 @@ use test_case::test_case;
 #[test_case(r#####"<div css={tw`hover:(lg:tw-bg-red-500)`} />
 ;"#####, r#####"<div
   css={{
-    '@media (min-width: 1024px)': {
-      ':hover': {
-        '--tw-bg-opacity': "1",
+    "@media (min-width: 1024px)": {
+      ":hover": {
+        "--tw-bg-opacity": "1",
         backgroundColor: "rgb(239 68 68 / var(--tw-bg-opacity))",
       },
     },
@@ -145,12 +145,12 @@ use test_case::test_case;
 #[test_case(r#####"<div css={tw`hover:(lg:tw-bg-red-500 max-width[100vw])`} />
 ;"#####, r#####"<div
   css={{
-    ':hover': {
+    ":hover": {
       maxWidth: "100vw",
     },
-    '@media (min-width: 1024px)': {
-      ':hover': {
-        '--tw-bg-opacity': "1",
+    "@media (min-width: 1024px)": {
+      ":hover": {
+        "--tw-bg-opacity": "1",
         backgroundColor: "rgb(239 68 68 / var(--tw-bg-opacity))",
       },
     },
@@ -163,12 +163,12 @@ use test_case::test_case;
 // custom plugin classes
 ;"#####, r#####"<div
   css={{
-    ':hover': {
+    ":hover": {
       maxWidth: "100vw",
     },
-    '@media (min-width: 1024px)': {
-      ':hover': {
-        '--tw-bg-opacity': "1",
+    "@media (min-width: 1024px)": {
+      ":hover": {
+        "--tw-bg-opacity": "1",
         backgroundColor: "rgb(239 68 68 / var(--tw-bg-opacity))",
       },
     },
@@ -188,10 +188,10 @@ use test_case::test_case;
 ;"#####, r#####"<div
   css={{
     background: "5px",
-    '.tw-a-class & .tw-some-class': {
+    ".tw-a-class & .tw-some-class": {
       margin: "10px",
     },
-    '.tw-a-class & > *': {
+    ".tw-a-class & > *": {
       margin: "20px",
     },
   }}
@@ -200,10 +200,10 @@ use test_case::test_case;
 ;"##### ; "14")]
 #[test_case(r#####"<div tw="tw-test-2" />"#####, r#####"<div
   css={{
-    '.tw-a-class & .tw-some-class': {
+    ".tw-a-class & .tw-some-class": {
       margin: "10px",
     },
-    '.tw-a-class & > *': {
+    ".tw-a-class & > *": {
       margin: "20px",
     },
   }}

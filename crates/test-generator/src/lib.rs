@@ -9,7 +9,7 @@ use swc_common::{
     errors::{ColorConfig, Handler},
     FileName, SourceMap,
 };
-use swc_ecma_ast::{Lit, Module, ModuleItem};
+use swc_ecma_ast::{Lit, Module, ModuleItem, PropName};
 use swc_ecma_parser::EsConfig;
 use swc_ecma_parser::{lexer::Lexer, Parser, StringInput, Syntax};
 use swc_ecma_visit::{Visit, VisitWith};
@@ -81,6 +81,7 @@ pub fn run(input: &str, output: &str) {
         "stitchesGlobals",
         "stitchesImports",
         "stitchesProps",
+        "variables",
     ]
     .into_iter()
     .collect::<HashSet<_>>();
@@ -223,11 +224,20 @@ impl Visit for SingleQuoteIndices {
             }
         }
     }
+
+    fn visit_prop_name(&mut self, s: &PropName) {
+        if let PropName::Str(s) = s {
+            if let Some('\'') = s.raw.as_ref().and_then(|r| r.chars().next()) {
+                self.0.push(s.span.lo.0 as usize - 1);
+                self.0.push(s.span.hi.0 as usize - 2);
+            }
+        }
+    }
 }
 
 fn double_quote(input: &str, module: &Module) -> String {
     let mut indices = SingleQuoteIndices(vec![]);
-    indices.visit_module(&module);
+    indices.visit_module(module);
 
     let mut bytes = input.to_owned().into_bytes();
     for x in indices.0 {

@@ -9,37 +9,37 @@ use test_case::test_case;
 })
 ;"##### ; "1")]
 #[test_case(r#####"tw`touch-pan-x`"#####, r#####"({
-  '--tw-pan-x': "pan-x",
+  "--tw-pan-x": "pan-x",
   touchAction: "var(--tw-pan-x) var(--tw-pan-y) var(--tw-pinch-zoom)",
 })
 ;"##### ; "2")]
 #[test_case(r#####"tw`touch-pan-left`"#####, r#####"({
-  '--tw-pan-x': "pan-left",
+  "--tw-pan-x": "pan-left",
   touchAction: "var(--tw-pan-x) var(--tw-pan-y) var(--tw-pinch-zoom)",
 })
 ;"##### ; "3")]
 #[test_case(r#####"tw`touch-pan-right`"#####, r#####"({
-  '--tw-pan-x': "pan-right",
+  "--tw-pan-x": "pan-right",
   touchAction: "var(--tw-pan-x) var(--tw-pan-y) var(--tw-pinch-zoom)",
 })
 ;"##### ; "4")]
 #[test_case(r#####"tw`touch-pan-y`"#####, r#####"({
-  '--tw-pan-y': "pan-y",
+  "--tw-pan-y": "pan-y",
   touchAction: "var(--tw-pan-x) var(--tw-pan-y) var(--tw-pinch-zoom)",
 })
 ;"##### ; "5")]
 #[test_case(r#####"tw`touch-pan-up`"#####, r#####"({
-  '--tw-pan-y': "pan-up",
+  "--tw-pan-y": "pan-up",
   touchAction: "var(--tw-pan-x) var(--tw-pan-y) var(--tw-pinch-zoom)",
 })
 ;"##### ; "6")]
 #[test_case(r#####"tw`touch-pan-down`"#####, r#####"({
-  '--tw-pan-y': "pan-down",
+  "--tw-pan-y": "pan-down",
   touchAction: "var(--tw-pan-x) var(--tw-pan-y) var(--tw-pinch-zoom)",
 })
 ;"##### ; "7")]
 #[test_case(r#####"tw`touch-pinch-zoom`"#####, r#####"({
-  '--tw-pinch-zoom': "pinch-zoom",
+  "--tw-pinch-zoom": "pinch-zoom",
   touchAction: "var(--tw-pan-x) var(--tw-pan-y) var(--tw-pinch-zoom)",
 })
 ;"##### ; "8")]

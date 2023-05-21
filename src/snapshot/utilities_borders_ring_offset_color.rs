@@ -292,996 +292,996 @@ use test_case::test_case;
     900: "#881337",
     950: "#4c0519",
   },
-  'red-500/fromConfig': "#000",
+  "red-500/fromConfig": "#000",
   electric: void 0,
 })
 ;"##### ; "0")]
 #[test_case(r#####"tw`ring-offset-inherit`"#####, r#####"({
-  '--tw-ring-offset-color': "inherit",
+  "--tw-ring-offset-color": "inherit",
 })
 ;"##### ; "1")]
 #[test_case(r#####"tw`ring-offset-current`"#####, r#####"({
-  '--tw-ring-offset-color': "currentColor",
+  "--tw-ring-offset-color": "currentColor",
 })
 ;"##### ; "2")]
 #[test_case(r#####"tw`ring-offset-transparent`"#####, r#####"({
-  '--tw-ring-offset-color': "transparent",
+  "--tw-ring-offset-color": "transparent",
 })
 ;"##### ; "3")]
 #[test_case(r#####"tw`ring-offset-black`"#####, r#####"({
-  '--tw-ring-offset-color': "#000",
+  "--tw-ring-offset-color": "#000",
 })
 ;"##### ; "4")]
 #[test_case(r#####"tw`ring-offset-white`"#####, r#####"({
-  '--tw-ring-offset-color': "#fff",
+  "--tw-ring-offset-color": "#fff",
 })
 ;"##### ; "5")]
 #[test_case(r#####"tw`ring-offset-slate-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#f8fafc",
+  "--tw-ring-offset-color": "#f8fafc",
 })
 ;"##### ; "6")]
 #[test_case(r#####"tw`ring-offset-slate-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#f1f5f9",
+  "--tw-ring-offset-color": "#f1f5f9",
 })
 ;"##### ; "7")]
 #[test_case(r#####"tw`ring-offset-slate-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#e2e8f0",
+  "--tw-ring-offset-color": "#e2e8f0",
 })
 ;"##### ; "8")]
 #[test_case(r#####"tw`ring-offset-slate-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#cbd5e1",
+  "--tw-ring-offset-color": "#cbd5e1",
 })
 ;"##### ; "9")]
 #[test_case(r#####"tw`ring-offset-slate-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#94a3b8",
+  "--tw-ring-offset-color": "#94a3b8",
 })
 ;"##### ; "10")]
 #[test_case(r#####"tw`ring-offset-slate-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#64748b",
+  "--tw-ring-offset-color": "#64748b",
 })
 ;"##### ; "11")]
 #[test_case(r#####"tw`ring-offset-slate-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#475569",
+  "--tw-ring-offset-color": "#475569",
 })
 ;"##### ; "12")]
 #[test_case(r#####"tw`ring-offset-slate-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#334155",
+  "--tw-ring-offset-color": "#334155",
 })
 ;"##### ; "13")]
 #[test_case(r#####"tw`ring-offset-slate-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#1e293b",
+  "--tw-ring-offset-color": "#1e293b",
 })
 ;"##### ; "14")]
 #[test_case(r#####"tw`ring-offset-slate-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#0f172a",
+  "--tw-ring-offset-color": "#0f172a",
 })
 ;"##### ; "15")]
 #[test_case(r#####"tw`ring-offset-gray-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#f9fafb",
+  "--tw-ring-offset-color": "#f9fafb",
 })
 ;"##### ; "16")]
 #[test_case(r#####"tw`ring-offset-gray-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#f3f4f6",
+  "--tw-ring-offset-color": "#f3f4f6",
 })
 ;"##### ; "17")]
 #[test_case(r#####"tw`ring-offset-gray-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#e5e7eb",
+  "--tw-ring-offset-color": "#e5e7eb",
 })
 ;"##### ; "18")]
 #[test_case(r#####"tw`ring-offset-gray-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#d1d5db",
+  "--tw-ring-offset-color": "#d1d5db",
 })
 ;"##### ; "19")]
 #[test_case(r#####"tw`ring-offset-gray-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#9ca3af",
+  "--tw-ring-offset-color": "#9ca3af",
 })
 ;"##### ; "20")]
 #[test_case(r#####"tw`ring-offset-gray-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#6b7280",
+  "--tw-ring-offset-color": "#6b7280",
 })
 ;"##### ; "21")]
 #[test_case(r#####"tw`ring-offset-gray-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#4b5563",
+  "--tw-ring-offset-color": "#4b5563",
 })
 ;"##### ; "22")]
 #[test_case(r#####"tw`ring-offset-gray-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#374151",
+  "--tw-ring-offset-color": "#374151",
 })
 ;"##### ; "23")]
 #[test_case(r#####"tw`ring-offset-gray-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#1f2937",
+  "--tw-ring-offset-color": "#1f2937",
 })
 ;"##### ; "24")]
 #[test_case(r#####"tw`ring-offset-gray-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#111827",
+  "--tw-ring-offset-color": "#111827",
 })
 ;"##### ; "25")]
 #[test_case(r#####"tw`ring-offset-zinc-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#fafafa",
+  "--tw-ring-offset-color": "#fafafa",
 })
 ;"##### ; "26")]
 #[test_case(r#####"tw`ring-offset-zinc-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#f4f4f5",
+  "--tw-ring-offset-color": "#f4f4f5",
 })
 ;"##### ; "27")]
 #[test_case(r#####"tw`ring-offset-zinc-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#e4e4e7",
+  "--tw-ring-offset-color": "#e4e4e7",
 })
 ;"##### ; "28")]
 #[test_case(r#####"tw`ring-offset-zinc-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#d4d4d8",
+  "--tw-ring-offset-color": "#d4d4d8",
 })
 ;"##### ; "29")]
 #[test_case(r#####"tw`ring-offset-zinc-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#a1a1aa",
+  "--tw-ring-offset-color": "#a1a1aa",
 })
 ;"##### ; "30")]
 #[test_case(r#####"tw`ring-offset-zinc-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#71717a",
+  "--tw-ring-offset-color": "#71717a",
 })
 ;"##### ; "31")]
 #[test_case(r#####"tw`ring-offset-zinc-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#52525b",
+  "--tw-ring-offset-color": "#52525b",
 })
 ;"##### ; "32")]
 #[test_case(r#####"tw`ring-offset-zinc-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#3f3f46",
+  "--tw-ring-offset-color": "#3f3f46",
 })
 ;"##### ; "33")]
 #[test_case(r#####"tw`ring-offset-zinc-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#27272a",
+  "--tw-ring-offset-color": "#27272a",
 })
 ;"##### ; "34")]
 #[test_case(r#####"tw`ring-offset-zinc-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#18181b",
+  "--tw-ring-offset-color": "#18181b",
 })
 ;"##### ; "35")]
 #[test_case(r#####"tw`ring-offset-neutral-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#fafafa",
+  "--tw-ring-offset-color": "#fafafa",
 })
 ;"##### ; "36")]
 #[test_case(r#####"tw`ring-offset-neutral-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#f5f5f5",
+  "--tw-ring-offset-color": "#f5f5f5",
 })
 ;"##### ; "37")]
 #[test_case(r#####"tw`ring-offset-neutral-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#e5e5e5",
+  "--tw-ring-offset-color": "#e5e5e5",
 })
 ;"##### ; "38")]
 #[test_case(r#####"tw`ring-offset-neutral-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#d4d4d4",
+  "--tw-ring-offset-color": "#d4d4d4",
 })
 ;"##### ; "39")]
 #[test_case(r#####"tw`ring-offset-neutral-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#a3a3a3",
+  "--tw-ring-offset-color": "#a3a3a3",
 })
 ;"##### ; "40")]
 #[test_case(r#####"tw`ring-offset-neutral-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#737373",
+  "--tw-ring-offset-color": "#737373",
 })
 ;"##### ; "41")]
 #[test_case(r#####"tw`ring-offset-neutral-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#525252",
+  "--tw-ring-offset-color": "#525252",
 })
 ;"##### ; "42")]
 #[test_case(r#####"tw`ring-offset-neutral-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#404040",
+  "--tw-ring-offset-color": "#404040",
 })
 ;"##### ; "43")]
 #[test_case(r#####"tw`ring-offset-neutral-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#262626",
+  "--tw-ring-offset-color": "#262626",
 })
 ;"##### ; "44")]
 #[test_case(r#####"tw`ring-offset-neutral-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#171717",
+  "--tw-ring-offset-color": "#171717",
 })
 ;"##### ; "45")]
 #[test_case(r#####"tw`ring-offset-stone-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#fafaf9",
+  "--tw-ring-offset-color": "#fafaf9",
 })
 ;"##### ; "46")]
 #[test_case(r#####"tw`ring-offset-stone-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#f5f5f4",
+  "--tw-ring-offset-color": "#f5f5f4",
 })
 ;"##### ; "47")]
 #[test_case(r#####"tw`ring-offset-stone-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#e7e5e4",
+  "--tw-ring-offset-color": "#e7e5e4",
 })
 ;"##### ; "48")]
 #[test_case(r#####"tw`ring-offset-stone-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#d6d3d1",
+  "--tw-ring-offset-color": "#d6d3d1",
 })
 ;"##### ; "49")]
 #[test_case(r#####"tw`ring-offset-stone-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#a8a29e",
+  "--tw-ring-offset-color": "#a8a29e",
 })
 ;"##### ; "50")]
 #[test_case(r#####"tw`ring-offset-stone-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#78716c",
+  "--tw-ring-offset-color": "#78716c",
 })
 ;"##### ; "51")]
 #[test_case(r#####"tw`ring-offset-stone-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#57534e",
+  "--tw-ring-offset-color": "#57534e",
 })
 ;"##### ; "52")]
 #[test_case(r#####"tw`ring-offset-stone-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#44403c",
+  "--tw-ring-offset-color": "#44403c",
 })
 ;"##### ; "53")]
 #[test_case(r#####"tw`ring-offset-stone-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#292524",
+  "--tw-ring-offset-color": "#292524",
 })
 ;"##### ; "54")]
 #[test_case(r#####"tw`ring-offset-stone-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#1c1917",
+  "--tw-ring-offset-color": "#1c1917",
 })
 ;"##### ; "55")]
 #[test_case(r#####"tw`ring-offset-red-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#fef2f2",
+  "--tw-ring-offset-color": "#fef2f2",
 })
 ;"##### ; "56")]
 #[test_case(r#####"tw`ring-offset-red-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#fee2e2",
+  "--tw-ring-offset-color": "#fee2e2",
 })
 ;"##### ; "57")]
 #[test_case(r#####"tw`ring-offset-red-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#fecaca",
+  "--tw-ring-offset-color": "#fecaca",
 })
 ;"##### ; "58")]
 #[test_case(r#####"tw`ring-offset-red-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#fca5a5",
+  "--tw-ring-offset-color": "#fca5a5",
 })
 ;"##### ; "59")]
 #[test_case(r#####"tw`ring-offset-red-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#f87171",
+  "--tw-ring-offset-color": "#f87171",
 })
 ;"##### ; "60")]
 #[test_case(r#####"tw`ring-offset-red-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#ef4444",
+  "--tw-ring-offset-color": "#ef4444",
 })
 ;"##### ; "61")]
 #[test_case(r#####"tw`ring-offset-red-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#dc2626",
+  "--tw-ring-offset-color": "#dc2626",
 })
 ;"##### ; "62")]
 #[test_case(r#####"tw`ring-offset-red-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#b91c1c",
+  "--tw-ring-offset-color": "#b91c1c",
 })
 ;"##### ; "63")]
 #[test_case(r#####"tw`ring-offset-red-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#991b1b",
+  "--tw-ring-offset-color": "#991b1b",
 })
 ;"##### ; "64")]
 #[test_case(r#####"tw`ring-offset-red-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#7f1d1d",
+  "--tw-ring-offset-color": "#7f1d1d",
 })
 ;"##### ; "65")]
 #[test_case(r#####"tw`ring-offset-orange-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#fff7ed",
+  "--tw-ring-offset-color": "#fff7ed",
 })
 ;"##### ; "66")]
 #[test_case(r#####"tw`ring-offset-orange-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#ffedd5",
+  "--tw-ring-offset-color": "#ffedd5",
 })
 ;"##### ; "67")]
 #[test_case(r#####"tw`ring-offset-orange-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#fed7aa",
+  "--tw-ring-offset-color": "#fed7aa",
 })
 ;"##### ; "68")]
 #[test_case(r#####"tw`ring-offset-orange-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#fdba74",
+  "--tw-ring-offset-color": "#fdba74",
 })
 ;"##### ; "69")]
 #[test_case(r#####"tw`ring-offset-orange-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#fb923c",
+  "--tw-ring-offset-color": "#fb923c",
 })
 ;"##### ; "70")]
 #[test_case(r#####"tw`ring-offset-orange-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#f97316",
+  "--tw-ring-offset-color": "#f97316",
 })
 ;"##### ; "71")]
 #[test_case(r#####"tw`ring-offset-orange-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#ea580c",
+  "--tw-ring-offset-color": "#ea580c",
 })
 ;"##### ; "72")]
 #[test_case(r#####"tw`ring-offset-orange-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#c2410c",
+  "--tw-ring-offset-color": "#c2410c",
 })
 ;"##### ; "73")]
 #[test_case(r#####"tw`ring-offset-orange-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#9a3412",
+  "--tw-ring-offset-color": "#9a3412",
 })
 ;"##### ; "74")]
 #[test_case(r#####"tw`ring-offset-orange-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#7c2d12",
+  "--tw-ring-offset-color": "#7c2d12",
 })
 ;"##### ; "75")]
 #[test_case(r#####"tw`ring-offset-amber-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#fffbeb",
+  "--tw-ring-offset-color": "#fffbeb",
 })
 ;"##### ; "76")]
 #[test_case(r#####"tw`ring-offset-amber-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#fef3c7",
+  "--tw-ring-offset-color": "#fef3c7",
 })
 ;"##### ; "77")]
 #[test_case(r#####"tw`ring-offset-amber-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#fde68a",
+  "--tw-ring-offset-color": "#fde68a",
 })
 ;"##### ; "78")]
 #[test_case(r#####"tw`ring-offset-amber-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#fcd34d",
+  "--tw-ring-offset-color": "#fcd34d",
 })
 ;"##### ; "79")]
 #[test_case(r#####"tw`ring-offset-amber-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#fbbf24",
+  "--tw-ring-offset-color": "#fbbf24",
 })
 ;"##### ; "80")]
 #[test_case(r#####"tw`ring-offset-amber-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#f59e0b",
+  "--tw-ring-offset-color": "#f59e0b",
 })
 ;"##### ; "81")]
 #[test_case(r#####"tw`ring-offset-amber-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#d97706",
+  "--tw-ring-offset-color": "#d97706",
 })
 ;"##### ; "82")]
 #[test_case(r#####"tw`ring-offset-amber-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#b45309",
+  "--tw-ring-offset-color": "#b45309",
 })
 ;"##### ; "83")]
 #[test_case(r#####"tw`ring-offset-amber-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#92400e",
+  "--tw-ring-offset-color": "#92400e",
 })
 ;"##### ; "84")]
 #[test_case(r#####"tw`ring-offset-amber-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#78350f",
+  "--tw-ring-offset-color": "#78350f",
 })
 ;"##### ; "85")]
 #[test_case(r#####"tw`ring-offset-yellow-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#fefce8",
+  "--tw-ring-offset-color": "#fefce8",
 })
 ;"##### ; "86")]
 #[test_case(r#####"tw`ring-offset-yellow-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#fef9c3",
+  "--tw-ring-offset-color": "#fef9c3",
 })
 ;"##### ; "87")]
 #[test_case(r#####"tw`ring-offset-yellow-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#fef08a",
+  "--tw-ring-offset-color": "#fef08a",
 })
 ;"##### ; "88")]
 #[test_case(r#####"tw`ring-offset-yellow-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#fde047",
+  "--tw-ring-offset-color": "#fde047",
 })
 ;"##### ; "89")]
 #[test_case(r#####"tw`ring-offset-yellow-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#facc15",
+  "--tw-ring-offset-color": "#facc15",
 })
 ;"##### ; "90")]
 #[test_case(r#####"tw`ring-offset-yellow-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#eab308",
+  "--tw-ring-offset-color": "#eab308",
 })
 ;"##### ; "91")]
 #[test_case(r#####"tw`ring-offset-yellow-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#ca8a04",
+  "--tw-ring-offset-color": "#ca8a04",
 })
 ;"##### ; "92")]
 #[test_case(r#####"tw`ring-offset-yellow-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#a16207",
+  "--tw-ring-offset-color": "#a16207",
 })
 ;"##### ; "93")]
 #[test_case(r#####"tw`ring-offset-yellow-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#854d0e",
+  "--tw-ring-offset-color": "#854d0e",
 })
 ;"##### ; "94")]
 #[test_case(r#####"tw`ring-offset-yellow-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#713f12",
+  "--tw-ring-offset-color": "#713f12",
 })
 ;"##### ; "95")]
 #[test_case(r#####"tw`ring-offset-lime-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#f7fee7",
+  "--tw-ring-offset-color": "#f7fee7",
 })
 ;"##### ; "96")]
 #[test_case(r#####"tw`ring-offset-lime-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#ecfccb",
+  "--tw-ring-offset-color": "#ecfccb",
 })
 ;"##### ; "97")]
 #[test_case(r#####"tw`ring-offset-lime-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#d9f99d",
+  "--tw-ring-offset-color": "#d9f99d",
 })
 ;"##### ; "98")]
 #[test_case(r#####"tw`ring-offset-lime-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#bef264",
+  "--tw-ring-offset-color": "#bef264",
 })
 ;"##### ; "99")]
 #[test_case(r#####"tw`ring-offset-lime-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#a3e635",
+  "--tw-ring-offset-color": "#a3e635",
 })
 ;"##### ; "100")]
 #[test_case(r#####"tw`ring-offset-lime-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#84cc16",
+  "--tw-ring-offset-color": "#84cc16",
 })
 ;"##### ; "101")]
 #[test_case(r#####"tw`ring-offset-lime-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#65a30d",
+  "--tw-ring-offset-color": "#65a30d",
 })
 ;"##### ; "102")]
 #[test_case(r#####"tw`ring-offset-lime-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#4d7c0f",
+  "--tw-ring-offset-color": "#4d7c0f",
 })
 ;"##### ; "103")]
 #[test_case(r#####"tw`ring-offset-lime-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#3f6212",
+  "--tw-ring-offset-color": "#3f6212",
 })
 ;"##### ; "104")]
 #[test_case(r#####"tw`ring-offset-lime-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#365314",
+  "--tw-ring-offset-color": "#365314",
 })
 ;"##### ; "105")]
 #[test_case(r#####"tw`ring-offset-green-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#f0fdf4",
+  "--tw-ring-offset-color": "#f0fdf4",
 })
 ;"##### ; "106")]
 #[test_case(r#####"tw`ring-offset-green-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#dcfce7",
+  "--tw-ring-offset-color": "#dcfce7",
 })
 ;"##### ; "107")]
 #[test_case(r#####"tw`ring-offset-green-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#bbf7d0",
+  "--tw-ring-offset-color": "#bbf7d0",
 })
 ;"##### ; "108")]
 #[test_case(r#####"tw`ring-offset-green-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#86efac",
+  "--tw-ring-offset-color": "#86efac",
 })
 ;"##### ; "109")]
 #[test_case(r#####"tw`ring-offset-green-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#4ade80",
+  "--tw-ring-offset-color": "#4ade80",
 })
 ;"##### ; "110")]
 #[test_case(r#####"tw`ring-offset-green-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#22c55e",
+  "--tw-ring-offset-color": "#22c55e",
 })
 ;"##### ; "111")]
 #[test_case(r#####"tw`ring-offset-green-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#16a34a",
+  "--tw-ring-offset-color": "#16a34a",
 })
 ;"##### ; "112")]
 #[test_case(r#####"tw`ring-offset-green-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#15803d",
+  "--tw-ring-offset-color": "#15803d",
 })
 ;"##### ; "113")]
 #[test_case(r#####"tw`ring-offset-green-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#166534",
+  "--tw-ring-offset-color": "#166534",
 })
 ;"##### ; "114")]
 #[test_case(r#####"tw`ring-offset-green-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#14532d",
+  "--tw-ring-offset-color": "#14532d",
 })
 ;"##### ; "115")]
 #[test_case(r#####"tw`ring-offset-emerald-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#ecfdf5",
+  "--tw-ring-offset-color": "#ecfdf5",
 })
 ;"##### ; "116")]
 #[test_case(r#####"tw`ring-offset-emerald-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#d1fae5",
+  "--tw-ring-offset-color": "#d1fae5",
 })
 ;"##### ; "117")]
 #[test_case(r#####"tw`ring-offset-emerald-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#a7f3d0",
+  "--tw-ring-offset-color": "#a7f3d0",
 })
 ;"##### ; "118")]
 #[test_case(r#####"tw`ring-offset-emerald-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#6ee7b7",
+  "--tw-ring-offset-color": "#6ee7b7",
 })
 ;"##### ; "119")]
 #[test_case(r#####"tw`ring-offset-emerald-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#34d399",
+  "--tw-ring-offset-color": "#34d399",
 })
 ;"##### ; "120")]
 #[test_case(r#####"tw`ring-offset-emerald-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#10b981",
+  "--tw-ring-offset-color": "#10b981",
 })
 ;"##### ; "121")]
 #[test_case(r#####"tw`ring-offset-emerald-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#059669",
+  "--tw-ring-offset-color": "#059669",
 })
 ;"##### ; "122")]
 #[test_case(r#####"tw`ring-offset-emerald-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#047857",
+  "--tw-ring-offset-color": "#047857",
 })
 ;"##### ; "123")]
 #[test_case(r#####"tw`ring-offset-emerald-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#065f46",
+  "--tw-ring-offset-color": "#065f46",
 })
 ;"##### ; "124")]
 #[test_case(r#####"tw`ring-offset-emerald-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#064e3b",
+  "--tw-ring-offset-color": "#064e3b",
 })
 ;"##### ; "125")]
 #[test_case(r#####"tw`ring-offset-teal-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#f0fdfa",
+  "--tw-ring-offset-color": "#f0fdfa",
 })
 ;"##### ; "126")]
 #[test_case(r#####"tw`ring-offset-teal-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#ccfbf1",
+  "--tw-ring-offset-color": "#ccfbf1",
 })
 ;"##### ; "127")]
 #[test_case(r#####"tw`ring-offset-teal-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#99f6e4",
+  "--tw-ring-offset-color": "#99f6e4",
 })
 ;"##### ; "128")]
 #[test_case(r#####"tw`ring-offset-teal-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#5eead4",
+  "--tw-ring-offset-color": "#5eead4",
 })
 ;"##### ; "129")]
 #[test_case(r#####"tw`ring-offset-teal-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#2dd4bf",
+  "--tw-ring-offset-color": "#2dd4bf",
 })
 ;"##### ; "130")]
 #[test_case(r#####"tw`ring-offset-teal-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#14b8a6",
+  "--tw-ring-offset-color": "#14b8a6",
 })
 ;"##### ; "131")]
 #[test_case(r#####"tw`ring-offset-teal-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#0d9488",
+  "--tw-ring-offset-color": "#0d9488",
 })
 ;"##### ; "132")]
 #[test_case(r#####"tw`ring-offset-teal-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#0f766e",
+  "--tw-ring-offset-color": "#0f766e",
 })
 ;"##### ; "133")]
 #[test_case(r#####"tw`ring-offset-teal-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#115e59",
+  "--tw-ring-offset-color": "#115e59",
 })
 ;"##### ; "134")]
 #[test_case(r#####"tw`ring-offset-teal-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#134e4a",
+  "--tw-ring-offset-color": "#134e4a",
 })
 ;"##### ; "135")]
 #[test_case(r#####"tw`ring-offset-cyan-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#ecfeff",
+  "--tw-ring-offset-color": "#ecfeff",
 })
 ;"##### ; "136")]
 #[test_case(r#####"tw`ring-offset-cyan-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#cffafe",
+  "--tw-ring-offset-color": "#cffafe",
 })
 ;"##### ; "137")]
 #[test_case(r#####"tw`ring-offset-cyan-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#a5f3fc",
+  "--tw-ring-offset-color": "#a5f3fc",
 })
 ;"##### ; "138")]
 #[test_case(r#####"tw`ring-offset-cyan-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#67e8f9",
+  "--tw-ring-offset-color": "#67e8f9",
 })
 ;"##### ; "139")]
 #[test_case(r#####"tw`ring-offset-cyan-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#22d3ee",
+  "--tw-ring-offset-color": "#22d3ee",
 })
 ;"##### ; "140")]
 #[test_case(r#####"tw`ring-offset-cyan-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#06b6d4",
+  "--tw-ring-offset-color": "#06b6d4",
 })
 ;"##### ; "141")]
 #[test_case(r#####"tw`ring-offset-cyan-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#0891b2",
+  "--tw-ring-offset-color": "#0891b2",
 })
 ;"##### ; "142")]
 #[test_case(r#####"tw`ring-offset-cyan-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#0e7490",
+  "--tw-ring-offset-color": "#0e7490",
 })
 ;"##### ; "143")]
 #[test_case(r#####"tw`ring-offset-cyan-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#155e75",
+  "--tw-ring-offset-color": "#155e75",
 })
 ;"##### ; "144")]
 #[test_case(r#####"tw`ring-offset-cyan-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#164e63",
+  "--tw-ring-offset-color": "#164e63",
 })
 ;"##### ; "145")]
 #[test_case(r#####"tw`ring-offset-sky-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#f0f9ff",
+  "--tw-ring-offset-color": "#f0f9ff",
 })
 ;"##### ; "146")]
 #[test_case(r#####"tw`ring-offset-sky-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#e0f2fe",
+  "--tw-ring-offset-color": "#e0f2fe",
 })
 ;"##### ; "147")]
 #[test_case(r#####"tw`ring-offset-sky-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#bae6fd",
+  "--tw-ring-offset-color": "#bae6fd",
 })
 ;"##### ; "148")]
 #[test_case(r#####"tw`ring-offset-sky-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#7dd3fc",
+  "--tw-ring-offset-color": "#7dd3fc",
 })
 ;"##### ; "149")]
 #[test_case(r#####"tw`ring-offset-sky-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#38bdf8",
+  "--tw-ring-offset-color": "#38bdf8",
 })
 ;"##### ; "150")]
 #[test_case(r#####"tw`ring-offset-sky-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#0ea5e9",
+  "--tw-ring-offset-color": "#0ea5e9",
 })
 ;"##### ; "151")]
 #[test_case(r#####"tw`ring-offset-sky-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#0284c7",
+  "--tw-ring-offset-color": "#0284c7",
 })
 ;"##### ; "152")]
 #[test_case(r#####"tw`ring-offset-sky-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#0369a1",
+  "--tw-ring-offset-color": "#0369a1",
 })
 ;"##### ; "153")]
 #[test_case(r#####"tw`ring-offset-sky-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#075985",
+  "--tw-ring-offset-color": "#075985",
 })
 ;"##### ; "154")]
 #[test_case(r#####"tw`ring-offset-sky-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#0c4a6e",
+  "--tw-ring-offset-color": "#0c4a6e",
 })
 ;"##### ; "155")]
 #[test_case(r#####"tw`ring-offset-blue-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#eff6ff",
+  "--tw-ring-offset-color": "#eff6ff",
 })
 ;"##### ; "156")]
 #[test_case(r#####"tw`ring-offset-blue-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#dbeafe",
+  "--tw-ring-offset-color": "#dbeafe",
 })
 ;"##### ; "157")]
 #[test_case(r#####"tw`ring-offset-blue-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#bfdbfe",
+  "--tw-ring-offset-color": "#bfdbfe",
 })
 ;"##### ; "158")]
 #[test_case(r#####"tw`ring-offset-blue-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#93c5fd",
+  "--tw-ring-offset-color": "#93c5fd",
 })
 ;"##### ; "159")]
 #[test_case(r#####"tw`ring-offset-blue-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#60a5fa",
+  "--tw-ring-offset-color": "#60a5fa",
 })
 ;"##### ; "160")]
 #[test_case(r#####"tw`ring-offset-blue-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#3b82f6",
+  "--tw-ring-offset-color": "#3b82f6",
 })
 ;"##### ; "161")]
 #[test_case(r#####"tw`ring-offset-blue-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#2563eb",
+  "--tw-ring-offset-color": "#2563eb",
 })
 ;"##### ; "162")]
 #[test_case(r#####"tw`ring-offset-blue-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#1d4ed8",
+  "--tw-ring-offset-color": "#1d4ed8",
 })
 ;"##### ; "163")]
 #[test_case(r#####"tw`ring-offset-blue-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#1e40af",
+  "--tw-ring-offset-color": "#1e40af",
 })
 ;"##### ; "164")]
 #[test_case(r#####"tw`ring-offset-blue-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#1e3a8a",
+  "--tw-ring-offset-color": "#1e3a8a",
 })
 ;"##### ; "165")]
 #[test_case(r#####"tw`ring-offset-indigo-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#eef2ff",
+  "--tw-ring-offset-color": "#eef2ff",
 })
 ;"##### ; "166")]
 #[test_case(r#####"tw`ring-offset-indigo-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#e0e7ff",
+  "--tw-ring-offset-color": "#e0e7ff",
 })
 ;"##### ; "167")]
 #[test_case(r#####"tw`ring-offset-indigo-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#c7d2fe",
+  "--tw-ring-offset-color": "#c7d2fe",
 })
 ;"##### ; "168")]
 #[test_case(r#####"tw`ring-offset-indigo-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#a5b4fc",
+  "--tw-ring-offset-color": "#a5b4fc",
 })
 ;"##### ; "169")]
 #[test_case(r#####"tw`ring-offset-indigo-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#818cf8",
+  "--tw-ring-offset-color": "#818cf8",
 })
 ;"##### ; "170")]
 #[test_case(r#####"tw`ring-offset-indigo-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#6366f1",
+  "--tw-ring-offset-color": "#6366f1",
 })
 ;"##### ; "171")]
 #[test_case(r#####"tw`ring-offset-indigo-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#4f46e5",
+  "--tw-ring-offset-color": "#4f46e5",
 })
 ;"##### ; "172")]
 #[test_case(r#####"tw`ring-offset-indigo-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#4338ca",
+  "--tw-ring-offset-color": "#4338ca",
 })
 ;"##### ; "173")]
 #[test_case(r#####"tw`ring-offset-indigo-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#3730a3",
+  "--tw-ring-offset-color": "#3730a3",
 })
 ;"##### ; "174")]
 #[test_case(r#####"tw`ring-offset-indigo-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#312e81",
+  "--tw-ring-offset-color": "#312e81",
 })
 ;"##### ; "175")]
 #[test_case(r#####"tw`ring-offset-violet-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#f5f3ff",
+  "--tw-ring-offset-color": "#f5f3ff",
 })
 ;"##### ; "176")]
 #[test_case(r#####"tw`ring-offset-violet-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#ede9fe",
+  "--tw-ring-offset-color": "#ede9fe",
 })
 ;"##### ; "177")]
 #[test_case(r#####"tw`ring-offset-violet-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#ddd6fe",
+  "--tw-ring-offset-color": "#ddd6fe",
 })
 ;"##### ; "178")]
 #[test_case(r#####"tw`ring-offset-violet-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#c4b5fd",
+  "--tw-ring-offset-color": "#c4b5fd",
 })
 ;"##### ; "179")]
 #[test_case(r#####"tw`ring-offset-violet-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#a78bfa",
+  "--tw-ring-offset-color": "#a78bfa",
 })
 ;"##### ; "180")]
 #[test_case(r#####"tw`ring-offset-violet-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#8b5cf6",
+  "--tw-ring-offset-color": "#8b5cf6",
 })
 ;"##### ; "181")]
 #[test_case(r#####"tw`ring-offset-violet-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#7c3aed",
+  "--tw-ring-offset-color": "#7c3aed",
 })
 ;"##### ; "182")]
 #[test_case(r#####"tw`ring-offset-violet-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#6d28d9",
+  "--tw-ring-offset-color": "#6d28d9",
 })
 ;"##### ; "183")]
 #[test_case(r#####"tw`ring-offset-violet-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#5b21b6",
+  "--tw-ring-offset-color": "#5b21b6",
 })
 ;"##### ; "184")]
 #[test_case(r#####"tw`ring-offset-violet-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#4c1d95",
+  "--tw-ring-offset-color": "#4c1d95",
 })
 ;"##### ; "185")]
 #[test_case(r#####"tw`ring-offset-purple-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#faf5ff",
+  "--tw-ring-offset-color": "#faf5ff",
 })
 ;"##### ; "186")]
 #[test_case(r#####"tw`ring-offset-purple-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#f3e8ff",
+  "--tw-ring-offset-color": "#f3e8ff",
 })
 ;"##### ; "187")]
 #[test_case(r#####"tw`ring-offset-purple-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#e9d5ff",
+  "--tw-ring-offset-color": "#e9d5ff",
 })
 ;"##### ; "188")]
 #[test_case(r#####"tw`ring-offset-purple-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#d8b4fe",
+  "--tw-ring-offset-color": "#d8b4fe",
 })
 ;"##### ; "189")]
 #[test_case(r#####"tw`ring-offset-purple-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#c084fc",
+  "--tw-ring-offset-color": "#c084fc",
 })
 ;"##### ; "190")]
 #[test_case(r#####"tw`ring-offset-purple-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#a855f7",
+  "--tw-ring-offset-color": "#a855f7",
 })
 ;"##### ; "191")]
 #[test_case(r#####"tw`ring-offset-purple-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#9333ea",
+  "--tw-ring-offset-color": "#9333ea",
 })
 ;"##### ; "192")]
 #[test_case(r#####"tw`ring-offset-purple-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#7e22ce",
+  "--tw-ring-offset-color": "#7e22ce",
 })
 ;"##### ; "193")]
 #[test_case(r#####"tw`ring-offset-purple-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#6b21a8",
+  "--tw-ring-offset-color": "#6b21a8",
 })
 ;"##### ; "194")]
 #[test_case(r#####"tw`ring-offset-purple-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#581c87",
+  "--tw-ring-offset-color": "#581c87",
 })
 ;"##### ; "195")]
 #[test_case(r#####"tw`ring-offset-fuchsia-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#fdf4ff",
+  "--tw-ring-offset-color": "#fdf4ff",
 })
 ;"##### ; "196")]
 #[test_case(r#####"tw`ring-offset-fuchsia-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#fae8ff",
+  "--tw-ring-offset-color": "#fae8ff",
 })
 ;"##### ; "197")]
 #[test_case(r#####"tw`ring-offset-fuchsia-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#f5d0fe",
+  "--tw-ring-offset-color": "#f5d0fe",
 })
 ;"##### ; "198")]
 #[test_case(r#####"tw`ring-offset-fuchsia-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#f0abfc",
+  "--tw-ring-offset-color": "#f0abfc",
 })
 ;"##### ; "199")]
 #[test_case(r#####"tw`ring-offset-fuchsia-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#e879f9",
+  "--tw-ring-offset-color": "#e879f9",
 })
 ;"##### ; "200")]
 #[test_case(r#####"tw`ring-offset-fuchsia-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#d946ef",
+  "--tw-ring-offset-color": "#d946ef",
 })
 ;"##### ; "201")]
 #[test_case(r#####"tw`ring-offset-fuchsia-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#c026d3",
+  "--tw-ring-offset-color": "#c026d3",
 })
 ;"##### ; "202")]
 #[test_case(r#####"tw`ring-offset-fuchsia-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#a21caf",
+  "--tw-ring-offset-color": "#a21caf",
 })
 ;"##### ; "203")]
 #[test_case(r#####"tw`ring-offset-fuchsia-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#86198f",
+  "--tw-ring-offset-color": "#86198f",
 })
 ;"##### ; "204")]
 #[test_case(r#####"tw`ring-offset-fuchsia-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#701a75",
+  "--tw-ring-offset-color": "#701a75",
 })
 ;"##### ; "205")]
 #[test_case(r#####"tw`ring-offset-pink-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#fdf2f8",
+  "--tw-ring-offset-color": "#fdf2f8",
 })
 ;"##### ; "206")]
 #[test_case(r#####"tw`ring-offset-pink-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#fce7f3",
+  "--tw-ring-offset-color": "#fce7f3",
 })
 ;"##### ; "207")]
 #[test_case(r#####"tw`ring-offset-pink-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#fbcfe8",
+  "--tw-ring-offset-color": "#fbcfe8",
 })
 ;"##### ; "208")]
 #[test_case(r#####"tw`ring-offset-pink-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#f9a8d4",
+  "--tw-ring-offset-color": "#f9a8d4",
 })
 ;"##### ; "209")]
 #[test_case(r#####"tw`ring-offset-pink-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#f472b6",
+  "--tw-ring-offset-color": "#f472b6",
 })
 ;"##### ; "210")]
 #[test_case(r#####"tw`ring-offset-pink-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#ec4899",
+  "--tw-ring-offset-color": "#ec4899",
 })
 ;"##### ; "211")]
 #[test_case(r#####"tw`ring-offset-pink-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#db2777",
+  "--tw-ring-offset-color": "#db2777",
 })
 ;"##### ; "212")]
 #[test_case(r#####"tw`ring-offset-pink-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#be185d",
+  "--tw-ring-offset-color": "#be185d",
 })
 ;"##### ; "213")]
 #[test_case(r#####"tw`ring-offset-pink-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#9d174d",
+  "--tw-ring-offset-color": "#9d174d",
 })
 ;"##### ; "214")]
 #[test_case(r#####"tw`ring-offset-pink-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#831843",
+  "--tw-ring-offset-color": "#831843",
 })
 ;"##### ; "215")]
 #[test_case(r#####"tw`ring-offset-rose-50`"#####, r#####"({
-  '--tw-ring-offset-color': "#fff1f2",
+  "--tw-ring-offset-color": "#fff1f2",
 })
 ;"##### ; "216")]
 #[test_case(r#####"tw`ring-offset-rose-100`"#####, r#####"({
-  '--tw-ring-offset-color': "#ffe4e6",
+  "--tw-ring-offset-color": "#ffe4e6",
 })
 ;"##### ; "217")]
 #[test_case(r#####"tw`ring-offset-rose-200`"#####, r#####"({
-  '--tw-ring-offset-color': "#fecdd3",
+  "--tw-ring-offset-color": "#fecdd3",
 })
 ;"##### ; "218")]
 #[test_case(r#####"tw`ring-offset-rose-300`"#####, r#####"({
-  '--tw-ring-offset-color': "#fda4af",
+  "--tw-ring-offset-color": "#fda4af",
 })
 ;"##### ; "219")]
 #[test_case(r#####"tw`ring-offset-rose-400`"#####, r#####"({
-  '--tw-ring-offset-color': "#fb7185",
+  "--tw-ring-offset-color": "#fb7185",
 })
 ;"##### ; "220")]
 #[test_case(r#####"tw`ring-offset-rose-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#f43f5e",
+  "--tw-ring-offset-color": "#f43f5e",
 })
 ;"##### ; "221")]
 #[test_case(r#####"tw`ring-offset-rose-600`"#####, r#####"({
-  '--tw-ring-offset-color': "#e11d48",
+  "--tw-ring-offset-color": "#e11d48",
 })
 ;"##### ; "222")]
 #[test_case(r#####"tw`ring-offset-rose-700`"#####, r#####"({
-  '--tw-ring-offset-color': "#be123c",
+  "--tw-ring-offset-color": "#be123c",
 })
 ;"##### ; "223")]
 #[test_case(r#####"tw`ring-offset-rose-800`"#####, r#####"({
-  '--tw-ring-offset-color': "#9f1239",
+  "--tw-ring-offset-color": "#9f1239",
 })
 ;"##### ; "224")]
 #[test_case(r#####"tw`ring-offset-rose-900`"#####, r#####"({
-  '--tw-ring-offset-color': "#881337",
+  "--tw-ring-offset-color": "#881337",
 })
 ;"##### ; "225")]
 #[test_case(r#####"tw`ring-offset-rose-900/50`"#####, r#####"({
-  '--tw-ring-offset-color': "rgb(136 19 55 / 0.5)",
+  "--tw-ring-offset-color": "rgb(136 19 55 / 0.5)",
 })
 ;"##### ; "226")]
 #[test_case(r#####"tw`ring-offset-rose-900/[.50]`"#####, r#####"({
-  '--tw-ring-offset-color': "rgb(136 19 55 / .50)",
+  "--tw-ring-offset-color": "rgb(136 19 55 / .50)",
 })
 ;"##### ; "227")]
 #[test_case(r#####"tw`ring-offset-[#50d71e]`"#####, r#####"({
-  '--tw-ring-offset-color': "#50d71e",
+  "--tw-ring-offset-color": "#50d71e",
 })
 ;"##### ; "228")]
 #[test_case(r#####"tw`ring-offset-red-500`"#####, r#####"({
-  '--tw-ring-offset-color': "#ef4444",
+  "--tw-ring-offset-color": "#ef4444",
 })
 ;"##### ; "229")]
 #[test_case(r#####"tw`ring-offset-red-500/25`"#####, r#####"({
-  '--tw-ring-offset-color': "rgb(239 68 68 / 0.25)",
+  "--tw-ring-offset-color": "rgb(239 68 68 / 0.25)",
 })
 ;"##### ; "230")]
 #[test_case(r#####"tw`ring-offset-red-500/fromConfig`"#####, r#####"({
-  '--tw-ring-offset-color': "#000",
+  "--tw-ring-offset-color": "#000",
 })
 ;"##### ; "231")]
 #[test_case(r#####"tw`ring-offset-red-500/fromConfig/25`"#####, r#####"({
-  '--tw-ring-offset-color': "rgb(0 0 0 / 0.25)",
+  "--tw-ring-offset-color": "rgb(0 0 0 / 0.25)",
 })
 ;"##### ; "232")]
 #[test_case(r#####"tw`ring-offset-red-500/fromConfig/[.555]`"#####, r#####"({
-  '--tw-ring-offset-color': "rgb(0 0 0 / .555)",
+  "--tw-ring-offset-color": "rgb(0 0 0 / .555)",
 })
 ;"##### ; "233")]
 #[test_case(r#####"tw`ring-offset-red-500/fromConfig/[var(--myvar)]`"#####, r#####"({
-  '--tw-ring-offset-color': "rgb(0 0 0 / var(--myvar))",
+  "--tw-ring-offset-color": "rgb(0 0 0 / var(--myvar))",
 })
 ;"##### ; "234")]
 #[test_case(r#####"tw`ring-offset-red-500/[.555]`"#####, r#####"({
-  '--tw-ring-offset-color': "rgb(239 68 68 / .555)",
+  "--tw-ring-offset-color": "rgb(239 68 68 / .555)",
 })
 ;"##### ; "235")]
 #[test_case(r#####"tw`ring-offset-red-500/[var(--myvar)]`"#####, r#####"({
-  '--tw-ring-offset-color': "rgb(239 68 68 / var(--myvar))",
+  "--tw-ring-offset-color": "rgb(239 68 68 / var(--myvar))",
 })
 ;"##### ; "236")]
 #[test_case(r#####"tw`ring-offset-[theme('colors.red.500')]`"#####, r#####"({
-  '--tw-ring-offset-color': "#ef4444",
+  "--tw-ring-offset-color": "#ef4444",
 })
 ;"##### ; "237")]
 #[test_case(r#####"tw`ring-offset-[theme('colors.red.500')]/20`"#####, r#####"({
-  '--tw-ring-offset-color': "rgb(239 68 68 / 0.2)",
+  "--tw-ring-offset-color": "rgb(239 68 68 / 0.2)",
 })
 ;"##### ; "238")]
 #[test_case(r#####"tw`ring-offset-electric`"#####, r#####"({
-  '--tw-ring-offset-color': "rgb(219, 0, 255)",
+  "--tw-ring-offset-color": "rgb(219, 0, 255)",
 })
 ;"##### ; "239")]
 #[test_case(r#####"tw`ring-offset-electric/25`"#####, r#####"({
-  '--tw-ring-offset-color': "rgba(219, 0, 255, 0.25)",
+  "--tw-ring-offset-color": "rgba(219, 0, 255, 0.25)",
 })
 ;"##### ; "240")]
 #[test_case(r#####"tw`ring-offset-electric/[.555]`"#####, r#####"({
-  '--tw-ring-offset-color': "rgba(219, 0, 255, .555)",
+  "--tw-ring-offset-color": "rgba(219, 0, 255, .555)",
 })
 ;"##### ; "241")]
 #[test_case(r#####"tw`ring-offset-electric/[var(--myvar)]`"#####, r#####"({
-  '--tw-ring-offset-color': "rgba(219, 0, 255, var(--myvar))",
+  "--tw-ring-offset-color": "rgba(219, 0, 255, var(--myvar))",
 })
 ;"##### ; "242")]
 #[test_case(r#####"tw`ring-offset-[theme('colors.electric')]`"#####, r#####"({
-  '--tw-ring-offset-color': "rgb(219, 0, 255)",
+  "--tw-ring-offset-color": "rgb(219, 0, 255)",
 })
 ;"##### ; "243")]
 #[test_case(r#####"tw`ring-offset-[theme('colors.electric')]/20`"#####, r#####"({
-  '--tw-ring-offset-color': "rgb(219 0 255 / 0.2)",
+  "--tw-ring-offset-color": "rgb(219 0 255 / 0.2)",
 })
 ;"##### ; "244")]
 #[test_case(r#####"tw`ring-offset-[color:green]`"#####, r#####"({
-  '--tw-ring-offset-color': "green",
+  "--tw-ring-offset-color": "green",
 })
 ;"##### ; "245")]
 #[test_case(r#####"tw`ring-offset-[color:rgba(255, 255, 255, .45)]`"#####, r#####"({
-  '--tw-ring-offset-color': "rgba(255, 255, 255, .45)",
+  "--tw-ring-offset-color": "rgba(255, 255, 255, .45)",
 })
 ;"##### ; "246")]
 #[test_case(r#####"tw`ring-offset-[length:10px]`"#####, r#####"({
-  '--tw-ring-offset-width': "10px",
+  "--tw-ring-offset-width": "10px",
 })"##### ; "247")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)

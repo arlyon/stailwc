@@ -1,249 +1,249 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
 #[test_case(r#####"tw`group-first:block`"#####, r#####"({
-  '.group:first-child &': {
+  ".group:first-child &": {
     display: "block",
   },
 })
 ;"##### ; "0")]
 #[test_case(r#####"tw`group-last:block`"#####, r#####"({
-  '.group:last-child &': {
+  ".group:last-child &": {
     display: "block",
   },
 })
 ;"##### ; "1")]
 #[test_case(r#####"tw`group-only:block`"#####, r#####"({
-  '.group:only-child &': {
+  ".group:only-child &": {
     display: "block",
   },
 })
 ;"##### ; "2")]
 #[test_case(r#####"tw`group-odd:block`"#####, r#####"({
-  '.group:nth-child(odd) &': {
+  ".group:nth-child(odd) &": {
     display: "block",
   },
 })
 ;"##### ; "3")]
 #[test_case(r#####"tw`group-even:block`"#####, r#####"({
-  '.group:nth-child(even) &': {
+  ".group:nth-child(even) &": {
     display: "block",
   },
 })
 ;"##### ; "4")]
 #[test_case(r#####"tw`group-first-of-type:block`"#####, r#####"({
-  '.group:first-of-type &': {
+  ".group:first-of-type &": {
     display: "block",
   },
 })
 ;"##### ; "5")]
 #[test_case(r#####"tw`group-last-of-type:block`"#####, r#####"({
-  '.group:last-of-type &': {
+  ".group:last-of-type &": {
     display: "block",
   },
 })
 ;"##### ; "6")]
 #[test_case(r#####"tw`group-only-of-type:block`"#####, r#####"({
-  '.group:only-of-type &': {
+  ".group:only-of-type &": {
     display: "block",
   },
 }) // State
 
 ;"##### ; "7")]
 #[test_case(r#####"tw`group-visited:block`"#####, r#####"({
-  '.group:visited &': {
+  ".group:visited &": {
     display: "block",
   },
 })
 ;"##### ; "8")]
 #[test_case(r#####"tw`group-target:block`"#####, r#####"({
-  '.group:target &': {
+  ".group:target &": {
     display: "block",
   },
 })
 ;"##### ; "9")]
 #[test_case(r#####"tw`group-open:block`"#####, r#####"({
-  '.group[open] &': {
+  ".group[open] &": {
     display: "block",
   },
 }) // Forms
 
 ;"##### ; "10")]
 #[test_case(r#####"tw`group-default:block`"#####, r#####"({
-  '.group:default &': {
+  ".group:default &": {
     display: "block",
   },
 })
 ;"##### ; "11")]
 #[test_case(r#####"tw`group-checked:block`"#####, r#####"({
-  '.group:checked &': {
+  ".group:checked &": {
     display: "block",
   },
 })
 ;"##### ; "12")]
 #[test_case(r#####"tw`group-indeterminate:block`"#####, r#####"({
-  '.group:indeterminate &': {
+  ".group:indeterminate &": {
     display: "block",
   },
 })
 ;"##### ; "13")]
 #[test_case(r#####"tw`group-placeholder-shown:block`"#####, r#####"({
-  '.group:placeholder-shown &': {
+  ".group:placeholder-shown &": {
     display: "block",
   },
 })
 ;"##### ; "14")]
 #[test_case(r#####"tw`group-autofill:block`"#####, r#####"({
-  '.group:autofill &': {
+  ".group:autofill &": {
     display: "block",
   },
 })
 ;"##### ; "15")]
 #[test_case(r#####"tw`group-optional:block`"#####, r#####"({
-  '.group:optional &': {
+  ".group:optional &": {
     display: "block",
   },
 })
 ;"##### ; "16")]
 #[test_case(r#####"tw`group-required:block`"#####, r#####"({
-  '.group:required &': {
+  ".group:required &": {
     display: "block",
   },
 })
 ;"##### ; "17")]
 #[test_case(r#####"tw`group-valid:block`"#####, r#####"({
-  '.group:valid &': {
+  ".group:valid &": {
     display: "block",
   },
 })
 ;"##### ; "18")]
 #[test_case(r#####"tw`group-invalid:block`"#####, r#####"({
-  '.group:invalid &': {
+  ".group:invalid &": {
     display: "block",
   },
 })
 ;"##### ; "19")]
 #[test_case(r#####"tw`group-in-range:block`"#####, r#####"({
-  '.group:in-range &': {
+  ".group:in-range &": {
     display: "block",
   },
 })
 ;"##### ; "20")]
 #[test_case(r#####"tw`group-out-of-range:block`"#####, r#####"({
-  '.group:out-of-range &': {
+  ".group:out-of-range &": {
     display: "block",
   },
 })
 ;"##### ; "21")]
 #[test_case(r#####"tw`group-read-only:block`"#####, r#####"({
-  '.group:read-only &': {
+  ".group:read-only &": {
     display: "block",
   },
 }) // Content
 
 ;"##### ; "22")]
 #[test_case(r#####"tw`group-empty:block`"#####, r#####"({
-  '.group:empty &': {
+  ".group:empty &": {
     display: "block",
   },
 }) // Interactive
 
 ;"##### ; "23")]
 #[test_case(r#####"tw`group-focus-within:block`"#####, r#####"({
-  '.group:focus-within &': {
+  ".group:focus-within &": {
     display: "block",
   },
 })
 ;"##### ; "24")]
 #[test_case(r#####"tw`group-hover:block`"#####, r#####"({
-  '.group:hover &': {
+  ".group:hover &": {
     display: "block",
   },
 })
 ;"##### ; "25")]
 #[test_case(r#####"tw`group-focus:block`"#####, r#####"({
-  '.group:focus &': {
+  ".group:focus &": {
     display: "block",
   },
 })
 ;"##### ; "26")]
 #[test_case(r#####"tw`group-focus-visible:block`"#####, r#####"({
-  '.group:focus-visible &': {
+  ".group:focus-visible &": {
     display: "block",
   },
 })
 ;"##### ; "27")]
 #[test_case(r#####"tw`group-active:block`"#####, r#####"({
-  '.group:active &': {
+  ".group:active &": {
     display: "block",
   },
 })
 ;"##### ; "28")]
 #[test_case(r#####"tw`group-enabled:block`"#####, r#####"({
-  '.group:enabled &': {
+  ".group:enabled &": {
     display: "block",
   },
 })
 ;"##### ; "29")]
 #[test_case(r#####"tw`group-disabled:block`"#####, r#####"({
-  '.group:disabled &': {
+  ".group:disabled &": {
     display: "block",
   },
 }) // Twin custom
 
 ;"##### ; "30")]
 #[test_case(r#####"tw`group-all:block`"#####, r#####"({
-  '.group * &': {
+  ".group * &": {
     display: "block",
   },
 })
 ;"##### ; "31")]
 #[test_case(r#####"tw`group-all-child:block`"#####, r#####"({
-  '.group > * &': {
+  ".group > * &": {
     display: "block",
   },
 })
 ;"##### ; "32")]
 #[test_case(r#####"tw`group-sibling:block`"#####, r#####"({
-  '.group ~ * &': {
+  ".group ~ * &": {
     display: "block",
   },
 })
 ;"##### ; "33")]
 #[test_case(r#####"tw`group-hocus:block`"#####, r#####"({
-  '.group:hover &': {
+  ".group:hover &": {
     display: "block",
   },
-  '.group:focus &': {
+  ".group:focus &": {
     display: "block",
   },
 })
 ;"##### ; "34")]
 #[test_case(r#####"tw`group-link:block`"#####, r#####"({
-  '.group:link &': {
+  ".group:link &": {
     display: "block",
   },
 })
 ;"##### ; "35")]
 #[test_case(r#####"tw`group-read-write:block`"#####, r#####"({
-  '.group:read-write &': {
+  ".group:read-write &": {
     display: "block",
   },
 })
 ;"##### ; "36")]
 #[test_case(r#####"tw`group-svg:block`"#####, r#####"({
-  '.group svg &': {
+  ".group svg &": {
     display: "block",
   },
 })
 ;"##### ; "37")]
 #[test_case(r#####"tw`group-even-of-type:block`"#####, r#####"({
-  '.group:nth-of-type(even) &': {
+  ".group:nth-of-type(even) &": {
     display: "block",
   },
 })
 ;"##### ; "38")]
 #[test_case(r#####"tw`group-odd-of-type:block`"#####, r#####"({
-  '.group:nth-of-type(odd) &': {
+  ".group:nth-of-type(odd) &": {
     display: "block",
   },
 }) // Not versions of the above
@@ -251,243 +251,243 @@ use test_case::test_case;
 
 ;"##### ; "39")]
 #[test_case(r#####"tw`group-not-first:block`"#####, r#####"({
-  '.group:not(:first-child) &': {
+  ".group:not(:first-child) &": {
     display: "block",
   },
 })
 ;"##### ; "40")]
 #[test_case(r#####"tw`group-not-last:block`"#####, r#####"({
-  '.group:not(:last-child) &': {
+  ".group:not(:last-child) &": {
     display: "block",
   },
 })
 ;"##### ; "41")]
 #[test_case(r#####"tw`group-not-only:block`"#####, r#####"({
-  '.group:not(:only-child) &': {
+  ".group:not(:only-child) &": {
     display: "block",
   },
 })
 ;"##### ; "42")]
 #[test_case(r#####"tw`group-not-odd:block`"#####, r#####"({
-  '.group:not(:nth-child(odd)) &': {
+  ".group:not(:nth-child(odd)) &": {
     display: "block",
   },
 })
 ;"##### ; "43")]
 #[test_case(r#####"tw`group-not-even:block`"#####, r#####"({
-  '.group:not(:nth-child(even)) &': {
+  ".group:not(:nth-child(even)) &": {
     display: "block",
   },
 })
 ;"##### ; "44")]
 #[test_case(r#####"tw`group-not-first-of-type:block`"#####, r#####"({
-  '.group:not(:first-of-type) &': {
+  ".group:not(:first-of-type) &": {
     display: "block",
   },
 })
 ;"##### ; "45")]
 #[test_case(r#####"tw`group-not-last-of-type:block`"#####, r#####"({
-  '.group:not(:last-of-type) &': {
+  ".group:not(:last-of-type) &": {
     display: "block",
   },
 })
 ;"##### ; "46")]
 #[test_case(r#####"tw`group-not-only-of-type:block`"#####, r#####"({
-  '.group:not(:only-of-type) &': {
+  ".group:not(:only-of-type) &": {
     display: "block",
   },
 }) // State
 
 ;"##### ; "47")]
 #[test_case(r#####"tw`group-not-target:block`"#####, r#####"({
-  '.group:not(:target) &': {
+  ".group:not(:target) &": {
     display: "block",
   },
 })
 ;"##### ; "48")]
 #[test_case(r#####"tw`group-not-open:block`"#####, r#####"({
-  '.group:not([open]) &': {
+  ".group:not([open]) &": {
     display: "block",
   },
 }) // Forms
 
 ;"##### ; "49")]
 #[test_case(r#####"tw`group-not-default:block`"#####, r#####"({
-  '.group:not(:default) &': {
+  ".group:not(:default) &": {
     display: "block",
   },
 })
 ;"##### ; "50")]
 #[test_case(r#####"tw`group-not-checked:block`"#####, r#####"({
-  '.group:not(:checked) &': {
+  ".group:not(:checked) &": {
     display: "block",
   },
 })
 ;"##### ; "51")]
 #[test_case(r#####"tw`group-not-indeterminate:block`"#####, r#####"({
-  '.group:not(:indeterminate) &': {
+  ".group:not(:indeterminate) &": {
     display: "block",
   },
 })
 ;"##### ; "52")]
 #[test_case(r#####"tw`group-not-placeholder-shown:block`"#####, r#####"({
-  '.group:not(:placeholder-shown) &': {
+  ".group:not(:placeholder-shown) &": {
     display: "block",
   },
 })
 ;"##### ; "53")]
 #[test_case(r#####"tw`group-not-autofill:block`"#####, r#####"({
-  '.group:not(:autofill) &': {
+  ".group:not(:autofill) &": {
     display: "block",
   },
 })
 ;"##### ; "54")]
 #[test_case(r#####"tw`group-not-optional:block`"#####, r#####"({
-  '.group:not(:optional) &': {
+  ".group:not(:optional) &": {
     display: "block",
   },
 })
 ;"##### ; "55")]
 #[test_case(r#####"tw`group-not-required:block`"#####, r#####"({
-  '.group:not(:required) &': {
+  ".group:not(:required) &": {
     display: "block",
   },
 })
 ;"##### ; "56")]
 #[test_case(r#####"tw`group-not-valid:block`"#####, r#####"({
-  '.group:not(:valid) &': {
+  ".group:not(:valid) &": {
     display: "block",
   },
 })
 ;"##### ; "57")]
 #[test_case(r#####"tw`group-not-invalid:block`"#####, r#####"({
-  '.group:not(:invalid) &': {
+  ".group:not(:invalid) &": {
     display: "block",
   },
 })
 ;"##### ; "58")]
 #[test_case(r#####"tw`group-not-in-range:block`"#####, r#####"({
-  '.group:not(:in-range) &': {
+  ".group:not(:in-range) &": {
     display: "block",
   },
 })
 ;"##### ; "59")]
 #[test_case(r#####"tw`group-not-out-of-range:block`"#####, r#####"({
-  '.group:not(:out-of-range) &': {
+  ".group:not(:out-of-range) &": {
     display: "block",
   },
 })
 ;"##### ; "60")]
 #[test_case(r#####"tw`group-not-read-only:block`"#####, r#####"({
-  '.group:not(:read-only) &': {
+  ".group:not(:read-only) &": {
     display: "block",
   },
 }) // Content
 
 ;"##### ; "61")]
 #[test_case(r#####"tw`group-not-empty:block`"#####, r#####"({
-  '.group:not(:empty) &': {
+  ".group:not(:empty) &": {
     display: "block",
   },
 }) // Interactive
 
 ;"##### ; "62")]
 #[test_case(r#####"tw`group-not-focus-within:block`"#####, r#####"({
-  '.group:not(:focus-within) &': {
+  ".group:not(:focus-within) &": {
     display: "block",
   },
 })
 ;"##### ; "63")]
 #[test_case(r#####"tw`group-not-hover:block`"#####, r#####"({
-  '.group:not(:hover) &': {
+  ".group:not(:hover) &": {
     display: "block",
   },
 })
 ;"##### ; "64")]
 #[test_case(r#####"tw`group-not-focus:block`"#####, r#####"({
-  '.group:not(:focus) &': {
+  ".group:not(:focus) &": {
     display: "block",
   },
 })
 ;"##### ; "65")]
 #[test_case(r#####"tw`group-not-focus-visible:block`"#####, r#####"({
-  '.group:not(:focus-visible) &': {
+  ".group:not(:focus-visible) &": {
     display: "block",
   },
 })
 ;"##### ; "66")]
 #[test_case(r#####"tw`group-not-active:block`"#####, r#####"({
-  '.group:not(:active) &': {
+  ".group:not(:active) &": {
     display: "block",
   },
 })
 ;"##### ; "67")]
 #[test_case(r#####"tw`group-not-enabled:block`"#####, r#####"({
-  '.group:not(:enabled) &': {
+  ".group:not(:enabled) &": {
     display: "block",
   },
 })
 ;"##### ; "68")]
 #[test_case(r#####"tw`group-not-disabled:block`"#####, r#####"({
-  '.group:not(:disabled) &': {
+  ".group:not(:disabled) &": {
     display: "block",
   },
 }) // Twin custom
 
 ;"##### ; "69")]
 #[test_case(r#####"tw`group-not-all:block`"#####, r#####"({
-  '.group:not(*) &': {
+  ".group:not(*) &": {
     display: "block",
   },
 })
 ;"##### ; "70")]
 #[test_case(r#####"tw`group-not-all-child:block`"#####, r#####"({
-  '.group:not(> *) &': {
+  ".group:not(> *) &": {
     display: "block",
   },
 })
 ;"##### ; "71")]
 #[test_case(r#####"tw`group-not-sibling:block`"#####, r#####"({
-  '.group:not(~ *) &': {
+  ".group:not(~ *) &": {
     display: "block",
   },
 })
 ;"##### ; "72")]
 #[test_case(r#####"tw`group-not-hocus:block`"#####, r#####"({
-  '.group:not(:hover) &': {
+  ".group:not(:hover) &": {
     display: "block",
   },
-  '.group:not(:focus) &': {
+  ".group:not(:focus) &": {
     display: "block",
   },
 })
 ;"##### ; "73")]
 #[test_case(r#####"tw`group-not-link:block`"#####, r#####"({
-  '.group:not(:link) &': {
+  ".group:not(:link) &": {
     display: "block",
   },
 })
 ;"##### ; "74")]
 #[test_case(r#####"tw`group-not-read-write:block`"#####, r#####"({
-  '.group:not(:read-write) &': {
+  ".group:not(:read-write) &": {
     display: "block",
   },
 })
 ;"##### ; "75")]
 #[test_case(r#####"tw`group-not-svg:block`"#####, r#####"({
-  '.group:not(svg) &': {
+  ".group:not(svg) &": {
     display: "block",
   },
 })
 ;"##### ; "76")]
 #[test_case(r#####"tw`group-not-even-of-type:block`"#####, r#####"({
-  '.group:not(:nth-of-type(even)) &': {
+  ".group:not(:nth-of-type(even)) &": {
     display: "block",
   },
 })
 ;"##### ; "77")]
 #[test_case(r#####"tw`group-not-odd-of-type:block`"#####, r#####"({
-  '.group:not(:nth-of-type(odd)) &': {
+  ".group:not(:nth-of-type(odd)) &": {
     display: "block",
   },
 })"##### ; "78")]

@@ -15,23 +15,23 @@ use test_case::test_case;
   backgroundColor: "#fff",
   borderColor: "#6b7280",
   borderWidth: "1px",
-  '--tw-shadow': "0 0 #0000",
+  "--tw-shadow": "0 0 #0000",
   borderRadius: "100%",
-  ':focus': {
+  ":focus": {
     outline: "2px solid transparent",
     outlineOffset: "2px",
-    '--tw-ring-inset': "var(--tw-empty,/*!*/ /*!*/)",
-    '--tw-ring-offset-width': "2px",
-    '--tw-ring-offset-color': "#fff",
-    '--tw-ring-color': "#2563eb",
-    '--tw-ring-offset-shadow':
+    "--tw-ring-inset": "var(--tw-empty,/*!*/ /*!*/)",
+    "--tw-ring-offset-width": "2px",
+    "--tw-ring-offset-color": "#fff",
+    "--tw-ring-color": "#2563eb",
+    "--tw-ring-offset-shadow":
       "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
-    '--tw-ring-shadow':
+    "--tw-ring-shadow":
       "var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
     boxShadow:
       "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)",
   },
-  ':checked': {
+  ":checked": {
     borderColor: "transparent",
     backgroundColor: "currentColor",
     backgroundSize: "100% 100%",
@@ -40,7 +40,7 @@ use test_case::test_case;
     backgroundImage:
       "url(\"data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e\")",
   },
-  ':checked:hover,:checked:focus': {
+  ":checked:hover,:checked:focus": {
     borderColor: "transparent",
     backgroundColor: "currentColor",
   },
@@ -58,17 +58,17 @@ use test_case::test_case;
   paddingLeft: "0.75rem",
   fontSize: "1rem",
   lineHeight: "1.5rem",
-  '--tw-shadow': "0 0 #0000",
-  ':focus': {
+  "--tw-shadow": "0 0 #0000",
+  ":focus": {
     outline: "2px solid transparent",
     outlineOffset: "2px",
-    '--tw-ring-inset': "var(--tw-empty,/*!*/ /*!*/)",
-    '--tw-ring-offset-width': "0px",
-    '--tw-ring-offset-color': "#fff",
-    '--tw-ring-color': "#2563eb",
-    '--tw-ring-offset-shadow':
+    "--tw-ring-inset": "var(--tw-empty,/*!*/ /*!*/)",
+    "--tw-ring-offset-width": "0px",
+    "--tw-ring-offset-color": "#fff",
+    "--tw-ring-color": "#2563eb",
+    "--tw-ring-offset-shadow":
       "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
-    '--tw-ring-shadow':
+    "--tw-ring-shadow":
       "var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
     boxShadow:
       "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)",
@@ -97,23 +97,23 @@ use test_case::test_case;
   backgroundColor: "#fff",
   borderColor: "#6b7280",
   borderWidth: "1px",
-  '--tw-shadow': "0 0 #0000",
+  "--tw-shadow": "0 0 #0000",
   borderRadius: "0px",
-  ':focus': {
+  ":focus": {
     outline: "2px solid transparent",
     outlineOffset: "2px",
-    '--tw-ring-inset': "var(--tw-empty,/*!*/ /*!*/)",
-    '--tw-ring-offset-width': "2px",
-    '--tw-ring-offset-color': "#fff",
-    '--tw-ring-color': "#2563eb",
-    '--tw-ring-offset-shadow':
+    "--tw-ring-inset": "var(--tw-empty,/*!*/ /*!*/)",
+    "--tw-ring-offset-width": "2px",
+    "--tw-ring-offset-color": "#fff",
+    "--tw-ring-color": "#2563eb",
+    "--tw-ring-offset-shadow":
       "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
-    '--tw-ring-shadow':
+    "--tw-ring-shadow":
       "var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
     boxShadow:
       "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)",
   },
-  ':checked': {
+  ":checked": {
     borderColor: "transparent",
     backgroundColor: "currentColor",
     backgroundSize: "100% 100%",
@@ -122,11 +122,11 @@ use test_case::test_case;
     backgroundImage:
       "url(\"data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e\")",
   },
-  ':checked:hover,:checked:focus': {
+  ":checked:hover,:checked:focus": {
     borderColor: "transparent",
     backgroundColor: "currentColor",
   },
-  ':indeterminate': {
+  ":indeterminate": {
     backgroundImage:
       "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e\")",
     borderColor: "transparent",
@@ -135,7 +135,7 @@ use test_case::test_case;
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
   },
-  ':indeterminate:hover,:indeterminate:focus': {
+  ":indeterminate:hover,:indeterminate:focus": {
     borderColor: "transparent",
     backgroundColor: "currentColor",
   },
@@ -153,33 +153,33 @@ use test_case::test_case;
   paddingLeft: "0.75rem",
   fontSize: "1rem",
   lineHeight: "1.5rem",
-  '--tw-shadow': "0 0 #0000",
-  ':focus': {
+  "--tw-shadow": "0 0 #0000",
+  ":focus": {
     outline: "2px solid transparent",
     outlineOffset: "2px",
-    '--tw-ring-inset': "var(--tw-empty,/*!*/ /*!*/)",
-    '--tw-ring-offset-width': "0px",
-    '--tw-ring-offset-color': "#fff",
-    '--tw-ring-color': "#2563eb",
-    '--tw-ring-offset-shadow':
+    "--tw-ring-inset": "var(--tw-empty,/*!*/ /*!*/)",
+    "--tw-ring-offset-width": "0px",
+    "--tw-ring-offset-color": "#fff",
+    "--tw-ring-color": "#2563eb",
+    "--tw-ring-offset-shadow":
       "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
-    '--tw-ring-shadow':
+    "--tw-ring-shadow":
       "var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
     boxShadow:
       "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)",
     borderColor: "#2563eb",
   },
-  '::placeholder': {
+  "::placeholder": {
     color: "#6b7280",
     opacity: "1",
   },
-  '::-webkit-datetime-edit-fields-wrapper': {
+  "::-webkit-datetime-edit-fields-wrapper": {
     padding: "0",
   },
-  '::-webkit-date-and-time-value': {
+  "::-webkit-date-and-time-value": {
     minHeight: "1.5em",
   },
-  '::-webkit-datetime-edit,::-webkit-datetime-edit-year-field,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute-field,::-webkit-datetime-edit-second-field,::-webkit-datetime-edit-millisecond-field,::-webkit-datetime-edit-meridiem-field':
+  "::-webkit-datetime-edit,::-webkit-datetime-edit-year-field,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute-field,::-webkit-datetime-edit-second-field,::-webkit-datetime-edit-millisecond-field,::-webkit-datetime-edit-meridiem-field":
     {
       paddingTop: "0",
       paddingBottom: "0",
@@ -198,23 +198,23 @@ use test_case::test_case;
   paddingLeft: "0.75rem",
   fontSize: "1rem",
   lineHeight: "1.5rem",
-  '--tw-shadow': "0 0 #0000",
-  ':focus': {
+  "--tw-shadow": "0 0 #0000",
+  ":focus": {
     outline: "2px solid transparent",
     outlineOffset: "2px",
-    '--tw-ring-inset': "var(--tw-empty,/*!*/ /*!*/)",
-    '--tw-ring-offset-width': "0px",
-    '--tw-ring-offset-color': "#fff",
-    '--tw-ring-color': "#2563eb",
-    '--tw-ring-offset-shadow':
+    "--tw-ring-inset": "var(--tw-empty,/*!*/ /*!*/)",
+    "--tw-ring-offset-width": "0px",
+    "--tw-ring-offset-color": "#fff",
+    "--tw-ring-color": "#2563eb",
+    "--tw-ring-offset-shadow":
       "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
-    '--tw-ring-shadow':
+    "--tw-ring-shadow":
       "var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
     boxShadow:
       "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)",
     borderColor: "#2563eb",
   },
-  '::placeholder': {
+  "::placeholder": {
     color: "#6b7280",
     opacity: "1",
   },
@@ -232,17 +232,17 @@ use test_case::test_case;
   paddingLeft: "0.75rem",
   fontSize: "1rem",
   lineHeight: "1.5rem",
-  '--tw-shadow': "0 0 #0000",
-  ':focus': {
+  "--tw-shadow": "0 0 #0000",
+  ":focus": {
     outline: "2px solid transparent",
     outlineOffset: "2px",
-    '--tw-ring-inset': "var(--tw-empty,/*!*/ /*!*/)",
-    '--tw-ring-offset-width': "0px",
-    '--tw-ring-offset-color': "#fff",
-    '--tw-ring-color': "#2563eb",
-    '--tw-ring-offset-shadow':
+    "--tw-ring-inset": "var(--tw-empty,/*!*/ /*!*/)",
+    "--tw-ring-offset-width": "0px",
+    "--tw-ring-offset-color": "#fff",
+    "--tw-ring-color": "#2563eb",
+    "--tw-ring-offset-shadow":
       "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
-    '--tw-ring-shadow':
+    "--tw-ring-shadow":
       "var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
     boxShadow:
       "var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)",

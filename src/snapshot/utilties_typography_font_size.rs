@@ -31,50 +31,50 @@ use test_case::test_case;
       lineHeight: "1.75rem",
     },
   ],
-  '2xl': [
+  "2xl": [
     "24px",
     {
       letterSpacing: "-0.01em",
     },
   ],
-  '3xl': [
+  "3xl": [
     "32px",
     {
       letterSpacing: "-0.02em",
       lineHeight: "40px",
     },
   ],
-  '4xl': [
+  "4xl": [
     "2.25rem",
     {
       lineHeight: "2.5rem",
     },
   ],
-  '5xl': [
+  "5xl": [
     "3rem",
     {
       lineHeight: "1",
     },
   ],
-  '6xl': [
+  "6xl": [
     "3.75rem",
     {
       lineHeight: "1",
     },
   ],
-  '7xl': [
+  "7xl": [
     "4.5rem",
     {
       lineHeight: "1",
     },
   ],
-  '8xl': [
+  "8xl": [
     "6rem",
     {
       lineHeight: "1",
     },
   ],
-  '9xl': [
+  "9xl": [
     "8rem",
     {
       lineHeight: "1",

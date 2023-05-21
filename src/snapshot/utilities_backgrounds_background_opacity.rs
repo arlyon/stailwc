@@ -17,71 +17,71 @@ use test_case::test_case;
 })
 ;"##### ; "3")]
 #[test_case(r#####"tw`bg-opacity-0`"#####, r#####"({
-  '--tw-bg-opacity': "0",
+  "--tw-bg-opacity": "0",
 })
 ;"##### ; "4")]
 #[test_case(r#####"tw`bg-opacity-5`"#####, r#####"({
-  '--tw-bg-opacity': "0.05",
+  "--tw-bg-opacity": "0.05",
 })
 ;"##### ; "5")]
 #[test_case(r#####"tw`bg-opacity-10`"#####, r#####"({
-  '--tw-bg-opacity': "0.1",
+  "--tw-bg-opacity": "0.1",
 })
 ;"##### ; "6")]
 #[test_case(r#####"tw`bg-opacity-20`"#####, r#####"({
-  '--tw-bg-opacity': "0.2",
+  "--tw-bg-opacity": "0.2",
 })
 ;"##### ; "7")]
 #[test_case(r#####"tw`bg-opacity-25`"#####, r#####"({
-  '--tw-bg-opacity': "0.25",
+  "--tw-bg-opacity": "0.25",
 })
 ;"##### ; "8")]
 #[test_case(r#####"tw`bg-opacity-30`"#####, r#####"({
-  '--tw-bg-opacity': "0.3",
+  "--tw-bg-opacity": "0.3",
 })
 ;"##### ; "9")]
 #[test_case(r#####"tw`bg-opacity-40`"#####, r#####"({
-  '--tw-bg-opacity': "0.4",
+  "--tw-bg-opacity": "0.4",
 })
 ;"##### ; "10")]
 #[test_case(r#####"tw`bg-opacity-50`"#####, r#####"({
-  '--tw-bg-opacity': "0.5",
+  "--tw-bg-opacity": "0.5",
 })
 ;"##### ; "11")]
 #[test_case(r#####"tw`bg-opacity-60`"#####, r#####"({
-  '--tw-bg-opacity': "0.6",
+  "--tw-bg-opacity": "0.6",
 })
 ;"##### ; "12")]
 #[test_case(r#####"tw`bg-opacity-70`"#####, r#####"({
-  '--tw-bg-opacity': "0.7",
+  "--tw-bg-opacity": "0.7",
 })
 ;"##### ; "13")]
 #[test_case(r#####"tw`bg-opacity-75`"#####, r#####"({
-  '--tw-bg-opacity': "0.75",
+  "--tw-bg-opacity": "0.75",
 })
 ;"##### ; "14")]
 #[test_case(r#####"tw`bg-opacity-80`"#####, r#####"({
-  '--tw-bg-opacity': "0.8",
+  "--tw-bg-opacity": "0.8",
 })
 ;"##### ; "15")]
 #[test_case(r#####"tw`bg-opacity-90`"#####, r#####"({
-  '--tw-bg-opacity': "0.9",
+  "--tw-bg-opacity": "0.9",
 })
 ;"##### ; "16")]
 #[test_case(r#####"tw`bg-opacity-95`"#####, r#####"({
-  '--tw-bg-opacity': "0.95",
+  "--tw-bg-opacity": "0.95",
 })
 ;"##### ; "17")]
 #[test_case(r#####"tw`bg-opacity-100`"#####, r#####"({
-  '--tw-bg-opacity': "1",
+  "--tw-bg-opacity": "1",
 })
 ;"##### ; "18")]
 #[test_case(r#####"tw`bg-opacity-[0.11]`"#####, r#####"({
-  '--tw-bg-opacity': "0.11",
+  "--tw-bg-opacity": "0.11",
 })
 ;"##### ; "19")]
 #[test_case(r#####"tw`bg-opacity-[var(--value)]`"#####, r#####"({
-  '--tw-bg-opacity': "var(--value)",
+  "--tw-bg-opacity": "var(--value)",
 })"##### ; "20")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)

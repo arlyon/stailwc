@@ -25,7 +25,7 @@ use test_case::test_case;
 })
 ;"##### ; "5")]
 #[test_case(r#####"tw`border-t-gray-50`"#####, r#####"({
-  '--tw-border-opacity': "1",
+  "--tw-border-opacity": "1",
   borderTopColor: "rgb(249 250 251 / var(--tw-border-opacity))",
 })
 ;"##### ; "6")]
@@ -38,7 +38,7 @@ use test_case::test_case;
 })
 ;"##### ; "8")]
 #[test_case(r#####"tw`border-r-gray-50`"#####, r#####"({
-  '--tw-border-opacity': "1",
+  "--tw-border-opacity": "1",
   borderRightColor: "rgb(249 250 251 / var(--tw-border-opacity))",
 })
 ;"##### ; "9")]
@@ -51,7 +51,7 @@ use test_case::test_case;
 })
 ;"##### ; "11")]
 #[test_case(r#####"tw`border-b-gray-50`"#####, r#####"({
-  '--tw-border-opacity': "1",
+  "--tw-border-opacity": "1",
   borderBottomColor: "rgb(249 250 251 / var(--tw-border-opacity))",
 })
 ;"##### ; "12")]
@@ -64,7 +64,7 @@ use test_case::test_case;
 })
 ;"##### ; "14")]
 #[test_case(r#####"tw`border-l-gray-50`"#####, r#####"({
-  '--tw-border-opacity': "1",
+  "--tw-border-opacity": "1",
   borderLeftColor: "rgb(249 250 251 / var(--tw-border-opacity))",
 })
 ;"##### ; "15")]

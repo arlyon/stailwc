@@ -9,7 +9,7 @@ use test_case::test_case;
 })
 ;"##### ; "1")]
 #[test_case(r#####"tw`[--my-var:blue]`"#####, r#####"({
-  '--my-var': "blue",
+  "--my-var": "blue",
 })
 ;"##### ; "2")]
 #[test_case(r#####"tw`[color:var(--my-var)]`"#####, r#####"({
@@ -17,9 +17,9 @@ use test_case::test_case;
 })
 ;"##### ; "3")]
 #[test_case(r#####"tw`bg-black md:[color:var(--my-var)]`"#####, r#####"({
-  '--tw-bg-opacity': "1",
+  "--tw-bg-opacity": "1",
   backgroundColor: "rgb(0 0 0 / var(--tw-bg-opacity))",
-  '@media (min-width: 768px)': {
+  "@media (min-width: 768px)": {
     color: "var(--my-var)",
   },
 })

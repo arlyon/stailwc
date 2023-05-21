@@ -3,13 +3,13 @@ use test_case::test_case;
 #[test_case(r#####"theme`transformOrigin`"#####, r#####"({
   center: "center",
   top: "top",
-  'top-right': "top right",
+  "top-right": "top right",
   right: "right",
-  'bottom-right': "bottom right",
+  "bottom-right": "bottom right",
   bottom: "bottom",
-  'bottom-left': "bottom left",
+  "bottom-left": "bottom left",
   left: "left",
-  'top-left': "top left",
+  "top-left": "top left",
 })
 ;"##### ; "0")]
 #[test_case(r#####"tw`origin-center`"#####, r#####"({

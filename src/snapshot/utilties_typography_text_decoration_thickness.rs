@@ -7,7 +7,7 @@ use test_case::test_case;
   4: "4px",
   8: "8px",
   auto: "auto",
-  'from-font': "from-font",
+  "from-font": "from-font",
 })
 ;"##### ; "0")]
 #[test_case(r#####"tw`decoration-auto`"#####, r#####"({

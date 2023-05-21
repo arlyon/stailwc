@@ -29,13 +29,13 @@ use test_case::test_case;
 ;"##### ; "4")]
 #[test_case(r#####"({ [screen`sm`]: `display: block; ${tw`inline`}` })
 ;"#####, r#####"({
-  '@media (min-width: 100px)': `display: block; ${{
+  "@media (min-width: 100px)": `display: block; ${{
     display: "inline",
   }}`,
 })
 ;"##### ; "5")]
 #[test_case(r#####"({ [screen`sm`]: { display: "block", ...tw`inline` } })"#####, r#####"({
-  '@media (min-width: 100px)': {
+  "@media (min-width: 100px)": {
     display: "block",
     ...{
       display: "inline",
@@ -45,25 +45,25 @@ use test_case::test_case;
 
 ;"##### ; "6")]
 #[test_case(r#####"screen.sm({ color: `red` })"#####, r#####"({
-  '@media (min-width: 100px)': {
+  "@media (min-width: 100px)": {
     color: `red`,
   },
 })
 ;"##### ; "7")]
 #[test_case(r#####"screen`md`({ color: `red` })"#####, r#####"({
-  '@media (min-width: 200px)': {
+  "@media (min-width: 200px)": {
     color: `red`,
   },
 })
 ;"##### ; "8")]
 #[test_case(r#####"screen("lg")({ color: `red` })"#####, r#####"({
-  '@media (min-width: 300px)': {
+  "@media (min-width: 300px)": {
     color: `red`,
   },
 })
 ;"##### ; "9")]
 #[test_case(r#####"screen(`xl`)({ color: `red` })"#####, r#####"({
-  '@media (min-width: 400px)': {
+  "@media (min-width: 400px)": {
     color: `red`,
   },
 })
@@ -77,13 +77,13 @@ use test_case::test_case;
 #[test_case(r#####"screen(`xl`)`color: red;`"#####, r#####"`@media (min-width: 400px) { ${`color: red;`} }`
 ;"##### ; "14")]
 #[test_case(r#####"screen.xl(tw`inline`)"#####, r#####"({
-  '@media (min-width: 400px)': {
+  "@media (min-width: 400px)": {
     display: "inline",
   },
 })
 ;"##### ; "15")]
 #[test_case(r#####"screen.xl({ ...tw`inline` })"#####, r#####"({
-  '@media (min-width: 400px)': {
+  "@media (min-width: 400px)": {
     ...{
       display: "inline",
     },
@@ -91,7 +91,7 @@ use test_case::test_case;
 })
 ;"##### ; "16")]
 #[test_case(r#####"screen.xl({ ...tw`inline`, display: "block" })"#####, r#####"({
-  '@media (min-width: 400px)': {
+  "@media (min-width: 400px)": {
     ...{
       display: "inline",
     },
@@ -135,7 +135,7 @@ use test_case::test_case;
 />
 ;"#####, r#####"<div
   css={{
-    '@media (min-width: 400px)': {
+    "@media (min-width: 400px)": {
       color: "red",
     },
   }}
@@ -149,7 +149,7 @@ use test_case::test_case;
 ;"#####, r#####"<div
   css={`
     ${{
-      '@media (min-width: 400px)': {
+      "@media (min-width: 400px)": {
         color: "red",
       },
     }}
@@ -160,7 +160,7 @@ use test_case::test_case;
 ;"#####, r#####"<div
   css={[
     {
-      '@media (min-width: 400px)': {
+      "@media (min-width: 400px)": {
         color: "red",
       },
     },
@@ -184,7 +184,7 @@ use test_case::test_case;
   ${{ [screen.xl]: { color: "red" } }}
 `"#####, r#####"_styled.div`
   ${{
-    '@media (min-width: 400px)': {
+    "@media (min-width: 400px)": {
       color: "red",
     },
   }}
@@ -194,7 +194,7 @@ use test_case::test_case;
 // Logical expressions
 ;"#####, r#####"_styled.div([
   {
-    '@media (min-width: 400px)': {
+    "@media (min-width: 400px)": {
       color: "red",
     },
   },
@@ -207,7 +207,7 @@ use test_case::test_case;
   }}
 />"#####, r#####"<div
   css={{
-    [true && "@media (min-width: 400px)"]: {
+    [true && '@media (min-width: 400px)']: {
       color: "red",
     },
   }}
@@ -217,7 +217,7 @@ use test_case::test_case;
 // Conditional expressions
 ;"#####, r#####"_styled.div([
   {
-    [true && "@media (min-width: 400px)"]: {
+    [true && '@media (min-width: 400px)']: {
       color: "red",
     },
   },
@@ -232,7 +232,7 @@ use test_case::test_case;
 />"#####, r#####"<div
   css={{
     // eslint-disable-next-line no-constant-condition
-    [true ? "@media (min-width: 400px)" : "@media (min-width: 100px)"]: {
+    [true ? '@media (min-width: 400px)' : '@media (min-width: 100px)']: {
       color: "red",
     },
   }}
@@ -248,7 +248,7 @@ use test_case::test_case;
 ;"#####, r#####"_styled.div`
   ${{
     // eslint-disable-next-line no-constant-condition
-    [true ? "@media (min-width: 400px)" : "@media (min-width: 100px)"]: {
+    [true ? '@media (min-width: 400px)' : '@media (min-width: 100px)']: {
       color: "red",
     },
   }}
@@ -257,7 +257,7 @@ use test_case::test_case;
 #[test_case(r#####"<div css={screen.xl({ color: "red" })} />
 ;"#####, r#####"<div
   css={{
-    '@media (min-width: 400px)': {
+    "@media (min-width: 400px)": {
       color: "red",
     },
   }}
@@ -267,7 +267,7 @@ use test_case::test_case;
 ;"#####, r#####"<div
   css={[
     {
-      '@media (min-width: 400px)': {
+      "@media (min-width: 400px)": {
         color: "red",
       },
     },
@@ -282,7 +282,7 @@ use test_case::test_case;
 ;"#####, r#####"<div
   css={`
     ${{
-      '@media (min-width: 400px)': {
+      "@media (min-width: 400px)": {
         color: "red",
       },
     }}

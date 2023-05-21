@@ -82,7 +82,7 @@ hum
 // break right bracket
 ;"#####, r#####"<div
   css={{
-    '@media (min-width: 768px)': {
+    "@media (min-width: 768px)": {
       fontSize: "1.25rem",
       lineHeight: "1.75rem",
       fontWeight: "900",
@@ -99,7 +99,7 @@ hum
 // comments within multiline comment
 ;"#####, r#####"<div
   css={{
-    '@media (min-width: 1536px)': {
+    "@media (min-width: 1536px)": {
       background: "rgb(191, 201, 211)",
     },
   }}
@@ -123,9 +123,9 @@ hum
 />"#####, r#####"<div
   css={{
     position: "relative",
-    '@media (min-width: 1024px)': {
+    "@media (min-width: 1024px)": {
       display: "flex !important",
-      '--tw-border-opacity': "1 !important",
+      "--tw-border-opacity": "1 !important",
       borderColor: "rgb(234 179 8 / var(--tw-border-opacity)) !important",
       fontSize: "3rem !important",
       lineHeight: "1 !important",

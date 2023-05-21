@@ -13,7 +13,7 @@ use test_case::test_case;
 })
 ;"##### ; "1")]
 #[test_case(r#####"tw`animate-spin`"#####, r#####"({
-  '@keyframes spin': {
+  "@keyframes spin": {
     to: {
       transform: "rotate(360deg)",
     },
@@ -22,8 +22,8 @@ use test_case::test_case;
 })
 ;"##### ; "2")]
 #[test_case(r#####"tw`animate-ping`"#####, r#####"({
-  '@keyframes ping': {
-    '75%, 100%': {
+  "@keyframes ping": {
+    "75%, 100%": {
       transform: "scale(2)",
       opacity: "0",
     },
@@ -32,8 +32,8 @@ use test_case::test_case;
 })
 ;"##### ; "3")]
 #[test_case(r#####"tw`animate-pulse`"#####, r#####"({
-  '@keyframes pulse': {
-    '50%': {
+  "@keyframes pulse": {
+    "50%": {
       opacity: ".5",
     },
   },
@@ -41,12 +41,12 @@ use test_case::test_case;
 })
 ;"##### ; "4")]
 #[test_case(r#####"tw`animate-bounce`"#####, r#####"({
-  '@keyframes bounce': {
-    '0%, 100%': {
+  "@keyframes bounce": {
+    "0%, 100%": {
       transform: "translateY(-25%)",
       animationTimingFunction: "cubic-bezier(0.8,0,1,1)",
     },
-    '50%': {
+    "50%": {
       transform: "none",
       animationTimingFunction: "cubic-bezier(0,0,0.2,1)",
     },

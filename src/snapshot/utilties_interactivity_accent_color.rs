@@ -292,7 +292,7 @@ use test_case::test_case;
     900: "#881337",
     950: "#4c0519",
   },
-  'red-500/fromConfig': "#000",
+  "red-500/fromConfig": "#000",
   electric: void 0,
   auto: "auto",
 })

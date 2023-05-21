@@ -5,7 +5,7 @@ use test_case::test_case;
   linear: "linear",
   in: "cubic-bezier(0.4, 0, 1, 1)",
   out: "cubic-bezier(0, 0, 0.2, 1)",
-  'in-out': "cubic-bezier(0.4, 0, 0.2, 1)",
+  "in-out": "cubic-bezier(0.4, 0, 0.2, 1)",
 })
 ;"##### ; "0")]
 #[test_case(r#####"tw`ease-linear`"#####, r#####"({

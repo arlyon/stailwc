@@ -32,7 +32,7 @@ use test_case::test_case;
 })
 ;"##### ; "6")]
 #[test_case(r#####"tw`lg:grid-cols-[200px,repeat(auto-fill,minmax(15%,100px)),300px]`"#####, r#####"({
-  '@media (min-width: 1024px)': {
+  "@media (min-width: 1024px)": {
     gridTemplateColumns: "200px repeat(auto-fill,minmax(15%,100px)) 300px",
   },
 })"##### ; "7")]

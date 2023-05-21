@@ -9,35 +9,35 @@ use test_case::test_case;
 })
 ;"##### ; "0")]
 #[test_case(r#####"tw`ring-offset-0`"#####, r#####"({
-  '--tw-ring-offset-width': "0px",
+  "--tw-ring-offset-width": "0px",
 })
 ;"##### ; "1")]
 #[test_case(r#####"tw`ring-offset-1`"#####, r#####"({
-  '--tw-ring-offset-width': "1px",
+  "--tw-ring-offset-width": "1px",
 })
 ;"##### ; "2")]
 #[test_case(r#####"tw`ring-offset-2`"#####, r#####"({
-  '--tw-ring-offset-width': "2px",
+  "--tw-ring-offset-width": "2px",
 })
 ;"##### ; "3")]
 #[test_case(r#####"tw`ring-offset-4`"#####, r#####"({
-  '--tw-ring-offset-width': "4px",
+  "--tw-ring-offset-width": "4px",
 })
 ;"##### ; "4")]
 #[test_case(r#####"tw`ring-offset-8`"#####, r#####"({
-  '--tw-ring-offset-width': "8px",
+  "--tw-ring-offset-width": "8px",
 })
 ;"##### ; "5")]
 #[test_case(r#####"tw`ring-offset-[3px]`"#####, r#####"({
-  '--tw-ring-offset-width': "3px",
+  "--tw-ring-offset-width": "3px",
 })
 ;"##### ; "6")]
 #[test_case(r#####"tw`ring-offset-[19rem]`"#####, r#####"({
-  '--tw-ring-offset-width': "19rem",
+  "--tw-ring-offset-width": "19rem",
 })
 ;"##### ; "7")]
 #[test_case(r#####"tw`ring-offset-[#76ad65]`"#####, r#####"({
-  '--tw-ring-offset-color': "#76ad65",
+  "--tw-ring-offset-color": "#76ad65",
 })"##### ; "8")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)

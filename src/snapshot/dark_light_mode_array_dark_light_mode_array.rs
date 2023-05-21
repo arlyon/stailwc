@@ -1,13 +1,13 @@
 use crate::test::snapshot_inner;
 use test_case::test_case;
 #[test_case(r#####"tw`dark:block`"#####, r#####"({
-  ':is(.test-dark &)': {
+  ":is(.test-dark &)": {
     display: "block",
   },
 })
 ;"##### ; "0")]
 #[test_case(r#####"tw`light:block`"#####, r#####"({
-  '.test-light &': {
+  ".test-light &": {
     display: "block",
   },
 })"##### ; "1")]

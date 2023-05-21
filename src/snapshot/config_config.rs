@@ -9,7 +9,7 @@ use test_case::test_case;
 })
 ;"##### ; "1")]
 #[test_case(r#####"tw`text-purple`"#####, r#####"({
-  '--tw-text-opacity': "1",
+  "--tw-text-opacity": "1",
   color: "rgb(128 0 128 / var(--tw-text-opacity))",
 })
 ;"##### ; "2")]
@@ -18,12 +18,12 @@ use test_case::test_case;
 })
 ;"##### ; "3")]
 #[test_case(r#####"tw`text-mycolors`"#####, r#####"({
-  '--tw-text-opacity': "1",
+  "--tw-text-opacity": "1",
   color: "rgb(0 0 255 / var(--tw-text-opacity))",
 })
 ;"##### ; "4")]
 #[test_case(r#####"tw`text-mycolors-a-purple`"#####, r#####"({
-  '--tw-text-opacity': "1",
+  "--tw-text-opacity": "1",
   color: "rgb(128 0 128 / var(--tw-text-opacity))",
 })
 ;"##### ; "5")]
@@ -33,17 +33,17 @@ use test_case::test_case;
 
 ;"##### ; "6")]
 #[test_case(r#####"tw`text-my-blue-100`"#####, r#####"({
-  '--tw-text-opacity': "1",
+  "--tw-text-opacity": "1",
   color: "rgb(0 0 255 / var(--tw-text-opacity))",
 })
 ;"##### ; "7")]
 #[test_case(r#####"tw`text-color-opacity`"#####, r#####"({
-  '--tw-text-opacity': "1",
+  "--tw-text-opacity": "1",
   color: "rgba(var(--color-primary), var(--tw-text-opacity, 1))",
 })
 ;"##### ; "8")]
 #[test_case(r#####"tw`text-color-deep-config-500`"#####, r#####"({
-  '--tw-text-opacity': "1",
+  "--tw-text-opacity": "1",
   color: "rgb(7 71 166 / var(--tw-text-opacity))",
 })
 ;"##### ; "9")]
@@ -52,7 +52,7 @@ use test_case::test_case;
 })
 ;"##### ; "10")]
 #[test_case(r#####"tw`bg-purple`"#####, r#####"({
-  '--tw-bg-opacity': "1",
+  "--tw-bg-opacity": "1",
   backgroundColor: "rgb(128 0 128 / var(--tw-bg-opacity))",
 })
 ;"##### ; "11")]
@@ -61,12 +61,12 @@ use test_case::test_case;
 })
 ;"##### ; "12")]
 #[test_case(r#####"tw`bg-mycolors`"#####, r#####"({
-  '--tw-bg-opacity': "1",
+  "--tw-bg-opacity": "1",
   backgroundColor: "rgb(0 0 255 / var(--tw-bg-opacity))",
 })
 ;"##### ; "13")]
 #[test_case(r#####"tw`bg-mycolors-a-purple`"#####, r#####"({
-  '--tw-bg-opacity': "1",
+  "--tw-bg-opacity": "1",
   backgroundColor: "rgb(128 0 128 / var(--tw-bg-opacity))",
 })
 ;"##### ; "14")]
@@ -76,17 +76,17 @@ use test_case::test_case;
 
 ;"##### ; "15")]
 #[test_case(r#####"tw`bg-my-blue-100`"#####, r#####"({
-  '--tw-bg-opacity': "1",
+  "--tw-bg-opacity": "1",
   backgroundColor: "rgb(0 0 255 / var(--tw-bg-opacity))",
 })
 ;"##### ; "16")]
 #[test_case(r#####"tw`bg-color-opacity`"#####, r#####"({
-  '--tw-bg-opacity': "1",
+  "--tw-bg-opacity": "1",
   backgroundColor: "rgba(var(--color-primary), var(--tw-bg-opacity, 1))",
 })
 ;"##### ; "17")]
 #[test_case(r#####"tw`bg-color-deep-config-500`"#####, r#####"({
-  '--tw-bg-opacity': "1",
+  "--tw-bg-opacity": "1",
   backgroundColor: "rgb(7 71 166 / var(--tw-bg-opacity))",
 })
 ;"##### ; "18")]

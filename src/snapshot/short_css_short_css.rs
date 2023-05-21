@@ -17,7 +17,7 @@ use test_case::test_case;
 #[test_case(r#####"<div cs="md:maxWidth[100vw - 2rem]" />
 ;"#####, r#####"<div
   css={{
-    '@media (min-width: 768px)': {
+    "@media (min-width: 768px)": {
       maxWidth: "100vw - 2rem",
     },
   }}
@@ -26,7 +26,7 @@ use test_case::test_case;
 #[test_case(r#####"<div cs="hover:(maxWidth[100vw - 2rem] width[2rem])" />
 ;"#####, r#####"<div
   css={{
-    ':hover': {
+    ":hover": {
       maxWidth: "100vw - 2rem",
       width: "2rem",
     },
@@ -36,10 +36,10 @@ use test_case::test_case;
 #[test_case(r#####"<div cs="hover:(maxWidth[100vw - 2rem] before:content['test'])" />
 ;"#####, r#####"<div
   css={{
-    ':hover': {
+    ":hover": {
       maxWidth: "100vw - 2rem",
     },
-    ':hover::before': {
+    ":hover::before": {
       content: "'test'",
     },
   }}
@@ -48,10 +48,10 @@ use test_case::test_case;
 #[test_case(r#####"<div cs="hover:(maxWidth[100vw - 2rem] before:content['test'])!" />
 ;"#####, r#####"<div
   css={{
-    ':hover': {
+    ":hover": {
       maxWidth: "100vw - 2rem !important",
     },
-    ':hover::before': {
+    ":hover::before": {
       content: "'test' !important",
     },
   }}
@@ -62,10 +62,10 @@ use test_case::test_case;
 // within tw prop
 ;"#####, r#####"<div
   css={{
-    ':hover': {
+    ":hover": {
       maxWidth: "100vw - 2rem !important",
     },
-    ':hover::before': {
+    ":hover::before": {
       content: "'test'",
     },
   }}
@@ -89,7 +89,7 @@ use test_case::test_case;
 #[test_case(r#####"<div tw="md:maxWidth[100vw - 2rem]" />
 ;"#####, r#####"<div
   css={{
-    '@media (min-width: 768px)': {
+    "@media (min-width: 768px)": {
       maxWidth: "100vw - 2rem",
     },
   }}
@@ -98,7 +98,7 @@ use test_case::test_case;
 #[test_case(r#####"<div tw="hover:(maxWidth[100vw - 2rem] width[2rem])" />
 ;"#####, r#####"<div
   css={{
-    ':hover': {
+    ":hover": {
       maxWidth: "100vw - 2rem",
       width: "2rem",
     },
@@ -108,10 +108,10 @@ use test_case::test_case;
 #[test_case(r#####"<div tw="hover:(maxWidth[100vw - 2rem] before:content['test'])" />
 ;"#####, r#####"<div
   css={{
-    ':hover': {
+    ":hover": {
       maxWidth: "100vw - 2rem",
     },
-    ':hover::before': {
+    ":hover::before": {
       content: "'test'",
     },
   }}
@@ -120,10 +120,10 @@ use test_case::test_case;
 #[test_case(r#####"<div tw="hover:(maxWidth[100vw - 2rem] before:content['test'])!" />
 ;"#####, r#####"<div
   css={{
-    ':hover': {
+    ":hover": {
       maxWidth: "100vw - 2rem !important",
     },
-    ':hover::before': {
+    ":hover::before": {
       content: "'test' !important",
     },
   }}
@@ -134,10 +134,10 @@ use test_case::test_case;
 // within css prop
 ;"#####, r#####"<div
   css={{
-    ':hover': {
+    ":hover": {
       maxWidth: "100vw - 2rem !important",
     },
-    ':hover::before': {
+    ":hover::before": {
       content: "'test'",
     },
   }}
@@ -146,8 +146,8 @@ use test_case::test_case;
 #[test_case(r#####"<div css={tw`lg:bg-red-500 max-width[100vw]`} />"#####, r#####"<div
   css={{
     maxWidth: "100vw",
-    '@media (min-width: 1024px)': {
-      '--tw-bg-opacity': "1",
+    "@media (min-width: 1024px)": {
+      "--tw-bg-opacity": "1",
       backgroundColor: "rgb(239 68 68 / var(--tw-bg-opacity))",
     },
   }}
@@ -164,32 +164,32 @@ use test_case::test_case;
 })
 ;"##### ; "16")]
 #[test_case(r#####"tw`md:maxWidth[100vw - 2rem]`"#####, r#####"({
-  '@media (min-width: 768px)': {
+  "@media (min-width: 768px)": {
     maxWidth: "100vw - 2rem",
   },
 })
 ;"##### ; "17")]
 #[test_case(r#####"tw`hover:(maxWidth[100vw - 2rem] width[2rem])`"#####, r#####"({
-  ':hover': {
+  ":hover": {
     maxWidth: "100vw - 2rem",
     width: "2rem",
   },
 })
 ;"##### ; "18")]
 #[test_case(r#####"tw`hover:(maxWidth[100vw - 2rem] before:content['test'])`"#####, r#####"({
-  ':hover': {
+  ":hover": {
     maxWidth: "100vw - 2rem",
   },
-  ':hover::before': {
+  ":hover::before": {
     content: "'test'",
   },
 })
 ;"##### ; "19")]
 #[test_case(r#####"tw`hover:(maxWidth[100vw - 2rem] before:content['test'])!`"#####, r#####"({
-  ':hover': {
+  ":hover": {
     maxWidth: "100vw - 2rem !important",
   },
-  ':hover::before': {
+  ":hover::before": {
     content: "'test' !important",
   },
 })
@@ -198,10 +198,10 @@ use test_case::test_case;
 
 // prop ordering
 ;"#####, r#####"({
-  ':hover': {
+  ":hover": {
     maxWidth: "100vw - 2rem !important",
   },
-  ':hover::before': {
+  ":hover::before": {
     content: "'test'",
   },
 }) // prop ordering
@@ -223,16 +223,16 @@ use test_case::test_case;
 
 ;"##### ; "22")]
 #[test_case(r#####"tw`--css-prop[true] md:--css-prop[false]`"#####, r#####"({
-  '--css-prop': "true",
-  '@media (min-width: 768px)': {
-    '--css-prop': "false",
+  "--css-prop": "true",
+  "@media (min-width: 768px)": {
+    "--css-prop": "false",
   },
 }) // Using css variables
 
 ;"##### ; "23")]
 #[test_case(r#####"tw`max-width[var(--css-react)] md:max-width[var(--css-react-md)]`"#####, r#####"({
   maxWidth: "var(--css-react)",
-  '@media (min-width: 768px)': {
+  "@media (min-width: 768px)": {
     maxWidth: "var(--css-react-md)",
   },
 }) // Browser vendor prefixes
@@ -240,7 +240,7 @@ use test_case::test_case;
 ;"##### ; "24")]
 #[test_case(r#####"tw`-webkit-gradient[gradient here] md:-webkit-gradient[gradient here md]`"#####, r#####"({
   WebkitGradient: "gradient here",
-  '@media (min-width: 768px)': {
+  "@media (min-width: 768px)": {
     WebkitGradient: "gradient here md",
   },
 }) // Grid template
@@ -249,7 +249,7 @@ use test_case::test_case;
 #[test_case(r#####"tw`grid-template-columns[[main-start] 1fr [content-start] 1fr [content-end] 1fr [main-end]] md:grid-template-columns[[main-start-md] 1fr [content-start-md] 1fr [content-end-md] 1fr [main-end-md]]`"#####, r#####"({
   gridTemplateColumns:
     "[main-start] 1fr [content-start] 1fr [content-end] 1fr [main-end]",
-  '@media (min-width: 768px)': {
+  "@media (min-width: 768px)": {
     gridTemplateColumns:
       "[main-start-md] 1fr [content-start-md] 1fr [content-end-md] 1fr [main-end-md]",
   },
@@ -281,11 +281,11 @@ use test_case::test_case;
 
 ;"##### ; "30")]
 #[test_case(r#####"tw`--color[theme(colors.red.500)]`"#####, r#####"({
-  '--color': "#ef4444",
+  "--color": "#ef4444",
 })
 ;"##### ; "31")]
 #[test_case(r#####"tw`--color[this theme(colors.red.500) that]`"#####, r#####"({
-  '--color': "this #ef4444 that",
+  "--color": "this #ef4444 that",
 }) // Automatic '' value
 
 ;"##### ; "32")]

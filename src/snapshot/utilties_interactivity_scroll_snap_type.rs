@@ -17,11 +17,11 @@ use test_case::test_case;
 })
 ;"##### ; "3")]
 #[test_case(r#####"tw`snap-mandatory`"#####, r#####"({
-  '--tw-scroll-snap-strictness': "mandatory",
+  "--tw-scroll-snap-strictness": "mandatory",
 })
 ;"##### ; "4")]
 #[test_case(r#####"tw`snap-proximity`"#####, r#####"({
-  '--tw-scroll-snap-strictness': "proximity",
+  "--tw-scroll-snap-strictness": "proximity",
 })"##### ; "5")]
 fn test(input: &str, output: &str) {
     snapshot_inner(input, output)
