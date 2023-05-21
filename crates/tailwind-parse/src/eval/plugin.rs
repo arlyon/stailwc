@@ -607,13 +607,23 @@ pub fn snap<'a>(
     }]))
 }
 
-pub fn bg<'a>(val: &SubjectValue, theme: &'a TailwindTheme) -> PluginResult<'a> {
+pub fn bg<'a>(
+    val: &SubjectValue,
+    theme: &'a TailwindTheme,
+    alpha: Option<&Value>,
+) -> PluginResult<'a> {
     match val {
-        SubjectValue::Value(Value(rest)) => simple_lookup(&theme.colors, rest, "backgroundColor")
-            .or_else(|_e| simple_lookup(&theme.background_image, rest, "backgroundImage"))
-            .or_else(|_e| simple_lookup(&theme.background_size, rest, "backgroundSize"))
-            .or_else(|_e| simple_lookup(&theme.background_position, rest, "backgroundPosition"))
-            .or_else(|_e| bg_repeat(&Value(rest), theme)),
+        SubjectValue::Value(Value(rest)) => simple_lookup_color(
+            &theme.colors,
+            rest,
+            "backgroundColor",
+            alpha,
+            Some("--tw-bg-opacity"),
+        )
+        .or_else(|_e| simple_lookup(&theme.background_image, rest, "backgroundImage"))
+        .or_else(|_e| simple_lookup(&theme.background_size, rest, "backgroundSize"))
+        .or_else(|_e| simple_lookup(&theme.background_position, rest, "backgroundPosition"))
+        .or_else(|_e| bg_repeat(&Value(rest), theme)),
         SubjectValue::Css(Css(css)) => Ok(to_lit(&[("background", css)])),
     }
 }

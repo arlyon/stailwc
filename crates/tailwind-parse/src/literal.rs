@@ -194,7 +194,7 @@ impl<'a> Literal<'a> {
             Ring(Some(Ring::Opacity)) => RequiredArbitrary(plugin::ring_opacity),
             Ring(Some(Ring::Inset)) => Singular(plugin::ring_inset),
             Sr => Required(plugin::sr),
-            Bg => RequiredArbitrary(plugin::bg),
+            Bg => RequiredArbitraryTransparency(plugin::bg),
             H => RequiredArbitrary(plugin::h),
             W => RequiredArbitrary(plugin::w),
             TransformOrigin => Required(plugin::transform_origin),
