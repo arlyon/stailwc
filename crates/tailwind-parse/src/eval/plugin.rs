@@ -256,6 +256,7 @@ array_map_plugin!(
     "backgroundRepeat"
 );
 lookup_color_plugin_arbitrary!(border_color, colors, "borderColor", "--tw-border-opacity");
+lookup_color_plugin_arbitrary!(divide_color, colors, "borderColor", "--tw-divide-opacity");
 lookup_plugin_arbitrary_opt!(border_width, border_width, "borderWidth");
 array_plugin!(
     border_style,
@@ -719,11 +720,11 @@ pub fn flex<'a>(
     Ok(to_lit(&rule))
 }
 
-pub fn divide(
+pub fn divide<'a>(
     d: Option<Divide>,
     rest: Option<&SubjectValue>,
-    theme: &TailwindTheme,
-) -> PluginResult<'static> {
+    theme: &'a TailwindTheme,
+) -> PluginResult<'a> {
     match (d, rest.as_ref().map(|r| r.as_str())) {
         (Some(Divide::X), Some("reverse")) => Ok(to_lit(&[("--tw-divide-x-reverse", "1")])),
         (Some(Divide::Y), Some("reverse")) => Ok(to_lit(&[("--tw-divide-y-reverse", "1")])),
@@ -766,11 +767,7 @@ pub fn divide(
         (Some(Divide::Dotted), None) => Ok(to_lit(&[("borderStyle", "dotted")])),
         (Some(Divide::Dashed), None) => Ok(to_lit(&[("borderStyle", "dashed")])),
         (Some(Divide::Solid), None) => Ok(to_lit(&[("borderStyle", "solid")])),
-        (None, Some(rest)) => theme
-            .colors
-            .get(rest)
-            .map(|v| to_lit(&[("borderColor", v)]))
-            .ok_or(vec![]),
+        (None, Some(_)) => divide_color(rest.as_ref().unwrap(), theme, None),
         _ => Err(vec![]),
     }
     .map(|lit| ObjectLit {
