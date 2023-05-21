@@ -128,6 +128,7 @@ lookup_plugin!(fill, colors, "fill");
 lookup_plugin_arbitrary!(left, width, "left");
 lookup_plugin_arbitrary!(right, width, "right");
 lookup_plugin_arbitrary!(tracking, letter_spacing, "letterSpacing");
+lookup_color_plugin_arbitrary!(caret, colors, "caretColor");
 lookup_plugin_arbitrary!(h, height, "height");
 lookup_plugin!(ring_width, ring_width, "borderWidth");
 lookup_plugin!(ring_color, colors, "--tw-ring-color");

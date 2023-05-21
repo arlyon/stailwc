@@ -219,6 +219,7 @@ macro_rules! merge_plugins_arbitrary_opt {
 pub(crate) use array_map_plugin;
 pub(crate) use array_map_plugin_arbitrary;
 pub(crate) use array_plugin;
+pub(crate) use lookup_color_plugin_arbitrary;
 pub(crate) use lookup_plugin;
 pub(crate) use lookup_plugin_arbitrary;
 pub(crate) use lookup_plugin_arbitrary_opt;

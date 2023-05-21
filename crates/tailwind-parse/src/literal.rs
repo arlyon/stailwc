@@ -178,6 +178,7 @@ impl<'a> Literal<'a> {
             Left => RequiredArbitrary(plugin::left),
             Right => RequiredArbitrary(plugin::right),
             Tracking => RequiredArbitrary(plugin::tracking),
+            Caret => RequiredArbitraryTransparency(plugin::caret),
             Invert => Optional(plugin::invert),
             Float => Required(plugin::float),
             Space => Required(plugin::space),
