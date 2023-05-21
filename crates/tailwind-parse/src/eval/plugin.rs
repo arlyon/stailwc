@@ -120,7 +120,7 @@ array_map_plugin_arbitrary!(
     ],
     "gridAutoColumns"
 );
-lookup_plugin!(opacity, opacity, "opacity");
+lookup_plugin_arbitrary!(opacity, opacity, "opacity");
 lookup_plugin!(animation, animation, "animation");
 lookup_plugin_arbitrary!(order, order, "order");
 lookup_plugin_arbitrary!(bottom, height, "bottom");

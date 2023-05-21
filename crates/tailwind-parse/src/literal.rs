@@ -183,7 +183,7 @@ impl<'a> Literal<'a> {
             Float => Required(plugin::float),
             Space => Required(plugin::space),
             Transform => Optional(plugin::transform),
-            Opacity => Required(plugin::opacity),
+            Opacity => RequiredArbitrary(plugin::opacity),
             Blur => Optional(plugin::blur),
             Ring => Optional(plugin::ring),
             Sr => Required(plugin::sr),
