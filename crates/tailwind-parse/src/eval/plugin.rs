@@ -526,6 +526,7 @@ pub fn truncate() -> ObjectLit {
 
 lookup_plugin_arbitrary!(outline_offset, outline_offset, "outlineOffset");
 lookup_plugin_arbitrary!(outline_width, outline_width, "outlineWidth");
+lookup_plugin_arbitrary!(outline_color, colors, "outlineColor");
 
 lookup_plugin_arbitrary!(aspect, aspect_ratio, "aspectRatio");
 
@@ -541,7 +542,9 @@ pub fn outline<'a>(rest: Option<&SubjectValue>, theme: &'a TailwindTheme) -> Plu
         Some(SubjectValue::Value(Value("double"))) => Ok(to_lit(&[("outlineStyle", "double")])),
         Some(SubjectValue::Value(Value("hidden"))) => Ok(to_lit(&[("outlineStyle", "hidden")])),
         Some(SubjectValue::Value(rest)) => simple_lookup(&theme.colors, rest.0, "outlineColor"),
-        Some(rest) => outline_offset(rest, theme).or_else(|_e| outline_width(rest, theme)),
+        Some(rest) => outline_offset(rest, theme)
+            .or_else(|_e| outline_width(rest, theme))
+            .or_else(|_| outline_color(rest, theme)),
     }
 }
 
