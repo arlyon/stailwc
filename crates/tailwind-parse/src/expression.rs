@@ -15,7 +15,7 @@ use swc_core::{
 };
 use tailwind_config::{Screens, TailwindConfig};
 
-use crate::{subject::Subject, NomSpan, SubjectConversionError, SubjectValue};
+use crate::{subject::Subject, NomSpan, SubjectConversionError, Value};
 
 /// An expression is a single tailwind class. An example is: `bg-red-500`
 ///
@@ -33,7 +33,7 @@ pub struct Expression<'a> {
     pub negative: bool,
     pub modifiers: Vec<&'a str>,
     pub subject: Subject<'a>,
-    pub alpha: Option<SubjectValue<'a>>,
+    pub alpha: Option<Value<'a>>,
     pub important: bool,
     pub span: Option<Span>,
 }
@@ -62,7 +62,7 @@ impl<'a> Expression<'a> {
         let mods = many0(terminated(single_mod, char(':')));
         let negative = opt(char('-')).map(|o| o.is_some());
         let subject = Subject::parse;
-        let alpha = opt(preceded(char('/'), SubjectValue::parse));
+        let alpha = opt(preceded(char('/'), Value::parser().map(|t| t.1)));
         let important = opt(char('!')).map(|o| o.is_some());
 
         let (s_next, (((((_, mods), negative), subject), alpha), important)) = multispace0
@@ -96,7 +96,7 @@ impl<'a> Expression<'a> {
     ) -> Result<ObjectLit, ExpressionConversionError<'a>> {
         let mut object: ObjectLit = self
             .subject
-            .to_literal(span, config)
+            .to_literal(span, config, self.alpha)
             .map_err(|e| ExpressionConversionError::UnknownSubject(e, span))?;
 
         for prop in &mut object.props {

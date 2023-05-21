@@ -42,34 +42,43 @@ pub enum LiteralConversionError<'a> {
 pub type PluginResult<'a> = Result<ObjectLit, Vec<&'a str>>;
 
 /// The types of plugin evaluators that can be used.
-enum PluginType<'a> {
+enum PluginType<'a, 'func> {
     /// This plugin takes no input, and produces an object literal.
     Singular(fn() -> ObjectLit),
-    SingularBox(Box<dyn Fn() -> ObjectLit>),
+    SingularBox(Box<dyn Fn() -> ObjectLit + 'func>),
     /// This plugin requires a value, and produces an object literal.
     Required(fn(&Value, &'a TailwindTheme) -> PluginResult<'a>),
     #[allow(clippy::type_complexity)]
-    RequiredBox(Box<dyn Fn(&Value, &'a TailwindTheme) -> PluginResult<'a>>),
+    RequiredBox(Box<dyn Fn(&Value, &'a TailwindTheme) -> PluginResult<'a> + 'func>),
     #[allow(clippy::type_complexity)]
-    OptionalAbitraryBox(Box<dyn Fn(Option<&SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>>),
+    OptionalAbitraryBox(
+        Box<dyn Fn(Option<&SubjectValue>, &'a TailwindTheme) -> PluginResult<'a> + 'func>,
+    ),
 
     /// This plugin takes an optional value, and produces an object literal.
     Optional(fn(Option<&Value>, &'a TailwindTheme) -> PluginResult<'a>),
     /// This plugin requires a value, or arbitrary css.
     RequiredArbitrary(fn(&SubjectValue, &'a TailwindTheme) -> PluginResult<'a>),
     #[allow(clippy::type_complexity)]
-    RequiredArbitraryBox(Box<dyn Fn(&SubjectValue, &'a TailwindTheme) -> PluginResult<'a>>),
+    RequiredArbitraryBox(Box<dyn Fn(&SubjectValue, &'a TailwindTheme) -> PluginResult<'a> + 'func>),
     /// This plugin takes an optional value, or arbitrary css.
     OptionalArbitrary(fn(Option<&SubjectValue>, &'a TailwindTheme) -> PluginResult<'a>),
+    RequiredArbitraryTransparency(
+        fn(&SubjectValue, &'a TailwindTheme, Option<&Value>) -> PluginResult<'a>,
+    ),
+    OptionalArbitraryTransparency(
+        fn(Option<&SubjectValue>, &'a TailwindTheme, Option<&Value>) -> PluginResult<'a>,
+    ),
 }
 
 impl<'a> Literal<'a> {
     /// Takes the combination of a plugin and a value and converts it into a
     /// javascript object literal with the equivalent css.
-    pub fn to_object_lit(
+    pub fn to_object_lit<'func>(
         self,
         _span: Span,
         theme: &'a TailwindTheme,
+        alpha: &Option<Value>,
     ) -> Result<ObjectLit, LiteralConversionError<'a>> {
         use crate::Auto;
         use crate::Gap;
@@ -221,6 +230,8 @@ impl<'a> Literal<'a> {
             (RequiredBox(p), Some(SubjectValue::Value(value))) => p(value, theme),
             (OptionalAbitraryBox(p), value) => p(value.as_ref(), theme),
             (OptionalArbitrary(p), value) => p(value.as_ref(), theme),
+            (RequiredArbitraryTransparency(p), Some(value)) => p(value, theme, alpha.as_ref()),
+            (OptionalArbitraryTransparency(p), value) => p(value.as_ref(), theme, alpha.as_ref()),
             _ => Err(vec![]),
         }
         .map_err(|e| match self.value {
@@ -282,14 +293,25 @@ impl<'a> SubjectValue<'a> {
     pub fn parse_with_span(
         s: NomSpan<'a>,
     ) -> IResult<NomSpan<'a>, (NomSpan<'a>, Self), Error<NomSpan<'a>>> {
+        Value::parser()
+            .map(|(a, b)| (a, SubjectValue::Value(b)))
+            .or(Css::parser().map(|(a, b)| (a, SubjectValue::Css(b))))
+            .parse(s)
+    }
+}
+
+impl<'a> Css<'a> {
+    pub fn parser() -> impl Parser<NomSpan<'a>, (NomSpan<'a>, Css<'a>), Error<NomSpan<'a>>> {
         // a value is either numeric with dashes signifying fractions,
         // or aplhanumeric with dashes
-        let value = verify(Self::parse_value, |s| s.len() > 0)
-            .map(|val: NomSpan<'a>| (val, SubjectValue::Value(Value(&val))));
-        let css = delimited(char('['), take_while(|c| c != ']'), char(']'))
-            .map(|css: NomSpan<'a>| (css, SubjectValue::Css(Css(&css))));
+        delimited(char('['), take_while(|c| c != ']'), char(']'))
+            .map(|css: NomSpan<'a>| (css, Css(&css)))
+    }
+}
 
-        value.or(css).parse(s)
+impl<'a> Value<'a> {
+    pub fn parser() -> impl Parser<NomSpan<'a>, (NomSpan<'a>, Value<'a>), Error<NomSpan<'a>>> {
+        verify(Self::parse_value, |s| s.len() > 0).map(|val: NomSpan<'a>| (val, Value(&val)))
     }
 
     /// This algorithm is used to disambiguate between a number with a fraction

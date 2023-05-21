@@ -11,7 +11,7 @@ use crate::{
     directive::Directive,
     literal::{Literal, SubjectValue},
 };
-use crate::{ExpressionConversionError, LiteralConversionError, NomSpan, Plugin};
+use crate::{ExpressionConversionError, LiteralConversionError, NomSpan, Plugin, Value};
 
 #[derive(Debug, PartialEq)]
 pub enum Subject<'a> {
@@ -58,10 +58,11 @@ impl<'a> Subject<'a> {
         self,
         span: Span,
         config: &'a TailwindConfig,
+        alpha: Option<Value<'a>>,
     ) -> Result<ObjectLit, SubjectConversionError<'a>> {
         match self {
             Subject::Literal(lit) => lit
-                .to_object_lit(span, &config.theme)
+                .to_object_lit(span, &config.theme, &alpha)
                 .map_err(SubjectConversionError::InvalidLiteral),
             Subject::Group(dir) => {
                 let (obj, mut errs) = dir.to_literal(config);
