@@ -202,10 +202,7 @@ macro_rules! merge_plugins {
             }
         }
     };
-}
-
-macro_rules! merge_plugins_arbitrary {
-    ($def:ident, $closure_a:expr, $closure_b:expr) => {
+    ($def:ident, arb $closure_a:expr, arb $closure_b:expr) => {
         pub fn $def<'a>(rest: &SubjectValue, theme: &'a TailwindTheme) -> PluginResult<'a> {
             match ($closure_a(rest, theme), $closure_b(rest, theme)) {
                 (Err(e1), Err(e2)) => Err(e1.into_iter().chain(e2).collect()),
@@ -215,10 +212,7 @@ macro_rules! merge_plugins_arbitrary {
             }
         }
     };
-}
-
-macro_rules! merge_plugins_arbitrary_opt {
-    ($def:ident, $closure_a:expr, $closure_b:expr) => {
+    ($def:ident, arb opt $closure_a:expr, arb opt $closure_b:expr) => {
         pub fn $def<'a>(rest: Option<&SubjectValue>, theme: &'a TailwindTheme) -> PluginResult<'a> {
             match ($closure_a(rest, theme), $closure_b(rest, theme)) {
                 (Err(e1), Err(e2)) => Err(e1.into_iter().chain(e2).collect()),
@@ -239,5 +233,3 @@ pub(crate) use lookup_plugin_arbitrary;
 pub(crate) use lookup_plugin_arbitrary_opt;
 pub(crate) use lookup_plugin_opt;
 pub(crate) use merge_plugins;
-pub(crate) use merge_plugins_arbitrary;
-pub(crate) use merge_plugins_arbitrary_opt;

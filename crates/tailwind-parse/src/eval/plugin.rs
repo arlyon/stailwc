@@ -88,7 +88,7 @@ fn simple_lookup_color<'a>(
 
 lookup_plugin_arbitrary!(stroke_width, stroke_width, "strokeWidth");
 lookup_plugin_arbitrary!(stroke_color, colors, "stroke");
-merge_plugins_arbitrary!(stroke, stroke_width, stroke_color);
+merge_plugins!(stroke, arb stroke_width, arb stroke_color);
 
 lookup_plugin_opt!(transition, transition_property, "transitionProperty");
 lookup_plugin_arbitrary!(delay, transition_delay, "transitionDelay");
@@ -233,7 +233,7 @@ array_plugin!(
 );
 lookup_plugin_arbitrary!(text_color, colors, "color");
 lookup_plugin_arbitrary!(text_size, font_size, "fontSize", |t| t.0.to_string());
-merge_plugins_arbitrary!(text_base, text_color, text_size);
+merge_plugins!(text_base, arb text_color, arb text_size);
 
 array_plugin!(appearance, ["none"], "appearance");
 
@@ -261,14 +261,14 @@ lookup_plugin_arbitrary_opt!(border_t, border_width, "borderTopWidth");
 lookup_plugin_arbitrary_opt!(border_l, border_width, "borderLeftWidth");
 lookup_plugin_arbitrary_opt!(border_r, border_width, "borderRightWidth");
 lookup_plugin_arbitrary_opt!(border_b, border_width, "borderBottomWidth");
-merge_plugins_arbitrary_opt!(border_x, border_l, border_r);
-merge_plugins_arbitrary_opt!(border_y, border_t, border_b);
-merge_plugins_arbitrary_opt!(border_cw, border_color, border_width);
-merge_plugins_arbitrary_opt!(border_inner, border_cw, border_style_wrapped);
+merge_plugins!(border_x, arb opt border_l, arb opt border_r);
+merge_plugins!(border_y, arb opt border_t, arb opt border_b);
+merge_plugins!(border_cw, arb opt border_color, arb opt border_width);
+merge_plugins!(border_inner, arb opt border_cw, arb opt border_style_wrapped);
 
-merge_plugins_arbitrary!(inset_x, left, right);
-merge_plugins_arbitrary!(inset_y, top, bottom);
-merge_plugins_arbitrary!(inset, inset_x, inset_y);
+merge_plugins!(inset_x, arb left, arb right);
+merge_plugins!(inset_y, arb top, arb bottom);
+merge_plugins!(inset, arb inset_x, arb inset_y);
 
 lookup_plugin_arbitrary!(grid_t_col, grid_template_columns, "gridTemplateColumns");
 lookup_plugin_arbitrary!(grid_t_row, grid_template_rows, "gridTemplateRows");
@@ -321,20 +321,20 @@ array_plugin!(
 lookup_plugin_arbitrary!(translate_x, translate, "--tw-translate-x");
 lookup_plugin_arbitrary!(translate_y, translate, "--tw-translate-y");
 
-merge_plugins_arbitrary!(my, mt, mb);
-merge_plugins_arbitrary!(mx, ml, mr);
-merge_plugins_arbitrary!(py, pt, pb);
-merge_plugins_arbitrary!(px, pl, pr);
+merge_plugins!(my, arb mt, arb mb);
+merge_plugins!(mx, arb ml, arb mr);
+merge_plugins!(py, arb pt, arb pb);
+merge_plugins!(px, arb pl, arb pr);
 
 lookup_plugin_arbitrary_opt!(rounded_base, border_radius, "borderRadius");
 lookup_plugin_arbitrary_opt!(rounded_tl, border_radius, "borderTopLeftRadius");
 lookup_plugin_arbitrary_opt!(rounded_tr, border_radius, "borderTopRightRadius");
 lookup_plugin_arbitrary_opt!(rounded_bl, border_radius, "borderBottomLeftRadius");
 lookup_plugin_arbitrary_opt!(rounded_br, border_radius, "borderBottomRightRadius");
-merge_plugins_arbitrary_opt!(rounded_t, rounded_tl, rounded_tr);
-merge_plugins_arbitrary_opt!(rounded_b, rounded_bl, rounded_br);
-merge_plugins_arbitrary_opt!(rounded_l, rounded_tl, rounded_bl);
-merge_plugins_arbitrary_opt!(rounded_r, rounded_tr, rounded_br);
+merge_plugins!(rounded_t, arb opt rounded_tl, arb opt rounded_tr);
+merge_plugins!(rounded_b, arb opt rounded_bl, arb opt rounded_br);
+merge_plugins!(rounded_l, arb opt rounded_tl, arb opt rounded_bl);
+merge_plugins!(rounded_r, arb opt rounded_tr, arb opt rounded_br);
 
 pub fn rounded<'a>(
     subcommand: Option<Rounded>,
@@ -522,16 +522,16 @@ lookup_plugin_arbitrary!(scroll_pl, padding, "scrollPaddingLeft");
 lookup_plugin_arbitrary!(scroll_pr, padding, "scrollPaddingRight");
 lookup_plugin_arbitrary!(scroll_pt, padding, "scrollPaddingTop");
 lookup_plugin_arbitrary!(scroll_pb, padding, "scrollPaddingBottom");
-merge_plugins_arbitrary!(scroll_px, scroll_pl, scroll_pr);
-merge_plugins_arbitrary!(scroll_py, scroll_pt, scroll_pb);
+merge_plugins!(scroll_px, arb scroll_pl, arb scroll_pr);
+merge_plugins!(scroll_py, arb scroll_pt, arb scroll_pb);
 lookup_plugin_arbitrary!(scroll_p, padding, "scrollPadding");
 
 lookup_plugin_arbitrary!(scroll_ml, margin, "scrollMarginLeft");
 lookup_plugin_arbitrary!(scroll_mr, margin, "scrollMarginRight");
 lookup_plugin_arbitrary!(scroll_mt, margin, "scrollMarginTop");
 lookup_plugin_arbitrary!(scroll_mb, margin, "scrollMarginBottom");
-merge_plugins_arbitrary!(scroll_mx, scroll_ml, scroll_mr);
-merge_plugins_arbitrary!(scroll_my, scroll_mt, scroll_mb);
+merge_plugins!(scroll_mx, arb scroll_ml, arb scroll_mr);
+merge_plugins!(scroll_my, arb scroll_mt, arb scroll_mb);
 lookup_plugin_arbitrary!(scroll_m, margin, "scrollMargin");
 
 pub fn scroll<'a>(
