@@ -130,9 +130,8 @@ lookup_plugin_arbitrary!(right, width, "right");
 lookup_plugin_arbitrary!(tracking, letter_spacing, "letterSpacing");
 lookup_color_plugin_arbitrary!(caret, colors, "caretColor");
 lookup_plugin_arbitrary!(h, height, "height");
-lookup_plugin!(ring_width, ring_width, "borderWidth");
-lookup_plugin!(ring_color, colors, "--tw-ring-color");
-merge_plugins!(ring_base, ring_width, ring_color);
+lookup_plugin_arbitrary_opt!(ring_width, ring_width, "borderWidth");
+lookup_color_plugin_arbitrary!(ring_color, colors, "--tw-ring-color", "--tw-ring-opacity");
 lookup_plugin!(to, colors, "--tw-gradient-to");
 lookup_plugin_arbitrary!(w, width, "width");
 lookup_plugin!(rotate, rotate, "--tw-rotate");
@@ -362,6 +361,10 @@ pub fn antialiased() -> ObjectLit {
         ("-webkit-font-smoothing", "antialiased"),
         ("-moz-osx-font-smoothing", "grayscale"),
     ])
+}
+
+pub fn ring_inset() -> ObjectLit {
+    to_lit(&[("--tw-ring-inset", "inset")])
 }
 
 pub fn mix<'a>(rest: &Value, theme: &'a TailwindTheme) -> PluginResult<'a> {
@@ -666,19 +669,24 @@ pub fn from(Value(rest): &Value, theme: &TailwindTheme) -> PluginResult<'static>
         .ok_or(vec![])
 }
 
-pub fn ring<'a>(rest: Option<&Value>, theme: &'a TailwindTheme) -> PluginResult<'a> {
-    let rest = rest.map(|v| v.0).unwrap_or("DEFAULT");
-    match rest.split_once('-') {
-        Some(("offset", rest)) => {
-            theme.ring_offset_width.get(rest)
-                .map(|&s| ("--tw-ring-offset-width", s))
-                .or_else(|| theme.colors.get(rest).map(|&s| ("--tw-ring-offset-color", s)))
-                .map(|p| to_lit(&[p, ("boxShadow", "0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color), var(--tw-ring-shadow)")]))
-                .ok_or(vec![])
-        }
-        Some((_, _)) => ring_color(&Value(rest), theme),
-        None if rest == "inset" => Ok(to_lit(&[("--tw-ring-inset", "inset")])),
-        None => ring_base(&Value(rest), theme)
+lookup_color_plugin_arbitrary!(ring_offset_color, colors, "--tw-ring-offset-color");
+lookup_plugin_arbitrary!(
+    ring_offset_width,
+    ring_offset_width,
+    "--tw-ring-offset-width"
+);
+merge_plugins!(ring_offset, alpha arb ring_offset_color, arb ring_offset_width);
+
+lookup_plugin_arbitrary!(ring_opacity, ring_opacity, "--tw-ring-opacity");
+
+pub fn ring<'a>(
+    rest: Option<&SubjectValue>,
+    theme: &'a TailwindTheme,
+    alpha: Option<&Value>,
+) -> PluginResult<'a> {
+    match rest {
+        Some(value) => ring_color(value, theme, alpha).or_else(|_| ring_width(Some(value), theme)),
+        None => ring_width(None, theme),
     }
 }
 

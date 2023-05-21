@@ -87,6 +87,7 @@ impl<'a> Literal<'a> {
         use crate::Max;
         use crate::Min;
         use crate::Plugin::*;
+        use crate::Ring;
         use PluginType::*;
 
         let plugin = match self.cmd {
@@ -186,7 +187,10 @@ impl<'a> Literal<'a> {
             Transform => Optional(plugin::transform),
             Opacity => RequiredArbitrary(plugin::opacity),
             Blur => Optional(plugin::blur),
-            Ring => Optional(plugin::ring),
+            Ring(None) => OptionalArbitraryTransparency(plugin::ring),
+            Ring(Some(Ring::Offset)) => RequiredArbitraryTransparency(plugin::ring_offset),
+            Ring(Some(Ring::Opacity)) => RequiredArbitrary(plugin::ring_opacity),
+            Ring(Some(Ring::Inset)) => Singular(plugin::ring_inset),
             Sr => Required(plugin::sr),
             Bg => RequiredArbitrary(plugin::bg),
             H => RequiredArbitrary(plugin::h),

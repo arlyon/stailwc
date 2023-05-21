@@ -188,6 +188,20 @@ macro_rules! merge_plugins {
             }
         }
     };
+    ($def:ident, alpha arb $closure_a:expr, arb $closure_b:expr) => {
+        pub fn $def<'a>(
+            rest: &SubjectValue,
+            theme: &'a TailwindTheme,
+            alpha: Option<&Value>,
+        ) -> PluginResult<'a> {
+            match ($closure_a(rest, theme, alpha), $closure_b(rest, theme)) {
+                (Err(e1), Err(e2)) => Err(e1.into_iter().chain(e2).collect()),
+                (Err(_), Ok(a)) => Ok(a),
+                (Ok(b), Err(_)) => Ok(b),
+                (Ok(a), Ok(b)) => Ok(merge_literals(a, b)),
+            }
+        }
+    };
 }
 
 macro_rules! merge_plugins_arbitrary {

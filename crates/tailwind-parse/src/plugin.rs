@@ -133,7 +133,7 @@ mod plugin {
         Opacity,
         Italic,
         Blur,
-        Ring,
+        Ring(Option<Ring>),
         Sr,
         Columns,
         Prose(Option<Prose>),
@@ -177,6 +177,13 @@ mod plugin {
         Both,
         Mandatory,
         Proximity,
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Ring {
+        Offset,
+        Opacity,
+        Inset,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
