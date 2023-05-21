@@ -147,7 +147,7 @@ impl<'a> Literal<'a> {
             Font => Required(plugin::font),
             Shadow => Optional(plugin::shadow),
             Transition => Optional(plugin::transition),
-            Placeholder => Required(plugin::placeholder),
+            Placeholder => RequiredArbitraryTransparency(plugin::placeholder),
             Delay => RequiredArbitrary(plugin::delay),
             Duration => Optional(plugin::duration),
             Decoration => RequiredArbitrary(plugin::decoration),

@@ -815,8 +815,19 @@ pub fn align_self(
     Ok(to_lit(&rule))
 }
 
-pub fn placeholder<'a>(Value(rest): &Value, theme: &'a TailwindTheme) -> PluginResult<'a> {
-    simple_lookup(&theme.colors, rest, "color").map(|lit| ObjectLit {
+lookup_color_plugin_arbitrary!(
+    placeholder_inner,
+    colors,
+    "color",
+    "--tw-placeholder-opacity"
+);
+
+pub fn placeholder<'a>(
+    rest: &SubjectValue,
+    theme: &'a TailwindTheme,
+    alpha: Option<&Value>,
+) -> PluginResult<'a> {
+    placeholder_inner(rest, theme, alpha).map(|lit| ObjectLit {
         span: DUMMY_SP,
         props: vec![Prop::KeyValue(KeyValueProp {
             key: PropName::Str(Str {
