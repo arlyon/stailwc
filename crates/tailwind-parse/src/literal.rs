@@ -147,6 +147,7 @@ impl<'a> Literal<'a> {
             Placeholder => Required(plugin::placeholder),
             Delay => RequiredArbitrary(plugin::delay),
             Duration => Optional(plugin::duration),
+            Decoration => RequiredArbitrary(plugin::decoration),
             Rotate => Required(plugin::rotate),
             Appearance => Required(plugin::appearance),
             Pointer => Required(plugin::pointer_events),

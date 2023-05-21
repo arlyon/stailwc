@@ -144,6 +144,9 @@ pub struct TailwindTheme<'a> {
 
     #[serde(borrow, alias = "aspectRatio")]
     pub aspect_ratio: HashMap<&'a str, &'a str>,
+
+    #[serde(borrow, alias = "textDecorationThickness")]
+    pub decoration_thickness: HashMap<&'a str, &'a str>,
 }
 
 #[derive(Deserialize, Debug)]

@@ -164,6 +164,24 @@ lookup_plugin_arbitrary!(max_h, max_height, "maxHeight");
 
 lookup_plugin!(leading, line_height, "lineHeight");
 
+lookup_plugin_arbitrary!(decoration_color, colors, "textDecorationColor");
+lookup_plugin_arbitrary!(
+    decoration_thickness,
+    decoration_thickness,
+    "textDecorationThickness"
+);
+array_plugin!(
+    decoration_style,
+    ["solid", "double", "dotted", "dashed", "wavy"],
+    "textDecorationStyle"
+);
+
+pub fn decoration<'a>(value: &SubjectValue, theme: &'a TailwindTheme) -> PluginResult<'a> {
+    decoration_color(value, theme)
+        .or_else(|_| decoration_thickness(value, theme))
+        .or_else(|_| decoration_style(value.value().expect("css consumed above"), theme))
+}
+
 array_plugin!(
     align,
     [

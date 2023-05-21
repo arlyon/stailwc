@@ -47,6 +47,7 @@ mod plugin {
         List(List),
         H,
         W,
+        Decoration,
         P,
         Px,
         Pl,
