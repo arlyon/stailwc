@@ -72,6 +72,7 @@ mod plugin {
         Mb,
         Z,
         Text,
+        Accent,
         Caret,
         Bg,
         Font,

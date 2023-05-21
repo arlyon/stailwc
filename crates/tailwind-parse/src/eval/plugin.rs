@@ -142,6 +142,8 @@ lookup_plugin_arbitrary!(pr, padding, "paddingRight");
 lookup_plugin_arbitrary!(pt, padding, "paddingTop");
 lookup_plugin_arbitrary!(pb, padding, "paddingBottom");
 
+lookup_color_plugin_arbitrary!(accent, colors, "accentColor");
+
 lookup_plugin_arbitrary!(m, margin, "margin");
 lookup_plugin_arbitrary!(ml, margin, "marginLeft");
 lookup_plugin_arbitrary!(mr, margin, "marginRight");

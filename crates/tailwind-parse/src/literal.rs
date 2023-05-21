@@ -201,6 +201,7 @@ impl<'a> Literal<'a> {
             Pb => RequiredArbitrary(plugin::pb),
             M => RequiredArbitrary(plugin::m),
             Mx => RequiredArbitrary(plugin::mx),
+            Accent => RequiredArbitraryTransparency(plugin::accent),
             Ml => RequiredArbitrary(plugin::ml),
             Mr => RequiredArbitrary(plugin::mr),
             My => RequiredArbitrary(plugin::my),
