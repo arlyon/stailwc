@@ -74,7 +74,7 @@ enum PluginType<'a, 'func> {
 impl<'a> Literal<'a> {
     /// Takes the combination of a plugin and a value and converts it into a
     /// javascript object literal with the equivalent css.
-    pub fn to_object_lit<'func>(
+    pub fn to_object_lit(
         self,
         _span: Span,
         theme: &'a TailwindTheme,
