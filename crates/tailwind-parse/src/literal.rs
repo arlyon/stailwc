@@ -88,6 +88,7 @@ impl<'a> Literal<'a> {
         use crate::Min;
         use crate::Plugin::*;
         use crate::Ring;
+        use crate::Text;
         use PluginType::*;
 
         let plugin = match self.cmd {
@@ -143,7 +144,8 @@ impl<'a> Literal<'a> {
             Auto(Auto::Rows) => RequiredArbitrary(plugin::auto_rows),
 
             // all other plugins
-            Text => RequiredArbitraryTransparency(plugin::text),
+            Text(None) => RequiredArbitraryTransparency(plugin::text),
+            Text(Some(Text::Opacity)) => Required(plugin::text_opacity),
             Font => Required(plugin::font),
             Shadow => Optional(plugin::shadow),
             Transition => Optional(plugin::transition),

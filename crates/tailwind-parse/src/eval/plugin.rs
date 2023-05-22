@@ -428,6 +428,8 @@ pub fn transform_origin<'a>(Value(rest): &Value, _theme: &'a TailwindTheme) -> P
     }
 }
 
+lookup_plugin!(text_opacity, opacity, "--tw-text-opacity");
+
 pub fn text<'a>(
     value: &SubjectValue,
     theme: &'a TailwindTheme,

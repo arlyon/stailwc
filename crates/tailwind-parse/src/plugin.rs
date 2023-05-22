@@ -72,7 +72,7 @@ mod plugin {
         TransformOrigin,
         Mb,
         Z,
-        Text,
+        Text(Option<Text>),
         Accent,
         Caret,
         Bg,
@@ -138,6 +138,11 @@ mod plugin {
         Columns,
         Prose(Option<Prose>),
         Not(Not),
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Text {
+        Opacity,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
