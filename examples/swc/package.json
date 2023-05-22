@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "@swc/cli": "^0.1.59",
-    "@swc/core": "^1.3.24",
+    "@swc/core": "^1.3.58",
     "stailwc": "link:../../",
     "tailwindcss": "^3.2.4"
   },

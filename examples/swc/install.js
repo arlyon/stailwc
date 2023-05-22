@@ -1,11 +1,11 @@
 const stailwc = require("stailwc/install");
 
-console.log(JSON.stringify({
-
+console.log(
+  JSON.stringify({
     jsc: {
       parser: {
-        "syntax": "ecmascript",
-        "jsx": true,
+        syntax: "ecmascript",
+        jsx: true,
       },
       experimental: {
         plugins: [
@@ -13,9 +13,11 @@ console.log(JSON.stringify({
             engine: "emotion",
             strict: true,
             tailwindPath: "./examples/swc/tailwind.config.json",
+            wasm: "/home/arlyon/Programming/stailwc/target/wasm32-wasi/release/stailwc.wasm",
             silent: true,
           }),
         ],
       },
     },
-  }));
+  })
+);
