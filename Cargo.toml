@@ -13,7 +13,8 @@ crate-type = ["cdylib"]
 [profile.release]
 # This removes more dead code
 codegen-units = 1
-lto = true
+# wasmer doesn't support lto
+lto = false
 # Optimize for size
 opt-level = "s"
 # Optimize for performance, this is default so you don't need to specify it
