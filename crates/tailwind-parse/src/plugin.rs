@@ -410,6 +410,7 @@ mod plugin {
         R,
         X,
         Y,
+        Spacing,
     }
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
     pub enum Min {

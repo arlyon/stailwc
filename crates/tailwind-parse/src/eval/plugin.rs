@@ -671,6 +671,18 @@ pub fn border<'a>(
         Some(Border::R) => border_r,
         Some(Border::X) => border_x,
         Some(Border::Y) => border_y,
+        Some(Border::Spacing) => {
+            let value = rest.ok_or_else(|| vec![])?;
+            let spacing = theme.spacing.get(value.as_str()).ok_or_else(|| vec![])?;
+            return Ok(to_lit(&[
+                ("--tw-border-spacing-x", spacing),
+                ("--tw-border-spacing-y", spacing),
+                (
+                    "borderSpacing",
+                    "var(--tw-border-spacing-x) var(--tw-border-spacing-y)",
+                ),
+            ]));
+        }
     };
 
     func(rest, theme, alpha)
