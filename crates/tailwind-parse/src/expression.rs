@@ -180,6 +180,7 @@ impl<'a> Expression<'a> {
                     "focus-visible" => ":focus-visible",
                     "active" => ":active",
                     "disabled" => ":disabled",
+                    "not-disabled" => ":not(:disabled)",
                     "all" => "*",
                     "all-child" => "> *",
                     "sibling" => "~ *",
