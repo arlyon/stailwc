@@ -105,10 +105,17 @@ impl<'a> Expression<'a> {
                 ..
             })) = prop
             {
+                let (negative, p_value) = if self.negative && value.starts_with('-') {
+                    (false, value.trim_start_matches('-'))
+                } else if self.negative {
+                    (true, value.as_ref())
+                } else {
+                    (false, value.as_ref())
+                };
                 *value = format!(
                     "{}{}{}",
-                    if self.negative { "-" } else { "" },
-                    value,
+                    if negative { "-" } else { "" },
+                    p_value,
                     if self.important { " !important" } else { "" }
                 )
                 .into();
