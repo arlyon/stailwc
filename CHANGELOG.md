@@ -1,3 +1,39 @@
+# [0.16.0](https://github.com/arlyon/stailwc/compare/0.15.0...0.16.0) (2023-05-22)
+
+
+### Bug Fixes
+
+* add case for SingularBox components ([415afeb](https://github.com/arlyon/stailwc/commit/415afeb2b40f2c5a8e36515eb5c001bf8b521697))
+* disable lto (not well supported) ([4af7e7a](https://github.com/arlyon/stailwc/commit/4af7e7afd94bd5a814994c565b4bb66692d20e97))
+* don't double-negate negative values ([fc7c0d0](https://github.com/arlyon/stailwc/commit/fc7c0d028fa901d8dec4c7226b20e116bcedd488))
+* inline flex ([7af8892](https://github.com/arlyon/stailwc/commit/7af88924fe4c89f66f816d132e5dc1d679babee5))
+* prefer multispace over space to better line up with jsx strings ([8be0b60](https://github.com/arlyon/stailwc/commit/8be0b60c9c50df58176b4cdc30f9472cf20b34b9))
+
+
+### Features
+
+* add a number of peer modifiers ([13b3692](https://github.com/arlyon/stailwc/commit/13b3692578c6d69404423131921b1f806f7ff6d1))
+* add accent plugin ([2714ce5](https://github.com/arlyon/stailwc/commit/2714ce5f06cb2fccf735e5a18c844dfc0d953986))
+* add alpha to bg plugin ([f15e159](https://github.com/arlyon/stailwc/commit/f15e159b961d2441694de2a2ec35550ff44339ff))
+* add alpha to placeholder ([a40c334](https://github.com/arlyon/stailwc/commit/a40c33434df29fd8ab922d453fb657c9419cf7dc))
+* add alpha to ring and support opacity and inset ([f3fd0a5](https://github.com/arlyon/stailwc/commit/f3fd0a5d5907d40fa6ecb925115e0f567d5f3fdb))
+* add bg attachment plugin support ([5b0ed0b](https://github.com/arlyon/stailwc/commit/5b0ed0b0b25ed6a1e381cb0bbf0cd7f5f5650748))
+* add bg opacity plugin support ([ab69a21](https://github.com/arlyon/stailwc/commit/ab69a21cc1181152c002865b4761bcdcf8a3c16b))
+* add caret plugin ([b7e22ed](https://github.com/arlyon/stailwc/commit/b7e22ede709950d1b2c1cc4aced1c1e26b0f14b9))
+* add columns plugin ([9d81033](https://github.com/arlyon/stailwc/commit/9d81033776b5e8f339ff23aa5218e7c2c6d458e8))
+* add decoration plugin ([86d4ada](https://github.com/arlyon/stailwc/commit/86d4ada1de1c3fd974f6630490f93c82625308d5))
+* add not-disabled modifier ([9b509a2](https://github.com/arlyon/stailwc/commit/9b509a2a5ce64bb9ccecdd67ffc3ff2230117f8a))
+* add outline color ([08a2ea0](https://github.com/arlyon/stailwc/commit/08a2ea0065ef4c172c24ea296f25520fbca03f26))
+* add text opacity plugin support ([64d5f32](https://github.com/arlyon/stailwc/commit/64d5f324c591e3ee14cefb1934345379475f4e26))
+* add transparency to text plugin ([b71861a](https://github.com/arlyon/stailwc/commit/b71861a2852c5ec339c5ce236c6ce3914a28424c))
+* add whitespace-break-spaces support ([a5b122f](https://github.com/arlyon/stailwc/commit/a5b122fc2d22206104fd055566bf341a131eac0a))
+* change error handler in test vs in plugin ([5c4fd8f](https://github.com/arlyon/stailwc/commit/5c4fd8f59dfc70c9bc14a3a2ee9a035ae79c0479))
+* change error handler in test vs in plugin ([b387b94](https://github.com/arlyon/stailwc/commit/b387b94281aa01448f10d23a94f36c13f1066a3c))
+* make opacity accept arbitrary values ([b5fbf02](https://github.com/arlyon/stailwc/commit/b5fbf0259c32e4acea2188331fdd0d1636675771))
+* overhaul border plugin ([8f67035](https://github.com/arlyon/stailwc/commit/8f67035862ea3c998941e072884f25cfd43a32a5))
+* support border-s and border-e plugins ([22041b3](https://github.com/arlyon/stailwc/commit/22041b36fffd0a9a4985da87aea637bac342ef28))
+* support symmetrical border spacing ([a627487](https://github.com/arlyon/stailwc/commit/a6274878c7cab262da82eeee4489217e3d2ab178))
+
 # [0.15.0](https://github.com/arlyon/stailwc/compare/0.14.0...0.15.0) (2023-02-20)
 
 
