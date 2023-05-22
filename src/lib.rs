@@ -44,7 +44,7 @@ use tailwind_parse::{
 
 #[cfg(not(target_arch = "wasm32"))]
 use swc_core::common::errors::HANDLER;
-#[cfg(targe_arch = "wasm32")]
+#[cfg(target_arch = "wasm32")]
 use swc_core::plugin::errors::HANDLER;
 
 #[derive(serde::Deserialize, Debug, Default)]
