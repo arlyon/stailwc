@@ -630,6 +630,9 @@ pub fn snap<'a>(
     }]))
 }
 
+
+lookup_plugin!(bg_opacity, opacity, "--tw-bg-opacity");
+
 pub fn bg<'a>(
     val: &SubjectValue,
     theme: &'a TailwindTheme,

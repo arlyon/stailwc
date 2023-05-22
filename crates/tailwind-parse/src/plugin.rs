@@ -75,7 +75,7 @@ mod plugin {
         Text(Option<Text>),
         Accent,
         Caret,
-        Bg,
+        Bg(Option<Bg>),
         Font,
         Fill,
         Shadow,
@@ -138,6 +138,11 @@ mod plugin {
         Columns,
         Prose(Option<Prose>),
         Not(Not),
+    }
+
+    #[derive(Copy, Clone, Eq, PartialEq, Debug)]
+    pub enum Bg {
+        Opacity,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
