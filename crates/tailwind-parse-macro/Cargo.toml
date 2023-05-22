@@ -4,7 +4,7 @@ edition = "2021"
 license = "MIT OR Apache-2.0"
 name = "tailwind-parse-macro"
 repository = "https://github.com/arlyon/stailwc"
-version = "0.15.0"
+version = "0.16.0"
 
 [lib]
 proc_macro = true
