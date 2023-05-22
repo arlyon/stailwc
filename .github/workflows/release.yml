@@ -18,7 +18,7 @@ jobs:
         with:
           profile: minimal
           # regular nightly currently causes panics, so pin this
-          toolchain: nightly-2022-09-27-x86_64-unknown-linux-gnu
+          toolchain: nightly-2023-03-08-x86_64-unknown-linux-gnu
           target: wasm32-wasi
           override: true
       - name: Set up Node 14
