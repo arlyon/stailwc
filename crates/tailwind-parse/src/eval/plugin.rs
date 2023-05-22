@@ -630,6 +630,11 @@ pub fn snap<'a>(
     }]))
 }
 
+array_plugin!(
+    bg_attachment,
+    ["fixed", "local", "scroll"],
+    "backgroundAttachment"
+);
 
 lookup_plugin!(bg_opacity, opacity, "--tw-bg-opacity");
 
@@ -649,7 +654,8 @@ pub fn bg<'a>(
         .or_else(|_e| simple_lookup(&theme.background_image, rest, "backgroundImage"))
         .or_else(|_e| simple_lookup(&theme.background_size, rest, "backgroundSize"))
         .or_else(|_e| simple_lookup(&theme.background_position, rest, "backgroundPosition"))
-        .or_else(|_e| bg_repeat(&Value(rest), theme)),
+        .or_else(|_e| bg_repeat(&Value(rest), theme))
+        .or_else(|_e| bg_attachment(&Value(rest), theme)),
         SubjectValue::Css(Css(css)) => Ok(to_lit(&[("background", css)])),
     }
 }
