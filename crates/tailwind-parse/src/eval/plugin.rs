@@ -287,6 +287,24 @@ merge_plugins!(border_y, alpha arb opt border_t, alpha arb opt border_b);
 merge_plugins!(border_ws, arb opt border_width, border_style);
 merge_plugins!(border_inner, alpha arb border_color, arb opt border_ws);
 
+lookup_color_plugin_arbitrary!(
+    border_sc,
+    colors,
+    "borderInlineStartColor",
+    "--tw-border-opacity"
+);
+lookup_color_plugin_arbitrary!(
+    border_ec,
+    colors,
+    "borderInlineEndColor",
+    "--tw-border-opacity"
+);
+lookup_plugin_arbitrary!(border_sw, border_width, "borderInlineStartWidth");
+lookup_plugin_arbitrary!(border_ew, border_width, "borderInlineEndWidth");
+
+merge_plugins!(border_s, alpha arb border_sc, arb border_sw);
+merge_plugins!(border_e, alpha arb border_ec, arb border_ew);
+
 merge_plugins!(inset_x, arb left, arb right);
 merge_plugins!(inset_y, arb top, arb bottom);
 merge_plugins!(inset, arb inset_x, arb inset_y);
@@ -671,6 +689,8 @@ pub fn border<'a>(
         Some(Border::R) => border_r,
         Some(Border::X) => border_x,
         Some(Border::Y) => border_y,
+        Some(Border::S) => return border_s(rest.ok_or_else(|| vec![])?, theme, alpha),
+        Some(Border::E) => return border_e(rest.ok_or_else(|| vec![])?, theme, alpha),
         Some(Border::Spacing) => {
             let value = rest.ok_or_else(|| vec![])?;
             let spacing = theme.spacing.get(value.as_str()).ok_or_else(|| vec![])?;
