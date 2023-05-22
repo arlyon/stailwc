@@ -240,6 +240,7 @@ impl<'a> Literal<'a> {
             (RequiredArbitrary(p), Some(value)) => p(value, theme),
             (RequiredArbitraryBox(p), Some(value)) => p(value, theme),
             (Singular(p), None) => Ok(p()),
+            (SingularBox(p), None) => Ok(p()),
             (RequiredBox(p), Some(SubjectValue::Value(value))) => p(value, theme),
             (OptionalAbitraryBox(p), value) => p(value.as_ref(), theme),
             (OptionalArbitrary(p), value) => p(value.as_ref(), theme),
