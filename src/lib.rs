@@ -35,12 +35,17 @@ use swc_core::{
         atoms::Atom,
         visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
     },
-    plugin::{errors::HANDLER, plugin_transform, proxies::TransformPluginProgramMetadata},
+    plugin::{plugin_transform, proxies::TransformPluginProgramMetadata},
 };
 use tailwind_config::TailwindConfig;
 use tailwind_parse::{
     Directive, ExpressionConversionError, LiteralConversionError, SubjectConversionError,
 };
+
+#[cfg(not(target_arch = "wasm32"))]
+use swc_core::common::errors::HANDLER;
+#[cfg(targe_arch = "wasm32")]
+use swc_core::plugin::errors::HANDLER;
 
 #[derive(serde::Deserialize, Debug, Default)]
 pub struct AppConfig<'a> {
