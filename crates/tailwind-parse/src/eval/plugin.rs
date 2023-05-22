@@ -956,6 +956,7 @@ pub fn white_space(
         Whitespace::Pre => [("whiteSpace", "pre")],
         Whitespace::PreLine => [("whiteSpace", "pre-line")],
         Whitespace::PreWrap => [("whiteSpace", "pre-wrap")],
+        Whitespace::BreakSpaces => [("whiteSpace", "break-spaces")],
     };
     Ok(to_lit(&rule))
 }

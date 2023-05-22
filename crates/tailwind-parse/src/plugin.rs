@@ -274,6 +274,7 @@ mod plugin {
         Pre,
         PreLine,
         PreWrap,
+        BreakSpaces,
     }
 
     #[derive(Copy, Clone, Eq, PartialEq, Debug)]
