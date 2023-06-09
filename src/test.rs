@@ -154,8 +154,9 @@ pub fn run_test(input: &str, expected: &str, engine: Engine, config: &TailwindCo
                 strict: true,
                 engine,
                 tw_attr_stack: Default::default(),
-                tw_style_imported: false,
+                tw_style_imported: None,
                 tw_tpl: None,
+                tw_styled_component: None,
             })
         },
         input,

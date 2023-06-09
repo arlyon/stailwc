@@ -10,7 +10,6 @@ export default defineConfig({
       plugins: [
         stailwc({
           engine: "emotion",
-          wasm: "/Users/arlyon/Programming/stailwc/target/wasm32-wasi/release/stailwc.wasm",
         }),
         ["@swc/plugin-emotion", {}],
       ],

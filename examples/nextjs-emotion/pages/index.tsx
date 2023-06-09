@@ -2,9 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import _styled from "@emotion/styled";
-_styled;
-
 const UnderlineLink = tw(Link)`underline`;
 
 export default function Home() {

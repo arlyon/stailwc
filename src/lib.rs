@@ -22,15 +22,16 @@ use swc_core::{
     common::{
         errors::{DiagnosticBuilder, Handler},
         util::take::Take,
-        Span, DUMMY_SP,
+        Span, Spanned,
     },
     ecma::{
         ast::{
             ArrayLit, BindingIdent, CallExpr, Callee, Decl, Expr, ExprOrSpread, Ident, ImportDecl,
-            ImportNamedSpecifier, ImportSpecifier, JSXAttr, JSXAttrName, JSXAttrOrSpread,
-            JSXAttrValue, JSXElementName, JSXExpr, JSXExprContainer, JSXOpeningElement, Lit,
-            MemberExpr, MemberProp, Module, ModuleDecl, ModuleItem, ObjectLit, Pat, Program, Stmt,
-            Str, TaggedTpl, Tpl, TplElement, VarDecl, VarDeclKind, VarDeclarator,
+            ImportDefaultSpecifier, ImportNamedSpecifier, ImportSpecifier, JSXAttr, JSXAttrName,
+            JSXAttrOrSpread, JSXAttrValue, JSXElementName, JSXExpr, JSXExprContainer,
+            JSXOpeningElement, Lit, MemberExpr, MemberProp, Module, ModuleDecl, ModuleItem,
+            ObjectLit, Pat, Program, Stmt, Str, TaggedTpl, Tpl, TplElement, VarDecl, VarDeclKind,
+            VarDeclarator,
         },
         atoms::Atom,
         visit::{as_folder, FoldWith, VisitMut, VisitMutWith},
@@ -90,7 +91,8 @@ pub struct TransformVisitor<'a> {
     /// This is treated as a stack because tw attrs can be nested
     tw_attr_stack: DepthStack<(Span, ObjectLit)>,
     tw_tpl: Option<TplTransform>,
-    tw_style_imported: bool,
+    tw_style_imported: Option<Span>,
+    tw_styled_component: Option<Span>,
 }
 
 impl<'a> TransformVisitor<'a> {
@@ -101,7 +103,8 @@ impl<'a> TransformVisitor<'a> {
             engine: config.engine,
             tw_attr_stack: Default::default(),
             tw_tpl: None,
-            tw_style_imported: false,
+            tw_style_imported: None,
+            tw_styled_component: None,
         }
     }
 
@@ -216,7 +219,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
     /// a) detect the TailwindStyle import and transform it into a css declaration
     /// b) extract any tw attributes and transform them into a css declarations
     fn visit_mut_jsx_opening_element(&mut self, n: &mut JSXOpeningElement) {
-        if self.tw_style_imported && let JSXElementName::Ident(i) = &n.name && i.sym.eq("TailwindStyle") {
+        if let JSXElementName::Ident(i) = &n.name && i.sym.eq("TailwindStyle") {
             match self.engine {
                 Engine::Emotion => {
                     let atom: Atom = css::format_css(
@@ -270,7 +273,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 // for anything else, convert it to an array and push our tailwind styles to the end
                 _ => {
                     *e = Expr::Array(ArrayLit {
-                        span: DUMMY_SP,
+                        span: e.span(),
                         elems: vec![
                             Some(ExprOrSpread {
                                 expr: Box::new(e.take()),
@@ -289,13 +292,13 @@ impl<'a> VisitMut for TransformVisitor<'a> {
             n.attrs.push(JSXAttrOrSpread::JSXAttr(JSXAttr {
                 name: JSXAttrName::Ident(Ident {
                     sym: "css".into(),
-                    span: DUMMY_SP,
+                    span: n.span,
                     optional: false,
                 }),
-                span: DUMMY_SP,
+                span: n.span,
                 value: Some(JSXAttrValue::JSXExprContainer(JSXExprContainer {
                     expr: JSXExpr::Expr(Box::new(Expr::Object(lit))),
-                    span: DUMMY_SP,
+                    span: n.span,
                 })),
             }));
         };
@@ -307,7 +310,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
     /// convert it to an emotion object.
     #[tracing::instrument]
     fn visit_mut_tagged_tpl(&mut self, n: &mut TaggedTpl) {
-        let extract_literal = || {
+        let mut extract_literal = |should_import| {
             let (text, span) = match n.tpl.quasis.as_slice() {
                 [TplElement { raw, span, .. }] => (raw, span),
                 _ => {
@@ -345,26 +348,32 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                 });
             }
 
+            if should_import {
+                self.tw_styled_component = Some(n.span);
+            }
+
             lit
         };
 
         let transform = match &n.tag {
             // tw`...`
             box Expr::Ident(Ident { sym, .. }) if sym == "tw" => {
-                TplTransform::Style(extract_literal())
+                TplTransform::Style(extract_literal(false))
             }
             // tw.button`...`
             box Expr::Member(MemberExpr {
                 obj: box Expr::Ident(Ident { sym, .. }),
                 prop: MemberProp::Ident(ident),
                 ..
-            }) if sym == "tw" => TplTransform::Component(ident.to_owned(), extract_literal()),
+            }) if sym == "tw" => TplTransform::Component(ident.to_owned(), extract_literal(true)),
             // tw(Button)`...`
             box Expr::Call(CallExpr {
                 callee: Callee::Expr(box Expr::Ident(Ident { sym, .. })),
                 args,
                 ..
-            }) if sym == "tw" => TplTransform::ComponentCustom(args.to_owned(), extract_literal()),
+            }) if sym == "tw" => {
+                TplTransform::ComponentCustom(args.to_owned(), extract_literal(true))
+            }
             _ => {
                 n.visit_mut_children_with(self);
                 return;
@@ -391,12 +400,12 @@ impl<'a> VisitMut for TransformVisitor<'a> {
             }
             Some(TplTransform::Component(ident, lit)) => {
                 *n = Expr::Call(CallExpr {
-                    span: DUMMY_SP,
+                    span: n.span(),
                     callee: Callee::Expr(Box::new(Expr::Member(MemberExpr {
-                        span: DUMMY_SP,
+                        span: n.span(),
                         obj: Box::new(Expr::Ident(Ident {
-                            span: DUMMY_SP,
-                            sym: "_styled".into(),
+                            span: n.span(),
+                            sym: "styled".into(),
                             optional: false,
                         })),
                         prop: MemberProp::Ident(ident),
@@ -410,15 +419,15 @@ impl<'a> VisitMut for TransformVisitor<'a> {
             }
             Some(TplTransform::ComponentCustom(args, lit)) => {
                 *n = Expr::Call(CallExpr {
-                    span: DUMMY_SP,
+                    span: n.span(),
                     callee: Callee::Expr(Box::new(Expr::Call(CallExpr {
                         args,
                         callee: Callee::Expr(Box::new(Expr::Ident(Ident {
-                            span: DUMMY_SP,
-                            sym: "_styled".into(),
+                            span: n.span(),
+                            sym: "styled".into(),
                             optional: false,
                         }))),
-                        span: DUMMY_SP,
+                        span: n.span(),
                         type_args: None,
                     }))),
                     type_args: None,
@@ -436,7 +445,10 @@ impl<'a> VisitMut for TransformVisitor<'a> {
     fn visit_mut_module(&mut self, n: &mut Module) {
         for stmt in &mut n.body {
             if let ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
-                src, specifiers, ..
+                src,
+                specifiers,
+                span,
+                ..
             })) = stmt
             {
                 let has_style_import = specifiers.iter().any(|s| match s {
@@ -450,7 +462,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                     continue;
                 }
 
-                self.tw_style_imported = true;
+                self.tw_style_imported = Some(*span);
 
                 match self.engine {
                     Engine::Emotion => {
@@ -458,19 +470,19 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                             src: Box::new(Str {
                                 raw: None,
                                 value: "@emotion/react".into(),
-                                span: DUMMY_SP,
+                                span: src.span,
                             }),
-                            span: DUMMY_SP,
+                            span: *span,
                             specifiers: vec![
                                 ImportSpecifier::Named(ImportNamedSpecifier {
-                                    span: DUMMY_SP,
-                                    local: Ident::new("css".into(), DUMMY_SP),
+                                    span: *span,
+                                    local: Ident::new("css".into(), *span),
                                     is_type_only: false,
                                     imported: None,
                                 }),
                                 ImportSpecifier::Named(ImportNamedSpecifier {
-                                    span: DUMMY_SP,
-                                    local: Ident::new("Global".into(), DUMMY_SP),
+                                    span: *span,
+                                    local: Ident::new("Global".into(), *span),
                                     is_type_only: false,
                                     imported: None,
                                 }),
@@ -485,12 +497,12 @@ impl<'a> VisitMut for TransformVisitor<'a> {
                             src: Box::new(Str {
                                 raw: None,
                                 value: "styled-components".into(),
-                                span: DUMMY_SP,
+                                span: src.span,
                             }),
-                            span: DUMMY_SP,
+                            span: *span,
                             specifiers: vec![ImportSpecifier::Named(ImportNamedSpecifier {
-                                span: DUMMY_SP,
-                                local: Ident::new("createGlobalStyle".into(), DUMMY_SP),
+                                span: *span,
+                                local: Ident::new("createGlobalStyle".into(), *span),
                                 is_type_only: false,
                                 imported: None,
                             })],
@@ -502,7 +514,7 @@ impl<'a> VisitMut for TransformVisitor<'a> {
             }
         }
 
-        if self.engine == Engine::StyledComponents && self.tw_style_imported {
+        if self.engine == Engine::StyledComponents && let Some(span) = self.tw_style_imported {
             let atom = css::format_css(
                 true,
                 self.config
@@ -522,29 +534,29 @@ impl<'a> VisitMut for TransformVisitor<'a> {
 
             n.body
                 .push(ModuleItem::Stmt(Stmt::Decl(Decl::Var(Box::new(VarDecl {
-                    span: DUMMY_SP,
+                    span,
                     kind: VarDeclKind::Const,
                     declare: false,
                     decls: vec![VarDeclarator {
-                        span: DUMMY_SP,
+                        span,
                         definite: true,
                         name: Pat::Ident(BindingIdent {
-                            id: Ident::new("Global".into(), DUMMY_SP),
+                            id: Ident::new("Global".into(), span),
                             type_ann: None,
                         }),
                         init: Some(Box::new(Expr::Call(CallExpr {
-                            span: DUMMY_SP,
+                            span,
                             callee: Callee::Expr(Box::new(Expr::Ident(Ident::new(
                                 "createGlobalStyle".into(),
-                                DUMMY_SP,
+                                span,
                             )))),
                             args: vec![ExprOrSpread {
                                 spread: None,
                                 expr: Box::new(Expr::Tpl(Tpl {
-                                    span: DUMMY_SP,
+                                    span,
                                     exprs: vec![],
                                     quasis: vec![TplElement {
-                                        span: DUMMY_SP,
+                                        span,
                                         tail: true,
                                         cooked: None,
                                         raw: atom,
@@ -558,6 +570,46 @@ impl<'a> VisitMut for TransformVisitor<'a> {
         };
 
         n.visit_mut_children_with(self);
+
+        if let Some(span) = self.tw_styled_component {
+            // if we have used styled we need to import it...
+            match self.engine {
+                Engine::Emotion => n.body.insert(
+                    0,
+                    ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
+                        src: Box::new(Str {
+                            raw: None,
+                            value: "@emotion/styled".into(),
+                            span,
+                        }),
+                        span,
+                        specifiers: vec![ImportSpecifier::Default(ImportDefaultSpecifier {
+                            span,
+                            local: Ident::new("styled".into(), span),
+                        })],
+                        asserts: None,
+                        type_only: false,
+                    })),
+                ),
+                Engine::StyledComponents => n.body.insert(
+                    0,
+                    ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {
+                        src: Box::new(Str {
+                            raw: None,
+                            value: "styled-components".into(),
+                            span,
+                        }),
+                        span,
+                        specifiers: vec![ImportSpecifier::Default(ImportDefaultSpecifier {
+                            span,
+                            local: Ident::new("styled".into(), span),
+                        })],
+                        asserts: None,
+                        type_only: false,
+                    })),
+                ),
+            }
+        }
     }
 }
 
