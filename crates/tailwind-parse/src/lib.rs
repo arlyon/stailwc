@@ -96,7 +96,7 @@ mod test {
 
     #[test_case("relative", Plugin::Position(Position::Relative), None ; "when a subject has no value")]
     #[test_case("pl-3.5", Plugin::Pl, Some(SubjectValue::Value(Value("3.5"))) ; "when a subject has a dot in it")]
-    #[test_case("text-red-500", Plugin::Text, Some(SubjectValue::Value(Value("red-500"))) ; "when a subject has a dash")]
+    #[test_case("text-red-500", Plugin::Text(None), Some(SubjectValue::Value(Value("red-500"))) ; "when a subject has a dash")]
     #[test_case("border-b-4", Plugin::Border(Some(Border::B)), Some(SubjectValue::Value(Value("4"))) ; "dash in plugin")]
     #[test_case("border-4", Plugin::Border(None), Some(SubjectValue::Value(Value("4"))) ; "empty plugin subcommand")]
     #[test_case("max-w-4", Plugin::Max(Max::W), Some(SubjectValue::Value(Value("4"))) ; "rootless subcommand")]
