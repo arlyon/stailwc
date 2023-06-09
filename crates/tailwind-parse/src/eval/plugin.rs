@@ -704,7 +704,10 @@ pub fn border<'a>(
         Some(Border::E) => return border_e(rest.ok_or_else(std::vec::Vec::new)?, theme, alpha),
         Some(Border::Spacing) => {
             let value = rest.ok_or_else(std::vec::Vec::new)?;
-            let spacing = theme.spacing.get(value.as_str()).ok_or_else(std::vec::Vec::new)?;
+            let spacing = theme
+                .spacing
+                .get(value.as_str())
+                .ok_or_else(std::vec::Vec::new)?;
             return Ok(to_lit(&[
                 ("--tw-border-spacing-x", spacing),
                 ("--tw-border-spacing-y", spacing),
