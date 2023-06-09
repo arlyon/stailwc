@@ -1,3 +1,10 @@
+# [0.17.0](https://github.com/arlyon/stailwc/compare/0.16.0...0.17.0) (2023-06-09)
+
+
+### Features
+
+* support automatic imports for global CSS and styled components ([0b8de71](https://github.com/arlyon/stailwc/commit/0b8de714759680074eb59ce0aa900e7c316436b0))
+
 # [0.16.0](https://github.com/arlyon/stailwc/compare/0.15.0...0.16.0) (2023-05-22)
 
 
