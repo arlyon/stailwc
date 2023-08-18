@@ -1,7 +1,7 @@
 #![feature(box_patterns)]
 #![feature(let_chains)]
+#![feature(lazy_cell)]
 #![deny(clippy::unwrap_used)]
-#![feature(once_cell)]
 // bug in swc
 #![allow(clippy::not_unsafe_ptr_arg_deref)]
 
