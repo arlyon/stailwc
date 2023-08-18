@@ -1,6 +1,5 @@
 #![feature(box_patterns)]
 #![feature(let_chains)]
-#![feature(drain_filter)]
 #![deny(clippy::unwrap_used)]
 #![feature(once_cell)]
 // bug in swc

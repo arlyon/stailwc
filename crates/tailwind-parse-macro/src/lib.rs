@@ -1,4 +1,4 @@
-#![feature(drain_filter)]
+#![feature(extract_if)]
 #![feature(box_patterns)]
 
 use std::{cmp::max, collections::HashSet};
@@ -14,10 +14,10 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
     let (_, content) = module.content.as_mut().expect("module must have a root");
 
     let mut root = content
-        .drain_filter(|i| {
+        .extract_if(|i| {
             if let Item::Enum(i) = i {
                 i.attrs
-                    .drain_filter(|a| a.path.segments.last().unwrap().ident.to_string().eq("root"))
+                    .extract_if(|a| a.path.segments.last().unwrap().ident.to_string().eq("root"))
                     .count()
                     > 0
             } else {
@@ -42,7 +42,7 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
 
             let kebab = v
                 .attrs
-                .drain_filter(|v| v.path.get_ident().unwrap() == "rename")
+                .extract_if(|v| v.path.get_ident().unwrap() == "rename")
                 .next()
                 .and_then(|Attribute { tokens, .. }| {
                     let paren = syn::parse2::<syn::ExprParen>(tokens);
@@ -88,7 +88,7 @@ pub fn parser(_attr: TokenStream, input: TokenStream) -> TokenStream {
 
                 let format = if v
                     .attrs
-                    .drain_filter(|a| a.path.get_ident().unwrap() == "transparent")
+                    .extract_if(|a| a.path.get_ident().unwrap() == "transparent")
                     .count()
                     > 0
                 {

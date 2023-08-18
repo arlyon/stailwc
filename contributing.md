@@ -19,14 +19,12 @@ additional terms or conditions.
 
 ## Building
 
-To get started you will need a rust toolchain which can cross-compile to the 
-`wasm32-wasi` target. In addition, there is currently an issue where newer
-rust toolchains cause an out-of-bounds memory access. To remedy this, we have
-pinned the toolchain to a specific known-working nightly. The solution can
-be tracked here: https://github.com/swc-project/swc/issues/6807#issuecomment-1463706888
+To get started you will need a rust toolchain which can cross-compile to the
+`wasm32-wasi` target. We currently loosely track the toolchain <-> swc version
+that nextjs uses. This is kept in the `rust-toolchain` file and should be
+used automatically.
 
 ```sh
-❯ rustup override set nightly-2022-11-23
 ❯ rustup target add wasm32-wasi
 ```
 
@@ -74,4 +72,3 @@ It is encouraged to open an issue before you create a PR as a place for pre-impl
 discussion. If you're unsure about your contribution or simply want to ask a question about anything just open an issue and we'll chat.
 
 ## Architecture
-
