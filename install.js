@@ -32,7 +32,10 @@ module.exports = (options = {}) => {
   config.theme.colors = Object.entries(config.theme.colors)
     .flatMap(([k, v]) => {
       if (typeof v === "object") {
-        const items = Object.entries(v).map(([k2, v2]) => [k + "-" + k2, v2]);
+        const items = Object.entries(v).map(([k2, v2]) => [
+          k2 === "DEFAULT" ? k : k + "-" + k2,
+          v2,
+        ]);
         return items;
       } else {
         return [[k, v]];
